@@ -16,6 +16,8 @@ package menu
          _loc2_ = [[1,false],[2,false],[2,true],[3,false],[3,true]];
          new MeterPersent(15,-15,"EyebrowY",param1);
          var _loc6_:Number = MeterPersent.MeterPersentNum;
+         new MeterPersent(15,-15,"EyebrowX",param1);
+         var baseEyebrowX:Number = MeterPersent.MeterPersentNum;
          var _loc7_:Boolean = false;
          _loc3_ = 0;
          while(_loc3_ <= 1)
@@ -50,6 +52,14 @@ package menu
             MenuClass.charaAdd[param1].head["eyebrow" + _loc3_].eyebrow.y = MeterPersent.MeterPersentNum;
             new MeterPersent(8,-8,"EyebrowMove" + _loc5_,param1);
             MenuClass.charaAdd[param1].head["eyebrow" + _loc3_].y = -30 + MeterPersent.MeterPersentNum + _loc6_;
+
+            new MeterPersent(-2.5, 2.5, "EyebrowMoveHorizontal" + _loc5_, param1);
+            if (_loc3_ == 0) {
+               MenuClass.charaAdd[param1].head["eyebrow" + _loc3_].x = -10.05 - baseEyebrowX - MeterPersent.MeterPersentNum;
+            } else {
+               MenuClass.charaAdd[param1].head["eyebrow" + _loc3_].x = 10.50 + baseEyebrowX + MeterPersent.MeterPersentNum;
+            }
+
             try
             {
                MenuClass.charaAdd[param1].head["eyebrow" + _loc3_].eyebrow.obj.shiwa.visible = _loc2_[_loc4_][1];
@@ -61,6 +71,9 @@ package menu
             {
                MenuClass.charaAdd[param1].head["eyebrow" + _loc3_].eyebrow.obj.gotoAndStop(MenuClass.charaData[param1]["Eyebrow"]["_menu"] + 1);
             }
+
+            Huku_MarkSet.updateEyebrow(param1, _loc3_);
+            
             _loc3_++;
          }
          if(_loc7_)

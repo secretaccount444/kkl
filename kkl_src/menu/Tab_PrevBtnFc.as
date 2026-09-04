@@ -12,6 +12,7 @@ package menu
          if(!MenuClass.hederSwitchCheck)
          {
             MenuClass.hederSwitchCheck = true;
+            HeaderbtnClass.layoutHeaderButtons();
             new Tab_headerSwitchSet();
          }
          MenuClass._nowHederSwitch = MenuClass.hederSwitchCheck;
@@ -20,7 +21,7 @@ package menu
          MenuClass.BeforePage = MenuClass.systemData["Story_Page"]["_menu"];
          MenuClass.systemData["Story_Page"]["_menu"] = 0;
          MenuClass.StoryMode = true;
-         new Tab_IEInOut("setIN",MenuClass.StoryTimeLineData[MenuClass.systemData["Story_Page"]["_menu"]][9],MenuClass._nowCharaNum);
+         Tab_IEInOut.execute("setIN",MenuClass.StoryTimeLineData[MenuClass.systemData["Story_Page"]["_menu"]][9],MenuClass._nowCharaNum);
          new Tab_CloseClass();
          var _loc3_:int = MenuClass.MY_MENUNAME.length - 1;
          HeaderbtnClass.headerMenu.visible = false;

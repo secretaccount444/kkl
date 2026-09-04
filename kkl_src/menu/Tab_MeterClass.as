@@ -3,7 +3,8 @@ package menu
    import flash.display.MovieClip;
    import flash.events.Event;
    import flash.events.MouseEvent;
-   
+   import undo.MeterAction;
+
    public class Tab_MeterClass
    {
       
@@ -22,6 +23,10 @@ package menu
       public static var before_num:Number = 0;
       
       public static var maxNum:int;
+
+      public static var barMouseHeld:Boolean = false;
+
+      public static var curUndoAction: MeterAction = null;
        
       
       public function Tab_MeterClass()
@@ -61,6 +66,7 @@ package menu
          catch(myError:Error)
          {
          }
+         barMouseHeld = false;
          param1.bar.addEventListener(MouseEvent.MOUSE_DOWN,BarMouseDown);
          param1.bar.buttonMode = true;
          param1.box.mouseEnabled = false;
@@ -70,6 +76,7 @@ package menu
       
       public static function deleteFc(param1:MovieClip) : void
       {
+         barMouseHeld = false;
          param1.minus.removeEventListener(MouseEvent.MOUSE_DOWN,MouseDown);
          param1.plus.removeEventListener(MouseEvent.MOUSE_DOWN,MouseDown);
          param1.bar.removeEventListener(MouseEvent.MOUSE_DOWN,BarMouseDown);
@@ -120,8 +127,11 @@ package menu
          nowbtn.gotoAndStop(2);
          nowbtn.addEventListener(MouseEvent.MOUSE_UP,MouseUp);
          Main.stageVar.addEventListener(MouseEvent.MOUSE_UP,MouseUp);
+
+         curUndoAction = initUndoAction(tabName);
          MenuAction(nowbtn.name,tabName);
          Nagaoshi_count = 0;
+
          Main.stageVar.addEventListener(Event.ENTER_FRAME,EnterFrame);
       }
       
@@ -135,6 +145,11 @@ package menu
          nowbtn.removeEventListener(MouseEvent.MOUSE_UP,MouseUp);
          Main.stageVar.removeEventListener(MouseEvent.MOUSE_UP,MouseUp);
          Main.stageVar.removeEventListener(Event.ENTER_FRAME,EnterFrame);
+
+         if (curUndoAction && headerName != "Tool") {
+            Main.undoTimeline.push(curUndoAction);
+         }
+         curUndoAction = null;
       }
       
       public static function BarMouseDown(param1:MouseEvent) : void
@@ -146,6 +161,10 @@ package menu
          maxNum = param1.currentTarget.parent.maxNum;
          before_num = 0;
          new Stage_MoveCheckClass();
+
+         barMouseHeld = true;
+         curUndoAction = initUndoAction(tabName);
+
          targetMC.box.addEventListener(Event.ENTER_FRAME,BoxEnterFrame);
          Main.stageVar.addEventListener(MouseEvent.MOUSE_UP,stageMouseUp);
       }
@@ -158,155 +177,225 @@ package menu
          }
          targetMC.box.removeEventListener(Event.ENTER_FRAME,BoxEnterFrame);
          Main.stageVar.removeEventListener(MouseEvent.MOUSE_UP,stageMouseUp);
+
+         if (curUndoAction && headerName != "Tool") {
+            Main.undoTimeline.push(curUndoAction);
+         }
+
+         curUndoAction = null;
+         barMouseHeld = false;
+
+         if (headerName == "Tool" && tabName == "MenuScale") {
+            new SetClass(MenuClass._nowCharaNum, "MenuScale", "tab");
+         }
       }
-      
+
+      public static function initUndoAction(dataKey: String) : MeterAction {
+         var val:Number = NaN;
+         var dataTarget:String = null;
+         var selectedSlot:int = 0;
+         var action = new MeterAction(headerName, targetJ, maxNum);
+         
+         if (MenuClass.tabData[headerName][targetJ][2]["_meter"] == "charaPlus") {
+            if (MenuClass.shiftKeyPress) {
+               dataTarget = MenuClass.tabData[headerName][targetJ][2]["_data"];
+               selectedSlot = MenuClass.systemData[dataTarget]["_menu"];
+
+               for (var shiftSlot = 0; shiftSlot < MenuClass.charaData[MenuClass._nowCharaNum][dataTarget]["_visible"].length; shiftSlot++) {
+                  if (shiftSlot != selectedSlot) {
+                     if (MenuClass.charaData[MenuClass._nowCharaNum][dataTarget]["_visible"][shiftSlot]) {
+                        action.recordPreviousValue(shiftSlot);
+                     }
+                  }
+               }
+
+               action.recordPreviousValue(selectedSlot);
+            } else {
+               dataTarget = MenuClass.tabData[headerName][targetJ][2]["_data"];
+               selectedSlot = MenuClass.systemData[dataTarget]["_menu"];
+               action.recordPreviousValue(selectedSlot);
+            }
+         } else if (MenuClass.tabData[headerName][targetJ][2]["_meter"] == "chara") {
+            action.recordPreviousValue(0);
+         } else if (MenuClass.tabData[headerName][targetJ][2]["_meter"] == "systemPlus") {
+            if (MenuClass.shiftKeyPress) {
+               dataTarget = MenuClass.tabData[headerName][targetJ][2]["_data"];
+               selectedSlot = MenuClass.systemData[dataTarget]["_menu"];
+
+               for (var shiftSlot = 0; shiftSlot < MenuClass.systemData[dataTarget]["_visible"].length; shiftSlot++) {
+                  if (shiftSlot != selectedSlot) {
+                     if (MenuClass.systemData[dataTarget]["_visible"][shiftSlot]) {
+                        action.recordPreviousValue(shiftSlot);
+                     }
+                  }
+               }
+
+               action.recordPreviousValue(selectedSlot);
+            } else {
+               dataTarget = MenuClass.tabData[headerName][targetJ][2]["_data"];
+               selectedSlot = MenuClass.systemData[dataTarget]["_menu"];
+               action.recordPreviousValue(selectedSlot);
+            }
+         } else if(MenuClass.tabData[headerName][targetJ][2]["_meter"] == "system" || MenuClass.tabData[headerName][targetJ][2]["_meter"] == "systemAll") {
+            action.recordPreviousValue(0);
+         }
+
+         return action;
+      }
+
       public static function MenuAction(param1:String, param2:String) : void
       {
-         var _loc3_:Number = NaN;
-         var _loc4_:String = null;
-         var _loc5_:int = 0;
-         var _loc6_:int = 0;
-         var _loc7_:int = 0;
+         var val:Number = NaN;
+         var dataTarget:String = null;
+         var selectedSlot:int = 0;
+
          MenuClass._nowTabName = param2;
-         if(MenuClass.tabData[headerName][targetJ][2]["_meter"] == "charaPlus")
-         {
-            if(MenuClass.shiftKeyPress)
-            {
-               _loc4_ = MenuClass.tabData[headerName][targetJ][2]["_data"];
-               _loc6_ = MenuClass.systemData[_loc4_]["_menu"];
-               _loc7_ = 0;
-               while(_loc7_ < MenuClass.charaData[MenuClass._nowCharaNum][_loc4_]["_visible"].length)
-               {
-                  if(_loc7_ != _loc6_)
-                  {
-                     if(MenuClass.charaData[MenuClass._nowCharaNum][_loc4_]["_visible"][_loc7_])
-                     {
-                        _loc3_ = MenuClass.charaData[MenuClass._nowCharaNum][param2 + _loc7_]["_meter"];
-                        if(param1 == "plus")
-                        {
-                           _loc3_ += 1;
+
+         if (MenuClass.tabData[headerName][targetJ][2]["_meter"] == "charaPlus") {
+            if (MenuClass.shiftKeyPress) {
+               dataTarget = MenuClass.tabData[headerName][targetJ][2]["_data"];
+               selectedSlot = MenuClass.systemData[dataTarget]["_menu"];
+
+               for (var shiftSlot = 0; shiftSlot < MenuClass.charaData[MenuClass._nowCharaNum][dataTarget]["_visible"].length; shiftSlot++) {
+                  if (shiftSlot != selectedSlot) {
+                     if (MenuClass.charaData[MenuClass._nowCharaNum][dataTarget]["_visible"][shiftSlot]) {
+                        val = MenuClass.charaData[MenuClass._nowCharaNum][param2 + shiftSlot]["_meter"];
+
+                        if(param1 == "plus") {
+                           val += 1;
+                        } else if(param1 == "minus") {
+                           val--;
                         }
-                        else if(param1 == "minus")
-                        {
-                           _loc3_--;
+
+                        if (curUndoAction) {
+                           curUndoAction.recordNewValue(val, shiftSlot);
                         }
-                        MenuClass.systemData[_loc4_]["_menu"] = _loc7_;
-                        dataIn(_loc3_,_loc7_);
+
+                        MenuClass.systemData[dataTarget]["_menu"] = shiftSlot;
+                        dataIn(val,shiftSlot);
                      }
                   }
-                  _loc7_++;
                }
-               MenuClass.systemData[_loc4_]["_menu"] = _loc6_;
-               _loc3_ = MenuClass.charaData[MenuClass._nowCharaNum][param2 + _loc6_]["_meter"];
-               if(param1 == "plus")
-               {
-                  _loc3_ += 1;
+
+               MenuClass.systemData[dataTarget]["_menu"] = selectedSlot;
+               val = MenuClass.charaData[MenuClass._nowCharaNum][param2 + selectedSlot]["_meter"];
+
+               if (param1 == "plus") {
+                  val += 1;
+               } else if (param1 == "minus") {
+                  val--;
                }
-               else if(param1 == "minus")
-               {
-                  _loc3_--;
+
+               if (curUndoAction) {
+                  curUndoAction.recordNewValue(val, selectedSlot);
                }
-               dataIn(_loc3_,_loc6_);
+
+               dataIn(val,selectedSlot);
+            } else {
+               dataTarget = MenuClass.tabData[headerName][targetJ][2]["_data"];
+               selectedSlot = MenuClass.systemData[dataTarget]["_menu"];
+               val = MenuClass.charaData[MenuClass._nowCharaNum][param2 + selectedSlot]["_meter"];
+
+               if (param1 == "plus") {
+                  val += 1;
+               } else if (param1 == "minus") {
+                  val--;
+               }
+
+               if (curUndoAction) {
+                  curUndoAction.recordNewValue(val, selectedSlot);
+               }
+
+               dataIn(val, selectedSlot);
             }
-            else
-            {
-               _loc4_ = MenuClass.tabData[headerName][targetJ][2]["_data"];
-               _loc5_ = MenuClass.systemData[_loc4_]["_menu"];
-               _loc3_ = MenuClass.charaData[MenuClass._nowCharaNum][param2 + _loc5_]["_meter"];
-               if(param1 == "plus")
-               {
-                  _loc3_ += 1;
-               }
-               else if(param1 == "minus")
-               {
-                  _loc3_--;
-               }
-               dataIn(_loc3_,_loc5_);
+         } else if (MenuClass.tabData[headerName][targetJ][2]["_meter"] == "chara") {
+            val = MenuClass.charaData[MenuClass._nowCharaNum][param2]["_meter"];
+            
+            if (param1 == "plus") {
+               val += 1;
+            } else if (param1 == "minus") {
+               val--;
             }
-         }
-         else if(MenuClass.tabData[headerName][targetJ][2]["_meter"] == "chara")
-         {
-            _loc3_ = MenuClass.charaData[MenuClass._nowCharaNum][param2]["_meter"];
-            _loc5_ = 0;
-            if(param1 == "plus")
-            {
-               _loc3_ += 1;
+
+            if (curUndoAction) {
+               curUndoAction.recordNewValue(val, 0);
             }
-            else if(param1 == "minus")
-            {
-               _loc3_--;
-            }
-            dataIn(_loc3_,_loc5_);
-         }
-         else if(MenuClass.tabData[headerName][targetJ][2]["_meter"] == "systemPlus")
-         {
-            if(MenuClass.shiftKeyPress)
-            {
-               _loc4_ = MenuClass.tabData[headerName][targetJ][2]["_data"];
-               _loc6_ = MenuClass.systemData[_loc4_]["_menu"];
-               _loc7_ = 0;
-               while(_loc7_ < MenuClass.systemData[_loc4_]["_visible"].length)
-               {
-                  if(_loc7_ != _loc6_)
-                  {
-                     if(MenuClass.systemData[_loc4_]["_visible"][_loc7_])
-                     {
-                        _loc3_ = MenuClass.systemData[param2 + _loc7_]["_meter"];
-                        if(param1 == "plus")
-                        {
-                           _loc3_ += 1;
+
+            dataIn(val, 0);
+         } else if (MenuClass.tabData[headerName][targetJ][2]["_meter"] == "systemPlus") {
+            if (MenuClass.shiftKeyPress) {
+               dataTarget = MenuClass.tabData[headerName][targetJ][2]["_data"];
+               selectedSlot = MenuClass.systemData[dataTarget]["_menu"];
+
+               for (var shiftSlot = 0; shiftSlot < MenuClass.systemData[dataTarget]["_visible"].length; shiftSlot++) {
+                  if (shiftSlot != selectedSlot) {
+                     if (MenuClass.systemData[dataTarget]["_visible"][shiftSlot]) {
+                        val = MenuClass.systemData[param2 + shiftSlot]["_meter"];
+
+                        if (param1 == "plus") {
+                           val += 1;
+                        } else if (param1 == "minus") {
+                           val--;
                         }
-                        else if(param1 == "minus")
-                        {
-                           _loc3_--;
+
+                        if (curUndoAction) {
+                           curUndoAction.recordNewValue(val, shiftSlot);
                         }
-                        MenuClass.systemData[_loc4_]["_menu"] = _loc7_;
-                        dataIn(_loc3_,_loc7_);
+
+                        MenuClass.systemData[dataTarget]["_menu"] = shiftSlot;
+                        dataIn(val,shiftSlot);
                      }
                   }
-                  _loc7_++;
                }
-               MenuClass.systemData[_loc4_]["_menu"] = _loc6_;
-               _loc3_ = MenuClass.systemData[param2 + _loc6_]["_meter"];
+
+               MenuClass.systemData[dataTarget]["_menu"] = selectedSlot;
+               val = MenuClass.systemData[param2 + selectedSlot]["_meter"];
+
+               if (param1 == "plus") {
+                  val += 1;
+               } else if (param1 == "minus") {
+                  val--;
+               }
+
+               if (curUndoAction) {
+                  curUndoAction.recordNewValue(val, selectedSlot);
+               }
+
+               dataIn(val,selectedSlot);
+            } else {
+               dataTarget = MenuClass.tabData[headerName][targetJ][2]["_data"];
+               selectedSlot = MenuClass.systemData[dataTarget]["_menu"];
+               val = MenuClass.systemData[param2 + selectedSlot]["_meter"];
+
                if(param1 == "plus")
                {
-                  _loc3_ += 1;
+                  val += 1;
                }
                else if(param1 == "minus")
                {
-                  _loc3_--;
+                  val--;
                }
-               dataIn(_loc3_,_loc6_);
-            }
-            else
-            {
-               _loc4_ = MenuClass.tabData[headerName][targetJ][2]["_data"];
-               _loc5_ = MenuClass.systemData[_loc4_]["_menu"];
-               _loc3_ = MenuClass.systemData[param2 + _loc5_]["_meter"];
-               if(param1 == "plus")
-               {
-                  _loc3_ += 1;
+
+               if (curUndoAction) {
+                  curUndoAction.recordNewValue(val, selectedSlot);
                }
-               else if(param1 == "minus")
-               {
-                  _loc3_--;
-               }
-               dataIn(_loc3_,_loc5_);
+
+               dataIn(val, selectedSlot);
             }
-         }
-         else if(MenuClass.tabData[headerName][targetJ][2]["_meter"] == "system" || MenuClass.tabData[headerName][targetJ][2]["_meter"] == "systemAll")
-         {
-            _loc3_ = MenuClass.systemData[param2]["_meter"];
-            _loc5_ = 0;
-            if(param1 == "plus")
-            {
-               _loc3_ += 1;
+         } else if(MenuClass.tabData[headerName][targetJ][2]["_meter"] == "system" || MenuClass.tabData[headerName][targetJ][2]["_meter"] == "systemAll") {
+            val = MenuClass.systemData[param2]["_meter"];
+
+            if(param1 == "plus") {
+               val += 1;
+            } else if(param1 == "minus") {
+               val--;
             }
-            else if(param1 == "minus")
-            {
-               _loc3_--;
+
+            if (curUndoAction) {
+               curUndoAction.recordNewValue(val, 0);
             }
-            dataIn(_loc3_,_loc5_);
+
+            dataIn(val, 0);
          }
       }
       
@@ -348,6 +437,9 @@ package menu
                            {
                               _loc7_ = MenuClass.charaData[MenuClass._nowCharaNum][tabName + _loc4_]["_meter"] + _loc6_;
                               MenuClass.systemData[_loc2_]["_menu"] = _loc4_;
+                              if (curUndoAction) {
+                                 curUndoAction.recordNewValue(_loc7_, _loc4_);
+                              }
                               dataIn(_loc7_,_loc4_);
                            }
                         }
@@ -355,6 +447,9 @@ package menu
                      }
                      MenuClass.systemData[_loc2_]["_menu"] = _loc8_;
                      _loc7_ = MenuClass.charaData[MenuClass._nowCharaNum][tabName + _loc8_]["_meter"] + _loc6_;
+                     if (curUndoAction) {
+                        curUndoAction.recordNewValue(_loc7_, _loc8_);
+                     }
                      dataIn(_loc7_,_loc8_);
                   }
                   else if(MenuClass.tabData[headerName][targetJ][2]["_meter"] == "systemPlus")
@@ -369,6 +464,9 @@ package menu
                            {
                               _loc7_ = MenuClass.systemData[tabName + _loc4_]["_meter"] + _loc6_;
                               MenuClass.systemData[_loc2_]["_menu"] = _loc4_;
+                              if (curUndoAction) {
+                                 curUndoAction.recordNewValue(_loc7_, _loc4_);
+                              }
                               dataIn(_loc7_,_loc4_);
                            }
                         }
@@ -376,17 +474,33 @@ package menu
                      }
                      MenuClass.systemData[_loc2_]["_menu"] = _loc8_;
                      _loc7_ = MenuClass.systemData[tabName + _loc8_]["_meter"] + _loc6_;
+                     if (curUndoAction) {
+                        curUndoAction.recordNewValue(_loc7_, _loc8_);
+                     }
                      dataIn(_loc7_,_loc8_);
                   }
                }
                else
                {
-                  dataIn(Math.floor((param1.currentTarget.parent.mouseX - 3) / _loc3_ * maxNum),MenuClass.systemData[MenuClass.tabData[headerName][targetJ][2]["_data"]]["_menu"]);
+                  var val = Math.floor((param1.currentTarget.parent.mouseX - 3) / _loc3_ * maxNum);
+                  var slot = MenuClass.systemData[MenuClass.tabData[headerName][targetJ][2]["_data"]]["_menu"];
+
+                  if (curUndoAction) {
+                     curUndoAction.recordNewValue(val, slot);
+                  }
+
+                  dataIn(val, slot);
                }
             }
             else
             {
-               dataIn(Math.floor((param1.currentTarget.parent.mouseX - 3) / _loc3_ * maxNum),0);
+               var val = Math.floor((param1.currentTarget.parent.mouseX - 3) / _loc3_ * maxNum);
+   
+               if (curUndoAction) {
+                  curUndoAction.recordNewValue(val, 0);
+               }
+
+               dataIn(val, 0);
             }
          }
          before_num = param1.currentTarget.parent.mouseX;
@@ -424,6 +538,7 @@ package menu
                param1 = maxNum;
             }
          }
+         
          if(MenuClass.tabData[headerName][targetJ][2]["_meter"] == "charaPlus")
          {
             _loc4_ = MenuClass.tabData[headerName][targetJ][2]["_data"];
@@ -530,6 +645,14 @@ package menu
          {
             MenuClass.systemData[tabName]["_meter"] = param1;
          }
+
+         /* Don't rescale the menu while the user is manipulating the scale slider. */
+         if (headerName == "Tool" && tabName == "MenuScale" && barMouseHeld) {
+            meterTxt();
+            new Tab_SetClass();
+            return;
+         }
+
          if((MenuClass.tabData[headerName][targetJ][2]["_meter"] == "charaPlus" || MenuClass.tabData[headerName][targetJ][2]["_meter"] == "chara") && MenuClass._nowTargetMode == "All")
          {
             _loc3_ = 0;
@@ -602,22 +725,32 @@ package menu
          {
             targetMC.meterTxt.gotoAndStop(1);
          }
-         targetMC.meterTxt.num.text = _loc1_;
-         if(!MenuClass.spaceKeyPress)
-         {
-            if(_loc1_ == maxNum)
+
+         /* NOTE: could probably replace this with a more general formatting mechanism
+          * Also see Tab_MeterTxt
+          */
+         if (headerName == "Tool" && tabName == "MenuScale") {
+            var scale = (_loc1_ * (0.50 / 100)) + .50;
+            targetMC.meterTxt.num.text = scale.toFixed(2);
+         } else {
+            targetMC.meterTxt.num.text = _loc1_;
+
+            if(!MenuClass.spaceKeyPress)
             {
-               if(maxNum == 100)
+               if(_loc1_ == maxNum)
                {
-                  targetMC.meterTxt.gotoAndStop(2);
-               }
-               else if(maxNum == 360 && MenuClass.tabData[headerName][targetJ][2]["_meterType"] == 1)
-               {
-                  targetMC.meterTxt.gotoAndStop(3);
-               }
-               else if(maxNum == 1000 && MenuClass.tabData[headerName][targetJ][2]["_meterType"] == 2)
-               {
-                  targetMC.meterTxt.gotoAndStop(4);
+                  if(maxNum == 100)
+                  {
+                     targetMC.meterTxt.gotoAndStop(2);
+                  }
+                  else if(maxNum == 360 && MenuClass.tabData[headerName][targetJ][2]["_meterType"] == 1)
+                  {
+                     targetMC.meterTxt.gotoAndStop(3);
+                  }
+                  else if(maxNum == 1000 && MenuClass.tabData[headerName][targetJ][2]["_meterType"] == 2)
+                  {
+                     targetMC.meterTxt.gotoAndStop(4);
+                  }
                }
             }
          }

@@ -17,6 +17,7 @@ package menu
          catch(myError:Error)
          {
          }
+
          if(!MenuClass.hederSwitchCheck)
          {
             try
@@ -143,6 +144,16 @@ package menu
             try
             {
                Tab_AddCostumOpen.deleteFc(MenuClass._nowHeaderName);
+            }
+            catch(myError:Error)
+            {
+            }
+         }
+         else if(MenuClass._nowHeaderName == "Mark")
+         {
+            try
+            {
+               Tab_AddCostumOpenMark.deleteFc(MenuClass._nowHeaderName);
             }
             catch(myError:Error)
             {

@@ -19,37 +19,39 @@ package menu
          _loc3_ = this.charaData["ZubonAshi" + param2]["_menu"];
          try
          {
+            this.charaAdd["ashi" + param2].leg.actual.leg.Zubon.gotoAndStop(1);
             if(!Dress_data.KutuData[this.charaData["Kutu" + param2]["_menu"]]["footSen"] && this.charaData["Kutu" + param2]["_visible"][0])
             {
                try
                {
-                  this.charaAdd["ashi" + param2].leg_huku.leg.Zubon.mask = this.charaAdd["ashi" + param2].leg_huku.leg.Kutu.legMask;
+                  this.charaAdd["ashi" + param2].leg_huku.actual.leg.Zubon.mask = this.charaAdd["ashi" + param2].leg_huku.actual.leg.Kutu.legMask;
                }
                catch(myError:Error)
                {
                }
-               this.charaAdd["ashi" + param2].leg.leg.Zubon.visible = false;
-               this.charaAdd["ashi" + param2].leg.leg.Zubon.gootAndStop(1);
+               this.charaAdd["ashi" + param2].leg.actual.leg.Zubon.visible = false;
+               this.charaAdd["ashi" + param2].leg.actual.leg.Zubon.gotoAndStop(1);
             }
             else
             {
-               this.charaAdd["ashi" + param2].leg_huku.leg.Zubon.mask = null;
+               this.charaAdd["ashi" + param2].leg_huku.actual.leg.Zubon.mask = null;
                try
                {
-                  this.charaAdd["ashi" + param2].leg_huku.leg.Kutu.legMask.visible = false;
+                  this.charaAdd["ashi" + param2].leg_huku.actual.leg.Kutu.legMask.visible = false;
                }
                catch(myError:Error)
                {
                }
+               
                if(Dress_data.ZubonAshiData[_loc3_]["legUnder"] == 0)
                {
-                  this.charaAdd["ashi" + param2].leg.leg.Zubon.visible = false;
-                  this.charaAdd["ashi" + param2].leg.leg.Zubon.gootAndStop(1);
+                  this.charaAdd["ashi" + param2].leg.actual.leg.Zubon.visible = false;
+                  this.charaAdd["ashi" + param2].leg.actual.leg.Zubon.gotoAndStop(1);
                }
                else
                {
-                  this.charaAdd["ashi" + param2].leg.leg.Zubon.visible = this.charaData["Zubon"]["_visible"][0];
-                  this.charaAdd["ashi" + param2].leg.leg.Zubon.gotoAndStop(Dress_data.ZubonAshiData[_loc3_]["legUnder"] + 1);
+                  this.charaAdd["ashi" + param2].leg.actual.leg.Zubon.visible = this.charaData["Zubon"]["_visible"][0];
+                  this.charaAdd["ashi" + param2].leg.actual.leg.Zubon.gotoAndStop(Dress_data.ZubonAshiData[_loc3_]["legUnder"] + 1);
                }
             }
          }

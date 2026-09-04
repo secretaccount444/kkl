@@ -183,6 +183,11 @@ package menu
             Chara_Class.chara_m["Ribon" + param1].ribon0.transform.matrix = _loc5_;
             new MeterPersentRibon(-406,1700,100,"FreeRibonX",param1);
             Chara_Class.chara_m["Ribon" + param1].ribon0.x = MeterPersentRibon.MeterPersentNum;
+            
+            /* Add the fine-tuning to directly to sprite X afterwards so that we add the offset to the rounded baseline X position. */
+            new MeterPersentRibon(-2.5,2.5,100,"FreeRibonFineX",param1);
+            Chara_Class.chara_m["Ribon" + param1].ribon0.x += MeterPersentRibon.MeterPersentNum;
+
             new MeterPersentRibon(360,0,100,"FreeRibonRotation",param1);
             _loc6_ = MeterPersentRibon.MeterPersentNum;
             Chara_Class.chara_m["Ribon" + param1].ribon0.rotation = _loc6_;
@@ -210,6 +215,12 @@ package menu
             Chara_Class.chara_m["Ribon" + param1].ribon0.scaleX = _loc9_;
             Chara_Class.chara_m["Ribon" + param1].ribon0.scaleY = _loc10_;
             Chara_Class.chara_m["Ribon" + param1].ribon0.y = _loc7_;
+
+            /* See above comment with the fine X offset for why this is being added to the Y position directly. */
+            new MeterPersentRibon(2.5, -2.5, 100, "FreeRibonFineY", param1);
+            Chara_Class.chara_m["Ribon" + param1].ribon0.y += MeterPersentRibon.MeterPersentNum;
+
+
             if(MenuClass.systemData["FreeRibon" + param1]["_reversal"])
             {
                if(Chara_Class.chara_m["Ribon" + param1].ribon0.scaleX < 0)
@@ -336,6 +347,9 @@ package menu
                }
             }
             new Chara_ColorClass(0,"FreeRibon" + param1);
+
+            new MeterPersentRibon(0, 1, 100, "FreeRibonAlpha", param1);
+            Chara_Class.chara_m["Ribon" + param1].ribon0.alpha = MeterPersentRibon.MeterPersentNum;
          }
          else
          {

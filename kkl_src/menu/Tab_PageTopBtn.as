@@ -35,7 +35,7 @@ package menu
          {
             MenuClass.BeforePage = MenuClass.systemData["Story_Page"]["_menu"];
             MenuClass.systemData["Story_Page"]["_menu"] = 0;
-            new Tab_IEInOut("setIN",MenuClass.StoryTimeLineData[MenuClass.systemData["Story_Page"]["_menu"]][9],MenuClass._nowCharaNum);
+            Tab_IEInOut.execute("setIN",MenuClass.StoryTimeLineData[MenuClass.systemData["Story_Page"]["_menu"]][9],MenuClass._nowCharaNum);
          }
          targetMC.addEventListener(MouseEvent.MOUSE_UP,MouseUp);
          Main.stageVar.addEventListener(MouseEvent.MOUSE_UP,MouseUp);

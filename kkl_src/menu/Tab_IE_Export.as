@@ -27,6 +27,12 @@ package menu
          Main.stageVar.addChild(MenuClass.tabMenuAdd["tabExportWindow"]);
          targetMC = MenuClass.tabMenuAdd["tabExportWindow"];
          targetMC.x = 8;
+
+         if (Tab_IEData1.IEGroup.length > 42) {
+            targetMC.myTa.scaleY = 0.92;
+            targetMC.getChildAt(5).scaleY = (48001.0 / 65536.0) * 0.925;
+         }
+
          targetMC.myTa.editable = false;
          if(!MenuClass.hederSwitchCheck)
          {
@@ -111,12 +117,9 @@ package menu
          var _loc5_:MovieClip = null;
          var _loc6_:String = null;
          var _loc7_:String = null;
+
          if(MenuClass._nowWindowName == "tabExportWindow")
          {
-            MenuClass.TxtCountArea = new Menu_Load.txtCountAreaClass();
-            MenuClass.tabMenuAdd["tabExportWindow"].addChild(MenuClass.TxtCountArea);
-            MenuClass.TxtCountArea.x = 195;
-            MenuClass.TxtCountArea.y = 409;
             _loc4_ = 0;
             _loc3_ = MenuClass.MY_MENUNAME.length;
             _loc2_ = 0;
@@ -129,29 +132,33 @@ package menu
                }
                _loc2_++;
             }
+
             _loc3_ = Tab_IEData1.IEGroup.length;
             _loc2_ = 0;
+
+            var buttonsPerRow = 21;
+            var totalRows = Math.ceil(_loc3_ / buttonsPerRow);
+            var baseX = 25;
+            var baseY = 510 - (36 * totalRows);
+
+            MenuClass.TxtCountArea = new Menu_Load.txtCountAreaClass();
+            MenuClass.tabMenuAdd["tabExportWindow"].addChild(MenuClass.TxtCountArea);
+            MenuClass.TxtCountArea.x = 195;
+            MenuClass.TxtCountArea.y = baseY - 22;
+
             while(_loc2_ < _loc3_)
             {
                _loc5_ = new Menu_Load.TabRandomBoxClass();
                MenuClass.tabMenuAdd["tabExportWindow"].addChild(_loc5_);
                MenuClass.exportCheckAdd[_loc2_] = _loc5_;
-               if(!MenuClass.MY_MENUNAME[_loc2_ + 4][4] && Main.r18Check)
-               {
-                  _loc4_++;
-                  MenuClass.exportCheckAdd[_loc2_].visible = false;
-               }
-               if(_loc2_ < 21)
-               {
-                  MenuClass.exportCheckAdd[_loc2_].x = 34 * (_loc2_ - _loc4_) + 25;
-                  MenuClass.exportCheckAdd[_loc2_].y = 438;
-               }
-               else
-               {
-                  MenuClass.exportCheckAdd[_loc2_].x = 34 * (_loc2_ - 21) + 25;
-                  MenuClass.exportCheckAdd[_loc2_].y = 474;
-               }
+
+               var row = Math.floor(_loc2_ / buttonsPerRow);
+               var col = _loc2_ % buttonsPerRow;
+
+               MenuClass.exportCheckAdd[_loc2_].x = baseX + (34 * col);
+               MenuClass.exportCheckAdd[_loc2_].y = baseY + (36 * row);
                MenuClass.exportCheckAdd[_loc2_].Num = _loc2_;
+
                _loc6_ = MenuClass.MY_MENUNAME[_loc2_ + 4][0];
                _loc7_ = MenuClass.MY_MENUNAME[_loc2_ + 4][1];
                if(_loc6_ == "Story")
@@ -163,6 +170,11 @@ package menu
                {
                   _loc6_ = "FreeHandScale";
                }
+               else if (_loc6_ == "LegHeight")
+               {
+                  _loc6_ = "Ashi2";
+               }
+
                MenuClass.exportCheckAdd[_loc2_].icon.icon.gotoAndStop(_loc6_);
                if(MenuClass.exportCheck[_loc2_])
                {
@@ -181,8 +193,6 @@ package menu
             }
             if(MenuClass._nowTargetMode == "All")
             {
-               MenuClass.exportCheckAdd[29].alpha = 1;
-               MenuClass.exportCheckAdd[29].buttonMode = true;
                MenuClass.exportCheckAdd[30].alpha = 1;
                MenuClass.exportCheckAdd[30].buttonMode = true;
                MenuClass.exportCheckAdd[31].alpha = 1;
@@ -203,11 +213,11 @@ package menu
                MenuClass.exportCheckAdd[38].buttonMode = true;
                MenuClass.exportCheckAdd[39].alpha = 1;
                MenuClass.exportCheckAdd[39].buttonMode = true;
+               MenuClass.exportCheckAdd[40].alpha = 1;
+               MenuClass.exportCheckAdd[40].buttonMode = true;
             }
             else
             {
-               MenuClass.exportCheckAdd[29].alpha = 0.2;
-               MenuClass.exportCheckAdd[29].buttonMode = false;
                MenuClass.exportCheckAdd[30].alpha = 0.2;
                MenuClass.exportCheckAdd[30].buttonMode = false;
                MenuClass.exportCheckAdd[31].alpha = 0.2;
@@ -228,6 +238,8 @@ package menu
                MenuClass.exportCheckAdd[38].buttonMode = false;
                MenuClass.exportCheckAdd[39].alpha = 0.2;
                MenuClass.exportCheckAdd[39].buttonMode = false;
+               MenuClass.exportCheckAdd[40].alpha = 0.2;
+               MenuClass.exportCheckAdd[40].buttonMode = false;
             }
             new Tab_IESet("export");
             Main.stageVar.removeEventListener(Event.ENTER_FRAME,Enter);
@@ -340,8 +352,6 @@ package menu
             MenuClass._nowTargetMode = "Select";
             new Chara_SelectClass("open");
             new Tab_IESet("export");
-            MenuClass.exportCheckAdd[29].alpha = 0.2;
-            MenuClass.exportCheckAdd[29].buttonMode = false;
             MenuClass.exportCheckAdd[30].alpha = 0.2;
             MenuClass.exportCheckAdd[30].buttonMode = false;
             MenuClass.exportCheckAdd[31].alpha = 0.2;
@@ -362,6 +372,8 @@ package menu
             MenuClass.exportCheckAdd[38].buttonMode = false;
             MenuClass.exportCheckAdd[39].alpha = 0.2;
             MenuClass.exportCheckAdd[39].buttonMode = false;
+            MenuClass.exportCheckAdd[40].alpha = 0.2;
+            MenuClass.exportCheckAdd[40].buttonMode = false;
          }
       }
       
@@ -374,8 +386,6 @@ package menu
             MenuClass._nowTargetMode = "All";
             new Chara_SelectClass("open");
             new Tab_IESet("export");
-            MenuClass.exportCheckAdd[29].alpha = 1;
-            MenuClass.exportCheckAdd[29].buttonMode = true;
             MenuClass.exportCheckAdd[30].alpha = 1;
             MenuClass.exportCheckAdd[30].buttonMode = true;
             MenuClass.exportCheckAdd[31].alpha = 1;
@@ -396,6 +406,8 @@ package menu
             MenuClass.exportCheckAdd[38].buttonMode = true;
             MenuClass.exportCheckAdd[39].alpha = 1;
             MenuClass.exportCheckAdd[39].buttonMode = true;
+            MenuClass.exportCheckAdd[40].alpha = 1;
+            MenuClass.exportCheckAdd[40].buttonMode = true;
          }
       }
    }

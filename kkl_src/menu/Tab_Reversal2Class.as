@@ -2,6 +2,7 @@ package menu
 {
    import flash.display.MovieClip;
    import flash.events.MouseEvent;
+   import undo.PropertyAction;
    
    public class Tab_Reversal2Class
    {
@@ -30,45 +31,59 @@ package menu
       
       public static function MouseDown(param1:MouseEvent) : void
       {
-         var _loc3_:String = null;
+         var dataKey:String = null;
          var _loc4_:int = 0;
-         var _loc5_:String = null;
-         var _loc6_:int = 0;
+         var dataTarget:String = null;
+         var selectedSlot:int = 0;
          targetMC = param1.currentTarget as MovieClip;
          MenuClass._nowTabName = targetMC.tabName;
-         var _loc2_:String = MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_menu"];
-         if(_loc2_ == "charaPlus")
+         var menuType:String = MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_menu"];
+
+         var undoAction = new PropertyAction(
+            targetMC.headerName, targetMC.targetJ,"_reversal2",
+            true, menuType == "charaPlus",
+            "tab", true
+         );
+
+         if(menuType == "charaPlus")
          {
-            _loc5_ = MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_data"];
-            _loc6_ = MenuClass.systemData[_loc5_]["_menu"];
-            _loc3_ = targetMC.tabName + _loc6_;
+            dataTarget = MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_data"];
+            selectedSlot = MenuClass.systemData[dataTarget]["_menu"];
+            dataKey = targetMC.tabName + selectedSlot;
          }
          else
          {
-            _loc3_ = targetMC.tabName;
+            dataKey = targetMC.tabName;
          }
+
+         undoAction.recordPreviousValue(selectedSlot);
+
          targetMC.addEventListener(MouseEvent.MOUSE_UP,MouseUp);
          Main.stageVar.addEventListener(MouseEvent.MOUSE_UP,MouseUp);
-         new Tab_VC(targetMC.headerName,targetMC.targetJ,_loc3_);
-         if(MenuClass.charaData[MenuClass._nowCharaNum][_loc3_]["_reversal2"] == 2)
+         new Tab_VC(targetMC.headerName,targetMC.targetJ,dataKey);
+         if(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal2"] == 2)
          {
-            MenuClass.charaData[MenuClass._nowCharaNum][_loc3_]["_reversal2"] = 0;
+            MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal2"] = 0;
          }
          else
          {
-            ++MenuClass.charaData[MenuClass._nowCharaNum][_loc3_]["_reversal2"];
+            ++MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal2"];
          }
+
+         undoAction.recordNewValue(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal2"], selectedSlot);
+         Main.undoTimeline.push(undoAction);
+
          if(MenuClass._nowTargetMode == "All")
          {
             _loc4_ = 0;
             for(; _loc4_ <= MenuClass._characterNum; new SetClass(_loc4_,targetMC.tabName,"tab"),_loc4_++)
             {
-               MenuClass.charaData[_loc4_][_loc3_]["_reversal2"] = MenuClass.charaData[MenuClass._nowCharaNum][_loc3_]["_reversal2"];
+               MenuClass.charaData[_loc4_][dataKey]["_reversal2"] = MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal2"];
                try
                {
-                  if(MenuClass.charaData[_loc4_][_loc3_]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[_loc4_][_loc3_]["_visible"].length == 1)
+                  if(MenuClass.charaData[_loc4_][dataKey]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[_loc4_][dataKey]["_visible"].length == 1)
                   {
-                     MenuClass.charaData[_loc4_][_loc3_]["_visible"][Tab_VC.menuNum] = true;
+                     MenuClass.charaData[_loc4_][dataKey]["_visible"][Tab_VC.menuNum] = true;
                   }
                }
                catch(myError:Error)
@@ -84,12 +99,12 @@ package menu
             {
                if(MenuClass._nowSelectChara[_loc4_])
                {
-                  MenuClass.charaData[_loc4_][_loc3_]["_reversal2"] = MenuClass.charaData[MenuClass._nowCharaNum][_loc3_]["_reversal2"];
+                  MenuClass.charaData[_loc4_][dataKey]["_reversal2"] = MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal2"];
                   try
                   {
-                     if(MenuClass.charaData[_loc4_][_loc3_]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[_loc4_][_loc3_]["_visible"].length == 1)
+                     if(MenuClass.charaData[_loc4_][dataKey]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[_loc4_][dataKey]["_visible"].length == 1)
                      {
-                        MenuClass.charaData[_loc4_][_loc3_]["_visible"][Tab_VC.menuNum] = true;
+                        MenuClass.charaData[_loc4_][dataKey]["_visible"][Tab_VC.menuNum] = true;
                      }
                   }
                   catch(myError:Error)
@@ -104,9 +119,9 @@ package menu
          {
             try
             {
-               if(MenuClass.charaData[MenuClass._nowCharaNum][_loc3_]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[MenuClass._nowCharaNum][_loc3_]["_visible"].length == 1)
+               if(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_visible"].length == 1)
                {
-                  MenuClass.charaData[MenuClass._nowCharaNum][_loc3_]["_visible"][Tab_VC.menuNum] = true;
+                  MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_visible"][Tab_VC.menuNum] = true;
                }
             }
             catch(myError:Error)
@@ -114,15 +129,16 @@ package menu
             }
             new SetClass(MenuClass._nowCharaNum,targetMC.tabName,"tab");
          }
-         if(MenuClass.charaData[MenuClass._nowCharaNum][_loc3_]["_reversal2"] == 0)
+
+         if(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal2"] == 0)
          {
             targetMC.gotoAndStop(4);
          }
-         else if(MenuClass.charaData[MenuClass._nowCharaNum][_loc3_]["_reversal2"] == 1)
+         else if(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal2"] == 1)
          {
             targetMC.gotoAndStop(5);
          }
-         else if(MenuClass.charaData[MenuClass._nowCharaNum][_loc3_]["_reversal2"] == 2)
+         else if(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal2"] == 2)
          {
             targetMC.gotoAndStop(6);
          }

@@ -307,11 +307,11 @@ package menu
          {
             if(selectNum.length == 1)
             {
-               new Tab_IEInOut("textIN",Chara_IECharadata.IEdata[selectNum[0]],param1);
+               Tab_IEInOut.execute("textIN",Chara_IECharadata.IEdata[selectNum[0]],param1);
             }
             else
             {
-               new Tab_IEInOut("textIN",Chara_IECharadata.IEdata[selectNum[param1]],param1);
+               Tab_IEInOut.execute("textIN",Chara_IECharadata.IEdata[selectNum[param1]],param1);
             }
          }
       }

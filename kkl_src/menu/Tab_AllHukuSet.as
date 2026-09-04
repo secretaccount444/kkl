@@ -409,175 +409,175 @@ package menu
          var skipFragmentSystem: Boolean = (strFlag != "first" && AllHukuNum != 0) || !Main.defaultChanGenerator.haveFragments();
 
          if (skipFragmentSystem) {
-         _loc8_["AllHairSet"]["_menu"] = HairRandomBox[_loc3_];
-         HairRandomBox.splice(_loc3_,1);
-         if((Chara_IEAllCharadata.IEAllHukuData[AllHukuNum] == "4" || Chara_IEAllCharadata.IEAllHukuData[AllHukuNum] == "5" || Chara_IEAllCharadata.IEAllHukuData[AllHukuNum] == "7") && Chara_IEdata.AllHairSetData[_loc8_["AllHairSet"]["_menu"]][1] != 0)
-         {
-            _loc6_ = Chara_IEdata.AllHairSetData[_loc8_["AllHairSet"]["_menu"]][1].split("**");
-         }
-         else
-         {
-            _loc6_ = Chara_IEdata.AllHairSetData[_loc8_["AllHairSet"]["_menu"]][0].split("**");
-         }
-         _loc6_.shift();
-         _loc7_ = _loc7_ + "_" + String(_loc6_);
-         _loc3_ = Math.floor(Math.random() * FaceRandomBox.length);
-         _loc4_ = FaceRandomBox[_loc3_];
-         FaceRandomBox.splice(_loc3_,1);
-         (_loc6_ = Chara_IEdata.AllFaceSetData[_loc4_].split("**")).shift();
-         _loc7_ = _loc7_ + "_" + String(_loc6_);
-         if(Chara_IEAllCharadata.IEAllHukuData[AllHukuNum] == "2" || Chara_IEAllCharadata.IEAllHukuData[AllHukuNum] == "3" || Chara_IEAllCharadata.IEAllHukuData[AllHukuNum] == "4")
-         {
-            if(MenuClass.systemData["BodyType"]["_menu"] == 0)
+            _loc8_["AllHairSet"]["_menu"] = HairRandomBox[_loc3_];
+            HairRandomBox.splice(_loc3_,1);
+            if((Chara_IEAllCharadata.IEAllHukuData[AllHukuNum] == "4" || Chara_IEAllCharadata.IEAllHukuData[AllHukuNum] == "5" || Chara_IEAllCharadata.IEAllHukuData[AllHukuNum] == "7") && Chara_IEdata.AllHairSetData[_loc8_["AllHairSet"]["_menu"]][1] != 0)
             {
-               _loc3_ = Math.floor(Math.random() * Chara_IEdata.AllBodySetMizugiData.length);
-               _loc6_ = Chara_IEdata.AllBodySetMizugiData[_loc3_].split("**");
+               _loc6_ = Chara_IEdata.AllHairSetData[_loc8_["AllHairSet"]["_menu"]][1].split("**");
             }
             else
             {
-               _loc3_ = Math.floor(Math.random() * Chara_IEdata.AllBodySet2MizugiData.length);
-               _loc6_ = Chara_IEdata.AllBodySet2MizugiData[_loc3_].split("**");
+               _loc6_ = Chara_IEdata.AllHairSetData[_loc8_["AllHairSet"]["_menu"]][0].split("**");
             }
-         }
-         else if(MenuClass.systemData["BodyType"]["_menu"] == 0)
-         {
-            _loc3_ = Math.floor(Math.random() * Chara_IEdata.AllBodySetData.length);
-            _loc6_ = Chara_IEdata.AllBodySetData[_loc3_].split("**");
-         }
-         else
-         {
-            _loc3_ = Math.floor(Math.random() * Chara_IEdata.AllBodySet2Data.length);
-            _loc6_ = Chara_IEdata.AllBodySet2Data[_loc3_].split("**");
-         }
-         _loc6_.shift();
-         _loc7_ = _loc7_ + "_" + String(_loc6_);
-         if(Chara_IEAllCharadata.IEAllHukuData[AllHukuNum] == "0" || Chara_IEAllCharadata.IEAllHukuData[AllHukuNum] == "1")
-         {
-            (_loc6_ = Chara_IESeihukudata.Hadakadata[0][0].split("**")).shift();
+            _loc6_.shift();
             _loc7_ = _loc7_ + "_" + String(_loc6_);
-            _loc3_ = Math.floor(Math.random() * Chara_IESeihukudata.Seihukudata[int(Chara_IEAllCharadata.IEAllHukuData[AllHukuNum])][randomNum_huku].length);
-            (_loc6_ = Chara_IESeihukudata.Seihukudata[int(Chara_IEAllCharadata.IEAllHukuData[AllHukuNum])][randomNum_huku][_loc3_][0].split("**")).shift();
+            _loc3_ = Math.floor(Math.random() * FaceRandomBox.length);
+            _loc4_ = FaceRandomBox[_loc3_];
+            FaceRandomBox.splice(_loc3_,1);
+            (_loc6_ = Chara_IEdata.AllFaceSetData[_loc4_].split("**")).shift();
             _loc7_ = _loc7_ + "_" + String(_loc6_);
-            _loc3_ = Math.floor(Math.random() * UnderwearRandomBox.length);
-            _loc4_ = UnderwearRandomBox[_loc3_];
-            UnderwearRandomBox.splice(_loc3_,1);
-            (_loc6_ = Chara_IEdata.UnderwearData[_loc4_][1].split("**")).shift();
-            _loc7_ = _loc7_ + "_" + String(_loc6_);
-            _loc3_ = Math.floor(Math.random() * AcceRamdomBox.length);
-            _loc4_ = AcceRamdomBox[_loc3_];
-            AcceRamdomBox.splice(_loc3_,1);
-            if(Chara_IEdata.Accedata[_loc4_] != null)
+            if(Chara_IEAllCharadata.IEAllHukuData[AllHukuNum] == "2" || Chara_IEAllCharadata.IEAllHukuData[AllHukuNum] == "3" || Chara_IEAllCharadata.IEAllHukuData[AllHukuNum] == "4")
             {
-               (_loc6_ = Chara_IEdata.Accedata[_loc4_].split("**")).shift();
+               if(MenuClass.systemData["BodyType"]["_menu"] == 0)
+               {
+                  _loc3_ = Math.floor(Math.random() * Chara_IEdata.AllBodySetMizugiData.length);
+                  _loc6_ = Chara_IEdata.AllBodySetMizugiData[_loc3_].split("**");
+               }
+               else
+               {
+                  _loc3_ = Math.floor(Math.random() * Chara_IEdata.AllBodySet2MizugiData.length);
+                  _loc6_ = Chara_IEdata.AllBodySet2MizugiData[_loc3_].split("**");
+               }
+            }
+            else if(MenuClass.systemData["BodyType"]["_menu"] == 0)
+            {
+               _loc3_ = Math.floor(Math.random() * Chara_IEdata.AllBodySetData.length);
+               _loc6_ = Chara_IEdata.AllBodySetData[_loc3_].split("**");
+            }
+            else
+            {
+               _loc3_ = Math.floor(Math.random() * Chara_IEdata.AllBodySet2Data.length);
+               _loc6_ = Chara_IEdata.AllBodySet2Data[_loc3_].split("**");
+            }
+            _loc6_.shift();
+            _loc7_ = _loc7_ + "_" + String(_loc6_);
+            if(Chara_IEAllCharadata.IEAllHukuData[AllHukuNum] == "0" || Chara_IEAllCharadata.IEAllHukuData[AllHukuNum] == "1")
+            {
+               (_loc6_ = Chara_IESeihukudata.Hadakadata[0][0].split("**")).shift();
+               _loc7_ = _loc7_ + "_" + String(_loc6_);
+               _loc3_ = Math.floor(Math.random() * Chara_IESeihukudata.Seihukudata[int(Chara_IEAllCharadata.IEAllHukuData[AllHukuNum])][randomNum_huku].length);
+               (_loc6_ = Chara_IESeihukudata.Seihukudata[int(Chara_IEAllCharadata.IEAllHukuData[AllHukuNum])][randomNum_huku][_loc3_][0].split("**")).shift();
+               _loc7_ = _loc7_ + "_" + String(_loc6_);
+               _loc3_ = Math.floor(Math.random() * UnderwearRandomBox.length);
+               _loc4_ = UnderwearRandomBox[_loc3_];
+               UnderwearRandomBox.splice(_loc3_,1);
+               (_loc6_ = Chara_IEdata.UnderwearData[_loc4_][1].split("**")).shift();
+               _loc7_ = _loc7_ + "_" + String(_loc6_);
+               _loc3_ = Math.floor(Math.random() * AcceRamdomBox.length);
+               _loc4_ = AcceRamdomBox[_loc3_];
+               AcceRamdomBox.splice(_loc3_,1);
+               if(Chara_IEdata.Accedata[_loc4_] != null)
+               {
+                  (_loc6_ = Chara_IEdata.Accedata[_loc4_].split("**")).shift();
+                  _loc7_ = _loc7_ + "_" + String(_loc6_);
+               }
+            }
+            else if(Chara_IEAllCharadata.IEAllHukuData[AllHukuNum] == "2")
+            {
+               (_loc6_ = Chara_IESeihukudata.Hadakadata[0][0].split("**")).shift();
+               _loc7_ = _loc7_ + "_" + String(_loc6_);
+               _loc3_ = Math.floor(Math.random() * Chara_IESeihukudata.SukumizuData[randomNum_Sukumizu].length);
+               (_loc6_ = Chara_IESeihukudata.SukumizuData[randomNum_Sukumizu][_loc3_][0].split("**")).shift();
                _loc7_ = _loc7_ + "_" + String(_loc6_);
             }
-         }
-         else if(Chara_IEAllCharadata.IEAllHukuData[AllHukuNum] == "2")
-         {
-            (_loc6_ = Chara_IESeihukudata.Hadakadata[0][0].split("**")).shift();
-            _loc7_ = _loc7_ + "_" + String(_loc6_);
-            _loc3_ = Math.floor(Math.random() * Chara_IESeihukudata.SukumizuData[randomNum_Sukumizu].length);
-            (_loc6_ = Chara_IESeihukudata.SukumizuData[randomNum_Sukumizu][_loc3_][0].split("**")).shift();
-            _loc7_ = _loc7_ + "_" + String(_loc6_);
-         }
-         else if(Chara_IEAllCharadata.IEAllHukuData[AllHukuNum] == "3")
-         {
-            (_loc6_ = Chara_IESeihukudata.Hadakadata[0][0].split("**")).shift();
-            _loc7_ = _loc7_ + "_" + String(_loc6_);
-            randomNum_Mizugi = Math.floor(Math.random() * MizugiRamdomBox.length);
-            _loc9_ = MizugiRamdomBox[randomNum_Mizugi];
-            MizugiRamdomBox.splice(randomNum_Mizugi,1);
-            _loc3_ = Math.floor(Math.random() * Chara_IESeihukudata.MizugiData[_loc9_].length);
-            (_loc6_ = Chara_IESeihukudata.MizugiData[_loc9_][_loc3_][0].split("**")).shift();
-            _loc7_ = _loc7_ + "_" + String(_loc6_);
-            randomNum_MizugiKutu = Math.floor(Math.random() * MizugiKutuRamdomBox.length);
-            _loc9_ = MizugiKutuRamdomBox[randomNum_MizugiKutu];
-            MizugiKutuRamdomBox.splice(randomNum_MizugiKutu,1);
-            _loc3_ = Math.floor(Math.random() * Chara_IESeihukudata.MizugiKutuData.length);
-            if(Chara_IESeihukudata.MizugiKutuData[_loc3_] != null)
+            else if(Chara_IEAllCharadata.IEAllHukuData[AllHukuNum] == "3")
             {
-               (_loc6_ = Chara_IESeihukudata.MizugiKutuData[_loc3_][0].split("**")).shift();
+               (_loc6_ = Chara_IESeihukudata.Hadakadata[0][0].split("**")).shift();
                _loc7_ = _loc7_ + "_" + String(_loc6_);
+               randomNum_Mizugi = Math.floor(Math.random() * MizugiRamdomBox.length);
+               _loc9_ = MizugiRamdomBox[randomNum_Mizugi];
+               MizugiRamdomBox.splice(randomNum_Mizugi,1);
+               _loc3_ = Math.floor(Math.random() * Chara_IESeihukudata.MizugiData[_loc9_].length);
+               (_loc6_ = Chara_IESeihukudata.MizugiData[_loc9_][_loc3_][0].split("**")).shift();
+               _loc7_ = _loc7_ + "_" + String(_loc6_);
+               randomNum_MizugiKutu = Math.floor(Math.random() * MizugiKutuRamdomBox.length);
+               _loc9_ = MizugiKutuRamdomBox[randomNum_MizugiKutu];
+               MizugiKutuRamdomBox.splice(randomNum_MizugiKutu,1);
+               _loc3_ = Math.floor(Math.random() * Chara_IESeihukudata.MizugiKutuData.length);
+               if(Chara_IESeihukudata.MizugiKutuData[_loc3_] != null)
+               {
+                  (_loc6_ = Chara_IESeihukudata.MizugiKutuData[_loc3_][0].split("**")).shift();
+                  _loc7_ = _loc7_ + "_" + String(_loc6_);
+               }
+               _loc3_ = Math.floor(Math.random() * AcceRamdomBox.length);
+               _loc4_ = AcceRamdomBox[_loc3_];
+               AcceRamdomBox.splice(_loc3_,1);
+               if(Chara_IEdata.Acce2data[_loc4_] != null)
+               {
+                  (_loc6_ = Chara_IEdata.Acce2data[_loc4_].split("**")).shift();
+                  _loc7_ = _loc7_ + "_" + String(_loc6_);
+               }
             }
-            _loc3_ = Math.floor(Math.random() * AcceRamdomBox.length);
-            _loc4_ = AcceRamdomBox[_loc3_];
-            AcceRamdomBox.splice(_loc3_,1);
-            if(Chara_IEdata.Acce2data[_loc4_] != null)
+            else if(Chara_IEAllCharadata.IEAllHukuData[AllHukuNum] == "4")
             {
-               (_loc6_ = Chara_IEdata.Acce2data[_loc4_].split("**")).shift();
+               (_loc6_ = Chara_IESeihukudata.Hadakadata[0][0].split("**")).shift();
                _loc7_ = _loc7_ + "_" + String(_loc6_);
+               (_loc6_ = Chara_IESeihukudata.BunnyData[randomNum_Bunny][0].split("**")).shift();
+               _loc7_ = _loc7_ + "_" + String(_loc6_);
+               _loc3_ = Math.floor(Math.random() * AcceRamdomBox.length);
+               _loc4_ = AcceRamdomBox[_loc3_];
+               AcceRamdomBox.splice(_loc3_,1);
+               if(Chara_IEdata.Acce3data[_loc4_] != null)
+               {
+                  (_loc6_ = Chara_IEdata.Acce3data[_loc4_].split("**")).shift();
+                  _loc7_ = _loc7_ + "_" + String(_loc6_);
+               }
             }
-         }
-         else if(Chara_IEAllCharadata.IEAllHukuData[AllHukuNum] == "4")
-         {
-            (_loc6_ = Chara_IESeihukudata.Hadakadata[0][0].split("**")).shift();
-            _loc7_ = _loc7_ + "_" + String(_loc6_);
-            (_loc6_ = Chara_IESeihukudata.BunnyData[randomNum_Bunny][0].split("**")).shift();
-            _loc7_ = _loc7_ + "_" + String(_loc6_);
-            _loc3_ = Math.floor(Math.random() * AcceRamdomBox.length);
-            _loc4_ = AcceRamdomBox[_loc3_];
-            AcceRamdomBox.splice(_loc3_,1);
-            if(Chara_IEdata.Acce3data[_loc4_] != null)
+            else if(Chara_IEAllCharadata.IEAllHukuData[AllHukuNum] == "5")
             {
-               (_loc6_ = Chara_IEdata.Acce3data[_loc4_].split("**")).shift();
+               (_loc6_ = Chara_IESeihukudata.Hadakadata[0][0].split("**")).shift();
                _loc7_ = _loc7_ + "_" + String(_loc6_);
+               (_loc6_ = Chara_IESeihukudata.MaidData[randomNum_Maid][0].split("**")).shift();
+               _loc7_ = _loc7_ + "_" + String(_loc6_);
+               _loc3_ = Math.floor(Math.random() * AcceRamdomBox.length);
+               _loc4_ = AcceRamdomBox[_loc3_];
+               AcceRamdomBox.splice(_loc3_,1);
+               if(Chara_IEdata.Acce3data[_loc4_] != null)
+               {
+                  (_loc6_ = Chara_IEdata.Acce3data[_loc4_].split("**")).shift();
+                  _loc7_ = _loc7_ + "_" + String(_loc6_);
+               }
             }
-         }
-         else if(Chara_IEAllCharadata.IEAllHukuData[AllHukuNum] == "5")
-         {
-            (_loc6_ = Chara_IESeihukudata.Hadakadata[0][0].split("**")).shift();
-            _loc7_ = _loc7_ + "_" + String(_loc6_);
-            (_loc6_ = Chara_IESeihukudata.MaidData[randomNum_Maid][0].split("**")).shift();
-            _loc7_ = _loc7_ + "_" + String(_loc6_);
-            _loc3_ = Math.floor(Math.random() * AcceRamdomBox.length);
-            _loc4_ = AcceRamdomBox[_loc3_];
-            AcceRamdomBox.splice(_loc3_,1);
-            if(Chara_IEdata.Acce3data[_loc4_] != null)
+            else if(Chara_IEAllCharadata.IEAllHukuData[AllHukuNum] == "6")
             {
-               (_loc6_ = Chara_IEdata.Acce3data[_loc4_].split("**")).shift();
+               (_loc6_ = Chara_IESeihukudata.Hadakadata[0][0].split("**")).shift();
                _loc7_ = _loc7_ + "_" + String(_loc6_);
+               (_loc6_ = Chara_IESeihukudata.CheerData[randomNum_Cheer][0].split("**")).shift();
+               _loc7_ = _loc7_ + "_" + String(_loc6_);
+               _loc3_ = Math.floor(Math.random() * UnderwearRandomBox.length);
+               _loc4_ = UnderwearRandomBox[_loc3_];
+               UnderwearRandomBox.splice(_loc3_,1);
+               (_loc6_ = Chara_IEdata.UnderwearData[_loc4_][1].split("**")).shift();
+               _loc7_ = _loc7_ + "_" + String(_loc6_);
+               _loc3_ = Math.floor(Math.random() * AcceRamdomBox.length);
+               _loc4_ = AcceRamdomBox[_loc3_];
+               AcceRamdomBox.splice(_loc3_,1);
+               if(Chara_IEdata.Acce3data[_loc4_] != null)
+               {
+                  (_loc6_ = Chara_IEdata.Acce3data[_loc4_].split("**")).shift();
+                  _loc7_ = _loc7_ + "_" + String(_loc6_);
+               }
             }
-         }
-         else if(Chara_IEAllCharadata.IEAllHukuData[AllHukuNum] == "6")
-         {
-            (_loc6_ = Chara_IESeihukudata.Hadakadata[0][0].split("**")).shift();
-            _loc7_ = _loc7_ + "_" + String(_loc6_);
-            (_loc6_ = Chara_IESeihukudata.CheerData[randomNum_Cheer][0].split("**")).shift();
-            _loc7_ = _loc7_ + "_" + String(_loc6_);
-            _loc3_ = Math.floor(Math.random() * UnderwearRandomBox.length);
-            _loc4_ = UnderwearRandomBox[_loc3_];
-            UnderwearRandomBox.splice(_loc3_,1);
-            (_loc6_ = Chara_IEdata.UnderwearData[_loc4_][1].split("**")).shift();
-            _loc7_ = _loc7_ + "_" + String(_loc6_);
-            _loc3_ = Math.floor(Math.random() * AcceRamdomBox.length);
-            _loc4_ = AcceRamdomBox[_loc3_];
-            AcceRamdomBox.splice(_loc3_,1);
-            if(Chara_IEdata.Acce3data[_loc4_] != null)
+            else if(Chara_IEAllCharadata.IEAllHukuData[AllHukuNum] == "7")
             {
-               (_loc6_ = Chara_IEdata.Acce3data[_loc4_].split("**")).shift();
+               (_loc6_ = Chara_IESeihukudata.Hadakadata[0][0].split("**")).shift();
                _loc7_ = _loc7_ + "_" + String(_loc6_);
-            }
-         }
-         else if(Chara_IEAllCharadata.IEAllHukuData[AllHukuNum] == "7")
-         {
-            (_loc6_ = Chara_IESeihukudata.Hadakadata[0][0].split("**")).shift();
-            _loc7_ = _loc7_ + "_" + String(_loc6_);
-            (_loc6_ = Chara_IESeihukudata.NurseData[randomNum_Nurse][0].split("**")).shift();
-            _loc7_ = _loc7_ + "_" + String(_loc6_);
-            _loc3_ = Math.floor(Math.random() * UnderwearRandomBox.length);
-            _loc4_ = UnderwearRandomBox[_loc3_];
-            UnderwearRandomBox.splice(_loc3_,1);
-            (_loc6_ = Chara_IEdata.UnderwearData[_loc4_][1].split("**")).shift();
-            _loc7_ = _loc7_ + "_" + String(_loc6_);
-            _loc3_ = Math.floor(Math.random() * AcceRamdomBox.length);
-            _loc4_ = AcceRamdomBox[_loc3_];
-            AcceRamdomBox.splice(_loc3_,1);
-            if(Chara_IEdata.Acce3data[_loc4_] != null)
-            {
-               (_loc6_ = Chara_IEdata.Acce3data[_loc4_].split("**")).shift();
+               (_loc6_ = Chara_IESeihukudata.NurseData[randomNum_Nurse][0].split("**")).shift();
                _loc7_ = _loc7_ + "_" + String(_loc6_);
+               _loc3_ = Math.floor(Math.random() * UnderwearRandomBox.length);
+               _loc4_ = UnderwearRandomBox[_loc3_];
+               UnderwearRandomBox.splice(_loc3_,1);
+               (_loc6_ = Chara_IEdata.UnderwearData[_loc4_][1].split("**")).shift();
+               _loc7_ = _loc7_ + "_" + String(_loc6_);
+               _loc3_ = Math.floor(Math.random() * AcceRamdomBox.length);
+               _loc4_ = AcceRamdomBox[_loc3_];
+               AcceRamdomBox.splice(_loc3_,1);
+               if(Chara_IEdata.Acce3data[_loc4_] != null)
+               {
+                  (_loc6_ = Chara_IEdata.Acce3data[_loc4_].split("**")).shift();
+                  _loc7_ = _loc7_ + "_" + String(_loc6_);
+               }
             }
-         }
          } else {
             //  generate from default-chan data:
             new Chara_AllBodyHeight(param1,"random");
@@ -605,7 +605,7 @@ package menu
             }
          }
 
-         new Tab_IEInOut("textIN",_loc7_,param1);
+         Tab_IEInOut.execute("textIN",_loc7_,param1);
          
          if(Chara_IEAllCharadata.IEAllHukuData[AllHukuNum] == "0" || Chara_IEAllCharadata.IEAllHukuData[AllHukuNum] == "1")
          {
@@ -687,8 +687,8 @@ package menu
          }
          if(strFlag == "first")
          {
-            MenuClass.charaMotoData[param1] = clone(MenuClass.charaData[param1]);
-            Dress_data.DressCharaMotoData[param1] = clone(Dress_data.DressCharaData[param1]);
+            // MenuClass.charaMotoData[param1] = clone(MenuClass.charaData[param1]);
+            // Dress_data.DressCharaMotoData[param1] = clone(Dress_data.DressCharaData[param1]);
          }
       }
       

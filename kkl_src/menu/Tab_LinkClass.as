@@ -2,6 +2,7 @@ package menu
 {
    import flash.display.MovieClip;
    import flash.events.MouseEvent;
+   import undo.LinkAction;
    
    public class Tab_LinkClass
    {
@@ -26,6 +27,8 @@ package menu
       
       public static function MouseDown(param1:MouseEvent) : void
       {
+         var undoAction = new LinkAction(param1.currentTarget.headerName, param1.currentTarget.targetJ, param1.currentTarget.tabName);
+         undoAction.recordPreviousValue(0);
          if(MenuClass.systemData[param1.currentTarget.tabName]["_flag"])
          {
             MenuClass.systemData[param1.currentTarget.tabName]["_flag"] = false;
@@ -36,6 +39,8 @@ package menu
             MenuClass.systemData[param1.currentTarget.tabName]["_flag"] = true;
             param1.currentTarget.gotoAndStop(1);
          }
+         undoAction.recordNewValue(MenuClass.systemData[param1.currentTarget.tabName]["_flag"], 0);
+         Main.undoTimeline.push(undoAction);
          new SetLinkColorClass(param1.currentTarget.tabName);
       }
    }

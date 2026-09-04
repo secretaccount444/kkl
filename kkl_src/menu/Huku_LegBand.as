@@ -67,15 +67,16 @@ package menu
             _loc2_ = this.charaData["LegBand" + param1]["_menu"];
             try
             {
-               this.charaAdd["ashi" + param1].leg_huku.leg.LegBand.gotoAndStop(Dress_data.LegBandData[_loc2_]["leg"] + 1);
+               this.charaAdd["ashi" + param1].leg_huku.actual.leg.LegBand.gotoAndStop(1);
+               this.charaAdd["ashi" + param1].leg_huku.actual.leg.LegBand.gotoAndStop(Dress_data.LegBandData[_loc2_]["leg"] + 1);
                if(Dress_data.LegBandData[_loc2_]["leg"] == 0)
                {
-                  this.charaAdd["ashi" + param1].leg_huku.leg.LegBand.visible = false;
-                  this.charaAdd["ashi" + param1].leg_huku.leg.LegBand.gotoAndStop(1);
+                  this.charaAdd["ashi" + param1].leg_huku.actual.leg.LegBand.visible = false;
+                  this.charaAdd["ashi" + param1].leg_huku.actual.leg.LegBand.gotoAndStop(1);
                }
                else
                {
-                  this.charaAdd["ashi" + param1].leg_huku.leg.LegBand.visible = true;
+                  this.charaAdd["ashi" + param1].leg_huku.actual.leg.LegBand.visible = true;
                }
             }
             catch(myError:Error)
@@ -83,59 +84,62 @@ package menu
             }
             try
             {
-               this.charaAdd["ashi" + param1].leg.leg.LegBand.gotoAndStop(Dress_data.LegBandData[_loc2_]["leg_under"] + 1);
+               this.charaAdd["ashi" + param1].leg.actual.leg.LegBand.gotoAndStop(1);
+               this.charaAdd["ashi" + param1].leg.actual.leg.LegBand.gotoAndStop(Dress_data.LegBandData[_loc2_]["leg_under"] + 1);
                if(Dress_data.LegBandData[_loc2_]["leg_under"] == 0)
                {
-                  this.charaAdd["ashi" + param1].leg.leg.LegBand.visible = false;
-                  this.charaAdd["ashi" + param1].leg.leg.LegBand.gotoAndStop(1);
+                  this.charaAdd["ashi" + param1].leg.actual.leg.LegBand.visible = false;
+                  this.charaAdd["ashi" + param1].leg.actual.leg.LegBand.gotoAndStop(1);
                }
                else
                {
-                  this.charaAdd["ashi" + param1].leg.leg.LegBand.visible = true;
+                  this.charaAdd["ashi" + param1].leg.actual.leg.LegBand.visible = true;
                }
             }
             catch(myError:Error)
             {
             }
-            this.charaAdd["ashi" + param1].foot.foot.LegBand.gotoAndStop(Dress_data.LegBandData[_loc2_]["foot"] + 1);
-            this.charaAdd["ashi" + param1].foot.foot.LegBand_sen.gotoAndStop(Dress_data.LegBandData[_loc2_]["foot"] + 1);
+            this.charaAdd["ashi" + param1].foot.actual.foot.LegBand.gotoAndStop(1);
+            this.charaAdd["ashi" + param1].foot.actual.foot.LegBand_sen.gotoAndStop(1);
+            this.charaAdd["ashi" + param1].foot.actual.foot.LegBand.gotoAndStop(Dress_data.LegBandData[_loc2_]["foot"] + 1);
+            this.charaAdd["ashi" + param1].foot.actual.foot.LegBand_sen.gotoAndStop(Dress_data.LegBandData[_loc2_]["foot"] + 1);
             if(Dress_data.LegBandData[_loc2_]["foot"] == 0)
             {
-               this.charaAdd["ashi" + param1].foot.foot.LegBand.visible = false;
-               this.charaAdd["ashi" + param1].foot.foot.LegBand_sen.visible = false;
-               this.charaAdd["ashi" + param1].foot.foot.LegBand.gotoAndStop(1);
-               this.charaAdd["ashi" + param1].foot.foot.LegBand_sen.gotoAndStop(1);
+               this.charaAdd["ashi" + param1].foot.actual.foot.LegBand.visible = false;
+               this.charaAdd["ashi" + param1].foot.actual.foot.LegBand_sen.visible = false;
+               this.charaAdd["ashi" + param1].foot.actual.foot.LegBand.gotoAndStop(1);
+               this.charaAdd["ashi" + param1].foot.actual.foot.LegBand_sen.gotoAndStop(1);
             }
             else
             {
-               this.charaAdd["ashi" + param1].foot.foot.LegBand.visible = true;
-               this.charaAdd["ashi" + param1].foot.foot.LegBand_sen.visible = true;
+               this.charaAdd["ashi" + param1].foot.actual.foot.LegBand.visible = true;
+               this.charaAdd["ashi" + param1].foot.actual.foot.LegBand_sen.visible = true;
             }
          }
          else
          {
             try
             {
-               this.charaAdd["ashi" + param1].leg_huku.leg.LegBand.visible = false;
-               this.charaAdd["ashi" + param1].leg_huku.leg.LegBand.gotoAndStop(1);
+               this.charaAdd["ashi" + param1].leg_huku.actual.leg.LegBand.visible = false;
+               this.charaAdd["ashi" + param1].leg_huku.actual.leg.LegBand.gotoAndStop(1);
             }
             catch(myError:Error)
             {
             }
             try
             {
-               this.charaAdd["ashi" + param1].leg.leg.LegBand.visible = false;
-               this.charaAdd["ashi" + param1].leg.leg.LegBand.gotoAndStop(1);
+               this.charaAdd["ashi" + param1].leg.actual.leg.LegBand.visible = false;
+               this.charaAdd["ashi" + param1].leg.actual.leg.LegBand.gotoAndStop(1);
             }
             catch(myError:Error)
             {
             }
             try
             {
-               this.charaAdd["ashi" + param1].foot.foot.LegBand.visible = false;
-               this.charaAdd["ashi" + param1].foot.foot.LegBand_sen.visible = false;
-               this.charaAdd["ashi" + param1].foot.foot.LegBand.gotoAndStop(1);
-               this.charaAdd["ashi" + param1].foot.foot.LegBand_sen.gotoAndStop(1);
+               this.charaAdd["ashi" + param1].foot.actual.foot.LegBand.visible = false;
+               this.charaAdd["ashi" + param1].foot.actual.foot.LegBand_sen.visible = false;
+               this.charaAdd["ashi" + param1].foot.actual.foot.LegBand.gotoAndStop(1);
+               this.charaAdd["ashi" + param1].foot.actual.foot.LegBand_sen.gotoAndStop(1);
             }
             catch(myError:Error)
             {

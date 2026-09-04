@@ -2,6 +2,7 @@ package menu
 {
    import flash.display.MovieClip;
    import flash.events.MouseEvent;
+   import undo.PropertyAction;
    
    public class Tab_tabMaskClass
    {
@@ -46,6 +47,15 @@ package menu
          {
             _loc2_ = targetMC.tabName;
          }
+
+         var undoAction = new PropertyAction(
+            targetMC.headerName, targetMC.targetJ, "_mask",
+            true, _loc3_ == "charaPlus",
+            "tab", true
+         );
+
+         undoAction.recordPreviousValue(_loc6_);
+
          targetMC.addEventListener(MouseEvent.MOUSE_UP,MouseUp);
          Main.stageVar.addEventListener(MouseEvent.MOUSE_UP,MouseUp);
          new Tab_VC(targetMC.headerName,targetMC.targetJ,_loc2_);
@@ -57,6 +67,10 @@ package menu
          {
             ++MenuClass.charaData[MenuClass._nowCharaNum][_loc2_]["_mask"];
          }
+
+         undoAction.recordNewValue(MenuClass.charaData[MenuClass._nowCharaNum][_loc2_]["_mask"], _loc6_);
+         Main.undoTimeline.push(undoAction);
+
          if(MenuClass._nowTargetMode == "All")
          {
             _loc4_ = 0;

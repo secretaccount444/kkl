@@ -22,24 +22,26 @@ package menu
             _loc4_ = 0;
             for(; _loc4_ <= 1; _loc4_++)
             {
+               this.charaAdd["ashi" + _loc4_].shiri.actual.shiri.Pantu.gotoAndStop(1);
                if(this.charaData["Pantu"]["_visible"][0] && Dress_data.PantuData[this.charaData["Pantu"]["_menu"]]["thigh"] != 0)
                {
-                  this.charaAdd["ashi" + _loc4_].shiri.shiri.Pantu.gotoAndStop(Dress_data.PantuData[this.charaData["Pantu"]["_menu"]]["thigh"] + 1);
+                  this.charaAdd["ashi" + _loc4_].shiri.actual.shiri.Pantu.gotoAndStop(Dress_data.PantuData[this.charaData["Pantu"]["_menu"]]["thigh"] + 1);
                }
                else
                {
-                  this.charaAdd["ashi" + _loc4_].shiri.shiri.Pantu.gotoAndStop(1);
+                  this.charaAdd["ashi" + _loc4_].shiri.actual.shiri.Pantu.gotoAndStop(1);
                }
                try
                {
-                  this.charaAdd["ashi" + _loc4_].thigh.thigh.Pantu.visible = this.charaData["Pantu"]["_visible"][0];
+                  this.charaAdd["ashi" + _loc4_].thigh.actual.thigh.Pantu.gotoAndStop(1);
+                  this.charaAdd["ashi" + _loc4_].thigh.actual.thigh.Pantu.visible = this.charaData["Pantu"]["_visible"][0];
                   if(this.charaData["Pantu"]["_visible"][0] && Dress_data.PantuData[this.charaData["Pantu"]["_menu"]]["thigh"] != 0)
                   {
-                     this.charaAdd["ashi" + _loc4_].thigh.thigh.Pantu.gotoAndStop(Dress_data.PantuData[this.charaData["Pantu"]["_menu"]]["thigh"] + 1);
+                     this.charaAdd["ashi" + _loc4_].thigh.actual.thigh.Pantu.gotoAndStop(Dress_data.PantuData[this.charaData["Pantu"]["_menu"]]["thigh"] + 1);
                   }
                   else
                   {
-                     this.charaAdd["ashi" + _loc4_].thigh.thigh.Pantu.gotoAndStop(1);
+                     this.charaAdd["ashi" + _loc4_].thigh.actual.thigh.Pantu.gotoAndStop(1);
                   }
                }
                catch(myError:Error)
@@ -59,14 +61,15 @@ package menu
                   {
                      try
                      {
+                        this.charaAdd["ashi" + _loc4_].thigh.actual.thigh.Spantu.gotoAndStop(1);
                         if(this.charaData["Bura"]["_visible"][0] && Dress_data.BuraData[this.charaData["Bura"]["_menu"]]["separate"] > 0 && this.charaData["Bura"]["_separate"] == 1)
                         {
-                           this.charaAdd["ashi" + _loc4_].thigh.thigh.Spantu.visible = false;
+                           this.charaAdd["ashi" + _loc4_].thigh.actual.thigh.Spantu.visible = false;
                         }
                         else
                         {
-                           this.charaAdd["ashi" + _loc4_].thigh.thigh.Spantu.visible = true;
-                           this.charaAdd["ashi" + _loc4_].thigh.thigh.Spantu.gotoAndStop(Dress_data.BuraData[_loc3_]["Spantu"] + 1);
+                           this.charaAdd["ashi" + _loc4_].thigh.actual.thigh.Spantu.visible = true;
+                           this.charaAdd["ashi" + _loc4_].thigh.actual.thigh.Spantu.gotoAndStop(Dress_data.BuraData[_loc3_]["Spantu"] + 1);
                         }
                      }
                      catch(myError:Error)
@@ -82,8 +85,8 @@ package menu
                   {
                      try
                      {
-                        this.charaAdd["ashi" + _loc4_].thigh.thigh.Spantu.visible = false;
-                        this.charaAdd["ashi" + _loc4_].thigh.thigh.Spantu.gotoAndStop(1);
+                        this.charaAdd["ashi" + _loc4_].thigh.actual.thigh.Spantu.visible = false;
+                        this.charaAdd["ashi" + _loc4_].thigh.actual.thigh.Spantu.gotoAndStop(1);
                      }
                      catch(myError:Error)
                      {

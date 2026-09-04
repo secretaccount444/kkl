@@ -9,6 +9,7 @@ package menu
    import parameter.ColorMakeNew;
    import parameter.Color_data;
    import parameter.Dress_data;
+   import undo.ColorAction;
    
    public class Tab_ColorBtnSet2
    {
@@ -42,6 +43,10 @@ package menu
       public static var shiftPress:Boolean;
       
       public static var spuitBg:Sprite = new Sprite();
+
+      public static var curUndoAction: ColorAction;
+      public static var curUndoSlot:int;
+      public static var colorPickerActive:Boolean;
        
       
       public function Tab_ColorBtnSet2()
@@ -78,6 +83,12 @@ package menu
          {
             tabNamePlus = param3;
          }
+
+         curUndoAction = new ColorAction(param1, param2);
+         curUndoSlot = _loc10_;
+         curUndoAction.recordPreviousValue(curUndoSlot);
+         colorPickerActive = false;
+
          MenuClass.colorSelectNum = param4;
          MenuClass._nowTabName = param3;
          new Stage_MoveCheckClass();
@@ -317,6 +328,8 @@ package menu
       public static function deleteFc() : void
       {
          var _loc1_:int = 0;
+         // curUndoAction = null;
+
          try
          {
             MenuClass.colorAdd["small"].removeChild(MenuClass.colorPlusAdd["Bg"]);
@@ -1409,6 +1422,7 @@ package menu
          {
             paretDataIn(_loc2_,"spuit");
          }
+         colorPickerActive = true;
          MenuClass.sCursor.x = Main.stageVar.mouseX;
          MenuClass.sCursor.y = Main.stageVar.mouseY;
       }
@@ -1426,6 +1440,9 @@ package menu
          {
             MenuClass.colorAdd["colorCustom"].spuit.gotoAndStop(1);
          }
+         
+         pushUndoColorFromPicker();
+
          spuitBg.removeEventListener(MouseEvent.MOUSE_DOWN,spuitBgMouseDown);
          spuitBg.removeEventListener(Event.ENTER_FRAME,spuitEnterFrame);
          Main.stageVar.removeChild(spuitBg);
@@ -1483,7 +1500,7 @@ package menu
          var _loc7_:String = null;
          try
          {
-            new Tab_TabNameCheck(MenuClass._nowTabName);
+            Tab_TabNameCheck.lookup(MenuClass._nowTabName);
             _loc1_ = Tab_TabNameCheck.headerName;
             _loc2_ = Tab_TabNameCheck.targetJ;
             _loc3_ = MenuClass.tabData[_loc1_][_loc2_][2]["_color"];
@@ -1722,9 +1739,32 @@ package menu
          {
          }
       }
+
+      public static function pushUndoColorFromPicker() : void {
+         colorPickerActive = false;
+         if (curUndoAction) {
+            tabNameSet();
+            Tab_TabNameCheck.lookup(MenuClass._nowTabName);
+            var itemType:String = MenuClass.tabData[Tab_TabNameCheck.headerName][Tab_TabNameCheck.targetJ][2]["_color"];
+
+            if(itemType == "chara" || itemType == "charaPlus")
+            {
+               curUndoAction.recordNewValuesFromCurrent(MenuClass._nowCharaNum, curUndoSlot);
+            }
+            else if(itemType == "system" || itemType == "systemPlus")
+            {
+               curUndoAction.recordNewValuesFromCurrent(0, curUndoSlot);
+            }
+            
+            Main.undoTimeline.push(curUndoAction);
+            curUndoAction = new ColorAction(Tab_TabNameCheck.headerName, Tab_TabNameCheck.targetJ);
+            curUndoAction.recordPreviousValue(curUndoSlot);
+         }         
+      }
       
       public static function paret0MouseDown(param1:MouseEvent) : void
       {
+         colorPickerActive = true;
          new Stage_MoveCheckClass();
          MenuClass.colorAdd["colorCustom"].en.visible = true;
          MenuClass.colorAdd["colorCustom"].en.addEventListener(Event.ENTER_FRAME,enEnterFrame);
@@ -1736,10 +1776,12 @@ package menu
       {
          MenuClass.colorAdd["colorCustom"].en.removeEventListener(Event.ENTER_FRAME,enEnterFrame);
          Main.stageVar.removeEventListener(MouseEvent.MOUSE_UP,paret0MouseUp);
+         pushUndoColorFromPicker();
       }
       
       public static function paret1MouseDown(param1:MouseEvent) : void
       {
+         colorPickerActive = true;
          new Stage_MoveCheckClass();
          MenuClass.colorAdd["colorCustom"].yajirushi.addEventListener(Event.ENTER_FRAME,yajirushiEnterFrame);
          Main.stageVar.addEventListener(MouseEvent.MOUSE_UP,paret1MouseUp);
@@ -1750,6 +1792,7 @@ package menu
       {
          MenuClass.colorAdd["colorCustom"].yajirushi.removeEventListener(Event.ENTER_FRAME,yajirushiEnterFrame);
          Main.stageVar.removeEventListener(MouseEvent.MOUSE_UP,paret1MouseUp);
+         pushUndoColorFromPicker();
       }
       
       public static function paret1Fc() : void
@@ -1781,7 +1824,7 @@ package menu
          }
          if(_loc5_ != _loc4_)
          {
-            new Tab_TabNameCheck(MenuClass._nowTabName);
+            Tab_TabNameCheck.lookup(MenuClass._nowTabName);
             _loc6_ = Tab_TabNameCheck.headerName;
             _loc7_ = Tab_TabNameCheck.targetJ;
             _loc8_ = MenuClass.tabData[_loc6_][_loc7_][2]["_color"];
@@ -2032,7 +2075,7 @@ package menu
          Tab_ColorBtnSet2.deleteFc();
          Tab_ColorBtnSet2.customSetFc("normal");
          tabNameSet();
-         new Tab_TabNameCheck(MenuClass._nowTabName);
+         Tab_TabNameCheck.lookup(MenuClass._nowTabName);
          var _loc2_:String = Tab_TabNameCheck.headerName;
          var _loc3_:int = Tab_TabNameCheck.targetJ;
          var _loc4_:String = MenuClass.tabData[_loc2_][_loc3_][2]["_color"];
@@ -2144,7 +2187,7 @@ package menu
       {
          var _loc4_:String = null;
          var _loc5_:int = 0;
-         new Tab_TabNameCheck(MenuClass._nowTabName);
+         Tab_TabNameCheck.lookup(MenuClass._nowTabName);
          var _loc1_:String = Tab_TabNameCheck.headerName;
          var _loc2_:int = Tab_TabNameCheck.targetJ;
          var _loc3_:String = MenuClass.tabData[_loc1_][_loc2_][2]["_color"];
@@ -2164,7 +2207,7 @@ package menu
       {
          var _loc5_:int = 0;
          var _loc7_:int = 0;
-         new Tab_TabNameCheck(MenuClass._nowTabName);
+         Tab_TabNameCheck.lookup(MenuClass._nowTabName);
          var _loc2_:String = Tab_TabNameCheck.headerName;
          var _loc3_:int = Tab_TabNameCheck.targetJ;
          tabNameSet();
@@ -2263,7 +2306,7 @@ package menu
          var _loc4_:int = 0;
          var _loc6_:int = 0;
          tabNameSet();
-         new Tab_TabNameCheck(MenuClass._nowTabName);
+         Tab_TabNameCheck.lookup(MenuClass._nowTabName);
          var _loc1_:String = Tab_TabNameCheck.headerName;
          var _loc2_:int = Tab_TabNameCheck.targetJ;
          var _loc3_:String = MenuClass.tabData[_loc1_][_loc2_][2]["_color"];
@@ -2277,6 +2320,15 @@ package menu
             _loc4_ = 0;
             _loc5_ = false;
          }
+
+         if (curUndoAction && !colorPickerActive) {
+            curUndoAction.recordNewValuesFromCurrent(_loc4_, curUndoSlot);
+            Main.undoTimeline.push(curUndoAction);
+
+            curUndoAction = new ColorAction(Tab_TabNameCheck.headerName, Tab_TabNameCheck.targetJ);
+            curUndoAction.recordPreviousValue(curUndoSlot);
+         }
+
          if(MenuClass._nowTargetMode == "All" && _loc5_)
          {
             _loc6_ = 0;
@@ -2365,7 +2417,7 @@ package menu
          var _loc6_:int = 0;
          var _loc8_:int = 0;
          tabNameSet();
-         new Tab_TabNameCheck(MenuClass._nowTabName);
+         Tab_TabNameCheck.lookup(MenuClass._nowTabName);
          var _loc3_:String = Tab_TabNameCheck.headerName;
          var _loc4_:int = Tab_TabNameCheck.targetJ;
          var _loc5_:String = MenuClass.tabData[_loc3_][_loc4_][2]["_color"];
@@ -2469,7 +2521,7 @@ package menu
             }
             else
             {
-               new Tab_TabNameCheck(MenuClass._nowTabName);
+               Tab_TabNameCheck.lookup(MenuClass._nowTabName);
                targetJ = Tab_TabNameCheck.targetJ;
                if(MenuClass.tabData[MenuClass._nowHeaderName][targetJ][2]["_color"] == "chara" || MenuClass.tabData[MenuClass._nowHeaderName][targetJ][2]["_color"] == "charaPlus")
                {
@@ -2495,7 +2547,7 @@ package menu
          var _loc9_:String = null;
          tabNameSet();
          new Stage_MoveCheckClass();
-         new Tab_TabNameCheck(MenuClass._nowTabName);
+         Tab_TabNameCheck.lookup(MenuClass._nowTabName);
          var _loc2_:String = Tab_TabNameCheck.headerName;
          var _loc3_:int = Tab_TabNameCheck.targetJ;
          var _loc4_:String = MenuClass.tabData[_loc2_][_loc3_][2]["_color"];
@@ -2742,7 +2794,7 @@ package menu
          tabNameSet();
          try
          {
-            new Tab_TabNameCheck(MenuClass._nowTabName);
+            Tab_TabNameCheck.lookup(MenuClass._nowTabName);
             _loc5_ = Tab_TabNameCheck.targetJ;
             if(MenuClass.tabData[MenuClass._nowHeaderName][_loc5_][2]["_color"] == "chara" || MenuClass.tabData[MenuClass._nowHeaderName][_loc5_][2]["_color"] == "charaPlus")
             {

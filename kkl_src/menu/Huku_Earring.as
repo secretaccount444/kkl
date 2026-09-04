@@ -57,6 +57,8 @@ package menu
       private function SetFc(param1:int, param2:int) : void
       {
          var _loc3_:Number = NaN;
+         this.charaAdd.head["ear" + param1].ear.Earring.gotoAndStop(1);
+         this.charaAdd.head["ear" + param1].ear.Earring.Earring.gotoAndStop(1);
          if(this.charaData["Earring" + param1]["_visible"][0])
          {
             if(!Dress_data.EarringData[this.charaData["Earring" + param1]["_menu"]]["rotation"])

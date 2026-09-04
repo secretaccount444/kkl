@@ -928,13 +928,18 @@ package menu
                _loc12_ = _loc10_.mune.getChildIndex(_loc10_.mune.mune0);
                _loc13_ = _loc10_.mune.getChildIndex(_loc10_.mune.mune1);
                _loc17_ = new Array(_loc9_["LeftArm2"]["_depth"],_loc9_["RightArm2"]["_depth"]);
-               // if (_loc17_[0] > 1) {
-               //    _loc17_[0] = 1;
-               // }
 
-               // if (_loc17_[1] > 1) {
-               //    _loc17_[1] = 1;
-               // }
+               if (_loc17_[0] == 2) {
+                  _loc17_[0] = 1;
+               } else if (_loc17_[0] == 3) {
+                  _loc17_[0] = 0;
+               }
+
+               if (_loc17_[1] == 2) {
+                  _loc17_[1] = 1;
+               } else if (_loc17_[1] == 3) {
+                  _loc17_[1] = 0;
+               }
 
                _loc3_ = 0;
                while(_loc3_ <= 1)

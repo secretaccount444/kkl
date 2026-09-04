@@ -21,128 +21,129 @@ package parameter
          IEGroup[2] = ["bi", "bf", "bg", "bh"];
          IEGroup[3] = ["ca"];
          IEGroup[4] = ["cc", "cd", "ce"];
+         IEGroup[5] = ["cf", "cg", "ch"];
          if (Main.r18Check)
          {
-            IEGroup[5] = ["da", "db", "dd", "di"];
+            IEGroup[6] = ["da", "db", "dd", "di"];
          }
          else
          {
-            IEGroup[5] = ["da", "db", "dd", "dh", "di"];
+            IEGroup[6] = ["da", "db", "dd", "dh", "di"];
          }
-         IEGroup[6] = ["qa", "qb", "dc", "eh"];
-         IEGroup[7] = ["ea", "ec", "ed", "ef", "eg"];
-         IEGroup[8] = [];
+         IEGroup[7] = ["qa", "qb", "dc", "eh"];
+         IEGroup[8] = ["ea", "ec", "ed", "ef", "eg"];
+         IEGroup[9] = [];
          this.i = 0;
          while (this.i <= Main.hukusuuNum)
          {
             if (this.i <= 9)
             {
-               IEGroup[8].push("r0" + this.i);
+               IEGroup[9].push("r0" + this.i);
             }
             else
             {
-               IEGroup[8].push("r" + this.i);
+               IEGroup[9].push("r" + this.i);
             }
             ++ this.i;
          }
-         IEGroup[9] = ["fa", "fb", "fh", "fk", "fc", "fj"];
-         IEGroup[10] = ["fd", "fe", "ff", "fg", "fi", "pa"];
-         IEGroup[11] = [];
+         IEGroup[10] = ["fa", "fb", "fh", "fk", "fc", "fj"];
+         IEGroup[11] = ["fd", "fe", "ff", "fg", "fi", "pa"];
+         IEGroup[12] = [];
          this.i = 0;
          while (this.i <= Main.hukusuuNum)
          {
             if (this.i <= 9)
             {
-               IEGroup[11].push("t0" + this.i);
+               IEGroup[12].push("t0" + this.i);
             }
             else
             {
-               IEGroup[11].push("t" + this.i);
+               IEGroup[12].push("t" + this.i);
             }
             ++ this.i;
          }
-         IEGroup[12] = ["pb", "pc", "pd", "pe"];
+         IEGroup[13] = ["pb", "pc", "pd", "pe"];
          if (Main.r18Check)
          {
-            IEGroup[13] = ["ga", "gc", "ge", "gh", "gf", "gg", "gd"];
+            IEGroup[14] = ["ga", "gc", "ge", "gh", "gf", "gg", "gd"];
          }
          else
          {
-            IEGroup[13] = ["ga", "gb", "gc", "ge", "gh", "gf", "gg", "gd"];
+            IEGroup[14] = ["ga", "gb", "gc", "ge", "gh", "gf", "gg", "gd"];
          }
-         IEGroup[14] = ["ha", "hb", "hc", "hd"];
-         IEGroup[15] = ["ad", "ae"];
-         IEGroup[16] = ["ia", "if"];
-         IEGroup[17] = ["ib", "id"];
-         IEGroup[18] = ["ic", "jc", "ie"];
-         IEGroup[19] = ["ja", "jb", "jf", "jg"];
-         IEGroup[20] = ["jd", "je"];
+         IEGroup[15] = ["ha", "hb", "hc", "hd"];
+         IEGroup[16] = ["ad", "ae"];
+         IEGroup[17] = ["ia", "if"];
+         IEGroup[18] = ["ib", "id"];
+         IEGroup[19] = ["ic", "jc", "ie"];
+         IEGroup[20] = ["ja", "jb", "jf", "jg"];
+         IEGroup[21] = ["jd", "je"];
          if (Main.r18Check)
          {
-            IEGroup[21] = ["ka", "kb"];
+            IEGroup[22] = ["ka", "kb"];
          }
          else
          {
-            IEGroup[21] = ["ka", "kb", "kc", "kd", "ke", "kf"];
+            IEGroup[22] = ["ka", "kb", "kc", "kd", "ke", "kf"];
          }
-         IEGroup[22] = ["kg"];
-         IEGroup[23] = ["la", "lb", "oa", "os", "ob", "oc", "od", "oe", "of", "lc"];
-         IEGroup[24] = [];
+         IEGroup[23] = ["kg"];
+         IEGroup[24] = ["la", "lb", "oa", "os", "ob", "oc", "od", "oe", "of", "lc"];
+         IEGroup[25] = [];
          this.i = 0;
          while (this.i <= Main.RibonhukusuuNum)
          {
             if (this.i <= 9)
             {
-               IEGroup[24].push("m0" + this.i);
+               IEGroup[25].push("m0" + this.i);
             }
             else
             {
-               IEGroup[24].push("m" + this.i);
+               IEGroup[25].push("m" + this.i);
             }
             ++ this.i;
          }
-         IEGroup[25] = [];
+         IEGroup[26] = [];
          this.i = 0;
          while (this.i <= Main.hukusuuNum)
          {
             if (this.i <= 9)
             {
-               IEGroup[25].push("s0" + this.i);
+               IEGroup[26].push("s0" + this.i);
             }
             else
             {
-               IEGroup[25].push("s" + this.i);
+               IEGroup[26].push("s" + this.i);
             }
             ++ this.i;
          }
-         IEGroup[26] = ["og", "oh", "oo", "op", "oq", "or"];
-         IEGroup[27] = ["om", "on", "ok", "ol", "oi", "oj"];
-         IEGroup[28] = [];
-         this.i = 0;
-         while (this.i <= Main.hukusuuNum)
-         {
-            if (this.i <= 9)
-            {
-               IEGroup[28].push("f0" + this.i);
-            }
-            else
-            {
-               IEGroup[28].push("f" + this.i);
-            }
-            ++ this.i;
-         }
+         IEGroup[27] = ["og", "oh", "oo", "op", "oq", "or"];
+         IEGroup[28] = ["om", "on", "ok", "ol", "oi", "oj"];
          IEGroup[29] = [];
+         this.i = 0;
+         while (this.i <= Main.hukusuuNum)
+         {
+            if (this.i <= 9)
+            {
+               IEGroup[29].push("f0" + this.i);
+            }
+            else
+            {
+               IEGroup[29].push("f" + this.i);
+            }
+            ++ this.i;
+         }
+         IEGroup[30] = [];
          this.n = MenuClass.systemData["FreeHandPlus"]["_visible"].length - 1;
          this.i = 0;
          while (this.i <= this.n)
          {
             if (this.i <= 9)
             {
-               IEGroup[29].push("a0" + this.i);
+               IEGroup[30].push("a0" + this.i);
             }
             else
             {
-               IEGroup[29].push("a" + this.i);
+               IEGroup[30].push("a" + this.i);
             }
             ++ this.i;
          }
@@ -151,11 +152,11 @@ package parameter
          {
             if (this.i <= 9)
             {
-               IEGroup[29].push("b0" + this.i);
+               IEGroup[30].push("b0" + this.i);
             }
             else
             {
-               IEGroup[29].push("b" + this.i);
+               IEGroup[30].push("b" + this.i);
             }
             ++ this.i;
          }
@@ -164,11 +165,11 @@ package parameter
          {
             if (this.i <= 9)
             {
-               IEGroup[29].push("c0" + this.i);
+               IEGroup[30].push("c0" + this.i);
             }
             else
             {
-               IEGroup[29].push("c" + this.i);
+               IEGroup[30].push("c" + this.i);
             }
             ++ this.i;
          }
@@ -177,109 +178,110 @@ package parameter
          {
             if (this.i <= 9)
             {
-               IEGroup[29].push("d0" + this.i);
+               IEGroup[30].push("d0" + this.i);
             }
             else
             {
-               IEGroup[29].push("d" + this.i);
+               IEGroup[30].push("d" + this.i);
             }
             ++ this.i;
          }
-         IEGroup[30] = [];
+         IEGroup[31] = [];
          this.n = MenuClass.systemData["FreeRibonPlus"]["_visible"].length - 1;
          this.i = 0;
          while (this.i <= this.n)
          {
             if (this.i <= 9)
             {
-               IEGroup[30].push("w0" + this.i);
+               IEGroup[31].push("w0" + this.i);
             }
             else
             {
-               IEGroup[30].push("w" + this.i);
+               IEGroup[31].push("w" + this.i);
             }
             ++ this.i;
          }
-         IEGroup[31] = [];
+         IEGroup[32] = [];
          this.n = MenuClass.systemData["FreeBeltPlus"]["_visible"].length - 1;
          this.i = 0;
          while (this.i <= this.n)
          {
             if (this.i <= 9)
             {
-               IEGroup[31].push("x0" + this.i);
+               IEGroup[32].push("x0" + this.i);
             }
             else
             {
-               IEGroup[31].push("x" + this.i);
+               IEGroup[32].push("x" + this.i);
             }
             ++ this.i;
          }
-         IEGroup[32] = [];
+         IEGroup[33] = [];
          this.n = MenuClass.systemData["FreeChairPlus"]["_visible"].length - 1;
          this.i = 0;
          while (this.i <= this.n)
          {
             if (this.i <= 9)
             {
-               IEGroup[32].push("e0" + this.i);
+               IEGroup[33].push("e0" + this.i);
             }
             else
             {
-               IEGroup[32].push("e" + this.i);
+               IEGroup[33].push("e" + this.i);
             }
             ++ this.i;
          }
-         IEGroup[33] = [];
+         IEGroup[34] = [];
          this.n = MenuClass.systemData["FreeFlagPlus"]["_visible"].length - 1;
          this.i = 0;
          while (this.i <= this.n)
          {
             if (this.i <= 9)
             {
-               IEGroup[33].push("y0" + this.i);
+               IEGroup[34].push("y0" + this.i);
             }
             else
             {
-               IEGroup[33].push("y" + this.i);
+               IEGroup[34].push("y" + this.i);
             }
             ++ this.i;
          }
-         IEGroup[34] = [];
+         IEGroup[35] = [];
          this.n = MenuClass.systemData["FreeHukidashiPlus"]["_visible"].length - 1;
          this.i = 0;
          while (this.i <= this.n)
          {
             if (this.i <= 9)
             {
-               IEGroup[34].push("z0" + this.i);
+               IEGroup[35].push("z0" + this.i);
             }
             else
             {
-               IEGroup[34].push("z" + this.i);
+               IEGroup[35].push("z" + this.i);
             }
             ++ this.i;
          }
-         IEGroup[35] = ["ua", "uf", "ue", "ub"];
-         IEGroup[36] = ["u0", "u1", "u2", "u3", "u4", "u5", "u6", "u7", "u8", "u9"];
-         IEGroup[37] = [];
+         IEGroup[36] = ["ua", "uf", "ue", "ub"];
+         IEGroup[37] = ["u0", "u1", "u2", "u3", "u4", "u5", "u6", "u7", "u8", "u9"];
+         IEGroup[38] = [];
          this.n = MenuClass.systemData["LoadPlus"]["_visible"].length - 1;
          this.i = 0;
          while (this.i <= this.n)
          {
             if (this.i <= 9)
             {
-               IEGroup[37].push("v0" + this.i);
+               IEGroup[38].push("v0" + this.i);
             }
             else
             {
-               IEGroup[37].push("v" + this.i);
+               IEGroup[38].push("v" + this.i);
             }
             ++ this.i;
          }
-         IEGroup[38] = ["ud", "ug"];
-         IEGroup[39] = ["uc"];
-         IEData["aa"] = [["LeftArm", "_meter"], ["LeftArm2", "_meter"], ["LeftArm2", "_depth"], ["LeftHand", "_menu"], ["LeftHand2", "_meter"], ["RightArm", "_meter"], ["RightArm2", "_meter"], ["RightArm2", "_depth"], ["RightHand", "_menu"], ["RightHand2", "_meter"]];
+         IEGroup[39] = ["ud", "ug"];
+         IEGroup[40] = ["uc"];
+         IEData["fv"] = [["SourceVersion", "_minor"], ["SourceVersion", "_alpha"]];
+         IEData["aa"] = [["LeftArm", "_meter"], ["LeftArm2", "_meter"], ["LeftArm2", "_depth"], ["LeftHand", "_menu"], ["LeftHand2", "_meter"], ["RightArm", "_meter"], ["RightArm2", "_meter"], ["RightArm2", "_depth"], ["RightHand", "_menu"], ["RightHand2", "_meter"], ["LeftArmFreeRotation", "_check"], ["RightArmFreeRotation", "_check"]];
          IEData["ab"] = [["Item0", "_menu"], ["Item0", "_color0"], ["Item0", "_color1"], ["Item0", "_color2"]];
          IEData["ac"] = [["Item1", "_menu"], ["Item1", "_color0"], ["Item1", "_color1"], ["Item1", "_color2"]];
          IEData["ba"] = [["Head", "_meter"]];
@@ -292,15 +294,18 @@ package parameter
          IEData["bh"] = [["CharaFilterEmotion", "_check"]];
          IEData["be"] = [["Rmove", "_meter"]];
          IEData["ca"] = [["BodyHeight", "_meter"], ["Waist", "_menu"], ["douHeight", "_meter"], ["AshiHeight", "_meter"], ["BodyWidth", "_meter"], ["HipWidth", "_meter"], ["HandWidth", "_meter"], ["AshiWidth", "_meter"], ["ShoulderWidth", "_meter"], ["Heso", "_menu"], ["WaistAlpha", "_meter"], ["BodySize", "_meter"]];
-         IEData["cc"] = [["LeftArmScaleX", "_meter"], ["LeftArmScaleY", "_meter"], ["LeftArmOffsetX", "_meter"], ["LeftArmOffsetY", "_meter"], ["RightArmScaleX", "_meter"], ["RightArmScaleY", "_meter"], ["RightArmOffsetX", "_meter"], ["RightArmOffsetY", "_meter"]];
-         IEData["cd"] = [["LeftHandScaleX", "_meter"], ["LeftHandScaleY", "_meter"], ["LeftHandOffsetX", "_meter"], ["LeftHandOffsetY", "_meter"], ["RightHandScaleX", "_meter"], ["RightHandScaleY", "_meter"], ["RightHandOffsetX", "_meter"], ["RightHandOffsetY", "_meter"]];
-         IEData["ce"] = [["LeftUpperArmScaleX", "_meter"], ["LeftUpperArmScaleY", "_meter"], ["LeftUpperArmOffsetX", "_meter"], ["LeftUpperArmOffsetY", "_meter"], ["RightUpperArmScaleX", "_meter"], ["RightUpperArmScaleY", "_meter"], ["RightUpperArmOffsetX", "_meter"], ["RightUpperArmOffsetY", "_meter"]];
+         IEData["cc"] = [["LeftArmScaleX", "_meter"], ["LeftArmScaleY", "_meter"], ["LeftArmOffsetX", "_meter"], ["LeftArmOffsetY", "_meter"], ["RightArmScaleX", "_meter"], ["RightArmScaleY", "_meter"], ["RightArmOffsetX", "_meter"], ["RightArmOffsetY", "_meter"], ["LeftArmVisible", "_visible"], ["RightArmVisible", "_visible"], ["LeftArmFlip", "_check"], ["RightArmFlip", "_check"]];
+         IEData["cd"] = [["LeftHandScaleX", "_meter"], ["LeftHandScaleY", "_meter"], ["LeftHandOffsetX", "_meter"], ["LeftHandOffsetY", "_meter"], ["RightHandScaleX", "_meter"], ["RightHandScaleY", "_meter"], ["RightHandOffsetX", "_meter"], ["RightHandOffsetY", "_meter"], ["LeftHandVisible", "_visible"], ["RightHandVisible", "_visible"], ["LeftHandFlip", "_check"], ["RightHandFlip", "_check"]];
+         IEData["ce"] = [["LeftUpperArmScaleX", "_meter"], ["LeftUpperArmScaleY", "_meter"], ["LeftUpperArmOffsetX", "_meter"], ["LeftUpperArmOffsetY", "_meter"], ["RightUpperArmScaleX", "_meter"], ["RightUpperArmScaleY", "_meter"], ["RightUpperArmOffsetX", "_meter"], ["RightUpperArmOffsetY", "_meter"], ["LeftShoulderVisible", "_visible"], ["RightShoulderVisible", "_visible"], ["LeftUpperArmVisible", "_visible"], ["RightUpperArmVisible", "_visible"]];
+         IEData["cf"] = [["LeftThighRotation", "_meter"],["LeftThighScaleX", "_meter"],["LeftThighScaleY", "_meter"],["LeftThighOffsetX", "_meter"],["LeftThighOffsetY", "_meter"],["RightThighRotation", "_meter"],["RightThighScaleX", "_meter"],["RightThighScaleY", "_meter"],["RightThighOffsetX", "_meter"],["RightThighOffsetY", "_meter"], ["LeftThighVisible", "_visible"], ["RightThighVisible", "_visible"]];
+         IEData["cg"] = [["LeftLegRotation", "_meter"],["LeftLegScaleX", "_meter"],["LeftLegScaleY", "_meter"],["LeftLegOffsetX", "_meter"],["LeftLegOffsetY", "_meter"],["RightLegRotation", "_meter"],["RightLegScaleX", "_meter"],["RightLegScaleY", "_meter"],["RightLegOffsetX", "_meter"],["RightLegOffsetY", "_meter"], ["LeftLegVisible", "_visible"], ["RightLegVisible", "_visible"]];
+         IEData["ch"] = [["LeftFootRotation", "_meter"],["LeftFootScaleX", "_meter"],["LeftFootScaleY", "_meter"],["LeftFootOffsetX", "_meter"],["LeftFootOffsetY", "_meter"],["RightFootRotation", "_meter"],["RightFootScaleX", "_meter"],["RightFootScaleY", "_meter"],["RightFootOffsetX", "_meter"],["RightFootOffsetY", "_meter"], ["LeftFootVisible", "_visible"], ["RightFootVisible", "_visible"]];
          IEData["da"] = [["Body", "_color0"]];
          IEData["db"] = [["Hiyake", "_menu"], ["Hiyake", "_color0"]];
          IEData["dd"] = [["Hoho", "_menu"], ["Contour", "_menu"], ["ContourWidth", "_meter"], ["ContourHeight", "_meter"], ["HeadScale", "_meter"], ["NeckHeight", "_meter"]];
          IEData["dh"] = [["Nipple", "_color0"], ["NippleSize", "_meter"], ["NippleHeight", "_meter"], ["NippleWidth", "_meter"], ["Nipple", "_menu"]];
          IEData["di"] = [["Breast", "_menu"]];
-         IEData["qa"] = [["Tin", "_menu"], ["Tin", "_color0"], ["Tin", "_color1"], ["TinSize", "_meter"], ["TinEx", "_meter"], ["Tin", "_color2"], ["Tin", "_depth"], ["TinManualAuto", "_check"], ["TinBokki", "_check"], ["TinSwing", "_meter"], ["TinKawa", "_menu"], ["Tin", "_tClick"]];
+         IEData["qa"] = [["Tin", "_menu"], ["Tin", "_color0"], ["Tin", "_color1"], ["TinSize", "_meter"], ["TinEx", "_meter"], ["Tin", "_color2"], ["Tin", "_depth"], ["TinManualAuto", "_check"], ["TinBokki", "_check"], ["TinSwing", "_meter"], ["TinKawa", "_menu"], ["Tin", "_tClick"], ["TinSizeAuto", "_check"], ["TinScaleX", "_meter"], ["TinScaleY", "_meter"], ["TinOffsetX", "_meter"], ["TinOffsetY", "_meter"]];
          IEData["qb"] = [["Tama", "_menu"], ["TamaSize", "_meter"]];
          IEData["dc"] = [["s", "_sClick"], ["s", "_menu"], ["s", "_color0"], ["s", "_color1"], ["s", "_color2"], ["s", "_hidaPlay"]];
          IEData["eh"] = [["UnderHair", "_menu"], ["UnderHair", "_color0"], ["UnderHairAlpha", "_meter"]];
@@ -329,7 +334,7 @@ package parameter
          IEData["fk"] = [["Eyelash", "_menu"]];
          IEData["fc"] = [["EyeballLeft", "_menu"], ["EyeballLeft", "_color0"], ["EyeballLeft", "_color1"], ["EyeballRight", "_menu"], ["EyeballRight", "_color0"], ["EyeballRight", "_color1"], ["EyeballScale", "_meter"], ["EyeballLeft", "_color2"], ["EyeballRight", "_color2"], ["EyeballScaleY", "_meter"], ["EyeballX", "_meter"], ["EyeballY", "_meter"]];
          IEData["fj"] = [["EyeballLight", "_menu"], ["EyeballLight", "_reversal"], ["EyeballLightRotation", "_meter"]];
-         IEData["fd"] = [["Eyebrow", "_menu"], ["Eyebrow", "_depth"], ["EyebrowY", "_meter"], ["Eyebrow", "_color0"], ["Eyebrow", "_color1"], ["EyebrowRotation", "_meter"]];
+         IEData["fd"] = [["Eyebrow", "_menu"], ["Eyebrow", "_depth"], ["EyebrowY", "_meter"], ["Eyebrow", "_color0"], ["Eyebrow", "_color1"], ["EyebrowRotation", "_meter"], ["EyebrowX", "_meter"]];
          IEData["fe"] = [["MouthScale", "_meter"], ["MouthY", "_meter"]];
          IEData["ff"] = [["FaceOption", "_visible"]];
          IEData["fg"] = [["Nose", "_menu"], ["NoseHeight", "_meter"], ["Nose", "_color0"], ["Nose", "_color1"], ["Nose", "_color2"], ["Nose", "_reversal"], ["NoseScaleX", "_meter"], ["NoseScaleY", "_meter"]];
@@ -345,7 +350,7 @@ package parameter
             {
                this.str = String(this.i);
             }
-            IEData["t" + this.str] = [["Mark" + this.i, "_menu"], ["Mark" + this.i, "_color0"], ["Mark" + this.i, "_color1"], ["Mark" + this.i, "_color2"], ["MarkScaleX" + this.i, "_meter"], ["MarkScaleY" + this.i, "_meter"], ["MarkRotation" + this.i, "_meter"], ["MarkX" + this.i, "_meter"], ["MarkY" + this.i, "_meter"], ["Mark" + this.i, "_reversal2"], ["MarkScaleB" + this.i, "_meter"], ["Mark" + this.i, "_depth"], ["MarkAlpha" + this.i, "_meter"]];
+            IEData["t" + this.str] = [["Mark" + this.i, "_menu"], ["Mark" + this.i, "_color0"], ["Mark" + this.i, "_color1"], ["Mark" + this.i, "_color2"], ["MarkScaleX" + this.i, "_meter"], ["MarkScaleY" + this.i, "_meter"], ["MarkRotation" + this.i, "_meter"], ["MarkX" + this.i, "_meter"], ["MarkY" + this.i, "_meter"], ["Mark" + this.i, "_reversal2"], ["MarkScaleB" + this.i, "_meter"], ["Mark" + this.i, "_depth"], ["MarkAlpha" + this.i, "_meter"], ["MarkVary" + this.i, "_menu"], ["MarkAdd" + this.i, "_add0"]];
             ++this.i;
          }
          IEData["pa"] = [["Ear", "_menu"], ["Ear", "_color0"], ["Ear", "_color1"], ["Ear", "_color2"], ["EarScale", "_meter"], ["EarRotation", "_meter"], ["EarX", "_meter"], ["EarY", "_meter"], ["Ear", "_sen"], ["Ear", "_senColor"]];
@@ -363,7 +368,7 @@ package parameter
          IEData["gg"] = [["defoEye", "_menu"], ["defoEye", "_color0"], ["defoEyeScale", "_meter"], ["defoEyeX", "_meter"], ["defoEyeY", "_meter"], ["defoEye", "_reversal"]];
          IEData["ha"] = [["EmotionEyeLeft", "_meter"], ["EmotionEyeRight", "_meter"]];
          IEData["hb"] = [["EyeballXMove", "_meter"], ["EyeballXMove", "_reversal"], ["EyeballYMove", "_meter"], ["EyeballWidth", "_meter"], ["EyeballWidthRight", "_meter"], ["EyeballXMoveRight", "_meter"], ["EyeballYMoveRight", "_meter"]];
-         IEData["hc"] = [["EmotionEyebrowLeft", "_menu"], ["EyebrowRotationLeft", "_meter"], ["EyebrowMoveLeft", "_meter"], ["EmotionEyebrowRight", "_menu"], ["EyebrowRotationRight", "_meter"], ["EyebrowMoveRight", "_meter"]];
+         IEData["hc"] = [["EmotionEyebrowLeft", "_menu"], ["EyebrowRotationLeft", "_meter"], ["EyebrowMoveLeft", "_meter"], ["EmotionEyebrowRight", "_menu"], ["EyebrowRotationRight", "_meter"], ["EyebrowMoveRight", "_meter"], ["EyebrowMoveHorizontalLeft", "_meter"], ["EyebrowMoveHorizontalRight", "_meter"]];
          IEData["hd"] = [["EmotionMouth", "_menu"], ["EmotionMouth", "_reversal"], ["MouthWidth", "_meter"], ["MouthHeight", "_meter"], ["MouthSen", "_menu"], ["MouthYMove", "_meter"], ["MouthXMove", "_meter"], ["MouthRotation", "_meter"], ["EmotionMouth", "_visible"]];
          this.i = 0;
          while (this.i <= Main.hukusuuNum)
@@ -376,7 +381,7 @@ package parameter
             {
                this.str = String(this.i);
             }
-            IEData["f" + this.str] = [["CharaLoadScale" + this.i, "_meter"], ["CharaLoadReversalDepth" + this.i, "_depth"], ["CharaLoadRotation" + this.i, "_meter"], ["CharaLoadX" + this.i, "_meter"], ["CharaLoadY" + this.i, "_meter"], ["CharaLoadScaleY" + this.i, "_meter"], ["CharaLoadSwfColor" + this.i, "_swfMenu"], ["CharaLoadSwfColor" + this.i, "_swfSen"], ["CharaLoadSwfColor" + this.i, "_swfColor"], ["CharaLoadScaleB" + this.i, "_meter"], ["CharaLoadAlpha" + this.i, "_meter"], ["CharaLoadAdd" + this.i, "_add0"], ["CharaLoadReversalDepth" + this.i, "_reversal"]];
+            IEData["f" + this.str] = [["CharaLoadScale" + this.i, "_meter"], ["CharaLoadReversalDepth" + this.i, "_depth"], ["CharaLoadRotation" + this.i, "_meter"], ["CharaLoadX" + this.i, "_meter"], ["CharaLoadY" + this.i, "_meter"], ["CharaLoadScaleY" + this.i, "_meter"], ["CharaLoadSwfColor" + this.i, "_swfMenu"], ["CharaLoadSwfColor" + this.i, "_swfSen"], ["CharaLoadSwfColor" + this.i, "_swfColor"], ["CharaLoadScaleB" + this.i, "_meter"], ["CharaLoadAlpha" + this.i, "_meter"], ["CharaLoadAdd" + this.i, "_add0"], ["CharaLoadReversalDepth" + this.i, "_reversal"], ["CharaLoadFineX" + this.i, "_meter"], ["CharaLoadFineY" + this.i, "_meter"]];
             ++this.i;
          }
          IEData["ia"] = [["Seihuku", "_menu"], ["Seihuku", "_color0"], ["Seihuku", "_color1"], ["Seihuku", "_color2"], ["Seihuku", "_g0"], ["SeihukuLeftArm", "_menu"], ["SeihukuLeftArm", "_color0"], ["SeihukuLeftArm", "_color1"], ["SeihukuRightArm", "_menu"], ["SeihukuRightArm", "_color0"], ["SeihukuRightArm", "_color1"], ["SeihukuBreastOption", "_menu"], ["SeihukuBreastOption", "_color0"], ["SeihukuBreastOption", "_color1"], ["SeihukuBreastOption", "_color2"], ["SeihukuBreastOption", "_reversal2"], ["SeihukuDouOption", "_menu"], ["SeihukuDouOption", "_color0"], ["SeihukuDouOption", "_color1"], ["SeihukuDouOption", "_color2"], ["SeihukuDouOption", "_number"]];
@@ -413,7 +418,7 @@ package parameter
             {
                this.str = String(this.i);
             }
-            IEData["m" + this.str] = [["Ribon" + this.i, "_menu"], ["Ribon" + this.i, "_color0"], ["Ribon" + this.i, "_color1"], ["Ribon" + this.i, "_color2"], ["Ribon" + this.i, "_reversal2"], ["Ribon" + this.i, "_depth"], ["RibonScale" + this.i, "_meter"], ["RibonRotation" + this.i, "_meter"], ["RibonX" + this.i, "_meter"], ["RibonY" + this.i, "_meter"], ["RibonLine" + this.i, "_menu"], ["RibonLine" + this.i, "_color0"], ["RibonScaleY" + this.i, "_meter"], ["RibonScaleB" + this.i, "_meter"], ["Ribon" + this.i, "_reversal"], ["RibonAdd" + this.i, "_add0"], ["Ribon" + this.i, "_shadow"], ["RibonAlpha" + this.i, "_meter"]];
+            IEData["m" + this.str] = [["Ribon" + this.i, "_menu"], ["Ribon" + this.i, "_color0"], ["Ribon" + this.i, "_color1"], ["Ribon" + this.i, "_color2"], ["Ribon" + this.i, "_reversal2"], ["Ribon" + this.i, "_depth"], ["RibonScale" + this.i, "_meter"], ["RibonRotation" + this.i, "_meter"], ["RibonX" + this.i, "_meter"], ["RibonY" + this.i, "_meter"], ["RibonLine" + this.i, "_menu"], ["RibonLine" + this.i, "_color0"], ["RibonScaleY" + this.i, "_meter"], ["RibonScaleB" + this.i, "_meter"], ["Ribon" + this.i, "_reversal"], ["RibonAdd" + this.i, "_add0"], ["Ribon" + this.i, "_shadow"], ["RibonAlpha" + this.i, "_meter"], ["RibonFineX" + this.i, "_meter"], ["RibonFineY" + this.i, "_meter"]];
             ++this.i;
          }
          this.i = 0;
@@ -448,7 +453,7 @@ package parameter
             {
                this.str = String(this.i);
             }
-            IEData["s" + this.str] = [["Belt" + this.i, "_menu"], ["Belt" + this.i, "_color0"], ["Belt" + this.i, "_color1"], ["Belt" + this.i, "_color2"], ["Belt" + this.i, "_reversal2"], ["BeltScale" + this.i, "_meter"], ["BeltRotation" + this.i, "_meter"], ["BeltX" + this.i, "_meter"], ["BeltY" + this.i, "_meter"], ["Belt" + this.i, "_depth"], ["BeltExtra" + this.i, "_menu"], ["Belt" + this.i, "_mask"], ["BeltScaleY" + this.i, "_meter"], ["BeltLine" + this.i, "_menu"], ["BeltLine" + this.i, "_color0"], ["BeltScaleB" + this.i, "_meter"], ["BeltAlpha" + this.i, "_meter"]];
+            IEData["s" + this.str] = [["Belt" + this.i, "_menu"], ["Belt" + this.i, "_color0"], ["Belt" + this.i, "_color1"], ["Belt" + this.i, "_color2"], ["Belt" + this.i, "_reversal2"], ["BeltScale" + this.i, "_meter"], ["BeltRotation" + this.i, "_meter"], ["BeltX" + this.i, "_meter"], ["BeltY" + this.i, "_meter"], ["Belt" + this.i, "_depth"], ["BeltExtra" + this.i, "_menu"], ["Belt" + this.i, "_mask"], ["BeltScaleY" + this.i, "_meter"], ["BeltLine" + this.i, "_menu"], ["BeltLine" + this.i, "_color0"], ["BeltScaleB" + this.i, "_meter"], ["BeltAlpha" + this.i, "_meter"], ["BeltFineX" + this.i, "_meter"], ["BeltFineY" + this.i, "_meter"]];
             ++this.i;
          }
          IEData["og"] = [["Wristband0", "_menu"], ["Wristband0", "_color0"], ["Wristband0", "_color1"], ["Wristband0", "_color2"]];
@@ -477,7 +482,7 @@ package parameter
             {
                this.str = String(this.i);
             }
-            IEData["a" + this.str] = [["FreeHand" + this.i, "_menu"], ["FreeHand" + this.i, "_reversal"], ["FreeHand" + this.i, "_color0"], ["FreeHand" + this.i, "_depth"], ["FreeHandAlpha" + this.i, "_meter"], ["FreeHandScale" + this.i, "_meter"], ["FreeHandRotation" + this.i, "_meter"], ["FreeHandX" + this.i, "_meter"], ["FreeHandY" + this.i, "_meter"], ["FreeHandDepth" + this.i, "_meter"], ["FreeHandWrist" + this.i, "_menu"], ["FreeHandWristRotation" + this.i, "_meter"], ["FreeHandWidth" + this.i, "_meter"]];
+            IEData["a" + this.str] = [["FreeHand" + this.i, "_menu"], ["FreeHand" + this.i, "_reversal"], ["FreeHand" + this.i, "_color0"], ["FreeHand" + this.i, "_depth"], ["FreeHandAlpha" + this.i, "_meter"], ["FreeHandScale" + this.i, "_meter"], ["FreeHandRotation" + this.i, "_meter"], ["FreeHandX" + this.i, "_meter"], ["FreeHandY" + this.i, "_meter"], ["FreeHandDepth" + this.i, "_meter"], ["FreeHandWrist" + this.i, "_menu"], ["FreeHandWristRotation" + this.i, "_meter"], ["FreeHandWidth" + this.i, "_meter"], ["FreeHandFineX" + this.i, "_meter"], ["FreeHandFineY" + this.i, "_meter"]];
             ++this.i;
          }
          this.i = 0;
@@ -534,7 +539,7 @@ package parameter
             {
                this.str = String(this.i);
             }
-            IEData["w" + this.str] = [["FreeRibon" + this.i, "_menu"], ["FreeRibon" + this.i, "_reversal"], ["FreeRibon" + this.i, "_color0"], ["FreeRibon" + this.i, "_color1"], ["FreeRibon" + this.i, "_color2"], ["FreeRibon" + this.i, "_depth"], ["FreeRibonScale" + this.i, "_meter"], ["FreeRibonLine" + this.i, "_menu"], ["FreeRibonLine" + this.i, "_color0"], ["FreeRibonRotation" + this.i, "_meter"], ["FreeRibonX" + this.i, "_meter"], ["FreeRibonY" + this.i, "_meter"], ["FreeRibonDepth" + this.i, "_meter"], ["FreeRibonScaleY" + this.i, "_meter"], ["FreeRibonScaleB" + this.i, "_meter"], ["FreeRibon" + this.i, "_shadow"]];
+            IEData["w" + this.str] = [["FreeRibon" + this.i, "_menu"], ["FreeRibon" + this.i, "_reversal"], ["FreeRibon" + this.i, "_color0"], ["FreeRibon" + this.i, "_color1"], ["FreeRibon" + this.i, "_color2"], ["FreeRibon" + this.i, "_depth"], ["FreeRibonScale" + this.i, "_meter"], ["FreeRibonLine" + this.i, "_menu"], ["FreeRibonLine" + this.i, "_color0"], ["FreeRibonRotation" + this.i, "_meter"], ["FreeRibonX" + this.i, "_meter"], ["FreeRibonY" + this.i, "_meter"], ["FreeRibonDepth" + this.i, "_meter"], ["FreeRibonScaleY" + this.i, "_meter"], ["FreeRibonScaleB" + this.i, "_meter"], ["FreeRibon" + this.i, "_shadow"], ["FreeRibonAlpha" + this.i, "_meter"], ["FreeRibonFineX" + this.i, "_meter"], ["FreeRibonFineY" + this.i, "_meter"]];
             ++this.i;
          }
          this.n = MenuClass.systemData["FreeBeltPlus"]["_visible"].length - 1;
@@ -549,7 +554,7 @@ package parameter
             {
                this.str = String(this.i);
             }
-            IEData["x" + this.str] = [["FreeBelt" + this.i, "_menu"], ["FreeBelt" + this.i, "_reversal"], ["FreeBelt" + this.i, "_color0"], ["FreeBelt" + this.i, "_color1"], ["FreeBelt" + this.i, "_color2"], ["FreeBelt" + this.i, "_depth"], ["FreeBeltScale" + this.i, "_meter"], ["FreeBeltScaleY" + this.i, "_meter"], ["FreeBeltLine" + this.i, "_menu"], ["FreeBeltLine" + this.i, "_color0"], ["FreeBeltRotation" + this.i, "_meter"], ["FreeBeltX" + this.i, "_meter"], ["FreeBeltY" + this.i, "_meter"], ["FreeBeltDepth" + this.i, "_meter"], ["FreeBeltExtra" + this.i, "_menu"], ["FreeBeltScaleB" + this.i, "_meter"]];
+            IEData["x" + this.str] = [["FreeBelt" + this.i, "_menu"], ["FreeBelt" + this.i, "_reversal"], ["FreeBelt" + this.i, "_color0"], ["FreeBelt" + this.i, "_color1"], ["FreeBelt" + this.i, "_color2"], ["FreeBelt" + this.i, "_depth"], ["FreeBeltScale" + this.i, "_meter"], ["FreeBeltScaleY" + this.i, "_meter"], ["FreeBeltLine" + this.i, "_menu"], ["FreeBeltLine" + this.i, "_color0"], ["FreeBeltRotation" + this.i, "_meter"], ["FreeBeltX" + this.i, "_meter"], ["FreeBeltY" + this.i, "_meter"], ["FreeBeltDepth" + this.i, "_meter"], ["FreeBeltExtra" + this.i, "_menu"], ["FreeBeltScaleB" + this.i, "_meter"], ["FreeBeltAlpha" + this.i, "_meter"], ["FreeBeltFineX" + this.i, "_meter"], ["FreeBeltFineY" + this.i, "_meter"]];
             ++this.i;
          }
          this.n = MenuClass.systemData["FreeChairPlus"]["_visible"].length - 1;
@@ -564,7 +569,7 @@ package parameter
             {
                this.str = String(this.i);
             }
-            IEData["e" + this.str] = [["FreeChair" + this.i, "_menu"], ["FreeChair" + this.i, "_reversal"], ["FreeChair" + this.i, "_color0"], ["FreeChair" + this.i, "_color1"], ["FreeChair" + this.i, "_color2"], ["FreeChair" + this.i, "_depth"], ["FreeChair" + this.i, "_depth2"], ["FreeChairLine" + this.i, "_menu"], ["FreeChairLine" + this.i, "_color0"], ["FreeChairScale" + this.i, "_meter"], ["FreeChairRotation" + this.i, "_meter"], ["FreeChairX" + this.i, "_meter"], ["FreeChairY" + this.i, "_meter"], ["FreeChairDepth" + this.i, "_meter"], ["FreeChairExtra" + this.i, "_menu"]];
+            IEData["e" + this.str] = [["FreeChair" + this.i, "_menu"], ["FreeChair" + this.i, "_reversal"], ["FreeChair" + this.i, "_color0"], ["FreeChair" + this.i, "_color1"], ["FreeChair" + this.i, "_color2"], ["FreeChair" + this.i, "_depth"], ["FreeChair" + this.i, "_depth2"], ["FreeChairLine" + this.i, "_menu"], ["FreeChairLine" + this.i, "_color0"], ["FreeChairScale" + this.i, "_meter"], ["FreeChairRotation" + this.i, "_meter"], ["FreeChairX" + this.i, "_meter"], ["FreeChairY" + this.i, "_meter"], ["FreeChairDepth" + this.i, "_meter"], ["FreeChairExtra" + this.i, "_menu"], ["FreeChairAlpha" + this.i, "_meter"], ["FreeChairFineX" + this.i, "_meter"], ["FreeChairFineY" + this.i, "_meter"]];
             ++this.i;
          }
          this.n = MenuClass.systemData["FreeFlagPlus"]["_visible"].length - 1;
@@ -620,7 +625,7 @@ package parameter
             {
                this.str = String(this.i);
             }
-            IEData["v" + this.str] = [["LoadScale" + this.i, "_meter"], ["LoadReversalDepth" + this.i, "_depth"], ["LoadRotation" + this.i, "_meter"], ["LoadX" + this.i, "_meter"], ["LoadY" + this.i, "_meter"], ["LoadSize" + this.i, "_check"], ["LoadScaleY" + this.i, "_meter"], ["LoadSwfColor" + this.i, "_swfMenu"], ["LoadSwfColor" + this.i, "_swfSen"], ["LoadSwfColor" + this.i, "_swfColor"], ["LoadScaleB" + this.i, "_meter"], ["LoadAlpha" + this.i, "_meter"], ["LoadAdd" + this.i, "_add0"], ["LoadReversalDepth" + this.i, "_reversal"]];
+            IEData["v" + this.str] = [["LoadScale" + this.i, "_meter"], ["LoadReversalDepth" + this.i, "_depth"], ["LoadRotation" + this.i, "_meter"], ["LoadX" + this.i, "_meter"], ["LoadY" + this.i, "_meter"], ["LoadSize" + this.i, "_check"], ["LoadScaleY" + this.i, "_meter"], ["LoadSwfColor" + this.i, "_swfMenu"], ["LoadSwfColor" + this.i, "_swfSen"], ["LoadSwfColor" + this.i, "_swfColor"], ["LoadScaleB" + this.i, "_meter"], ["LoadAlpha" + this.i, "_meter"], ["LoadAdd" + this.i, "_add0"], ["LoadReversalDepth" + this.i, "_reversal"], ["LoadFineX" + this.i, "_meter"], ["LoadFineY" + this.i, "_meter"]];
             ++this.i;
          }
          IEData["ud"] = [["Mosaic", "_menu"], ["Mosaic", "_color0"]];

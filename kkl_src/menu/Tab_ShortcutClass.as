@@ -74,6 +74,16 @@ package menu
                MenuClass.shortcutHeaderbtnAdd[_loc1_].y = _loc5_ * 47 + 39;
                _loc11_ = MenuClass.MY_MENUNAME[_loc1_][0];
                _loc12_ = MenuClass.MY_MENUNAME[_loc1_][1];
+
+               if (_loc11_ == "ArmHeight")
+               {
+                  _loc11_ = "FreeHandScale";
+               }
+               else if (_loc11_ == "LegHeight")
+               {
+                  _loc11_ = "Ashi2";
+               }
+
                MenuClass.shortcutHeaderbtnAdd[_loc1_].icon.icon.gotoAndStop(_loc11_);
                new ColorChangeClass(MenuClass.shortcutHeaderbtnAdd[_loc1_].icon.icon,"ffffff");
                new ColorChangeClass(MenuClass.shortcutHeaderbtnAdd[_loc1_].bg,_loc12_);

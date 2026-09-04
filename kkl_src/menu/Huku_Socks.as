@@ -81,77 +81,89 @@ package menu
             _loc4_ = this.charaData["Socks" + param1]["_menu"];
             if(this.charaData["Socks" + param1]["_visible"][0])
             {
+               this.charaAdd["ashi" + param1].thigh.actual.thigh.Socks.gotoAndStop(1);
+               this.charaAdd["ashi" + param1].foot.actual.foot.Socks.gotoAndStop(1);
+               this.charaAdd["ashi" + param1].foot.actual.foot.socks_sen.gotoAndStop(1);
+
                if(!Dress_data.SocksData[_loc4_]["thigh"])
                {
-                  this.charaAdd["ashi" + param1].thigh.thigh.Socks.visible = false;
-                  this.charaAdd["ashi" + param1].thigh.thigh.Socks.gotoAndStop(1);
+                  this.charaAdd["ashi" + param1].thigh.actual.thigh.Socks.visible = false;
+                  this.charaAdd["ashi" + param1].thigh.actual.thigh.Socks.gotoAndStop(1);
                }
                else
                {
-                  this.charaAdd["ashi" + param1].thigh.thigh.Socks.visible = true;
-                  this.charaAdd["ashi" + param1].thigh.thigh.Socks.gotoAndStop(Dress_data.SocksData[_loc4_]["thigh"] + 1);
+                  this.charaAdd["ashi" + param1].thigh.actual.thigh.Socks.visible = true;
+                  this.charaAdd["ashi" + param1].thigh.actual.thigh.Socks.gotoAndStop(Dress_data.SocksData[_loc4_]["thigh"] + 1);
                }
+
                if(!Dress_data.SocksData[_loc4_]["foot"])
                {
-                  this.charaAdd["ashi" + param1].foot.foot.Socks.visible = false;
-                  this.charaAdd["ashi" + param1].foot.foot.Socks.gotoAndStop(1);
-                  this.charaAdd["ashi" + param1].foot.foot.socks_sen.visible = false;
-                  this.charaAdd["ashi" + param1].foot.foot.socks_sen.gotoAndStop(1);
+                  this.charaAdd["ashi" + param1].foot.actual.foot.Socks.visible = false;
+                  this.charaAdd["ashi" + param1].foot.actual.foot.Socks.gotoAndStop(1);
+                  this.charaAdd["ashi" + param1].foot.actual.foot.socks_sen.visible = false;
+                  this.charaAdd["ashi" + param1].foot.actual.foot.socks_sen.gotoAndStop(1);
                }
                else
                {
-                  this.charaAdd["ashi" + param1].foot.foot.Socks.visible = true;
-                  this.charaAdd["ashi" + param1].foot.foot.socks_sen.visible = true;
-                  this.charaAdd["ashi" + param1].foot.foot.Socks.gotoAndStop(Dress_data.SocksData[_loc4_]["foot"] + 1);
-                  this.charaAdd["ashi" + param1].foot.foot.socks_sen.gotoAndStop(Dress_data.SocksData[_loc4_]["footSen"] + 1);
+                  this.charaAdd["ashi" + param1].foot.actual.foot.Socks.visible = true;
+                  this.charaAdd["ashi" + param1].foot.actual.foot.socks_sen.visible = true;
+                  this.charaAdd["ashi" + param1].foot.actual.foot.Socks.gotoAndStop(Dress_data.SocksData[_loc4_]["foot"] + 1);
+                  this.charaAdd["ashi" + param1].foot.actual.foot.socks_sen.gotoAndStop(Dress_data.SocksData[_loc4_]["footSen"] + 1);
                }
+
                try
                {
+                  this.charaAdd["ashi" + param1].leg.actual.leg.Socks.gotoAndStop(1);
                   if(!Dress_data.SocksData[_loc4_]["leg"])
                   {
-                     this.charaAdd["ashi" + param1].leg.leg.Socks.visible = false;
-                     this.charaAdd["ashi" + param1].leg.leg.Socks.gotoAndStop(1);
+                     this.charaAdd["ashi" + param1].leg.actual.leg.Socks.visible = false;
+                     this.charaAdd["ashi" + param1].leg.actual.leg.Socks.gotoAndStop(1);
                   }
                   else
                   {
-                     this.charaAdd["ashi" + param1].leg.leg.Socks.visible = true;
-                     this.charaAdd["ashi" + param1].leg.leg.Socks.gotoAndStop(Dress_data.SocksData[_loc4_]["leg"] + 1);
+                     this.charaAdd["ashi" + param1].leg.actual.leg.Socks.visible = true;
+                     this.charaAdd["ashi" + param1].leg.actual.leg.Socks.gotoAndStop(Dress_data.SocksData[_loc4_]["leg"] + 1);
                   }
                }
                catch(myError:Error)
                {
                }
+
+               this.charaAdd["ashi" + param1].thigh.actual.thigh.SocksTop.gotoAndStop(1);
                if(!Dress_data.SocksData[_loc4_]["SocksTop"])
                {
-                  this.charaAdd["ashi" + param1].thigh.thigh.SocksTop.visible = false;
-                  this.charaAdd["ashi" + param1].thigh.thigh.SocksTop.gotoAndStop(1);
+                  this.charaAdd["ashi" + param1].thigh.actual.thigh.SocksTop.visible = false;
+                  this.charaAdd["ashi" + param1].thigh.actual.thigh.SocksTop.gotoAndStop(1);
                }
                else
                {
-                  this.charaAdd["ashi" + param1].thigh.thigh.SocksTop.visible = true;
-                  this.charaAdd["ashi" + param1].thigh.thigh.SocksTop.gotoAndStop(Dress_data.SocksData[_loc4_]["SocksTop"] + 1);
+                  this.charaAdd["ashi" + param1].thigh.actual.thigh.SocksTop.visible = true;
+                  this.charaAdd["ashi" + param1].thigh.actual.thigh.SocksTop.gotoAndStop(Dress_data.SocksData[_loc4_]["SocksTop"] + 1);
                }
                try
                {
+                  this.charaAdd["ashi" + param1].leg_huku.actual.leg.Socks.gotoAndStop(1);
                   if(!Dress_data.SocksData[_loc4_]["legTop"])
                   {
-                     this.charaAdd["ashi" + param1].leg_huku.leg.Socks.visible = false;
-                     this.charaAdd["ashi" + param1].leg_huku.leg.Socks.gotoAndStop(1);
+                     this.charaAdd["ashi" + param1].leg_huku.actual.leg.Socks.visible = false;
+                     this.charaAdd["ashi" + param1].leg_huku.actual.leg.Socks.gotoAndStop(1);
                   }
                   else
                   {
-                     this.charaAdd["ashi" + param1].leg_huku.leg.Socks.visible = true;
-                     this.charaAdd["ashi" + param1].leg_huku.leg.Socks.gotoAndStop(Dress_data.SocksData[_loc4_]["legTop"] + 1);
+                     this.charaAdd["ashi" + param1].leg_huku.actual.leg.Socks.visible = true;
+                     this.charaAdd["ashi" + param1].leg_huku.actual.leg.Socks.gotoAndStop(Dress_data.SocksData[_loc4_]["legTop"] + 1);
                   }
+                  
+                  this.charaAdd["ashi" + param1].leg.actual.leg.Socks_under.gotoAndStop(1);
                   if(!Dress_data.SocksData[_loc4_]["legUnder"])
                   {
-                     this.charaAdd["ashi" + param1].leg.leg.Socks_under.visible = false;
-                     this.charaAdd["ashi" + param1].leg.leg.Socks_under.gotoAndStop(1);
+                     this.charaAdd["ashi" + param1].leg.actual.leg.Socks_under.visible = false;
+                     this.charaAdd["ashi" + param1].leg.actual.leg.Socks_under.gotoAndStop(1);
                   }
                   else
                   {
-                     this.charaAdd["ashi" + param1].leg.leg.Socks_under.visible = true;
-                     this.charaAdd["ashi" + param1].leg.leg.Socks_under.gotoAndStop(Dress_data.SocksData[_loc4_]["legUnder"] + 1);
+                     this.charaAdd["ashi" + param1].leg.actual.leg.Socks_under.visible = true;
+                     this.charaAdd["ashi" + param1].leg.actual.leg.Socks_under.gotoAndStop(Dress_data.SocksData[_loc4_]["legUnder"] + 1);
                   }
                }
                catch(myError:Error)
@@ -160,36 +172,36 @@ package menu
             }
             else
             {
-               this.charaAdd["ashi" + param1].foot.foot.Socks.visible = false;
-               this.charaAdd["ashi" + param1].foot.foot.Socks.gotoAndStop(1);
-               this.charaAdd["ashi" + param1].foot.foot.socks_sen.visible = false;
-               this.charaAdd["ashi" + param1].foot.foot.socks_sen.gotoAndStop(1);
+               this.charaAdd["ashi" + param1].foot.actual.foot.Socks.visible = false;
+               this.charaAdd["ashi" + param1].foot.actual.foot.Socks.gotoAndStop(1);
+               this.charaAdd["ashi" + param1].foot.actual.foot.socks_sen.visible = false;
+               this.charaAdd["ashi" + param1].foot.actual.foot.socks_sen.gotoAndStop(1);
                try
                {
-                  this.charaAdd["ashi" + param1].leg_huku.leg.Socks.visible = false;
+                  this.charaAdd["ashi" + param1].leg_huku.actual.leg.Socks.visible = false;
                }
                catch(myError:Error)
                {
                }
                try
                {
-                  this.charaAdd["ashi" + param1].leg.leg.Socks_under.visible = false;
+                  this.charaAdd["ashi" + param1].leg.actual.leg.Socks_under.visible = false;
                }
                catch(myError:Error)
                {
                }
                try
                {
-                  this.charaAdd["ashi" + param1].leg.leg.Socks.visible = false;
-                  this.charaAdd["ashi" + param1].leg.leg.Socks.gotoAndStop(1);
+                  this.charaAdd["ashi" + param1].leg.actual.leg.Socks.visible = false;
+                  this.charaAdd["ashi" + param1].leg.actual.leg.Socks.gotoAndStop(1);
                }
                catch(myError:Error)
                {
                }
-               this.charaAdd["ashi" + param1].thigh.thigh.Socks.visible = false;
-               this.charaAdd["ashi" + param1].thigh.thigh.Socks.gotoAndStop(1);
-               this.charaAdd["ashi" + param1].thigh.thigh.SocksTop.visible = false;
-               this.charaAdd["ashi" + param1].thigh.thigh.SocksTop.gotoAndStop(1);
+               this.charaAdd["ashi" + param1].thigh.actual.thigh.Socks.visible = false;
+               this.charaAdd["ashi" + param1].thigh.actual.thigh.Socks.gotoAndStop(1);
+               this.charaAdd["ashi" + param1].thigh.actual.thigh.SocksTop.visible = false;
+               this.charaAdd["ashi" + param1].thigh.actual.thigh.SocksTop.gotoAndStop(1);
             }
          }
          catch(myError:Error)

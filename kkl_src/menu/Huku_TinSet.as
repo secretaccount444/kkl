@@ -38,11 +38,13 @@ package menu
          {
             this.charaAdd.peni.peni.Peni.Tin.Tin.gotoAndStop(_loc2_ + 1);
             this.charaAdd.peni.peni.Peni.Tin.Tin.mosaic.mosaic.gotoAndStop(MenuClass.systemData["Mosaic"]["_menu"] + 1);
+            this.charaAdd.peni.peni.Peni.Tin.Tin.mosaic.visible = false;
          }
          if(this.charaAdd.peni.peni.Peni.Tin.TinUp.visible)
          {
             this.charaAdd.peni.peni.Peni.Tin.TinUp.gotoAndStop(_loc2_ + 1);
             this.charaAdd.peni.peni.Peni.Tin.TinUp.mosaic.mosaic.gotoAndStop(MenuClass.systemData["Mosaic"]["_menu"] + 1);
+            this.charaAdd.peni.peni.Peni.Tin.TinUp.mosaic.visible = false;
          }
          try
          {

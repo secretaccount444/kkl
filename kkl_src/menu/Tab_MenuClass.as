@@ -6,6 +6,7 @@ package menu
    import parameter.Chara_IEdata;
    import parameter.Dress_data;
    import parameter.Vibrator_data;
+   import undo.SetMenuAction;
    
    public class Tab_MenuClass
    {
@@ -33,6 +34,8 @@ package menu
       public static var menuBtnType:int = 2;
       
       public static var keySetType:String = "menu";
+
+      public static var curUndoAction: SetMenuAction = null;
        
       
       public function Tab_MenuClass()
@@ -151,6 +154,22 @@ package menu
          new Stage_MoveCheckClass();
          nowbtn = param1.currentTarget as MovieClip;
          nowbtn.gotoAndStop(2);
+
+         var menuType:String = MenuClass.tabData[headerName][targetJ][2]["_menu"];
+         var menuTarget = MenuClass.tabData[headerName][targetJ][2]["_menuTarget"];
+         var selectedSlot:int = 0;
+
+         curUndoAction = null;
+         if (menuType != "SelectCharacter" && menuTarget != "single" && tabName != "DressSet" && tabName != "UnderwearSet" && tabName != "VibratorMove" && headerName != "Tool") {
+            if (menuType == "charaPlus" || menuType == "systemPlus") {
+               var dataTarget = MenuClass.tabData[headerName][targetJ][2]["_data"];
+               selectedSlot = MenuClass.systemData[dataTarget]["_menu"];
+            }
+
+            curUndoAction = new SetMenuAction(headerName, targetJ, true);
+            curUndoAction.recordPreviousValue(selectedSlot);
+         }
+
          MenuAction(nowbtn.name,tabName);
          nowbtn.addEventListener(MouseEvent.MOUSE_UP,MouseUp);
          Main.stageVar.addEventListener(MouseEvent.MOUSE_UP,MouseUp);
@@ -164,33 +183,40 @@ package menu
          nowbtn.removeEventListener(MouseEvent.MOUSE_UP,MouseUp);
          Main.stageVar.removeEventListener(MouseEvent.MOUSE_UP,MouseUp);
          Main.stageVar.removeEventListener(Event.ENTER_FRAME,EnterFrame);
+
+         if (curUndoAction && headerName != "Tool") {
+            Main.undoTimeline.push(curUndoAction);
+         }
+         curUndoAction = null;
       }
       
-      public static function MenuAction(param1:String, param2:String) : void
+      public static function MenuAction(action:String, tabName:String) : void
       {
          var _loc3_:int = 0;
-         var _loc4_:int = 0;
-         var _loc5_:String = null;
-         var _loc8_:String = null;
-         var _loc9_:int = 0;
+         var dataKey:String = null;
+         var dataTarget:String = null;
+         var selectedSlot:int = 0;
          var _loc10_:int = 0;
          var _loc11_:Number = NaN;
-         MenuClass._nowTabName = param2;
-         var _loc6_:String;
-         if((_loc6_ = MenuClass.tabData[headerName][targetJ][2]["_menu"]) == "charaPlus" || _loc6_ == "systemPlus")
+         MenuClass._nowTabName = tabName;
+         var menuType:String = MenuClass.tabData[headerName][targetJ][2]["_menu"];
+
+         if(menuType  == "charaPlus" || menuType == "systemPlus")
          {
-            _loc8_ = MenuClass.tabData[headerName][targetJ][2]["_data"];
-            _loc9_ = MenuClass.systemData[_loc8_]["_menu"];
-            _loc5_ = param2 + _loc9_;
+            dataTarget = MenuClass.tabData[headerName][targetJ][2]["_data"];
+            selectedSlot = MenuClass.systemData[dataTarget]["_menu"];
+            dataKey = tabName + selectedSlot;
          }
          else
          {
-            _loc5_ = param2;
+            dataKey = tabName;
          }
+
          var _loc7_:Boolean = false;
+
          try
          {
-            if(Dress_data.menuCustom[param2][0] >= 0)
+            if(Dress_data.menuCustom[tabName][0] >= 0)
             {
                _loc7_ = true;
             }
@@ -198,88 +224,110 @@ package menu
          catch(myError:Error)
          {
          }
-         if(_loc5_ == "Story_Page")
+
+         if(dataKey == "Story_Page")
          {
             MenuClass.BeforePage = MenuClass.systemData["Story_Page"]["_menu"];
          }
-         if(_loc6_ == "chara" || _loc6_ == "charaPlus")
+
+         if(menuType == "chara" || menuType == "charaPlus")
          {
-            if(param1 == "plus")
+            if(action == "plus")
             {
                if(_loc7_)
                {
-                  Dress_data.menuCustomNum[MenuClass._nowCharaNum][param2] += 1;
-                  MenuClass.charaData[MenuClass._nowCharaNum][_loc5_]["_menu"] = Dress_data.menuCustom[param2][Dress_data.menuCustomNum[MenuClass._nowCharaNum][param2]];
+                  Dress_data.menuCustomNum[MenuClass._nowCharaNum][tabName] += 1;
+                  MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_menu"] = Dress_data.menuCustom[tabName][Dress_data.menuCustomNum[MenuClass._nowCharaNum][tabName]];
                }
                else
                {
-                  MenuClass.charaData[MenuClass._nowCharaNum][_loc5_]["_menu"] += 1;
+                  MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_menu"] += 1;
                }
             }
-            else if(param1 == "minus")
+            else if(action == "minus")
             {
                if(_loc7_)
                {
-                  Dress_data.menuCustomNum[MenuClass._nowCharaNum][param2] = Dress_data.menuCustomNum[MenuClass._nowCharaNum][param2] - 1;
-                  MenuClass.charaData[MenuClass._nowCharaNum][_loc5_]["_menu"] = Dress_data.menuCustom[param2][Dress_data.menuCustomNum[MenuClass._nowCharaNum][param2]];
+                  Dress_data.menuCustomNum[MenuClass._nowCharaNum][tabName] = Dress_data.menuCustomNum[MenuClass._nowCharaNum][tabName] - 1;
+                  MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_menu"] = Dress_data.menuCustom[tabName][Dress_data.menuCustomNum[MenuClass._nowCharaNum][tabName]];
                }
                else
                {
-                  MenuClass.charaData[MenuClass._nowCharaNum][_loc5_]["_menu"] = MenuClass.charaData[MenuClass._nowCharaNum][_loc5_]["_menu"] - 1;
+                  MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_menu"] = MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_menu"] - 1;
                }
             }
-         }
-         else if(_loc6_ == "system" || _loc6_ == "systemPlus" || _loc6_ == "SelectCharacter")
-         {
-            if(param1 == "plus")
-            {
-               if(_loc7_)
-               {
-                  Dress_data.menuCustomNum[0][param2] += 1;
-                  MenuClass.systemData[_loc5_]["_menu"] = Dress_data.menuCustom[param2][Dress_data.menuCustomNum[0][param2]];
-               }
-               else
-               {
-                  MenuClass.systemData[_loc5_]["_menu"] += 1;
-               }
-            }
-            else if(param1 == "minus")
-            {
-               if(_loc7_)
-               {
-                  Dress_data.menuCustomNum[0][param2] = Dress_data.menuCustomNum[0][param2] - 1;
-                  MenuClass.systemData[_loc5_]["_menu"] = Dress_data.menuCustom[param2][Dress_data.menuCustomNum[0][param2]];
-               }
-               else
-               {
-                  MenuClass.systemData[_loc5_]["_menu"] = MenuClass.systemData[_loc5_]["_menu"] - 1;
+
+            if (curUndoAction) {
+               if(_loc7_) {
+                  curUndoAction.recordNewValue(Dress_data.menuCustomNum[MenuClass._nowCharaNum][tabName], selectedSlot);
+               } else {
+                  curUndoAction.recordNewValue(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_menu"], selectedSlot);
                }
             }
          }
-         new Tab_TextNum0Class(param2,headerName,targetJ);
-         if(_loc6_ == "charaPlus")
+         else if(menuType == "system" || menuType == "systemPlus" || menuType == "SelectCharacter")
          {
-            new Tab_VC(headerName,targetJ,_loc8_);
+            if(action == "plus")
+            {
+               if(_loc7_)
+               {
+                  Dress_data.menuCustomNum[0][tabName] += 1;
+                  MenuClass.systemData[dataKey]["_menu"] = Dress_data.menuCustom[tabName][Dress_data.menuCustomNum[0][tabName]];
+               }
+               else
+               {
+                  MenuClass.systemData[dataKey]["_menu"] += 1;
+               }
+            }
+            else if(action == "minus")
+            {
+               if(_loc7_)
+               {
+                  Dress_data.menuCustomNum[0][tabName] = Dress_data.menuCustomNum[0][tabName] - 1;
+                  MenuClass.systemData[dataKey]["_menu"] = Dress_data.menuCustom[tabName][Dress_data.menuCustomNum[0][tabName]];
+               }
+               else
+               {
+                  MenuClass.systemData[dataKey]["_menu"] = MenuClass.systemData[dataKey]["_menu"] - 1;
+               }
+            }
+
+            if (curUndoAction) {
+               if(_loc7_) {
+                  curUndoAction.recordNewValue(Dress_data.menuCustomNum[0][tabName], selectedSlot);
+               } else {
+                  curUndoAction.recordNewValue(MenuClass.systemData[dataKey]["_menu"], selectedSlot);
+               }
+            }
          }
-         else if(_loc6_ == "systemPlus")
+
+         new Tab_TextNum0Class(tabName,headerName,targetJ);
+
+         if(menuType == "charaPlus")
          {
-            new Tab_VC(headerName,targetJ,_loc5_);
+            new Tab_VC(headerName,targetJ,dataTarget);
+         }
+         else if(menuType == "systemPlus")
+         {
+            new Tab_VC(headerName,targetJ,dataKey);
          }
          else
          {
-            new Tab_VC(headerName,targetJ,param2);
+            new Tab_VC(headerName,targetJ,tabName);
          }
+
          try
          {
-            if(MenuClass.systemData[_loc5_]["_visible"][0] == false && MenuClass.systemData[_loc5_]["_visible"].length == 1)
+            if(MenuClass.systemData[dataKey]["_visible"][0] == false && MenuClass.systemData[dataKey]["_visible"].length == 1)
             {
-               MenuClass.systemData[_loc5_]["_visible"][0] = true;
+               MenuClass.systemData[dataKey]["_visible"][0] = true;
             }
          }
          catch(myError:Error)
          {
          }
-         if(param2 == "DressSet" || param2 == "UnderwearSet")
+
+         if(tabName == "DressSet" || tabName == "UnderwearSet")
          {
             if(!MenuClass.DressSetCheck)
             {
@@ -300,14 +348,15 @@ package menu
                }
             }
          }
+
          if(MenuClass._nowTargetMode == "All" && MenuClass.tabData[headerName][targetJ][2]["_menuTarget"] != "single")
          {
-            if(_loc6_ == "chara" || _loc6_ == "charaPlus")
+            if(menuType == "chara" || menuType == "charaPlus")
             {
                _loc3_ = 0;
                while(_loc3_ <= MenuClass._characterNum)
                {
-                  if(_loc5_ == "VibratorMove" && MenuClass.charaData[_loc3_]["Vibrator"]["_visible"][0])
+                  if(dataKey == "VibratorMove" && MenuClass.charaData[_loc3_]["Vibrator"]["_visible"][0])
                   {
                      if(MenuClass.charaData[_loc3_]["VibratorThrough"]["_check"] || !MenuClass.charaData[_loc3_]["Nawa"]["_visible"][0] && !MenuClass.charaData[_loc3_]["SG"]["_visible"][0] && !MenuClass.charaData[_loc3_]["Pantu"]["_visible"][0] && !MenuClass.charaData[_loc3_]["Zubon"]["_visible"][0] && (!MenuClass.charaData[_loc3_]["Tights"]["_visible"][0] || Dress_data.TightsData[MenuClass.charaData[_loc3_]["Tights"]["_menu"]]["mosaic"] == 2))
                      {
@@ -347,16 +396,16 @@ package menu
                   {
                      if(MenuClass._nowCharaNum != _loc3_)
                      {
-                        MenuClass.charaData[_loc3_][_loc5_]["_menu"] = MenuClass.charaData[MenuClass._nowCharaNum][_loc5_]["_menu"];
+                        MenuClass.charaData[_loc3_][dataKey]["_menu"] = MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_menu"];
                      }
-                     new Tab_MenuColorIn(headerName,targetJ,_loc5_,_loc3_);
-                     if(_loc6_ == "charaPlus")
+                     new Tab_MenuColorIn(headerName,targetJ,dataKey,_loc3_);
+                     if(menuType == "charaPlus")
                      {
                         try
                         {
-                           if(MenuClass.charaData[_loc3_][_loc8_]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[_loc3_][_loc8_]["_visible"].length == 1)
+                           if(MenuClass.charaData[_loc3_][dataTarget]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[_loc3_][dataTarget]["_visible"].length == 1)
                            {
-                              MenuClass.charaData[_loc3_][_loc8_]["_visible"][Tab_VC.menuNum] = true;
+                              MenuClass.charaData[_loc3_][dataTarget]["_visible"][Tab_VC.menuNum] = true;
                            }
                         }
                         catch(myError:Error)
@@ -367,9 +416,9 @@ package menu
                      {
                         try
                         {
-                           if(MenuClass.charaData[_loc3_][param2]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[_loc3_][_loc5_]["_visible"].length == 1)
+                           if(MenuClass.charaData[_loc3_][tabName]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[_loc3_][dataKey]["_visible"].length == 1)
                            {
-                              MenuClass.charaData[_loc3_][param2]["_visible"][Tab_VC.menuNum] = true;
+                              MenuClass.charaData[_loc3_][tabName]["_visible"][Tab_VC.menuNum] = true;
                            }
                         }
                         catch(myError:Error)
@@ -380,7 +429,7 @@ package menu
                      {
                         if(MenuClass.tabData[headerName][targetJ][2]["_easyLink"] != undefined)
                         {
-                           MenuClass.charaData[_loc3_][MenuClass.tabData[headerName][targetJ][2]["_easyLink"]]["_menu"] = MenuClass.charaData[_loc3_][_loc5_]["_menu"];
+                           MenuClass.charaData[_loc3_][MenuClass.tabData[headerName][targetJ][2]["_easyLink"]]["_menu"] = MenuClass.charaData[_loc3_][dataKey]["_menu"];
                            new Tab_MenuColorIn(headerName,targetJ,MenuClass.tabData[headerName][targetJ][2]["_easyLink"],_loc3_);
                            MenuClass.charaData[_loc3_][MenuClass.tabData[headerName][targetJ][2]["_easyLink"]]["_visible"][0] = true;
                            new SetClass(_loc3_,MenuClass.tabData[headerName][targetJ][2]["_easyLink"],"tab");
@@ -390,31 +439,31 @@ package menu
                   _loc3_++;
                }
             }
-            else if(_loc6_ == "system" || _loc6_ == "systemPlus")
+            else if(menuType == "system" || menuType == "systemPlus")
             {
-               new Tab_MenuColorIn(headerName,targetJ,_loc5_,0);
+               new Tab_MenuColorIn(headerName,targetJ,dataKey,0);
             }
-            if(param2 == "Mosaic")
+            if(tabName == "Mosaic")
             {
-               new Tab_MenuColorIn(headerName,targetJ,param2,MenuClass._nowCharaNum);
+               new Tab_MenuColorIn(headerName,targetJ,tabName,MenuClass._nowCharaNum);
             }
-            if(param2 != "SelectCharacter")
+            if(tabName != "SelectCharacter")
             {
-               if(param2 == "DressSet" || param2 == "UnderwearSet")
+               if(tabName == "DressSet" || tabName == "UnderwearSet")
                {
                   enterCount = 0;
-                  MenuClass.tabMenuAdd[param2].menu0.addEventListener(Event.ENTER_FRAME,EnterFrame2);
+                  MenuClass.tabMenuAdd[tabName].menu0.addEventListener(Event.ENTER_FRAME,EnterFrame2);
                }
-               else if(param2 == "BackgroundSet")
+               else if(tabName == "BackgroundSet")
                {
-                  new SetClass(0,param2,"menu");
+                  new SetClass(0,tabName,"menu");
                }
                else
                {
                   _loc3_ = 0;
                   while(_loc3_ <= MenuClass._characterNum)
                   {
-                     new SetClass(_loc3_,param2,"menu");
+                     new SetClass(_loc3_,tabName,"menu");
                      _loc3_++;
                   }
                }
@@ -422,7 +471,7 @@ package menu
          }
          else if(MenuClass._nowTargetMode == "SelectPlus")
          {
-            if(_loc6_ == "chara" || _loc6_ == "charaPlus")
+            if(menuType == "chara" || menuType == "charaPlus")
             {
                _loc3_ = 0;
                while(_loc3_ <= MenuClass._characterNum)
@@ -431,16 +480,16 @@ package menu
                   {
                      if(MenuClass._nowCharaNum != _loc3_)
                      {
-                        MenuClass.charaData[_loc3_][_loc5_]["_menu"] = MenuClass.charaData[MenuClass._nowCharaNum][_loc5_]["_menu"];
+                        MenuClass.charaData[_loc3_][dataKey]["_menu"] = MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_menu"];
                      }
-                     new Tab_MenuColorIn(headerName,targetJ,_loc5_,_loc3_);
-                     if(_loc6_ == "charaPlus")
+                     new Tab_MenuColorIn(headerName,targetJ,dataKey,_loc3_);
+                     if(menuType == "charaPlus")
                      {
                         try
                         {
-                           if(MenuClass.charaData[_loc3_][_loc8_]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[_loc3_][_loc8_]["_visible"].length == 1)
+                           if(MenuClass.charaData[_loc3_][dataTarget]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[_loc3_][dataTarget]["_visible"].length == 1)
                            {
-                              MenuClass.charaData[_loc3_][_loc8_]["_visible"][Tab_VC.menuNum] = true;
+                              MenuClass.charaData[_loc3_][dataTarget]["_visible"][Tab_VC.menuNum] = true;
                            }
                         }
                         catch(myError:Error)
@@ -451,9 +500,9 @@ package menu
                      {
                         try
                         {
-                           if(MenuClass.charaData[_loc3_][param2]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[_loc3_][_loc5_]["_visible"].length == 1)
+                           if(MenuClass.charaData[_loc3_][tabName]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[_loc3_][dataKey]["_visible"].length == 1)
                            {
-                              MenuClass.charaData[_loc3_][param2]["_visible"][Tab_VC.menuNum] = true;
+                              MenuClass.charaData[_loc3_][tabName]["_visible"][Tab_VC.menuNum] = true;
                            }
                         }
                         catch(myError:Error)
@@ -464,7 +513,7 @@ package menu
                      {
                         if(MenuClass.tabData[headerName][targetJ][2]["_easyLink"] != undefined)
                         {
-                           MenuClass.charaData[_loc3_][MenuClass.tabData[headerName][targetJ][2]["_easyLink"]]["_menu"] = MenuClass.charaData[_loc3_][_loc5_]["_menu"];
+                           MenuClass.charaData[_loc3_][MenuClass.tabData[headerName][targetJ][2]["_easyLink"]]["_menu"] = MenuClass.charaData[_loc3_][dataKey]["_menu"];
                            new Tab_MenuColorIn(headerName,targetJ,MenuClass.tabData[headerName][targetJ][2]["_easyLink"],_loc3_);
                            MenuClass.charaData[_loc3_][MenuClass.tabData[headerName][targetJ][2]["_easyLink"]]["_visible"][0] = true;
                            new SetClass(_loc3_,MenuClass.tabData[headerName][targetJ][2]["_easyLink"],"tab");
@@ -474,20 +523,20 @@ package menu
                   _loc3_++;
                }
             }
-            else if(_loc6_ == "system" || _loc6_ == "systemPlus")
+            else if(menuType == "system" || menuType == "systemPlus")
             {
-               new Tab_MenuColorIn(headerName,targetJ,_loc5_,0);
+               new Tab_MenuColorIn(headerName,targetJ,dataKey,0);
             }
-            if(param2 == "Mosaic")
+            if(tabName == "Mosaic")
             {
-               new Tab_MenuColorIn(headerName,targetJ,param2,MenuClass._nowCharaNum);
+               new Tab_MenuColorIn(headerName,targetJ,tabName,MenuClass._nowCharaNum);
             }
-            if(param2 != "SelectCharacter")
+            if(tabName != "SelectCharacter")
             {
-               if(param2 == "DressSet" || param2 == "UnderwearSet")
+               if(tabName == "DressSet" || tabName == "UnderwearSet")
                {
                   enterCount = 0;
-                  MenuClass.tabMenuAdd[param2].menu0.addEventListener(Event.ENTER_FRAME,EnterFrame4);
+                  MenuClass.tabMenuAdd[tabName].menu0.addEventListener(Event.ENTER_FRAME,EnterFrame4);
                }
                else
                {
@@ -496,32 +545,32 @@ package menu
                   {
                      if(MenuClass._nowSelectChara[_loc3_])
                      {
-                        new SetClass(_loc3_,param2,"menu");
+                        new SetClass(_loc3_,tabName,"menu");
                      }
                      _loc3_++;
                   }
                }
             }
          }
-         else if(_loc6_ != "SelectCharacter")
+         else if(menuType != "SelectCharacter")
          {
-            new Tab_MenuColorIn(headerName,targetJ,_loc5_,MenuClass._nowCharaNum);
+            new Tab_MenuColorIn(headerName,targetJ,dataKey,MenuClass._nowCharaNum);
             try
             {
-               if(MenuClass.charaData[MenuClass._nowCharaNum][_loc5_]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[MenuClass._nowCharaNum][_loc5_]["_visible"].length == 1)
+               if(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_visible"].length == 1)
                {
-                  MenuClass.charaData[MenuClass._nowCharaNum][_loc5_]["_visible"][Tab_VC.menuNum] = true;
+                  MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_visible"][Tab_VC.menuNum] = true;
                }
             }
             catch(myError:Error)
             {
             }
-            if(param2 == "DressSet")
+            if(tabName == "DressSet")
             {
-               selectTabName = param2;
+               selectTabName = tabName;
                if(enterCountSelect == 0)
                {
-                  MenuClass.tabMenuAdd[param2].menu0.addEventListener(Event.ENTER_FRAME,EnterFrame3);
+                  MenuClass.tabMenuAdd[tabName].menu0.addEventListener(Event.ENTER_FRAME,EnterFrame3);
                }
             }
             else
@@ -530,18 +579,19 @@ package menu
                {
                   if(MenuClass.tabData[headerName][targetJ][2]["_easyLink"] != undefined)
                   {
-                     MenuClass.charaData[MenuClass._nowCharaNum][MenuClass.tabData[headerName][targetJ][2]["_easyLink"]]["_menu"] = MenuClass.charaData[MenuClass._nowCharaNum][_loc5_]["_menu"];
+                     MenuClass.charaData[MenuClass._nowCharaNum][MenuClass.tabData[headerName][targetJ][2]["_easyLink"]]["_menu"] = MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_menu"];
                      new Tab_MenuColorIn(headerName,targetJ,MenuClass.tabData[headerName][targetJ][2]["_easyLink"],MenuClass._nowCharaNum);
                      MenuClass.charaData[MenuClass._nowCharaNum][MenuClass.tabData[headerName][targetJ][2]["_easyLink"]]["_visible"][0] = true;
                      new SetClass(MenuClass._nowCharaNum,MenuClass.tabData[headerName][targetJ][2]["_easyLink"],"tab");
                   }
                }
-               new SetClass(MenuClass._nowCharaNum,param2,"menu");
+               new SetClass(MenuClass._nowCharaNum,tabName,"menu");
             }
          }
-         if(_loc6_ == "SelectCharacter")
+
+         if(menuType == "SelectCharacter")
          {
-            if(param1 == "plus")
+            if(action == "plus")
             {
                if(MenuClass._characterNum == MenuClass._nowCharaNum)
                {
@@ -552,7 +602,7 @@ package menu
                   new Chara_SelectIcon(MenuClass._nowCharaNum + 1);
                }
             }
-            else if(param1 == "minus")
+            else if(action == "minus")
             {
                if(MenuClass._nowCharaNum == 0)
                {
@@ -563,11 +613,12 @@ package menu
                   new Chara_SelectIcon(MenuClass._nowCharaNum - 1);
                }
             }
-            else if(param1 == "key")
+            else if(action == "key")
             {
                new Chara_SelectIcon(MenuClass.systemData["SelectCharacter"]["_menu"]);
             }
          }
+
          new Tab_SetClass();
       }
       

@@ -204,6 +204,18 @@ package menu
             new ColorFilterClass(MenuClass.tabMenuAdd["MarkScaleY"],!_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["MarkScaleB"],!_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["LinkMark"],!_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["MarkAdd"],!_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["MarkAlpha"],!_loc2_,-0.4,"link");
+
+            if (_loc2_) {
+               var slot = MenuClass.systemData["MarkPlus"]["_menu"];
+               var selectedType = this.charaData["Mark" + slot]["_menu"];
+               var selectedData = Dress_data.DressData["Mark" + slot][selectedType];
+               var hasVary = "_varyA" in selectedData;
+               new ColorFilterClass(MenuClass.tabMenuAdd["MarkVary"],!hasVary,-0.4,"link");
+            } else {
+               new ColorFilterClass(MenuClass.tabMenuAdd["MarkVary"],true,-0.4,"link");
+            }
          }
          else if(param1 == "LinkHand")
          {
@@ -211,6 +223,7 @@ package menu
             new ColorFilterClass(MenuClass.tabMenuAdd["RightArm2"],MenuClass.systemData[param1]["_flag"],-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["RightHand"],MenuClass.systemData[param1]["_flag"],-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["RightHand2"],MenuClass.systemData[param1]["_flag"],-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightArmFreeRotation"],MenuClass.systemData[param1]["_flag"],-0.4,"link");
          }
          else if(param1 == "LinkAshi")
          {
@@ -255,6 +268,7 @@ package menu
                new ColorFilterClass(MenuClass.tabMenuAdd["EmotionEyebrowRight"],MenuClass.systemData["LinkEmotionEyebrow"]["_flag"],-0.4,"link");
                new ColorFilterClass(MenuClass.tabMenuAdd["EyebrowRotationRight"],MenuClass.systemData["LinkEmotionEyebrow"]["_flag"],-0.4,"link");
                new ColorFilterClass(MenuClass.tabMenuAdd["EyebrowMoveRight"],MenuClass.systemData["LinkEmotionEyebrow"]["_flag"],-0.4,"link");
+               new ColorFilterClass(MenuClass.tabMenuAdd["EyebrowMoveHorizontalRight"],MenuClass.systemData["LinkEmotionEyebrow"]["_flag"],-0.4,"link");
             }
          }
          else if(param1 == "LinkEyeballWidth")
@@ -537,6 +551,11 @@ package menu
             new ColorFilterClass(MenuClass.tabMenuAdd["SG"],_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["SGSize"],_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["TinManualAuto"],!_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["TinSizeAuto"],!_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["TinScaleX"],!_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["TinScaleY"],!_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["TinOffsetX"],!_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["TinOffsetY"],!_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["TinBokki"],!_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["TinSwing"],!_loc2_,-0.4,"link");
          }
@@ -547,6 +566,19 @@ package menu
                _loc2_ = this.charaData["TinManualAuto"]["_check"];
                new ColorFilterClass(MenuClass.tabMenuAdd["TinBokki"],_loc2_,-0.4,"link");
                new ColorFilterClass(MenuClass.tabMenuAdd["TinSwing"],_loc2_,-0.4,"link");
+            }
+         }
+         else if(param1 == "TinSizeAuto")
+         {
+            if(this.charaData["Tin"]["_visible"][0])
+            {
+               _loc2_ = this.charaData["TinSizeAuto"]["_check"];
+               // new ColorFilterClass(MenuClass.tabMenuAdd["TinEx"],!_loc2_,-0.4,"link");
+               new ColorFilterClass(MenuClass.tabMenuAdd["TinSize"],!_loc2_,-0.4,"link");
+               new ColorFilterClass(MenuClass.tabMenuAdd["TinScaleX"],_loc2_,-0.4,"link");
+               new ColorFilterClass(MenuClass.tabMenuAdd["TinScaleY"],_loc2_,-0.4,"link");
+               new ColorFilterClass(MenuClass.tabMenuAdd["TinOffsetX"],_loc2_,-0.4,"link");
+               new ColorFilterClass(MenuClass.tabMenuAdd["TinOffsetY"],_loc2_,-0.4,"link");
             }
          }
          else if(param1 == "Tama")
@@ -714,6 +746,8 @@ package menu
             new ColorFilterClass(MenuClass.tabMenuAdd["LinkRibonLine"],!_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["RibonAdd"],!_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["RibonAlpha"],!_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RibonFineX"],!_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RibonFineY"],!_loc2_,-0.4,"link");
          }
          else if(param1 == "LinkFreeRibonScale")
          {
@@ -743,6 +777,9 @@ package menu
             new ColorFilterClass(MenuClass.tabMenuAdd["LinkFreeRibonLine"],!_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["LinkFreeRibonScale"],!_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["FreeRibonDepth"],!_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["FreeRibonAlpha"],!_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["FreeRibonFineX"],!_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["FreeRibonFineY"],!_loc2_,-0.4,"link");
          }
          else if(param1 == "FreeHandPlus")
          {
@@ -760,6 +797,8 @@ package menu
             new ColorFilterClass(MenuClass.tabMenuAdd["FreeHandItem"],!_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["FreeHandWristband"],!_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["FreeHandVest"],!_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["FreeHandFineY"],!_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["FreeHandFineX"],!_loc2_,-0.4,"link");
          }
          else if(param1 == "BeltPlus")
          {
@@ -776,6 +815,8 @@ package menu
             new ColorFilterClass(MenuClass.tabMenuAdd["LinkBeltLine"],!_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["BeltLine"],!_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["BeltAlpha"],!_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["BeltFineX"],!_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["BeltFineY"],!_loc2_,-0.4,"link");
          }
          else if(param1 == "LinkBeltScale")
          {
@@ -808,6 +849,9 @@ package menu
             new ColorFilterClass(MenuClass.tabMenuAdd["LinkFreeBeltLine"],!_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["FreeBeltLine"],!_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["FreeBeltDepth"],!_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["FreeBeltFineX"],!_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["FreeBeltFineY"],!_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["FreeBeltAlpha"],!_loc2_,-0.4,"link");
          }
          else if(param1 == "LinkFreeBeltScale")
          {
@@ -837,6 +881,9 @@ package menu
             new ColorFilterClass(MenuClass.tabMenuAdd["LinkFreeChairScale"],!_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["FreeChairDepth"],!_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["FreeChairLine"],!_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["FreeChairFineX"],!_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["FreeChairFineY"],!_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["FreeChairAlpha"],!_loc2_,-0.4,"link");
          }
          else if(param1 == "LinkFreeChairScale")
          {
@@ -890,7 +937,7 @@ package menu
             new ColorFilterClass(MenuClass.tabMenuAdd["LinkFreeHukidashiExtraScale"],!_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["FreeHukidashiExtraScaleY"],!_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["FreeHukidashiExtraRotation"],!_loc2_,-0.4,"link");
-            if(MenuClass.systemData["FreeHukidashiBlend" + MenuClass.systemData["FreeHukidashiPlus"]["_menu"]]["_menu"] > 9)
+            if(MenuClass.systemData["FreeHukidashiBlend" + MenuClass.systemData["FreeHukidashiPlus"]["_menu"]]["_menu"] > 11)
             {
                new ColorFilterClass(MenuClass.tabMenuAdd["FreeHukidashiLine"],true,-0.4,"link");
                new ColorFilterClass(MenuClass.tabMenuAdd["FreeHukidashiDepth"],true,-0.4,"link");
@@ -1014,6 +1061,8 @@ package menu
             new ColorFilterClass(MenuClass.tabMenuAdd["CharaLoadRotation"],!_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["CharaLoadX"],!_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["CharaLoadY"],!_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["CharaLoadFineX"],!_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["CharaLoadFineY"],!_loc2_,-0.4,"link");
          }
          else if(param1 == "CharaLinkLoadScale")
          {
@@ -1048,6 +1097,8 @@ package menu
             new ColorFilterClass(MenuClass.tabMenuAdd["LoadRotation"],!_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["LoadX"],!_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["LoadY"],!_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["LoadFineX"],!_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["LoadFineY"],!_loc2_,-0.4,"link");
          }
          else if(param1 == "LinkLoadScale")
          {
@@ -1119,6 +1170,68 @@ package menu
             _loc2_ = MenuClass.systemData["CharaURLLocal"]["_check"];
             new ColorFilterClass(MenuClass.tabMenuAdd["CharaURLText"],!_loc2_,-0.4,"link");
          }
+         else if(param1 == "LinkThighSettings")
+         {
+            _loc2_ = MenuClass.systemData["LinkThighSettings"]["_flag"];
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightThighRotation"],_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightThighScaleX"],_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightThighScaleY"],_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightThighOffsetX"],_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightThighOffsetY"],_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightThighVisible"],_loc2_,-0.4,"link");
+         }
+         else if(param1 == "LinkLegSettings")
+         {
+            _loc2_ = MenuClass.systemData["LinkLegSettings"]["_flag"];
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightLegRotation"],_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightLegScaleX"],_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightLegScaleY"],_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightLegOffsetX"],_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightLegOffsetY"],_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightLegVisible"],_loc2_,-0.4,"link");
+         }
+         else if(param1 == "LinkFootSettings")
+         {
+            _loc2_ = MenuClass.systemData["LinkFootSettings"]["_flag"];
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightFootRotation"],_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightFootScaleX"],_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightFootScaleY"],_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightFootOffsetX"],_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightFootOffsetY"],_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightFootVisible"],_loc2_,-0.4,"link");
+         }
+         else if(param1 == "LinkUpperArmSettings")
+         {
+            _loc2_ = MenuClass.systemData["LinkUpperArmSettings"]["_flag"];
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightThighRotation"],_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightUpperArmScaleX"],_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightUpperArmScaleY"],_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightUpperArmOffsetX"],_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightUpperArmOffsetY"],_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightUpperArmVisible"],_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightShoulderVisible"],_loc2_,-0.4,"link");
+         }
+         else if(param1 == "LinkArmSettings")
+         {
+            _loc2_ = MenuClass.systemData["LinkArmSettings"]["_flag"];
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightArmScaleX"],_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightArmScaleY"],_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightArmOffsetX"],_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightArmOffsetY"],_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightArmVisible"],_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightArmFlip"],_loc2_,-0.4,"link");
+         }
+         else if(param1 == "LinkHandSettings")
+         {
+            _loc2_ = MenuClass.systemData["LinkHandSettings"]["_flag"];
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightFootRotation"],_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightHandScaleX"],_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightHandScaleY"],_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightHandOffsetX"],_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightHandOffsetY"],_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightHandVisible"],_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightHandFlip"],_loc2_,-0.4,"link");
+         }
       }
       
       private function fcEmotionManualAuto() : void
@@ -1149,6 +1262,8 @@ package menu
          new ColorFilterClass(MenuClass.tabMenuAdd["EmotionEyebrowRight"],_loc1_,-0.4,"link");
          new ColorFilterClass(MenuClass.tabMenuAdd["EyebrowRotationRight"],_loc1_,-0.4,"link");
          new ColorFilterClass(MenuClass.tabMenuAdd["EyebrowMoveRight"],_loc1_,-0.4,"link");
+         new ColorFilterClass(MenuClass.tabMenuAdd["EyebrowMoveHorizontalLeft"],_loc1_,-0.4,"link");
+         new ColorFilterClass(MenuClass.tabMenuAdd["EyebrowMoveHorizontalRight"],_loc1_,-0.4,"link");
          new ColorFilterClass(MenuClass.tabMenuAdd["EmotionMouth"],_loc1_,-0.4,"link");
          new ColorFilterClass(MenuClass.tabMenuAdd["MouthYMove"],_loc1_,-0.4,"link");
          new ColorFilterClass(MenuClass.tabMenuAdd["MouthWidth"],_loc1_,-0.4,"link");

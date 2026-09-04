@@ -3,6 +3,7 @@ package menu
    import flash.display.MovieClip;
    import flash.events.MouseEvent;
    import parameter.Dress_data;
+   import undo.SetMenuAction;
    
    public class Tab_MenuCheckClass
    {
@@ -15,6 +16,7 @@ package menu
       
       public static var headerName:String;
        
+      public static var curUndoAction: SetMenuAction = null;
       
       public function Tab_MenuCheckClass()
       {
@@ -23,6 +25,7 @@ package menu
       
       public static function setFc(param1:String, param2:int, param3:String) : void
       {
+         trace("Tab_MenuCheckClass.setFc called: ", param1, param2, param3);
          var _loc4_:String = null;
          var _loc6_:String = null;
          var _loc7_:int = 0;
@@ -66,6 +69,7 @@ package menu
       
       public static function deleteFc(param1:String) : void
       {
+         curUndoAction = null;
          MenuClass.tabMenuAdd[param1].MenuCheck.btn0.removeEventListener(MouseEvent.MOUSE_DOWN,btn0Click);
          MenuClass.tabMenuAdd[param1].MenuCheck.btn1.removeEventListener(MouseEvent.MOUSE_DOWN,btn1Click);
          try
@@ -74,6 +78,24 @@ package menu
          }
          catch(myError:Error)
          {
+         }
+      }
+
+      public static function initUndoAction() : void
+      {
+         var menuType:String = MenuClass.tabData[headerName][targetJ][2]["_menu"];
+         var menuTarget = MenuClass.tabData[headerName][targetJ][2]["_menuTarget"];
+         var selectedSlot:int = 0;
+
+         curUndoAction = null;
+         if (menuType != "SelectCharacter" && menuTarget != "single" && tabName != "DressSet" && tabName != "UnderwearSet" && tabName != "VibratorMove") {
+            if (menuType == "charaPlus" || menuType == "systemPlus") {
+               var dataTarget = MenuClass.tabData[headerName][targetJ][2]["_data"];
+               selectedSlot = MenuClass.systemData[dataTarget]["_menu"];
+            }
+
+            curUndoAction = new SetMenuAction(headerName, targetJ, (menuType == "chara" || menuType == "charaPlus"));
+            curUndoAction.recordPreviousValue(selectedSlot);
          }
       }
       
@@ -93,6 +115,7 @@ package menu
          {
          }
          nowbtn = param1.currentTarget as MovieClip;
+         initUndoAction();
          MenuAction(0,tabName);
       }
       
@@ -112,6 +135,7 @@ package menu
          {
          }
          nowbtn = param1.currentTarget as MovieClip;
+         initUndoAction();
          MenuAction(1,tabName);
       }
       
@@ -125,6 +149,7 @@ package menu
          MenuClass.tabMenuAdd[tabName].MenuCheck.btn1.gotoAndStop(1);
          MenuClass.tabMenuAdd[tabName].MenuCheck.btn2.gotoAndStop(2);
          nowbtn = param1.currentTarget as MovieClip;
+         initUndoAction();
          MenuAction(2,tabName);
       }
       
@@ -158,6 +183,7 @@ package menu
          catch(myError:Error)
          {
          }
+
          if(_loc6_ == "chara" || _loc6_ == "charaPlus")
          {
             if(_loc7_)
@@ -168,6 +194,12 @@ package menu
             else
             {
                MenuClass.charaData[MenuClass._nowCharaNum][_loc5_]["_menu"] = param1;
+            }
+            
+            if (curUndoAction) {
+               curUndoAction.recordNewValue(param1, _loc9_);
+               Main.undoTimeline.push(curUndoAction);
+               initUndoAction();
             }
          }
          else if(_loc6_ == "system" || _loc6_ == "systemPlus" || _loc6_ == "SelectCharacter")
@@ -181,7 +213,14 @@ package menu
             {
                MenuClass.systemData[_loc5_]["_menu"] = param1;
             }
+
+            if (curUndoAction) {
+               curUndoAction.recordNewValue(param1, _loc9_);
+               Main.undoTimeline.push(curUndoAction);
+               initUndoAction();
+            }
          }
+
          if(_loc6_ == "charaPlus")
          {
             new Tab_VC(headerName,targetJ,_loc8_);
@@ -194,6 +233,7 @@ package menu
          {
             new Tab_VC(headerName,targetJ,param2);
          }
+
          if(MenuClass._nowTargetMode == "All" && MenuClass.tabData[headerName][targetJ][2]["_menuTarget"] != "single")
          {
             if(_loc6_ == "chara" || _loc6_ == "charaPlus")

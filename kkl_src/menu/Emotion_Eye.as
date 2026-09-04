@@ -149,6 +149,26 @@ package menu
                this.charaAdd.head["eye" + _loc2_].eyeball.scaleY = 1 - _loc7_ + _loc9_;
                this.charaAdd.head["eye" + _loc2_].eyeball.x = SizeDataClass.bodyDefault_y["defoEyeballX"] + _loc10_ * _loc12_[_loc2_] * (1 + _loc6_ * _loc13_) + _loc14_;
                this.charaAdd.head["eye" + _loc2_].eyeball.y = SizeDataClass.bodyDefault_y["defoEyeballY"] + Emotion_data.EyeData[_loc3_[_loc2_]][1] + _loc11_ * (1 + _loc6_ * _loc13_) + _loc15_;
+
+               try {
+                  if (this.charaAdd.head["eye" + _loc2_].underMarkAttachPoint) {
+                     this.charaAdd.head["eye" + _loc2_].underMarkAttachPoint.visible = true;
+                     this.charaAdd.head["eye" + _loc2_].underMarkAttachPoint.scaleY = Emotion_data.EyeData[_loc3_[_loc2_]][2];
+                  }
+               } catch (err) {
+                  trace(err.getStackTrace());
+               }
+
+               try {
+                  if (this.charaAdd.head["eye" + _loc2_].overMarkAttachPoint) {
+                     this.charaAdd.head["eye" + _loc2_].overMarkAttachPoint.visible = true;
+                     this.charaAdd.head["eye" + _loc2_].overMarkAttachPoint.scaleY = Emotion_data.EyeData[_loc3_[_loc2_]][2];
+                  }
+               } catch (err) {
+                  trace(err.getStackTrace());
+               }
+
+               Huku_MarkSet.updateEyelid(param1, _loc2_);
             }
             else
             {
@@ -190,6 +210,24 @@ package menu
                this.charaAdd.head["eye" + _loc2_].eyeMask.visible = false;
                this.charaAdd.head["eye" + _loc2_].eyeWhite.visible = false;
                this.charaAdd.head["eye" + _loc2_].eyeball.visible = false;
+
+               try {
+                  if (this.charaAdd.head["eye" + _loc2_].underMarkAttachPoint) {
+                     this.charaAdd.head["eye" + _loc2_].underMarkAttachPoint.visible = false;
+                  }
+               } catch (err) {
+                  trace(err.getStackTrace());
+               }
+
+               try {
+                  if (this.charaAdd.head["eye" + _loc2_].overMarkAttachPoint) {
+                     this.charaAdd.head["eye" + _loc2_].overMarkAttachPoint.visible = false;
+                  }
+               } catch (err) {
+                  trace(err.getStackTrace());
+               }
+               
+               Huku_MarkSet.updateEyelid(param1, _loc2_);
             }
             _loc2_++;
          }

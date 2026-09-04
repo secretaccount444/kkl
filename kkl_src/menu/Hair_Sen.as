@@ -4,7 +4,50 @@ package menu
    
    public class Hair_Sen
    {
-       
+      public static function setVisAlpha(visible:Boolean, alpha:Number, base:Object, ...path): Boolean {
+         var curObj = base;
+         // trace("start(vis-alpha): " + curObj + " " + visible + " " + alpha);
+         for (var i:int = 0; i < path.length; i++) {
+            // trace(curObj + " " + path[i]);
+            if (curObj !== null && curObj !== undefined) {
+               curObj = curObj[path[i]];
+            } else {
+               return false;
+            }
+         }
+
+         // trace("end: " + curObj);
+         if (curObj === null || curObj === undefined) {
+            return false;
+         }
+         
+         curObj.visible = visible;
+         curObj.alpha = alpha;
+
+         return true;
+      }
+
+      public static function setAlpha(alpha:Number, base:Object, ...path): Boolean {
+         var curObj = base;
+         // trace("start(alpha): " + curObj + " " + alpha);
+         for (var i:int = 0; i < path.length; i++) {
+            // trace(curObj + " " + path[i]);
+            if (curObj !== null && curObj !== undefined) {
+               curObj = curObj[path[i]];
+            } else {
+               return false;
+            }
+         }
+
+         // trace("end: " + curObj);
+         if (curObj === null || curObj === undefined) {
+            return false;
+         }
+
+         curObj.alpha = alpha;
+
+         return true;
+      }
       
       public function Hair_Sen(param1:int)
       {
@@ -39,95 +82,125 @@ package menu
          }
          try
          {
-            _loc8_.head.hair.color2_0.visible = _loc9_;
-            _loc8_.HairUshiro.color2_0.visible = _loc9_;
-            _loc8_.head.hair.color2_0.alpha = _loc10_;
-            _loc8_.HairUshiro.color2_0.alpha = _loc10_;
+            if (_loc8_.head.hair.color2_0) {
+               _loc8_.head.hair.color2_0.visible = _loc9_;
+               if (_loc8_.HairUshiro.color2_0) {
+                  _loc8_.HairUshiro.color2_0.visible = _loc9_;
+                  _loc8_.head.hair.color2_0.alpha = _loc10_;
+                  _loc8_.HairUshiro.color2_0.alpha = _loc10_;
+               }
+            }
+            // _loc8_.head.hair.color2_0.visible = _loc9_;
+            // _loc8_.HairUshiro.color2_0.visible = _loc9_;
+            // _loc8_.head.hair.color2_0.alpha = _loc10_;
+            // _loc8_.HairUshiro.color2_0.alpha = _loc10_;
          }
          catch(myError:Error)
          {
+            // trace(myError.getStackTrace());
          }
-         new Hair_SenVisible(param1);
+         // new Hair_SenVisible(param1);
+         Hair_SenVisible.apply(param1);
          try
          {
-            _loc8_.head.hair.mae_sen.alpha = _loc10_;
+            setAlpha(_loc10_, _loc8_, "head", "hair", "mae_sen");
+            // _loc8_.head.hair.mae_sen.alpha = _loc10_;
          }
          catch(myError:Error)
          {
-         }
-         try
-         {
-            _loc8_.head.hair.color2_0.alpha = _loc10_;
-         }
-         catch(myError:Error)
-         {
-         }
-         try
-         {
-            _loc8_.head.hair.color2_0.alpha = _loc10_;
-         }
-         catch(myError:Error)
-         {
-         }
-         try
-         {
-            _loc8_.head.hairUnder.mae_sen.alpha = _loc11_;
-         }
-         catch(myError:Error)
-         {
+            // trace(myError.getStackTrace());
          }
          try
          {
-            _loc8_.head.Bangs.bangs.color2_0.visible = _loc9_;
-            _loc8_.head.Bangs.bangs.color2_0.alpha = _loc10_;
+            setAlpha(_loc10_, _loc8_, "head", "hair", "color2_0");
+            // _loc8_.head.hair.color2_0.alpha = _loc10_;
          }
          catch(myError:Error)
          {
+            // trace(myError.getStackTrace());
+         }
+         try
+         {
+            setAlpha(_loc10_, _loc8_, "head", "hair", "color2_0");
+            // _loc8_.head.hair.color2_0.alpha = _loc10_;
+         }
+         catch(myError:Error)
+         {
+            // trace(myError.getStackTrace());
+         }
+         try
+         {
+            setAlpha(_loc11_, _loc8_, "head", "hairUnder", "mae_sen");
+            // _loc8_.head.hairUnder.mae_sen.alpha = _loc11_;
+         }
+         catch(myError:Error)
+         {
+            // trace(myError.getStackTrace());
+         }
+         try
+         {
+            setVisAlpha(_loc9_, _loc10_, _loc8_, "head", "Bangs", "bangs", "color2_0");
+            // _loc8_.head.Bangs.bangs.color2_0.visible = _loc9_;
+            // _loc8_.head.Bangs.bangs.color2_0.alpha = _loc10_;
+         }
+         catch(myError:Error)
+         {
+            // trace(myError.getStackTrace());
          }
          _loc5_ = 0;
          while(_loc5_ <= 1)
          {
             try
             {
-               _loc8_.HairBack.hairBack.hairBack["color2_" + _loc5_].visible = _loc9_;
-               _loc8_.HairBack.hairBack.hairBack["color2_" + _loc5_].alpha = _loc10_;
+               setVisAlpha(_loc9_, _loc10_, _loc8_, "HairBack", "hairBack", "hairBack", "color2_" + _loc5_);
+               // _loc8_.HairBack.hairBack.hairBack["color2_" + _loc5_].visible = _loc9_;
+               // _loc8_.HairBack.hairBack.hairBack["color2_" + _loc5_].alpha = _loc10_;
             }
             catch(myError:Error)
             {
+               // trace(myError.getStackTrace());
             }
             _loc5_++;
          }
          try
          {
-            _loc8_.head.SideBurnLeft.SideBurn.side.color2_0.visible = _loc9_;
-            _loc8_.head.SideBurnLeft.SideBurn.side.color2_0.alpha = _loc10_;
+            setVisAlpha(_loc9_, _loc10_, _loc8_, "head", "SideBurnLeft", "SideBurn", "side", "color2_0");
+            // _loc8_.head.SideBurnLeft.SideBurn.side.color2_0.visible = _loc9_;
+            // _loc8_.head.SideBurnLeft.SideBurn.side.color2_0.alpha = _loc10_;
          }
          catch(myError:Error)
          {
+            // trace(myError.getStackTrace());
          }
          try
          {
-            _loc8_.SideBurnMiddle.SideBurnLeft.SideBurn.side.color2_0.visible = _loc9_;
-            _loc8_.SideBurnMiddle.SideBurnLeft.SideBurn.side.color2_0.alpha = _loc10_;
+            setVisAlpha(_loc9_, _loc10_, _loc8_, "SideBurnMiddle", "SideBurnLeft", "SideBurn", "side", "color2_0");
+            // _loc8_.SideBurnMiddle.SideBurnLeft.SideBurn.side.color2_0.visible = _loc9_;
+            // _loc8_.SideBurnMiddle.SideBurnLeft.SideBurn.side.color2_0.alpha = _loc10_;
          }
          catch(myError:Error)
          {
+            // trace(myError.getStackTrace());
          }
          try
          {
-            _loc8_.head.SideBurnRight.SideBurn.side.color2_0.visible = _loc9_;
-            _loc8_.head.SideBurnRight.SideBurn.side.color2_0.alpha = _loc10_;
+            setVisAlpha(_loc9_, _loc10_, _loc8_, "head", "SideBurnRight", "SideBurn", "side", "color2_0");
+            // _loc8_.head.SideBurnRight.SideBurn.side.color2_0.visible = _loc9_;
+            // _loc8_.head.SideBurnRight.SideBurn.side.color2_0.alpha = _loc10_;
          }
          catch(myError:Error)
          {
+            // trace(myError.getStackTrace());
          }
          try
          {
-            _loc8_.SideBurnMiddle.SideBurnRight.SideBurn.side.color2_0.visible = _loc9_;
-            _loc8_.SideBurnMiddle.SideBurnRight.SideBurn.side.color2_0.alpha = _loc10_;
+            setVisAlpha(_loc9_, _loc10_, _loc8_, "SideBurnMiddle", "SideBurnRight", "SideBurn", "side", "color2_0");
+            // _loc8_.SideBurnMiddle.SideBurnRight.SideBurn.side.color2_0.visible = _loc9_;
+            // _loc8_.SideBurnMiddle.SideBurnRight.SideBurn.side.color2_0.alpha = _loc10_;
          }
          catch(myError:Error)
          {
+            // trace(myError.getStackTrace());
          }
          _loc4_ = 0;
          for(; _loc4_ <= Main.hukusuuNum; _loc4_++)
@@ -146,8 +219,9 @@ package menu
                         {
                            try
                            {
-                              _loc8_["HairEx" + _loc4_ + "_" + _loc2_].HairEx0["color1_" + _loc5_].visible = _loc9_;
-                              _loc8_["HairEx" + _loc4_ + "_" + _loc2_].HairEx0["color1_" + _loc5_].alpha = _loc10_;
+                              setVisAlpha(_loc9_, _loc10_, _loc8_, "HairEx" + _loc4_ + "_" + _loc2_, "HairEx0", "color1_" + _loc5_);
+                              // _loc8_["HairEx" + _loc4_ + "_" + _loc2_].HairEx0["color1_" + _loc5_].visible = _loc9_;
+                              // _loc8_["HairEx" + _loc4_ + "_" + _loc2_].HairEx0["color1_" + _loc5_].alpha = _loc10_;
                            }
                            catch(myError:Error)
                            {
@@ -167,8 +241,9 @@ package menu
                         {
                            try
                            {
-                              _loc8_["HairEx" + _loc4_ + "_" + _loc2_].HairEx0["color2_" + _loc5_].visible = _loc9_;
-                              _loc8_["HairEx" + _loc4_ + "_" + _loc2_].HairEx0["color2_" + _loc5_].alpha = _loc10_;
+                              setVisAlpha(_loc9_, _loc10_, _loc8_, "HairEx" + _loc4_ + "_" + _loc2_, "HairEx0", "color2_" + _loc5_);
+                              // _loc8_["HairEx" + _loc4_ + "_" + _loc2_].HairEx0["color2_" + _loc5_].visible = _loc9_;
+                              // _loc8_["HairEx" + _loc4_ + "_" + _loc2_].HairEx0["color2_" + _loc5_].alpha = _loc10_;
                            }
                            catch(myError:Error)
                            {

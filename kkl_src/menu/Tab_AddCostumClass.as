@@ -101,6 +101,20 @@ package menu
                Tab_AddCostumOpen2.deleteFc(targetMC.headerName);
             }
          }
+         else if(MenuClass._nowHeaderName == "Mark")
+         {
+            if(MenuClass.AddOpenCheck == 0)
+            {
+               MenuClass.tabMenuAdd["MarkAdd"].addBox0.gotoAndStop(2);
+               MenuClass.tabMenuAdd["MarkAdd"].addBox0.icon.scaleX = MenuClass.tabMenuAdd["MarkAdd"].addBox0.icon.scaleY = 0.9;
+               MenuClass.tabMenuAdd["MarkAdd"].addBox0.icon.x = 28;
+               Tab_AddCostumOpenMark.setFc(targetMC.headerName, MenuClass._nowCharaNum);
+            }
+            else if(MenuClass.AddOpenCheck == 1)
+            {
+               Tab_AddCostumOpenMark.deleteFc(targetMC.headerName);
+            }
+         }
          targetMC.addEventListener(MouseEvent.MOUSE_UP,MouseUp);
          Main.stageVar.addEventListener(MouseEvent.MOUSE_UP,MouseUp);
       }

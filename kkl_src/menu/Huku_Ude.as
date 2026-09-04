@@ -47,9 +47,12 @@ package menu
          this.charaAdd = MenuClass.charaAdd[this.charaNum];
          this.charaData = MenuClass.charaData[this.charaNum];
          this.KataAngle = new Array(Math.round(49 * this.charaData["LeftArm"]["_meter"] / 100),Math.round(49 * this.charaData["RightArm"]["_meter"] / 100));
+         // trace(this.tabName, this.charaNum, this.handNum);
          if(this.tabName == "Wristband0" || this.tabName == "Wristband1")
          {
             this.menuNum = this.charaData[this.tabName]["_menu"];
+
+            this.charaAdd["handm1_" + this.handNum].hand.arm1.arm1.arm1.actual.Wristband.gotoAndStop(1);
             if(Dress_data.WristbandData[this.menuNum]["arm1"] == 0 || !this.charaData[this.tabName]["_visible"][0])
             {
                this.charaAdd["handm1_" + this.handNum].hand.arm1.arm1.arm1.actual.Wristband.visible = false;
@@ -63,6 +66,8 @@ package menu
                   this.charaAdd["handm1_" + this.handNum].hand.arm1.arm1.arm1.actual.Wristband.gotoAndStop(Dress_data.WristbandData[this.menuNum]["arm1"] + 1);
                }
             }
+
+            this.charaAdd["handm0_" + this.handNum].hand.arm2.actual.arm2.Wristband.gotoAndStop(1);
             if(Dress_data.WristbandData[this.menuNum]["arm2"] == 0 || !this.charaData[this.tabName]["_visible"][0])
             {
                this.charaAdd["handm0_" + this.handNum].hand.arm2.actual.arm2.Wristband.visible = false;
@@ -73,6 +78,7 @@ package menu
                this.charaAdd["handm0_" + this.handNum].hand.arm2.actual.arm2.Wristband.visible = true;
                this.charaAdd["handm0_" + this.handNum].hand.arm2.actual.arm2.Wristband.gotoAndStop(Dress_data.WristbandData[this.menuNum]["arm2"] + 2);
             }
+            
             if(this.charaData[this.tabName]["_visible"][0])
             {
                try
@@ -110,13 +116,13 @@ package menu
             {
                _loc4_ = 0;
             }
+
+            this.charaAdd["handm1_" + this.handNum].hand.arm1.arm1.arm1.actual.Glove.gotoAndStop(1);
+            this.charaAdd["handm1_" + this.handNum].hand.arm1.arm1.arm1.actual.Glove_mask.gotoAndStop(1);
             if(Dress_data.GloveData[this.menuNum][_loc4_]["arm1_top"] == 0 && Dress_data.GloveData[this.menuNum][_loc4_]["arm1"] == 0 || !this.charaData[this.tabName]["_visible"][0])
             {
                this.charaAdd["handm1_" + this.handNum].hand.arm1.arm1.arm1.actual.Glove.visible = false;
                this.charaAdd["handm1_" + this.handNum].hand.arm1.arm1.arm1.actual.Glove_mask.visible = false;
-
-               this.charaAdd["handm1_" + this.handNum].hand.arm1.arm1.arm1.actual.Glove.gotoAndStop(1);
-               this.charaAdd["handm1_" + this.handNum].hand.arm1.arm1.arm1.actual.Glove_mask.gotoAndStop(1);
             }
             else
             {
@@ -141,13 +147,13 @@ package menu
                   this.charaAdd["handm1_" + this.handNum].hand.arm1.arm1.arm1.actual.Glove_mask.gotoAndStop(1);
                }
             }
+
+            this.charaAdd["handm0_" + this.handNum].hand.arm2.actual.arm2.Glove.gotoAndStop(1);
+            this.charaAdd["handm0_" + this.handNum].hand.arm2.actual.arm2.Glove_mask.gotoAndStop(1);
             if(Dress_data.GloveData[this.menuNum][_loc4_]["arm2_top"] == 0 && Dress_data.GloveData[this.menuNum][_loc4_]["arm2"] == 0 || !this.charaData[this.tabName]["_visible"][0])
             {
                this.charaAdd["handm0_" + this.handNum].hand.arm2.actual.arm2.Glove.visible = false;
                this.charaAdd["handm0_" + this.handNum].hand.arm2.actual.arm2.Glove_mask.visible = false;
-
-               this.charaAdd["handm0_" + this.handNum].hand.arm2.actual.arm2.Glove.gotoAndStop(1);
-               this.charaAdd["handm0_" + this.handNum].hand.arm2.actual.arm2.Glove_mask.gotoAndStop(1);
             }
             else
             {
@@ -190,10 +196,10 @@ package menu
                // trace(myError.getStackTrace());
             }
 
+            this.charaAdd["handm1_" + this.handNum].hand.arm0.hand.actual.glove.gotoAndStop(1);
             if(Dress_data.GloveData[this.menuNum][_loc4_]["arm0"] == 0)
             {
                this.charaAdd["handm1_" + this.handNum].hand.arm0.hand.actual.glove.visible = false;
-               this.charaAdd["handm1_" + this.handNum].hand.arm0.hand.actual.glove.gotoAndStop(1);
             }
             else
             {
@@ -213,6 +219,7 @@ package menu
             if(this.charaData[this.tabName]["_visible"][0])
             {
                this.menuNum = this.charaData[this.tabName]["_menu"];
+               this.charaAdd["handm1_" + this.handNum].hand.arm1.arm1.arm1.actual.Bracelet.gotoAndStop(1);
                this.charaAdd["handm1_" + this.handNum].hand.arm1.arm1.arm1.actual.Bracelet.gotoAndStop(this.menuNum + 2);
                this.charaAdd["handm1_" + this.handNum].hand.arm1.arm1.arm1.actual.Bracelet.mouseChildren = false;
                this.charaAdd["handm1_" + this.handNum].hand.arm1.arm1.arm1.actual.Bracelet.buttonMode = true;
@@ -230,6 +237,7 @@ package menu
             if(this.charaData[this.tabName]["_visible"][0])
             {
                this.menuNum = this.charaData[this.tabName]["_menu"];
+               this.charaAdd["handm0_" + this.handNum].hand.arm2.actual.arm2.ArmBracelet.gotoAndStop(1);
                this.charaAdd["handm0_" + this.handNum].hand.arm2.actual.arm2.ArmBracelet.gotoAndStop(this.menuNum + 2);
                this.charaAdd["handm0_" + this.handNum].hand.arm2.actual.arm2.ArmBracelet.mouseChildren = false;
                this.charaAdd["handm0_" + this.handNum].hand.arm2.actual.arm2.ArmBracelet.buttonMode = true;
@@ -247,6 +255,7 @@ package menu
             if(this.charaData[this.tabName]["_visible"][0])
             {
                this.menuNum = this.charaData[this.tabName]["_menu"];
+               this.charaAdd["handm0_" + this.handNum].hand.arm2.actual.arm2.Armband.gotoAndStop(1);
                this.charaAdd["handm0_" + this.handNum].hand.arm2.actual.arm2.Armband.gotoAndStop(this.menuNum + 2);
                this.charaAdd["handm0_" + this.handNum].hand.arm2.actual.arm2.Armband.mouseChildren = false;
                this.charaAdd["handm0_" + this.handNum].hand.arm2.actual.arm2.Armband.buttonMode = true;
@@ -265,6 +274,8 @@ package menu
             if(this.charaData[this.tabName]["_visible"][0])
             {
                this.menuNum = this.charaData[this.tabName]["_menu"];
+               this.charaAdd["handm0_" + this.handNum].hand.arm2.actual.arm2.Elbowpad.gotoAndStop(1);
+               this.charaAdd["handm1_" + this.handNum].hand.arm1.arm1.arm1.actual.Elbowpad.gotoAndStop(1);
                this.charaAdd["handm0_" + this.handNum].hand.arm2.actual.arm2.Elbowpad.gotoAndStop(this.menuNum + 2);
                this.charaAdd["handm1_" + this.handNum].hand.arm1.arm1.arm1.actual.Elbowpad.gotoAndStop(this.menuNum + 2);
                this.charaAdd["handm0_" + this.handNum].hand.arm2.actual.arm2.Elbowpad.mouseChildren = false;
@@ -865,6 +876,7 @@ package menu
          catch(myError:Error)
          {
          }
+
          if(this.charaAdd["handm0_" + this.handNum].hand.arm2.actual.arm2.Seihuku.visible || this.charaAdd["handm0_" + this.handNum].hand.arm2.actual.arm2.Vest.visible || this.charaAdd["handm0_" + this.handNum].hand.arm2.actual.arm2.Ysyatu.visible || this.charaAdd["handm0_" + this.handNum].hand.arm2.actual.arm2.Tsyatu.visible)
          {
             this.charaAdd["handm0_" + this.handNum].shoulder.sen.visible = false;
@@ -872,6 +884,21 @@ package menu
          else
          {
             this.charaAdd["handm0_" + this.handNum].shoulder.sen.visible = true;
+         }
+
+         var side = "";
+         if (this.handNum == 0) {
+            side = "Left";
+         } else {
+            side = "Right";
+         }
+         
+         if (this.charaData[side + "ShoulderVisible"]["_visible"][0]) {
+            this.charaAdd["handm0_" + this.handNum].shoulder.visible = true;
+            this.charaAdd["handm0_" + this.handNum].shoulder_back.visible = true;
+         } else {
+            this.charaAdd["handm0_" + this.handNum].shoulder.visible = false;
+            this.charaAdd["handm0_" + this.handNum].shoulder_back.visible = false;
          }
       }
       

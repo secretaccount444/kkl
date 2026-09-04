@@ -510,7 +510,7 @@ package menu
             new Tab_CameraGif();
             MenuClass.BeforePage = MenuClass.systemData["Story_Page"]["_menu"];
             MenuClass.systemData["Story_Page"]["_menu"] += 1;
-            new Tab_IEInOut("setIN",MenuClass.StoryTimeLineData[MenuClass.systemData["Story_Page"]["_menu"]][9],MenuClass._nowCharaNum);
+            Tab_IEInOut.execute("setIN",MenuClass.StoryTimeLineData[MenuClass.systemData["Story_Page"]["_menu"]][9],MenuClass._nowCharaNum);
          }
          else if(MenuClass.StoryTimeLineData.length - 1 == MenuClass.systemData["Story_Page"]["_menu"] && MenuClass.urlLoadCompCheck)
          {

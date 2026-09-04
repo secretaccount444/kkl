@@ -53,14 +53,14 @@ package menu
                }
                try
                {
-                  this.charaAdd["ashi" + _loc5_].thigh.thigh.Tights.line.rotation = _loc3_ + _loc10_ + _loc6_;
+                  this.charaAdd["ashi" + _loc5_].thigh.actual.thigh.Tights.line.rotation = _loc3_ + _loc10_ + _loc6_;
                }
                catch(myError:Error)
                {
                }
                try
                {
-                  this.charaAdd["ashi" + _loc5_].thigh.thigh.Tights.line.scaleX = _loc4_;
+                  this.charaAdd["ashi" + _loc5_].thigh.actual.thigh.Tights.line.scaleX = _loc4_;
                }
                catch(myError:Error)
                {

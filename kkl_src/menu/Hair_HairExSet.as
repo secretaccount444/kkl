@@ -142,17 +142,17 @@ package menu
                      }
                      else if(_loc5_["HairExAdd" + param2]["_add0"] == 95)
                      {
-                        _loc4_.ashi0.thigh.thigh.addChild(_loc20_);
+                        _loc4_.ashi0.thigh.actual.thigh.addChild(_loc20_);
                      }
                      else if(_loc5_["HairExAdd" + param2]["_add0"] == 96)
                      {
-                        if (_loc4_.ashi0.leg != null && _loc4_.ashi0.leg.leg != null) {
-                           _loc4_.ashi0.leg.leg.addChild(_loc20_);
+                        if (_loc4_.ashi0.leg != null && _loc4_.ashi0.leg.actual.leg != null) {
+                           _loc4_.ashi0.leg.actual.leg.addChild(_loc20_);
                         }
                      }
                      else if(_loc5_["HairExAdd" + param2]["_add0"] == 97)
                      {
-                        _loc4_.ashi0.foot.foot.addChild(_loc20_);
+                        _loc4_.ashi0.foot.actual.foot.addChild(_loc20_);
                      }
                      else if(_loc5_["HairExAdd" + param2]["_add0"] == 94)
                      {
@@ -246,17 +246,17 @@ package menu
                      }
                      else if(_loc5_["HairExAdd" + param2]["_add0"] == 95)
                      {
-                        _loc4_.ashi1.thigh.thigh.addChild(_loc21_);
+                        _loc4_.ashi1.thigh.actual.thigh.addChild(_loc21_);
                      }
                      else if(_loc5_["HairExAdd" + param2]["_add0"] == 96)
                      {
-                        if (_loc4_.ashi1.leg != null && _loc4_.ashi1.leg.leg != null) {
-                           _loc4_.ashi1.leg.leg.addChild(_loc21_);
+                        if (_loc4_.ashi1.leg != null && _loc4_.ashi1.leg.actual.leg != null) {
+                           _loc4_.ashi1.leg.actual.leg.addChild(_loc21_);
                         }
                      }
                      else if(_loc5_["HairExAdd" + param2]["_add0"] == 97)
                      {
-                        _loc4_.ashi1.foot.foot.addChild(_loc21_);
+                        _loc4_.ashi1.foot.actual.foot.addChild(_loc21_);
                      }
                      else if(_loc5_["HairExAdd" + param2]["_add0"] == 94)
                      {
@@ -929,15 +929,15 @@ package menu
                   
                   if(charaData["HairExAdd" + i]["_add0"] == 95)
                   {
-                     charaAdd.ashi0.thigh.thigh.addChild(curSprite);
+                     charaAdd.ashi0.thigh.actual.thigh.addChild(curSprite);
                   }
-                  else if(charaData["HairExAdd" + i]["_add0"] == 96 && charaAdd.ashi0.leg != null && charaAdd.ashi0.leg.leg != null)
+                  else if(charaData["HairExAdd" + i]["_add0"] == 96 && charaAdd.ashi0.leg != null && charaAdd.ashi0.leg.actual.leg != null)
                   {
-                     charaAdd.ashi0.leg.leg.addChild(curSprite);
+                     charaAdd.ashi0.leg.actual.leg.addChild(curSprite);
                   }
                   else if(charaData["HairExAdd" + i]["_add0"] == 97)
                   {
-                     charaAdd.ashi0.foot.foot.addChild(curSprite);
+                     charaAdd.ashi0.foot.actual.foot.addChild(curSprite);
                   }
                }
             }
@@ -953,17 +953,17 @@ package menu
 
                   if(charaData["HairExAdd" + i]["_add0"] == 95)
                   {
-                     charaAdd.ashi1.thigh.thigh.addChild(curSprite);
+                     charaAdd.ashi1.thigh.actual.thigh.addChild(curSprite);
                      curSprite.scaleX = -1;
                   }
-                  else if(charaData["HairExAdd" + i]["_add0"] == 96 && charaAdd.ashi1.leg != null && charaAdd.ashi1.leg.leg != null)
+                  else if(charaData["HairExAdd" + i]["_add0"] == 96 && charaAdd.ashi1.leg != null && charaAdd.ashi1.leg.actual.leg != null)
                   {
-                     charaAdd.ashi1.leg.leg.addChild(curSprite);
+                     charaAdd.ashi1.leg.actual.leg.addChild(curSprite);
                      curSprite.scaleX = -1;
                   }
                   else if(charaData["HairExAdd" + i]["_add0"] == 97)
                   {
-                     charaAdd.ashi1.foot.foot.addChild(curSprite);
+                     charaAdd.ashi1.foot.actual.foot.addChild(curSprite);
                      curSprite.scaleX = -1;
                   }
                }
@@ -1028,21 +1028,21 @@ package menu
          }
          try
          {
-            _loc4_["ashi"+param3].thigh.thigh.removeChild(_loc4_["HairEx" + param2 + "_" + param3]);
+            _loc4_["ashi"+param3].thigh.actual.thigh.removeChild(_loc4_["HairEx" + param2 + "_" + param3]);
          }
          catch(myError:Error)
          {
          }
          try
          {
-            _loc4_["ashi"+param3].leg.leg.removeChild(_loc4_["HairEx" + param2 + "_" + param3]);
+            _loc4_["ashi"+param3].leg.actual.leg.removeChild(_loc4_["HairEx" + param2 + "_" + param3]);
          }
          catch(myError:Error)
          {
          }
          try
          {
-            _loc4_["ashi"+param3].foot.foot.removeChild(_loc4_["HairEx" + param2 + "_" + param3]);
+            _loc4_["ashi"+param3].foot.actual.foot.removeChild(_loc4_["HairEx" + param2 + "_" + param3]);
          }
          catch(myError:Error)
          {

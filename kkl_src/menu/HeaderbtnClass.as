@@ -13,6 +13,9 @@ package menu
       private var nowbtn:MovieClip;
       
       private var Nagaoshi_count:int;
+
+      public static var headerTabWidth = 41; // px
+      public static var headerTabHeight = 32; // px
       
       public function HeaderbtnClass()
       {
@@ -37,6 +40,7 @@ package menu
          var _loc3_:int = 1;
          var _loc4_:Number = -1;
          _loc1_ = 0;
+
          while(_loc1_ <= _loc2_)
          {
             if((_loc5_ = MenuClass.MY_MENUNAME[_loc1_][0]) == null)
@@ -113,19 +117,23 @@ package menu
                   }
                }
                _loc6_.y = 568;
+               
                new ColorChangeClass(_loc6_.bg.obj,MenuClass.MY_MENUNAME[_loc1_][1]);
+
                _loc7_ = _loc5_;
                if(_loc5_.substring(0,4) == "Easy")
                {
                   _loc7_ = _loc5_.substring(4,_loc5_.length);
                }
-               if (_loc7_ == "ArmHeight")
-               {
+
+               if (_loc7_ == "ArmHeight") {
                   _loc6_.icon.gotoAndStop("FreeHandScale");
-               } else
-               {
+               } else if (_loc7_ == "LegHeight") {
+                  _loc6_.icon.gotoAndStop("Ashi2");
+               } else {
                   _loc6_.icon.gotoAndStop(_loc7_);
                }
+
                _loc6_.buttonMode = true;
                _loc6_.mouseChildren = false;
                _loc6_.name = _loc5_;
@@ -136,6 +144,74 @@ package menu
             }
             _loc3_ = MenuClass.MY_MENUNAME[_loc1_][3];
             _loc1_++;
+         }
+      }
+
+      public static function layoutHeaderButtons() {
+         var curHeaderGroup:int = 1;
+         var curGroupIdx:Number = -1;
+
+         headerMenu.x = Air_StageSize.menuLeftEdge + 3;
+         headerMenu.y = Air_StageSize.menuBottomEdge - headerTabHeight;
+
+         for (var i = 0; i < MenuClass.MY_MENUNAME.length; i++)
+         {
+            var headerName = MenuClass.MY_MENUNAME[i][0];
+            var headerSprite = MenuClass.headerAdd[headerName];
+            if (headerName == null || headerSprite == null) {
+               continue;
+            }
+
+            if(MenuClass.MY_MENUNAME[i][3] == 0)
+            {
+               if(headerName == "Tool")
+               {
+                  headerSprite.x = Air_StageSize.menuRightEdge - (2 * headerTabWidth);
+               }
+               else if(headerName == "Escape")
+               {
+                  headerSprite.x = Air_StageSize.menuRightEdge - headerTabWidth;
+               }
+               else if(headerName == "Save")
+               {
+                  headerSprite.x = Air_StageSize.menuRightEdge - (3 * headerTabWidth);
+               }
+               else if(headerName == "StoryTool")
+               {
+                  headerSprite.x = Air_StageSize.menuRightEdge - headerTabWidth;
+                  headerSprite.visible = false;
+               }
+            }
+            else
+            {
+               if(MenuClass.MY_MENUNAME[i][3] == curHeaderGroup)
+               {
+                  curGroupIdx++;
+               }
+               else
+               {
+                  curGroupIdx = 0;
+               }
+
+               if(MenuClass.MY_MENUNAME[i][3] != 10)
+               {
+                  headerSprite.x = headerTabWidth * curGroupIdx + 127 + Air_StageSize.menuLeftEdge;
+               }
+               else if(headerName == "EasyTool")
+               {
+                  headerSprite.x = Air_StageSize.menuRightEdge - (2 * headerTabWidth);
+               }
+               else if(headerName == "EasySave")
+               {
+                  headerSprite.x = Air_StageSize.menuRightEdge - (3 * headerTabWidth);
+               }
+               else
+               {
+                  headerSprite.x = headerTabWidth * curGroupIdx + Air_StageSize.menuLeftEdge;
+               }
+            }
+            headerSprite.y = Air_StageSize.menuBottomEdge - headerTabHeight;
+            curHeaderGroup = MenuClass.MY_MENUNAME[i][3];
          }
       }
       

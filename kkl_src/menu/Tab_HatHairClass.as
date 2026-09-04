@@ -2,6 +2,7 @@ package menu
 {
    import flash.display.MovieClip;
    import flash.events.MouseEvent;
+   import undo.PropertyAction;
    
    public class Tab_HatHairClass
    {
@@ -47,6 +48,7 @@ package menu
          {
             _loc4_ = MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_meter"];
          }
+
          if(_loc4_ == "charaPlus" || _loc4_ == "systemPlus")
          {
             _loc2_ = MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_data"];
@@ -57,6 +59,17 @@ package menu
          {
             _loc5_ = targetMC.tabName;
          }
+
+         var newVal = int(!MenuClass.charaData[MenuClass._nowCharaNum][_loc5_]["_hair" + targetMC.num]);
+         var undoAction = new PropertyAction(
+            targetMC.headerName, targetMC.targetJ, "_hair" + targetMC.num,
+            true, (_loc4_ == "charaPlus"),
+            "tab", true
+         );
+         undoAction.recordPreviousValue(_loc3_);
+         undoAction.recordNewValue(newVal, _loc3_);
+         Main.undoTimeline.push(undoAction);
+
          new Tab_VC(targetMC.headerName,targetMC.targetJ,_loc5_);
          if(MenuClass._nowTargetMode == "All")
          {

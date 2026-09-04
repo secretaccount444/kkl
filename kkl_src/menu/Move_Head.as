@@ -45,16 +45,20 @@ package menu
                {
                   try
                   {
-                     this.charaAdd["HairEx" + _loc2_ + "_0"].rotation = _loc4_;
-                     this.charaAdd["HairEx" + _loc2_ + "_0"].x = _loc5_;
+                     if (this.charaAdd["HairEx" + _loc2_ + "_0"]) {
+                        this.charaAdd["HairEx" + _loc2_ + "_0"].rotation = _loc4_;
+                        this.charaAdd["HairEx" + _loc2_ + "_0"].x = _loc5_;
+                     }
                   }
                   catch(myError:Error)
                   {
                   }
                   try
                   {
-                     this.charaAdd["HairEx" + _loc2_ + "_1"].rotation = _loc4_;
-                     this.charaAdd["HairEx" + _loc2_ + "_1"].x = _loc5_;
+                     if (this.charaAdd["HairEx" + _loc2_ + "_1"]) {
+                        this.charaAdd["HairEx" + _loc2_ + "_1"].rotation = _loc4_;
+                        this.charaAdd["HairEx" + _loc2_ + "_1"].x = _loc5_;
+                     }
                   }
                   catch(myError:Error)
                   {
@@ -102,16 +106,20 @@ package menu
                } else {
                   try
                   {
-                     this.charaAdd["HairEx" + _loc2_ + "_0"].rotation = 0;
-                     this.charaAdd["HairEx" + _loc2_ + "_0"].x = 0;
+                     if (this.charaAdd["HairEx" + _loc2_ + "_0"]) {
+                        this.charaAdd["HairEx" + _loc2_ + "_0"].rotation = 0;
+                        this.charaAdd["HairEx" + _loc2_ + "_0"].x = 0;
+                     }
                   }
                   catch(myError:Error)
                   {
                   }
                   try
                   {
-                     this.charaAdd["HairEx" + _loc2_ + "_1"].rotation = 0;
-                     this.charaAdd["HairEx" + _loc2_ + "_1"].x = 0;
+                     if (this.charaAdd["HairEx" + _loc2_ + "_1"]) {
+                        this.charaAdd["HairEx" + _loc2_ + "_1"].rotation = 0;
+                        this.charaAdd["HairEx" + _loc2_ + "_1"].x = 0;
+                     }
                   }
                   catch(myError:Error)
                   {
@@ -127,16 +135,20 @@ package menu
             {
                try
                {
-                  this.charaAdd["Ribon" + _loc2_ + "_0"].rotation = _loc4_;
-                  this.charaAdd["Ribon" + _loc2_ + "_0"].x = _loc5_;
+                  if (this.charaAdd["Ribon" + _loc2_ + "_0"]) {
+                     this.charaAdd["Ribon" + _loc2_ + "_0"].rotation = _loc4_;
+                     this.charaAdd["Ribon" + _loc2_ + "_0"].x = _loc5_;
+                  }
                }
                catch(myError:Error)
                {
                }
                try
                {
-                  this.charaAdd["Ribon" + _loc2_ + "_1"].rotation = _loc4_;
-                  this.charaAdd["Ribon" + _loc2_ + "_1"].x = _loc5_;
+                  if (this.charaAdd["Ribon" + _loc2_ + "_1"]) {
+                     this.charaAdd["Ribon" + _loc2_ + "_1"].rotation = _loc4_;
+                     this.charaAdd["Ribon" + _loc2_ + "_1"].x = _loc5_;
+                  }
                }
                catch(myError:Error)
                {
@@ -151,13 +163,21 @@ package menu
             {
                if(this.charaData["Earring" + _loc2_]["_visible"][0] && Dress_data.EarringData[this.charaData["Earring" + _loc2_]["_menu"]]["rotation"])
                {
-                  if(_loc2_ == 0)
-                  {
-                     this.charaAdd.head["ear" + _loc2_].ear.Earring.Earring.rotation = _loc4_ * -1;
-                  }
-                  else
-                  {
-                     this.charaAdd.head["ear" + _loc2_].ear.Earring.Earring.rotation = _loc4_;
+                  var earBase = this.charaAdd.head["ear" + _loc2_];
+                  if (
+                     earBase &&
+                     earBase.ear &&
+                     earBase.ear.Earring &&
+                     earBase.ear.Earring.Earring
+                  ) {
+                     if(_loc2_ == 0)
+                     {
+                        this.charaAdd.head["ear" + _loc2_].ear.Earring.Earring.rotation = _loc4_ * -1;
+                     }
+                     else
+                     {
+                        this.charaAdd.head["ear" + _loc2_].ear.Earring.Earring.rotation = _loc4_;
+                     }
                   }
                }
             }

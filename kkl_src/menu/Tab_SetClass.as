@@ -128,6 +128,11 @@ package menu
                         }
                         new Tab_TextInClass(1,"RightHand",MenuClass.menuData["RightHand"]);
                      }
+                     else if(tabName == "MarkVary")
+                     {
+                        Huku_MarkSet.updateMarkVaryMenu();
+                        new Tab_TextInClass(1,"MarkVary",MenuClass.menuData["MarkVary"]);
+                     }
                      else if(tabName == "FreeHandItem")
                      {
                         n = Dress_data.menuCustom["FreeHandItem"].length - 1;
@@ -490,7 +495,7 @@ package menu
                         tabNamePlus = tabName;
                      }
                      this.menuNumFc(headerName,tabName,j);
-                     new Tab_TabNameCheck(tabName);
+                     Tab_TabNameCheck.lookup(tabName);
                      targetJ = Tab_TabNameCheck.targetJ;
                      new Tab_VDB(headerName,tabNamePlus,targetJ,"_visible",MenuClass._nowCharaNum);
                      if(Tab_VDB.dataBox["_visible"].length == 1)
@@ -687,6 +692,18 @@ package menu
                            new ColorChangeClass(MenuClass.tabMenuAdd["txtFieldAdd"].addBox0.bg,Tab_AddCostumOpen.openAr[MenuClass.systemData["txtFieldAdd" + menuNum3]["_add0"]][1]);
                            Tab_AddCostumOpen.deleteFc("txtFieldAdd");
                         }
+                        else if(headerName == "Mark")
+                        {
+                           menuNum3 = MenuClass.systemData["MarkPlus"]["_menu"];
+                           MenuClass.tabMenuAdd["MarkAdd"].addBox0.gotoAndStop(1);
+                           MenuClass.tabMenuAdd["MarkAdd"].addBox0.icon.scaleX = MenuClass.tabMenuAdd["MarkAdd"].addBox0.icon.scaleY = 1;
+                           MenuClass.tabMenuAdd["MarkAdd"].addBox0.icon.x = 29;
+
+                           var markAdd0Idx = MenuClass.charaData[MenuClass._nowCharaNum]["MarkAdd" + menuNum3]["_add0"];
+                           MenuClass.tabMenuAdd["MarkAdd"].addBox0.icon.icon.gotoAndStop(Tab_AddCostumOpenMark.openAr[markAdd0Idx][0]);
+                           new ColorChangeClass(MenuClass.tabMenuAdd["MarkAdd"].addBox0.bg,Tab_AddCostumOpenMark.openAr[markAdd0Idx][1]);
+                           Tab_AddCostumOpenMark.deleteFc("MarkPlus");
+                        }
                      }
                      catch(e:Error)
                      {
@@ -766,7 +783,7 @@ package menu
                {
                   if(MenuClass.tabMenuAdd[tabName].EasyExpert != undefined)
                   {
-                     new Tab_TabNameCheck(tabName);
+                     Tab_TabNameCheck.lookup(tabName);
                      EasyExpertJ = Tab_TabNameCheck.targetJ;
                      new Tab_VDB(headerName,tabName,EasyExpertJ,"_check",MenuClass._nowCharaNum);
                      if(Tab_VDB.dataBox["_check"])
@@ -966,6 +983,10 @@ package menu
                   {
                      if(MenuClass.tabData[headerName][j][2]["_menu"] == "chara" || MenuClass.tabData[headerName][j][2]["_menu"] == "charaPlus" || MenuClass.tabData[headerName][j][2]["_meter"] == "chara" || MenuClass.tabData[headerName][j][2]["_meter"] == "charaPlus")
                      {
+                        MenuClass.tabMenuAdd[tabName].depth.scaleY = 1;
+                        MenuClass.tabMenuAdd[tabName].depth.y = 2;
+                        MenuClass.tabMenuAdd[tabName].depth.transform.colorTransform = new ColorTransform();
+
                         if (
                            tabNamePlus.substring(0, 22) == "CharaLoadReversalDepth" &&
                            MenuClass.charaData[MenuClass._nowCharaNum][tabNamePlus.replace("ReversalDepth", "Add")]["_add0"] == 0 &&
@@ -983,6 +1004,19 @@ package menu
 
                            MenuClass.tabMenuAdd[tabName].depth.transform.colorTransform = prevCxForm;
                            MenuClass.tabMenuAdd[tabName].depth.gotoAndStop(2);
+                           
+                        } else if (tabNamePlus === "LeftArm2" || tabNamePlus == "RightArm2") {
+                           if (MenuClass.charaData[MenuClass._nowCharaNum][tabNamePlus]["_depth"] == 0) {
+                              MenuClass.tabMenuAdd[tabName].depth.gotoAndStop(1);
+                           } else if (MenuClass.charaData[MenuClass._nowCharaNum][tabNamePlus]["_depth"] == 1) {
+                              MenuClass.tabMenuAdd[tabName].depth.gotoAndStop(2);
+                           } else if (MenuClass.charaData[MenuClass._nowCharaNum][tabNamePlus]["_depth"] == 2) {
+                              MenuClass.tabMenuAdd[tabName].depth.gotoAndStop(3);
+                           } else if (MenuClass.charaData[MenuClass._nowCharaNum][tabNamePlus]["_depth"] == 3) {
+                              MenuClass.tabMenuAdd[tabName].depth.gotoAndStop(1);
+                              MenuClass.tabMenuAdd[tabName].depth.scaleY = -1;
+                              MenuClass.tabMenuAdd[tabName].depth.y = 30;
+                           }
                         } else {
                            MenuClass.tabMenuAdd[tabName].depth.transform.colorTransform = new ColorTransform();
                            MenuClass.tabMenuAdd[tabName].depth.gotoAndStop(MenuClass.charaData[MenuClass._nowCharaNum][tabNamePlus]["_depth"] + 1);

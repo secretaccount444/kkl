@@ -512,7 +512,7 @@ package menu
                      {
                         MenuClass.systemData["Story_Page"]["_menu"] += 1;
                      }
-                     new Tab_IEInOut("setIN",MenuClass.StoryTimeLineData[MenuClass.systemData["Story_Page"]["_menu"]][9],MenuClass._nowCharaNum);
+                     Tab_IEInOut.execute("setIN",MenuClass.StoryTimeLineData[MenuClass.systemData["Story_Page"]["_menu"]][9],MenuClass._nowCharaNum);
                      storyShortcutCheck = false;
                      MenuClass.clickCheck = false;
                      this.StoryPangeNum();
@@ -557,7 +557,7 @@ package menu
                      {
                         MenuClass.systemData["Story_Page"]["_menu"] = MenuClass.systemData["Story_Page"]["_menu"] - 1;
                      }
-                     new Tab_IEInOut("setIN",MenuClass.StoryTimeLineData[MenuClass.systemData["Story_Page"]["_menu"]][9],MenuClass._nowCharaNum);
+                     Tab_IEInOut.execute("setIN",MenuClass.StoryTimeLineData[MenuClass.systemData["Story_Page"]["_menu"]][9],MenuClass._nowCharaNum);
                      storyShortcutCheck = false;
                      MenuClass.clickCheck = false;
                      this.StoryPangeNum();
@@ -1113,7 +1113,7 @@ package menu
                {
                   try
                   {
-                     new Tab_TabNameCheck(MenuClass._nowTabName);
+                     Tab_TabNameCheck.lookup(MenuClass._nowTabName);
                      targetJ = Tab_TabNameCheck.targetJ;
                      if(MenuClass.tabData[MenuClass._nowHeaderName][targetJ][2]["_menu"] == "charaPlus" || MenuClass.tabData[MenuClass._nowHeaderName][targetJ][2]["_menu"] == "systemPlus")
                      {
@@ -1526,7 +1526,7 @@ package menu
             if(MenuClass.quickSaveData[this.quickTextNum - 4] != null)
             {
                MenuClass.clickCheck = true;
-               new Tab_IEInOut("textIN",MenuClass.quickSaveData[this.quickTextNum - 4],MenuClass._nowCharaNum);
+               Tab_IEInOut.execute("textIN",MenuClass.quickSaveData[this.quickTextNum - 4],MenuClass._nowCharaNum);
                if(MenuClass._nowHeaderName == "Story")
                {
                   new Tab_IESet("txtSave");
@@ -1924,8 +1924,8 @@ package menu
                _loc4_ = 0;
                while(_loc4_ <= 1)
                {
-                  MenuClass.charaAdd[_loc3_]["ashi" + _loc4_].thigh.thigh.eki.mouseChildren = param1;
-                  MenuClass.charaAdd[_loc3_]["ashi" + _loc4_].thigh.thigh.eki.buttonMode = param2;
+                  MenuClass.charaAdd[_loc3_]["ashi" + _loc4_].thigh.actual.thigh.eki.mouseChildren = param1;
+                  MenuClass.charaAdd[_loc3_]["ashi" + _loc4_].thigh.actual.thigh.eki.buttonMode = param2;
                   _loc4_++;
                }
             }

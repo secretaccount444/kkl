@@ -50,6 +50,14 @@ package menu
             {
                MenuClass.tabMenuAdd["FreeHukidashiBlend"].txt.text = "HARDLIGHT";
             }
+            else if(_loc2_ == 10)
+            {
+               MenuClass.tabMenuAdd["FreeHukidashiBlend"].txt.text = "ERASE";
+            }
+            else if(_loc2_ == 11)
+            {
+               MenuClass.tabMenuAdd["FreeHukidashiBlend"].txt.text = "ALPHA";
+            }
          }
          catch(myError:Error)
          {

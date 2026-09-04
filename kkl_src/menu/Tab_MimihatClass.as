@@ -2,6 +2,7 @@ package menu
 {
    import flash.display.MovieClip;
    import flash.events.MouseEvent;
+   import undo.PropertyAction;
    
    public class Tab_MimihatClass
    {
@@ -51,6 +52,7 @@ package menu
          {
             _loc4_ = MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_meter"];
          }
+
          if(_loc4_ == "charaPlus" || _loc4_ == "systemPlus")
          {
             _loc2_ = MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_data"];
@@ -61,9 +63,22 @@ package menu
          {
             _loc5_ = targetMC.tabName;
          }
+         
          new Tab_VC(targetMC.headerName,targetMC.targetJ,_loc5_);
          if(_loc4_ == "chara" || _loc4_ == "charaPlus")
          {
+            var undoAction = new PropertyAction(
+               targetMC.headerName, targetMC.targetJ, "_mimihat",
+               true, (_loc4_ == "charaPlus"),
+               "tab", true
+            );
+
+            var newVal = MenuClass.charaData[MenuClass._nowCharaNum][_loc5_]["_mimihat"];
+
+            undoAction.recordPreviousValue(_loc3_);
+            undoAction.recordNewValue(newVal, _loc3_);
+            Main.undoTimeline.push(undoAction);
+
             if(MenuClass._nowTargetMode == "All")
             {
                _loc6_ = 0;

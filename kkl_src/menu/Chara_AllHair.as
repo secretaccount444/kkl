@@ -44,7 +44,7 @@ package menu
          {
             if(MenuClass._nowTargetMode == "Select")
             {
-               new Tab_IEInOut("allHairSet",Chara_IEdata.AllHairSetData[_loc3_["AllHairSet"]["_menu"]][0],MenuClass._nowCharaNum);
+               Tab_IEInOut.execute("allHairSet",Chara_IEdata.AllHairSetData[_loc3_["AllHairSet"]["_menu"]][0],MenuClass._nowCharaNum);
             }
             else if(MenuClass._nowTargetMode == "SelectPlus")
             {
@@ -52,7 +52,7 @@ package menu
                {
                   if(MenuClass._nowSelectChara[param1])
                   {
-                     new Tab_IEInOut("allHairSet",Chara_IEdata.AllHairSetData[_loc3_["AllHairSet"]["_menu"]][0],param1);
+                     Tab_IEInOut.execute("allHairSet",Chara_IEdata.AllHairSetData[_loc3_["AllHairSet"]["_menu"]][0],param1);
                   }
                }
             }
@@ -60,7 +60,7 @@ package menu
             {
                if(_loc3_["SelectCharacter"]["_visible"][0])
                {
-                  new Tab_IEInOut("allHairSet",Chara_IEdata.AllHairSetData[_loc3_["AllHairSet"]["_menu"]][0],param1);
+                  Tab_IEInOut.execute("allHairSet",Chara_IEdata.AllHairSetData[_loc3_["AllHairSet"]["_menu"]][0],param1);
                }
             }
          }

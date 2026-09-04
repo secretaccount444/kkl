@@ -74,7 +74,7 @@ package menu
                   _loc4_ = 0;
                   while(_loc4_ <= 15)
                   {
-                     this.charaAdd["ashi" + _loc3_].thigh.thigh["SHitTest" + _loc4_].visible = false;
+                     this.charaAdd["ashi" + _loc3_].thigh.actual.thigh["SHitTest" + _loc4_].visible = false;
                      _loc4_++;
                   }
                }
@@ -168,7 +168,7 @@ package menu
                               _loc4_ = 0;
                               while(_loc4_ <= 12)
                               {
-                                 _loc11_ = this.charaAddSkirt["hit" + _loc14_]["hitTest" + (_loc7_ - 1) + "_" + _loc3_].hitTestObject(this.charaAdd["ashi" + _loc14_].thigh.thigh["SHitTest" + _loc4_]);
+                                 _loc11_ = this.charaAddSkirt["hit" + _loc14_]["hitTest" + (_loc7_ - 1) + "_" + _loc3_].hitTestObject(this.charaAdd["ashi" + _loc14_].thigh.actual.thigh["SHitTest" + _loc4_]);
                                  if(_loc11_)
                                  {
                                     _loc17_[_loc14_] = _loc3_ + 1;

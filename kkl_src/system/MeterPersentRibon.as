@@ -6,13 +6,11 @@ package system
    {
       
       public static var MeterPersentNum:Number;
-       
-      
-      public function MeterPersentRibon(param1:Number, param2:Number, param3:int, param4:String, param5:int)
+
+      public static function get(param1:Number, param2:Number, param3:int, param4:String, param5:int)
       {
          var _loc9_:Number = NaN;
-         super();
-         new Tab_TabNameCheck(param4);
+         Tab_TabNameCheck.lookup(param4);
          var _loc6_:String = Tab_TabNameCheck.headerName;
          var _loc7_:int = Tab_TabNameCheck.targetJ;
          var _loc8_:Number = param2 - param1;
@@ -40,6 +38,12 @@ package system
             _loc9_ = MenuClass.charaData[param3][param4 + param5]["_meter"] / _loc10_;
          }
          MeterPersentNum = param1 + _loc8_ * _loc9_;
+      }
+      
+      public function MeterPersentRibon(param1:Number, param2:Number, param3:int, param4:String, param5:int)
+      {
+         super();
+         get(param1, param2, param3, param4, param5);
       }
    }
 }

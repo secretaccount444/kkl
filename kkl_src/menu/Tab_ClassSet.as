@@ -1,11 +1,398 @@
 package menu
 {
    import flash.display.MovieClip;
+   import flash.geom.ColorTransform;
+   import flash.geom.Point;
    import flash.events.MouseEvent;
+   import system.MeterPersent;
    
    public class Tab_ClassSet
    {
-       
+      /* Icon bounds are:
+       *   X: -18.85 to 19.30
+       *   Y:  -8.00 to 25.80
+       *   (width 38.15, height 33.80)
+       */
+      public static var iconAdjustments: Object = {
+         "TinScaleX": {
+            "icon": "TinSize",
+            "rotation": -90,
+            "x": 31,
+            "y": 15,
+            "scaleX": 0.9,
+            "scaleY": -0.9
+         },
+         "TinScaleY": {
+            "icon": "TinSize"
+         },
+         "TinOffsetX": {
+            "icon": "CharaLoadX"
+         },
+         "TinOffsetY": {
+            "icon": "CharaLoadY"
+         },
+         "LeftUpperArmVisible": {
+            "icon": "LeftArm"
+         },
+         "RightUpperArmVisible": {
+            "icon": "RightArm"
+         },
+         "LeftArmVisible": {
+            "icon": "FreeHandScale"
+         },
+         "RightArmVisible": {
+            "icon": "FreeHandScale",
+            "scaleX": -1
+         },
+         "LeftHandVisible": {
+            "icon": "LeftHand"
+         },
+         "RightHandVisible": {
+            "icon": "RightHand"
+         },
+         "LeftHandFlip": {
+            "icon": "RightHand2"
+         },
+         "RightHandFlip": {
+            "icon": "LeftHand2"
+         },
+         "LeftArmFlip": {
+            "icon": "RightArm2"
+         },
+         "RightArmFlip": {
+            "icon": "LeftArm2"
+         },
+         "MarkVary": {
+            "icon": "RibonLine"
+         },
+         "EyebrowMoveHorizontalLeft": {
+            "icon": "MarkX",
+            "scaleX": -1
+         },
+         "EyebrowMoveHorizontalRight": {
+            "icon": "MarkX"
+         },
+         "EyebrowX": {
+            "icon": "EyebrowY",
+            "rotation": 90,
+            "x": 31,
+            "y": 15
+         },
+         "RibonFineX": {
+            "icon": "RibonX",
+            "scaleX": 0.85,
+            "scaleY": 0.85,
+            "x": (38.15 * 0.55),
+            "y": (33.80 * 0.20),
+            "tint": {
+               "amount": 0.33,
+               "rgb": [210, 114, 217]
+            }
+         },
+         "RibonFineY": {
+            "icon": "RibonY",
+            "scaleX": 0.85,
+            "scaleY": 0.85,
+            "x": (38.15 * 0.55),
+            "y": (33.80 * 0.20),
+            "tint": {
+               "amount": 0.33,
+               "rgb": [210, 114, 217]
+            }
+         },
+         "FreeRibonFineX": {
+            "icon": "FreeRibonX",
+            "scaleX": 0.85,
+            "scaleY": 0.85,
+            "x": (38.15 * 0.55),
+            "y": (33.80 * 0.20),
+            "tint": {
+               "amount": 0.33,
+               "rgb": [210, 114, 217]
+            }
+         },
+         "FreeRibonFineY": {
+            "icon": "FreeRibonY",
+            "scaleX": 0.85,
+            "scaleY": 0.85,
+            "x": (38.15 * 0.55),
+            "y": (33.80 * 0.20),
+            "tint": {
+               "amount": 0.33,
+               "rgb": [210, 114, 217]
+            }
+         },
+         "FreeRibonAlpha": {
+            "icon": "CharaLoadAlpha"
+         },
+         "BeltFineX": {
+            "icon": "BeltX",
+            "scaleX": 0.85,
+            "scaleY": 0.85,
+            "x": (38.15 * 0.55),
+            "y": (33.80 * 0.20),
+            "tint": {
+               "amount": 0.33,
+               "rgb": [210, 114, 217]
+            }
+         },
+         "BeltFineY": {
+            "icon": "BeltY",
+            "scaleX": 0.85,
+            "scaleY": 0.85,
+            "x": (38.15 * 0.55),
+            "y": (33.80 * 0.20),
+            "tint": {
+               "amount": 0.33,
+               "rgb": [210, 114, 217]
+            }
+         },
+         "FreeBeltFineX": {
+            "icon": "FreeBeltX",
+            "scaleX": 0.85,
+            "scaleY": 0.85,
+            "x": (38.15 * 0.55),
+            "y": (33.80 * 0.20),
+            "tint": {
+               "amount": 0.33,
+               "rgb": [210, 114, 217]
+            }
+         },
+         "FreeBeltFineY": {
+            "icon": "FreeBeltY",
+            "scaleX": 0.85,
+            "scaleY": 0.85,
+            "x": (38.15 * 0.55),
+            "y": (33.80 * 0.20),
+            "tint": {
+               "amount": 0.33,
+               "rgb": [210, 114, 217]
+            }
+         },
+         "FreeBeltAlpha": {
+            "icon": "CharaLoadAlpha"
+         },
+         "FreeHandFineX": {
+            "icon": "FreeHandX",
+            "scaleX": 0.85,
+            "scaleY": 0.85,
+            "x": (38.15 * 0.55),
+            "y": (33.80 * 0.20),
+            "tint": {
+               "amount": 0.33,
+               "rgb": [210, 114, 217]
+            }
+         },
+         "FreeHandFineY": {
+            "icon": "FreeHandY",
+            "scaleX": 0.85,
+            "scaleY": 0.85,
+            "x": (38.15 * 0.55),
+            "y": (33.80 * 0.20),
+            "tint": {
+               "amount": 0.33,
+               "rgb": [210, 114, 217]
+            }
+         },
+         "CharaLoadFineX": {
+            "icon": "CharaLoadX",
+            "scaleX": 0.85,
+            "scaleY": 0.85,
+            "x": (38.15 * 0.55),
+            "y": (33.80 * 0.20),
+            "tint": {
+               "amount": 0.33,
+               "rgb": [210, 114, 217]
+            }
+         },
+         "CharaLoadFineY": {
+            "icon": "CharaLoadY",
+            "scaleX": 0.85,
+            "scaleY": 0.85,
+            "x": (38.15 * 0.55),
+            "y": (33.80 * 0.20),
+            "tint": {
+               "amount": 0.33,
+               "rgb": [210, 114, 217]
+            }
+         },
+         "LoadFineX": {
+            "icon": "LoadX",
+            "scaleX": 0.85,
+            "scaleY": 0.85,
+            "x": (38.15 * 0.55),
+            "y": (33.80 * 0.20),
+            "tint": {
+               "amount": 0.33,
+               "rgb": [210, 114, 217]
+            }
+         },
+         "LoadFineY": {
+            "icon": "LoadY",
+            "scaleX": 0.85,
+            "scaleY": 0.85,
+            "x": (38.15 * 0.55),
+            "y": (33.80 * 0.20),
+            "tint": {
+               "amount": 0.33,
+               "rgb": [210, 114, 217]
+            }
+         },
+         "FreeChairFineX": {
+            "icon": "FreeChairX",
+            "scaleX": 0.85,
+            "scaleY": 0.85,
+            "x": (38.15 * 0.55),
+            "y": (33.80 * 0.20),
+            "tint": {
+               "amount": 0.33,
+               "rgb": [210, 114, 217]
+            }
+         },
+         "FreeChairFineY": {
+            "icon": "FreeChairY",
+            "scaleX": 0.85,
+            "scaleY": 0.85,
+            "x": (38.15 * 0.55),
+            "y": (33.80 * 0.20),
+            "tint": {
+               "amount": 0.33,
+               "rgb": [210, 114, 217]
+            }
+         },
+         "FreeChairAlpha": {
+            "icon": "CharaLoadAlpha"
+         },
+         "MenuScale": {
+            "icon": "FullScreen"
+         },
+         "MenuAlign": {
+            "icon": "HideIcon",
+            "rotation": 90,
+            "x": 31,
+            "y": 15
+         },
+         "LeftArmFreeRotation": {
+            "icon": "FreeHandPlus"
+         },
+         "RightArmFreeRotation": {
+            "icon": "FreeHandPlus",
+            "scaleX": -1,
+            "x": 24
+         },
+         "LeftThighRotation": {
+            "icon": "Ashi"
+         },
+         "LeftThighVisible": {
+            "icon": "Ashi"
+         },
+         "LeftThighOffsetX": {
+            "icon": "CharaLoadX"
+         },
+         "LeftThighOffsetY": {
+            "icon": "CharaLoadY"
+         },
+         "LeftThighScaleX": {
+            "icon": "CharaLoadScale"
+         },
+         "LeftThighScaleY": {
+            "icon": "CharaLoadScaleY"
+         },
+         "RightThighRotation": {
+            "icon": "Ashi2"
+         },
+         "RightThighVisible": {
+            "icon": "Ashi2"
+         },
+         "RightThighOffsetX": {
+            "icon": "CharaLoadX"
+         },
+         "RightThighOffsetY": {
+            "icon": "CharaLoadY"
+         },
+         "RightThighScaleX": {
+            "icon": "CharaLoadScale"
+         },
+         "RightThighScaleY": {
+            "icon": "CharaLoadScaleY"
+         },
+         "LeftLegRotation": {
+            "icon": "Tights"
+         },
+         "LeftLegVisible": {
+            "icon": "Tights"
+         },
+         "LeftLegOffsetX": {
+            "icon": "CharaLoadX"
+         },
+         "LeftLegOffsetY": {
+            "icon": "CharaLoadY"
+         },
+         "LeftLegScaleX": {
+            "icon": "CharaLoadScale"
+         },
+         "LeftLegScaleY": {
+            "icon": "CharaLoadScaleY"
+         },
+         "RightLegRotation": {
+            "icon": "Tights",
+            "scaleX": -1,
+            "x": 19
+         },
+         "RightLegVisible": {
+            "icon": "Tights",
+            "scaleX": -1,
+            "x": 19
+         },
+         "RightLegOffsetX": {
+            "icon": "CharaLoadX"
+         },
+         "RightLegOffsetY": {
+            "icon": "CharaLoadY"
+         },
+         "RightLegScaleX": {
+            "icon": "CharaLoadScale"
+         },
+         "RightLegScaleY": {
+            "icon": "CharaLoadScaleY"
+         },
+         "LeftFootRotation": {
+            "icon": "Socks0"
+         },
+         "LeftFootVisible": {
+            "icon": "Socks0"
+         },
+         "LeftFootOffsetX": {
+            "icon": "CharaLoadX"
+         },
+         "LeftFootOffsetY": {
+            "icon": "CharaLoadY"
+         },
+         "LeftFootScaleX": {
+            "icon": "CharaLoadScale"
+         },
+         "LeftFootScaleY": {
+            "icon": "CharaLoadScaleY"
+         },
+         "RightFootRotation": {
+            "icon": "Socks1"
+         },
+         "RightFootVisible": {
+            "icon": "Socks1"
+         },
+         "RightFootOffsetX": {
+            "icon": "CharaLoadX"
+         },
+         "RightFootOffsetY": {
+            "icon": "CharaLoadY"
+         },
+         "RightFootScaleX": {
+            "icon": "CharaLoadScale"
+         },
+         "RightFootScaleY": {
+            "icon": "CharaLoadScaleY"
+         }
+      };
       
       public function Tab_ClassSet(param1:String)
       {
@@ -29,6 +416,10 @@ package menu
             }
             _loc2_++;
          }
+
+         new MeterPersent(0.5, 1.0, "MenuScale", 0);
+         var menuScale = MeterPersent.MeterPersentNum;
+
          for(_loc7_ in MenuClass.tabData[param1])
          {
             _loc3_ = _loc7_ as int;
@@ -58,80 +449,130 @@ package menu
                   }
                   else if(MenuClass.tabMenuAdd[_loc6_].bg != undefined)
                   {
-                     new ColorChangeClass(MenuClass.tabMenuAdd[_loc6_].bg,MenuClass.MY_MENUNAME[_loc10_][1]);
+                     if (MenuClass.tabData[param1][_loc3_][2] && MenuClass.tabData[param1][_loc3_][2]["_overrideMenuColor"]) {
+                        new ColorChangeClass(MenuClass.tabMenuAdd[_loc6_].bg, MenuClass.tabData[param1][_loc3_][2]["_overrideMenuColor"]);
+                     } else {
+                        new ColorChangeClass(MenuClass.tabMenuAdd[_loc6_].bg, MenuClass.MY_MENUNAME[_loc10_][1]);
+                     }
                   }
                   try
                   {
-                     if(MenuClass.tabMenuAdd[_loc6_].icon != undefined)
+                     var iconSprite = MenuClass.tabMenuAdd[_loc6_].icon;
+
+                     if(iconSprite != undefined)
                      {
-                        MenuClass.tabMenuAdd[_loc6_].icon.rotation = 0;
-                        if (MenuClass.tabData[param1][_loc3_][0] == "RibonAlpha" || MenuClass.tabData[param1][_loc3_][0] == "BeltAlpha" || MenuClass.tabData[param1][_loc3_][0] == "HairExAlpha") {
-                           MenuClass.tabMenuAdd[_loc6_].icon.gotoAndStop("CharaLoadAlpha");
+                        var settingName = MenuClass.tabData[param1][_loc3_][0];
+
+                        iconSprite.rotation = 0;
+
+                        if (settingName in iconAdjustments) {
+                           var adjustments = iconAdjustments[settingName];
+
+                           iconSprite.gotoAndStop(adjustments["icon"]);
+                           
+                           if ("rotation" in adjustments) {
+                              iconSprite.rotation = adjustments["rotation"];
+                           }
+
+                           if ("x" in adjustments) {
+                              iconSprite.x = adjustments["x"];
+                           }
+
+                           if ("y" in adjustments) {
+                              iconSprite.y = adjustments["y"];
+                           }
+
+                           if ("scaleX" in adjustments) {
+                              iconSprite.scaleX = adjustments["scaleX"];
+                           }
+
+                           if ("scaleY" in adjustments) {
+                              iconSprite.scaleY = adjustments["scaleY"];
+                           }
+
+                           if ("tint" in adjustments) {
+                              var tintPct = adjustments["tint"]["amount"];
+                              var origPct = 1.0 - tintPct;
+                              var color = adjustments["tint"]["rgb"];
+
+                              iconSprite.transform.colorTransform = new ColorTransform(
+                                 origPct, origPct, origPct, 1.0,
+                                 color[0] * tintPct, color[1] * tintPct, color[2] * tintPct, 0
+                              );
+                           }
+
+                           var targetPoint = new Point()
+                        } else if (MenuClass.tabData[param1][_loc3_][0] == "RibonAlpha" || MenuClass.tabData[param1][_loc3_][0] == "BeltAlpha" || MenuClass.tabData[param1][_loc3_][0] == "HairExAlpha") {
+                           iconSprite.gotoAndStop("CharaLoadAlpha");
                         } else if (MenuClass.tabData[param1][_loc3_][0] == "LeftUpperArmScaleX") {
-                           MenuClass.tabMenuAdd[_loc6_].icon.gotoAndStop("HandWidth");
-                           MenuClass.tabMenuAdd[_loc6_].icon.scaleX = -1;
+                           iconSprite.gotoAndStop("HandWidth");
+                           iconSprite.scaleX = -1;
                         } else if (MenuClass.tabData[param1][_loc3_][0] == "RightUpperArmScaleX") {
-                           MenuClass.tabMenuAdd[_loc6_].icon.gotoAndStop("HandWidth");
+                           iconSprite.gotoAndStop("HandWidth");
                         } else if (MenuClass.tabData[param1][_loc3_][0] == "LeftUpperArmScaleY") {
-                           MenuClass.tabMenuAdd[_loc6_].icon.gotoAndStop("HandWidth");
-                           MenuClass.tabMenuAdd[_loc6_].icon.rotation = 90;
-                           MenuClass.tabMenuAdd[_loc6_].icon.x = 12;
-                           MenuClass.tabMenuAdd[_loc6_].icon.y = 15;
-                           MenuClass.tabMenuAdd[_loc6_].icon.scaleY = -1;
+                           iconSprite.gotoAndStop("HandWidth");
+                           iconSprite.rotation = 90;
+                           iconSprite.x = 12;
+                           iconSprite.y = 15;
+                           iconSprite.scaleY = -1;
                         } else if (MenuClass.tabData[param1][_loc3_][0] == "RightUpperArmScaleY") {
-                           MenuClass.tabMenuAdd[_loc6_].icon.gotoAndStop("HandWidth");
-                           MenuClass.tabMenuAdd[_loc6_].icon.rotation = 90;
-                           MenuClass.tabMenuAdd[_loc6_].icon.x = 31;
-                           MenuClass.tabMenuAdd[_loc6_].icon.y = 15;
+                           iconSprite.gotoAndStop("HandWidth");
+                           iconSprite.rotation = 90;
+                           iconSprite.x = 31;
+                           iconSprite.y = 15;
                         } else if (MenuClass.tabData[param1][_loc3_][0] == "LeftUpperArmOffsetX") {
-                           MenuClass.tabMenuAdd[_loc6_].icon.gotoAndStop("FreeHandX");
+                           iconSprite.gotoAndStop("FreeHandX");
                         } else if (MenuClass.tabData[param1][_loc3_][0] == "RightUpperArmOffsetX") {
-                           MenuClass.tabMenuAdd[_loc6_].icon.gotoAndStop("FreeHandX");
-                           MenuClass.tabMenuAdd[_loc6_].icon.scaleX = -1;
+                           iconSprite.gotoAndStop("FreeHandX");
+                           iconSprite.scaleX = -1;
                         } else if (MenuClass.tabData[param1][_loc3_][0] == "LeftUpperArmOffsetY") {
-                           MenuClass.tabMenuAdd[_loc6_].icon.gotoAndStop("FreeHandY");
+                           iconSprite.gotoAndStop("FreeHandY");
                         } else if (MenuClass.tabData[param1][_loc3_][0] == "RightUpperArmOffsetY") {
-                           MenuClass.tabMenuAdd[_loc6_].icon.gotoAndStop("FreeHandY");
-                           MenuClass.tabMenuAdd[_loc6_].icon.scaleX = -1;
+                           iconSprite.gotoAndStop("FreeHandY");
+                           iconSprite.scaleX = -1;
                         } else if (MenuClass.tabData[param1][_loc3_][0] == "LeftArmScaleX") {
-                           MenuClass.tabMenuAdd[_loc6_].icon.gotoAndStop("FreeHandScale");
-                           MenuClass.tabMenuAdd[_loc6_].icon.rotation = 90;
-                           MenuClass.tabMenuAdd[_loc6_].icon.x = 12;
-                           MenuClass.tabMenuAdd[_loc6_].icon.y = 15;
-                           MenuClass.tabMenuAdd[_loc6_].icon.scaleY = -1;
+                           iconSprite.gotoAndStop("FreeHandScale");
+                           iconSprite.rotation = 90;
+                           iconSprite.x = 12;
+                           iconSprite.y = 15;
+                           iconSprite.scaleY = -1;
                         } else if (MenuClass.tabData[param1][_loc3_][0] == "RightArmScaleX") {
-                           MenuClass.tabMenuAdd[_loc6_].icon.gotoAndStop("FreeHandScale");
-                           MenuClass.tabMenuAdd[_loc6_].icon.rotation = 90;
-                           MenuClass.tabMenuAdd[_loc6_].icon.x = 31;
-                           MenuClass.tabMenuAdd[_loc6_].icon.y = 15;
+                           iconSprite.gotoAndStop("FreeHandScale");
+                           iconSprite.rotation = 90;
+                           iconSprite.x = 31;
+                           iconSprite.y = 15;
                         } else if (MenuClass.tabData[param1][_loc3_][0] == "LeftArmScaleY") {
-                           MenuClass.tabMenuAdd[_loc6_].icon.gotoAndStop("FreeHandScale");
+                           iconSprite.gotoAndStop("FreeHandScale");
                         } else if (MenuClass.tabData[param1][_loc3_][0] == "RightArmScaleY") {
-                           MenuClass.tabMenuAdd[_loc6_].icon.gotoAndStop("FreeHandScale");
-                           MenuClass.tabMenuAdd[_loc6_].icon.scaleX = -1;
+                           iconSprite.gotoAndStop("FreeHandScale");
+                           iconSprite.scaleX = -1;
                         } else if (MenuClass.tabData[param1][_loc3_][0] == "LeftArmOffsetX" || MenuClass.tabData[param1][_loc3_][0] == "LeftHandOffsetX") {
-                           MenuClass.tabMenuAdd[_loc6_].icon.gotoAndStop("FreeHandX");
+                           iconSprite.gotoAndStop("FreeHandX");
                         } else if (MenuClass.tabData[param1][_loc3_][0] == "RightArmOffsetX" || MenuClass.tabData[param1][_loc3_][0] == "RightHandOffsetX") {
-                           MenuClass.tabMenuAdd[_loc6_].icon.gotoAndStop("FreeHandX");
-                           MenuClass.tabMenuAdd[_loc6_].icon.scaleX = -1;
+                           iconSprite.gotoAndStop("FreeHandX");
+                           iconSprite.scaleX = -1;
                         } else if (MenuClass.tabData[param1][_loc3_][0] == "LeftArmOffsetY" || MenuClass.tabData[param1][_loc3_][0] == "LeftHandOffsetY") {
-                           MenuClass.tabMenuAdd[_loc6_].icon.gotoAndStop("FreeHandY");
+                           iconSprite.gotoAndStop("FreeHandY");
                         } else if (MenuClass.tabData[param1][_loc3_][0] == "RightArmOffsetY" || MenuClass.tabData[param1][_loc3_][0] == "RightHandOffsetY") {
-                           MenuClass.tabMenuAdd[_loc6_].icon.gotoAndStop("FreeHandY");
-                           MenuClass.tabMenuAdd[_loc6_].icon.scaleX = -1;
+                           iconSprite.gotoAndStop("FreeHandY");
+                           iconSprite.scaleX = -1;
                         } else if (MenuClass.tabData[param1][_loc3_][0] == "LeftHandScaleX" || MenuClass.tabData[param1][_loc3_][0] == "LeftHandScaleY") {
-                           MenuClass.tabMenuAdd[_loc6_].icon.gotoAndStop("LeftHand");
+                           iconSprite.gotoAndStop("LeftHand");
                         } else if (MenuClass.tabData[param1][_loc3_][0] == "RightHandScaleX" || MenuClass.tabData[param1][_loc3_][0] == "RightHandScaleY") {
-                           MenuClass.tabMenuAdd[_loc6_].icon.gotoAndStop("RightHand");
+                           iconSprite.gotoAndStop("RightHand");
+                        } else if (MenuClass.tabData[param1][_loc3_][0] == "LeftShoulderVisible") {
+                           iconSprite.gotoAndStop("ShoulderWidth");
+                        } else if (MenuClass.tabData[param1][_loc3_][0] == "RightShoulderVisible") {
+                           iconSprite.gotoAndStop("ShoulderWidth");
                         } else {
-                           MenuClass.tabMenuAdd[_loc6_].icon.gotoAndStop(MenuClass.tabData[param1][_loc3_][0]);
+                           iconSprite.gotoAndStop(MenuClass.tabData[param1][_loc3_][0]);
                         }
                         
                         if(Main.r18Check)
                         {
-                           if(MenuClass.tabMenuAdd[_loc6_].icon.icon)
+                           if(iconSprite.icon)
                            {
-                              MenuClass.tabMenuAdd[_loc6_].icon.icon.gotoAndStop(2);
+                              iconSprite.icon.gotoAndStop(2);
                            }
                         }
                      }
@@ -474,11 +915,19 @@ package menu
                         Tab_CharaWindow.setFc("start");
                      }
                   }
+
+                  if(
+                     !(_loc6_ == "AllCharacterSet_Close" || _loc6_ == "CharacterSet_Close" || _loc6_ == "AllHukuSet_Close" || _loc6_ == "Close")
+                  ) {
+                     MenuClass.tabMenuAdd[_loc6_].scaleX = menuScale;
+                     MenuClass.tabMenuAdd[_loc6_].scaleY = menuScale;
+                  }
+
                   if(_loc3_ != 0)
                   {
                      if(MenuClass.tabData[param1][_loc3_][2]["_sort"] != MenuClass.tabData[param1][_loc3_ - 1][2]["_sort"])
                      {
-                        MenuClass.tabMenuAdd[_loc6_].x = 10;
+                        MenuClass.tabMenuAdd[_loc6_].x = Air_StageSize.menuLeftEdge + 10;
                      }
                      else
                      {
@@ -489,18 +938,68 @@ package menu
                   }
                   else
                   {
-                     MenuClass.tabMenuAdd[_loc6_].x = 10;
+                     MenuClass.tabMenuAdd[_loc6_].x = Air_StageSize.menuLeftEdge + 10;
                      _loc8_ = MenuClass.tabMenuAdd[_loc6_].width;
                      _loc9_ = MenuClass.tabMenuAdd[_loc6_].x;
                   }
                   if(_loc6_ == "AllCharacterSet_Close" || _loc6_ == "CharacterSet_Close" || _loc6_ == "AllHukuSet_Close" || _loc6_ == "Close")
                   {
-                     MenuClass.tabMenuAdd[_loc6_].x += 2;
+                     MenuClass.tabMenuAdd[_loc6_].x += 3 * menuScale;
                   }
                }
             }
          }
          new Tab_ClassSetY(param1);
+      }
+
+      public static function rescaleMenu(headerName:String) {
+         
+         new MeterPersent(0.5, 1.0, "MenuScale", 0);
+         var menuScale = MeterPersent.MeterPersentNum;
+         var prevTabX = 0;
+         var prevTabWidth = 0;
+
+         for(var key in MenuClass.tabData[headerName])
+         {
+            var tabIdx = key as int;
+            var tabName = MenuClass.tabData[headerName][tabIdx][0];
+            var tabSprite = MenuClass.tabData[headerName][tabIdx][1];
+
+            if (
+               !(tabName == "AllCharacterSet_Close" || tabName == "CharacterSet_Close" || tabName == "AllHukuSet_Close" || tabName == "Close")
+            ) {
+               tabSprite.scaleX = menuScale;
+               tabSprite.scaleY = menuScale;
+            } else {
+               Tab_CloseBtnClass.applyScale(tabName);
+            }
+
+            if(tabIdx != 0)
+            {
+               if(MenuClass.tabData[headerName][tabIdx][2]["_sort"] != MenuClass.tabData[headerName][tabIdx - 1][2]["_sort"])
+               {
+                  tabSprite.x = Air_StageSize.menuLeftEdge + 10;
+               }
+               else
+               {
+                  tabSprite.x = Math.floor(prevTabWidth + prevTabX - 2);
+               }
+               prevTabWidth = tabSprite.width;
+               prevTabX = tabSprite.x;
+            }
+            else
+            {
+               tabSprite.x = Air_StageSize.menuLeftEdge + 10;
+               prevTabWidth = tabSprite.width;
+               prevTabX = tabSprite.x;
+            }
+            if(tabName == "AllCharacterSet_Close" || tabName == "CharacterSet_Close" || tabName == "AllHukuSet_Close" || tabName == "Close")
+            {
+               tabSprite.x += 3 * menuScale;
+            }
+         }
+
+         new Tab_ClassSetY(headerName);
       }
 
       public static function searchInterceptTarget (start: MovieClip) : MovieClip {

@@ -41,11 +41,11 @@ package menu
                {
                   if(Dress_data.TightsData[_loc6_]["thighSen"] == 1)
                   {
-                     this.charaAdd["ashi" + _loc3_].thigh.thigh.sen.gotoAndStop(2);
+                     this.charaAdd["ashi" + _loc3_].thigh.actual.thigh.sen.gotoAndStop(2);
                   }
                   else if(Dress_data.TightsData[_loc6_]["thighSen"] == 2)
                   {
-                     this.charaAdd["ashi" + _loc3_].thigh.thigh.sen.gotoAndStop(4);
+                     this.charaAdd["ashi" + _loc3_].thigh.actual.thigh.sen.gotoAndStop(4);
                   }
                }
             }
@@ -59,7 +59,7 @@ package menu
                      {
                         if(Dress_data.BuraData[this.charaData["Bura"]["_menu"]]["separate"] > 0 && this.charaData["Bura"]["_separate"] == 1)
                         {
-                           this.charaAdd["ashi" + _loc3_].thigh.thigh.sen.gotoAndStop(1);
+                           this.charaAdd["ashi" + _loc3_].thigh.actual.thigh.sen.gotoAndStop(1);
                         }
                      }
                   }
@@ -70,13 +70,13 @@ package menu
                   {
                      if(this.charaData["Pantu"]["_visible"][0])
                      {
-                        if(this.charaAdd["ashi" + _loc3_].thigh.thigh.Pantu.Pantu)
+                        if(this.charaAdd["ashi" + _loc3_].thigh.actual.thigh.Pantu.Pantu)
                         {
-                           this.charaAdd["ashi" + _loc3_].thigh.thigh.sen.gotoAndStop(2);
+                           this.charaAdd["ashi" + _loc3_].thigh.actual.thigh.sen.gotoAndStop(2);
                         }
                         else
                         {
-                           this.charaAdd["ashi" + _loc3_].thigh.thigh.sen.gotoAndStop(3);
+                           this.charaAdd["ashi" + _loc3_].thigh.actual.thigh.sen.gotoAndStop(3);
                         }
                      }
                   }
@@ -91,11 +91,11 @@ package menu
                         {
                            if(Dress_data.BuraData[this.charaData["Bura"]["_menu"]]["Spantu"] >= 1)
                            {
-                              this.charaAdd["ashi" + _loc3_].thigh.thigh.sen.gotoAndStop(2);
+                              this.charaAdd["ashi" + _loc3_].thigh.actual.thigh.sen.gotoAndStop(2);
                            }
                            else
                            {
-                              this.charaAdd["ashi" + _loc3_].thigh.thigh.sen.gotoAndStop(3);
+                              this.charaAdd["ashi" + _loc3_].thigh.actual.thigh.sen.gotoAndStop(3);
                            }
                         }
                      }
@@ -106,20 +106,20 @@ package menu
                }
                else if(this.charaAdd.dou.dou_Skirt.Skirt.visible || this.charaAdd.dou.TsyatuOnePiece.visible || this.charaAdd.dou.YsyatuOnePiece.visible || this.charaAdd.dou.VestOnePiece.visible)
                {
-                  this.charaAdd["ashi" + _loc3_].thigh.thigh.sen.gotoAndStop(3);
+                  this.charaAdd["ashi" + _loc3_].thigh.actual.thigh.sen.gotoAndStop(3);
                }
                else
                {
-                  this.charaAdd["ashi" + _loc3_].thigh.thigh.sen.gotoAndStop(1);
+                  this.charaAdd["ashi" + _loc3_].thigh.actual.thigh.sen.gotoAndStop(1);
                }
             }
             else if(this.charaAdd.dou.dou_Skirt.Skirt.visible || this.charaAdd.dou.TsyatuOnePiece.visible || this.charaAdd.dou.YsyatuOnePiece.visible || this.charaAdd.dou.VestOnePiece.visible)
             {
-               this.charaAdd["ashi" + _loc3_].thigh.thigh.sen.gotoAndStop(3);
+               this.charaAdd["ashi" + _loc3_].thigh.actual.thigh.sen.gotoAndStop(3);
             }
             else
             {
-               this.charaAdd["ashi" + _loc3_].thigh.thigh.sen.gotoAndStop(1);
+               this.charaAdd["ashi" + _loc3_].thigh.actual.thigh.sen.gotoAndStop(1);
             }
             _loc3_++;
          }

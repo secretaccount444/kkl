@@ -369,7 +369,7 @@ package menu
                   MenuClass.charaAdd[i].removeChild(Chara_Class_Load.Tail_ar[i]);
                   MenuClass.charaAdd[i].head.removeChild(Chara_Class_Load.Megane_ar[i]);
                   new Chara_Class_Load(i);
-                  new SetCharaData(i,"move",3);
+                  SetCharaData.execute(i,"move",3);
                   new Chara_Class_First(i);
                }
             }

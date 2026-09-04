@@ -50,7 +50,7 @@ package menu
             MenuClass.menuData["Story_Page"] = MenuClass.StoryTimeLineData.length - 1;
             new Tab_TextInClass(1,"Story_Page",MenuClass.menuData["Story_Page"]);
             new Tab_SetClass();
-            new Tab_IEInOut(param2,MenuClass.StoryTimeLineData[MenuClass.systemData["Story_Page"]["_menu"]][9],MenuClass._nowCharaNum);
+            Tab_IEInOut.execute(param2,MenuClass.StoryTimeLineData[MenuClass.systemData["Story_Page"]["_menu"]][9],MenuClass._nowCharaNum);
          }
          catch(myError:Error)
          {

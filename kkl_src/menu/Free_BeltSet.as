@@ -183,8 +183,12 @@ package menu
             _loc5_.b = Math.tan(MeterPersentRibon.MeterPersentNum);
             Chara_Class.chara_m["Belt" + param1].belt0.transform.matrix = _loc5_;
             Chara_Class.chara_m["Belt" + param1].belt0.y = -400;
+
             new MeterPersentRibon(-506,1800,100,"FreeBeltX",param1);
             Chara_Class.chara_m["Belt" + param1].x = MeterPersentRibon.MeterPersentNum;
+            new MeterPersentRibon(-2.5,2.5,100,"FreeBeltFineX",param1);
+            Chara_Class.chara_m["Belt" + param1].x += MeterPersentRibon.MeterPersentNum;
+
             new MeterPersentRibon(360,0,100,"FreeBeltRotation",param1);
             _loc6_ = MeterPersentRibon.MeterPersentNum;
             Chara_Class.chara_m["Belt" + param1].belt0.rotation = _loc6_;
@@ -207,7 +211,11 @@ package menu
             }
             Chara_Class.chara_m["Belt" + param1].belt0.scaleX = _loc9_;
             Chara_Class.chara_m["Belt" + param1].belt0.scaleY = _loc10_;
+
             Chara_Class.chara_m["Belt" + param1].y = _loc7_;
+            new MeterPersentRibon(2.5,-2.5,100,"FreeBeltFineY",param1);
+            Chara_Class.chara_m["Belt" + param1].y += MeterPersentRibon.MeterPersentNum;
+
             if(MenuClass.systemData["FreeBelt" + param1]["_reversal"])
             {
                if(Chara_Class.chara_m["Belt" + param1].belt0.scaleX < 0)
@@ -220,6 +228,7 @@ package menu
                Chara_Class.chara_m["Belt" + param1].belt0.scaleX *= -1;
             }
             MenuClass.systemData["FreeBeltY" + param1]["_meter"] = Math.floor(MenuClass.systemData["FreeBeltY" + param1]["_meter"]);
+            MenuClass.systemData["FreeBeltFineY" + param1]["_meter"] = Math.floor(MenuClass.systemData["FreeBeltFineY" + param1]["_meter"]);
             MenuClass.DepthMeter[param1 + 108] = MenuClass.systemData["FreeBeltDepth" + param1]["_meter"];
             try
             {
@@ -229,6 +238,9 @@ package menu
             {
             }
             new Chara_ColorClass(0,"FreeBelt" + param1);
+
+            new MeterPersentRibon(0, 1, 100, "FreeBeltAlpha", param1);
+            Chara_Class.chara_m["Belt" + param1].belt0.alpha = MeterPersentRibon.MeterPersentNum;
          }
          else
          {

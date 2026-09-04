@@ -21,18 +21,18 @@ package menu
          super();
          var _loc2_:Object = MenuClass.charaAdd[param1];
          var _loc3_:Object = MenuClass.charaAddDepth[param1];
-         thighScaleX.push(_loc2_.ashi0.thigh.thigh.scaleX);
-         _loc2_.ashi0.thigh.gotoAndStop(2);
-         thighScaleX.push(_loc2_.ashi0.thigh.thigh.scaleX);
-         _loc2_.ashi0.thigh.gotoAndStop(1);
-         legSize.push(_loc2_.ashi0.leg.leg.scaleX);
-         _loc2_.ashi0.leg.gotoAndStop(2);
-         legSize.push(_loc2_.ashi0.leg.leg.scaleX);
-         _loc2_.ashi0.leg.gotoAndStop(1);
-         footSize.push(_loc2_.ashi0.foot.foot.scaleX);
-         _loc2_.ashi0.foot.gotoAndStop(2);
-         footSize.push(_loc2_.ashi0.foot.foot.scaleX);
-         _loc2_.ashi0.foot.gotoAndStop(1);
+         thighScaleX.push(_loc2_.ashi0.thigh.actual.thigh.scaleX);
+         _loc2_.ashi0.thigh.actual.gotoAndStop(2);
+         thighScaleX.push(_loc2_.ashi0.thigh.actual.thigh.scaleX);
+         _loc2_.ashi0.thigh.actual.gotoAndStop(1);
+         legSize.push(_loc2_.ashi0.leg.actual.leg.scaleX);
+         _loc2_.ashi0.leg.actual.gotoAndStop(2);
+         legSize.push(_loc2_.ashi0.leg.actual.leg.scaleX);
+         _loc2_.ashi0.leg.actual.gotoAndStop(1);
+         footSize.push(_loc2_.ashi0.foot.actual.foot.scaleX);
+         _loc2_.ashi0.foot.actual.gotoAndStop(2);
+         footSize.push(_loc2_.ashi0.foot.actual.foot.scaleX);
+         _loc2_.ashi0.foot.actual.gotoAndStop(1);
          muneSetChildIndex = _loc2_.mune.getChildIndex(_loc2_.mune.mune0);
          bodyDefault_y = {
             "ashi":_loc2_.ashi0.y,

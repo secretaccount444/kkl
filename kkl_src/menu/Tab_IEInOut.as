@@ -40,6 +40,8 @@ package menu
       public static var KutuOldData:Array = new Array();
       
       public static var renCheckText:Boolean = false;
+
+      private static var cloneBuf:ByteArray = new ByteArray();
        
       
       private var strPlus:String;
@@ -145,21 +147,11 @@ package menu
       private var addNameFirst1:String;
       
       private var addNameLast1:String;
-      
+
+      private var cloned:Object;
+
       public function Tab_IEInOut(param1:String, param2:String, param3:int)
       {
-         var bbb:Array = null;
-         var charaVisibleCheck:Boolean = false;
-         var timeLineCheck:Boolean = false;
-         var aaa:Array = null;
-         var CharaLoadCheck:Boolean = false;
-         var IENameNextCheck:Boolean = false;
-         var IENameNext:String = null;
-         var swfColorStr:String = null;
-         var txtData:String = null;
-         var flag:String = param1;
-         var DataTxt:String = param2;
-         var CharaNum:int = param3;
          this.INArray = new Array();
          this.INArray0 = new Array();
          this.INArray1 = new Array();
@@ -178,15 +170,49 @@ package menu
          };
          kobitoCheck2 = false;
          this.storyLoadCheck = false;
-         this.charaNum = CharaNum;
-         this.Flag = flag;
-         this.dataTxt = DataTxt;
+         this.charaNum = param3;
+         this.Flag = param1;
+         this.dataTxt = param2;
          this.charaData = MenuClass.charaData[this.charaNum];
          this.DressCharaData = Dress_data.DressCharaData[this.charaNum];
          this.dataVersion = 0;
+         this.cloned = {};
+      }
+
+      public static function execute(param1:String, param2:String, param3:int)
+      {
+         var inst = new Tab_IEInOut(param1, param2, param3);
+         inst.exec();
+      }
+      
+      private function ensureCloned(character: int) {
+         if (this.Flag == "IN" && !this.cloned[character]) {
+            // trace("IEInOut: cloning character " + character);
+            MenuClass.charaOldData[character] = this.clone(MenuClass.charaData[character]);
+            this.cloned[character] = true;
+         }
+      }
+
+      public function exec()
+      {
+         var bbb:Array = null;
+         var charaVisibleCheck:Boolean = false;
+         var timeLineCheck:Boolean = false;
+         var aaa:Array = null;
+         var CharaLoadCheck:Boolean = false;
+         var IENameNextCheck:Boolean = false;
+         var IENameNext:String = null;
+         var swfColorStr:String = null;
+         var txtData:String = null;
          if(this.Flag == "IN" || this.Flag == "setIN" || this.Flag == "firstIN" || this.Flag == "textIN" || this.Flag == "hairSet" || this.Flag == "allHairSet" || this.Flag == "allFaceSet" || this.Flag == "allBodySet" || this.Flag == "resetIN")
          {
-            MenuClass.charaOldData = this.clone(MenuClass.charaData);
+            Main.undoTimeline.reset();
+            if (this.Flag != "IN") {
+               MenuClass.charaOldData = this.clone(MenuClass.charaData);
+            } else {
+               MenuClass.charaOldData = [];
+            }
+
             MenuClass.systemOldData = this.clone(MenuClass.systemData);
             this.textArray = new Array();
             this.textArray2 = new Array();
@@ -251,8 +277,12 @@ package menu
                   this.s = 0;
                   while(this.s <= MenuClass._characterNum)
                   {
+                     if (this.Flag == "IN" && !MenuClass.charaData[this.s]["SelectCharacter"]["_visible"][0]) {
+                        ++this.s;
+                        continue;
+                     }
                      MenuClass.charaData[this.s]["SelectCharacter"]["_visible"][0] = false;
-                     new SetCharaData(this.s,"first",0);
+                     SetCharaData.execute(this.s,"first",0);
                      ++this.s;
                   }
                }
@@ -273,13 +303,13 @@ package menu
                {
                   if(this.INArray0[0].length != 0)
                   {
-
+                     // trace("IEInOut: single import");
                      this.fcIn(0);
                   }
                }
                else if(this.INArray0[0] != "")
                {
-
+                  // trace("IEInOut: single import (old)");
                   this.fcIn_old(0);
                }
             }
@@ -339,9 +369,14 @@ package menu
                            {
                               if(this.INArray0[this.s] == 0)
                               {
+                                 var prevVisible = MenuClass.charaData[this.s]["SelectCharacter"]["_visible"][0];
                                  MenuClass.charaData[this.s]["SelectCharacter"]["_visible"][0] = false;
                                  if(this.Flag == "firstIN")
                                  {
+                                    // trace("IEInOut: hiding character " + this.s + " via ALL code (firstIN)");
+                                    this.ensureCloned(this.s);
+                                    MenuClass.charaOldData[this.s]["SelectCharacter"]["_visible"][0] = prevVisible;
+
                                     aaa = Chara_IECharadata.IEdata[this.s].split("**");
                                     this.dataVersion = aaa[0];
                                     aaa.shift();
@@ -352,8 +387,14 @@ package menu
                                  }
                                  else
                                  {
-                                    new SetCharaData(this.s,"first",0);
+                                    if (this.Flag != "IN" || prevVisible) {
+                                       // trace("IEInOut: hiding character " + this.s + " via ALL code");
+                                       this.ensureCloned(this.s);
+                                       MenuClass.charaOldData[this.s]["SelectCharacter"]["_visible"][0] = prevVisible;
+                                       SetCharaData.execute(this.s,"first",0);
+                                    }
                                  }
+
                                  if(MenuClass._nowCharaNum == MenuClass._characterNum)
                                  {
                                     new Tab_CloseSelectMove();
@@ -368,25 +409,28 @@ package menu
                               }
                               else
                               {
-
+                                 // trace("IEInOut: importing data for character " + this.s + " via ALL code");
                                  this.dataVersion = this.motodataVersion;
                                  this.firstVisible = true;
                                  this.fcIn(this.s);
                               }
                            }
-
-
                         }
                      }
                      else
                      {
+                        // trace("IEInOut: importing data for character " + this.s + " (old)");
                         this.fcIn_old(this.s);
                      }
                   }
                   else
                   {
-                     MenuClass.charaData[this.s]["SelectCharacter"]["_visible"][0] = false;
-                     new SetCharaData(this.s,"first",0);
+                     if (this.Flag != "IN" || MenuClass.charaData[this.s]["SelectCharacter"]["_visible"][0]) {
+                        // trace("IEInOut: resetting character " + this.s + "?");
+                        this.ensureCloned(this.s);
+                        MenuClass.charaData[this.s]["SelectCharacter"]["_visible"][0] = false;
+                        SetCharaData.execute(this.s,"first",0);
+                     }
                   }
                   ++this.s;
                }
@@ -398,8 +442,7 @@ package menu
                MenuClass.firstLoadEmotionCount = 1;
             }
 
-
-            MenuClass.menuCustomResetNum = this.clone(Dress_data.menuCustomNum);
+            // MenuClass.menuCustomResetNum = this.clone(Dress_data.menuCustomNum);
             MenuClass.StoryBackupData = null;
             MenuClass.charaOldData = null;
             MenuClass.systemOldData = null;
@@ -614,6 +657,9 @@ package menu
                ++this.i;
             }
             this.strPlus = this.strPlus.substring(0,this.strPlus.length - 1);
+            if (Main.version >= 107) {
+               this.strPlus += "_fv" + Main.minor_version + "." + Main.alpha_version;
+            }
             if(CharaLoadCheck)
             {
                this.k = 0;
@@ -651,47 +697,47 @@ package menu
          }
          else if(this.Flag == "FreeHand")
          {
-            this.fcSystemOut(29);
+            this.fcSystemOut(30);
          }
          else if(this.Flag == "FreeRibon")
          {
-            this.fcSystemOut(30);
+            this.fcSystemOut(31);
          }
          else if(this.Flag == "FreeBelt")
          {
-            this.fcSystemOut(31);
+            this.fcSystemOut(32);
          }
          else if(this.Flag == "FreeChair")
          {
-            this.fcSystemOut(32);
+            this.fcSystemOut(33);
          }
          else if(this.Flag == "FreeFlag")
          {
-            this.fcSystemOut(33);
+            this.fcSystemOut(34);
          }
          else if(this.Flag == "FreeHukidashi")
          {
-            this.fcSystemOut(34);
+            this.fcSystemOut(35);
          }
          else if(this.Flag == "Background")
          {
-            this.fcSystemOut(35);
+            this.fcSystemOut(36);
          }
          else if(this.Flag == "txt")
          {
-            this.fcSystemOut(36);
+            this.fcSystemOut(37);
          }
          else if(this.Flag == "Loadmenu")
          {
-            this.fcSystemOut(37);
+            this.fcSystemOut(38);
          }
          else if(this.Flag == "SystemOption")
          {
-            this.fcSystemOut(38);
+            this.fcSystemOut(39);
          }
          else if(this.Flag == "Tool")
          {
-            this.fcSystemOut(39);
+            this.fcSystemOut(40);
          }
          else if(this.Flag == "OUTText")
          {
@@ -743,7 +789,20 @@ package menu
                if(MenuClass._nowWindowName == "tabExportWindow")
                {
                   MenuClass.tabMenuAdd["tabExportWindow"].myTa.text = dataStr;
-                  MenuClass.TxtCountArea.num1.text = "Number of words : " + MenuClass.tabMenuAdd["tabExportWindow"].myTa.length;
+
+                  /* Is this really necessary? Could just use dataStr.length here */
+                  var tmp = new ByteArray();
+                  tmp.writeUTFBytes(dataStr);
+
+                  var dataLen = tmp.length;
+                  if (dataLen < 1000) {
+                     MenuClass.TxtCountArea.num1.text = "Size: " + dataLen + " B";
+                  } else if (dataLen < 1000000) {
+                     MenuClass.TxtCountArea.num1.text = "Size: " + (dataLen / 1000).toFixed(2) + " KB";
+                  } else {
+                     // Highly unlikely, but...
+                     MenuClass.TxtCountArea.num1.text = "Size: " + (dataLen / 1000000).toFixed(2) + " MB";
+                  }
                }
                if((MenuClass._nowTargetMode == "Select" || MenuClass._nowTargetMode == "SelectPlus") && this.Flag == "OUTLast")
                {
@@ -758,7 +817,7 @@ package menu
                }
             }
          }
-      }
+      } 
       
       private function fcSystemOut(param1:int) : void
       {
@@ -992,7 +1051,7 @@ package menu
                   {
                      this.visibleCheck(this.IEtabName,"_",MenuClass.systemData);
                   }
-                  else if (this.IEName == "cc" || this.IEName == "cd" || this.IEName == "ce")
+                  else if (this.IEName == "cc" || this.IEName == "cd" || this.IEName == "ce" || this.IEName == "cf" || this.IEName == "cg" || this.IEName == "ch")
                   {
                      ++this.j;
                      continue;
@@ -1029,7 +1088,7 @@ package menu
                {
                   this.visibleCheck(this.IEtabName,".",MenuClass.systemData);
                }
-               else if (this.IEName == "cc" || this.IEName == "cd" || this.IEName == "ce")
+               else if (this.IEName == "cc" || this.IEName == "cd" || this.IEName == "ce" || this.IEName == "cf" || this.IEName == "cg" || this.IEName == "ch")
                {
                   ++this.j;
                   continue;
@@ -1068,7 +1127,14 @@ package menu
          }
          else
          {
-            dataStr = dataStr + "#/]" + this.strPlus;
+            if (Main.version >= 107) {
+               dataStr = dataStr + "#/]fv" + Main.minor_version + "." + Main.alpha_version;
+               if (this.strPlus.length > 0) {
+                  dataStr = dataStr + "_" + this.strPlus;
+               }
+            } else {
+               dataStr = dataStr + "#/]" + this.strPlus;
+            }
             systemOutCheck = true;
          }
       }
@@ -1086,10 +1152,12 @@ package menu
          INNameCharaAr = new Array();
          if(this.selectMode)
          {
+            this.ensureCloned(s);
             MenuClass.charaData[s]["SelectCharacter"]["_visible"][0] = true;
          }
          else
          {
+            this.ensureCloned(this.charaNum);
             MenuClass.charaData[this.charaNum]["SelectCharacter"]["_visible"][0] = true;
          }
          this.INArray = new Array();
@@ -1100,6 +1168,7 @@ package menu
             this.DressCharaData = Dress_data.DressCharaData[s];
             this.charaNum = s;
          }
+         this.ensureCloned(this.charaNum);
          var itemBeforeCheck:Array = new Array(0,0);
          var itemBeforeHandType:Array = new Array(0,0);
          var itemCheck:Array = new Array(0,0);
@@ -1165,6 +1234,8 @@ package menu
          EyeOptionCheck = false;
          this.i = 0;
 
+         MenuClass.charaData[this.charaNum]["SourceVersion"]["_minor"] = 0;
+         MenuClass.charaData[this.charaNum]["SourceVersion"]["_alpha"] = 0;
 
          while(this.i <= this.n)
          {
@@ -1278,17 +1349,24 @@ package menu
             }
             else
             {
-
-
                if(this.IENameFirst == "s" && this.dataVersion == 80 && this.INArray2[this.IEName].length == 17)
                {
                   sliceData = this.INArray2[this.IEName].slice(0,9);
                   sliceData2 = this.INArray2[this.IEName].slice(10,17);
                   this.INArray2[this.IEName] = sliceData.concat(sliceData2);
                }
+
+               if (!(this.IEName in Tab_IEData1.IEData) && this.Flag == "IN") {
+                  trace("skipping unknown import data: " + this.IEName);
+                  ++this.i;
+                  continue;
+               }
+
                this.IETopTabName = Tab_IEData1.IEData[this.IEName][0][0];
                this.m = Tab_IEData1.IEData[this.IEName].length - 1;
                this.j = 0;
+
+               var prevMenu = {};
 
                while(this.j <= this.m)
                {
@@ -1328,6 +1406,11 @@ package menu
                      this.IEtabName = Tab_IEData1.IEData[this.IEName][this.j][0];
                      this.IEtabParameter = Tab_IEData1.IEData[this.IEName][this.j][1];
                      INNameCharaAr.push(this.IEtabName);
+
+                     if (("_menu" in this.charaData[this.IEtabName]) && !(this.IEtabName in prevMenu)) {
+                        prevMenu[this.IEtabName] = this.charaData[this.IEtabName]["_menu"];
+                     }
+
                      if(this.IETopTabName != "Xmove" || this.selectMode || this.allSelectOneMode)
                      {
                         if(this.IENameFirst == "m" && IENameNextCheck)
@@ -1425,7 +1508,23 @@ package menu
                               this.charaData[this.IETopTabName]["_visible"][0] = false;
                            }
                         }
-                        else if(this.IEtabParameter == "_visible" && this.IEtabName == "EmotionMouth")
+                        else if (this.IEtabParameter == "_visible" && (
+                           this.IEtabName == "EmotionMouth" ||
+                           this.IEtabName == "LeftShoulderVisible" ||
+                           this.IEtabName == "RightShoulderVisible" ||
+                           this.IEtabName == "LeftUpperArmVisible" ||
+                           this.IEtabName == "RightUpperArmVisible" ||
+                           this.IEtabName == "LeftArmVisible" ||
+                           this.IEtabName == "RightArmVisible" ||
+                           this.IEtabName == "LeftHandVisible" ||
+                           this.IEtabName == "RightHandVisible" ||
+                           this.IEtabName == "LeftThighVisible" ||
+                           this.IEtabName == "RightThighVisible" ||
+                           this.IEtabName == "LeftLegVisible" ||
+                           this.IEtabName == "RightLegVisible" ||
+                           this.IEtabName == "LeftFootVisible" ||
+                           this.IEtabName == "RightFootVisible"
+                        ))
                         {
                            this.q = this.charaData[this.IEtabName]["_visible"].length - 1;
                            this.r = 0;
@@ -1552,7 +1651,9 @@ package menu
 
                               try
                               {
-                                 this.charaData[this.IEtabName]["_menu"] = MenuClass.charaMotoData[s][this.IEtabName]["_menu"];
+                                 // trace("read from CharaMotoData[" + this.IEtabName + "][\"_menu\"]");
+                                 this.charaData[this.IEtabName]["_menu"] = prevMenu[this.IEtabName];
+                                 // this.charaData[this.IEtabName]["_menu"] = MenuClass.charaMotoData[s][this.IEtabName]["_menu"];
                               }
                               catch(myError:Error)
                               {
@@ -1561,7 +1662,7 @@ package menu
                            }
                            else if(this.INArray2[this.IEName][this.j] == undefined)
                            {
-
+                              // trace("clone: " + this.IEtabName + " " + this.IEtabParameter);
                               this.charaData[this.IEtabName][this.IEtabParameter] = this.clone(MenuClass.charaDefoData[this.charaNum][this.IEtabName][this.IEtabParameter]);
                            }
                            else if(this.IEtabParameter == "_swfColor")
@@ -1699,7 +1800,7 @@ package menu
                {
                   try
                   {
-                     new SetCharaData(this.charaNum,"move",1);
+                     SetCharaData.execute(this.charaNum,"move",1);
                   }
                   catch(myError:Error)
                   {
@@ -1707,15 +1808,15 @@ package menu
                }
                else if(this.Flag == "allFaceSet")
                {
-                  new SetCharaData(this.charaNum,"allFaceSet",0);
+                  SetCharaData.execute(this.charaNum,"allFaceSet",0);
                }
                else if(this.Flag == "allBodySet")
                {
-                  new SetCharaData(this.charaNum,"allBodySet",0);
+                  SetCharaData.execute(this.charaNum,"allBodySet",0);
                }
                else
                {
-                  new SetCharaData(this.charaNum,"move",0);
+                  SetCharaData.execute(this.charaNum,"move",0);
                }
                if(this.charaData["SelectCharacter"]["_visible"][0])
                {
@@ -1726,8 +1827,9 @@ package menu
 
             if(MenuClass._nowHeaderName != "Story" && MenuClass._nowHeaderName != "Character" && MenuClass._nowHeaderName != "AllCharacterSet" && MenuClass._nowHeaderName != "CharacterSet" && MenuClass._nowHeaderName != "AllHukuSet" && !MenuClass.StoryMode && Main.allCharaLoadFlag)
             {
-               MenuClass.charaMotoData[s] = this.clone(MenuClass.charaData[s]);
-               Dress_data.DressCharaMotoData[s] = this.clone(this.DressCharaData);
+               // trace("clone: charaMotoData / DressCharaMotoData");
+               // MenuClass.charaMotoData[s] = this.clone(MenuClass.charaData[s]);
+               // Dress_data.DressCharaMotoData[s] = this.clone(this.DressCharaData);
             }
          }
          else
@@ -1820,6 +1922,8 @@ package menu
          {
             this.systemArray.push("z00");
          }
+         MenuClass.systemData["SourceVersion"]["_minor"] = 0;
+         MenuClass.systemData["SourceVersion"]["_alpha"] = 0;
          try
          {
             this.INArray = new Array();
@@ -1856,6 +1960,13 @@ package menu
                   this.IENameLast = this.IEName.substring(1,2);
                }
                this.INArray2[this.IEName] = this.str.split(".");
+               
+               if (!(this.IEName in Tab_IEData1.IEData) && this.Flag == "IN") {
+                  trace("skipping unknown import data: " + this.IEName);
+                  ++this.i;
+                  continue;
+               }
+
                this.IETopTabName = Tab_IEData1.IEData[this.IEName][0][0];
                SaveUpdateTabNameSystem.push(this.IETopTabName);
                if(this.IEName == "u0" || this.IEName == "u1" || this.IEName == "u2" || this.IEName == "u3" || this.IEName == "u4" || this.IEName == "u5" || this.IEName == "u6" || this.IEName == "u7" || this.IEName == "u8" || this.IEName == "u9")
@@ -2342,11 +2453,13 @@ package menu
          var s:int = param1;
          if(this.firstRead == 1 && s != 0)
          {
+            this.ensureCloned(s);
             MenuClass._nowCharaNum = 0;
             MenuClass.charaData[s]["SelectCharacter"]["_visible"][0] = false;
          }
          else if(this.firstRead != 2)
          {
+            this.ensureCloned(MenuClass._nowCharaNum);
             MenuClass.charaData[MenuClass._nowCharaNum]["SelectCharacter"]["_visible"][0] = true;
          }
          this.INArray = new Array();
@@ -2358,6 +2471,7 @@ package menu
             this.DressCharaData = Dress_data.DressCharaData[s];
             this.charaNum = s;
          }
+         this.ensureCloned(this.charaNum);
          this.INArray1 = this.INArray0[s].split("!");
          this.INArray1.shift();
          this.n = this.INArray1.length - 1;
@@ -2601,12 +2715,12 @@ package menu
             {
                MenuClass.charaAddDepth[s].visible = true;
             }
-            new SetCharaData(this.charaNum,"move",0);
+            SetCharaData.execute(this.charaNum,"move",0);
          }
-         MenuClass.charaMotoData = this.clone(MenuClass.charaData);
-         Dress_data.DressCharaMotoData[s] = this.clone(this.DressCharaData);
+         // MenuClass.charaMotoData = this.clone(MenuClass.charaData);
+         // Dress_data.DressCharaMotoData[s] = this.clone(this.DressCharaData);
          MenuClass.systemMotoData = this.clone(MenuClass.systemData);
-         MenuClass.menuCustomResetNum = this.clone(Dress_data.menuCustomNum);
+         // MenuClass.menuCustomResetNum = this.clone(Dress_data.menuCustomNum);
       }
       
       private function reversalCheck(param1:String, param2:String, param3:Object) : void
@@ -2641,12 +2755,17 @@ package menu
          this.strPlus = this.strPlus + _loc6_ + param2;
       }
       
-      private function clone(param1:Object) : *
+      private function clone(param1:*) : *
       {
-         var _loc2_:ByteArray = new ByteArray();
-         _loc2_.writeObject(param1);
-         _loc2_.position = 0;
-         return _loc2_.readObject();
+         if (typeof param1 !== "object") {
+            return param1;
+         }
+
+         // var _loc2_:ByteArray = new ByteArray();
+         cloneBuf.position = 0;
+         cloneBuf.writeObject(param1);
+         cloneBuf.position = 0;
+         return cloneBuf.readObject();
       }
    }
 }

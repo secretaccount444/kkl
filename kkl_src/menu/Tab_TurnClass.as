@@ -2,6 +2,7 @@ package menu
 {
    import flash.display.MovieClip;
    import flash.events.MouseEvent;
+   import undo.PropertyAction;
    
    public class Tab_TurnClass
    {
@@ -35,9 +36,11 @@ package menu
          var _loc4_:String = null;
          var _loc5_:String = null;
          var _loc6_:int = 0;
+
          targetMC = param1.currentTarget as MovieClip;
          targetMC.addEventListener(MouseEvent.MOUSE_UP,MouseUp);
          Main.stageVar.addEventListener(MouseEvent.MOUSE_UP,MouseUp);
+
          if(MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_menu"])
          {
             _loc4_ = MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_menu"];
@@ -46,6 +49,7 @@ package menu
          {
             _loc4_ = MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_meter"];
          }
+
          if(_loc4_ == "charaPlus" || _loc4_ == "systemPlus")
          {
             _loc2_ = MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_data"];
@@ -56,7 +60,21 @@ package menu
          {
             _loc5_ = targetMC.tabName;
          }
+
+         var undoAction = new PropertyAction(
+            targetMC.headerName, targetMC.targetJ, "_turn",
+            (_loc4_ == "chara" || _loc4_ == "charaPlus"),
+            (_loc4_ == "systemPlus" || _loc4_ == "charaPlus"),
+            "tab", true
+         );
+         undoAction.recordPreviousValue(_loc3_);
+
          new Tab_VC(targetMC.headerName,targetMC.targetJ,_loc5_);
+         
+         var newVal = int(!MenuClass.charaData[MenuClass._nowCharaNum][_loc5_]["_turn"]);
+         undoAction.recordNewValue(newVal, _loc3_);
+         Main.undoTimeline.push(undoAction);
+
          if(MenuClass._nowTargetMode == "All")
          {
             MenuClass.charaData[MenuClass._nowCharaNum][_loc5_]["_turn"] = int(!MenuClass.charaData[MenuClass._nowCharaNum][_loc5_]["_turn"]);

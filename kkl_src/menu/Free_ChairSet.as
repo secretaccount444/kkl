@@ -90,6 +90,11 @@ package menu
                new MeterPersentRibon(-406,1700,100,"FreeChairX",param1);
                Chara_Class.chara_m["Chair" + param1].x = MeterPersentRibon.MeterPersentNum;
                Chara_Class.chara_m["ChairBack" + param1].x = MeterPersentRibon.MeterPersentNum;
+
+               new MeterPersentRibon(-2.5,2.5,100,"FreeChairFineX",param1);
+               Chara_Class.chara_m["Chair" + param1].x += MeterPersentRibon.MeterPersentNum;
+               Chara_Class.chara_m["ChairBack" + param1].x += MeterPersentRibon.MeterPersentNum;
+
                new MeterPersentRibon(360,0,100,"FreeChairRotation",param1);
                _loc6_ = MeterPersentRibon.MeterPersentNum;
                Chara_Class.chara_m["Chair" + param1].rotation = _loc6_;
@@ -112,8 +117,14 @@ package menu
                }
                Chara_Class.chara_m["Chair" + param1].scaleY = MeterPersentRibon.MeterPersentNum;
                Chara_Class.chara_m["ChairBack" + param1].scaleY = MeterPersentRibon.MeterPersentNum;
+
                Chara_Class.chara_m["Chair" + param1].y = _loc7_;
                Chara_Class.chara_m["ChairBack" + param1].y = _loc7_;
+
+               new MeterPersentRibon(2.5,-2.5,100,"FreeChairFineY",param1);
+               Chara_Class.chara_m["Chair" + param1].y += MeterPersentRibon.MeterPersentNum;
+               Chara_Class.chara_m["ChairBack" + param1].y += MeterPersentRibon.MeterPersentNum;
+
                _loc9_ = MenuClass.systemData["FreeChairDepth" + param1]["_meter"];
                MenuClass.DepthMeter[param1 + 504] = _loc9_;
                try
@@ -387,6 +398,10 @@ package menu
                {
                }
                new Chara_ColorClass(0,"FreeChair" + param1);
+               
+               new MeterPersentRibon(0, 1, 100, "FreeChairAlpha", param1);
+               Chara_Class.chara_m["Chair" + param1].alpha = MeterPersentRibon.MeterPersentNum;
+               Chara_Class.chara_m["ChairBack" + param1].alpha = MeterPersentRibon.MeterPersentNum;
             }
             else
             {

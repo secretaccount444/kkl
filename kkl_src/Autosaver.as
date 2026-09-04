@@ -65,12 +65,22 @@ package {
 
                 var out_stream: FileStream = new FileStream();
                 out_stream.open(outFile, "write");
+
+                var prevExportFilters = {};
+                for (var idx in MenuClass.exportCheck) {
+                    prevExportFilters[idx] = MenuClass.exportCheck[idx];
+                    MenuClass.exportCheck[idx] = true;
+                }
                 
                 new Tab_IESet("txtSave");
                 exported_code = Tab_TextSaveBtn.txtSaveData;
                 
                 out_stream.writeUTFBytes(exported_code);
                 out_stream.close();
+
+                for (var idx in MenuClass.exportCheck) {
+                    MenuClass.exportCheck[idx] = prevExportFilters[idx];
+                }
             } catch(err: Error) {
                 Main.logError(err, "in doAutosave");
                 return false;

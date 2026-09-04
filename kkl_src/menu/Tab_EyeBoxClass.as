@@ -2,6 +2,7 @@ package menu
 {
    import flash.display.MovieClip;
    import flash.events.MouseEvent;
+   import undo.VisibilityAction;
    
    public class Tab_EyeBoxClass
    {
@@ -34,17 +35,55 @@ package menu
          MenuClass._nowTabName = param1.currentTarget.tabName;
          new Stage_MoveCheckClass();
          var _loc3_:String = MenuClass.tabData[param1.currentTarget.headerName][param1.currentTarget.targetJ][2]["_data"];
+
+         var tabName = param1.currentTarget.tabName;
+         var headerName = param1.currentTarget.headerName;
+         var targetJ = param1.currentTarget.targetJ;
+         var visType = MenuClass.tabData[headerName][targetJ][2]["_visible"];
+         var hasSlots = false;
+         var slotIndexedVisibility = false;
+         var curSelectedSlot = 0;
+
          if(MenuClass.tabData[param1.currentTarget.headerName][param1.currentTarget.targetJ][2]["_menu"] == "charaPlus" || MenuClass.tabData[param1.currentTarget.headerName][param1.currentTarget.targetJ][2]["_menu"] == "systemPlus")
          {
             _loc4_ = param1.currentTarget.tabName + MenuClass.systemData[_loc3_]["_menu"];
+            hasSlots = true;
          }
          else
          {
             _loc4_ = param1.currentTarget.tabName;
+            if (visType == "system" || visType == "systemPlus") {
+               hasSlots = MenuClass.systemData[tabName]["_visible"].length > 1;
+            } else {
+               hasSlots = MenuClass.charaData[MenuClass._nowCharaNum][tabName]["_visible"].length > 1;
+            }
+            slotIndexedVisibility = hasSlots;
          }
+
+         if (visType == "SelectCharacter") {
+            hasSlots = false;
+            slotIndexedVisibility = false;
+         }
+
+         if(MenuClass.tabData[headerName][targetJ][2]["_menu"] == "chara" || MenuClass.tabData[headerName][targetJ][2]["_menu"] == "charaPlus")
+         {
+            curSelectedSlot = MenuClass.charaData[MenuClass._nowCharaNum][_loc4_]["_menu"];
+         }
+         else if(MenuClass.tabData[headerName][targetJ][2]["_menu"] == "system" || MenuClass.tabData[headerName][targetJ][2]["_menu"] == "systemPlus")
+         {
+            curSelectedSlot = MenuClass.systemData[_loc4_]["_menu"];
+         }
+         
+         var undoAction = new VisibilityAction(headerName, targetJ, hasSlots, slotIndexedVisibility);
+         undoAction.recordPreviousValue(curSelectedSlot);
+
          new Tab_VC(param1.currentTarget.headerName,param1.currentTarget.targetJ,_loc4_);
+
          if(MenuClass.tabData[param1.currentTarget.headerName][param1.currentTarget.targetJ][2]["_visible"] == "chara" || MenuClass.tabData[param1.currentTarget.headerName][param1.currentTarget.targetJ][2]["_visible"] == "charaPlus")
          {
+            var prevVisible = MenuClass.charaData[MenuClass._nowCharaNum][_loc4_]["_visible"][Tab_VC.menuNum];
+            undoAction.recordNewValue(!prevVisible, curSelectedSlot);
+
             if(MenuClass._nowTargetMode == "All")
             {
                _loc5_ = MenuClass.charaData[MenuClass._nowCharaNum][_loc4_]["_visible"][Tab_VC.menuNum];
@@ -105,12 +144,16 @@ package menu
          {
             if(Tab_FileReference.loadCheck)
             {
+               undoAction.recordNewValue(!MenuClass.systemData[_loc4_]["_visible"][Tab_VC.menuNum], curSelectedSlot);
                MenuClass.systemData[_loc4_]["_visible"][Tab_VC.menuNum] = !MenuClass.systemData[_loc4_]["_visible"][Tab_VC.menuNum];
                new SetClass(MenuClass._nowCharaNum,param1.currentTarget.tabName,"tab");
             }
          }
          else if(MenuClass.tabData[param1.currentTarget.headerName][param1.currentTarget.targetJ][2]["_visible"] == "SelectCharacter")
          {
+            var prevVisible = MenuClass.charaData[MenuClass._nowCharaNum]["SelectCharacter"]["_visible"][0];
+            undoAction.recordNewValue(!prevVisible, 0);
+
             if(MenuClass._nowTargetMode == "All")
             {
                _loc5_ = MenuClass.charaData[MenuClass._nowCharaNum]["SelectCharacter"]["_visible"][0];
@@ -163,6 +206,9 @@ package menu
             }
             new Chara_SelectClass("open");
          }
+
+         Main.undoTimeline.push(undoAction);
+
          new Tab_SetClass();
       }
       

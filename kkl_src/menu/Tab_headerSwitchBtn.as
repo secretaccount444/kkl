@@ -26,6 +26,7 @@ package menu
       public static function MouseDown(param1:MouseEvent) : void
       {
          MenuClass.hederSwitchCheck = !MenuClass.hederSwitchCheck;
+         HeaderbtnClass.layoutHeaderButtons();
          new Tab_headerSwitchSet();
          if(!MenuClass.hederSwitchCheck)
          {

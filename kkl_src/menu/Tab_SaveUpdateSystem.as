@@ -246,6 +246,25 @@ package menu
                _loc4_++;
             }
          }
+         if (param2 <= 105) {
+            if (param1 == "FreeRibon" || param1 == "FreeBelt" || param1 == "FreeChair" || param1 == "urlLoad" || param1 == "FreeHand") {
+               var baseName = param1;
+               if (param1 == "urlLoad") {
+                  baseName = "Load";
+               }
+
+               for (var i = 0; i < 99; i++) {
+                  if(MenuClass.systemData[baseName + "Plus"]["_visible"][i])
+                  {
+                     MenuClass.systemData[baseName + "FineX" + i]["_meter"] = 50;
+                     MenuClass.systemData[baseName + "FineY" + i]["_meter"] = 50;
+                     if (baseName == "FreeBelt" || baseName == "FreeChair" || baseName == "FreeRibon") {
+                        MenuClass.systemData[baseName + "Alpha" + i]["_meter"] = 100;
+                     }
+                  }
+               }
+            }
+         }
       }
    }
 }

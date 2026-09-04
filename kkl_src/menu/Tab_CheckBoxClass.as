@@ -2,6 +2,7 @@ package menu
 {
    import flash.display.MovieClip;
    import flash.events.MouseEvent;
+   import undo.PropertyAction;
    
    public class Tab_CheckBoxClass
    {
@@ -32,8 +33,29 @@ package menu
          var _loc3_:String = null;
          MenuClass._nowTabName = param1.currentTarget.tabName;
          new Stage_MoveCheckClass();
+
+         var headerName = param1.currentTarget.headerName;
+         var targetJ = param1.currentTarget.targetJ;
+         var tabName = param1.currentTarget.tabName;
+         var checkType = MenuClass.tabData[param1.currentTarget.headerName][param1.currentTarget.targetJ][2]["_check"];
+         var undoAction: PropertyAction = null;
+
+         if (headerName != "Tool" && headerName != "SystemOption") {
+            undoAction = new PropertyAction(
+               headerName, targetJ, "_check",
+               checkType == "chara",
+               checkType == "systemPlus"
+            );
+         }
+
          if(MenuClass.tabData[param1.currentTarget.headerName][param1.currentTarget.targetJ][2]["_check"] == "chara")
          {
+            var prevChecked = MenuClass.charaData[MenuClass._nowCharaNum][param1.currentTarget.tabName]["_check"];
+            if (undoAction) {
+               undoAction.recordPreviousValue(0);
+               undoAction.recordNewValue(!prevChecked, 0);
+            }
+
             MenuClass.charaData[MenuClass._nowCharaNum][param1.currentTarget.tabName]["_check"] = !MenuClass.charaData[MenuClass._nowCharaNum][param1.currentTarget.tabName]["_check"];
             if(MenuClass._nowTargetMode == "All")
             {
@@ -65,15 +87,34 @@ package menu
          }
          else if(MenuClass.tabData[param1.currentTarget.headerName][param1.currentTarget.targetJ][2]["_check"] == "system")
          {
+            var prevChecked = MenuClass.systemData[param1.currentTarget.tabName]["_check"];
+            if (undoAction) {
+               undoAction.recordPreviousValue(0);
+               undoAction.recordNewValue(!prevChecked, 0);
+            }
+
             MenuClass.systemData[param1.currentTarget.tabName]["_check"] = !MenuClass.systemData[param1.currentTarget.tabName]["_check"];
             new SetClass(MenuClass._nowCharaNum,param1.currentTarget.tabName,"tab");
          }
          else if(MenuClass.tabData[param1.currentTarget.headerName][param1.currentTarget.targetJ][2]["_check"] == "systemPlus")
          {
             _loc3_ = MenuClass.tabData[param1.currentTarget.headerName][param1.currentTarget.targetJ][2]["_data"];
+
+            var selectedSlot = MenuClass.systemData[_loc3_]["_menu"];
+            var prevChecked = MenuClass.systemData[param1.currentTarget.tabName + selectedSlot]["_check"];
+            if (undoAction) {
+               undoAction.recordPreviousValue(selectedSlot);
+               undoAction.recordNewValue(!prevChecked, selectedSlot);
+            }
+            
             MenuClass.systemData[param1.currentTarget.tabName + MenuClass.systemData[_loc3_]["_menu"]]["_check"] = !MenuClass.systemData[param1.currentTarget.tabName + MenuClass.systemData[_loc3_]["_menu"]]["_check"];
             new SetClass(MenuClass._nowCharaNum,param1.currentTarget.tabName,"tab");
          }
+
+         if (undoAction) {
+            Main.undoTimeline.push(undoAction);
+         }
+
          new Tab_SetClass();
       }
    }

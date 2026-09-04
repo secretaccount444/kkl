@@ -92,7 +92,13 @@ package menu
             }
             _loc5_++;
          }
-         _loc2_.peni.scaleY = _loc17_;
+
+         if (_loc4_["TinSizeAuto"]["_check"]) {
+            _loc2_.peni.scaleY = _loc17_;
+         } else {
+            _loc2_.peni.scaleY = 1.0;
+         }
+
          _loc2_.dou.y = SizeDataClass.bodyDefault_y["dou"] + _loc21_;
          _loc5_ = 0;
          while(_loc5_ <= Main.hukusuuNum)
@@ -107,7 +113,14 @@ package menu
             }
             _loc5_++;
          }
-         _loc2_.peni.y = SizeDataClass.bodyDefault_y["dou"] + _loc21_;
+
+         if (_loc4_["TinSizeAuto"]["_check"]) {
+            _loc2_.peni.y = SizeDataClass.bodyDefault_y["dou"] + _loc21_;
+         } else {
+            _loc2_.peni.y = 0;
+         }
+
+
          new MeterPersent(25,-25,"douHeight",param1);
          var _loc22_:Number = MeterPersent.MeterPersentNum + _loc9_;
          _loc2_.mune.y = SizeDataClass.bodyDefault_y["mune"] + _loc22_;
@@ -195,8 +208,8 @@ package menu
             _loc2_["handm1_" + _loc5_].y = SizeDataClass.bodyDefault_y["hand"] + _loc27_ + _loc22_;
             new MeterPersent(Move_DataClass.AshiFrameData[_loc28_]["_ashiY_Y"],Move_DataClass.AshiFrameData[_loc28_]["_ashiY_H"],"AshiHeight",param1);
             _loc2_["ashi" + _loc5_].y = SizeDataClass.bodyDefault_y["ashi"] + _loc23_ + MeterPersent.MeterPersentNum + _loc24_;
-            _loc2_["ashi" + _loc5_].shiri.shiri.y = _loc25_;
-            _loc2_["ashi" + _loc5_].shiri.shiri.x = _loc26_;
+            _loc2_["ashi" + _loc5_].shiri.actual.shiri.y = _loc25_;
+            _loc2_["ashi" + _loc5_].shiri.actual.shiri.x = _loc26_;
             new MeterPersent(Move_DataClass.AshiFrameData[_loc28_]["douH_Y"] / 10,Move_DataClass.AshiFrameData[_loc28_]["douH_H"] / 10,"douHeight",param1);
             if(_loc5_ == 0)
             {

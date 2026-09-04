@@ -6,7 +6,6 @@ package parameter
    
    public class ColorMake
    {
-      
       public static var colorStr:Array = new Array();
       public static var cache: Object = {};
 
@@ -29,6 +28,7 @@ package parameter
             Color_data.pict_bd.draw(Color_data.checkColor);
 
             var cacheArr = new Array();
+            colorStr = new Array();
 
             _loc2_ = 0;
             while(_loc2_ <= 8)

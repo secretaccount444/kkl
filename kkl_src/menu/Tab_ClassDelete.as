@@ -72,6 +72,10 @@ package menu
                         {
                            Tab_AddCostumOpen.deleteFc("txtFieldAdd");
                         }
+                        else if(param1 == "Mark")
+                        {
+                           Tab_AddCostumOpenMark.deleteFc("MarkPlus");
+                        }
                      }
                      catch(e:Error)
                      {

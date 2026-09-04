@@ -77,7 +77,7 @@ package menu
          ++this.enterCount;
          if(this.enterCount == 1)
          {
-            new Tab_IEInOut("setIN",MenuClass.StoryTimeLineData[MenuClass.systemData["Story_Page"]["_menu"]][9],MenuClass._nowCharaNum);
+            Tab_IEInOut.execute("setIN",MenuClass.StoryTimeLineData[MenuClass.systemData["Story_Page"]["_menu"]][9],MenuClass._nowCharaNum);
             this.storyLoadFlag = false;
             Main.mainWindow.removeEventListener(Event.ENTER_FRAME,this.EnterFrame);
          }

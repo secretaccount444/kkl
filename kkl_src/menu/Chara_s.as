@@ -36,8 +36,10 @@ package menu
             this.charaData["s"]["_hidaPlay"] = 0;
             this.charaData["s"]["_hidaCount"] = 0;
          }
+
          var _loc4_:int = this.charaData["s"]["_menu"];
          var _loc5_:Array = new Array(Move_DataClass.AshiFrameData[this.charaData["Ashi"]["_menu"]]["depth"],Move_DataClass.AshiFrameData[this.charaData["Ashi2"]["_menu"]]["depth"]);
+
          if(param2 == "huku")
          {
             if(Math.floor(Math.random() * 7) == 0 && this.charaAdd.dou.dou_shitaHuku.s.tare.currentFrame == 1 && this.charaData["s"]["_sClick"] >= 50)
@@ -55,13 +57,14 @@ package menu
                }
             }
          }
+
          if(this.charaAdd.dou.dou_shitaHuku.s.eki.currentFrame <= 20 && _loc3_ <= 20)
          {
             this.charaAdd.dou.dou_shitaHuku.s.eki.gotoAndStop(_loc3_);
             try
             {
-               this.charaAdd["ashi" + 1].thigh.thigh.eki.gotoAndStop(_loc3_);
-               this.charaAdd["ashi" + 0].thigh.thigh.eki.gotoAndStop(_loc3_ + 20);
+               this.charaAdd["ashi" + 1].thigh.actual.thigh.eki.gotoAndStop(_loc3_);
+               this.charaAdd["ashi" + 0].thigh.actual.thigh.eki.gotoAndStop(_loc3_ + 20);
             }
             catch(myError:Error)
             {
@@ -72,13 +75,14 @@ package menu
             this.charaAdd.dou.dou_shitaHuku.s.eki.gotoAndStop(20);
             try
             {
-               this.charaAdd["ashi" + 1].thigh.thigh.eki.gotoAndStop(20);
-               this.charaAdd["ashi" + 0].thigh.thigh.eki.gotoAndStop(40);
+               this.charaAdd["ashi" + 1].thigh.actual.thigh.eki.gotoAndStop(20);
+               this.charaAdd["ashi" + 0].thigh.actual.thigh.eki.gotoAndStop(40);
             }
             catch(myError:Error)
             {
             }
          }
+
          this.charaAdd.dou.dou_shitaHuku.s.gotoAndStop(Dress_data.SujiData[_loc4_]["type"]);
          this.charaAdd.dou.dou_shitaHuku.s.b_s_clear.s_btn0.mouseChildren = false;
          this.charaAdd.dou.dou_shitaHuku.s.b_s_clear.s_btn1.mouseChildren = false;
@@ -88,6 +92,7 @@ package menu
          this.charaAdd.dou.dou_shitaHuku.s.b_s_clear.s_btn2.buttonMode = true;
          var _loc6_:int = this.charaAdd.getChildIndex(this.charaAdd.vibrator_swap0);
          var _loc7_:int = this.charaAdd.getChildIndex(this.charaAdd.vibrator);
+
          if(_loc5_[0] >= 1 && _loc5_[1] >= 1)
          {
             if(_loc5_[0] == 2 && _loc5_[1] == 2)
@@ -99,8 +104,15 @@ package menu
                this.charaAdd.dou.dou_shitaHuku.s.maskMc.gotoAndStop(2);
                this.charaAdd.dou.dou_shitaHuku.s.sen.gotoAndStop(2);
                this.charaAdd.mosaic.y = SizeDataClass.bodyDefault_y["mosaic"] + Dress_data.SujiData[this.charaData["s"]["_menu"]]["_y"];
-               this.charaAdd.dou.dou_shitaHuku.peni.y = -28;
-               this.charaAdd.peni.peni.y = -28;
+
+               if (this.charaData["TinSizeAuto"]["_check"]) {
+                  this.charaAdd.dou.dou_shitaHuku.peni.y = -28;
+                  this.charaAdd.peni.peni.y = -28;
+               } else {
+                  this.charaAdd.dou.dou_shitaHuku.peni.y = 0;
+                  this.charaAdd.peni.peni.y = 0;
+               }
+
                try
                {
                   this.charaAdd.vibrator.senMc.y = this.charaAdd.vibrator.maskMc.y = -325 + Dress_data.SujiData[this.charaData["s"]["_menu"]]["_vibrator"];
@@ -127,8 +139,13 @@ package menu
                this.charaAdd.dou.dou_shitaHuku.s.maskMc.gotoAndStop(2);
                this.charaAdd.dou.dou_shitaHuku.s.sen.gotoAndStop(2);
                this.charaAdd.mosaic.y = SizeDataClass.bodyDefault_y["mosaic"] - 6 + Dress_data.SujiData[this.charaData["s"]["_menu"]]["_y"];
-               this.charaAdd.dou.dou_shitaHuku.peni.y = -40;
-               this.charaAdd.peni.peni.y = -40;
+               if (this.charaData["TinSizeAuto"]["_check"]) {
+                  this.charaAdd.dou.dou_shitaHuku.peni.y = -40;
+                  this.charaAdd.peni.peni.y = -40;
+               } else {
+                  this.charaAdd.dou.dou_shitaHuku.peni.y = 0;
+                  this.charaAdd.peni.peni.y = 0;
+               }
                try
                {
                   this.charaAdd.vibrator.senMc.y = this.charaAdd.vibrator.maskMc.y = -330 + Dress_data.SujiData[this.charaData["s"]["_menu"]]["_vibrator"];
@@ -156,8 +173,13 @@ package menu
             this.charaAdd.dou.dou_shitaHuku.s.maskMc.gotoAndStop(2);
             this.charaAdd.dou.dou_shitaHuku.s.sen.gotoAndStop(2);
             this.charaAdd.mosaic.y = SizeDataClass.bodyDefault_y["mosaic"] - 4 + Dress_data.SujiData[this.charaData["s"]["_menu"]]["_y"];
-            this.charaAdd.dou.dou_shitaHuku.peni.y = -36;
-            this.charaAdd.peni.peni.y = -36;
+            if (this.charaData["TinSizeAuto"]["_check"]) {
+               this.charaAdd.dou.dou_shitaHuku.peni.y = -36;
+               this.charaAdd.peni.peni.y = -36;
+            } else {
+               this.charaAdd.dou.dou_shitaHuku.peni.y = 0;
+               this.charaAdd.peni.peni.y = 0;
+            }
             try
             {
                this.charaAdd.vibrator.senMc.y = this.charaAdd.vibrator.maskMc.y = -328 + Dress_data.SujiData[this.charaData["s"]["_menu"]]["_vibrator"];
@@ -185,8 +207,13 @@ package menu
             this.charaAdd.dou.dou_shitaHuku.s.maskMc.gotoAndStop(1);
             this.charaAdd.dou.dou_shitaHuku.s.sen.gotoAndStop(1);
             this.charaAdd.mosaic.y = SizeDataClass.bodyDefault_y["mosaic"];
-            this.charaAdd.dou.dou_shitaHuku.peni.y = -8;
-            this.charaAdd.peni.peni.y = -8;
+            if (this.charaData["TinSizeAuto"]["_check"]) {
+               this.charaAdd.dou.dou_shitaHuku.peni.y = -8;
+               this.charaAdd.peni.peni.y = -8;
+            } else {
+               this.charaAdd.dou.dou_shitaHuku.peni.y = 0;
+               this.charaAdd.peni.peni.y = 0;
+            }
             try
             {
                this.charaAdd.vibrator.senMc.y = this.charaAdd.vibrator.maskMc.y = -333 + Dress_data.SujiData[this.charaData["s"]["_menu"]]["_vibrator"];
@@ -201,6 +228,7 @@ package menu
             {
             }
          }
+
          if(Main.r18Check)
          {
             this.charaData["s"]["_visible"][0] = false;
@@ -209,13 +237,14 @@ package menu
             this.charaAdd.dou.dou_shitaHuku.s.eki.visible = false;
             try
             {
-               this.charaAdd["ashi" + 0].thigh.thigh.eki.visible = false;
-               this.charaAdd["ashi" + 1].thigh.thigh.eki.visible = false;
+               this.charaAdd["ashi" + 0].thigh.actual.thigh.eki.visible = false;
+               this.charaAdd["ashi" + 1].thigh.actual.thigh.eki.visible = false;
             }
             catch(myError:Error)
             {
             }
          }
+
          if(this.charaData["s"]["_visible"][0])
          {
             this.charaAdd.mosaic.mosaic.visible = false;
@@ -267,6 +296,7 @@ package menu
             this.charaAdd.dou.dou_shitaHuku.s.tare.visible = false;
             this.charaAdd.dou.dou_shitaHuku.s.eki.visible = false;
          }
+         
          if(param2 != "huku")
          {
             try

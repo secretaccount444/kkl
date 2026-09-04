@@ -101,7 +101,10 @@ package menu
          catch(myError:Error)
          {
          }
+         
          MenuClass.charaData[_loc2_]["CharaLoadAdd" + _loc3_]["_name"] = "images/" + fileReference.name;
+         Tab_LoadClass.pushUndoAction("images/" + fileReference.name);
+
          if(fileReference.type == ".swf" || fileReference.type == ".svg")
          {
             Tab_FileReference.loadCheck = true;

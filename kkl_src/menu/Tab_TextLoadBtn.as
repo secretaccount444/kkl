@@ -92,7 +92,7 @@ package menu
             }
             else
             {
-               new Tab_IEInOut("textIN",_loc2_,MenuClass._nowCharaNum);
+               Tab_IEInOut.execute("textIN",_loc2_,MenuClass._nowCharaNum);
             }
          }
          else

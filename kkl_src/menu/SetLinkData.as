@@ -47,7 +47,7 @@ package menu
          {
             MenuClass.systemData["LinkCharaBlur"]["_flag"] = false;
          }
-         if(this.charaData["LeftArm"]["_meter"] == this.charaData["RightArm"]["_meter"] && this.charaData["LeftArm2"]["_meter"] == this.charaData["RightArm2"]["_meter"] && this.charaData["LeftArm2"]["_depth"] == this.charaData["RightArm2"]["_depth"] && this.charaData["LeftHand"]["_menu"] == this.charaData["RightHand"]["_menu"] && this.charaData["LeftHand2"]["_meter"] == this.charaData["RightHand2"]["_meter"])
+         if(this.charaData["LeftArm"]["_meter"] == this.charaData["RightArm"]["_meter"] && this.charaData["LeftArm2"]["_meter"] == this.charaData["RightArm2"]["_meter"] && this.charaData["LeftArm2"]["_depth"] == this.charaData["RightArm2"]["_depth"] && this.charaData["LeftHand"]["_menu"] == this.charaData["RightHand"]["_menu"] && this.charaData["LeftHand2"]["_meter"] == this.charaData["RightHand2"]["_meter"] && this.charaData["LeftArmFreeRotation"]["_check"] == this.charaData["RightArmFreeRotation"]["_check"])
          {
             MenuClass.systemData["LinkHand"]["_flag"] = true;
          }
@@ -168,7 +168,7 @@ package menu
          {
             MenuClass.systemData["LinkMouthWidth"]["_flag"] = false;
          }
-         if(this.charaData["EmotionEyebrowLeft"]["_menu"] == this.charaData["EmotionEyebrowRight"]["_menu"] && this.charaData["EyebrowRotationLeft"]["_meter"] == this.charaData["EyebrowRotationRight"]["_meter"] && this.charaData["EyebrowMoveLeft"]["_meter"] == this.charaData["EyebrowMoveRight"]["_meter"])
+         if(this.charaData["EmotionEyebrowLeft"]["_menu"] == this.charaData["EmotionEyebrowRight"]["_menu"] && this.charaData["EyebrowRotationLeft"]["_meter"] == this.charaData["EyebrowRotationRight"]["_meter"] && this.charaData["EyebrowMoveLeft"]["_meter"] == this.charaData["EyebrowMoveRight"]["_meter"] && this.charaData["EyebrowMoveHorizontalLeft"]["_meter"] == this.charaData["EyebrowMoveHorizontalRight"]["_meter"])
          {
             MenuClass.systemData["LinkEmotionEyebrow"]["_flag"] = true;
          }
@@ -355,6 +355,84 @@ package menu
          else
          {
             MenuClass.systemData["CharaLinkLoadScale"]["_flag"] = false;
+         }
+
+         if (
+            this.charaData["LeftThighRotation"]["_meter"] == this.charaData["RightThighRotation"]["_meter"] &&
+            this.charaData["LeftThighScaleX"]["_meter"] == this.charaData["RightThighScaleX"]["_meter"] &&
+            this.charaData["LeftThighScaleY"]["_meter"] == this.charaData["RightThighScaleY"]["_meter"] &&
+            this.charaData["LeftThighOffsetX"]["_meter"] == this.charaData["RightThighOffsetX"]["_meter"] &&
+            this.charaData["LeftThighOffsetY"]["_meter"] == this.charaData["RightThighOffsetY"]["_meter"] &&
+            this.charaData["LeftThighVisible"]["_visible"][0] == this.charaData["RightThighVisible"]["_visible"][0]
+         ) {
+            MenuClass.systemData["LinkThighSettings"]["_flag"] = true;
+         } else {
+            MenuClass.systemData["LinkThighSettings"]["_flag"] = false;
+         }
+
+         if (
+            this.charaData["LeftLegRotation"]["_meter"] == this.charaData["RightLegRotation"]["_meter"] &&
+            this.charaData["LeftLegScaleX"]["_meter"] == this.charaData["RightLegScaleX"]["_meter"] &&
+            this.charaData["LeftLegScaleY"]["_meter"] == this.charaData["RightLegScaleY"]["_meter"] &&
+            this.charaData["LeftLegOffsetX"]["_meter"] == this.charaData["RightLegOffsetX"]["_meter"] &&
+            this.charaData["LeftLegOffsetY"]["_meter"] == this.charaData["RightLegOffsetY"]["_meter"] &&
+            this.charaData["LeftLegVisible"]["_visible"][0] == this.charaData["RightLegVisible"]["_visible"][0]
+         ) {
+            MenuClass.systemData["LinkLegSettings"]["_flag"] = true;
+         } else {
+            MenuClass.systemData["LinkLegSettings"]["_flag"] = false;
+         }
+
+         if (
+            this.charaData["LeftFootRotation"]["_meter"] == this.charaData["RightFootRotation"]["_meter"] &&
+            this.charaData["LeftFootScaleX"]["_meter"] == this.charaData["RightFootScaleX"]["_meter"] &&
+            this.charaData["LeftFootScaleY"]["_meter"] == this.charaData["RightLegScaleY"]["_meter"] &&
+            this.charaData["LeftFootOffsetX"]["_meter"] == this.charaData["RightFootOffsetX"]["_meter"] &&
+            this.charaData["LeftFootOffsetY"]["_meter"] == this.charaData["RightFootOffsetY"]["_meter"] &&
+            this.charaData["LeftFootVisible"]["_visible"][0] == this.charaData["RightFootVisible"]["_visible"][0]
+         ) {
+            MenuClass.systemData["LinkFootSettings"]["_flag"] = true;
+         } else {
+            MenuClass.systemData["LinkFootSettings"]["_flag"] = false;
+         }
+
+         if (
+            this.charaData["LeftUpperArmScaleX"]["_meter"] == this.charaData["RightUpperArmScaleX"]["_meter"] &&
+            this.charaData["LeftUpperArmScaleY"]["_meter"] == this.charaData["RightUpperArmScaleY"]["_meter"] &&
+            this.charaData["LeftUpperArmOffsetX"]["_meter"] == this.charaData["RightUpperArmOffsetX"]["_meter"] &&
+            this.charaData["LeftUpperArmOffsetY"]["_meter"] == this.charaData["RightUpperArmOffsetY"]["_meter"] &&
+            this.charaData["LeftUpperArmVisible"]["_visible"][0] == this.charaData["RightUpperArmVisible"]["_visible"][0] &&
+            this.charaData["LeftShoulderVisible"]["_visible"][0] == this.charaData["RightShoulderVisible"]["_visible"][0]
+         ) {
+            MenuClass.systemData["LinkUpperArmSettings"]["_flag"] = true;
+         } else {
+            MenuClass.systemData["LinkUpperArmSettings"]["_flag"] = false;
+         }
+
+         if (
+            this.charaData["LeftArmScaleX"]["_meter"] == this.charaData["RightArmScaleX"]["_meter"] &&
+            this.charaData["LeftArmScaleY"]["_meter"] == this.charaData["RightArmScaleY"]["_meter"] &&
+            this.charaData["LeftArmOffsetX"]["_meter"] == this.charaData["RightArmOffsetX"]["_meter"] &&
+            this.charaData["LeftArmOffsetY"]["_meter"] == this.charaData["RightArmOffsetY"]["_meter"] &&
+            this.charaData["LeftArmVisible"]["_visible"][0] == this.charaData["RightArmVisible"]["_visible"][0] &&
+            this.charaData["LeftArmFlip"]["_check"] == this.charaData["RightArmFlip"]["_check"]
+         ) {
+            MenuClass.systemData["LinkArmSettings"]["_flag"] = true;
+         } else {
+            MenuClass.systemData["LinkArmSettings"]["_flag"] = false;
+         }
+
+         if (
+            this.charaData["LeftHandScaleX"]["_meter"] == this.charaData["RightHandScaleX"]["_meter"] &&
+            this.charaData["LeftHandScaleY"]["_meter"] == this.charaData["RightHandScaleY"]["_meter"] &&
+            this.charaData["LeftHandOffsetX"]["_meter"] == this.charaData["RightHandOffsetX"]["_meter"] &&
+            this.charaData["LeftHandOffsetY"]["_meter"] == this.charaData["RightHandOffsetY"]["_meter"] &&
+            this.charaData["LeftHandVisible"]["_visible"][0] == this.charaData["RightHandVisible"]["_visible"][0] &&
+            this.charaData["LeftHandFlip"]["_check"] == this.charaData["RightHandFlip"]["_check"]
+         ) {
+            MenuClass.systemData["LinkHandSettings"]["_flag"] = true;
+         } else {
+            MenuClass.systemData["LinkHandSettings"]["_flag"] = false;
          }
       }
    }

@@ -3,11 +3,14 @@ package menu
    import flash.display.MovieClip;
    import flash.events.MouseEvent;
    import flash.net.FileFilter;
+   import undo.LoadImageAction;
    
    public class Tab_LoadClass
    {
       
       public static var targetMC:MovieClip;
+
+      public static var curUndoAction: LoadImageAction;
        
       
       public function Tab_LoadClass()
@@ -15,6 +18,14 @@ package menu
          super();
       }
       
+      public static function pushUndoAction(newURL: String) : void {
+         if (curUndoAction) {
+            curUndoAction.newURL = newURL;
+            Main.undoTimeline.push(curUndoAction);
+         }
+         curUndoAction = null;
+      }
+
       public static function setFc(param1:MovieClip) : void
       {
          param1.addEventListener(MouseEvent.MOUSE_DOWN,MouseDown);
@@ -33,11 +44,15 @@ package menu
          var _loc4_:Array = null;
          targetMC = param1.currentTarget as MovieClip;
          new Stage_MoveCheckClass();
+
          if(MenuClass._nowHeaderName == "Loadmenu")
          {
+            curUndoAction = new LoadImageAction(MenuClass.systemData["LoadPlus"]["_menu"], 100);
+         
             if(MenuClass.systemData["URLLocal"]["_check"])
             {
                Tab_FileReference.loadCheck = false;
+               pushUndoAction(MenuClass.tabMenuAdd["URLText"].txt.text);
                new Tab_LoadURL("menu",MenuClass.systemData["LoadPlus"]["_menu"]);
             }
             else
@@ -51,9 +66,11 @@ package menu
          }
          else if(MenuClass._nowHeaderName == "CharaLoad")
          {
+            curUndoAction = new LoadImageAction(MenuClass.systemData["CharaLoadPlus"]["_menu"], MenuClass._nowCharaNum);
             if(MenuClass.systemData["CharaURLLocal"]["_check"])
             {
                Tab_FileReference.loadCheck = false;
+               pushUndoAction(MenuClass.tabMenuAdd["CharaURLText"].txt.text);
                new Tab_LoadURL2("menu",MenuClass.systemData["CharaLoadPlus"]["_menu"],MenuClass._nowCharaNum);
             }
             else

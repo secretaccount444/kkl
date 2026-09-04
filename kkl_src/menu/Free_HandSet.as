@@ -259,8 +259,12 @@ package menu
                Chara_Class.chara_m["FreeHand" + param1].blendMode = BlendMode.LAYER;
             }
             Chara_Class.chara_m["FreeHand" + param1].alpha = MenuClass.systemData["FreeHandAlpha" + param1]["_meter"] * 0.01;
+
             new MeterPersentRibon(-506,1800,100,"FreeHandX",param1);
             Chara_Class.chara_m["FreeHand" + param1].x = MeterPersentRibon.MeterPersentNum;
+            new MeterPersentRibon(-2.5,2.5,100,"FreeHandFineX",param1);
+            Chara_Class.chara_m["FreeHand" + param1].x += MeterPersentRibon.MeterPersentNum;
+
             new MeterPersentRibon(360,0,100,"FreeHandRotation",param1);
             _loc7_ = MeterPersentRibon.MeterPersentNum;
             Chara_Class.chara_m["FreeHand" + param1].rotation = _loc7_;
@@ -273,7 +277,11 @@ package menu
             _loc10_ = MeterPersentRibon.MeterPersentNum;
             Chara_Class.chara_m["FreeHand" + param1].scaleX = _loc10_;
             Chara_Class.chara_m["FreeHand" + param1].scaleY = _loc10_;
+            
             Chara_Class.chara_m["FreeHand" + param1].y = _loc8_;
+            new MeterPersentRibon(2.5,-2.5,100,"FreeHandFineY",param1);
+            Chara_Class.chara_m["FreeHand" + param1].y += MeterPersentRibon.MeterPersentNum;
+
             if(MenuClass.systemData["FreeHand" + param1]["_reversal"])
             {
                if(Chara_Class.chara_m["FreeHand" + param1].scaleX < 0)

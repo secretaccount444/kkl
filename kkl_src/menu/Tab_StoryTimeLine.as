@@ -79,7 +79,7 @@ package menu
                MenuClass.systemData["Story_Page"]["_menu"] = MenuClass.NowFrameCheck + 50;
             }
             new Tab_SetClass();
-            new Tab_IEInOut("setIN",MenuClass.StoryTimeLineData[MenuClass.systemData["Story_Page"]["_menu"]][9],MenuClass._nowCharaNum);
+            Tab_IEInOut.execute("setIN",MenuClass.StoryTimeLineData[MenuClass.systemData["Story_Page"]["_menu"]][9],MenuClass._nowCharaNum);
             targetMc.addEventListener(MouseEvent.MOUSE_UP,MouseUp);
             Main.stageVar.addEventListener(MouseEvent.MOUSE_UP,MouseUp);
          }
@@ -102,7 +102,7 @@ package menu
                MenuClass.systemData["Story_Page"]["_menu"] = 0;
             }
             new Tab_SetClass();
-            new Tab_IEInOut("setIN",MenuClass.StoryTimeLineData[MenuClass.systemData["Story_Page"]["_menu"]][9],MenuClass._nowCharaNum);
+            Tab_IEInOut.execute("setIN",MenuClass.StoryTimeLineData[MenuClass.systemData["Story_Page"]["_menu"]][9],MenuClass._nowCharaNum);
             targetMc.addEventListener(MouseEvent.MOUSE_UP,MouseUp);
             Main.stageVar.addEventListener(MouseEvent.MOUSE_UP,MouseUp);
          }
@@ -125,7 +125,7 @@ package menu
                MenuClass.BeforePage = MenuClass.systemData["Story_Page"]["_menu"];
                MenuClass.systemData["Story_Page"]["_menu"] = param1.target.num + MenuClass.NowFrameCheck;
                new Tab_SetClass();
-               new Tab_IEInOut("setIN",MenuClass.StoryTimeLineData[MenuClass.systemData["Story_Page"]["_menu"]][9],MenuClass._nowCharaNum);
+               Tab_IEInOut.execute("setIN",MenuClass.StoryTimeLineData[MenuClass.systemData["Story_Page"]["_menu"]][9],MenuClass._nowCharaNum);
             }
          }
       }

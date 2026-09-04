@@ -4,6 +4,9 @@ package menu
    import flash.events.MouseEvent;
    import flash.utils.ByteArray;
    import parameter.Dress_data;
+   import undo.CharacterHeaderCopyAction;
+   import undo.SystemHeaderCopyAction;
+   import undo.FullCharacterCopyAction;
    
    public class Tab_PasteTargetClass
    {
@@ -68,6 +71,9 @@ package menu
             Main.stageVar.addEventListener(MouseEvent.MOUSE_UP,MouseUp);
             if(tabName == "SystemCopy")
             {
+               var undoAction = new SystemHeaderCopyAction(headerName);
+               Main.undoTimeline.push(undoAction);
+
                for(tabNum in MenuClass.tabData[headerName])
                {
                   tdName = MenuClass.tabData[headerName][tabNum][0];
@@ -181,6 +187,8 @@ package menu
                      MenuClass.systemData["FreeHandRotation" + num] = clone(Tab_CopyTargetClass.systemCopyData["FreeHandRotation"]);
                      MenuClass.systemData["FreeHandX" + num] = clone(Tab_CopyTargetClass.systemCopyData["FreeHandX"]);
                      MenuClass.systemData["FreeHandY" + num] = clone(Tab_CopyTargetClass.systemCopyData["FreeHandY"]);
+                     MenuClass.systemData["FreeHandFineX" + num] = clone(Tab_CopyTargetClass.systemCopyData["FreeHandFineX"]);
+                     MenuClass.systemData["FreeHandFineY" + num] = clone(Tab_CopyTargetClass.systemCopyData["FreeHandFineY"]);
                      MenuClass.systemData["FreeHandDepth" + num] = clone(Tab_CopyTargetClass.systemCopyData["FreeHandDepth"]);
                      MenuClass.systemData["FreeHandWrist" + num] = clone(Tab_CopyTargetClass.systemCopyData["FreeHandWrist"]);
                      MenuClass.systemData["FreeHandWristRotation" + num] = clone(Tab_CopyTargetClass.systemCopyData["FreeHandWristRotation"]);
@@ -207,7 +215,10 @@ package menu
                      MenuClass.systemData["FreeRibonRotation" + num] = clone(Tab_CopyTargetClass.systemCopyData["FreeRibonRotation"]);
                      MenuClass.systemData["FreeRibonX" + num] = clone(Tab_CopyTargetClass.systemCopyData["FreeRibonX"]);
                      MenuClass.systemData["FreeRibonY" + num] = clone(Tab_CopyTargetClass.systemCopyData["FreeRibonY"]);
+                     MenuClass.systemData["FreeRibonFineX" + num] = clone(Tab_CopyTargetClass.systemCopyData["FreeRibonFineX"]);
+                     MenuClass.systemData["FreeRibonFineY" + num] = clone(Tab_CopyTargetClass.systemCopyData["FreeRibonFineY"]);
                      MenuClass.systemData["FreeRibonDepth" + num] = clone(Tab_CopyTargetClass.systemCopyData["FreeRibonDepth"]);
+                     MenuClass.systemData["FreeRibonAlpha" + num] = clone(Tab_CopyTargetClass.systemCopyData["FreeRibonAlpha"]);
                      loadCheck = false;
                   }
                   else if(tdName == "FreeBeltPlus")
@@ -226,6 +237,9 @@ package menu
                      MenuClass.systemData["FreeBeltRotation" + num] = clone(Tab_CopyTargetClass.systemCopyData["FreeBeltRotation"]);
                      MenuClass.systemData["FreeBeltX" + num] = clone(Tab_CopyTargetClass.systemCopyData["FreeBeltX"]);
                      MenuClass.systemData["FreeBeltY" + num] = clone(Tab_CopyTargetClass.systemCopyData["FreeBeltY"]);
+                     MenuClass.systemData["FreeBeltFineX" + num] = clone(Tab_CopyTargetClass.systemCopyData["FreeBeltFineX"]);
+                     MenuClass.systemData["FreeBeltFineY" + num] = clone(Tab_CopyTargetClass.systemCopyData["FreeBeltFineY"]);
+                     MenuClass.systemData["FreeBeltAlpha" + num] = clone(Tab_CopyTargetClass.systemCopyData["FreeBeltAlpha"]);
                      MenuClass.systemData["FreeBeltDepth" + num] = clone(Tab_CopyTargetClass.systemCopyData["FreeBeltDepth"]);
                      loadCheck = false;
                   }
@@ -259,6 +273,9 @@ package menu
                      MenuClass.systemData["FreeChairX" + num] = clone(Tab_CopyTargetClass.systemCopyData["FreeChairX"]);
                      MenuClass.systemData["FreeChairY" + num] = clone(Tab_CopyTargetClass.systemCopyData["FreeChairY"]);
                      MenuClass.systemData["FreeChairDepth" + num] = clone(Tab_CopyTargetClass.systemCopyData["FreeChairDepth"]);
+                     MenuClass.systemData["FreeChairFineX" + num] = clone(Tab_CopyTargetClass.systemCopyData["FreeChairFineX"]);
+                     MenuClass.systemData["FreeChairFineY" + num] = clone(Tab_CopyTargetClass.systemCopyData["FreeChairFineY"]);
+                     MenuClass.systemData["FreeChairAlpha" + num] = clone(Tab_CopyTargetClass.systemCopyData["FreeChairAlpha"]);
                      loadCheck = false;
                   }
                   else if(tdName == "LoadPlus")
@@ -273,6 +290,8 @@ package menu
                      MenuClass.systemData["LoadRotation" + num] = clone(Tab_CopyTargetClass.systemCopyData["LoadRotation"]);
                      MenuClass.systemData["LoadX" + num] = clone(Tab_CopyTargetClass.systemCopyData["LoadX"]);
                      MenuClass.systemData["LoadY" + num] = clone(Tab_CopyTargetClass.systemCopyData["LoadY"]);
+                     MenuClass.systemData["LoadFineX" + num] = clone(Tab_CopyTargetClass.systemCopyData["LoadFineX"]);
+                     MenuClass.systemData["LoadFineY" + num] = clone(Tab_CopyTargetClass.systemCopyData["LoadFineY"]);
                      MenuClass.systemData["LoadSwfColor" + num] = clone(Tab_CopyTargetClass.systemCopyData["LoadSwfColor"]);
                      MenuClass.systemData["LoadAdd" + num] = clone(Tab_CopyTargetClass.systemCopyData["LoadAdd"]);
                      MenuClass.systemData["LoadReversalDepth" + num] = clone(Tab_CopyTargetClass.systemCopyData["LoadReversalDepth"]);
@@ -300,10 +319,13 @@ package menu
             {
                MenuClass.StoryBackupData = clone(MenuClass.StoryTimeLineData[MenuClass.systemData["Story_Page"]["_menu"]]);
                MenuClass.StoryTimeLineData[MenuClass.systemData["Story_Page"]["_menu"]] = clone(MenuClass.StoryTimeLineCopy);
-               new Tab_IEInOut("setIN",MenuClass.StoryTimeLineData[MenuClass.systemData["Story_Page"]["_menu"]][9],MenuClass._nowCharaNum);
+               Tab_IEInOut.execute("setIN",MenuClass.StoryTimeLineData[MenuClass.systemData["Story_Page"]["_menu"]][9],MenuClass._nowCharaNum);
             }
             else if(headerName == "SystemOption" || headerName == "Character")
             {
+               var undoAction = new FullCharacterCopyAction();
+               Main.undoTimeline.push(undoAction);
+
                if(MenuClass._nowTargetMode == "All")
                {
                   i = 0;
@@ -320,7 +342,7 @@ package menu
                      catch(myError:Error)
                      {
                      }
-                     new SetCharaData(i,"paste",0);
+                     SetCharaData.execute(i,"paste",0);
                      i++;
                   }
                }
@@ -342,7 +364,7 @@ package menu
                         catch(myError:Error)
                         {
                         }
-                        new SetCharaData(i,"paste",0);
+                        SetCharaData.execute(i,"paste",0);
                      }
                      i++;
                   }
@@ -360,11 +382,21 @@ package menu
                   catch(myError:Error)
                   {
                   }
-                  new SetCharaData(MenuClass._nowCharaNum,"paste",0);
+                  SetCharaData.execute(MenuClass._nowCharaNum,"paste",0);
                }
             }
             else if(tabName == "CopyRibon")
             {
+               for(tabNum in MenuClass.tabData[headerName])
+               {
+                  var dataTarget = MenuClass.tabData[headerName][tabNum][2]["_data"];
+                  if (dataTarget != null) {
+                     var undoAction = new CharacterHeaderCopyAction(headerName, false, MenuClass.systemData[dataTarget]["_menu"], true);
+                     Main.undoTimeline.push(undoAction);
+                     break;
+                  }
+               }
+
                for(tabNum in MenuClass.tabData[headerName])
                {
                   tdName = MenuClass.tabData[headerName][tabNum][0];
@@ -393,32 +425,37 @@ package menu
                   }
                }
                new SetClass(MenuClass._nowCharaNum,plusStr,"pasteRibon");
-            }
-            else if(MenuClass._nowTargetMode == "All")
-            {
-               i = 0;
-               while(i <= MenuClass._characterNum)
+            } else {
+               var undoAction = new CharacterHeaderCopyAction(headerName, true, -1, false);
+               Main.undoTimeline.push(undoAction);
+
+               if(MenuClass._nowTargetMode == "All")
                {
-                  dataIn(i);
-                  i++;
-               }
-            }
-            else if(MenuClass._nowTargetMode == "SelectPlus")
-            {
-               i = 0;
-               while(i <= MenuClass._characterNum)
-               {
-                  if(MenuClass._nowSelectChara[i])
+                  i = 0;
+                  while(i <= MenuClass._characterNum)
                   {
                      dataIn(i);
+                     i++;
                   }
-                  i++;
+               }
+               else if(MenuClass._nowTargetMode == "SelectPlus")
+               {
+                  i = 0;
+                  while(i <= MenuClass._characterNum)
+                  {
+                     if(MenuClass._nowSelectChara[i])
+                     {
+                        dataIn(i);
+                     }
+                     i++;
+                  }
+               }
+               else
+               {
+                  dataIn(MenuClass._nowCharaNum);
                }
             }
-            else
-            {
-               dataIn(MenuClass._nowCharaNum);
-            }
+            
             MenuClass.charaOldData = null;
             MenuClass.systemOldData = null;
             new Tab_SetClass();

@@ -158,12 +158,12 @@ package menu
             this.BodyColorSet();
             this.HandArm2Color(1);
          }
-         else if(this.tabName == "LeftArm2")
+         else if(this.tabName == "LeftArm2" || this.tabName == "LeftArmFreeRotation")
          {
             this.BodyColorSet();
             this.HandArm1Color(0);
          }
-         else if(this.tabName == "RightArm2")
+         else if(this.tabName == "RightArm2" || this.tabName == "RightArmFreeRotation")
          {
             this.BodyColorSet();
             this.HandArm1Color(1);
@@ -1083,32 +1083,32 @@ package menu
          this.i = 0;
          while(this.i <= 1)
          {
-            new ColorChangeClass(this.charaAdd["ashi" + this.i].shiri.shiri.kage0,this.shiri_kage);
+            new ColorChangeClass(this.charaAdd["ashi" + this.i].shiri.actual.shiri.kage0,this.shiri_kage);
             try
             {
-               new ColorChangeClass(this.charaAdd["ashi" + this.i].thigh.thigh.color0,this.thigh_C);
+               new ColorChangeClass(this.charaAdd["ashi" + this.i].thigh.actual.thigh.color0,this.thigh_C);
             }
             catch(myError:Error)
             {
             }
-            new ColorChangeClass(this.charaAdd["ashi" + this.i].thigh.thigh.kage0,this.thigh_kage);
+            new ColorChangeClass(this.charaAdd["ashi" + this.i].thigh.actual.thigh.kage0,this.thigh_kage);
             try
             {
-               new ColorChangeClass(this.charaAdd["ashi" + this.i].thigh.thigh.kage1,this.all_kage);
+               new ColorChangeClass(this.charaAdd["ashi" + this.i].thigh.actual.thigh.kage1,this.all_kage);
             }
             catch(myError:Error)
             {
             }
-            new ColorChangeClass(this.charaAdd["ashi" + this.i].thigh.thigh.color1,this.all_C);
+            new ColorChangeClass(this.charaAdd["ashi" + this.i].thigh.actual.thigh.color1,this.all_C);
             try
             {
-               new ColorChangeClass(this.charaAdd["ashi" + this.i].leg.leg.color0,this.all_C);
+               new ColorChangeClass(this.charaAdd["ashi" + this.i].leg.actual.leg.color0,this.all_C);
             }
             catch(myError:Error)
             {
             }
-            new ColorChangeClass(this.charaAdd["ashi" + this.i].foot.foot.color0,this.all_C);
-            new ColorChangeClass(this.charaAdd["ashi" + this.i].foot.foot.kage0,this.all_kage);
+            new ColorChangeClass(this.charaAdd["ashi" + this.i].foot.actual.foot.color0,this.all_C);
+            new ColorChangeClass(this.charaAdd["ashi" + this.i].foot.actual.foot.kage0,this.all_kage);
             ++this.i;
          }
       }
@@ -4052,21 +4052,21 @@ package menu
                {
                   try
                   {
-                     new ColorChangeClass(this.charaAdd["ashi" + param1].thigh.thigh.Zubon["color" + this.j + "_" + this.k],this.ccChange);
+                     new ColorChangeClass(this.charaAdd["ashi" + param1].thigh.actual.thigh.Zubon["color" + this.j + "_" + this.k],this.ccChange);
                   }
                   catch(myError:Error)
                   {
                   }
                   try
                   {
-                     new ColorChangeClass(this.charaAdd["ashi" + param1].leg_huku.leg.Zubon["color" + this.j + "_" + this.k],this.ccChange);
+                     new ColorChangeClass(this.charaAdd["ashi" + param1].leg_huku.actual.leg.Zubon["color" + this.j + "_" + this.k],this.ccChange);
                   }
                   catch(myError:Error)
                   {
                   }
                   try
                   {
-                     new ColorChangeClass(this.charaAdd["ashi" + param1].leg_huku.leg.Zubon["kage" + this.j + "_" + this.k],this.kkChange);
+                     new ColorChangeClass(this.charaAdd["ashi" + param1].leg_huku.actual.leg.Zubon["kage" + this.j + "_" + this.k],this.kkChange);
                   }
                   catch(myError:Error)
                   {
@@ -4075,28 +4075,28 @@ package menu
                }
                try
                {
-                  new ColorChangeClass(this.charaAdd["ashi" + param1].leg.leg.Zubon["kage" + this.j],this.kkChange);
+                  new ColorChangeClass(this.charaAdd["ashi" + param1].leg.actual.leg.Zubon["kage" + this.j],this.kkChange);
                }
                catch(myError:Error)
                {
                }
                try
                {
-                  new ColorChangeClass(this.charaAdd["ashi" + param1].shiri.shiri.Zubon["color" + this.j + "_0"],this.ccChange);
+                  new ColorChangeClass(this.charaAdd["ashi" + param1].shiri.actual.shiri.Zubon["color" + this.j + "_0"],this.ccChange);
                }
                catch(myError:Error)
                {
                }
                try
                {
-                  new ColorChangeClass(this.charaAdd["ashi" + param1].thigh.thigh.Zubon["kage" + this.j + "_0"],this.kkChange);
+                  new ColorChangeClass(this.charaAdd["ashi" + param1].thigh.actual.thigh.Zubon["kage" + this.j + "_0"],this.kkChange);
                }
                catch(myError:Error)
                {
                }
                try
                {
-                  new ColorChangeClass(this.charaAdd["ashi" + param1].shiri.shiri.Zubon["kage" + this.j + "_0"],this.kkChange);
+                  new ColorChangeClass(this.charaAdd["ashi" + param1].shiri.actual.shiri.Zubon["kage" + this.j + "_0"],this.kkChange);
                }
                catch(myError:Error)
                {
@@ -4357,7 +4357,7 @@ package menu
                   {
                      try
                      {
-                        new ColorChangeClass(this.charaAdd["ashi" + this.i].thigh.thigh.Spantu.Pantu["color" + this.j + "_" + this.k],this.ccChange);
+                        new ColorChangeClass(this.charaAdd["ashi" + this.i].thigh.actual.thigh.Spantu.Pantu["color" + this.j + "_" + this.k],this.ccChange);
                      }
                      catch(myError:Error)
                      {
@@ -4366,21 +4366,21 @@ package menu
                   }
                   try
                   {
-                     new ColorChangeClass(this.charaAdd["ashi" + this.i].shiri.shiri.Spantu["color" + this.j + "_0"],this.ccChange);
+                     new ColorChangeClass(this.charaAdd["ashi" + this.i].shiri.actual.shiri.Spantu["color" + this.j + "_0"],this.ccChange);
                   }
                   catch(myError:Error)
                   {
                   }
                   try
                   {
-                     new ColorChangeClass(this.charaAdd["ashi" + this.i].thigh.thigh.Spantu.Pantu["kage" + this.j + "_0"],this.kkChange);
+                     new ColorChangeClass(this.charaAdd["ashi" + this.i].thigh.actual.thigh.Spantu.Pantu["kage" + this.j + "_0"],this.kkChange);
                   }
                   catch(myError:Error)
                   {
                   }
                   try
                   {
-                     new ColorChangeClass(this.charaAdd["ashi" + this.i].shiri.shiri.Spantu["kage" + this.j + "_0"],this.kkChange);
+                     new ColorChangeClass(this.charaAdd["ashi" + this.i].shiri.actual.shiri.Spantu["kage" + this.j + "_0"],this.kkChange);
                   }
                   catch(myError:Error)
                   {
@@ -4479,7 +4479,7 @@ package menu
                   {
                      try
                      {
-                        new ColorChangeClass(this.charaAdd["ashi" + this.i].thigh.thigh.Pantu.Pantu["color" + this.j + "_" + this.k],this.ccChange);
+                        new ColorChangeClass(this.charaAdd["ashi" + this.i].thigh.actual.thigh.Pantu.Pantu["color" + this.j + "_" + this.k],this.ccChange);
                      }
                      catch(myError:Error)
                      {
@@ -4488,21 +4488,21 @@ package menu
                   }
                   try
                   {
-                     new ColorChangeClass(this.charaAdd["ashi" + this.i].shiri.shiri.Pantu["color" + this.j + "_0"],this.ccChange);
+                     new ColorChangeClass(this.charaAdd["ashi" + this.i].shiri.actual.shiri.Pantu["color" + this.j + "_0"],this.ccChange);
                   }
                   catch(myError:Error)
                   {
                   }
                   try
                   {
-                     new ColorChangeClass(this.charaAdd["ashi" + this.i].thigh.thigh.Pantu.Pantu["kage" + this.j + "_0"],this.kkChange);
+                     new ColorChangeClass(this.charaAdd["ashi" + this.i].thigh.actual.thigh.Pantu.Pantu["kage" + this.j + "_0"],this.kkChange);
                   }
                   catch(myError:Error)
                   {
                   }
                   try
                   {
-                     new ColorChangeClass(this.charaAdd["ashi" + this.i].shiri.shiri.Pantu["kage" + this.j + "_0"],this.kkChange);
+                     new ColorChangeClass(this.charaAdd["ashi" + this.i].shiri.actual.shiri.Pantu["kage" + this.j + "_0"],this.kkChange);
                   }
                   catch(myError:Error)
                   {
@@ -4774,7 +4774,7 @@ package menu
                {
                   try
                   {
-                     new ColorChangeClass(this.charaAdd["ashi" + param1].thigh.thigh.SocksTop["color" + this.j + "_" + this.k],this.ccChange);
+                     new ColorChangeClass(this.charaAdd["ashi" + param1].thigh.actual.thigh.SocksTop["color" + this.j + "_" + this.k],this.ccChange);
                   }
                   catch(myError:Error)
                   {
@@ -4786,7 +4786,7 @@ package menu
                {
                   try
                   {
-                     new ColorChangeClass(this.charaAdd["ashi" + param1].thigh.thigh.Socks["color" + this.j + "_" + this.k],this.ccChange);
+                     new ColorChangeClass(this.charaAdd["ashi" + param1].thigh.actual.thigh.Socks["color" + this.j + "_" + this.k],this.ccChange);
                   }
                   catch(myError:Error)
                   {
@@ -4795,63 +4795,63 @@ package menu
                }
                try
                {
-                  new ColorChangeClass(this.charaAdd["ashi" + param1].thigh.thigh.Socks["kage" + this.j + "_0"],this.kkChange);
+                  new ColorChangeClass(this.charaAdd["ashi" + param1].thigh.actual.thigh.Socks["kage" + this.j + "_0"],this.kkChange);
                }
                catch(myError:Error)
                {
                }
                try
                {
-                  new ColorChangeClass(this.charaAdd["ashi" + param1].leg.leg.Socks["color" + this.j + "_0"],this.ccChange);
+                  new ColorChangeClass(this.charaAdd["ashi" + param1].leg.actual.leg.Socks["color" + this.j + "_0"],this.ccChange);
                }
                catch(myError:Error)
                {
                }
                try
                {
-                  new ColorChangeClass(this.charaAdd["ashi" + param1].leg.leg.Socks["kage" + this.j + "_0"],this.kkChange);
+                  new ColorChangeClass(this.charaAdd["ashi" + param1].leg.actual.leg.Socks["kage" + this.j + "_0"],this.kkChange);
                }
                catch(myError:Error)
                {
                }
                try
                {
-                  new ColorChangeClass(this.charaAdd["ashi" + param1].leg.leg.Socks_under["color" + this.j + "_0"],this.ccChange);
+                  new ColorChangeClass(this.charaAdd["ashi" + param1].leg.actual.leg.Socks_under["color" + this.j + "_0"],this.ccChange);
                }
                catch(myError:Error)
                {
                }
                try
                {
-                  new ColorChangeClass(this.charaAdd["ashi" + param1].leg.leg.Socks_under["kage" + this.j + "_0"],this.kkChange);
+                  new ColorChangeClass(this.charaAdd["ashi" + param1].leg.actual.leg.Socks_under["kage" + this.j + "_0"],this.kkChange);
                }
                catch(myError:Error)
                {
                }
                try
                {
-                  new ColorChangeClass(this.charaAdd["ashi" + param1].leg_huku.leg.Socks["color" + this.j + "_0"],this.ccChange);
+                  new ColorChangeClass(this.charaAdd["ashi" + param1].leg_huku.actual.leg.Socks["color" + this.j + "_0"],this.ccChange);
                }
                catch(myError:Error)
                {
                }
                try
                {
-                  new ColorChangeClass(this.charaAdd["ashi" + param1].leg_huku.leg.Socks["kage" + this.j + "_0"],this.kkChange);
+                  new ColorChangeClass(this.charaAdd["ashi" + param1].leg_huku.actual.leg.Socks["kage" + this.j + "_0"],this.kkChange);
                }
                catch(myError:Error)
                {
                }
                try
                {
-                  new ColorChangeClass(this.charaAdd["ashi" + param1].foot.foot.Socks["color" + this.j + "_0"],this.ccChange);
+                  new ColorChangeClass(this.charaAdd["ashi" + param1].foot.actual.foot.Socks["color" + this.j + "_0"],this.ccChange);
                }
                catch(myError:Error)
                {
                }
                try
                {
-                  new ColorChangeClass(this.charaAdd["ashi" + param1].foot.foot.Socks["kage" + this.j + "_0"],this.kkChange);
+                  new ColorChangeClass(this.charaAdd["ashi" + param1].foot.actual.foot.Socks["kage" + this.j + "_0"],this.kkChange);
                }
                catch(myError:Error)
                {
@@ -4891,28 +4891,28 @@ package menu
                   }
                   try
                   {
-                     new ColorChangeClass(this.charaAdd["ashi" + this.i].shiri.shiri.Tights["color" + this.j + "_0"],this.ccChange);
+                     new ColorChangeClass(this.charaAdd["ashi" + this.i].shiri.actual.shiri.Tights["color" + this.j + "_0"],this.ccChange);
                   }
                   catch(myError:Error)
                   {
                   }
                   try
                   {
-                     new ColorChangeClass(this.charaAdd["ashi" + this.i].thigh.thigh.Tights["kage" + this.j + "_0"],this.kkChange);
+                     new ColorChangeClass(this.charaAdd["ashi" + this.i].thigh.actual.thigh.Tights["kage" + this.j + "_0"],this.kkChange);
                   }
                   catch(myError:Error)
                   {
                   }
                   try
                   {
-                     new ColorChangeClass(this.charaAdd["ashi" + this.i].foot.foot.Tights["color" + this.j + "_0"],this.ccChange);
+                     new ColorChangeClass(this.charaAdd["ashi" + this.i].foot.actual.foot.Tights["color" + this.j + "_0"],this.ccChange);
                   }
                   catch(myError:Error)
                   {
                   }
                   try
                   {
-                     new ColorChangeClass(this.charaAdd["ashi" + this.i].foot.foot.Tights["kage" + this.j + "_0"],this.kkChange);
+                     new ColorChangeClass(this.charaAdd["ashi" + this.i].foot.actual.foot.Tights["kage" + this.j + "_0"],this.kkChange);
                   }
                   catch(myError:Error)
                   {
@@ -4922,21 +4922,21 @@ package menu
                   {
                      try
                      {
-                        new ColorChangeClass(this.charaAdd["ashi" + this.i].leg.leg.Tights["color" + this.j + "_" + this.k],this.ccChange);
+                        new ColorChangeClass(this.charaAdd["ashi" + this.i].leg.actual.leg.Tights["color" + this.j + "_" + this.k],this.ccChange);
                      }
                      catch(myError:Error)
                      {
                      }
                      try
                      {
-                        new ColorChangeClass(this.charaAdd["ashi" + this.i].thigh.thigh.Tights["color" + this.j + "_" + this.k],this.ccChange);
+                        new ColorChangeClass(this.charaAdd["ashi" + this.i].thigh.actual.thigh.Tights["color" + this.j + "_" + this.k],this.ccChange);
                      }
                      catch(myError:Error)
                      {
                      }
                      try
                      {
-                        new ColorChangeClass(this.charaAdd["ashi" + this.i].thigh.thigh.Tights.line["color" + this.j + "_" + this.k],this.ccChange);
+                        new ColorChangeClass(this.charaAdd["ashi" + this.i].thigh.actual.thigh.Tights.line["color" + this.j + "_" + this.k],this.ccChange);
                      }
                      catch(myError:Error)
                      {
@@ -5156,27 +5156,27 @@ package menu
                         }
                         else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 95 && this.i == 0)
                         {
-                           this.Obj = this.charaAdd.ashi0.thigh.thigh["Ribon" + param1 + "_" + 0].ribon0;
+                           this.Obj = this.charaAdd.ashi0.thigh.actual.thigh["Ribon" + param1 + "_" + 0].ribon0;
                         }
                         else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 95 && this.i == 1)
                         {
-                           this.Obj = this.charaAdd.ashi1.thigh.thigh["Ribon" + param1 + "_" + 1].ribon0;
+                           this.Obj = this.charaAdd.ashi1.thigh.actual.thigh["Ribon" + param1 + "_" + 1].ribon0;
                         }
-                        else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 96 && this.i == 0 && this.charaAdd.ashi0.leg != null && this.charaAdd.ashi0.leg.leg != null)
+                        else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 96 && this.i == 0 && this.charaAdd.ashi0.leg != null && this.charaAdd.ashi0.leg.actual.leg != null)
                         {
-                           this.Obj = this.charaAdd.ashi0.leg.leg["Ribon" + param1 + "_" + 0].ribon0;
+                           this.Obj = this.charaAdd.ashi0.leg.actual.leg["Ribon" + param1 + "_" + 0].ribon0;
                         }
-                        else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 96 && this.i == 1 && this.charaAdd.ashi1.leg != null && this.charaAdd.ashi1.leg.leg != null)
+                        else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 96 && this.i == 1 && this.charaAdd.ashi1.leg != null && this.charaAdd.ashi1.leg.actual.leg != null)
                         {
-                           this.Obj = this.charaAdd.ashi1.leg.leg["Ribon" + param1 + "_" + 1].ribon0;
+                           this.Obj = this.charaAdd.ashi1.leg.actual.leg["Ribon" + param1 + "_" + 1].ribon0;
                         }
                         else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 97 && this.i == 0)
                         {
-                           this.Obj = this.charaAdd.ashi0.foot.foot["Ribon" + param1 + "_" + 0].ribon0;
+                           this.Obj = this.charaAdd.ashi0.foot.actual.foot["Ribon" + param1 + "_" + 0].ribon0;
                         }
                         else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 97 && this.i == 1)
                         {
-                           this.Obj = this.charaAdd.ashi1.foot.foot["Ribon" + param1 + "_" + 1].ribon0;
+                           this.Obj = this.charaAdd.ashi1.foot.actual.foot["Ribon" + param1 + "_" + 1].ribon0;
                         }
                         else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 92 && this.i == 0)
                         {
@@ -5346,27 +5346,27 @@ package menu
                   }
                   else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 95 && this.i == 0)
                   {
-                     this.Obj = this.charaAdd.ashi0.thigh.thigh["Ribon" + param1 + "_" + 0].ribon0;
+                     this.Obj = this.charaAdd.ashi0.thigh.actual.thigh["Ribon" + param1 + "_" + 0].ribon0;
                   }
                   else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 95 && this.i == 1)
                   {
-                     this.Obj = this.charaAdd.ashi1.thigh.thigh["Ribon" + param1 + "_" + 1].ribon0;
+                     this.Obj = this.charaAdd.ashi1.thigh.actual.thigh["Ribon" + param1 + "_" + 1].ribon0;
                   }
-                  else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 96 && this.i == 0 && this.charaAdd.ashi0.leg != null && this.charaAdd.ashi0.leg.leg != null)
+                  else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 96 && this.i == 0 && this.charaAdd.ashi0.leg != null && this.charaAdd.ashi0.leg.actual.leg != null)
                   {
-                     this.Obj = this.charaAdd.ashi0.leg.leg["Ribon" + param1 + "_" + 0].ribon0;
+                     this.Obj = this.charaAdd.ashi0.leg.actual.leg["Ribon" + param1 + "_" + 0].ribon0;
                   }
-                  else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 96 && this.i == 1 && this.charaAdd.ashi1.leg != null && this.charaAdd.ashi1.leg.leg != null)
+                  else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 96 && this.i == 1 && this.charaAdd.ashi1.leg != null && this.charaAdd.ashi1.leg.actual.leg != null)
                   {
-                     this.Obj = this.charaAdd.ashi1.leg.leg["Ribon" + param1 + "_" + 1].ribon0;
+                     this.Obj = this.charaAdd.ashi1.leg.actual.leg["Ribon" + param1 + "_" + 1].ribon0;
                   }
                   else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 97 && this.i == 0)
                   {
-                     this.Obj = this.charaAdd.ashi0.foot.foot["Ribon" + param1 + "_" + 0].ribon0;
+                     this.Obj = this.charaAdd.ashi0.foot.actual.foot["Ribon" + param1 + "_" + 0].ribon0;
                   }
                   else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 97 && this.i == 1)
                   {
-                     this.Obj = this.charaAdd.ashi1.foot.foot["Ribon" + param1 + "_" + 1].ribon0;
+                     this.Obj = this.charaAdd.ashi1.foot.actual.foot["Ribon" + param1 + "_" + 1].ribon0;
                   }
                   else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 92 && this.i == 0)
                   {
@@ -6705,42 +6705,42 @@ package menu
                {
                   try
                   {
-                     new ColorChangeClass(this.charaAdd["ashi" + param1].foot.foot.Kutu["color" + this.j + "_" + this.k],this.ccChange);
+                     new ColorChangeClass(this.charaAdd["ashi" + param1].foot.actual.foot.Kutu["color" + this.j + "_" + this.k],this.ccChange);
                   }
                   catch(myError:Error)
                   {
                   }
                   try
                   {
-                     new ColorChangeClass(this.charaAdd["ashi" + param1].leg_huku.leg.Kutu["main_color" + this.j + "_" + this.k],this.ccChange);
+                     new ColorChangeClass(this.charaAdd["ashi" + param1].leg_huku.actual.leg.Kutu["main_color" + this.j + "_" + this.k],this.ccChange);
                   }
                   catch(myError:Error)
                   {
                   }
                   try
                   {
-                     new ColorChangeClass(this.charaAdd["ashi" + param1].leg.leg.Kutu["main_color" + this.j + "_" + this.k],this.ccChange);
+                     new ColorChangeClass(this.charaAdd["ashi" + param1].leg.actual.leg.Kutu["main_color" + this.j + "_" + this.k],this.ccChange);
                   }
                   catch(myError:Error)
                   {
                   }
                   try
                   {
-                     new ColorChangeClass(this.charaAdd["ashi" + param1].foot.foot.Kutu["kage" + this.j + "_" + this.k],this.kkChange);
+                     new ColorChangeClass(this.charaAdd["ashi" + param1].foot.actual.foot.Kutu["kage" + this.j + "_" + this.k],this.kkChange);
                   }
                   catch(myError:Error)
                   {
                   }
                   try
                   {
-                     new ColorChangeClass(this.charaAdd["ashi" + param1].leg_huku.leg.Kutu["main_kage" + this.j + "_" + this.k],this.kkChange);
+                     new ColorChangeClass(this.charaAdd["ashi" + param1].leg_huku.actual.leg.Kutu["main_kage" + this.j + "_" + this.k],this.kkChange);
                   }
                   catch(myError:Error)
                   {
                   }
                   try
                   {
-                     new ColorChangeClass(this.charaAdd["ashi" + param1].leg.leg.Kutu["main_kage" + this.j + "_" + this.k],this.kkChange);
+                     new ColorChangeClass(this.charaAdd["ashi" + param1].leg.actual.leg.Kutu["main_kage" + this.j + "_" + this.k],this.kkChange);
                   }
                   catch(myError:Error)
                   {
@@ -6749,14 +6749,14 @@ package menu
                }
                try
                {
-                  new ColorChangeClass(this.charaAdd["ashi" + param1].foot.foot.KutuUnder["color" + this.j + "_0"],this.ccChange);
+                  new ColorChangeClass(this.charaAdd["ashi" + param1].foot.actual.foot.KutuUnder["color" + this.j + "_0"],this.ccChange);
                }
                catch(myError:Error)
                {
                }
                try
                {
-                  new ColorChangeClass(this.charaAdd["ashi" + param1].foot.foot.KutuUnder["kage" + this.j + "_0"],this.kkChange);
+                  new ColorChangeClass(this.charaAdd["ashi" + param1].foot.actual.foot.KutuUnder["kage" + this.j + "_0"],this.kkChange);
                }
                catch(myError:Error)
                {
@@ -6773,28 +6773,28 @@ package menu
                {
                   try
                   {
-                     new ColorChangeClass(this.charaAdd["ashi" + param1].leg_huku.leg.Kutu["color" + this.j + "_" + this.k],this.ccChange);
+                     new ColorChangeClass(this.charaAdd["ashi" + param1].leg_huku.actual.leg.Kutu["color" + this.j + "_" + this.k],this.ccChange);
                   }
                   catch(myError:Error)
                   {
                   }
                   try
                   {
-                     new ColorChangeClass(this.charaAdd["ashi" + param1].leg.leg.Kutu["color" + this.j + "_" + this.k],this.ccChange);
+                     new ColorChangeClass(this.charaAdd["ashi" + param1].leg.actual.leg.Kutu["color" + this.j + "_" + this.k],this.ccChange);
                   }
                   catch(myError:Error)
                   {
                   }
                   try
                   {
-                     new ColorChangeClass(this.charaAdd["ashi" + param1].leg_huku.leg.Kutu["kage" + this.j + "_" + this.k],this.kkChange);
+                     new ColorChangeClass(this.charaAdd["ashi" + param1].leg_huku.actual.leg.Kutu["kage" + this.j + "_" + this.k],this.kkChange);
                   }
                   catch(myError:Error)
                   {
                   }
                   try
                   {
-                     new ColorChangeClass(this.charaAdd["ashi" + param1].leg.leg.Kutu["kage" + this.j + "_" + this.k],this.kkChange);
+                     new ColorChangeClass(this.charaAdd["ashi" + param1].leg.actual.leg.Kutu["kage" + this.j + "_" + this.k],this.kkChange);
                   }
                   catch(myError:Error)
                   {
@@ -6822,35 +6822,35 @@ package menu
                {
                   try
                   {
-                     new ColorChangeClass(this.charaAdd["ashi" + param1].leg_huku.leg.LegBand["color" + this.j + "_" + this.k],this.ccChange);
+                     new ColorChangeClass(this.charaAdd["ashi" + param1].leg_huku.actual.leg.LegBand["color" + this.j + "_" + this.k],this.ccChange);
                   }
                   catch(myError:Error)
                   {
                   }
                   try
                   {
-                     new ColorChangeClass(this.charaAdd["ashi" + param1].leg.leg.LegBand["kage" + this.j + "_" + this.k],this.kkChange);
+                     new ColorChangeClass(this.charaAdd["ashi" + param1].leg.actual.leg.LegBand["kage" + this.j + "_" + this.k],this.kkChange);
                   }
                   catch(myError:Error)
                   {
                   }
                   try
                   {
-                     new ColorChangeClass(this.charaAdd["ashi" + param1].leg_huku.leg.LegBand["kage" + this.j + "_" + this.k],this.kkChange);
+                     new ColorChangeClass(this.charaAdd["ashi" + param1].leg_huku.actual.leg.LegBand["kage" + this.j + "_" + this.k],this.kkChange);
                   }
                   catch(myError:Error)
                   {
                   }
                   try
                   {
-                     new ColorChangeClass(this.charaAdd["ashi" + param1].foot.foot.LegBand["color" + this.j + "_" + this.k],this.ccChange);
+                     new ColorChangeClass(this.charaAdd["ashi" + param1].foot.actual.foot.LegBand["color" + this.j + "_" + this.k],this.ccChange);
                   }
                   catch(myError:Error)
                   {
                   }
                   try
                   {
-                     new ColorChangeClass(this.charaAdd["ashi" + param1].foot.foot.LegBand["kage" + this.j + "_" + this.k],this.kkChange);
+                     new ColorChangeClass(this.charaAdd["ashi" + param1].foot.actual.foot.LegBand["kage" + this.j + "_" + this.k],this.kkChange);
                   }
                   catch(myError:Error)
                   {

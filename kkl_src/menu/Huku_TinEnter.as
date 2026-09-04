@@ -134,6 +134,7 @@ package menu
                   }
                }
             }
+
             _loc10_ = false;
             _loc11_ = false;
             if(_loc7_ && this.charaData["Tin"]["_depth"] != 0 && !this.charaData["TinBokki"]["_check"])
@@ -150,10 +151,12 @@ package menu
             catch(e:Error)
             {
             }
+
             if(_loc7_ && (this.charaData["Tin"]["_depth"] == 1 || this.charaData["Tin"]["_depth"] == 2 && !this.charaData["Tama"]["_visible"][0]))
             {
                _loc11_ = true;
             }
+
             try
             {
                _loc9_.Tin.TinUp.sen.visible = _loc11_;
@@ -161,6 +164,7 @@ package menu
             catch(e:Error)
             {
             }
+
             if(this.charaData["TinMove"]["_mode"] == 0)
             {
                if(_loc5_ || this.charaData["TinBokki"]["_check"])
@@ -175,6 +179,7 @@ package menu
                   _loc9_.Tin.gotoAndStop(1);
                }
             }
+
             if(this.charaData["TinManualAuto"]["_check"])
             {
                if(_loc5_)
@@ -201,6 +206,7 @@ package menu
                      this.charaData["TinMove"]["_mode"] = 4;
                   }
                }
+
                if(this.charaData["TinMove"]["_mode"] == 1)
                {
                   if(_loc5_)
@@ -218,6 +224,7 @@ package menu
                   _loc9_.Tin.gotoAndPlay("UpClick");
                   this.charaData["TinMove"]["_mode"] = 4;
                }
+
                _loc18_ = _loc9_.Tin.currentLabel;
                if(this.charaData["TinMove"]["_mode"] == 5 && (_loc18_ == "DownUpEnd" || _loc18_ == "UpDownEnd"))
                {
@@ -227,6 +234,7 @@ package menu
                {
                   this.charaData["TinMove"]["_mode"] = 0;
                }
+               
                if(this.charaData["Tin"]["_tClick"] > 0)
                {
                   this.charaData["Tin"]["_tClick"] -= 0.1;
@@ -235,6 +243,7 @@ package menu
                {
                   this.charaData["Tin"]["_tClick"] = 0;
                }
+
                if(this.charaData["TinSwing"]["_meter"] != 50)
                {
                   this.charaData["TinSwing"]["_meter"] = 50;
@@ -262,6 +271,19 @@ package menu
                }
                _loc9_.Tin.rotation = MeterPersent.MeterPersentNum;
             }
+
+            if(this.charaData["TinSizeAuto"]["_check"])
+            {
+               _loc9_.Tin.x = 0;
+               _loc9_.Tin.y = 0;
+            } else {
+               new MeterPersent(-25,25,"TinOffsetX",param1);
+               _loc9_.Tin.x = MeterPersent.MeterPersentNum;
+
+               new MeterPersent(25,-25,"TinOffsetY",param1);
+               _loc9_.Tin.y = MeterPersent.MeterPersentNum;
+            }
+
             if(_loc9_.Tin.TinUp.x > 20)
             {
                if(_loc9_.Tin.TinUp.visible)
@@ -347,6 +369,18 @@ package menu
             {
                _loc9_.Tin.visible = true;
             }
+            
+            try {
+               _loc9_.Tin.Tin.mosaic.mosaic.visible = false;
+            } catch (error) {}
+
+            try {
+               _loc9_.Tin.TinUp.mosaic.mosaic.visible = false;
+            } catch (error) {}
+
+            try {
+               this.charaAdd.mosaic.mosaic.visible = false;
+            } catch (error) {}
          }
          else
          {
@@ -357,6 +391,7 @@ package menu
                this.charaAdd.dou.dou_shitaHuku.swapChildren(this.charaAdd.dou.dou_shitaHuku.s_swap,this.charaAdd.dou.dou_shitaHuku.s);
             }
          }
+
          if(this.charaData["Tama"]["_visible"][0])
          {
             _loc19_ = false;
@@ -367,22 +402,56 @@ package menu
                   _loc19_ = true;
                }
             }
-            if(this.charaData["Tin"]["_depth"] == 2)
-            {
-               _loc20_ = this.charaAdd.peni.peni.Peni;
+
+            var offset = 0;
+            if(this.charaData["TinSizeAuto"]["_check"]) {
+               if(this.charaData["Tin"]["_depth"] == 2)
+               {
+                  _loc20_ = this.charaAdd.peni.peni.Peni;
+               }
+               else
+               {
+                  _loc20_ = this.charaAdd.dou.dou_shitaHuku.peni.Peni;
+               }
+            } else {
+               new MeterPersent(25,-25,"TinOffsetY",param1);
+               offset = MeterPersent.MeterPersentNum;
+
+               /* Match with Tin positioning above */
+               if(this.charaData["Tin"]["_depth"] == 0)
+               {
+                  _loc20_ = this.charaAdd.dou.dou_shitaHuku.peni.Peni;
+                  try {
+                     this.charaAdd.peni.peni.Peni.Tama.visible = false;
+                     this.charaAdd.peni.peni.Peni.TamaIn.visible = false;
+                  } catch (err) {};
+               }
+               else
+               {
+                  _loc20_ = this.charaAdd.peni.peni.Peni;
+                  try {
+                     this.charaAdd.dou.dou_shitaHuku.peni.Peni.Tama.visible = false;
+                     this.charaAdd.dou.dou_shitaHuku.peni.Peni.TamaIn.visible = false;
+                  } catch (err) {};
+               }
             }
-            else
-            {
-               _loc20_ = this.charaAdd.dou.dou_shitaHuku.peni.Peni;
-            }
+            
             if(this.charaData["TinBokki"]["_check"])
             {
-               _loc20_.Tama.y = 3;
+               _loc20_.Tama.y = 3 + offset;
             }
             else
             {
-               _loc20_.Tama.y = 7;
+               _loc20_.Tama.y = 7 + offset;
             }
+
+            if (this.charaData["TinSizeAuto"]["_check"]) {
+               _loc20_.Tama.x = 0;
+            } else {
+               new MeterPersent(-25,25,"TinOffsetX",param1);
+               _loc20_.Tama.x = MeterPersent.MeterPersentNum;
+            }
+
             if(this.charaData["TamaMove"]["_mode"] == 2)
             {
                _loc20_.Tama.gotoAndPlay("TamaClick");
@@ -393,6 +462,7 @@ package menu
                _loc20_.Tama.gotoAndPlay("Swing");
                this.charaData["TamaMove"]["_mode"] = 0;
             }
+
             if(_loc6_)
             {
                if(_loc20_.Tama.Tama.currentFrame != 1)
@@ -421,6 +491,7 @@ package menu
                   new Chara_ColorClass(param1,"Tama");
                }
             }
+
             try
             {
                this.charaAdd.dou.dou_shitaHuku.peni.Peni.Tama.Tama.TamaSen.visible = false;
@@ -467,6 +538,24 @@ package menu
                }
                catch(myError:Error)
                {
+               }
+            }
+
+            if (!this.charaData["TinSizeAuto"]["_check"]) {
+               /* Match with Tin positioning above */
+               if(this.charaData["Tin"]["_depth"] == 0)
+               {
+                  try {
+                     this.charaAdd.peni.peni.Peni.Tama.visible = false;
+                     this.charaAdd.peni.peni.Peni.TamaIn.visible = false;
+                  } catch (err) {};
+               }
+               else
+               {
+                  try {
+                     this.charaAdd.dou.dou_shitaHuku.peni.Peni.Tama.visible = false;
+                     this.charaAdd.dou.dou_shitaHuku.peni.Peni.TamaIn.visible = false;
+                  } catch (err) {};
                }
             }
          }

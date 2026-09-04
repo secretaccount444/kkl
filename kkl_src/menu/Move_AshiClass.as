@@ -1,6 +1,9 @@
 package menu
 {
    import parameter.Dress_data;
+   import system.MeterPersent;
+   import flash.geom.Matrix;
+   import flash.geom.Point;
    
    public class Move_AshiClass
    {
@@ -248,26 +251,26 @@ package menu
          {
             try
             {
-               this.charaAdd["ashi" + i].thigh.thigh.sen.mask = this.charaAdd["ashi" + i].leg.leg.maskMc0;
+               this.charaAdd["ashi" + i].thigh.actual.thigh.sen.mask = this.charaAdd["ashi" + i].leg.actual.leg.maskMc0;
             }
             catch(myError:Error)
             {
             }
             try
             {
-               this.charaAdd["ashi" + i].foot.foot.sen.mask = this.charaAdd["ashi" + i].leg.leg.maskMc;
-               this.charaAdd["ashi" + i].foot.foot.LegBand_sen.mask = this.charaAdd["ashi" + i].leg.leg.maskMcLegBand;
-               this.charaAdd["ashi" + i].foot.foot.socks_sen.mask = this.charaAdd["ashi" + i].leg.leg.maskMcSocks;
-               this.charaAdd["ashi" + i].foot.foot.tights_sen.mask = this.charaAdd["ashi" + i].leg.leg.maskMcTights;
+               this.charaAdd["ashi" + i].foot.actual.foot.sen.mask = this.charaAdd["ashi" + i].leg.actual.leg.maskMc;
+               this.charaAdd["ashi" + i].foot.actual.foot.LegBand_sen.mask = this.charaAdd["ashi" + i].leg.actual.leg.maskMcLegBand;
+               this.charaAdd["ashi" + i].foot.actual.foot.socks_sen.mask = this.charaAdd["ashi" + i].leg.actual.leg.maskMcSocks;
+               this.charaAdd["ashi" + i].foot.actual.foot.tights_sen.mask = this.charaAdd["ashi" + i].leg.actual.leg.maskMcTights;
             }
             catch(myError:Error)
             {
                try
                {
-                  charaAdd["ashi" + i].foot.foot.sen.mask = null;
-                  charaAdd["ashi" + i].foot.foot.LegBand_sen.mask = null;
-                  charaAdd["ashi" + i].foot.foot.socks_sen.mask = null;
-                  charaAdd["ashi" + i].foot.foot.tights_sen.mask = null;
+                  charaAdd["ashi" + i].foot.actual.foot.sen.mask = null;
+                  charaAdd["ashi" + i].foot.actual.foot.LegBand_sen.mask = null;
+                  charaAdd["ashi" + i].foot.actual.foot.socks_sen.mask = null;
+                  charaAdd["ashi" + i].foot.actual.foot.tights_sen.mask = null;
                }
                catch(myError:Error)
                {
@@ -287,115 +290,115 @@ package menu
          i = 0;
          while(i <= 1)
          {
-            this.charaAdd["ashi" + i].thigh.thigh.Tights.num = i;
-            this.charaAdd["ashi" + i].thigh.thigh.Tights.mouseChildren = false;
-            this.charaAdd["ashi" + i].shiri.shiri.Tights.num = i;
-            this.charaAdd["ashi" + i].shiri.shiri.Tights.mouseChildren = false;
-            this.charaAdd["ashi" + i].foot.foot.Tights.num = i;
-            this.charaAdd["ashi" + i].foot.foot.Tights.mouseChildren = false;
+            this.charaAdd["ashi" + i].thigh.actual.thigh.Tights.num = i;
+            this.charaAdd["ashi" + i].thigh.actual.thigh.Tights.mouseChildren = false;
+            this.charaAdd["ashi" + i].shiri.actual.shiri.Tights.num = i;
+            this.charaAdd["ashi" + i].shiri.actual.shiri.Tights.mouseChildren = false;
+            this.charaAdd["ashi" + i].foot.actual.foot.Tights.num = i;
+            this.charaAdd["ashi" + i].foot.actual.foot.Tights.mouseChildren = false;
             try
             {
-               this.charaAdd["ashi" + i].leg.leg.Tights.num = i;
-               this.charaAdd["ashi" + i].leg.leg.Tights.mouseChildren = false;
+               this.charaAdd["ashi" + i].leg.actual.leg.Tights.num = i;
+               this.charaAdd["ashi" + i].leg.actual.leg.Tights.mouseChildren = false;
             }
             catch(myError:Error)
             {
             }
-            this.charaAdd["ashi" + i].thigh.thigh.Zubon.num = i;
-            this.charaAdd["ashi" + i].thigh.thigh.Zubon.mouseChildren = false;
-            this.charaAdd["ashi" + i].thigh.thigh.Zubon.buttonMode = true;
-            this.charaAdd["ashi" + i].thigh.thigh.Socks.num = i;
-            this.charaAdd["ashi" + i].thigh.thigh.Socks.mouseChildren = false;
-            this.charaAdd["ashi" + i].thigh.thigh.Socks.buttonMode = true;
-            this.charaAdd["ashi" + i].thigh.thigh.SocksTop.num = i;
-            this.charaAdd["ashi" + i].thigh.thigh.SocksTop.mouseChildren = false;
-            this.charaAdd["ashi" + i].thigh.thigh.SocksTop.buttonMode = true;
+            this.charaAdd["ashi" + i].thigh.actual.thigh.Zubon.num = i;
+            this.charaAdd["ashi" + i].thigh.actual.thigh.Zubon.mouseChildren = false;
+            this.charaAdd["ashi" + i].thigh.actual.thigh.Zubon.buttonMode = true;
+            this.charaAdd["ashi" + i].thigh.actual.thigh.Socks.num = i;
+            this.charaAdd["ashi" + i].thigh.actual.thigh.Socks.mouseChildren = false;
+            this.charaAdd["ashi" + i].thigh.actual.thigh.Socks.buttonMode = true;
+            this.charaAdd["ashi" + i].thigh.actual.thigh.SocksTop.num = i;
+            this.charaAdd["ashi" + i].thigh.actual.thigh.SocksTop.mouseChildren = false;
+            this.charaAdd["ashi" + i].thigh.actual.thigh.SocksTop.buttonMode = true;
             try
             {
-               this.charaAdd["ashi" + i].thigh.thigh.Pantu.num = i;
-               this.charaAdd["ashi" + i].thigh.thigh.Pantu.mouseChildren = false;
-               this.charaAdd["ashi" + i].thigh.thigh.Pantu.buttonMode = true;
+               this.charaAdd["ashi" + i].thigh.actual.thigh.Pantu.num = i;
+               this.charaAdd["ashi" + i].thigh.actual.thigh.Pantu.mouseChildren = false;
+               this.charaAdd["ashi" + i].thigh.actual.thigh.Pantu.buttonMode = true;
             }
             catch(myError:Error)
             {
             }
-            this.charaAdd["ashi" + i].foot.foot.Kutu.num = i;
-            this.charaAdd["ashi" + i].foot.foot.Kutu.mouseChildren = false;
-            this.charaAdd["ashi" + i].foot.foot.Kutu.buttonMode = true;
-            this.charaAdd["ashi" + i].foot.foot.KutuUnder.num = i;
-            this.charaAdd["ashi" + i].foot.foot.KutuUnder.mouseChildren = false;
-            this.charaAdd["ashi" + i].foot.foot.KutuUnder.buttonMode = true;
-            this.charaAdd["ashi" + i].foot.foot.Socks.num = i;
-            this.charaAdd["ashi" + i].foot.foot.Socks.mouseChildren = false;
-            this.charaAdd["ashi" + i].foot.foot.Socks.buttonMode = true;
+            this.charaAdd["ashi" + i].foot.actual.foot.Kutu.num = i;
+            this.charaAdd["ashi" + i].foot.actual.foot.Kutu.mouseChildren = false;
+            this.charaAdd["ashi" + i].foot.actual.foot.Kutu.buttonMode = true;
+            this.charaAdd["ashi" + i].foot.actual.foot.KutuUnder.num = i;
+            this.charaAdd["ashi" + i].foot.actual.foot.KutuUnder.mouseChildren = false;
+            this.charaAdd["ashi" + i].foot.actual.foot.KutuUnder.buttonMode = true;
+            this.charaAdd["ashi" + i].foot.actual.foot.Socks.num = i;
+            this.charaAdd["ashi" + i].foot.actual.foot.Socks.mouseChildren = false;
+            this.charaAdd["ashi" + i].foot.actual.foot.Socks.buttonMode = true;
             try
             {
-               this.charaAdd["ashi" + i].leg.leg.Socks.num = i;
-               this.charaAdd["ashi" + i].leg.leg.Socks.mouseChildren = false;
-               this.charaAdd["ashi" + i].leg.leg.Socks.buttonMode = true;
-            }
-            catch(myError:Error)
-            {
-            }
-            try
-            {
-               this.charaAdd["ashi" + i].leg_huku.leg.Socks.num = i;
-               this.charaAdd["ashi" + i].leg_huku.leg.Socks.mouseChildren = false;
-               this.charaAdd["ashi" + i].leg_huku.leg.Socks.buttonMode = true;
+               this.charaAdd["ashi" + i].leg.actual.leg.Socks.num = i;
+               this.charaAdd["ashi" + i].leg.actual.leg.Socks.mouseChildren = false;
+               this.charaAdd["ashi" + i].leg.actual.leg.Socks.buttonMode = true;
             }
             catch(myError:Error)
             {
             }
             try
             {
-               this.charaAdd["ashi" + i].leg_huku.leg.Kutu.num = i;
-               this.charaAdd["ashi" + i].leg_huku.leg.Kutu.mouseChildren = false;
-               this.charaAdd["ashi" + i].leg_huku.leg.Kutu.buttonMode = true;
+               this.charaAdd["ashi" + i].leg_huku.actual.leg.Socks.num = i;
+               this.charaAdd["ashi" + i].leg_huku.actual.leg.Socks.mouseChildren = false;
+               this.charaAdd["ashi" + i].leg_huku.actual.leg.Socks.buttonMode = true;
             }
             catch(myError:Error)
             {
             }
             try
             {
-               this.charaAdd["ashi" + i].leg.leg.Kutu.num = i;
-               this.charaAdd["ashi" + i].leg.leg.Kutu.mouseChildren = false;
-               this.charaAdd["ashi" + i].leg.leg.Kutu.buttonMode = true;
+               this.charaAdd["ashi" + i].leg_huku.actual.leg.Kutu.num = i;
+               this.charaAdd["ashi" + i].leg_huku.actual.leg.Kutu.mouseChildren = false;
+               this.charaAdd["ashi" + i].leg_huku.actual.leg.Kutu.buttonMode = true;
             }
             catch(myError:Error)
             {
             }
             try
             {
-               this.charaAdd["ashi" + i].leg_huku.leg.LegBand.num = i;
-               this.charaAdd["ashi" + i].leg_huku.leg.LegBand.mouseChildren = false;
-               this.charaAdd["ashi" + i].leg_huku.leg.LegBand.buttonMode = true;
+               this.charaAdd["ashi" + i].leg.actual.leg.Kutu.num = i;
+               this.charaAdd["ashi" + i].leg.actual.leg.Kutu.mouseChildren = false;
+               this.charaAdd["ashi" + i].leg.actual.leg.Kutu.buttonMode = true;
             }
             catch(myError:Error)
             {
             }
             try
             {
-               this.charaAdd["ashi" + i].leg.leg.LegBand.num = i;
-               this.charaAdd["ashi" + i].leg.leg.LegBand.mouseChildren = false;
-               this.charaAdd["ashi" + i].leg.leg.LegBand.buttonMode = true;
+               this.charaAdd["ashi" + i].leg_huku.actual.leg.LegBand.num = i;
+               this.charaAdd["ashi" + i].leg_huku.actual.leg.LegBand.mouseChildren = false;
+               this.charaAdd["ashi" + i].leg_huku.actual.leg.LegBand.buttonMode = true;
             }
             catch(myError:Error)
             {
             }
             try
             {
-               this.charaAdd["ashi" + i].foot.foot.LegBand.num = i;
-               this.charaAdd["ashi" + i].foot.foot.LegBand.mouseChildren = false;
-               this.charaAdd["ashi" + i].foot.foot.LegBand.buttonMode = true;
+               this.charaAdd["ashi" + i].leg.actual.leg.LegBand.num = i;
+               this.charaAdd["ashi" + i].leg.actual.leg.LegBand.mouseChildren = false;
+               this.charaAdd["ashi" + i].leg.actual.leg.LegBand.buttonMode = true;
             }
             catch(myError:Error)
             {
             }
             try
             {
-               this.charaAdd["ashi" + i].leg_huku.leg.Zubon.num = i;
-               this.charaAdd["ashi" + i].leg_huku.leg.Zubon.mouseChildren = false;
-               this.charaAdd["ashi" + i].leg_huku.leg.Zubon.buttonMode = true;
+               this.charaAdd["ashi" + i].foot.actual.foot.LegBand.num = i;
+               this.charaAdd["ashi" + i].foot.actual.foot.LegBand.mouseChildren = false;
+               this.charaAdd["ashi" + i].foot.actual.foot.LegBand.buttonMode = true;
+            }
+            catch(myError:Error)
+            {
+            }
+            try
+            {
+               this.charaAdd["ashi" + i].leg_huku.actual.leg.Zubon.num = i;
+               this.charaAdd["ashi" + i].leg_huku.actual.leg.Zubon.mouseChildren = false;
+               this.charaAdd["ashi" + i].leg_huku.actual.leg.Zubon.buttonMode = true;
             }
             catch(myError:Error)
             {
@@ -440,147 +443,318 @@ package menu
             new Huku_Skirt(this.charaNum,"Vest");
          }
          new Chara_s(this.charaNum,"tab");
+
+         updateLegRotation(this.charaNum);
+
          i = 0;
          while(i <= 1)
          {
             try
             {
-               this.charaAdd["ashi" + i].thigh.thigh.hitTest.mouseChildren = false;
-               this.charaAdd["ashi" + i].thigh.thigh.hitTest.mouseEnabled = false;
+               this.charaAdd["ashi" + i].thigh.actual.thigh.hitTest.mouseChildren = false;
+               this.charaAdd["ashi" + i].thigh.actual.thigh.hitTest.mouseEnabled = false;
             }
             catch(myError:Error)
             {
             }
             try
             {
-               this.charaAdd["ashi" + i].thigh.thigh.color1.mouseChildren = false;
-               this.charaAdd["ashi" + i].thigh.thigh.color1.mouseEnabled = false;
+               this.charaAdd["ashi" + i].thigh.actual.thigh.color1.mouseChildren = false;
+               this.charaAdd["ashi" + i].thigh.actual.thigh.color1.mouseEnabled = false;
             }
             catch(myError:Error)
             {
             }
             try
             {
-               this.charaAdd["ashi" + i].thigh.thigh.kage1.mouseChildren = false;
-               this.charaAdd["ashi" + i].thigh.thigh.kage1.mouseEnabled = false;
+               this.charaAdd["ashi" + i].thigh.actual.thigh.kage1.mouseChildren = false;
+               this.charaAdd["ashi" + i].thigh.actual.thigh.kage1.mouseEnabled = false;
             }
             catch(myError:Error)
             {
             }
             try
             {
-               this.charaAdd["ashi" + i].thigh.thigh.color0.mouseChildren = false;
-               this.charaAdd["ashi" + i].thigh.thigh.color0.mouseEnabled = false;
+               this.charaAdd["ashi" + i].thigh.actual.thigh.color0.mouseChildren = false;
+               this.charaAdd["ashi" + i].thigh.actual.thigh.color0.mouseEnabled = false;
             }
             catch(myError:Error)
             {
             }
             try
             {
-               this.charaAdd["ashi" + i].thigh.thigh.kage0.mouseChildren = false;
-               this.charaAdd["ashi" + i].thigh.thigh.kage0.mouseEnabled = false;
+               this.charaAdd["ashi" + i].thigh.actual.thigh.kage0.mouseChildren = false;
+               this.charaAdd["ashi" + i].thigh.actual.thigh.kage0.mouseEnabled = false;
             }
             catch(myError:Error)
             {
             }
             try
             {
-               this.charaAdd["ashi" + i].thigh.thigh.Tights_Swap.mouseChildren = false;
-               this.charaAdd["ashi" + i].thigh.thigh.Tights_Swap.mouseEnabled = false;
+               this.charaAdd["ashi" + i].thigh.actual.thigh.Tights_Swap.mouseChildren = false;
+               this.charaAdd["ashi" + i].thigh.actual.thigh.Tights_Swap.mouseEnabled = false;
             }
             catch(myError:Error)
             {
             }
             try
             {
-               this.charaAdd["ashi" + i].thigh.thigh.sen.mouseChildren = false;
-               this.charaAdd["ashi" + i].thigh.thigh.sen.mouseEnabled = false;
+               this.charaAdd["ashi" + i].thigh.actual.thigh.sen.mouseChildren = false;
+               this.charaAdd["ashi" + i].thigh.actual.thigh.sen.mouseEnabled = false;
             }
             catch(myError:Error)
             {
             }
             try
             {
-               this.charaAdd["ashi" + i].leg.leg.color0.mouseChildren = false;
-               this.charaAdd["ashi" + i].leg.leg.color0.mouseEnabled = false;
+               this.charaAdd["ashi" + i].leg.actual.leg.color0.mouseChildren = false;
+               this.charaAdd["ashi" + i].leg.actual.leg.color0.mouseEnabled = false;
             }
             catch(myError:Error)
             {
             }
             try
             {
-               this.charaAdd["ashi" + i].leg.leg.maskMc.mouseChildren = false;
-               this.charaAdd["ashi" + i].leg.leg.maskMc.mouseEnabled = false;
+               this.charaAdd["ashi" + i].leg.actual.leg.maskMc.mouseChildren = false;
+               this.charaAdd["ashi" + i].leg.actual.leg.maskMc.mouseEnabled = false;
             }
             catch(myError:Error)
             {
             }
             try
             {
-               this.charaAdd["ashi" + i].leg.leg.maskMcTights.mouseChildren = false;
-               this.charaAdd["ashi" + i].leg.leg.maskMcTights.mouseEnabled = false;
+               this.charaAdd["ashi" + i].leg.actual.leg.maskMcTights.mouseChildren = false;
+               this.charaAdd["ashi" + i].leg.actual.leg.maskMcTights.mouseEnabled = false;
             }
             catch(myError:Error)
             {
             }
             try
             {
-               this.charaAdd["ashi" + i].leg.leg.maskMcSocks.mouseChildren = false;
-               this.charaAdd["ashi" + i].leg.leg.maskMcSocks.mouseEnabled = false;
+               this.charaAdd["ashi" + i].leg.actual.leg.maskMcSocks.mouseChildren = false;
+               this.charaAdd["ashi" + i].leg.actual.leg.maskMcSocks.mouseEnabled = false;
             }
             catch(myError:Error)
             {
             }
             try
             {
-               this.charaAdd["ashi" + i].leg.leg.maskMcLegBand.mouseChildren = false;
-               this.charaAdd["ashi" + i].leg.leg.maskMcLegBand.mouseEnabled = false;
+               this.charaAdd["ashi" + i].leg.actual.leg.maskMcLegBand.mouseChildren = false;
+               this.charaAdd["ashi" + i].leg.actual.leg.maskMcLegBand.mouseEnabled = false;
             }
             catch(myError:Error)
             {
             }
             try
             {
-               this.charaAdd["ashi" + i].foot.foot.hitTest.mouseChildren = false;
-               this.charaAdd["ashi" + i].foot.foot.hitTest.mouseEnabled = false;
+               this.charaAdd["ashi" + i].foot.actual.foot.hitTest.mouseChildren = false;
+               this.charaAdd["ashi" + i].foot.actual.foot.hitTest.mouseEnabled = false;
             }
             catch(myError:Error)
             {
             }
             try
             {
-               this.charaAdd["ashi" + i].foot.foot.color0.mouseChildren = false;
-               this.charaAdd["ashi" + i].foot.foot.color0.mouseEnabled = false;
+               this.charaAdd["ashi" + i].foot.actual.foot.color0.mouseChildren = false;
+               this.charaAdd["ashi" + i].foot.actual.foot.color0.mouseEnabled = false;
             }
             catch(myError:Error)
             {
             }
             try
             {
-               this.charaAdd["ashi" + i].foot.foot.kage0.mouseChildren = false;
-               this.charaAdd["ashi" + i].foot.foot.kage0.mouseEnabled = false;
+               this.charaAdd["ashi" + i].foot.actual.foot.kage0.mouseChildren = false;
+               this.charaAdd["ashi" + i].foot.actual.foot.kage0.mouseEnabled = false;
             }
             catch(myError:Error)
             {
             }
             try
             {
-               this.charaAdd["ashi" + i].foot.foot.sen.mouseChildren = false;
-               this.charaAdd["ashi" + i].foot.foot.sen.mouseEnabled = false;
+               this.charaAdd["ashi" + i].foot.actual.foot.sen.mouseChildren = false;
+               this.charaAdd["ashi" + i].foot.actual.foot.sen.mouseEnabled = false;
             }
             catch(myError:Error)
             {
             }
             try
             {
-               this.charaAdd["ashi" + i].shiri.shiri.kage0.mouseChildren = false;
-               this.charaAdd["ashi" + i].shiri.shiri.kage0.mouseEnabled = false;
+               this.charaAdd["ashi" + i].shiri.actual.shiri.kage0.mouseChildren = false;
+               this.charaAdd["ashi" + i].shiri.actual.shiri.kage0.mouseEnabled = false;
             }
             catch(myError:Error)
             {
             }
             i++;
          }
+      }
+
+      public static var thighDims = {
+         886:  [63.85,  206.85],
+         892:  [63.45,  207.65],
+         1457: [63.25,  212.60],
+         1495: [63.70,  211.25],
+         1688: [66.45,  190.60],
+         1818: [70.25,  178.30],
+         1881: [69.10,  128.85],
+         2122: [111.50, 360.95],
+         2145: [0, 0]
+      };
+
+      /* pose = raw _menu number from charaData */
+      public static function resolveThighType(pose: uint) : uint {
+         if ((pose <= 1) || (pose >= 6 && pose <= 12) || (pose >= 43 && pose <= 49)) {
+            return 886;
+         } else if (pose >= 2 && pose <= 5) {
+            return 892;
+         } else if (pose >= 13 && pose <= 42) {
+            return 1457;
+         } else if (pose >= 50 && pose <= 59) {
+            return 1495;
+         } else if (pose >= 60 && pose <= 71) {
+            return 1688;
+         } else if (pose >= 72 && pose <= 79) {
+            return 1818;
+         } else if ((pose >= 80 && pose <= 87) || (pose == 99)) {
+            return 1881;
+         } else if ((pose >= 88 && pose <= 98)) {
+            return 2122;
+         } else if ((pose >= 100 && pose <= 102)) {
+            return 2145;
+         } else {
+            return 0;
+         }
+      }
+
+      public static function rotationMatrix(deg: Number) : Matrix {
+         var rad = deg * (Math.PI / 180.0);
+         return new Matrix(Math.cos(rad), Math.sin(rad), -Math.sin(rad), Math.cos(rad), 0, 0);
+      }
+
+      public static function rotateSpriteOffsetVector(target, source, rotation: Number, offset: Point, scale: Point): Point {
+         var alignOffset = new Point(target.x - source.x, target.y - source.y);
+         var len2 = new Point(alignOffset.x * scale.x, alignOffset.y * scale.y);
+         return rotationMatrix(rotation).transformPoint(len2.add(offset)).subtract(alignOffset);
+      }
+
+      public static function getOffsetDataVector(character: int, side: String, part: String) : Point {
+         new MeterPersent(-25, 25, side + part + "OffsetX", character);
+         var x = MeterPersent.MeterPersentNum;
+         new MeterPersent(-25, 25, side + part + "OffsetY", character);
+         var y = MeterPersent.MeterPersentNum;
+         return new Point(x, y);
+      }
+
+      public static function getScaleVector(character: int, side: String, part: String) : Point {
+         new MeterPersent(0.75, 1.25, side + part + "ScaleX", character);
+         var x = MeterPersent.MeterPersentNum;
+         new MeterPersent(0.75, 1.25, side + part + "ScaleY", character);
+         var y = MeterPersent.MeterPersentNum;
+         return new Point(x, y);
+      }
+
+      public static function getScaleAdjustmentVector(character: int, side: String, part: String) : Point {
+         var scaleVec = getScaleVector(character, side, part);
+         if (part == "Thigh") {
+            return new Point((scaleVec.x - 1) * 3.25, (scaleVec.y - 1) * 15);
+         } else if (part == "Leg") {
+            return new Point(0, (scaleVec.y - 1) * 15);
+            // return new Point((scaleVec.x - 1) * -0.65, (scaleVec.y - 1) * 15);
+         }
+
+         return null;
+      }
+
+      public static function updateSingleLegRotation(character: int, side: int) {
+         var sideName = "";
+         var ashi = null;
+         var charaData = MenuClass.charaData[character];
+
+         if (side == 0) {
+            sideName = "Left";
+            ashi = MenuClass.charaAdd[character].ashi0;
+         } else {
+            sideName = "Right";
+            ashi = MenuClass.charaAdd[character].ashi1;
+         }
+
+         var thighRot = charaData[sideName + "ThighRotation"]["_meter"];
+         var legRot = charaData[sideName + "LegRotation"]["_meter"];
+         var footRot = charaData[sideName + "FootRotation"]["_meter"];
+
+         var thighOffset = getOffsetDataVector(character, sideName, "Thigh");
+         var thighScale = getScaleVector(character, sideName, "Thigh");
+         var thighScaleOffset = getScaleAdjustmentVector(character, sideName, "Thigh");
+         if (thighScaleOffset) {
+            thighOffset = thighOffset.add(thighScaleOffset);
+         } else {
+            trace("Could not compute " + sideName + " thigh scale offset vector?")
+         }
+
+         ashi.thigh.actual.x = thighOffset.x;
+         ashi.thigh.actual.y = thighOffset.y;
+         ashi.thigh.actual.scaleX = thighScale.x;
+         ashi.thigh.actual.scaleY = thighScale.y;
+         ashi.thigh.actual.rotation = thighRot;
+         ashi.thigh.actual.visible = charaData[sideName + "ThighVisible"]["_visible"][0];
+         ashi.shiri.actual.visible = charaData[sideName + "ThighVisible"]["_visible"][0];
+
+         if (ashi.leg) {
+            var legOffset = getOffsetDataVector(character, sideName, "Leg");
+            var legScale = getScaleVector(character, sideName, "Leg");
+            var legScaleOffset = getScaleAdjustmentVector(character, sideName, "Thigh");
+            if (legScaleOffset) {
+               legOffset = legOffset.add(legScaleOffset);
+            } else {
+               trace("Could not compute " + sideName + " leg scale offset vector?")
+            }
+
+            var legPos = rotateSpriteOffsetVector(ashi.leg, ashi.thigh, thighRot, legOffset, thighScale).add(thighOffset);
+
+            ashi.leg.actual.x = legPos.x;
+            ashi.leg.actual.y = legPos.y;
+            ashi.leg.actual.scaleX = legScale.x;
+            ashi.leg.actual.scaleY = legScale.y;
+            ashi.leg.actual.rotation = thighRot + legRot;
+            ashi.leg.actual.visible = charaData[sideName + "LegVisible"]["_visible"][0];
+
+            if (ashi.leg_huku) {
+               var legHukuPos = rotateSpriteOffsetVector(ashi.leg_huku, ashi.thigh, thighRot, legOffset, thighScale).add(thighOffset);
+               ashi.leg_huku.actual.x = legHukuPos.x;
+               ashi.leg_huku.actual.y = legHukuPos.y;
+               ashi.leg_huku.actual.scaleX = legScale.x;
+               ashi.leg_huku.actual.scaleY = legScale.y;
+               ashi.leg_huku.actual.rotation = thighRot + legRot;
+               ashi.leg_huku.actual.visible = charaData[sideName + "LegVisible"]["_visible"][0];
+            }
+
+            if (ashi.foot) {
+               var footScale = getScaleVector(character, sideName, "Foot");
+               var footPos = rotateSpriteOffsetVector(ashi.foot, ashi.leg, thighRot + legRot, getOffsetDataVector(character, sideName, "Foot"), legScale).add(legPos);
+               ashi.foot.actual.x = footPos.x;
+               ashi.foot.actual.y = footPos.y;
+               ashi.foot.actual.scaleX = footScale.x;
+               ashi.foot.actual.scaleY = footScale.y;
+               ashi.foot.actual.rotation = thighRot + legRot + footRot;
+            }
+         } else if (ashi.foot) {
+            var footScale = getScaleVector(character, sideName, "Foot");
+            var footPos = rotateSpriteOffsetVector(ashi.foot, ashi.thigh, thighRot, getOffsetDataVector(character, sideName, "Foot"), thighScale).add(thighOffset);
+            ashi.foot.actual.x = footPos.x;
+            ashi.foot.actual.y = footPos.y;
+            ashi.foot.actual.scaleX = footScale.x;
+            ashi.foot.actual.scaleY = footScale.y;
+            ashi.foot.actual.rotation = thighRot + footRot;
+         }
+
+         if (ashi.foot) {
+            ashi.foot.actual.visible = charaData[sideName + "FootVisible"]["_visible"][0];
+         }
+      }
+
+      public static function updateLegRotation(character: int) {
+         updateSingleLegRotation(character, 0);
+         updateSingleLegRotation(character, 1);
       }
    }
 }

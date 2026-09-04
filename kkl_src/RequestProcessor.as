@@ -226,12 +226,12 @@ package {
                 if (split_idx > 1) {
                     new Tab_StoryLoad(code_split, "IN");
                 } else {
-                    new Tab_IEInOut("IN", code, MenuClass._nowCharaNum);
+                    Tab_IEInOut.execute("IN", code, MenuClass._nowCharaNum);
                     new Tab_SetClass();
                 }
             }
 
-            var tm:Timer = new Timer(250, 1);
+            var tm:Timer = new Timer(500, 1);
             tm.addEventListener("timer", function (e:TimerEvent) {
                 lastHideShowStatus = getChildren(MenuClass.charaAdd[MenuClass._nowCharaNum], []);
                 
@@ -253,7 +253,7 @@ package {
                     MenuClass.charaAddDepth[i].charaSelect.visible = false;
                 }
                 
-                var tm2:Timer = new Timer(750, 1);
+                var tm2:Timer = new Timer(25, 1);
                 tm2.addEventListener("timer", function (e2:TimerEvent) {
                     Main.mainWindow.bg.visible = false;
                     var camera: Tab_CameraJpg = new Tab_CameraJpg();
@@ -264,7 +264,7 @@ package {
         }
 
         public function onProcessCodeComplete() : void {
-            var t:Timer = new Timer(250, 1);
+            var t:Timer = new Timer(50, 1);
             
             Main.mainWindow.bg.visible = true;
             loadHideShowFromArray(MenuClass.charaAdd[MenuClass._nowCharaNum], lastHideShowStatus);

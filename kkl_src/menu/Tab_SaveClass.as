@@ -890,7 +890,7 @@ package menu
                         continue;
                      }
                   }
-                  new Tab_IEInOut("textIN",saveData[nowSelectBoxNum].charaData,MenuClass._nowCharaNum);
+                  Tab_IEInOut.execute("textIN",saveData[nowSelectBoxNum].charaData,MenuClass._nowCharaNum);
                   new Tab_CloseClass();
                }
             }
@@ -990,7 +990,7 @@ package menu
                         Tab_IEInOut.BeltCheck = true;
                         Tab_IEInOut.MarkCheck = true;
                         new Tab_SaveUpdate(i,MenuClass.systemData["version"]["_menu"],"Non");
-                        new SetCharaData(i,"move",2);
+                        SetCharaData.execute(i,"move",2);
                         MenuClass.firstLoadEmotionCount = 1;
                         i++;
                      }
@@ -1028,10 +1028,10 @@ package menu
                         new Tab_ColorLinkCheck(0,tabName,"system");
                      }
                      new SetClass(0,"system","move");
-                     MenuClass.charaMotoData = clone(MenuClass.charaData);
-                     Dress_data.DressCharaMotoData = clone(Dress_data.DressCharaData);
+                     // MenuClass.charaMotoData = clone(MenuClass.charaData);
+                     // Dress_data.DressCharaMotoData = clone(Dress_data.DressCharaData);
                      MenuClass.systemMotoData = clone(MenuClass.systemData);
-                     MenuClass.menuCustomResetNum = clone(Dress_data.menuCustomNum);
+                     // MenuClass.menuCustomResetNum = clone(Dress_data.menuCustomNum);
                      MenuClass.charaOldData = null;
                      MenuClass.systemOldData = null;
                      if(MenuClass._nowTargetMode == "Select")
@@ -1089,7 +1089,7 @@ package menu
                      i = 0;
                      while(i <= MenuClass._characterNum)
                      {
-                        new SetCharaData(i,"move",2);
+                        SetCharaData.execute(i,"move",2);
                         i++;
                      }
                      new SetClass(0,"system","tab");
@@ -1131,7 +1131,7 @@ package menu
                MenuClass.menuData["Story_Page"] = MenuClass.StoryTimeLineData.length - 1;
                new Tab_TextInClass(1,"Story_Page",MenuClass.menuData["Story_Page"]);
                new Tab_SetClass();
-               new Tab_IEInOut("textIN",MenuClass.StoryTimeLineData[MenuClass.systemData["Story_Page"]["_menu"]][9],MenuClass._nowCharaNum);
+               Tab_IEInOut.execute("textIN",MenuClass.StoryTimeLineData[MenuClass.systemData["Story_Page"]["_menu"]][9],MenuClass._nowCharaNum);
                new Tab_CloseClass();
             }
             catch(myError:Error)

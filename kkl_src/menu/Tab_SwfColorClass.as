@@ -44,6 +44,8 @@ package menu
          new Stage_MoveCheckClass();
          try
          {
+            Tab_ColorBtnSet2.customSetFc("swfColor");
+            /*
             if(MenuClass._nowHeaderName == "CharaLoad")
             {
                if(Tab_FileReference2.Arloader2[MenuClass._nowCharaNum][MenuClass.systemData["CharaLoadPlus"]["_menu"]].getChildAt(0).pass)
@@ -105,15 +107,18 @@ package menu
                   _loc2_++;
                }
             }
+            */
             new Tab_SetClass();
          }
          catch(myError:Error)
          {
+            trace(myError.getStackTrace());
          }
       }
       
       public static function submitMouseDown(param1:MouseEvent) : void
       {
+         /*
          var _loc2_:int = 0;
          var _loc3_:int = Main.passData.length;
          if(_loc3_ == 0)
@@ -141,6 +146,12 @@ package menu
                break;
             }
             _loc2_++;
+         }
+         */
+         try {
+            Tab_ColorBtnSet2.customSetFc("swfColor");
+         } catch (err) {
+            trace(err.getStackTrace());
          }
          new Stage_MoveCheckClass();
          MenuClass.ErrorWindow.submitBtn.removeEventListener(MouseEvent.MOUSE_DOWN,submitMouseDown);

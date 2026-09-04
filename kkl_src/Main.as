@@ -19,20 +19,21 @@ package {
    import parameter.Chara_IESeihukudata;
    import parameter.Chara_IEdata;
    import system.TextLoadClass;
-    import flash.filesystem.*;
+   import flash.filesystem.*;
 
-    import flash.net.URLRequest;
-    import flash.display.Loader;
-    import menu.Tab_IEInOut;
-    import menu.Tab_SetClass;
-    import flash.filesystem.*;
-    import flash.utils.ByteArray;
+   import flash.net.URLRequest;
+   import flash.display.Loader;
+   import menu.Tab_IEInOut;
+   import menu.Tab_SetClass;
+   import flash.filesystem.*;
+   import flash.utils.ByteArray;
+   import undo.UndoTimeline;
 
    
    public class Main extends MovieClip
    {
       
-      public static var version:int = 105;
+      public static var version:int = 106;
       
       public static var saveAllVersion:int = 1;
       
@@ -46,7 +47,7 @@ package {
       
       public static var r18Check:Boolean = false;
       
-      public static var loadName:Array = new Array("tail2","hane1","bura21","mune31","dou63","hand0_10_1","hand1_45_1","ashi31","head63","peni7","mune_m32","ysyatu30","hairEx17","belt15","background13","mob5","character7","mark13_1","ribon22_1","sideburn3","hairBack3","bangs2","horn","bodyDress11","mouth4","hair","breastOption2","hat3","megane3","eye","hukidashi6");
+      public static var loadName:Array = new Array("tail2","hane1","bura21","mune31","dou63","hand0_10_1","hand1_45_1","ashi31_1","head63","peni7","mune_m32","ysyatu30","hairEx17","belt15","background13","mob5","character7","mark13_1","ribon22_1","sideburn3","hairBack3","bangs2","horn","bodyDress11","mouth4","hair","breastOption2","hat3","megane3","eye","hukidashi6");
       
       public static var loadItemName:Array = new Array("flag0","","chair20","charaSet11","allCharaSet5","allHukuSet6");
       
@@ -142,6 +143,7 @@ package {
       public static var server: RequestServer = null;
       public static var autosaver: Autosaver = null;
       public static var keypressHandler: AdvKeyPressHandler = null;
+      public static var clickHandler: AdvClickHandler = null;
       public static var defaultChanGenerator: DefaultChanGenerator = null;
       public static var errorLogger: ErrorLogger = null;
 
@@ -150,12 +152,14 @@ package {
       public static var fullResetCode: String = "68***ba50_bb6.0_bc410.500.8.0.1.0_bd6_be180_ad0.0.0.0.0.0.0.0.0.0_ae0.3.3.0.0*0*0*0*0*0*0*0*0#/]a00_b00_c00_d00_w00_x00_e00_y00_z00_ua1.0.0.0.100_uf0.3.0.0_ue_ub_u0_v00_ud7.8_uc7.2.24";
       public static var initCode: String = "100**#/]a00_b00_c00_d00_w00_x00_e00_y00_z00_ua1.57.57.59.100_uf0.3.59.0_ue_ub_u0_v00";
 
-      public static var minor_version: Number = 5;
+      public static var minor_version: Number = 0;
+      public static var alpha_version: Number = 0;
 
       public static var ready: Boolean = false;
       public static var mainCreated: Boolean = false;
       public static var initializedErrorLog: Boolean = false;
       public static var bodyAttachedHairSorting: Boolean = false;
+      public static var undoTimeline: UndoTimeline = null;
 
       public function Main()
       {
@@ -196,6 +200,7 @@ package {
                File.applicationStorageDirectory.resolvePath("#SharedObjects/my_url.sol")
          );
 
+         undoTimeline = new UndoTimeline();
          defaultChanGenerator = new DefaultChanGenerator();
          // errorLogger = new ErrorLogger();
 
@@ -455,8 +460,20 @@ package {
       public static function onKisekaeReady() : void {
          trace("Kisekae is ready!");
 
-         new Tab_IEInOut("IN", initCode, MenuClass._nowCharaNum);
+         Tab_IEInOut.execute("IN", initCode, MenuClass._nowCharaNum);
          new Tab_SetClass();
+
+         var menuSettings: SharedObject = SharedObject.getLocal("menuSettings", "/");
+         if (menuSettings.data.hasSettings) {
+            MenuClass.systemData["MenuScale"]["_meter"] = menuSettings.data.menuScale;
+            MenuClass.systemData["MenuAlign"]["_check"] = menuSettings.data.menuAlign;
+            Air_StageSize.recalculateMenuSize();
+         } else {
+            menuSettings.data.menuScale = 100;
+            menuSettings.data.menuAlign = false;
+            menuSettings.data.hasSettings = true;
+            menuSettings.flush();
+         }
 
          Main.ready = true;
 
@@ -468,7 +485,7 @@ package {
                var fdata = fstream.readUTFBytes(custom_init_code.size);
                fstream.close();
 
-               new Tab_IEInOut("IN", fdata, MenuClass._nowCharaNum);
+               Tab_IEInOut.execute("IN", fdata, MenuClass._nowCharaNum);
             }
          } catch (err: Error) {
             trace("Failed to load custom init code:")
@@ -479,6 +496,7 @@ package {
          processor = new RequestProcessor();
          autosaver = new Autosaver();
          keypressHandler = new AdvKeyPressHandler();
+         clickHandler = new AdvClickHandler();
          
          var enable_flag: File = File.applicationDirectory.resolvePath("enable_server");
          if (enable_flag.exists) {

@@ -2,6 +2,7 @@ package menu
 {
    import flash.display.MovieClip;
    import flash.events.MouseEvent;
+   import undo.PropertyAction;
    
    public class Tab_ReversalClass
    {
@@ -30,52 +31,68 @@ package menu
       
       public static function MouseDown(param1:MouseEvent) : void
       {
-         var _loc2_:String = null;
-         var _loc3_:int = 0;
-         var _loc4_:String = null;
-         var _loc5_:String = null;
+         var dataTarget:String = null;
+         var selectedSlot:int = 0;
+         var itemType:String = null;
+         var dataKey:String = null;
          var _loc6_:int = 0;
          targetMC = param1.currentTarget as MovieClip;
          MenuClass._nowTabName = targetMC.tabName;
          targetMC.addEventListener(MouseEvent.MOUSE_UP,MouseUp);
          Main.stageVar.addEventListener(MouseEvent.MOUSE_UP,MouseUp);
+
+
          if(MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_reversal"])
          {
-            _loc4_ = MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_reversal"];
+            itemType = MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_reversal"];
          }
          else if(MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_menu"])
          {
-            _loc4_ = MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_menu"];
+            itemType = MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_menu"];
          }
          else if(MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_meter"])
          {
-            _loc4_ = MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_meter"];
+            itemType = MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_meter"];
          }
-         if(_loc4_ == "charaPlus" || _loc4_ == "systemPlus")
+
+         var undoAction = new PropertyAction(
+            targetMC.headerName, targetMC.targetJ, "_reversal",
+            (itemType == "chara" || itemType == "charaPlus"),
+            (itemType == "systemPlus" || itemType == "charaPlus"),
+            "tab", true
+         );
+
+         if(itemType == "charaPlus" || itemType == "systemPlus")
          {
-            _loc2_ = MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_data"];
-            _loc3_ = MenuClass.systemData[_loc2_]["_menu"];
-            _loc5_ = targetMC.tabName + _loc3_;
+            dataTarget = MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_data"];
+            selectedSlot = MenuClass.systemData[dataTarget]["_menu"];
+            dataKey = targetMC.tabName + selectedSlot;
          }
-         else if(_loc4_ == "chara" || _loc4_ == "system")
+         else if(itemType == "chara" || itemType == "system")
          {
-            _loc5_ = targetMC.tabName;
+            dataKey = targetMC.tabName;
          }
-         new Tab_VC(targetMC.headerName,targetMC.targetJ,_loc5_);
-         if(_loc4_ == "chara" || _loc4_ == "charaPlus")
+
+         undoAction.recordPreviousValue(selectedSlot);
+         new Tab_VC(targetMC.headerName,targetMC.targetJ,dataKey);
+
+         if(itemType == "chara" || itemType == "charaPlus")
          {
+            var newReversal = int(!MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal"]);
+            undoAction.recordNewValue(newReversal, selectedSlot);
+
             if(MenuClass._nowTargetMode == "All")
             {
-               MenuClass.charaData[MenuClass._nowCharaNum][_loc5_]["_reversal"] = int(!MenuClass.charaData[MenuClass._nowCharaNum][_loc5_]["_reversal"]);
+               MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal"] = int(!MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal"]);
                _loc6_ = 0;
                for(; _loc6_ <= MenuClass._characterNum; new SetClass(_loc6_,targetMC.tabName,"tab"),_loc6_++)
                {
-                  MenuClass.charaData[_loc6_][_loc5_]["_reversal"] = int(MenuClass.charaData[MenuClass._nowCharaNum][_loc5_]["_reversal"]);
+                  MenuClass.charaData[_loc6_][dataKey]["_reversal"] = int(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal"]);
                   try
                   {
-                     if(MenuClass.charaData[_loc6_][_loc5_]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[_loc6_][_loc5_]["_visible"].length == 1)
+                     if(MenuClass.charaData[_loc6_][dataKey]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[_loc6_][dataKey]["_visible"].length == 1)
                      {
-                        MenuClass.charaData[_loc6_][_loc5_]["_visible"][Tab_VC.menuNum] = true;
+                        MenuClass.charaData[_loc6_][dataKey]["_visible"][Tab_VC.menuNum] = true;
                      }
                   }
                   catch(myError:Error)
@@ -86,18 +103,18 @@ package menu
             }
             else if(MenuClass._nowTargetMode == "SelectPlus")
             {
-               MenuClass.charaData[MenuClass._nowCharaNum][_loc5_]["_reversal"] = int(!MenuClass.charaData[MenuClass._nowCharaNum][_loc5_]["_reversal"]);
+               MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal"] = int(!MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal"]);
                _loc6_ = 0;
                while(_loc6_ <= MenuClass._characterNum)
                {
                   if(MenuClass._nowSelectChara[_loc6_])
                   {
-                     MenuClass.charaData[_loc6_][_loc5_]["_reversal"] = int(MenuClass.charaData[MenuClass._nowCharaNum][_loc5_]["_reversal"]);
+                     MenuClass.charaData[_loc6_][dataKey]["_reversal"] = int(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal"]);
                      try
                      {
-                        if(MenuClass.charaData[_loc6_][_loc5_]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[_loc6_][_loc5_]["_visible"].length == 1)
+                        if(MenuClass.charaData[_loc6_][dataKey]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[_loc6_][dataKey]["_visible"].length == 1)
                         {
-                           MenuClass.charaData[_loc6_][_loc5_]["_visible"][Tab_VC.menuNum] = true;
+                           MenuClass.charaData[_loc6_][dataKey]["_visible"][Tab_VC.menuNum] = true;
                         }
                      }
                      catch(myError:Error)
@@ -110,12 +127,12 @@ package menu
             }
             else
             {
-               MenuClass.charaData[MenuClass._nowCharaNum][_loc5_]["_reversal"] = int(!MenuClass.charaData[MenuClass._nowCharaNum][_loc5_]["_reversal"]);
+               MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal"] = int(!MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal"]);
                try
                {
-                  if(MenuClass.charaData[MenuClass._nowCharaNum][_loc5_]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[MenuClass._nowCharaNum][_loc5_]["_visible"].length == 1)
+                  if(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_visible"].length == 1)
                   {
-                     MenuClass.charaData[MenuClass._nowCharaNum][_loc5_]["_visible"][Tab_VC.menuNum] = true;
+                     MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_visible"][Tab_VC.menuNum] = true;
                   }
                }
                catch(myError:Error)
@@ -123,7 +140,7 @@ package menu
                }
                new SetClass(MenuClass._nowCharaNum,targetMC.tabName,"tab");
             }
-            if(MenuClass.charaData[MenuClass._nowCharaNum][_loc5_]["_reversal"])
+            if(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal"])
             {
                targetMC.gotoAndStop(3);
             }
@@ -132,21 +149,24 @@ package menu
                targetMC.gotoAndStop(4);
             }
          }
-         else if(_loc4_ == "system" || _loc4_ == "systemPlus")
+         else if(itemType == "system" || itemType == "systemPlus")
          {
-            MenuClass.systemData[_loc5_]["_reversal"] = int(!MenuClass.systemData[_loc5_]["_reversal"]);
+            var newReversal = int(!MenuClass.systemData[dataKey]["_reversal"]);
+            undoAction.recordNewValue(newReversal, selectedSlot);
+
+            MenuClass.systemData[dataKey]["_reversal"] = int(!MenuClass.systemData[dataKey]["_reversal"]);
             try
             {
-               if(MenuClass.systemData[_loc5_]["_visible"][Tab_VC.menuNum] == false && MenuClass.systemData[_loc5_]["_visible"].length == 1)
+               if(MenuClass.systemData[dataKey]["_visible"][Tab_VC.menuNum] == false && MenuClass.systemData[dataKey]["_visible"].length == 1)
                {
-                  MenuClass.systemData[_loc5_]["_visible"][Tab_VC.menuNum] = true;
+                  MenuClass.systemData[dataKey]["_visible"][Tab_VC.menuNum] = true;
                }
             }
             catch(myError:Error)
             {
             }
             new SetClass(0,targetMC.tabName,"tab");
-            if(MenuClass.systemData[_loc5_]["_reversal"])
+            if(MenuClass.systemData[dataKey]["_reversal"])
             {
                targetMC.gotoAndStop(3);
             }
@@ -155,6 +175,8 @@ package menu
                targetMC.gotoAndStop(4);
             }
          }
+
+         Main.undoTimeline.push(undoAction);
       }
       
       public static function MouseUp(param1:MouseEvent) : void

@@ -23,12 +23,12 @@ package menu
             {
                if(Dress_data.TightsData[this.charaData["Tights"]["_menu"]]["_click"])
                {
-                  this.charaAdd["ashi" + _loc2_].thigh.thigh.Tights.buttonMode = true;
-                  this.charaAdd["ashi" + _loc2_].shiri.shiri.Tights.buttonMode = true;
-                  this.charaAdd["ashi" + _loc2_].foot.foot.Tights.buttonMode = true;
+                  this.charaAdd["ashi" + _loc2_].thigh.actual.thigh.Tights.buttonMode = true;
+                  this.charaAdd["ashi" + _loc2_].shiri.actual.shiri.Tights.buttonMode = true;
+                  this.charaAdd["ashi" + _loc2_].foot.actual.foot.Tights.buttonMode = true;
                   try
                   {
-                     this.charaAdd["ashi" + _loc2_].leg.leg.Tights.buttonMode = true;
+                     this.charaAdd["ashi" + _loc2_].leg.actual.leg.Tights.buttonMode = true;
                   }
                   catch(myError:Error)
                   {
@@ -36,12 +36,12 @@ package menu
                }
                else
                {
-                  this.charaAdd["ashi" + _loc2_].thigh.thigh.Tights.buttonMode = false;
-                  this.charaAdd["ashi" + _loc2_].shiri.shiri.Tights.buttonMode = false;
-                  this.charaAdd["ashi" + _loc2_].foot.foot.Tights.buttonMode = false;
+                  this.charaAdd["ashi" + _loc2_].thigh.actual.thigh.Tights.buttonMode = false;
+                  this.charaAdd["ashi" + _loc2_].shiri.actual.shiri.Tights.buttonMode = false;
+                  this.charaAdd["ashi" + _loc2_].foot.actual.foot.Tights.buttonMode = false;
                   try
                   {
-                     this.charaAdd["ashi" + _loc2_].leg.leg.Tights.buttonMode = false;
+                     this.charaAdd["ashi" + _loc2_].leg.actual.leg.Tights.buttonMode = false;
                   }
                   catch(myError:Error)
                   {

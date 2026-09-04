@@ -15,8 +15,6 @@ package menu
       
       public function SetCharaData(param1:int, param2:String, param3:int)
       {
-         var _loc4_:int = 0;
-         var _loc5_:int = 0;
          super();
          this.charaData = MenuClass.charaData[param1];
          if(param3 != 3)
@@ -24,6 +22,18 @@ package menu
             this.charaOldData = MenuClass.charaOldData[param1];
          }
          this.DressCharaData = Dress_data.DressCharaData[param1];
+      }
+
+      public static function execute(param1:int, param2:String, param3:int)
+      {
+         var inst = new SetCharaData(param1, param2, param3);
+         inst.execInternal(param1, param2, param3);
+      }
+      
+      public function execInternal(param1:int, param2:String, param3:int)
+      {
+         var _loc4_:int = 0;
+         var _loc5_:int = 0;
          var _loc6_:Boolean = true;
          var _loc7_:Boolean = true;
          var _loc8_:Boolean = true;
@@ -206,7 +216,7 @@ package menu
                {
                   _loc13_ = false;
                }
-               if(this.charaOldData["ShoulderWidth"]["_meter"] == this.charaData["ShoulderWidth"]["_meter"])
+               if(this.charaOldData["ShoulderWidth"]["_meter"] == this.charaData["ShoulderWidth"]["_meter"] && this.charaOldData["LeftShoulderVisible"]["_visible"][0] == this.charaData["LeftShoulderVisible"]["_visible"][0] && this.charaOldData["RightShoulderVisible"]["_visible"][0] == this.charaData["RightShoulderVisible"]["_visible"][0])
                {
                   _loc14_ = false;
                }
@@ -238,7 +248,47 @@ package menu
                {
                   _loc19_ = false;
                }
-               if(this.charaOldData["Ashi"]["_menu"] == this.charaData["Ashi"]["_menu"] && this.charaOldData["Ashi"]["_reversal"] == this.charaData["Ashi"]["_reversal"] && this.charaOldData["Ashi2"]["_menu"] == this.charaData["Ashi2"]["_menu"])
+               if(
+                  this.charaOldData["Ashi"]["_menu"] == this.charaData["Ashi"]["_menu"] &&
+                  this.charaOldData["Ashi"]["_reversal"] == this.charaData["Ashi"]["_reversal"] &&
+                  this.charaOldData["Ashi2"]["_menu"] == this.charaData["Ashi2"]["_menu"] &&
+                  this.charaOldData["LeftThighRotation"]["_meter"] == this.charaData["LeftThighRotation"]["_meter"] &&
+                  this.charaOldData["RightThighRotation"]["_meter"] == this.charaData["RightThighRotation"]["_meter"] &&
+                  this.charaOldData["LeftLegRotation"]["_meter"] == this.charaData["LeftLegRotation"]["_meter"] &&
+                  this.charaOldData["RightLegRotation"]["_meter"] == this.charaData["RightLegRotation"]["_meter"] &&
+                  this.charaOldData["LeftFootRotation"]["_meter"] == this.charaData["LeftFootRotation"]["_meter"] &&
+                  this.charaOldData["RightFootRotation"]["_meter"] == this.charaData["RightFootRotation"]["_meter"] &&
+                  this.charaOldData["LeftThighScaleX"]["_meter"] == this.charaData["LeftThighScaleX"]["_meter"] &&
+                  this.charaOldData["LeftThighScaleY"]["_meter"] == this.charaData["LeftThighScaleY"]["_meter"] &&
+                  this.charaOldData["LeftThighOffsetX"]["_meter"] == this.charaData["LeftThighOffsetX"]["_meter"] &&
+                  this.charaOldData["LeftThighOffsetY"]["_meter"] == this.charaData["LeftThighOffsetY"]["_meter"] &&
+                  this.charaOldData["RightThighScaleX"]["_meter"] == this.charaData["RightThighScaleX"]["_meter"] &&
+                  this.charaOldData["RightThighScaleY"]["_meter"] == this.charaData["RightThighScaleY"]["_meter"] &&
+                  this.charaOldData["RightThighOffsetX"]["_meter"] == this.charaData["RightThighOffsetX"]["_meter"] &&
+                  this.charaOldData["RightThighOffsetY"]["_meter"] == this.charaData["RightThighOffsetY"]["_meter"] &&
+                  this.charaOldData["LeftLegScaleX"]["_meter"] == this.charaData["LeftLegScaleX"]["_meter"] &&
+                  this.charaOldData["LeftLegScaleY"]["_meter"] == this.charaData["LeftLegScaleY"]["_meter"] &&
+                  this.charaOldData["LeftLegOffsetX"]["_meter"] == this.charaData["LeftLegOffsetX"]["_meter"] &&
+                  this.charaOldData["LeftLegOffsetY"]["_meter"] == this.charaData["LeftLegOffsetY"]["_meter"] &&
+                  this.charaOldData["RightLegScaleX"]["_meter"] == this.charaData["RightLegScaleX"]["_meter"] &&
+                  this.charaOldData["RightLegScaleY"]["_meter"] == this.charaData["RightLegScaleY"]["_meter"] &&
+                  this.charaOldData["RightLegOffsetX"]["_meter"] == this.charaData["RightLegOffsetX"]["_meter"] &&
+                  this.charaOldData["RightLegOffsetY"]["_meter"] == this.charaData["RightLegOffsetY"]["_meter"] &&
+                  this.charaOldData["LeftFootScaleX"]["_meter"] == this.charaData["LeftFootScaleX"]["_meter"] &&
+                  this.charaOldData["LeftFootScaleY"]["_meter"] == this.charaData["LeftFootScaleY"]["_meter"] &&
+                  this.charaOldData["LeftFootOffsetX"]["_meter"] == this.charaData["LeftFootOffsetX"]["_meter"] &&
+                  this.charaOldData["LeftFootOffsetY"]["_meter"] == this.charaData["LeftFootOffsetY"]["_meter"] &&
+                  this.charaOldData["RightFootScaleX"]["_meter"] == this.charaData["RightFootScaleX"]["_meter"] &&
+                  this.charaOldData["RightFootScaleY"]["_meter"] == this.charaData["RightFootScaleY"]["_meter"] &&
+                  this.charaOldData["RightFootOffsetX"]["_meter"] == this.charaData["RightFootOffsetX"]["_meter"] &&
+                  this.charaOldData["RightFootOffsetY"]["_meter"] == this.charaData["RightFootOffsetY"]["_meter"] &&
+                  this.charaOldData["LeftThighVisible"]["_visible"][0] == this.charaData["LeftThighVisible"]["_visible"][0] &&
+                  this.charaOldData["RightThighVisible"]["_visible"][0] == this.charaData["RightThighVisible"]["_visible"][0] &&
+                  this.charaOldData["LeftLegVisible"]["_visible"][0] == this.charaData["LeftLegVisible"]["_visible"][0] &&
+                  this.charaOldData["RightLegVisible"]["_visible"][0] == this.charaData["RightLegVisible"]["_visible"][0] &&
+                  this.charaOldData["LeftFootVisible"]["_visible"][0] == this.charaData["LeftFootVisible"]["_visible"][0] &&
+                  this.charaOldData["RightFootVisible"]["_visible"][0] == this.charaData["RightFootVisible"]["_visible"][0]
+               )
                {
                   _loc20_ = false;
                }
@@ -277,7 +327,18 @@ package menu
                   this.charaOldData["LeftHandOffsetX"]["_meter"] == this.charaData["LeftHandOffsetX"]["_meter"] &&
                   this.charaOldData["LeftHandOffsetY"]["_meter"] == this.charaData["LeftHandOffsetY"]["_meter"] &&
                   this.charaOldData["RightHandOffsetX"]["_meter"] == this.charaData["RightHandOffsetX"]["_meter"] &&
-                  this.charaOldData["RightHandOffsetY"]["_meter"] == this.charaData["RightHandOffsetY"]["_meter"]
+                  this.charaOldData["LeftUpperArmVisible"]["_visible"][0] == this.charaData["LeftUpperArmVisible"]["_visible"][0] &&
+                  this.charaOldData["RightUpperArmVisible"]["_visible"][0] == this.charaData["RightUpperArmVisible"]["_visible"][0] &&
+                  this.charaOldData["LeftArmVisible"]["_visible"][0] == this.charaData["LeftArmVisible"]["_visible"][0] &&
+                  this.charaOldData["RightArmVisible"]["_visible"][0] == this.charaData["RightArmVisible"]["_visible"][0] &&
+                  this.charaOldData["LeftHandVisible"]["_visible"][0] == this.charaData["LeftHandVisible"]["_visible"][0] &&
+                  this.charaOldData["RightHandVisible"]["_visible"][0] == this.charaData["RightHandVisible"]["_visible"][0] &&
+                  this.charaOldData["LeftHandFlip"]["_check"] == this.charaData["LeftHandFlip"]["_check"] &&
+                  this.charaOldData["RightHandFlip"]["_check"] == this.charaData["RightHandFlip"]["_check"] &&
+                  this.charaOldData["LeftArmFlip"]["_check"] == this.charaData["LeftArmFlip"]["_check"] &&
+                  this.charaOldData["RightArmFlip"]["_check"] == this.charaData["RightArmFlip"]["_check"] &&
+                  this.charaOldData["RightArmFreeRotation"]["_check"] == this.charaData["RightArmFreeRotation"]["_check"] &&
+                  this.charaOldData["LeftArmFreeRotation"]["_check"] == this.charaData["LeftArmFreeRotation"]["_check"]
                )
                {
                   _loc21_ = false;
@@ -442,7 +503,26 @@ package menu
                {
                   _loc63_ = false;
                }
-               if(this.charaOldData["Tin"]["_visible"][0] == this.charaData["Tin"]["_visible"][0] && this.charaOldData["Tin"]["_menu"] == this.charaData["Tin"]["_menu"] && String(this.charaOldData["Tin"]["_color0"][0]) == String(this.charaData["Tin"]["_color0"][0]) && String(this.charaOldData["Tin"]["_color1"][0]) == String(this.charaData["Tin"]["_color1"][0]) && String(this.charaOldData["Tin"]["_color2"][0]) == String(this.charaData["Tin"]["_color2"][0]) && this.charaOldData["Tin"]["_tClick"] == this.charaData["Tin"]["_tClick"] && this.charaOldData["Tin"]["_depth"] == this.charaData["Tin"]["_depth"] && this.charaOldData["TinManualAuto"]["_check"] == this.charaData["TinManualAuto"]["_check"] && this.charaOldData["TinBokki"]["_check"] == this.charaData["TinBokki"]["_check"] && this.charaOldData["TinSwing"]["_meter"] == this.charaData["TinSwing"]["_meter"] && this.charaOldData["TinKawa"]["_menu"] == this.charaData["TinKawa"]["_menu"] && this.charaOldData["TinEx"]["_meter"] == this.charaData["TinEx"]["_meter"] && this.charaOldData["TinSize"]["_meter"] == this.charaData["TinSize"]["_meter"])
+               if(
+                  this.charaOldData["Tin"]["_visible"][0] == this.charaData["Tin"]["_visible"][0] &&
+                  this.charaOldData["Tin"]["_menu"] == this.charaData["Tin"]["_menu"] &&
+                  String(this.charaOldData["Tin"]["_color0"][0]) == String(this.charaData["Tin"]["_color0"][0]) &&
+                  String(this.charaOldData["Tin"]["_color1"][0]) == String(this.charaData["Tin"]["_color1"][0]) &&
+                  String(this.charaOldData["Tin"]["_color2"][0]) == String(this.charaData["Tin"]["_color2"][0]) &&
+                  this.charaOldData["Tin"]["_tClick"] == this.charaData["Tin"]["_tClick"] &&
+                  this.charaOldData["Tin"]["_depth"] == this.charaData["Tin"]["_depth"] &&
+                  this.charaOldData["TinManualAuto"]["_check"] == this.charaData["TinManualAuto"]["_check"] &&
+                  this.charaOldData["TinBokki"]["_check"] == this.charaData["TinBokki"]["_check"] &&
+                  this.charaOldData["TinSwing"]["_meter"] == this.charaData["TinSwing"]["_meter"] &&
+                  this.charaOldData["TinKawa"]["_menu"] == this.charaData["TinKawa"]["_menu"] &&
+                  this.charaOldData["TinEx"]["_meter"] == this.charaData["TinEx"]["_meter"] &&
+                  this.charaOldData["TinSize"]["_meter"] == this.charaData["TinSize"]["_meter"] &&
+                  this.charaOldData["TinSizeAuto"]["_check"] == this.charaData["TinSizeAuto"]["_check"] &&
+                  this.charaOldData["TinScaleX"]["_meter"] == this.charaData["TinScaleX"]["_meter"] &&
+                  this.charaOldData["TinScaleY"]["_meter"] == this.charaData["TinScaleY"]["_meter"] &&
+                  this.charaOldData["TinOffsetX"]["_meter"] == this.charaData["TinOffsetX"]["_meter"] &&
+                  this.charaOldData["TinOffsetY"]["_meter"] == this.charaData["TinOffsetY"]["_meter"]
+               )
                {
                   _loc64_ = false;
                }
@@ -509,7 +589,7 @@ package menu
                {
                   _loc76_ = false;
                }
-               if(this.charaOldData["EyebrowY"]["_meter"] == this.charaData["EyebrowY"]["_meter"] && this.charaOldData["EyebrowRotation"]["_meter"] == this.charaData["EyebrowRotation"]["_meter"])
+               if(this.charaOldData["EyebrowY"]["_meter"] == this.charaData["EyebrowY"]["_meter"] && this.charaOldData["EyebrowRotation"]["_meter"] == this.charaData["EyebrowRotation"]["_meter"] && this.charaOldData["EyebrowX"]["_meter"] == this.charaData["EyebrowX"]["_meter"])
                {
                   _loc77_ = false;
                }
@@ -637,11 +717,21 @@ package menu
                {
                   _loc104_ = false;
                }
-               if(this.charaOldData["EmotionEyebrowLeft"]["_menu"] == this.charaData["EmotionEyebrowLeft"]["_menu"] && this.charaOldData["EyebrowRotationLeft"]["_meter"] == this.charaData["EyebrowRotationLeft"]["_meter"] && this.charaOldData["EyebrowMoveLeft"]["_meter"] == this.charaData["EyebrowMoveLeft"]["_meter"])
+               if(
+                  this.charaOldData["EmotionEyebrowLeft"]["_menu"] == this.charaData["EmotionEyebrowLeft"]["_menu"] &&
+                  this.charaOldData["EyebrowRotationLeft"]["_meter"] == this.charaData["EyebrowRotationLeft"]["_meter"] &&
+                  this.charaOldData["EyebrowMoveLeft"]["_meter"] == this.charaData["EyebrowMoveLeft"]["_meter"] &&
+                  this.charaOldData["EyebrowMoveHorizontalLeft"]["_meter"] == this.charaData["EyebrowMoveHorizontalLeft"]["_meter"]
+               )
                {
                   _loc105_ = false;
                }
-               if(this.charaOldData["EmotionEyebrowRight"]["_menu"] == this.charaData["EmotionEyebrowRight"]["_menu"] && this.charaOldData["EyebrowRotationRight"]["_meter"] == this.charaData["EyebrowRotationRight"]["_meter"] && this.charaOldData["EyebrowMoveRight"]["_meter"] == this.charaData["EyebrowMoveRight"]["_meter"])
+               if(
+                  this.charaOldData["EmotionEyebrowRight"]["_menu"] == this.charaData["EmotionEyebrowRight"]["_menu"] &&
+                  this.charaOldData["EyebrowRotationRight"]["_meter"] == this.charaData["EyebrowRotationRight"]["_meter"] &&
+                  this.charaOldData["EyebrowMoveRight"]["_meter"] == this.charaData["EyebrowMoveRight"]["_meter"] &&
+                  this.charaOldData["EyebrowMoveHorizontalRight"]["_meter"] == this.charaData["EyebrowMoveHorizontalRight"]["_meter"]
+               )
                {
                   _loc106_ = false;
                }
@@ -700,8 +790,24 @@ package menu
                _loc4_ = 0;
                while(_loc4_ <= Main.hukusuuNum)
                {
-                  if(!(this.charaOldData["MarkPlus"]["_visible"][_loc4_] == this.charaData["MarkPlus"]["_visible"][_loc4_] && this.charaOldData["Mark" + _loc4_]["_menu"] == this.charaData["Mark" + _loc4_]["_menu"] && this.charaOldData["Mark" + _loc4_]["_reversal2"] == this.charaData["Mark" + _loc4_]["_reversal2"] && String(this.charaOldData["Mark" + _loc4_]["_color0"][0]) == String(this.charaData["Mark" + _loc4_]["_color0"][0]) && String(this.charaOldData["Mark" + _loc4_]["_color1"][0]) == String(this.charaData["Mark" + _loc4_]["_color1"][0]) && String(this.charaOldData["Mark" + _loc4_]["_color2"][0]) == String(this.charaData["Mark" + _loc4_]["_color2"][0]) && this.charaOldData["MarkScaleX" + _loc4_]["_meter"] == this.charaData["MarkScaleX" + _loc4_]["_meter"] && this.charaOldData["MarkScaleY" + _loc4_]["_meter"] == this.charaData["MarkScaleY" + _loc4_]["_meter"] && this.charaOldData["MarkScaleB" + _loc4_]["_meter"] == this.charaData["MarkScaleB" + _loc4_]["_meter"] && this.charaOldData["MarkRotation" + _loc4_]["_meter"] == this.charaData["MarkRotation" + _loc4_]["_meter"] && this.charaOldData["MarkX" + _loc4_]["_meter"] == this.charaData["MarkX" + _loc4_]["_meter"] && this.charaOldData["MarkY" + _loc4_]["_meter"] == this.charaData["MarkY" + _loc4_]["_meter"] && this.charaOldData["MarkAlpha" + _loc4_]["_meter"] == this.charaData["MarkAlpha" + _loc4_]["_meter"] && this.charaOldData["Mark" + _loc4_]["_depth"] == this.charaData["Mark" + _loc4_]["_depth"]))
-                  {
+                  if(!(
+                     this.charaOldData["MarkPlus"]["_visible"][_loc4_] == this.charaData["MarkPlus"]["_visible"][_loc4_] &&
+                     this.charaOldData["Mark" + _loc4_]["_menu"] == this.charaData["Mark" + _loc4_]["_menu"] &&
+                     this.charaOldData["Mark" + _loc4_]["_reversal2"] == this.charaData["Mark" + _loc4_]["_reversal2"] &&
+                     String(this.charaOldData["Mark" + _loc4_]["_color0"][0]) == String(this.charaData["Mark" + _loc4_]["_color0"][0]) &&
+                     String(this.charaOldData["Mark" + _loc4_]["_color1"][0]) == String(this.charaData["Mark" + _loc4_]["_color1"][0]) &&
+                     String(this.charaOldData["Mark" + _loc4_]["_color2"][0]) == String(this.charaData["Mark" + _loc4_]["_color2"][0]) &&
+                     this.charaOldData["MarkScaleX" + _loc4_]["_meter"] == this.charaData["MarkScaleX" + _loc4_]["_meter"] &&
+                     this.charaOldData["MarkScaleY" + _loc4_]["_meter"] == this.charaData["MarkScaleY" + _loc4_]["_meter"] &&
+                     this.charaOldData["MarkScaleB" + _loc4_]["_meter"] == this.charaData["MarkScaleB" + _loc4_]["_meter"] &&
+                     this.charaOldData["MarkRotation" + _loc4_]["_meter"] == this.charaData["MarkRotation" + _loc4_]["_meter"] &&
+                     this.charaOldData["MarkX" + _loc4_]["_meter"] == this.charaData["MarkX" + _loc4_]["_meter"] &&
+                     this.charaOldData["MarkY" + _loc4_]["_meter"] == this.charaData["MarkY" + _loc4_]["_meter"] &&
+                     this.charaOldData["MarkAlpha" + _loc4_]["_meter"] == this.charaData["MarkAlpha" + _loc4_]["_meter"] &&
+                     this.charaOldData["Mark" + _loc4_]["_depth"] == this.charaData["Mark" + _loc4_]["_depth"] &&
+                     this.charaOldData["MarkVary" + _loc4_]["_menu"] == this.charaData["MarkVary" + _loc4_]["_menu"] &&
+                     this.charaOldData["MarkAdd" + _loc4_]["_add0"] == this.charaData["MarkAdd" + _loc4_]["_add0"]
+                  )) {
                      _loc120_ = true;
                      break;
                   }
@@ -711,7 +817,29 @@ package menu
                _loc4_ = 0;
                while(_loc4_ <= Main.RibonhukusuuNum)
                {
-                  if(!(this.charaOldData["RibonPlus"]["_visible"][_loc4_] == this.charaData["RibonPlus"]["_visible"][_loc4_] && this.charaOldData["Ribon" + _loc4_]["_menu"] == this.charaData["Ribon" + _loc4_]["_menu"] && this.charaOldData["Ribon" + _loc4_]["_reversal2"] == this.charaData["Ribon" + _loc4_]["_reversal2"] && this.charaOldData["Ribon" + _loc4_]["_depth"] == this.charaData["Ribon" + _loc4_]["_depth"] && String(this.charaOldData["Ribon" + _loc4_]["_color0"][0]) == String(this.charaData["Ribon" + _loc4_]["_color0"][0]) && String(this.charaOldData["Ribon" + _loc4_]["_color1"][0]) == String(this.charaData["Ribon" + _loc4_]["_color1"][0]) && String(this.charaOldData["Ribon" + _loc4_]["_color2"][0]) == String(this.charaData["Ribon" + _loc4_]["_color2"][0]) && this.charaOldData["RibonLine" + _loc4_]["_menu"] == this.charaData["RibonLine" + _loc4_]["_menu"] && String(this.charaOldData["RibonLine" + _loc4_]["_color0"]) == String(this.charaData["RibonLine" + _loc4_]["_color0"]) && this.charaOldData["RibonScale" + _loc4_]["_meter"] == this.charaData["RibonScale" + _loc4_]["_meter"] && this.charaOldData["RibonScaleY" + _loc4_]["_meter"] == this.charaData["RibonScaleY" + _loc4_]["_meter"] && this.charaOldData["RibonScaleB" + _loc4_]["_meter"] == this.charaData["RibonScaleB" + _loc4_]["_meter"] && this.charaOldData["RibonRotation" + _loc4_]["_meter"] == this.charaData["RibonRotation" + _loc4_]["_meter"] && this.charaOldData["RibonX" + _loc4_]["_meter"] == this.charaData["RibonX" + _loc4_]["_meter"] && this.charaOldData["RibonY" + _loc4_]["_meter"] == this.charaData["RibonY" + _loc4_]["_meter"] && this.charaOldData["RibonAdd" + _loc4_]["_add0"] == this.charaData["RibonAdd" + _loc4_]["_add0"] && this.charaOldData["Ribon" + _loc4_]["_reversal"] == this.charaData["Ribon" + _loc4_]["_reversal"] && this.charaOldData["Ribon" + _loc4_]["_shadow"] == this.charaData["Ribon" + _loc4_]["_shadow"] && this.charaOldData["RibonAlpha" + _loc4_]["_meter"] == this.charaData["RibonAlpha" + _loc4_]["_meter"]))
+                  if(!(
+                     this.charaOldData["RibonPlus"]["_visible"][_loc4_] == this.charaData["RibonPlus"]["_visible"][_loc4_] &&
+                     this.charaOldData["Ribon" + _loc4_]["_menu"] == this.charaData["Ribon" + _loc4_]["_menu"] &&
+                     this.charaOldData["Ribon" + _loc4_]["_reversal2"] == this.charaData["Ribon" + _loc4_]["_reversal2"] &&
+                     this.charaOldData["Ribon" + _loc4_]["_depth"] == this.charaData["Ribon" + _loc4_]["_depth"] &&
+                     String(this.charaOldData["Ribon" + _loc4_]["_color0"][0]) == String(this.charaData["Ribon" + _loc4_]["_color0"][0]) &&
+                     String(this.charaOldData["Ribon" + _loc4_]["_color1"][0]) == String(this.charaData["Ribon" + _loc4_]["_color1"][0]) &&
+                     String(this.charaOldData["Ribon" + _loc4_]["_color2"][0]) == String(this.charaData["Ribon" + _loc4_]["_color2"][0]) &&
+                     this.charaOldData["RibonLine" + _loc4_]["_menu"] == this.charaData["RibonLine" + _loc4_]["_menu"] &&
+                     String(this.charaOldData["RibonLine" + _loc4_]["_color0"]) == String(this.charaData["RibonLine" + _loc4_]["_color0"]) &&
+                     this.charaOldData["RibonScale" + _loc4_]["_meter"] == this.charaData["RibonScale" + _loc4_]["_meter"] &&
+                     this.charaOldData["RibonScaleY" + _loc4_]["_meter"] == this.charaData["RibonScaleY" + _loc4_]["_meter"] &&
+                     this.charaOldData["RibonScaleB" + _loc4_]["_meter"] == this.charaData["RibonScaleB" + _loc4_]["_meter"] &&
+                     this.charaOldData["RibonRotation" + _loc4_]["_meter"] == this.charaData["RibonRotation" + _loc4_]["_meter"] &&
+                     this.charaOldData["RibonX" + _loc4_]["_meter"] == this.charaData["RibonX" + _loc4_]["_meter"] &&
+                     this.charaOldData["RibonY" + _loc4_]["_meter"] == this.charaData["RibonY" + _loc4_]["_meter"] &&
+                     this.charaOldData["RibonAdd" + _loc4_]["_add0"] == this.charaData["RibonAdd" + _loc4_]["_add0"] &&
+                     this.charaOldData["Ribon" + _loc4_]["_reversal"] == this.charaData["Ribon" + _loc4_]["_reversal"] &&
+                     this.charaOldData["Ribon" + _loc4_]["_shadow"] == this.charaData["Ribon" + _loc4_]["_shadow"] &&
+                     this.charaOldData["RibonAlpha" + _loc4_]["_meter"] == this.charaData["RibonAlpha" + _loc4_]["_meter"] &&
+                     this.charaOldData["RibonFineX" + _loc4_]["_meter"] == this.charaData["RibonFineX" + _loc4_]["_meter"] &&
+                     this.charaOldData["RibonFineY" + _loc4_]["_meter"] == this.charaData["RibonFineY" + _loc4_]["_meter"]
+                  ))
                   {
                      _loc121_ = true;
                      break;
@@ -722,7 +850,28 @@ package menu
                _loc4_ = 0;
                while(_loc4_ <= Main.hukusuuNum)
                {
-                  if(!(this.charaOldData["BeltPlus"]["_visible"][_loc4_] == this.charaData["BeltPlus"]["_visible"][_loc4_] && this.charaOldData["Belt" + _loc4_]["_menu"] == this.charaData["Belt" + _loc4_]["_menu"] && this.charaOldData["Belt" + _loc4_]["_reversal2"] == this.charaData["Belt" + _loc4_]["_reversal2"] && this.charaOldData["Belt" + _loc4_]["_depth"] == this.charaData["Belt" + _loc4_]["_depth"] && this.charaOldData["Belt" + _loc4_]["_mask"] == this.charaData["Belt" + _loc4_]["_mask"] && String(this.charaOldData["Belt" + _loc4_]["_color0"][0]) == String(this.charaData["Belt" + _loc4_]["_color0"][0]) && String(this.charaOldData["Belt" + _loc4_]["_color1"][0]) == String(this.charaData["Belt" + _loc4_]["_color1"][0]) && String(this.charaOldData["Belt" + _loc4_]["_color2"][0]) == String(this.charaData["Belt" + _loc4_]["_color2"][0]) && this.charaOldData["BeltScale" + _loc4_]["_meter"] == this.charaData["BeltScale" + _loc4_]["_meter"] && this.charaOldData["BeltScaleY" + _loc4_]["_meter"] == this.charaData["BeltScaleY" + _loc4_]["_meter"] && this.charaOldData["BeltScaleB" + _loc4_]["_meter"] == this.charaData["BeltScaleB" + _loc4_]["_meter"] && this.charaOldData["BeltLine" + _loc4_]["_menu"] == this.charaData["BeltLine" + _loc4_]["_menu"] && String(this.charaOldData["BeltLine" + _loc4_]["_color0"]) == String(this.charaData["BeltLine" + _loc4_]["_color0"]) && this.charaOldData["BeltRotation" + _loc4_]["_meter"] == this.charaData["BeltRotation" + _loc4_]["_meter"] && this.charaOldData["BeltX" + _loc4_]["_meter"] == this.charaData["BeltX" + _loc4_]["_meter"] && this.charaOldData["BeltY" + _loc4_]["_meter"] == this.charaData["BeltY" + _loc4_]["_meter"] && this.charaOldData["BeltExtra" + _loc4_]["_menu"] == this.charaData["BeltExtra" + _loc4_]["_menu"] && this.charaOldData["BeltAlpha" + _loc4_]["_meter"] == this.charaData["BeltAlpha" + _loc4_]["_meter"]))
+                  if(!(
+                     this.charaOldData["BeltPlus"]["_visible"][_loc4_] == this.charaData["BeltPlus"]["_visible"][_loc4_] &&
+                     this.charaOldData["Belt" + _loc4_]["_menu"] == this.charaData["Belt" + _loc4_]["_menu"] &&
+                     this.charaOldData["Belt" + _loc4_]["_reversal2"] == this.charaData["Belt" + _loc4_]["_reversal2"] &&
+                     this.charaOldData["Belt" + _loc4_]["_depth"] == this.charaData["Belt" + _loc4_]["_depth"] &&
+                     this.charaOldData["Belt" + _loc4_]["_mask"] == this.charaData["Belt" + _loc4_]["_mask"] &&
+                     String(this.charaOldData["Belt" + _loc4_]["_color0"][0]) == String(this.charaData["Belt" + _loc4_]["_color0"][0]) &&
+                     String(this.charaOldData["Belt" + _loc4_]["_color1"][0]) == String(this.charaData["Belt" + _loc4_]["_color1"][0]) &&
+                     String(this.charaOldData["Belt" + _loc4_]["_color2"][0]) == String(this.charaData["Belt" + _loc4_]["_color2"][0]) &&
+                     this.charaOldData["BeltScale" + _loc4_]["_meter"] == this.charaData["BeltScale" + _loc4_]["_meter"] &&
+                     this.charaOldData["BeltScaleY" + _loc4_]["_meter"] == this.charaData["BeltScaleY" + _loc4_]["_meter"] &&
+                     this.charaOldData["BeltScaleB" + _loc4_]["_meter"] == this.charaData["BeltScaleB" + _loc4_]["_meter"] &&
+                     this.charaOldData["BeltLine" + _loc4_]["_menu"] == this.charaData["BeltLine" + _loc4_]["_menu"] &&
+                     String(this.charaOldData["BeltLine" + _loc4_]["_color0"]) == String(this.charaData["BeltLine" + _loc4_]["_color0"]) &&
+                     this.charaOldData["BeltRotation" + _loc4_]["_meter"] == this.charaData["BeltRotation" + _loc4_]["_meter"] &&
+                     this.charaOldData["BeltX" + _loc4_]["_meter"] == this.charaData["BeltX" + _loc4_]["_meter"] &&
+                     this.charaOldData["BeltY" + _loc4_]["_meter"] == this.charaData["BeltY" + _loc4_]["_meter"] &&
+                     this.charaOldData["BeltExtra" + _loc4_]["_menu"] == this.charaData["BeltExtra" + _loc4_]["_menu"] &&
+                     this.charaOldData["BeltAlpha" + _loc4_]["_meter"] == this.charaData["BeltAlpha" + _loc4_]["_meter"] &&
+                     this.charaOldData["BeltFineX" + _loc4_]["_meter"] == this.charaData["BeltFineX" + _loc4_]["_meter"] &&
+                     this.charaOldData["BeltFineY" + _loc4_]["_meter"] == this.charaData["BeltFineY" + _loc4_]["_meter"]
+                  ))
                   {
                      _loc123_ = true;
                      break;
@@ -733,7 +882,24 @@ package menu
                _loc4_ = 0;
                while(_loc4_ <= Main.hukusuuNum)
                {
-                  if(!(this.charaOldData["CharaLoadPlus"]["_visible"][_loc4_] == this.charaData["CharaLoadPlus"]["_visible"][_loc4_] && this.charaOldData["CharaLoadReversalDepth" + _loc4_]["_reversal"] == this.charaData["CharaLoadReversalDepth" + _loc4_]["_reversal"] && this.charaOldData["CharaLoadReversalDepth" + _loc4_]["_depth"] == this.charaData["CharaLoadReversalDepth" + _loc4_]["_depth"] && this.charaOldData["CharaLoadAdd" + _loc4_]["_name"] == this.charaData["CharaLoadAdd" + _loc4_]["_name"] && this.charaOldData["CharaLoadScale" + _loc4_]["_meter"] == this.charaData["CharaLoadScale" + _loc4_]["_meter"] && this.charaOldData["CharaLoadScaleY" + _loc4_]["_meter"] == this.charaData["CharaLoadScaleY" + _loc4_]["_meter"] && this.charaOldData["CharaLoadScaleB" + _loc4_]["_meter"] == this.charaData["CharaLoadScaleB" + _loc4_]["_meter"] && this.charaOldData["CharaLoadRotation" + _loc4_]["_meter"] == this.charaData["CharaLoadRotation" + _loc4_]["_meter"] && this.charaOldData["CharaLoadX" + _loc4_]["_meter"] == this.charaData["CharaLoadX" + _loc4_]["_meter"] && this.charaOldData["CharaLoadY" + _loc4_]["_meter"] == this.charaData["CharaLoadY" + _loc4_]["_meter"] && this.charaOldData["CharaLoadAlpha" + _loc4_]["_meter"] == this.charaData["CharaLoadAlpha" + _loc4_]["_meter"] && this.charaOldData["CharaLoadAdd" + _loc4_]["_add0"] == this.charaData["CharaLoadAdd" + _loc4_]["_add0"] && this.charaOldData["CharaLoadSwfColor" + _loc4_]["_swfMenu"] == this.charaData["CharaLoadSwfColor" + _loc4_]["_swfMenu"] && this.charaOldData["CharaLoadSwfColor" + _loc4_]["_swfSen"] == this.charaData["CharaLoadSwfColor" + _loc4_]["_swfSen"]))
+                  if(!(
+                     this.charaOldData["CharaLoadPlus"]["_visible"][_loc4_] == this.charaData["CharaLoadPlus"]["_visible"][_loc4_] &&
+                     this.charaOldData["CharaLoadReversalDepth" + _loc4_]["_reversal"] == this.charaData["CharaLoadReversalDepth" + _loc4_]["_reversal"] &&
+                     this.charaOldData["CharaLoadReversalDepth" + _loc4_]["_depth"] == this.charaData["CharaLoadReversalDepth" + _loc4_]["_depth"] &&
+                     this.charaOldData["CharaLoadAdd" + _loc4_]["_name"] == this.charaData["CharaLoadAdd" + _loc4_]["_name"] &&
+                     this.charaOldData["CharaLoadScale" + _loc4_]["_meter"] == this.charaData["CharaLoadScale" + _loc4_]["_meter"] &&
+                     this.charaOldData["CharaLoadScaleY" + _loc4_]["_meter"] == this.charaData["CharaLoadScaleY" + _loc4_]["_meter"] &&
+                     this.charaOldData["CharaLoadScaleB" + _loc4_]["_meter"] == this.charaData["CharaLoadScaleB" + _loc4_]["_meter"] &&
+                     this.charaOldData["CharaLoadRotation" + _loc4_]["_meter"] == this.charaData["CharaLoadRotation" + _loc4_]["_meter"] &&
+                     this.charaOldData["CharaLoadX" + _loc4_]["_meter"] == this.charaData["CharaLoadX" + _loc4_]["_meter"] &&
+                     this.charaOldData["CharaLoadY" + _loc4_]["_meter"] == this.charaData["CharaLoadY" + _loc4_]["_meter"] &&
+                     this.charaOldData["CharaLoadAlpha" + _loc4_]["_meter"] == this.charaData["CharaLoadAlpha" + _loc4_]["_meter"] &&
+                     this.charaOldData["CharaLoadAdd" + _loc4_]["_add0"] == this.charaData["CharaLoadAdd" + _loc4_]["_add0"] &&
+                     this.charaOldData["CharaLoadSwfColor" + _loc4_]["_swfMenu"] == this.charaData["CharaLoadSwfColor" + _loc4_]["_swfMenu"] &&
+                     this.charaOldData["CharaLoadSwfColor" + _loc4_]["_swfSen"] == this.charaData["CharaLoadSwfColor" + _loc4_]["_swfSen"] &&
+                     this.charaOldData["CharaLoadFineX" + _loc4_]["_meter"] == this.charaData["CharaLoadFineX" + _loc4_]["_meter"] &&
+                     this.charaOldData["CharaLoadFineY" + _loc4_]["_meter"] == this.charaData["CharaLoadFineY" + _loc4_]["_meter"]
+                  ))
                   {
                      _loc124_ = true;
                      break;
@@ -855,8 +1021,8 @@ package menu
             }
             if(param2 == "tab" || param2 == "meter" || param2 == "reset")
             {
-               MenuClass.charaData[param1] = this.clone(MenuClass.charaMotoData[MenuClass.systemData["SelectCharacter"]["_menu"]]);
-               Dress_data.DressCharaData[param1] = this.clone(Dress_data.DressCharaMotoData[MenuClass.systemData["SelectCharacter"]["_menu"]]);
+               // MenuClass.charaData[param1] = this.clone(MenuClass.charaMotoData[MenuClass.systemData["SelectCharacter"]["_menu"]]);
+               // Dress_data.DressCharaData[param1] = this.clone(Dress_data.DressCharaMotoData[MenuClass.systemData["SelectCharacter"]["_menu"]]);
             }
          }
          if(param3 != 3)

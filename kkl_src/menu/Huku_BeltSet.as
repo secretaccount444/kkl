@@ -483,6 +483,8 @@ package menu
                this.charaAdd["belt" + param2 + "_" + 0].beltDou.belt0.transform.matrix = _loc10_;
                new MeterPersentRibon(150,-150,this.charaNum,"BeltX",param2);
                this.charaAdd["belt" + param2 + "_" + 0].beltDou.belt0.x = MeterPersentRibon.MeterPersentNum;
+               new MeterPersentRibon(2.5,-2.5,this.charaNum,"BeltFineX",param2);
+               this.charaAdd["belt" + param2 + "_" + 0].beltDou.belt0.x += MeterPersentRibon.MeterPersentNum;
             }
             if(this.flag1)
             {
@@ -491,6 +493,8 @@ package menu
                this.charaAdd["belt" + param2 + "_" + 1].beltDou.belt0.transform.matrix = _loc10_;
                new MeterPersentRibon(-150,150,this.charaNum,"BeltX",param2);
                this.charaAdd["belt" + param2 + "_" + 1].beltDou.belt0.x = MeterPersentRibon.MeterPersentNum;
+               new MeterPersentRibon(-2.5,2.5,this.charaNum,"BeltFineX",param2);
+               this.charaAdd["belt" + param2 + "_" + 1].beltDou.belt0.x += MeterPersentRibon.MeterPersentNum;
             }
             new MeterPersentRibon(360,0,this.charaNum,"BeltRotation",param2);
             _loc11_ = MeterPersentRibon.MeterPersentNum;
@@ -523,12 +527,17 @@ package menu
             new MeterPersent(0.96,1.18,"HipWidth",this.charaNum);
             _loc16_ = MeterPersent.MeterPersentNum;
             _loc4_ = 0;
+
+            new MeterPersentRibon(2.5, -2.5,this.charaNum,"BeltFineY",param2);
+            var fineTuneY = MeterPersentRibon.MeterPersentNum;
+
             while(_loc4_ <= 1)
             {
                if(_loc4_ == 0 && this.flag0 || _loc4_ == 1 && this.flag1)
                {
                   this.charaAdd["belt" + param2 + "_" + _loc4_].beltDou.belt0.scaleY = _loc14_;
                   this.charaAdd["belt" + param2 + "_" + _loc4_].beltDou.belt0.y = _loc13_;
+                  this.charaAdd["belt" + param2 + "_" + _loc4_].beltDou.belt0.y += fineTuneY;
                   this.charaAdd["belt" + param2 + "_" + _loc4_].beltUeSen0.scaleX = _loc15_;
                   this.charaAdd["belt" + param2 + "_" + _loc4_].beltNakaSen0.SenMask.scaleX = _loc15_;
                   this.charaAdd["belt" + param2 + "_" + _loc4_].beltMask.ueMask.scaleX = _loc15_;

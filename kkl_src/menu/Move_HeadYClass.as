@@ -14,24 +14,27 @@ package menu
          var _loc3_:Object = MenuClass.charaAdd[param1];
          var _loc4_:Object = MenuClass.charaAddDepth[param1];
          var _loc5_:Object = MenuClass.charaData[param1];
-         new MeterPersent(0,20,"Head",param1);
+         MeterPersent.get(0,20,"Head",param1);
          var _loc6_:Number = Math.floor(MeterPersent.MeterPersentNum);
-         new MeterPersent(25,-25,"douHeight",param1);
+         MeterPersent.get(25,-25,"douHeight",param1);
          var _loc7_:Number = MeterPersent.MeterPersentNum;
          var _loc8_:Number = 0;
-         var _loc9_:Array;
-         if((_loc9_ = new Array(Move_DataClass.AshiFrameData[_loc5_["Ashi"]["_menu"]]["depth"],Move_DataClass.AshiFrameData[_loc5_["Ashi2"]["_menu"]]["depth"]))[0] >= 1 && _loc9_[1] >= 1)
+
+         var ashiDepth1 = Move_DataClass.AshiFrameData[_loc5_["Ashi"]["_menu"]]["depth"];
+         var ashiDepth2 = Move_DataClass.AshiFrameData[_loc5_["Ashi2"]["_menu"]]["depth"];
+         if(ashiDepth1 >= 1 && ashiDepth2 >= 1)
          {
             _loc8_ = 20;
          }
-         else if(_loc9_[0] >= 1 || _loc9_[1] >= 1)
+         else if(ashiDepth1 >= 1 || ashiDepth2 >= 1)
          {
             _loc8_ = 10;
          }
-         new MeterPersent(-10,2,"BodyHeight",param1);
+
+         MeterPersent.get(-10,2,"BodyHeight",param1);
          var _loc10_:Number = MeterPersent.MeterPersentNum;
          _loc5_["Head"]["_y"] = _loc10_;
-         new MeterPersent(20,-20,"NeckHeight",param1);
+         MeterPersent.get(20,-20,"NeckHeight",param1);
          if(_loc5_["NeckHeight"]["_meter"] >= 70)
          {
             _loc3_.mune.senNeck0.senNeck.gotoAndStop(3);
@@ -72,14 +75,18 @@ package menu
             {
                try
                {
-                  _loc3_["Ribon" + _loc2_ + "_0"].y = SizeDataClass.bodyDefault_y["Ribon"] + _loc12_;
+                  if (_loc3_["Ribon" + _loc2_ + "_0"]) {
+                     _loc3_["Ribon" + _loc2_ + "_0"].y = SizeDataClass.bodyDefault_y["Ribon"] + _loc12_;
+                  }
                }
                catch(myError:Error)
                {
                }
                try
                {
-                  _loc3_["Ribon" + _loc2_ + "_1"].y = SizeDataClass.bodyDefault_y["Ribon"] + _loc12_;
+                  if (_loc3_["Ribon" + _loc2_ + "_1"]) {
+                     _loc3_["Ribon" + _loc2_ + "_1"].y = SizeDataClass.bodyDefault_y["Ribon"] + _loc12_;
+                  }
                }
                catch(myError:Error)
                {
@@ -96,14 +103,18 @@ package menu
                {
                   try
                   {
-                     _loc3_["HairEx" + _loc2_ + "_" + 0].y = SizeDataClass.bodyDefault_y["HairBack"] + _loc12_;
+                     if (_loc3_["HairEx" + _loc2_ + "_0"]) {
+                        _loc3_["HairEx" + _loc2_ + "_0"].y = SizeDataClass.bodyDefault_y["HairBack"] + _loc12_;
+                     }
                   }
                   catch(myError:Error)
                   {
                   }
                   try
                   {
-                     _loc3_["HairEx" + _loc2_ + "_" + 1].y = SizeDataClass.bodyDefault_y["HairBack"] + _loc12_;
+                     if (_loc3_["HairEx" + _loc2_ + "_1"]) {
+                        _loc3_["HairEx" + _loc2_ + "_1"].y = SizeDataClass.bodyDefault_y["HairBack"] + _loc12_;
+                     }
                   }
                   catch(myError:Error)
                   {
@@ -115,7 +126,7 @@ package menu
                         _loc3_["HairEx" + _loc2_ + "_0"].y = _loc3_.handm1_0.hand.arm0.y;
                      }
                   } catch(myError:Error) {
-                     Main.logError(myError, "in Move_HeadYClass(" + param1 + ")");
+                     // Main.logError(myError, "in Move_HeadYClass(" + param1 + ")");
                   }
 
                   try
@@ -124,7 +135,7 @@ package menu
                         _loc3_["HairEx" + _loc2_ + "_1"].y = _loc3_.handm1_1.hand.arm0.y;
                      }
                   } catch(myError:Error) {
-                     Main.logError(myError, "in Move_HeadYClass(" + param1 + ")");
+                     // Main.logError(myError, "in Move_HeadYClass(" + param1 + ")");
                   }
                } else if (_loc5_["HairExAdd" + _loc2_]["_add0"] == 94) {
                   try
@@ -133,7 +144,7 @@ package menu
                         _loc3_["HairEx" + _loc2_ + "_0"].y = 100;
                      }
                   } catch(myError:Error) {
-                     Main.logError(myError, "in Move_HeadYClass(" + param1 + ")");
+                     // Main.logError(myError, "in Move_HeadYClass(" + param1 + ")");
                   }
 
                   try
@@ -142,19 +153,23 @@ package menu
                         _loc3_["HairEx" + _loc2_ + "_1"].y = 100;
                      }
                   } catch(myError:Error) {
-                     Main.logError(myError, "in Move_HeadYClass(" + param1 + ")");
+                     // Main.logError(myError, "in Move_HeadYClass(" + param1 + ")");
                   }
                } else {
                   try
                   {
-                     _loc3_["HairEx" + _loc2_ + "_" + 0].y = 0;
+                     if (_loc3_["HairEx" + _loc2_ + "_0"]) {
+                        _loc3_["HairEx" + _loc2_ + "_0"].y = 0;
+                     }
                   }
                   catch(myError:Error)
                   {
                   }
                   try
                   {
-                     _loc3_["HairEx" + _loc2_ + "_" + 1].y = 0;
+                     if (_loc3_["HairEx" + _loc2_ + "_1"]) {
+                        _loc3_["HairEx" + _loc2_ + "_1"].y = 0;
+                     }
                   }
                   catch(myError:Error)
                   {

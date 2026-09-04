@@ -81,7 +81,7 @@ package menu
          if(Main.urlData == "nodata")
          {
             _loc4_ = Math.floor(Math.random() * Chara_IEdata.BackgroundSetData[Main.accessObj.AllHukuNumData].length);
-            new Tab_IEInOut("textIN",Chara_IEdata.BackgroundData[Chara_IEdata.BackgroundSetData[Main.accessObj.AllHukuNumData][_loc4_]][0],0);
+            Tab_IEInOut.execute("textIN",Chara_IEdata.BackgroundData[Chara_IEdata.BackgroundSetData[Main.accessObj.AllHukuNumData][_loc4_]][0],0);
          }
          new Stage_ClickClass();
          if(Main.urlData == "nodata")
@@ -160,7 +160,7 @@ package menu
                else
                {
                   trace("calling TabIEInOut");
-                  new Tab_IEInOut("firstIN",_loc6_,MenuClass._nowCharaNum);
+                  Tab_IEInOut.execute("firstIN",_loc6_,MenuClass._nowCharaNum);
                   
                   Tab_AllHukuSet.AllHukuNum = Main.accessObj.AllHukuNumData;
                   
@@ -211,13 +211,13 @@ package menu
                MenuClass.charaAddDepth[_loc3_].charaSelect.gotoAndStop(1);
                _loc3_++;
             }
-            MenuClass.charaMotoData = this.clone(MenuClass.charaData);
-            _loc3_ = 0;
-            while(_loc3_ <= MenuClass._characterNum)
-            {
-               MenuClass.charaMotoData[_loc3_]["SelectCharacter"]["_visible"][0] = true;
-               _loc3_++;
-            }
+            // MenuClass.charaMotoData = this.clone(MenuClass.charaData);
+            // _loc3_ = 0;
+            // while(_loc3_ <= MenuClass._characterNum)
+            // {
+            //    MenuClass.charaMotoData[_loc3_]["SelectCharacter"]["_visible"][0] = true;
+            //    _loc3_++;
+            // }
             Main.mainWindow.setChildIndex(Main.mainWindow.chara_obj,Main.mainWindow.getChildIndex(Main.mainWindow.bg) + 1);
             Main.stageVar.removeEventListener(Event.ENTER_FRAME,this.Enter);
          }
@@ -285,7 +285,7 @@ package menu
          ++this.charaCount;
          if(i == MenuClass._characterNum + 1)
          {
-            Dress_data.DressCharaMotoData = this.clone(Dress_data.DressCharaData);
+            // Dress_data.DressCharaMotoData = this.clone(Dress_data.DressCharaData);
             Main.mainWindow.chara_obj.shadow_m.alpha = 0.3;
             Main.mainWindow.chara_obj.shadow_m.blendMode = BlendMode.LAYER;
             try

@@ -165,7 +165,10 @@ package menu
          catch(myError:Error)
          {
          }
+         
          MenuClass.systemData["LoadScale" + _loc2_]["_name"] = "images/" + fileReference.name;
+         Tab_LoadClass.pushUndoAction("images/" + fileReference.name);
+
          if(fileReference.type == ".swf" || fileReference.type == ".svg")
          {
             loadCheck = true;

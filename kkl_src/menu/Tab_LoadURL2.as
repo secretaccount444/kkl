@@ -55,13 +55,14 @@ package menu
                   _loc4_ = false;
                }
             }
+            // if not changing source URL or attach point
             else if(MenuClass.charaOldData[this.charaNum]["CharaLoadPlus"]["_visible"][this.menuNum] && MenuClass.charaOldData[this.charaNum]["CharaLoadAdd" + this.menuNum]["_name"] == MenuClass.charaData[this.charaNum]["CharaLoadAdd" + this.menuNum]["_name"] && MenuClass.charaOldData[this.charaNum]["CharaLoadAdd" + this.menuNum]["_add0"] == MenuClass.charaData[this.charaNum]["CharaLoadAdd" + this.menuNum]["_add0"])
             {
                _loc4_ = false;
-               ++MenuClass.urlLoadCompCount;
+               ++MenuClass.urlLoadCompCount; // url load complete count?
                if(MenuClass.urlLoadCompCount == MenuClass.urlLoadCount)
                {
-                  MenuClass.urlLoadCompCheck = true;
+                  MenuClass.urlLoadCompCheck = true; // URL load complete flag
                }
             }
          }
@@ -69,6 +70,7 @@ package menu
          {
          }
          MenuClass.charaData[this.charaNum]["CharaLoadPlusCheck"]["_visibleCheck"][this.menuNum] = MenuClass.charaData[this.charaNum]["CharaLoadPlus"]["_visible"][this.menuNum];
+         // reload / recreate sprite
          if(_loc4_)
          {
             try
@@ -149,6 +151,22 @@ package menu
             catch(e:Error)
             {
             }
+         }
+      }
+
+      // used by Tab_UpDownTargetClass
+      public static function updateSingleSlot(character: int, slot: int) : void
+      {
+         if (
+            MenuClass.charaData[character]["CharaLoadPlus"]["_visible"][slot] &&
+            MenuClass.charaData[character]["CharaLoadAdd" + slot]["_name"] != null
+         ) {
+            new Tab_LoadURL2("load", slot, character);
+         } else {
+            MenuClass.charaData[character]["CharaLoadPlus"]["_visible"][slot] = false;
+            try {
+               MenuClass.charaAdd[character]["loadObj" + slot].visible = false;
+            } catch(e:Error) {}
          }
       }
       

@@ -15,8 +15,8 @@ package menu
          if((MenuClass._nowTargetMode == "Select" || MenuClass._nowTargetMode == "SelectPlus") && param1 == "export")
          {
             Tab_IEInOut.dataStr = "";
-            new Tab_IEInOut("OUT","0",MenuClass._nowCharaNum);
-            new Tab_IEInOut("OUTLast","0",0);
+            Tab_IEInOut.execute("OUT","0",MenuClass._nowCharaNum);
+            Tab_IEInOut.execute("OUTLast","0",0);
             if(!MenuClass.charaData[MenuClass._nowCharaNum]["SelectCharacter"]["_visible"][0])
             {
                MenuClass.tabMenuAdd["tabExportWindow"].myTa.text = "";
@@ -35,18 +35,18 @@ package menu
                {
                   if(param1 == "txtSave")
                   {
-                     new Tab_IEInOut("OUTTXT","0",_loc2_);
+                     Tab_IEInOut.execute("OUTTXT","0",_loc2_);
                   }
                   else
                   {
-                     new Tab_IEInOut("OUT","0",_loc2_);
+                     Tab_IEInOut.execute("OUT","0",_loc2_);
                   }
                }
                else
                {
                   if(_loc2_ == 0)
                   {
-                     new Tab_IEInOut("CharaNoData","0",0);
+                     Tab_IEInOut.execute("CharaNoData","0",0);
                   }
                   else
                   {
@@ -79,57 +79,57 @@ package menu
             Tab_IEInOut.systemOutCheck = false;
             if(MenuClass.exportCheck[29] || param1 == "txtSave")
             {
-               new Tab_IEInOut("FreeHand","0",0);
+               Tab_IEInOut.execute("FreeHand","0",0);
             }
             if(MenuClass.exportCheck[30] || param1 == "txtSave")
             {
-               new Tab_IEInOut("FreeRibon","0",0);
+               Tab_IEInOut.execute("FreeRibon","0",0);
             }
             if(MenuClass.exportCheck[31] || param1 == "txtSave")
             {
-               new Tab_IEInOut("FreeBelt","0",0);
+               Tab_IEInOut.execute("FreeBelt","0",0);
             }
             if(MenuClass.exportCheck[32] || param1 == "txtSave")
             {
-               new Tab_IEInOut("FreeChair","0",0);
+               Tab_IEInOut.execute("FreeChair","0",0);
             }
             if(MenuClass.exportCheck[33] || param1 == "txtSave")
             {
-               new Tab_IEInOut("FreeFlag","0",0);
+               Tab_IEInOut.execute("FreeFlag","0",0);
             }
             if(MenuClass.exportCheck[34] || param1 == "txtSave")
             {
-               new Tab_IEInOut("FreeHukidashi","0",0);
+               Tab_IEInOut.execute("FreeHukidashi","0",0);
             }
             if(MenuClass.exportCheck[35] || param1 == "txtSave")
             {
-               new Tab_IEInOut("Background","0",0);
+               Tab_IEInOut.execute("Background","0",0);
             }
             if(MenuClass.exportCheck[36] || param1 == "txtSave")
             {
-               new Tab_IEInOut("txt","0",0);
+               Tab_IEInOut.execute("txt","0",0);
             }
             if(MenuClass.exportCheck[37] || param1 == "txtSave")
             {
-               new Tab_IEInOut("Loadmenu","0",0);
+               Tab_IEInOut.execute("Loadmenu","0",0);
             }
             if(MenuClass.exportCheck[38] || param1 == "txtSave")
             {
-               new Tab_IEInOut("SystemOption","0",0);
+               Tab_IEInOut.execute("SystemOption","0",0);
             }
             if(MenuClass.exportCheck[39] || param1 == "txtSave")
             {
-               new Tab_IEInOut("Tool","0",0);
+               Tab_IEInOut.execute("Tool","0",0);
             }
             if(MenuClass.exportCheck[36] || param1 == "txtSave")
             {
-               new Tab_IEInOut("OUTText","0",0);
+               Tab_IEInOut.execute("OUTText","0",0);
             }
             if(MenuClass.exportCheck[37] || param1 == "txtSave")
             {
-               new Tab_IEInOut("LoadmenuText","0",0);
+               Tab_IEInOut.execute("LoadmenuText","0",0);
             }
-            new Tab_IEInOut("OUTLast","0",0);
+            Tab_IEInOut.execute("OUTLast","0",0);
             if(Tab_IEInOut.firstCheck)
             {
                MenuClass.tabMenuAdd["tabExportWindow"].myTa.text = "";

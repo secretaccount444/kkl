@@ -2,6 +2,7 @@ package menu
 {
    import flash.events.Event;
    import flash.events.MouseEvent;
+   import undo.ClickAction;
    
    public class HukuClickClass
    {
@@ -33,6 +34,10 @@ package menu
       public static var nagaoshiFlag:int;
       
       public static var plusNum:String;
+
+      public static var curUndoAction: ClickAction;
+      public static var initSClick: Number;
+      public static var holdPushUndoAction: Boolean;
        
       
       private var charaNum:int;
@@ -42,6 +47,8 @@ package menu
       public function HukuClickClass(param1:Object)
       {
          super();
+         curUndoAction = null;
+         holdPushUndoAction = false;
          param1.addEventListener(MouseEvent.CLICK,this.HukuClick);
          param1.addEventListener(MouseEvent.MOUSE_DOWN,this.MenuMouseDown);
          param1.addEventListener(MouseEvent.MOUSE_MOVE,this.MenuMouseMove);
@@ -50,7 +57,7 @@ package menu
       
       private function MenuMouseDown(param1:MouseEvent) : void
       {
-         if(!MenuClass.ClickRock && !MenuClass.HukuRock)
+         if(!MenuClass.ClickRock && !MenuClass.HukuRock && !Main.clickHandler.identifyModeActive)
          {
             targetName = param1.target.name;
             if(param1.target.parent.parent.name == "mune0")
@@ -67,6 +74,11 @@ package menu
             nagaoshiCount = 0;
             nagaoshifirst = 30;
             nagaoshiFlag = 0;
+
+            initSClick = this.charaData["s"]["_sClick"];
+            curUndoAction = new ClickAction(this.charaNum, ["s", "HeartPlus"], 0);
+            holdPushUndoAction = this.charaData["EmotionManualAuto"]["_check"];
+
             Main.stageVar.addEventListener(Event.ENTER_FRAME,this.EnterFrame);
             Main.stageVar.addEventListener(Event.ENTER_FRAME,this.EnterFrame2);
             Main.stageVar.addEventListener(MouseEvent.MOUSE_UP,this.MenuMouseUp2);
@@ -92,8 +104,45 @@ package menu
       private function HukuClick(param1:MouseEvent) : void
       {
          var e:MouseEvent = param1;
-         if(!MenuClass.ClickRock && !MenuClass.HukuRock)
+         if (Main.clickHandler.identifyModeActive) {
+            try
+            {
+               var partNum = NaN;
+               var partType = "";
+
+               if (e.target.name.substring(0, 7) == "loadObj") {
+                  partType = "CharaLoad";
+                  partNum = parseInt(e.target.name.substring(7), 10);
+               } else if (e.target.name == "ribon0") {
+                  partType = "Ribon";
+                  partNum = parseInt(e.target.parent.name.substring(5, e.target.parent.name.length - 2), 10);
+               } else if (e.target.name == "beltDou") {
+                  partType = "Belt";
+                  partNum = parseInt(e.target.parent.name.substring(4, e.target.parent.name.length - 2), 10);
+               } else if (e.target.parent.name == "HairEx0") {
+                  partType = "HairEx";
+                  partNum = parseInt(e.target.parent.parent.name.substring(6, e.target.parent.parent.name.length - 2), 10);
+               } else if (e.target.parent.name == "mark0") {
+                  partType = "Mark";
+                  partNum = parseInt(e.target.parent.parent.name.substring(4, e.target.parent.parent.name.length - 2), 10);
+               }
+
+               if (!isNaN(partNum) && partType) {
+                  MenuClass.systemData[partType + "Plus"]["_menu"] = partNum;
+                  if (MenuClass._nowHeaderName == partType) {
+                     new Tab_SetClass();
+                  } else {
+                     new HeaderbtnFc(partType);
+                  }
+               }
+            } catch (e) {
+               trace(e.getStackTrace());
+            }
+         }
+         else if(!MenuClass.ClickRock && !MenuClass.HukuRock)
          {
+            curUndoAction = null;
+
             try
             {
                targetName = e.target.name;
@@ -103,7 +152,12 @@ package menu
                targetNum = e.target.Num;
                try
                {
-                  targetNumPPP = e.target.parent.parent.parent.Num;
+                  if (targetNamePP == "actual") {
+                     targetNumPPP = e.target.parent.parent.parent.parent.Num;
+                  } else {
+                     targetNumPPP = e.target.parent.parent.parent.Num;
+                  }
+                  
                }
                catch(myError:Error)
                {
@@ -144,7 +198,8 @@ package menu
             }
             catch(myError:Error)
             {
-               trace("HukuClickClassエラー   targetPPかな？");
+               trace(myError.getStackTrace());
+               // trace("HukuClickClassエラー   targetPPかな？");
             }
          }
       }
@@ -156,6 +211,15 @@ package menu
       
       private function MenuMouseUp2(param1:MouseEvent) : void
       {
+         if (curUndoAction) {
+            curUndoAction.recordNewData("s");
+            if (holdPushUndoAction && curUndoAction.anyChanged()) {
+               Main.undoTimeline.push(curUndoAction);
+            }
+            curUndoAction = null;
+            holdPushUndoAction = false;
+         }
+
          try
          {
             Main.stageVar.removeEventListener(Event.ENTER_FRAME,this.EnterFrame2);
@@ -202,6 +266,12 @@ package menu
                {
                   nagaoshiFlag = 0;
                   new HukuClick_s(this.charaNum,targetName,0);
+               }
+
+               holdPushUndoAction = true;
+               if (this.charaData["s"]["_sClick"] - initSClick >= 10) {
+                  new Chara_s(this.charaNum, "huku");
+                  initSClick = this.charaData["s"]["_sClick"];
                }
             }
          }

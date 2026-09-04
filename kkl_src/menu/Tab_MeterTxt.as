@@ -55,20 +55,28 @@ package menu
                      {
                         MenuClass.tabMenuAdd[_loc7_]["meter0"].meterTxt.gotoAndStop(1);
                      }
-                     MenuClass.tabMenuAdd[_loc7_]["meter0"].meterTxt.num.text = _loc8_;
-                     if(!MenuClass.spaceKeyPress)
-                     {
-                        if(_loc8_ == 1000 && MenuClass.tabData[MenuClass._nowHeaderName][_loc2_][2]["_meterType"] == 2)
+
+                     /* NOTE: could probably replace this with a more general formatting mechanism */
+                     if (MenuClass._nowHeaderName == "Tool" && _loc7_ == "MenuScale") {
+                        var scale = (_loc8_ * (0.50 / 100)) + .50;
+                        MenuClass.tabMenuAdd[_loc7_]["meter0"].meterTxt.num.text = scale.toFixed(2);
+                     } else {
+                        MenuClass.tabMenuAdd[_loc7_]["meter0"].meterTxt.num.text = _loc8_;
+                     
+                        if(!MenuClass.spaceKeyPress)
                         {
-                           MenuClass.tabMenuAdd[_loc7_]["meter0"].meterTxt.gotoAndStop(4);
-                        }
-                        else if(_loc8_ == 360 && MenuClass.tabData[MenuClass._nowHeaderName][_loc2_][2]["_meterType"] == 1)
-                        {
-                           MenuClass.tabMenuAdd[_loc7_]["meter0"].meterTxt.gotoAndStop(3);
-                        }
-                        else if(_loc8_ == 100 && MenuClass.tabData[MenuClass._nowHeaderName][_loc2_][2]["_meterType"] == 0)
-                        {
-                           MenuClass.tabMenuAdd[_loc7_]["meter0"].meterTxt.gotoAndStop(2);
+                           if(_loc8_ == 1000 && MenuClass.tabData[MenuClass._nowHeaderName][_loc2_][2]["_meterType"] == 2)
+                           {
+                              MenuClass.tabMenuAdd[_loc7_]["meter0"].meterTxt.gotoAndStop(4);
+                           }
+                           else if(_loc8_ == 360 && MenuClass.tabData[MenuClass._nowHeaderName][_loc2_][2]["_meterType"] == 1)
+                           {
+                              MenuClass.tabMenuAdd[_loc7_]["meter0"].meterTxt.gotoAndStop(3);
+                           }
+                           else if(_loc8_ == 100 && MenuClass.tabData[MenuClass._nowHeaderName][_loc2_][2]["_meterType"] == 0)
+                           {
+                              MenuClass.tabMenuAdd[_loc7_]["meter0"].meterTxt.gotoAndStop(2);
+                           }
                         }
                      }
                   }

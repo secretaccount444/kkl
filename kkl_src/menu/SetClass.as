@@ -242,7 +242,7 @@ package menu
                   }
                   else
                   {
-                     new Tab_IEInOut("textIN",Chara_IEdata.PoseData[MenuClass.systemData["PoseSet"]["_menu"]],MenuClass._nowCharaNum);
+                     Tab_IEInOut.execute("textIN",Chara_IEdata.PoseData[MenuClass.systemData["PoseSet"]["_menu"]],MenuClass._nowCharaNum);
                   }
                }
                else if(MenuClass._nowTargetMode == "SelectPlus")
@@ -257,7 +257,7 @@ package menu
                         }
                         else
                         {
-                           new Tab_IEInOut("textIN",Chara_IEdata.PoseData[MenuClass.systemData["PoseSet"]["_menu"]],this.charaNum);
+                           Tab_IEInOut.execute("textIN",Chara_IEdata.PoseData[MenuClass.systemData["PoseSet"]["_menu"]],this.charaNum);
                         }
                      }
                   }
@@ -272,7 +272,7 @@ package menu
                      }
                      else
                      {
-                        new Tab_IEInOut("textIN",Chara_IEdata.PoseData[MenuClass.systemData["PoseSet"]["_menu"]],this.charaNum);
+                        Tab_IEInOut.execute("textIN",Chara_IEdata.PoseData[MenuClass.systemData["PoseSet"]["_menu"]],this.charaNum);
                      }
                   }
                }
@@ -288,7 +288,7 @@ package menu
             {
                if(MenuClass._nowTargetMode == "Select")
                {
-                  new Tab_IEInOut("textIN",Chara_IECharadata.Dressdata[MenuClass.systemData["DressSet"]["_menu"]][0],MenuClass._nowCharaNum);
+                  Tab_IEInOut.execute("textIN",Chara_IECharadata.Dressdata[MenuClass.systemData["DressSet"]["_menu"]][0],MenuClass._nowCharaNum);
                }
                else if(MenuClass._nowTargetMode == "SelectPlus")
                {
@@ -296,7 +296,7 @@ package menu
                   {
                      if(MenuClass._nowSelectChara[this.charaNum])
                      {
-                        new Tab_IEInOut("textIN",Chara_IECharadata.Dressdata[MenuClass.systemData["DressSet"]["_menu"]][0],this.charaNum);
+                        Tab_IEInOut.execute("textIN",Chara_IECharadata.Dressdata[MenuClass.systemData["DressSet"]["_menu"]][0],this.charaNum);
                      }
                   }
                }
@@ -304,7 +304,7 @@ package menu
                {
                   if(MenuClass.charaData[this.charaNum]["SelectCharacter"]["_visible"][0])
                   {
-                     new Tab_IEInOut("textIN",Chara_IECharadata.Dressdata[MenuClass.systemData["DressSet"]["_menu"]][0],this.charaNum);
+                     Tab_IEInOut.execute("textIN",Chara_IECharadata.Dressdata[MenuClass.systemData["DressSet"]["_menu"]][0],this.charaNum);
                   }
                }
             }
@@ -340,7 +340,7 @@ package menu
                {
                   MenuClass.menuData["SeihukuSet1"] = Chara_IESeihukudata.MizugiData.length - 1;
                   new Tab_TextInClass(1,"SeihukuSet1",MenuClass.menuData["SeihukuSet1"]);
-                  new Tab_IEInOut("textIN",Chara_IESeihukudata.MizugiData[MenuClass.systemData["SeihukuSet1"]["_menu"]][MenuClass.systemData["SeihukuSet2"]["_menu"]][0],MenuClass._nowCharaNum);
+                  Tab_IEInOut.execute("textIN",Chara_IESeihukudata.MizugiData[MenuClass.systemData["SeihukuSet1"]["_menu"]][MenuClass.systemData["SeihukuSet2"]["_menu"]][0],MenuClass._nowCharaNum);
                }
             }
             catch(myError:Error)
@@ -362,7 +362,7 @@ package menu
                   }
                   if(MenuClass._nowTargetMode == "Select")
                   {
-                     new Tab_IEInOut("textIN",Chara_IESeihukudata.Seihukudata[MenuClass.systemData["SeihukuSet0"]["_menu"]][testNum][MenuClass.systemData["SeihukuSet2"]["_menu"]][0],MenuClass._nowCharaNum);
+                     Tab_IEInOut.execute("textIN",Chara_IESeihukudata.Seihukudata[MenuClass.systemData["SeihukuSet0"]["_menu"]][testNum][MenuClass.systemData["SeihukuSet2"]["_menu"]][0],MenuClass._nowCharaNum);
                   }
                   else if(MenuClass._nowTargetMode == "SelectPlus")
                   {
@@ -370,7 +370,7 @@ package menu
                      {
                         if(MenuClass._nowSelectChara[this.charaNum])
                         {
-                           new Tab_IEInOut("textIN",Chara_IESeihukudata.Seihukudata[MenuClass.systemData["SeihukuSet0"]["_menu"]][testNum][MenuClass.systemData["SeihukuSet2"]["_menu"]][0],this.charaNum);
+                           Tab_IEInOut.execute("textIN",Chara_IESeihukudata.Seihukudata[MenuClass.systemData["SeihukuSet0"]["_menu"]][testNum][MenuClass.systemData["SeihukuSet2"]["_menu"]][0],this.charaNum);
                         }
                      }
                   }
@@ -378,12 +378,12 @@ package menu
                   {
                      if(MenuClass.charaData[this.charaNum]["SelectCharacter"]["_visible"][0])
                      {
-                        new Tab_IEInOut("textIN",Chara_IESeihukudata.Seihukudata[MenuClass.systemData["SeihukuSet0"]["_menu"]][testNum][MenuClass.systemData["SeihukuSet2"]["_menu"]][0],this.charaNum);
+                        Tab_IEInOut.execute("textIN",Chara_IESeihukudata.Seihukudata[MenuClass.systemData["SeihukuSet0"]["_menu"]][testNum][MenuClass.systemData["SeihukuSet2"]["_menu"]][0],this.charaNum);
                      }
                   }
                   if(MenuClass.spaceKeyPress && (Main.publishMode == "test" || Main.publishMode == "download_test"))
                   {
-                     new Tab_IEInOut("OUT","0",MenuClass._nowCharaNum);
+                     Tab_IEInOut.execute("OUT","0",MenuClass._nowCharaNum);
                      trace("[\"" + Tab_IEInOut.dataStr + "\"," + Chara_IESeihukudata.Seihukudata[MenuClass.systemData["SeihukuSet0"]["_menu"]][testNum][MenuClass.systemData["SeihukuSet2"]["_menu"]][1] + "],");
                      if(Chara_IESeihukudata.Seihukudata[testNum].length - 1 > MenuClass.systemData["SeihukuSet2"]["_menu"])
                      {
@@ -396,7 +396,7 @@ package menu
                {
                   MenuClass.menuData["SeihukuSet2"] = Chara_IESeihukudata.MizugiData[MenuClass.systemData["SeihukuSet1"]["_menu"]].length - 1;
                   new Tab_TextInClass(1,"SeihukuSet2",MenuClass.menuData["SeihukuSet2"]);
-                  new Tab_IEInOut("textIN",Chara_IESeihukudata.MizugiData[MenuClass.systemData["SeihukuSet1"]["_menu"]][MenuClass.systemData["SeihukuSet2"]["_menu"]][0],MenuClass._nowCharaNum);
+                  Tab_IEInOut.execute("textIN",Chara_IESeihukudata.MizugiData[MenuClass.systemData["SeihukuSet1"]["_menu"]][MenuClass.systemData["SeihukuSet2"]["_menu"]][0],MenuClass._nowCharaNum);
                }
             }
             catch(myError:Error)
@@ -417,7 +417,7 @@ package menu
                {
                   if(MenuClass._nowTargetMode == "Select")
                   {
-                     new Tab_IEInOut("textIN",Chara_IEdata.UnderwearData[MenuClass.systemData["UnderwearSet"]["_menu"]][1],MenuClass._nowCharaNum);
+                     Tab_IEInOut.execute("textIN",Chara_IEdata.UnderwearData[MenuClass.systemData["UnderwearSet"]["_menu"]][1],MenuClass._nowCharaNum);
                   }
                   else if(MenuClass._nowTargetMode == "SelectPlus")
                   {
@@ -425,7 +425,7 @@ package menu
                      {
                         if(MenuClass._nowSelectChara[this.charaNum])
                         {
-                           new Tab_IEInOut("textIN",Chara_IEdata.UnderwearData[MenuClass.systemData["UnderwearSet"]["_menu"]][1],this.charaNum);
+                           Tab_IEInOut.execute("textIN",Chara_IEdata.UnderwearData[MenuClass.systemData["UnderwearSet"]["_menu"]][1],this.charaNum);
                         }
                      }
                   }
@@ -433,13 +433,13 @@ package menu
                   {
                      if(MenuClass.charaData[this.charaNum]["SelectCharacter"]["_visible"][0])
                      {
-                        new Tab_IEInOut("textIN",Chara_IEdata.UnderwearData[MenuClass.systemData["UnderwearSet"]["_menu"]][1],this.charaNum);
+                        Tab_IEInOut.execute("textIN",Chara_IEdata.UnderwearData[MenuClass.systemData["UnderwearSet"]["_menu"]][1],this.charaNum);
                      }
                   }
                }
                if(MenuClass.spaceKeyPress && (Main.publishMode == "test" || Main.publishMode == "download_test"))
                {
-                  new Tab_IEInOut("OUT","0",MenuClass._nowCharaNum);
+                  Tab_IEInOut.execute("OUT","0",MenuClass._nowCharaNum);
                   if(Chara_IEdata.UnderwearData.length - 1 > MenuClass.systemData["UnderwearSet"]["_menu"])
                   {
                      MenuClass.systemData["UnderwearSet"]["_menu"] += 1;
@@ -464,7 +464,7 @@ package menu
                new Chara_AllHair(this.charaNum,this.clickTarget);
                if(MenuClass.spaceKeyPress && (Main.publishMode == "test" || Main.publishMode == "download_test"))
                {
-                  new Tab_IEInOut("OUT","0",MenuClass._nowCharaNum);
+                  Tab_IEInOut.execute("OUT","0",MenuClass._nowCharaNum);
                   trace("\"" + Tab_IEInOut.dataStr + "\",");
                   if(Chara_IEdata.AllHairSetData.length - 1 > this.charaData["AllHairSet"]["_menu"])
                   {
@@ -490,7 +490,7 @@ package menu
                new Chara_AllFace(this.charaNum,this.clickTarget);
                if(MenuClass.spaceKeyPress && (Main.publishMode == "test" || Main.publishMode == "download_test"))
                {
-                  new Tab_IEInOut("OUT","0",MenuClass._nowCharaNum);
+                  Tab_IEInOut.execute("OUT","0",MenuClass._nowCharaNum);
                   trace("\"" + Tab_IEInOut.dataStr + "\",");
                   if(Chara_IEdata.AllFaceSetData.length - 1 > this.charaData["AllFaceSet"]["_menu"])
                   {
@@ -527,7 +527,7 @@ package menu
                new Chara_AllBody(this.charaNum,this.clickTarget);
                if(MenuClass.spaceKeyPress && (Main.publishMode == "test" || Main.publishMode == "download_test"))
                {
-                  new Tab_IEInOut("OUT","0",MenuClass._nowCharaNum);
+                  Tab_IEInOut.execute("OUT","0",MenuClass._nowCharaNum);
                   trace("[\"" + Tab_IEInOut.dataStr + "\"," + Chara_IEdata.AllBodySetMotoData[MenuClass.systemData["AllBodySet"]["_menu"]][1] + "],");
                   if(Chara_IEdata.AllBodySetMotoData.length - 1 > MenuClass.systemData["AllBodySet"]["_menu"])
                   {
@@ -552,11 +552,11 @@ package menu
                }
                if(this.clickTarget == "menu" || MenuClass._nowTargetMode == "All" && this.charaNum == 8)
                {
-                  new Tab_IEInOut("textIN",Chara_IEdata.BackgroundData[MenuClass.systemData["BackgroundSet"]["_menu"]][0],this.charaNum);
+                  Tab_IEInOut.execute("textIN",Chara_IEdata.BackgroundData[MenuClass.systemData["BackgroundSet"]["_menu"]][0],this.charaNum);
                }
                if(MenuClass.spaceKeyPress && (Main.publishMode == "test" || Main.publishMode == "download_test"))
                {
-                  new Tab_IEInOut("OUT","0",MenuClass._nowCharaNum);
+                  Tab_IEInOut.execute("OUT","0",MenuClass._nowCharaNum);
                   trace("[\"" + Tab_IEInOut.dataStr + "\"," + Chara_IEdata.BackgroundData[MenuClass.systemData["BackgroundSet"]["_menu"]][1] + "],");
                   if(Chara_IEdata.BackgroundData.length - 1 > MenuClass.systemData["BackgroundSet"]["_menu"])
                   {
@@ -578,7 +578,7 @@ package menu
                {
                   if(MenuClass._nowTargetMode == "Select")
                   {
-                     new Tab_IEInOut("hairSet",Chara_HairData.HairExData[MenuClass.systemData["HairExSet"]["_menu"]],this.charaNum);
+                     Tab_IEInOut.execute("hairSet",Chara_HairData.HairExData[MenuClass.systemData["HairExSet"]["_menu"]],this.charaNum);
                   }
                   else if(MenuClass._nowTargetMode == "SelectPlus")
                   {
@@ -586,7 +586,7 @@ package menu
                      {
                         if(MenuClass._nowSelectChara[this.charaNum])
                         {
-                           new Tab_IEInOut("hairSet",Chara_HairData.HairExData[MenuClass.systemData["HairExSet"]["_menu"]],this.charaNum);
+                           Tab_IEInOut.execute("hairSet",Chara_HairData.HairExData[MenuClass.systemData["HairExSet"]["_menu"]],this.charaNum);
                         }
                      }
                   }
@@ -594,7 +594,7 @@ package menu
                   {
                      if(this.charaData["SelectCharacter"]["_visible"][0])
                      {
-                        new Tab_IEInOut("hairSet",Chara_HairData.HairExData[MenuClass.systemData["HairExSet"]["_menu"]],this.charaNum);
+                        Tab_IEInOut.execute("hairSet",Chara_HairData.HairExData[MenuClass.systemData["HairExSet"]["_menu"]],this.charaNum);
                      }
                   }
                }
@@ -612,7 +612,7 @@ package menu
                {
                   if(MenuClass.systemData["HairExSetEasy"]["_visible"][0])
                   {
-                     new Tab_IEInOut("hairSet",Chara_HairData.HairExData[MenuClass.systemData["HairExSetEasy"]["_menu"]],this.charaNum);
+                     Tab_IEInOut.execute("hairSet",Chara_HairData.HairExData[MenuClass.systemData["HairExSetEasy"]["_menu"]],this.charaNum);
                   }
                   else
                   {
@@ -760,7 +760,7 @@ package menu
                ErrorFc(myError);
             }
          }
-         else if(this.tabName == "LeftArm2" || this.tabName == "RightArm2")
+         else if(this.tabName == "LeftArm2" || this.tabName == "RightArm2" || this.tabName == "LeftArmFreeRotation" || this.tabName == "RightArmFreeRotation")
          {
             try
             {
@@ -768,11 +768,12 @@ package menu
                {
                   this.charaData["RightArm2"]["_meter"] = this.charaData["LeftArm2"]["_meter"];
                   this.charaData["RightArm2"]["_depth"] = this.charaData["LeftArm2"]["_depth"];
+                  this.charaData["RightArmFreeRotation"]["_check"] = this.charaData["LeftArmFreeRotation"]["_check"];
                }
                new Move_UdeClass(this.charaNum);
                new Chara_SetSize(this.charaNum,"HandWidth",this.clickTarget);
                new Chara_ColorClass(this.charaNum,this.tabName);
-               if(this.tabName == "LeftArm2")
+               if(this.tabName == "LeftArm2" || this.tabName == "LeftArmFreeRotation")
                {
                   new Chara_ColorClass(this.charaNum,"LeftHand");
                }
@@ -843,6 +844,83 @@ package menu
             {
                new Move_AshiClass(this.charaNum,this.clickTarget);
                new Move_HitLine(this.charaNum);
+            }
+            catch(myError:Error)
+            {
+               ErrorFc(myError);
+            }
+         }
+         else if(
+            this.tabName == "LeftThighRotation" ||
+            this.tabName == "RightThighRotation" ||
+            this.tabName == "LeftLegRotation" ||
+            this.tabName == "RightLegRotation" ||
+            this.tabName == "LeftFootRotation" ||
+            this.tabName == "RightFootRotation" ||
+            this.tabName == "LeftThighScaleX" ||
+            this.tabName == "LeftThighScaleY" ||
+            this.tabName == "LeftThighOffsetX" ||
+            this.tabName == "LeftThighOffsetY" ||
+            this.tabName == "RightThighScaleX" ||
+            this.tabName == "RightThighScaleY" ||
+            this.tabName == "RightThighOffsetX" ||
+            this.tabName == "RightThighOffsetY" ||
+            this.tabName == "LeftLegScaleX" ||
+            this.tabName == "LeftLegScaleY" ||
+            this.tabName == "LeftLegOffsetX" ||
+            this.tabName == "LeftLegOffsetY" ||
+            this.tabName == "RightLegScaleX" ||
+            this.tabName == "RightLegScaleY" ||
+            this.tabName == "RightLegOffsetX" ||
+            this.tabName == "RightLegOffsetY" ||
+            this.tabName == "LeftFootScaleX" ||
+            this.tabName == "LeftFootScaleY" ||
+            this.tabName == "LeftFootOffsetX" ||
+            this.tabName == "LeftFootOffsetY" ||
+            this.tabName == "RightFootScaleX" ||
+            this.tabName == "RightFootScaleY" ||
+            this.tabName == "RightFootOffsetX" ||
+            this.tabName == "RightFootOffsetY" ||
+            this.tabName == "LeftThighVisible" ||
+            this.tabName == "RightThighVisible" ||
+            this.tabName == "LeftLegVisible" ||
+            this.tabName == "RightLegVisible" ||
+            this.tabName == "LeftFootVisible" ||
+            this.tabName == "RightFootVisible"
+         )
+         {
+            if(this.clickTarget == "menu" || this.clickTarget == "tab" || this.clickTarget == "random") {
+               if (MenuClass.systemData["LinkThighSettings"]["_flag"]) {
+                  this.charaData["RightThighRotation"]["_meter"] = this.charaData["LeftThighRotation"]["_meter"];
+                  this.charaData["RightThighScaleX"]["_meter"] = this.charaData["LeftThighScaleX"]["_meter"];
+                  this.charaData["RightThighScaleY"]["_meter"] = this.charaData["LeftThighScaleY"]["_meter"];
+                  this.charaData["RightThighOffsetX"]["_meter"] = this.charaData["LeftThighOffsetX"]["_meter"];
+                  this.charaData["RightThighOffsetY"]["_meter"] = this.charaData["LeftThighOffsetY"]["_meter"];
+                  this.charaData["RightThighVisible"]["_visible"][0] = this.charaData["LeftThighVisible"]["_visible"][0];
+               }
+
+               if (MenuClass.systemData["LinkLegSettings"]["_flag"]) {
+                  this.charaData["RightLegRotation"]["_meter"] = this.charaData["LeftLegRotation"]["_meter"];
+                  this.charaData["RightLegScaleX"]["_meter"] = this.charaData["LeftLegScaleX"]["_meter"];
+                  this.charaData["RightLegScaleY"]["_meter"] = this.charaData["LeftLegScaleY"]["_meter"];
+                  this.charaData["RightLegOffsetX"]["_meter"] = this.charaData["LeftLegOffsetX"]["_meter"];
+                  this.charaData["RightLegOffsetY"]["_meter"] = this.charaData["LeftLegOffsetY"]["_meter"];
+                  this.charaData["RightLegVisible"]["_visible"][0] = this.charaData["LeftLegVisible"]["_visible"][0];
+               }
+
+               if (MenuClass.systemData["LinkFootSettings"]["_flag"]) {
+                  this.charaData["RightFootRotation"]["_meter"] = this.charaData["LeftFootRotation"]["_meter"];
+                  this.charaData["RightFootScaleX"]["_meter"] = this.charaData["LeftFootScaleX"]["_meter"];
+                  this.charaData["RightFootScaleY"]["_meter"] = this.charaData["LeftFootScaleY"]["_meter"];
+                  this.charaData["RightFootOffsetX"]["_meter"] = this.charaData["LeftFootOffsetX"]["_meter"];
+                  this.charaData["RightFootOffsetY"]["_meter"] = this.charaData["LeftFootOffsetY"]["_meter"];
+                  this.charaData["RightFootVisible"]["_visible"][0] = this.charaData["LeftFootVisible"]["_visible"][0];
+               }
+            }
+
+            try
+            {
+               Move_AshiClass.updateLegRotation(this.charaNum);
             }
             catch(myError:Error)
             {
@@ -1132,8 +1210,17 @@ package menu
                ErrorFc(myError);
             }
          }
-         else if(this.tabName == "ShoulderWidth")
+         else if(this.tabName == "ShoulderWidth" || this.tabName == "LeftShoulderVisible" || this.tabName == "RightShoulderVisible")
          {
+            if (MenuClass.systemData["LinkUpperArmSettings"]["_flag"]) {
+               this.charaData["RightUpperArmScaleX"]["_meter"] = this.charaData["LeftUpperArmScaleX"]["_meter"];
+               this.charaData["RightUpperArmScaleY"]["_meter"] = this.charaData["LeftUpperArmScaleY"]["_meter"];
+               this.charaData["RightUpperArmOffsetX"]["_meter"] = this.charaData["LeftUpperArmOffsetX"]["_meter"];
+               this.charaData["RightUpperArmOffsetY"]["_meter"] = this.charaData["LeftUpperArmOffsetY"]["_meter"];
+               this.charaData["RightUpperArmVisible"]["_visible"][0] = this.charaData["LeftUpperArmVisible"]["_visible"][0];
+               this.charaData["RightShoulderVisible"]["_visible"][0] = this.charaData["LeftShoulderVisible"]["_visible"][0];
+            }
+
             try
             {
                new Huku_YsyatuKata(this.charaNum);
@@ -1204,16 +1291,48 @@ package menu
             this.tabName == "LeftUpperArmOffsetX" || this.tabName == "LeftUpperArmOffsetY" ||
             this.tabName == "RightUpperArmScaleX" || this.tabName == "RightUpperArmScaleY" ||
             this.tabName == "RightUpperArmOffsetX" || this.tabName == "RightUpperArmOffsetY" ||
+            this.tabName == "LeftUpperArmVisible" || this.tabName == "RightUpperArmVisible" ||
             this.tabName == "LeftArmScaleX" || this.tabName == "LeftArmScaleY" ||
             this.tabName == "LeftArmOffsetX" || this.tabName == "LeftArmOffsetY" ||
             this.tabName == "RightArmScaleX" || this.tabName == "RightArmScaleY" ||
             this.tabName == "RightArmOffsetX" || this.tabName == "RightArmOffsetY" ||
+            this.tabName == "LeftArmVisible" || this.tabName == "RightArmVisible" ||
             this.tabName == "LeftHandScaleX" || this.tabName == "LeftHandScaleY" ||
             this.tabName == "LeftHandOffsetX" || this.tabName == "LeftHandOffsetY" ||
             this.tabName == "RightHandScaleX" || this.tabName == "RightHandScaleY" ||
-            this.tabName == "RightHandOffsetX" || this.tabName == "RightHandOffsetY"
+            this.tabName == "RightHandOffsetX" || this.tabName == "RightHandOffsetY" ||
+            this.tabName == "LeftHandVisible" || this.tabName == "RightHandVisible" ||
+            this.tabName == "LeftHandFlip" || this.tabName == "RightHandFlip" ||
+            this.tabName == "LeftArmFlip" || this.tabName == "RightArmFlip"
          )
          {
+            if (MenuClass.systemData["LinkUpperArmSettings"]["_flag"]) {
+               this.charaData["RightUpperArmScaleX"]["_meter"] = this.charaData["LeftUpperArmScaleX"]["_meter"];
+               this.charaData["RightUpperArmScaleY"]["_meter"] = this.charaData["LeftUpperArmScaleY"]["_meter"];
+               this.charaData["RightUpperArmOffsetX"]["_meter"] = this.charaData["LeftUpperArmOffsetX"]["_meter"];
+               this.charaData["RightUpperArmOffsetY"]["_meter"] = this.charaData["LeftUpperArmOffsetY"]["_meter"];
+               this.charaData["RightUpperArmVisible"]["_visible"][0] = this.charaData["LeftUpperArmVisible"]["_visible"][0];
+               this.charaData["RightShoulderVisible"]["_visible"][0] = this.charaData["LeftShoulderVisible"]["_visible"][0];
+            }
+
+            if (MenuClass.systemData["LinkArmSettings"]["_flag"]) {
+               this.charaData["RightArmScaleX"]["_meter"] = this.charaData["LeftArmScaleX"]["_meter"];
+               this.charaData["RightArmScaleY"]["_meter"] = this.charaData["LeftArmScaleY"]["_meter"];
+               this.charaData["RightArmOffsetX"]["_meter"] = this.charaData["LeftArmOffsetX"]["_meter"];
+               this.charaData["RightArmOffsetY"]["_meter"] = this.charaData["LeftArmOffsetY"]["_meter"];
+               this.charaData["RightArmVisible"]["_visible"][0] = this.charaData["LeftArmVisible"]["_visible"][0];
+               this.charaData["RightArmFlip"]["_check"] = this.charaData["LeftArmFlip"]["_check"];
+            }
+
+            if (MenuClass.systemData["LinkHandSettings"]["_flag"]) {
+               this.charaData["RightHandScaleX"]["_meter"] = this.charaData["LeftHandScaleX"]["_meter"];
+               this.charaData["RightHandScaleY"]["_meter"] = this.charaData["LeftHandScaleY"]["_meter"];
+               this.charaData["RightHandOffsetX"]["_meter"] = this.charaData["LeftHandOffsetX"]["_meter"];
+               this.charaData["RightHandOffsetY"]["_meter"] = this.charaData["LeftHandOffsetY"]["_meter"];
+               this.charaData["RightHandVisible"]["_visible"][0] = this.charaData["LeftHandVisible"]["_visible"][0];
+               this.charaData["RightHandFlip"]["_check"] = this.charaData["LeftHandFlip"]["_check"];
+            }
+            
             try
             {
                new Move_UdeClass(this.charaNum);
@@ -1348,6 +1467,11 @@ package menu
                ErrorFc(myError);
             }
          }
+         else if (this.tabName == "TinSizeAuto" || this.tabName == "TinScaleX"  || this.tabName == "TinScaleY" || this.tabName == "TinOffsetX" || this.tabName == "TinOffsetY")
+         {
+            new Huku_Tin(this.charaNum);
+            new Huku_TinEnter(this.charaNum);
+         }
          else if(this.tabName == "Tin")
          {
             try
@@ -1451,6 +1575,26 @@ package menu
                      new Huku_Pantu(this.charaNum,"Pantu");
                      new Huku_Pantu(this.charaNum,"Spantu");
                      new Chara_ColorClass(this.charaNum,"Pantu");
+
+                     try {
+                        this.charaAdd.mosaic.mosaic.visible = false;
+                     } catch (error) {}
+
+                     try {
+                        this.charaAdd.dou.dou_shitaHuku.peni.Peni.Tin.Tin.mosaic.mosaic.visible = false;
+                     } catch (error) {}
+
+                     try {
+                        this.charaAdd.dou.dou_shitaHuku.peni.Peni.Tin.TinUp.mosaic.mosaic.visible = false;
+                     } catch (error) {}
+
+                     try {
+                        this.charaAdd.peni.peni.Peni.Tin.Tin.mosaic.mosaic.visible = false;
+                     } catch (error) {}
+
+                     try {
+                        this.charaAdd.peni.peni.Peni.Tin.TinUp.mosaic.mosaic.visible = false;
+                     } catch (error) {}
                   }
                }
             }
@@ -2264,7 +2408,7 @@ package menu
                ErrorFc(myError);
             }
          }
-         else if(this.tabName == "EyebrowY" || this.tabName == "EyebrowRotation")
+         else if(this.tabName == "EyebrowY" || this.tabName == "EyebrowRotation" || this.tabName == "EyebrowX")
          {
             try
             {
@@ -3387,6 +3531,23 @@ package menu
                   this.charaAdd.head["eye" + i].eyeMask.y = this.charaAdd.head["eye" + i].eyeWhite.y = eyeY;
                   this.charaAdd.head["eye" + i].eyeWhite.rotation = eyeRotation;
                   this.charaAdd.head["eye" + i].eyeMask.rotation = eyeRotation;
+
+                  try {
+                     if (this.charaAdd.head["eye" + i].underMarkAttachPoint) {
+                        this.charaAdd.head["eye" + i].underMarkAttachPoint.rotation = eyeRotation;
+                     }
+                  } catch (err) {
+                     trace(err.getStackTrace());
+                  }
+
+                  try {
+                     if (this.charaAdd.head["eye" + i].overMarkAttachPoint) {
+                        this.charaAdd.head["eye" + i].overMarkAttachPoint.rotation = eyeRotation;
+                     }
+                  } catch (err) {
+                     trace(err.getStackTrace());
+                  }
+
                   i++;
                }
                new Emotion_Eye(this.charaNum);
@@ -3396,7 +3557,7 @@ package menu
                ErrorFc(myError);
             }
          }
-         else if(this.tabName == "EmotionEyebrowLeft" || this.tabName == "EyebrowRotationLeft" || this.tabName == "EyebrowMoveLeft" || this.tabName == "EmotionEyebrowRight" || this.tabName == "EyebrowRotationRight" || this.tabName == "EyebrowMoveRight")
+         else if(this.tabName == "EmotionEyebrowLeft" || this.tabName == "EyebrowRotationLeft" || this.tabName == "EyebrowMoveLeft" || this.tabName == "EmotionEyebrowRight" || this.tabName == "EyebrowRotationRight" || this.tabName == "EyebrowMoveRight" || this.tabName == "EyebrowMoveHorizontalLeft" || this.tabName == "EyebrowMoveHorizontalRight")
          {
             try
             {
@@ -3405,6 +3566,7 @@ package menu
                   this.charaData["EmotionEyebrowRight"]["_menu"] = this.charaData["EmotionEyebrowLeft"]["_menu"];
                   this.charaData["EyebrowRotationRight"]["_meter"] = this.charaData["EyebrowRotationLeft"]["_meter"];
                   this.charaData["EyebrowMoveRight"]["_meter"] = this.charaData["EyebrowMoveLeft"]["_meter"];
+                  this.charaData["EyebrowMoveHorizontalRight"]["_meter"] = this.charaData["EyebrowMoveHorizontalLeft"]["_meter"];
                }
                new Emotion_Eyebrow(this.charaNum);
             }
@@ -3417,6 +3579,7 @@ package menu
          {
             try
             {
+               Huku_MarkSet.clearMouthAttachedMarks(this.charaNum);
                new Emotion_MouthReversal(this.charaNum);
                this.charaAdd.head.mouth.gotoAndStop(this.charaData[this.tabName]["_menu"] + 1);
                this.charaAdd.head.mouth.sen0.gotoAndStop(MenuClass.charaData[this.charaNum]["MouthSen"]["_menu"] + 1);
@@ -3428,6 +3591,7 @@ package menu
                catch(myError:Error)
                {
                }
+               Huku_MarkSet.updateMouth(this.charaNum);
                this.charaAdd.head.mouth.visible = this.charaData[this.tabName]["_visible"][0];
             }
             catch(myError:Error)
@@ -4817,7 +4981,7 @@ package menu
                ErrorFc(myError);
             }
          }
-         else if(this.tabName == "Mark" || this.tabName == "MarkRotation" || this.tabName == "MarkY" || this.tabName == "MarkX" || this.tabName == "MarkScaleX" || this.tabName == "MarkScaleY" || this.tabName == "MarkScaleB" || this.tabName == "MarkAlpha")
+         else if(this.tabName == "Mark" || this.tabName == "MarkRotation" || this.tabName == "MarkY" || this.tabName == "MarkX" || this.tabName == "MarkScaleX" || this.tabName == "MarkScaleY" || this.tabName == "MarkScaleB" || this.tabName == "MarkAlpha" || this.tabName == "MarkVary" || this.tabName == "MarkAdd")
          {
             try
             {
@@ -4892,7 +5056,7 @@ package menu
                ErrorFc(myError);
             }
          }
-         else if(this.tabName == "Ribon" || this.tabName == "RibonLine" || this.tabName == "RibonRotation" || this.tabName == "RibonY" || this.tabName == "RibonX" || this.tabName == "RibonScale" || this.tabName == "RibonScaleY" || this.tabName == "RibonScaleB" || this.tabName == "RibonAdd" || this.tabName == "RibonAlpha")
+         else if(this.tabName == "Ribon" || this.tabName == "RibonLine" || this.tabName == "RibonRotation" || this.tabName == "RibonY" || this.tabName == "RibonX" || this.tabName == "RibonScale" || this.tabName == "RibonScaleY" || this.tabName == "RibonScaleB" || this.tabName == "RibonAdd" || this.tabName == "RibonAlpha" || this.tabName == "RibonFineY" || this.tabName == "RibonFineX")
          {
             try
             {
@@ -4906,7 +5070,7 @@ package menu
                }
                else if(this.clickTarget == "paste")
                {
-                  if(this.tabName == "RibonY")
+                  if(this.tabName == "RibonY" || this.tabName == "RibonFineY")
                   {
                      i = 0;
                      while(i <= Main.RibonhukusuuNum)
@@ -4973,7 +5137,23 @@ package menu
                ErrorFc(myError);
             }
          }
-         else if(this.tabName == "FreeHand" || this.tabName == "FreeHandAlpha" || this.tabName == "FreeHandRotation" || this.tabName == "FreeHandY" || this.tabName == "FreeHandX" || this.tabName == "FreeHandScale" || this.tabName == "FreeHandWidth" || this.tabName == "FreeHandDepth" || this.tabName == "FreeHandWrist" || this.tabName == "FreeHandWristRotation" || this.tabName == "FreeHandItem" || this.tabName == "FreeHandWristband" || this.tabName == "FreeHandVest")
+         else if(
+            this.tabName == "FreeHand" ||
+            this.tabName == "FreeHandAlpha" ||
+            this.tabName == "FreeHandRotation" ||
+            this.tabName == "FreeHandY" ||
+            this.tabName == "FreeHandX" ||
+            this.tabName == "FreeHandScale" ||
+            this.tabName == "FreeHandWidth" ||
+            this.tabName == "FreeHandDepth" ||
+            this.tabName == "FreeHandWrist" ||
+            this.tabName == "FreeHandWristRotation" ||
+            this.tabName == "FreeHandItem" ||
+            this.tabName == "FreeHandWristband" ||
+            this.tabName == "FreeHandVest" ||
+            this.tabName == "FreeHandFineX" ||
+            this.tabName == "FreeHandFineY"
+         )
          {
             try
             {
@@ -5025,7 +5205,7 @@ package menu
                ErrorFc(myError);
             }
          }
-         else if(this.tabName == "FreeRibon" || this.tabName == "FreeRibonLine" || this.tabName == "FreeRibonRotation" || this.tabName == "FreeRibonY" || this.tabName == "FreeRibonX" || this.tabName == "FreeRibonScale" || this.tabName == "FreeRibonScaleY" || this.tabName == "FreeRibonScaleB" || this.tabName == "FreeRibonDepth")
+         else if(this.tabName == "FreeRibon" || this.tabName == "FreeRibonLine" || this.tabName == "FreeRibonRotation" || this.tabName == "FreeRibonY" || this.tabName == "FreeRibonX" || this.tabName == "FreeRibonScale" || this.tabName == "FreeRibonScaleY" || this.tabName == "FreeRibonScaleB" || this.tabName == "FreeRibonDepth" || this.tabName == "FreeRibonFineX" || this.tabName == "FreeRibonFineY" || this.tabName == "FreeRibonAlpha")
          {
             try
             {
@@ -5077,7 +5257,19 @@ package menu
                ErrorFc(myError);
             }
          }
-         else if(this.tabName == "FreeChair" || this.tabName == "FreeChairExtra" || this.tabName == "FreeChairLine" || this.tabName == "FreeChairRotation" || this.tabName == "FreeChairY" || this.tabName == "FreeChairX" || this.tabName == "FreeChairScale" || this.tabName == "FreeChairDepth")
+         else if(
+            this.tabName == "FreeChair" ||
+            this.tabName == "FreeChairExtra" ||
+            this.tabName == "FreeChairLine" ||
+            this.tabName == "FreeChairRotation" ||
+            this.tabName == "FreeChairY" ||
+            this.tabName == "FreeChairX" ||
+            this.tabName == "FreeChairScale" ||
+            this.tabName == "FreeChairDepth" ||
+            this.tabName == "FreeChairFineX" ||
+            this.tabName == "FreeChairFineY" ||
+            this.tabName == "FreeChairAlpha"
+         )
          {
             try
             {
@@ -5236,7 +5428,7 @@ package menu
                ErrorFc(myError);
             }
          }
-         else if(this.tabName == "Belt" || this.tabName == "BeltExtra" || this.tabName == "BeltRotation" || this.tabName == "BeltY" || this.tabName == "BeltX" || this.tabName == "BeltScale" || this.tabName == "BeltScaleY" || this.tabName == "BeltScaleB" || this.tabName == "BeltLine" || this.tabName == "BeltAlpha")
+         else if(this.tabName == "Belt" || this.tabName == "BeltExtra" || this.tabName == "BeltRotation" || this.tabName == "BeltY" || this.tabName == "BeltX" || this.tabName == "BeltScale" || this.tabName == "BeltScaleY" || this.tabName == "BeltScaleB" || this.tabName == "BeltLine" || this.tabName == "BeltAlpha" || this.tabName == "BeltFineX" || this.tabName == "BeltFineY")
          {
             try
             {
@@ -5250,7 +5442,7 @@ package menu
                }
                else if(this.clickTarget == "paste")
                {
-                  if(this.tabName == "BeltY")
+                  if(this.tabName == "BeltY" || this.tabName == "BeltFineY")
                   {
                      i = 0;
                      while(i <= Main.hukusuuNum)
@@ -5308,7 +5500,21 @@ package menu
                ErrorFc(myError);
             }
          }
-         else if(this.tabName == "FreeBelt" || this.tabName == "FreeBeltExtra" || this.tabName == "FreeBeltRotation" || this.tabName == "FreeBeltY" || this.tabName == "FreeBeltX" || this.tabName == "FreeBeltScale" || this.tabName == "FreeBeltScaleY" || this.tabName == "FreeBeltScaleB" || this.tabName == "FreeBeltLine" || this.tabName == "FreeBeltDepth")
+         else if(
+            this.tabName == "FreeBelt" ||
+            this.tabName == "FreeBeltExtra" ||
+            this.tabName == "FreeBeltRotation" ||
+            this.tabName == "FreeBeltY" ||
+            this.tabName == "FreeBeltX" ||
+            this.tabName == "FreeBeltScale" ||
+            this.tabName == "FreeBeltScaleY" ||
+            this.tabName == "FreeBeltScaleB" ||
+            this.tabName == "FreeBeltLine" ||
+            this.tabName == "FreeBeltDepth" ||
+            this.tabName == "FreeBeltFineX" ||
+            this.tabName == "FreeBeltFineY" ||
+            this.tabName == "FreeBeltAlpha"
+         )
          {
             try
             {
@@ -6330,6 +6536,16 @@ package menu
                ErrorFc(myError);
             }
          }
+         else if(this.tabName == "MenuScale")
+         {
+            Air_StageSize.saveMenuSettings();
+            Tab_ClassSet.rescaleMenu(MenuClass._nowHeaderName);
+         }
+         else if(this.tabName == "MenuAlign")
+         {
+            Air_StageSize.saveMenuSettings();
+            Air_StageSize.recalculateMenuSize();
+         }
          else if(this.tabName == "MeterNumView")
          {
             try
@@ -6458,7 +6674,20 @@ package menu
                ErrorFc(myError);
             }
          }
-         else if(this.tabName == "CharaLoadAdd" || this.tabName == "CharaLoadAlpha" || this.tabName == "CharaLoadReversalDepth" || this.tabName == "CharaLoadScaleB" || this.tabName == "CharaLoadScale" || this.tabName == "CharaLoadScaleY" || this.tabName == "CharaLoadRotation" || this.tabName == "CharaLoadX" || this.tabName == "CharaLoadY" || this.tabName == "CharaLoadSwfColor")
+         else if(
+            this.tabName == "CharaLoadAdd" ||
+            this.tabName == "CharaLoadAlpha" ||
+            this.tabName == "CharaLoadReversalDepth" ||
+            this.tabName == "CharaLoadScaleB" ||
+            this.tabName == "CharaLoadScale" ||
+            this.tabName == "CharaLoadScaleY" ||
+            this.tabName == "CharaLoadRotation" ||
+            this.tabName == "CharaLoadX" ||
+            this.tabName == "CharaLoadY" ||
+            this.tabName == "CharaLoadSwfColor" ||
+            this.tabName == "CharaLoadFineX" ||
+            this.tabName == "CharaLoadFineY"
+         )
          {
             try
             {
@@ -6537,7 +6766,21 @@ package menu
                ErrorFc(myError);
             }
          }
-         else if(this.tabName == "LoadAdd" || this.tabName == "LoadAlpha" || this.tabName == "LoadReversalDepth" || this.tabName == "LoadScale" || this.tabName == "LoadScaleY" || this.tabName == "LoadScaleB" || this.tabName == "LoadSize" || this.tabName == "LoadRotation" || this.tabName == "LoadX" || this.tabName == "LoadY" || this.tabName == "LoadSwfColor")
+         else if(
+            this.tabName == "LoadAdd" ||
+            this.tabName == "LoadAlpha" ||
+            this.tabName == "LoadReversalDepth" ||
+            this.tabName == "LoadScale" ||
+            this.tabName == "LoadScaleY" ||
+            this.tabName == "LoadScaleB" ||
+            this.tabName == "LoadSize" ||
+            this.tabName == "LoadRotation" ||
+            this.tabName == "LoadX" ||
+            this.tabName == "LoadY" ||
+            this.tabName == "LoadSwfColor" ||
+            this.tabName == "LoadFineX" ||
+            this.tabName == "LoadFineY"
+         )
          {
             try
             {
@@ -6550,7 +6793,7 @@ package menu
          }
          else if(this.tabName == "Story_Page")
          {
-            new Tab_IEInOut("setIN",MenuClass.StoryTimeLineData[MenuClass.systemData["Story_Page"]["_menu"]][9],MenuClass._nowCharaNum);
+            Tab_IEInOut.execute("setIN",MenuClass.StoryTimeLineData[MenuClass.systemData["Story_Page"]["_menu"]][9],MenuClass._nowCharaNum);
          }
 
          try {
@@ -6600,7 +6843,7 @@ package menu
          {
             trace(this.tabName,"ロードエラー");
             trace(error.getStackTrace());
-            MenuClass.charaData[this.charaNum] = this.clone(MenuClass.charaMotoData[this.charaNum]);
+            // MenuClass.charaData[this.charaNum] = this.clone(MenuClass.charaMotoData[this.charaNum]);
             new SetClass(this.charaNum,this.tabName,"ErrorReload");
          }
          else

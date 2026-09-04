@@ -2,6 +2,7 @@ package menu
 {
    import flash.display.MovieClip;
    import flash.events.MouseEvent;
+   import undo.PropertyAction;
    
    public class Tab_NumberClass
    {
@@ -44,6 +45,7 @@ package menu
          {
             _loc4_ = MenuClass.tabData[param1.currentTarget.headerName][param1.currentTarget.targetJ][2]["_meter"];
          }
+
          if(_loc4_ == "charaPlus" || _loc4_ == "systemPlus")
          {
             _loc2_ = MenuClass.tabData[param1.currentTarget.headerName][param1.currentTarget.targetJ][2]["_data"];
@@ -54,10 +56,20 @@ package menu
          {
             _loc5_ = param1.currentTarget.tabName;
          }
+
+
          new Tab_VC(param1.currentTarget.headerName,param1.currentTarget.targetJ,_loc5_);
          var _loc6_:int = 0;
          if(_loc4_ == "chara" || _loc4_ == "charaPlus")
          {
+            var undoAction = new PropertyAction(
+               param1.currentTarget.headerName, param1.currentTarget.targetJ, "_number",
+               true, (_loc4_ == "charaPlus"),
+               "tab", true
+            );
+            
+            undoAction.recordPreviousValue(_loc3_);
+
             if(MenuClass._nowTargetMode == "All")
             {
                _loc7_ = 0;
@@ -178,6 +190,10 @@ package menu
                }
                new SetClass(MenuClass._nowCharaNum,_loc5_,"tab");
             }
+
+            undoAction.recordNewValue(MenuClass.charaData[MenuClass._nowCharaNum][_loc5_]["_number"], _loc3_);
+            Main.undoTimeline.push(undoAction);
+
             param1.currentTarget.gotoAndStop(MenuClass.charaData[MenuClass._nowCharaNum][_loc5_]["_number"] + 61);
          }
       }

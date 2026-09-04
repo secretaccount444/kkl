@@ -57,6 +57,26 @@ package menu
             {
                this.charaAdd.dou.dou_shitaHuku.peni.Peni.Tin.Tin.mosaic.mosaic.y = 0;
             }
+
+            try {
+               this.charaAdd.dou.dou_shitaHuku.peni.Peni.Tin.Tin.mosaic.mosaic.visible = false;
+            } catch (error) {}
+
+            try {
+               this.charaAdd.dou.dou_shitaHuku.peni.Peni.Tin.TinUp.mosaic.mosaic.visible = false;
+            } catch (error) {}
+
+            try {
+               this.charaAdd.peni.peni.Peni.Tin.Tin.mosaic.mosaic.visible = false;
+            } catch (error) {}
+
+            try {
+               this.charaAdd.peni.peni.Peni.Tin.TinUp.mosaic.mosaic.visible = false;
+            } catch (error) {}
+
+            try {
+               this.charaAdd.mosaic.mosaic.visible = false;
+            } catch (error) {}
          }
          catch(myError:Error)
          {

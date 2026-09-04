@@ -2,6 +2,7 @@ package menu
 {
    import flash.display.MovieClip;
    import flash.events.MouseEvent;
+   import undo.PropertyAction;
    
    public class Tab_SeparateClass
    {
@@ -51,6 +52,7 @@ package menu
          {
             _loc4_ = MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_meter"];
          }
+
          if(_loc4_ == "charaPlus" || _loc4_ == "systemPlus")
          {
             _loc2_ = MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_data"];
@@ -61,9 +63,17 @@ package menu
          {
             _loc5_ = targetMC.tabName;
          }
+
          new Tab_VC(targetMC.headerName,targetMC.targetJ,_loc5_);
          if(_loc4_ == "chara" || _loc4_ == "charaPlus")
          {
+            var undoAction = new PropertyAction(
+               targetMC.headerName, targetMC.targetJ, "_separate",
+               true, (_loc4_ == "charaPlus"),
+               "tab", true
+            );
+            undoAction.recordPreviousValue(_loc3_);
+
             if(Main.r18Check)
             {
                if(MenuClass.charaData[MenuClass._nowCharaNum][_loc5_]["_separate"] == 1)
@@ -83,6 +93,10 @@ package menu
             {
                MenuClass.charaData[MenuClass._nowCharaNum][_loc5_]["_separate"] += 1;
             }
+
+            undoAction.recordNewValue(MenuClass.charaData[MenuClass._nowCharaNum][_loc5_]["_separate"], _loc3_);
+            Main.undoTimeline.push(undoAction);
+
             if(MenuClass._nowTargetMode == "All")
             {
                _loc6_ = 0;
@@ -139,6 +153,7 @@ package menu
                }
                new SetClass(MenuClass._nowCharaNum,targetMC.tabName,"tab");
             }
+
             targetMC.gotoAndStop(MenuClass.charaData[MenuClass._nowCharaNum][_loc5_]["_separate"] + 4);
          }
       }

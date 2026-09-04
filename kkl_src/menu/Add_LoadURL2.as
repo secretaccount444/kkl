@@ -96,31 +96,31 @@ package menu
             }
             else if(addName0 == "LeftThighMod")
             {
-               this.charaAdd.ashi0.thigh.thigh.addChild(this.charaAdd["loadObj" + num]);
+               this.charaAdd.ashi0.thigh.actual.thigh.addChild(this.charaAdd["loadObj" + num]);
             }
             else if(addName0 == "RightThighMod")
             {
-               this.charaAdd.ashi1.thigh.thigh.addChild(this.charaAdd["loadObj" + num]);
+               this.charaAdd.ashi1.thigh.actual.thigh.addChild(this.charaAdd["loadObj" + num]);
             }
             else if(addName0 == "LeftLegMod")
             {
-               if (this.charaAdd.ashi0.leg != null && this.charaAdd.ashi0.leg.leg != null) {
-                  this.charaAdd.ashi0.leg.leg.addChild(this.charaAdd["loadObj" + num]);
+               if (this.charaAdd.ashi0.leg != null && this.charaAdd.ashi0.leg.actual.leg != null) {
+                  this.charaAdd.ashi0.leg.actual.leg.addChild(this.charaAdd["loadObj" + num]);
                }
             }
             else if(addName0 == "RightLegMod")
             {
-               if (this.charaAdd.ashi1.leg != null && this.charaAdd.ashi1.leg.leg != null) {
-                  this.charaAdd.ashi1.leg.leg.addChild(this.charaAdd["loadObj" + num]);
+               if (this.charaAdd.ashi1.leg != null && this.charaAdd.ashi1.leg.actual.leg != null) {
+                  this.charaAdd.ashi1.leg.actual.leg.addChild(this.charaAdd["loadObj" + num]);
                }
             }
             else if(addName0 == "LeftFootMod")
             {
-               this.charaAdd.ashi0.foot.foot.addChild(this.charaAdd["loadObj" + num]);
+               this.charaAdd.ashi0.foot.actual.foot.addChild(this.charaAdd["loadObj" + num]);
             }
             else if(addName0 == "RightFootMod")
             {
-               this.charaAdd.ashi1.foot.foot.addChild(this.charaAdd["loadObj" + num]);
+               this.charaAdd.ashi1.foot.actual.foot.addChild(this.charaAdd["loadObj" + num]);
             }
 
             if (attachPointLayeringKeys[addName0]) {
@@ -396,12 +396,14 @@ package menu
                this.charaAdd["loadObj" + num].rotation = MeterPersentRibon.MeterPersentNum;
             }
          }
-         if((tabName == "CharaLoadScaleB" || tabName == "CharaLoadX") && this.charaData["CharaLoadPlus"]["_visible"][num])
+         if((tabName == "CharaLoadScaleB" || tabName == "CharaLoadX" || tabName == "CharaLoadFineX") && this.charaData["CharaLoadPlus"]["_visible"][num])
          {
             if(addName0 == "Body" || addName0 == "headAdd")
             {
                new MeterPersentRibon(-500,500,charaNum,"CharaLoadX",num);
                this.charaAdd["loadObj" + num].x = MeterPersentRibon.MeterPersentNum;
+               new MeterPersentRibon(-2.5,2.5,charaNum,"CharaLoadFineX",num);
+               this.charaAdd["loadObj" + num].x += MeterPersentRibon.MeterPersentNum;
             }
             else if (
                addName0 == "LoadLeftArm" ||
@@ -420,6 +422,8 @@ package menu
             {
                new MeterPersentRibon(-515,485,charaNum,"CharaLoadX",num);
                this.charaAdd["loadObj" + num].x = MeterPersentRibon.MeterPersentNum;
+               new MeterPersentRibon(-2.5,2.5,charaNum,"CharaLoadFineX",num);
+               this.charaAdd["loadObj" + num].x += MeterPersentRibon.MeterPersentNum;
             }
             else if (addName0 == "HeadMod")
             {
@@ -454,27 +458,35 @@ package menu
                this.charaAdd["loadObj" + num].y = 100 + xy[1];
             }
          }
-         if((tabName == "CharaLoadScaleB" || tabName == "CharaLoadY") && this.charaData["CharaLoadPlus"]["_visible"][num])
+         if((tabName == "CharaLoadScaleB" || tabName == "CharaLoadY" || tabName == "CharaLoadFineY") && this.charaData["CharaLoadPlus"]["_visible"][num])
          {
             if(addName0 == "Body")
             {
                new MeterPersentRibon(100,-900,charaNum,"CharaLoadY",num);
                this.charaAdd["loadObj" + num].y = MeterPersentRibon.MeterPersentNum;
+               new MeterPersentRibon(2.5,-2.5,charaNum,"CharaLoadFineY",num);
+               this.charaAdd["loadObj" + num].y += MeterPersentRibon.MeterPersentNum;
             }
             else if(addName0 == "headAdd")
             {
                new MeterPersentRibon(500,-500,charaNum,"CharaLoadY",num);
                this.charaAdd["loadObj" + num].y = MeterPersentRibon.MeterPersentNum;
+               new MeterPersentRibon(2.5,-2.5,charaNum,"CharaLoadFineY",num);
+               this.charaAdd["loadObj" + num].y += MeterPersentRibon.MeterPersentNum;
             }
             else if(addName0 == "LoadLeftArm" || addName0 == "LoadRightArm")
             {
                new MeterPersentRibon(650,-350,charaNum,"CharaLoadY",num);
                this.charaAdd["loadObj" + num].y = MeterPersentRibon.MeterPersentNum;
+               new MeterPersentRibon(2.5,-2.5,charaNum,"CharaLoadFineY",num);
+               this.charaAdd["loadObj" + num].y += MeterPersentRibon.MeterPersentNum;
             }
             else if(addName0 == "LoadLeftHand" || addName0 == "LoadRightHand")
             {
                new MeterPersentRibon(650,-350,charaNum,"CharaLoadY",num);
                this.charaAdd["loadObj" + num].y = MeterPersentRibon.MeterPersentNum;
+               new MeterPersentRibon(2.5,-2.5,charaNum,"CharaLoadFineY",num);
+               this.charaAdd["loadObj" + num].y += MeterPersentRibon.MeterPersentNum;
             }
             else if (
                addName0 == "LeftThighMod" ||
@@ -489,6 +501,8 @@ package menu
             {
                new MeterPersentRibon(650,-350,charaNum,"CharaLoadY",num);
                this.charaAdd["loadObj" + num].y = MeterPersentRibon.MeterPersentNum;
+               new MeterPersentRibon(2.5,-2.5,charaNum,"CharaLoadFineY",num);
+               this.charaAdd["loadObj" + num].y += MeterPersentRibon.MeterPersentNum;
             }
             else if (addName0 == "HeadMod")
             {
@@ -533,22 +547,22 @@ package menu
          
          switch (attachIndex) {
          case 99: return charaAdd;
-         case 98: return charaAdd.ashi0.thigh.thigh;
-         case 97: return charaAdd.ashi1.thigh.thigh;
+         case 98: return charaAdd.ashi0.thigh.actual.thigh;
+         case 97: return charaAdd.ashi1.thigh.actual.thigh;
          case 96:
-            if (charaAdd.ashi0.leg != null && charaAdd.ashi0.leg.leg != null) {
-               return charaAdd.ashi0.leg.leg;
+            if (charaAdd.ashi0.leg != null && charaAdd.ashi0.leg.actual.leg != null) {
+               return charaAdd.ashi0.leg.actual.leg;
             } else {
                return null;
             }
          case 95: 
-            if (charaAdd.ashi1.leg != null && charaAdd.ashi1.leg.leg != null) {
-               return charaAdd.ashi1.leg.leg;
+            if (charaAdd.ashi1.leg != null && charaAdd.ashi1.leg.actual.leg != null) {
+               return charaAdd.ashi1.leg.actual.leg;
             } else {
                return null;
             }
-         case 94: return charaAdd.ashi0.foot.foot;
-         case 93: return charaAdd.ashi1.foot.foot;
+         case 94: return charaAdd.ashi0.foot.actual.foot;
+         case 93: return charaAdd.ashi1.foot.actual.foot;
          case 92: return charaAdd.handm0_0.hand;
          case 91: return charaAdd.handm0_1.hand;
          case 90: return charaAdd.handm1_0.hand;
@@ -643,8 +657,13 @@ package menu
       public static function calculateRotatedOffset(character: int, slot: int, xBounds: Array, yBounds: Array, inRot: int) : Array {
          new MeterPersentRibon(xBounds[0], xBounds[1], character,"CharaLoadX",slot);
          var offsetX = Number(MeterPersentRibon.MeterPersentNum);
+         new MeterPersentRibon(-2.5, 2.5, character,"CharaLoadFineX",slot);
+         offsetX += Number(MeterPersentRibon.MeterPersentNum);
+
          new MeterPersentRibon(yBounds[0], yBounds[1], character,"CharaLoadY",slot);
          var offsetY = Number(MeterPersentRibon.MeterPersentNum);
+         new MeterPersentRibon(2.5, -2.5, character,"CharaLoadFineY",slot);
+         offsetY += Number(MeterPersentRibon.MeterPersentNum);
 
          var rotation = Number(inRot) * (Math.PI / 180.0);
 

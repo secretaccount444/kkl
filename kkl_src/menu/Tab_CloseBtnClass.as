@@ -1,6 +1,7 @@
 package menu
 {
    import flash.events.MouseEvent;
+   import system.MeterPersent;
    
    public class Tab_CloseBtnClass
    {
@@ -17,15 +18,28 @@ package menu
          MenuClass.tabMenuAdd[param1].addEventListener(MouseEvent.MOUSE_OVER,MouseOver);
          MenuClass.tabMenuAdd[param1].addEventListener(MouseEvent.MOUSE_OUT,MouseOut);
          MenuClass.tabMenuAdd[param1].buttonMode = true;
+
          if(param1 == "Close2")
          {
             new ColorChangeClass(MenuClass.tabMenuAdd[param1].bg,MenuClass.MY_MENUNAME[param2][1]);
-            MenuClass.tabMenuAdd[param1].scaleX = MenuClass.tabMenuAdd[param1].scaleY = 0.93;
+         }
+
+         applyScale(param1);
+      }
+
+      public static function applyScale(tabName:String) {
+         new MeterPersent(0.5, 1.0, "MenuScale", 0);
+         var menuScale = MeterPersent.MeterPersentNum;
+
+         if(tabName == "Close2")
+         {
+            MenuClass.tabMenuAdd[tabName].scaleX = MenuClass.tabMenuAdd[tabName].scaleY = 0.93 * menuScale;
          }
          else
          {
-            MenuClass.tabMenuAdd[param1].scaleX = MenuClass.tabMenuAdd[param1].scaleY = 0.73;
+            MenuClass.tabMenuAdd[tabName].scaleX = MenuClass.tabMenuAdd[tabName].scaleY = 0.73 * menuScale;
          }
+
       }
       
       public static function deleteFc(param1:String) : void

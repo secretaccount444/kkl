@@ -158,7 +158,7 @@ package menu
             }
             if(EnterFrameClass.hitFlag == 0 && _loc4_["Kutu0"]["_visible"][0])
             {
-               if(_loc5_["ashi" + 0].leg.leg.Kutu.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 0].leg_huku.leg.Kutu.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 0].foot.foot.Kutu.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true))
+               if(_loc5_["ashi" + 0].leg.actual.leg.Kutu.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 0].leg_huku.actual.leg.Kutu.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 0].foot.actual.foot.Kutu.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true))
                {
                   HukuClickClass.targetName = "Kutu";
                   HukuClickClass.targetNumPPP = 0;
@@ -168,7 +168,7 @@ package menu
             }
             if(EnterFrameClass.hitFlag == 0 && _loc4_["Kutu1"]["_visible"][0])
             {
-               if(_loc5_["ashi" + 1].leg.leg.Kutu.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 1].leg_huku.leg.Kutu.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 1].foot.foot.Kutu.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true))
+               if(_loc5_["ashi" + 1].leg.actual.leg.Kutu.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 1].leg_huku.actual.leg.Kutu.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 1].foot.actual.foot.Kutu.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true))
                {
                   HukuClickClass.targetName = "Kutu";
                   HukuClickClass.targetNumPPP = 1;
@@ -181,7 +181,7 @@ package menu
                _loc10_ = false;
                try
                {
-                  if((!_loc4_["Kutu0"]["_visible"][0] || _loc2_ == 3) && _loc5_["ashi" + 0].leg.leg.Socks.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 0].leg_huku.leg.Socks.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true))
+                  if((!_loc4_["Kutu0"]["_visible"][0] || _loc2_ == 3) && _loc5_["ashi" + 0].leg.actual.leg.Socks.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 0].leg_huku.actual.leg.Socks.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true))
                   {
                      _loc10_ = true;
                   }
@@ -189,7 +189,7 @@ package menu
                catch(myError:Error)
                {
                }
-               if(_loc5_["ashi" + 0].thigh.thigh.Socks.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || !_loc4_["Kutu0"]["_visible"][0] && _loc5_["ashi" + 0].foot.foot.Socks.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 0].thigh.thigh.SocksTop.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc10_)
+               if(_loc5_["ashi" + 0].thigh.actual.thigh.Socks.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || !_loc4_["Kutu0"]["_visible"][0] && _loc5_["ashi" + 0].foot.actual.foot.Socks.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 0].thigh.actual.thigh.SocksTop.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc10_)
                {
                   HukuClickClass.targetName = "Socks";
                   HukuClickClass.targetNumPPP = 0;
@@ -202,7 +202,7 @@ package menu
                _loc11_ = false;
                try
                {
-                  if((!_loc4_["Kutu1"]["_visible"][0] || _loc2_ == 3) && _loc5_["ashi" + 1].leg.leg.Socks.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 1].leg_huku.leg.Socks.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true))
+                  if((!_loc4_["Kutu1"]["_visible"][0] || _loc2_ == 3) && _loc5_["ashi" + 1].leg.actual.leg.Socks.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 1].leg_huku.actual.leg.Socks.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true))
                   {
                      _loc11_ = true;
                   }
@@ -210,7 +210,7 @@ package menu
                catch(myError:Error)
                {
                }
-               if(_loc5_["ashi" + 1].thigh.thigh.Socks.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || !_loc4_["Kutu1"]["_visible"][0] && _loc5_["ashi" + 1].foot.foot.Socks.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 1].thigh.thigh.SocksTop.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc11_)
+               if(_loc5_["ashi" + 1].thigh.actual.thigh.Socks.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || !_loc4_["Kutu1"]["_visible"][0] && _loc5_["ashi" + 1].foot.actual.foot.Socks.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 1].thigh.actual.thigh.SocksTop.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc11_)
                {
                   HukuClickClass.targetName = "Socks";
                   HukuClickClass.targetNumPPP = 1;
@@ -223,7 +223,7 @@ package menu
                _loc12_ = false;
                try
                {
-                  if(_loc5_["ashi" + 0].thigh.thigh.Pantu.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 1].thigh.thigh.Pantu.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 0].thigh.thigh.Spantu.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 1].thigh.thigh.Spantu.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true))
+                  if(_loc5_["ashi" + 0].thigh.actual.thigh.Pantu.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 1].thigh.actual.thigh.Pantu.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 0].thigh.actual.thigh.Spantu.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 1].thigh.actual.thigh.Spantu.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true))
                   {
                      _loc12_ = true;
                   }
@@ -252,7 +252,7 @@ package menu
                _loc13_ = false;
                try
                {
-                  if((!_loc4_["Kutu0"]["_visible"][0] || _loc2_ == 3) && _loc5_["ashi" + 0].leg.leg.Tights.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || (!_loc4_["Kutu1"]["_visible"][0] || _loc2_ == 3) && _loc5_["ashi" + 1].leg.leg.Tights.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true))
+                  if((!_loc4_["Kutu0"]["_visible"][0] || _loc2_ == 3) && _loc5_["ashi" + 0].leg.actual.leg.Tights.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || (!_loc4_["Kutu1"]["_visible"][0] || _loc2_ == 3) && _loc5_["ashi" + 1].leg.actual.leg.Tights.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true))
                   {
                      _loc13_ = true;
                   }
@@ -260,7 +260,7 @@ package menu
                catch(myError:Error)
                {
                }
-               if(_loc5_.dou.dou_shitaHuku.Tights.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 0].thigh.thigh.Tights.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 1].thigh.thigh.Tights.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc13_)
+               if(_loc5_.dou.dou_shitaHuku.Tights.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 0].thigh.actual.thigh.Tights.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 1].thigh.actual.thigh.Tights.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc13_)
                {
                   HukuClickClass.targetName = "Tights";
                   this.fc1(param1,_loc2_);
@@ -416,7 +416,7 @@ package menu
             }
             if(EnterFrameClass.hitFlag == 0 && _loc4_["LegBand0"]["_visible"][0])
             {
-               if(_loc5_["ashi" + 0].leg.leg.LegBand.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 0].leg_huku.leg.LegBand.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 0].foot.foot.LegBand.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true))
+               if(_loc5_["ashi" + 0].leg.actual.leg.LegBand.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 0].leg_huku.actual.leg.LegBand.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 0].foot.actual.foot.LegBand.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true))
                {
                   HukuClickClass.targetName = "LegBand";
                   HukuClickClass.targetNumPPP = 0;
@@ -426,7 +426,7 @@ package menu
             }
             if(EnterFrameClass.hitFlag == 0 && _loc4_["LegBand1"]["_visible"][0])
             {
-               if(_loc5_["ashi" + 1].leg.leg.LegBand.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 1].leg_huku.leg.LegBand.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 1].foot.foot.LegBand.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true))
+               if(_loc5_["ashi" + 1].leg.actual.leg.LegBand.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 1].leg_huku.actual.leg.LegBand.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 1].foot.actual.foot.LegBand.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true))
                {
                   HukuClickClass.targetName = "LegBand";
                   HukuClickClass.targetNumPPP = 1;
@@ -679,7 +679,7 @@ package menu
                _loc14_ = false;
                try
                {
-                  if(_loc5_["ashi" + 0].leg_huku.leg.Zubon.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 0].leg.leg.Zubon.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 1].leg_huku.leg.Zubon.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 1].leg.leg.Zubon.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true))
+                  if(_loc5_["ashi" + 0].leg_huku.actual.leg.Zubon.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 0].leg.actual.leg.Zubon.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 1].leg_huku.actual.leg.Zubon.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 1].leg.actual.leg.Zubon.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true))
                   {
                      _loc14_ = true;
                   }
@@ -687,7 +687,7 @@ package menu
                catch(myError:Error)
                {
                }
-               if(_loc5_.dou.dou_Skirt.Zubon.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 0].thigh.thigh.Zubon.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 1].thigh.thigh.Zubon.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc14_)
+               if(_loc5_.dou.dou_Skirt.Zubon.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 0].thigh.actual.thigh.Zubon.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc5_["ashi" + 1].thigh.actual.thigh.Zubon.hitTestPoint(Tab_BreakBlockBtn.ball.x + _loc9_[_loc2_],Tab_BreakBlockBtn.ball.y + _loc8_[_loc2_],true) || _loc14_)
                {
                   HukuClickClass.targetName = "Zubon";
                   this.fc1(param1,_loc2_);
@@ -847,14 +847,14 @@ package menu
                   {
                      try
                      {
-                        _loc6_ = _loc5_.ashi0.thigh.thigh;
+                        _loc6_ = _loc5_.ashi0.thigh.actual.thigh;
                      }
                      catch(myError:Error)
                      {
                      }
                      try
                      {
-                        _loc7_ = _loc5_.ashi1.thigh.thigh;
+                        _loc7_ = _loc5_.ashi1.thigh.actual.thigh;
                      }
                      catch(myError:Error)
                      {
@@ -864,14 +864,14 @@ package menu
                   {
                      try
                      {
-                        _loc6_ = _loc5_.ashi0.leg.leg;
+                        _loc6_ = _loc5_.ashi0.leg.actual.leg;
                      }
                      catch(myError:Error)
                      {
                      }
                      try
                      {
-                        _loc7_ = _loc5_.ashi1.leg.leg;
+                        _loc7_ = _loc5_.ashi1.leg.actual.leg;
                      }
                      catch(myError:Error)
                      {
@@ -881,14 +881,14 @@ package menu
                   {
                      try
                      {
-                        _loc6_ = _loc5_.ashi0.foot.foot;
+                        _loc6_ = _loc5_.ashi0.foot.actual.foot;
                      }
                      catch(myError:Error)
                      {
                      }
                      try
                      {
-                        _loc7_ = _loc5_.ashi1.foot.foot;
+                        _loc7_ = _loc5_.ashi1.foot.actual.foot;
                      }
                      catch(myError:Error)
                      {

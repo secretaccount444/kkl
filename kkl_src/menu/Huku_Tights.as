@@ -102,93 +102,103 @@ package menu
             _loc2_ = 0;
             for(; _loc2_ <= 1; _loc2_++)
             {
+               this.charaAdd["ashi" + _loc2_].shiri.actual.shiri.Tights.gotoAndStop(1);
+               this.charaAdd["ashi" + _loc2_].thigh.actual.thigh.Tights.gotoAndStop(1);
+               this.charaAdd["ashi" + _loc2_].foot.actual.foot.Tights.gotoAndStop(1);
+               this.charaAdd["ashi" + _loc2_].foot.actual.foot.tights_sen.gotoAndStop(1);
+
                if(!Dress_data.TightsData[_loc6_]["Shiri"])
                {
-                  this.charaAdd["ashi" + _loc2_].shiri.shiri.Tights.visible = false;
-                  this.charaAdd["ashi" + _loc2_].shiri.shiri.Tights.gotoAndStop(1);
+                  this.charaAdd["ashi" + _loc2_].shiri.actual.shiri.Tights.visible = false;
+                  this.charaAdd["ashi" + _loc2_].shiri.actual.shiri.Tights.gotoAndStop(1);
                }
                else
                {
-                  this.charaAdd["ashi" + _loc2_].shiri.shiri.Tights.visible = true;
-                  this.charaAdd["ashi" + _loc2_].shiri.shiri.Tights.gotoAndStop(2);
+                  this.charaAdd["ashi" + _loc2_].shiri.actual.shiri.Tights.visible = true;
+                  this.charaAdd["ashi" + _loc2_].shiri.actual.shiri.Tights.gotoAndStop(2);
                }
+
                if(!Dress_data.TightsData[_loc6_]["thigh"])
                {
-                  this.charaAdd["ashi" + _loc2_].thigh.thigh.Tights.visible = false;
-                  this.charaAdd["ashi" + _loc2_].thigh.thigh.Tights.gotoAndStop(1);
+                  this.charaAdd["ashi" + _loc2_].thigh.actual.thigh.Tights.visible = false;
+                  this.charaAdd["ashi" + _loc2_].thigh.actual.thigh.Tights.gotoAndStop(1);
                }
                else
                {
-                  this.charaAdd["ashi" + _loc2_].thigh.thigh.Tights.visible = true;
-                  this.charaAdd["ashi" + _loc2_].thigh.thigh.Tights.gotoAndStop(Dress_data.TightsData[_loc6_]["thigh"] + 1);
+                  this.charaAdd["ashi" + _loc2_].thigh.actual.thigh.Tights.visible = true;
+                  this.charaAdd["ashi" + _loc2_].thigh.actual.thigh.Tights.gotoAndStop(Dress_data.TightsData[_loc6_]["thigh"] + 1);
                }
+
                if(!Dress_data.TightsData[_loc6_]["foot"])
                {
-                  this.charaAdd["ashi" + _loc2_].foot.foot.Tights.visible = false;
-                  this.charaAdd["ashi" + _loc2_].foot.foot.tights_sen.visible = false;
-                  this.charaAdd["ashi" + _loc2_].foot.foot.Tights.gotoAndStop(1);
-                  this.charaAdd["ashi" + _loc2_].foot.foot.tights_sen.gotoAndStop(1);
+                  this.charaAdd["ashi" + _loc2_].foot.actual.foot.Tights.visible = false;
+                  this.charaAdd["ashi" + _loc2_].foot.actual.foot.tights_sen.visible = false;
+                  this.charaAdd["ashi" + _loc2_].foot.actual.foot.Tights.gotoAndStop(1);
+                  this.charaAdd["ashi" + _loc2_].foot.actual.foot.tights_sen.gotoAndStop(1);
                }
                else
                {
-                  this.charaAdd["ashi" + _loc2_].foot.foot.Tights.visible = true;
-                  this.charaAdd["ashi" + _loc2_].foot.foot.tights_sen.visible = true;
-                  this.charaAdd["ashi" + _loc2_].foot.foot.Tights.gotoAndStop(Dress_data.TightsData[_loc6_]["foot"] + 1);
-                  this.charaAdd["ashi" + _loc2_].foot.foot.tights_sen.gotoAndStop(Dress_data.TightsData[_loc6_]["footSen"] + 1);
+                  this.charaAdd["ashi" + _loc2_].foot.actual.foot.Tights.visible = true;
+                  this.charaAdd["ashi" + _loc2_].foot.actual.foot.tights_sen.visible = true;
+                  this.charaAdd["ashi" + _loc2_].foot.actual.foot.Tights.gotoAndStop(Dress_data.TightsData[_loc6_]["foot"] + 1);
+                  this.charaAdd["ashi" + _loc2_].foot.actual.foot.tights_sen.gotoAndStop(Dress_data.TightsData[_loc6_]["footSen"] + 1);
                }
+
                try
                {
+                  this.charaAdd["ashi" + _loc2_].leg.actual.leg.Tights.gotoAndStop(1);
                   if(!Dress_data.TightsData[_loc6_]["leg"])
                   {
-                     this.charaAdd["ashi" + _loc2_].leg.leg.Tights.visible = false;
-                     this.charaAdd["ashi" + _loc2_].leg.leg.Tights.gotoAndStop(1);
+                     this.charaAdd["ashi" + _loc2_].leg.actual.leg.Tights.visible = false;
+                     this.charaAdd["ashi" + _loc2_].leg.actual.leg.Tights.gotoAndStop(1);
                   }
                   else
                   {
-                     this.charaAdd["ashi" + _loc2_].leg.leg.Tights.visible = true;
-                     this.charaAdd["ashi" + _loc2_].leg.leg.Tights.gotoAndStop(Dress_data.TightsData[_loc6_]["leg"] + 1);
+                     this.charaAdd["ashi" + _loc2_].leg.actual.leg.Tights.visible = true;
+                     this.charaAdd["ashi" + _loc2_].leg.actual.leg.Tights.gotoAndStop(Dress_data.TightsData[_loc6_]["leg"] + 1);
                   }
                }
                catch(myError:Error)
                {
                }
+               
                try
                {
-                  _loc4_ = this.charaAdd["ashi" + _loc2_].thigh.thigh.getChildIndex(this.charaAdd["ashi" + _loc2_].thigh.thigh.Tights_Swap);
-                  _loc5_ = this.charaAdd["ashi" + _loc2_].thigh.thigh.getChildIndex(this.charaAdd["ashi" + _loc2_].thigh.thigh.Tights);
+                  _loc4_ = this.charaAdd["ashi" + _loc2_].thigh.actual.thigh.getChildIndex(this.charaAdd["ashi" + _loc2_].thigh.actual.thigh.Tights_Swap);
+                  _loc5_ = this.charaAdd["ashi" + _loc2_].thigh.actual.thigh.getChildIndex(this.charaAdd["ashi" + _loc2_].thigh.actual.thigh.Tights);
                   if(Dress_data.TightsData[_loc6_]["Dou"] == 0)
                   {
                      if(_loc4_ < _loc5_)
                      {
-                        this.charaAdd["ashi" + _loc2_].thigh.thigh.swapChildren(this.charaAdd["ashi" + _loc2_].thigh.thigh.Tights_Swap,this.charaAdd["ashi" + _loc2_].thigh.thigh.Tights);
+                        this.charaAdd["ashi" + _loc2_].thigh.actual.thigh.swapChildren(this.charaAdd["ashi" + _loc2_].thigh.actual.thigh.Tights_Swap,this.charaAdd["ashi" + _loc2_].thigh.actual.thigh.Tights);
                      }
                   }
                   else if(this.charaData["Tights"]["_depth"] == 0)
                   {
                      if(_loc4_ < _loc5_)
                      {
-                        this.charaAdd["ashi" + _loc2_].thigh.thigh.swapChildren(this.charaAdd["ashi" + _loc2_].thigh.thigh.Tights_Swap,this.charaAdd["ashi" + _loc2_].thigh.thigh.Tights);
+                        this.charaAdd["ashi" + _loc2_].thigh.actual.thigh.swapChildren(this.charaAdd["ashi" + _loc2_].thigh.actual.thigh.Tights_Swap,this.charaAdd["ashi" + _loc2_].thigh.actual.thigh.Tights);
                      }
                   }
                   else if(this.charaData["Tights"]["_depth"] == 2)
                   {
                      if(_loc4_ > _loc5_)
                      {
-                        this.charaAdd["ashi" + _loc2_].thigh.thigh.swapChildren(this.charaAdd["ashi" + _loc2_].thigh.thigh.Tights_Swap,this.charaAdd["ashi" + _loc2_].thigh.thigh.Tights);
+                        this.charaAdd["ashi" + _loc2_].thigh.actual.thigh.swapChildren(this.charaAdd["ashi" + _loc2_].thigh.actual.thigh.Tights_Swap,this.charaAdd["ashi" + _loc2_].thigh.actual.thigh.Tights);
                      }
                   }
                   else if(this.charaData["Tights"]["_depth"] == 1 && this.charaData["Pantu"]["_depth"] == 0)
                   {
                      if(_loc4_ > _loc5_)
                      {
-                        this.charaAdd["ashi" + _loc2_].thigh.thigh.swapChildren(this.charaAdd["ashi" + _loc2_].thigh.thigh.Tights_Swap,this.charaAdd["ashi" + _loc2_].thigh.thigh.Tights);
+                        this.charaAdd["ashi" + _loc2_].thigh.actual.thigh.swapChildren(this.charaAdd["ashi" + _loc2_].thigh.actual.thigh.Tights_Swap,this.charaAdd["ashi" + _loc2_].thigh.actual.thigh.Tights);
                      }
                   }
                   else if(this.charaData["Tights"]["_depth"] == 1 && this.charaData["Pantu"]["_depth"] == 1)
                   {
                      if(_loc4_ < _loc5_)
                      {
-                        this.charaAdd["ashi" + _loc2_].thigh.thigh.swapChildren(this.charaAdd["ashi" + _loc2_].thigh.thigh.Tights_Swap,this.charaAdd["ashi" + _loc2_].thigh.thigh.Tights);
+                        this.charaAdd["ashi" + _loc2_].thigh.actual.thigh.swapChildren(this.charaAdd["ashi" + _loc2_].thigh.actual.thigh.Tights_Swap,this.charaAdd["ashi" + _loc2_].thigh.actual.thigh.Tights);
                      }
                   }
                }
@@ -224,29 +234,29 @@ package menu
       private function fc_false(param1:int) : void
       {
          this.charaAdd.dou.dou_shitaHuku.Tights.visible = false;
-         this.charaAdd["ashi" + param1].foot.foot.Tights.visible = false;
-         this.charaAdd["ashi" + param1].foot.foot.tights_sen.visible = false;
+         this.charaAdd["ashi" + param1].foot.actual.foot.Tights.visible = false;
+         this.charaAdd["ashi" + param1].foot.actual.foot.tights_sen.visible = false;
          try
          {
-            this.charaAdd["ashi" + param1].leg.leg.Tights.visible = false;
+            this.charaAdd["ashi" + param1].leg.actual.leg.Tights.visible = false;
          }
          catch(myError:Error)
          {
          }
-         this.charaAdd["ashi" + param1].thigh.thigh.Tights.visible = false;
-         this.charaAdd["ashi" + param1].shiri.shiri.Tights.visible = false;
+         this.charaAdd["ashi" + param1].thigh.actual.thigh.Tights.visible = false;
+         this.charaAdd["ashi" + param1].shiri.actual.shiri.Tights.visible = false;
          this.charaAdd.dou.dou_shitaHuku.Tights.gotoAndStop(1);
-         this.charaAdd["ashi" + param1].foot.foot.Tights.gotoAndStop(1);
-         this.charaAdd["ashi" + param1].foot.foot.tights_sen.gotoAndStop(1);
+         this.charaAdd["ashi" + param1].foot.actual.foot.Tights.gotoAndStop(1);
+         this.charaAdd["ashi" + param1].foot.actual.foot.tights_sen.gotoAndStop(1);
          try
          {
-            this.charaAdd["ashi" + param1].leg.leg.Tights.gotoAndStop(1);
+            this.charaAdd["ashi" + param1].leg.actual.leg.Tights.gotoAndStop(1);
          }
          catch(myError:Error)
          {
          }
-         this.charaAdd["ashi" + param1].thigh.thigh.Tights.gotoAndStop(1);
-         this.charaAdd["ashi" + param1].shiri.shiri.Tights.gotoAndStop(1);
+         this.charaAdd["ashi" + param1].thigh.actual.thigh.Tights.gotoAndStop(1);
+         this.charaAdd["ashi" + param1].shiri.actual.shiri.Tights.gotoAndStop(1);
       }
    }
 }

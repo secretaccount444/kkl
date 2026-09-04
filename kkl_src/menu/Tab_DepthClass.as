@@ -3,6 +3,7 @@ package menu
    import flash.display.MovieClip;
    import flash.events.MouseEvent;
    import flash.geom.ColorTransform; 
+   import undo.PropertyAction;
    
    public class Tab_DepthClass
    {
@@ -32,45 +33,58 @@ package menu
       public static function MouseDown(param1:MouseEvent) : void
       {
          var _loc2_:int = 0;
-         var _loc3_:String = null;
-         var _loc4_:String = null;
-         var _loc5_:int = 0;
-         var _loc6_:String = null;
+         var itemType:String = null;
+         var dataTarget:String = null;
+         var selectedSlot:int = 0;
+         var dataKey:String = null;
+
          targetMC = param1.currentTarget as MovieClip;
          MenuClass._nowTabName = targetMC.tabName;
          targetMC.addEventListener(MouseEvent.MOUSE_UP,MouseUp);
          Main.stageVar.addEventListener(MouseEvent.MOUSE_UP,MouseUp);
+
          if(MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_menu"])
          {
-            _loc3_ = MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_menu"];
+            itemType = MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_menu"];
          }
          else if(MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_meter"])
          {
-            _loc3_ = MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_meter"];
+            itemType = MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_meter"];
          }
-         if(_loc3_ == "charaPlus" || _loc3_ == "systemPlus")
+
+         if(itemType == "charaPlus" || itemType == "systemPlus")
          {
-            _loc4_ = MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_data"];
-            _loc5_ = MenuClass.systemData[_loc4_]["_menu"];
-            _loc6_ = targetMC.tabName + _loc5_;
+            dataTarget = MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_data"];
+            selectedSlot = MenuClass.systemData[dataTarget]["_menu"];
+            dataKey = targetMC.tabName + selectedSlot;
          }
-         else if(_loc3_ == "chara" || _loc3_ == "system")
+         else if(itemType == "chara" || itemType == "system")
          {
-            _loc6_ = targetMC.tabName;
+            dataKey = targetMC.tabName;
          }
-         new Tab_VC(targetMC.headerName,targetMC.targetJ,_loc6_);
-         if(_loc3_ == "charaPlus" || _loc3_ == "chara")
+
+         var undoAction = new PropertyAction(
+            targetMC.headerName, targetMC.targetJ, "_depth",
+            (itemType == "charaPlus" || itemType == "chara"),
+            (itemType == "charaPlus" || itemType == "systemPlus"),
+            "depth", (itemType == "charaPlus" || itemType == "chara")
+         );
+
+         undoAction.recordPreviousValue(selectedSlot);
+
+         new Tab_VC(targetMC.headerName,targetMC.targetJ,dataKey);
+         if(itemType == "charaPlus" || itemType == "chara")
          {
             if(MenuClass._nowTargetMode == "All")
             {
                _loc2_ = 0;
-               for(; _loc2_ <= MenuClass._characterNum; DepthChange(_loc2_,targetMC.targetJ,targetMC.headerName,targetMC.tabName,_loc6_),_loc2_++)
+               for(; _loc2_ <= MenuClass._characterNum; DepthChange(_loc2_,targetMC.targetJ,targetMC.headerName,targetMC.tabName,dataKey,undoAction,selectedSlot),_loc2_++)
                {
                   try
                   {
-                     if(MenuClass.charaData[_loc2_][_loc6_]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[_loc2_][_loc6_]["_visible"].length == 1)
+                     if(MenuClass.charaData[_loc2_][dataKey]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[_loc2_][dataKey]["_visible"].length == 1)
                      {
-                        MenuClass.charaData[_loc2_][_loc6_]["_visible"][Tab_VC.menuNum] = true;
+                        MenuClass.charaData[_loc2_][dataKey]["_visible"][Tab_VC.menuNum] = true;
                      }
                   }
                   catch(myError:Error)
@@ -81,7 +95,7 @@ package menu
             }
             else if(MenuClass._nowTargetMode == "SelectPlus")
             {
-               DepthChange(MenuClass._nowCharaNum,targetMC.targetJ,targetMC.headerName,targetMC.tabName,_loc6_);
+               DepthChange(MenuClass._nowCharaNum,targetMC.targetJ,targetMC.headerName,targetMC.tabName,dataKey,undoAction,selectedSlot);
                _loc2_ = 0;
                while(_loc2_ <= MenuClass._characterNum)
                {
@@ -89,15 +103,15 @@ package menu
                   {
                      try
                      {
-                        if(MenuClass.charaData[_loc2_][_loc6_]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[_loc2_][_loc6_]["_visible"].length == 1)
+                        if(MenuClass.charaData[_loc2_][dataKey]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[_loc2_][dataKey]["_visible"].length == 1)
                         {
-                           MenuClass.charaData[_loc2_][_loc6_]["_visible"][Tab_VC.menuNum] = true;
+                           MenuClass.charaData[_loc2_][dataKey]["_visible"][Tab_VC.menuNum] = true;
                         }
                      }
                      catch(myError:Error)
                      {
                      }
-                     MenuClass.charaData[_loc2_][_loc6_]["_depth"] = int(MenuClass.charaData[MenuClass._nowCharaNum][_loc6_]["_depth"]);
+                     MenuClass.charaData[_loc2_][dataKey]["_depth"] = int(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_depth"]);
                      new SetClass(_loc2_,targetMC.tabName,"depth");
                   }
                   _loc2_++;
@@ -107,30 +121,34 @@ package menu
             {
                try
                {
-                  if(MenuClass.charaData[MenuClass._nowCharaNum][_loc6_]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[MenuClass._nowCharaNum][_loc6_]["_visible"].length == 1)
+                  if(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_visible"].length == 1)
                   {
-                     MenuClass.charaData[MenuClass._nowCharaNum][_loc6_]["_visible"][Tab_VC.menuNum] = true;
+                     MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_visible"][Tab_VC.menuNum] = true;
                   }
                }
                catch(myError:Error)
                {
                }
-               DepthChange(MenuClass._nowCharaNum,targetMC.targetJ,targetMC.headerName,targetMC.tabName,_loc6_);
+               DepthChange(MenuClass._nowCharaNum,targetMC.targetJ,targetMC.headerName,targetMC.tabName,dataKey,undoAction,selectedSlot);
             }
 
             targetMC.transform.colorTransform = new ColorTransform();
 
-            if(MenuClass.charaData[MenuClass._nowCharaNum][_loc6_]["_depth"] == 0)
+            targetMC.scaleY = 1;
+            targetMC.y = 2;
+            if(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_depth"] == 0)
             {
                targetMC.gotoAndStop(5);
             }
-            else if(MenuClass.charaData[MenuClass._nowCharaNum][_loc6_]["_depth"] == 1)
+            else if(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_depth"] == 1)
             {
                targetMC.gotoAndStop(6);
             }
-            else if(MenuClass.charaData[MenuClass._nowCharaNum][_loc6_]["_depth"] == 2)
+            else if(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_depth"] == 2)
             {
-               if (targetMC.tabName === "CharaLoadReversalDepth" && MenuClass.charaData[MenuClass._nowCharaNum][_loc6_.replace("ReversalDepth", "Add")]["_add0"] == 0) {
+               if (
+                  targetMC.tabName === "CharaLoadReversalDepth" && MenuClass.charaData[MenuClass._nowCharaNum][dataKey.replace("ReversalDepth", "Add")]["_add0"] == 0
+               ) {
                   var prevCxForm = targetMC.transform.colorTransform;
 
                   prevCxForm.redMultiplier = 0.5;
@@ -148,31 +166,39 @@ package menu
                   targetMC.gotoAndStop(7);
                }
             }
-            else if(MenuClass.charaData[MenuClass._nowCharaNum][_loc6_]["_depth"] == 3)
+            else if(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_depth"] == 3)
             {
-               targetMC.gotoAndStop(8);
+               if (targetMC.tabName === "LeftArm2" || targetMC.tabName === "RightArm2") {
+                  targetMC.gotoAndStop(5);
+                  targetMC.y = 30;
+                  targetMC.scaleY = -1;
+               } else {
+                  targetMC.gotoAndStop(8);
+               }
             }
          }
          else
          {
-            DepthChange2(targetMC.targetJ,targetMC.headerName,targetMC.tabName,_loc6_);
-            if(MenuClass.systemData[_loc6_]["_depth"] == 0)
+            DepthChange2(targetMC.targetJ,targetMC.headerName,targetMC.tabName,dataKey,undoAction,selectedSlot);
+            if(MenuClass.systemData[dataKey]["_depth"] == 0)
             {
                targetMC.gotoAndStop(5);
             }
-            else if(MenuClass.systemData[_loc6_]["_depth"] == 1)
+            else if(MenuClass.systemData[dataKey]["_depth"] == 1)
             {
                targetMC.gotoAndStop(6);
             }
-            else if(MenuClass.systemData[_loc6_]["_depth"] == 2)
+            else if(MenuClass.systemData[dataKey]["_depth"] == 2)
             {
                targetMC.gotoAndStop(7);
             }
-            else if(MenuClass.systemData[_loc6_]["_depth"] == 3)
+            else if(MenuClass.systemData[dataKey]["_depth"] == 3)
             {
                targetMC.gotoAndStop(8);
             }
          }
+
+         Main.undoTimeline.push(undoAction);
       }
       
       public static function MouseUp(param1:MouseEvent) : void
@@ -182,7 +208,7 @@ package menu
          Main.stageVar.removeEventListener(MouseEvent.MOUSE_UP,MouseUp);
       }
       
-      public static function DepthChange(param1:int, param2:int, param3:String, param4:String, param5:String) : void
+      public static function DepthChange(param1:int, param2:int, param3:String, param4:String, param5:String, undoAction: PropertyAction,selectedSlot:int) : void
       {
          var _loc6_:String = null;
          if(param3 == "HairEx")
@@ -207,6 +233,9 @@ package menu
             {
                MenuClass.charaData[param1][param5]["_depth"] = 0;
             }
+         }
+         else if(param5 == "LeftArm2" || param5 == "RightArm2") {
+            MenuClass.charaData[param1][param5]["_depth"] = (MenuClass.charaData[param1][param5]["_depth"] + 1) % (MenuClass.tabData[param3][param2][2]["_depth"] + 1);
          }
          else if(MenuClass.tabData[param3][param2][2]["_depth"] == 1)
          {
@@ -241,10 +270,11 @@ package menu
                MenuClass.charaData[param1][param5]["_depth"] = 0;
             }
          }
+         undoAction.recordNewValue(MenuClass.charaData[param1][param5]["_depth"], selectedSlot);
          new SetClass(param1,param4,"depth");
       }
       
-      public static function DepthChange2(param1:int, param2:String, param3:String, param4:String) : void
+      public static function DepthChange2(param1:int, param2:String, param3:String, param4:String, undoAction: PropertyAction,selectedSlot:int) : void
       {
          if(MenuClass.tabData[param2][param1][2]["_depth"] == 1)
          {
@@ -279,6 +309,7 @@ package menu
                MenuClass.systemData[param4]["_depth"] = 0;
             }
          }
+         undoAction.recordNewValue(MenuClass.systemData[param4]["_depth"], selectedSlot);
          new SetClass(0,param3,"depth");
       }
    }

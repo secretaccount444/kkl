@@ -49,9 +49,9 @@ package menu
          if(count == 0)
          {
             targetMC.gotoAndStop(2);
-            targetMC.addEventListener(Event.ENTER_FRAME,ResetFc);
-            MenuClass.charaOldData = clone(MenuClass.charaMotoData);
-            MenuClass.systemOldData = clone(MenuClass.systemMotoData);
+            // targetMC.addEventListener(Event.ENTER_FRAME,ResetFc);
+            // MenuClass.charaOldData = clone(MenuClass.charaMotoData);
+            // MenuClass.systemOldData = clone(MenuClass.systemMotoData);
          }
       }
       
@@ -74,7 +74,7 @@ package menu
          //             if(headerName == "Character" || headerName == "SystemOption")
          //             {
          //                MenuClass.systemData["SelectCharacter"]["_menu"] = i;
-         //                new SetCharaData(i,"reset",0);
+         //                SetCharaData.execute(i,"reset",0);
          //             }
          //             else
          //             {
@@ -94,7 +94,7 @@ package menu
          //                if(headerName == "Character" || headerName == "SystemOption")
          //                {
          //                   MenuClass.systemData["SelectCharacter"]["_menu"] = i;
-         //                   new SetCharaData(i,"reset",0);
+         //                   SetCharaData.execute(i,"reset",0);
          //                }
          //                else
          //                {
@@ -109,7 +109,7 @@ package menu
          //       {
          //          MenuClass.systemData["SelectCharacter"]["_menu"] = MenuClass._nowCharaNum;
          //          new SetClass(MenuClass._nowCharaNum,"Xmove","reset");
-         //          new SetCharaData(MenuClass._nowCharaNum,"reset",0);
+         //          SetCharaData.execute(MenuClass._nowCharaNum,"reset",0);
          //       }
          //       else
          //       {
@@ -164,11 +164,11 @@ package menu
                while(_loc4_ <= _loc8_)
                {
                   _loc9_ = _loc2_ + _loc4_;
-                  MenuClass.charaData[param1][_loc9_] = clone(MenuClass.charaMotoData[param1][_loc9_]);
-                  Dress_data.DressCharaData[param1][_loc9_] = clone(Dress_data.DressCharaMotoData[param1][_loc9_]);
+                  // MenuClass.charaData[param1][_loc9_] = clone(MenuClass.charaMotoData[param1][_loc9_]);
+                  // Dress_data.DressCharaData[param1][_loc9_] = clone(Dress_data.DressCharaMotoData[param1][_loc9_]);
                   try
                   {
-                     Dress_data.menuCustomNum[param1][_loc9_] = clone(MenuClass.menuCustomResetNum[param1][_loc9_]);
+                     // Dress_data.menuCustomNum[param1][_loc9_] = clone(MenuClass.menuCustomResetNum[param1][_loc9_]);
                   }
                   catch(myError:Error)
                   {
@@ -178,11 +178,11 @@ package menu
             }
             else
             {
-               MenuClass.charaData[param1][_loc2_] = clone(MenuClass.charaMotoData[param1][_loc2_]);
-               Dress_data.DressCharaData[param1][_loc2_] = clone(Dress_data.DressCharaMotoData[param1][_loc2_]);
+               // MenuClass.charaData[param1][_loc2_] = clone(MenuClass.charaMotoData[param1][_loc2_]);
+               // Dress_data.DressCharaData[param1][_loc2_] = clone(Dress_data.DressCharaMotoData[param1][_loc2_]);
                try
                {
-                  Dress_data.menuCustomNum[param1][_loc2_] = clone(MenuClass.menuCustomResetNum[param1][_loc2_]);
+                  // Dress_data.menuCustomNum[param1][_loc2_] = clone(MenuClass.menuCustomResetNum[param1][_loc2_]);
                }
                catch(myError:Error)
                {

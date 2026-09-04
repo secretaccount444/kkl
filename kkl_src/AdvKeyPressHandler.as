@@ -5,6 +5,7 @@ package {
     import flash.events.TimerEvent;
     import flash.geom.ColorTransform;
     import flash.utils.Timer;
+    import flash.ui.Keyboard;
     
     import menu.SystemText2;
     import menu.Tab_URLTextClass;
@@ -15,12 +16,33 @@ package {
     public class AdvKeyPressHandler {
         private var cur_target: int = 0;  // 0 = forearm, 1 = hand
         private var target_side: int = 0; // 0 = left, 1 = right
+        private var keyState = {};
+        private var _shift: Boolean = false;
+        private var _ctrl: Boolean = false;
+        private var _alt: Boolean = false;
 
         public function AdvKeyPressHandler() {
             super();
             Main.stageVar.addEventListener(KeyboardEvent.KEY_DOWN, this.handleKeyDown);
+            Main.stageVar.addEventListener(KeyboardEvent.KEY_UP, this.handleKeyUp);
             Main.stageVar.addEventListener(KeyboardEvent.KEY_DOWN, this.sendServerKeyEvent);
             Main.stageVar.addEventListener(KeyboardEvent.KEY_UP, this.sendServerKeyEvent);
+        }
+
+        public function get shift() : Boolean {
+            return this._shift;
+        }
+
+        public function get ctrl() : Boolean {
+            return this._ctrl;
+        }
+
+        public function get alt() : Boolean {
+            return this._alt;
+        }
+
+        public function pressed(keyCode: uint) : Boolean {
+            return !!this.keyState[keyCode];
         }
 
         private function getTarget() : Sprite {
@@ -73,8 +95,18 @@ package {
             }
         }
 
+        private function handleKeyUp(ev: KeyboardEvent) {
+            this.keyState[ev.keyCode] = false;
+            this._shift = ev.shiftKey;
+            this._ctrl = ev.ctrlKey;
+            this._alt = ev.altKey;
+        }
+
         private function handleKeyDown(ev: KeyboardEvent) {
-            trace("keyDown event, charCode: " + ev.charCode);
+            this.keyState[ev.keyCode] = true;
+            this._shift = ev.shiftKey;
+            this._ctrl = ev.ctrlKey;
+            this._alt = ev.altKey;
 
             if (MenuClass.menuSetFlag) {
                 return;
@@ -106,6 +138,25 @@ package {
 
             var tgt: Sprite = this.getTarget();
             switch (ev.charCode) {
+            case 90:
+                /* uppercase Z (i.e. ctrl-shift-Z) */
+                if (ev.ctrlKey) {
+                    Main.undoTimeline.redo();
+                }
+                return;
+            case 122:
+                /* lowercase z */
+                if (ev.ctrlKey) {
+                    Main.undoTimeline.undo();
+                }
+                return;
+            case 89:
+            case 121:
+                /* y (uppercase and lowercase) */
+                if (ev.ctrlKey) {
+                    Main.undoTimeline.redo();
+                }
+                return;
             case 108:
                 /* l */
                 tgt.x += 0.5;
@@ -122,12 +173,12 @@ package {
                 /* i */
                 tgt.y -= 0.5;
                 break;
-            case 117:
-                /* u */
+            case 93:
+                /* ] */
                 tgt.rotation += 0.25;
                 break;
-            case 121:
-                /* y */
+            case 91:
+                /* [ */
                 tgt.rotation -= 0.25;
                 break;
             case 106:
@@ -147,6 +198,14 @@ package {
                     this.target_side = 0;
                 }
                 this.highlightTarget();
+                return;
+            case 112:
+                /* p */
+                MenuClass.systemData["MenuScale"]["_meter"] = 100;
+                MenuClass.systemData["MenuAlign"]["_check"] = false;
+                Air_StageSize.saveMenuSettings();
+                Air_StageSize.recalculateMenuSize();
+                new Tab_SetClass();
                 return;
             default:
                 return;

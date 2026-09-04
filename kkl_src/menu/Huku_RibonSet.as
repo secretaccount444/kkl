@@ -159,12 +159,12 @@ package menu
             {
                try
                {
-                  _loc9_ = MenuClass.charaAdd[param1].ashi0.thigh.thigh;
+                  _loc9_ = MenuClass.charaAdd[param1].ashi0.thigh.actual.thigh;
                }
                catch(myError:Error) { Main.logError(myError, "when getting sprite for character " + param1); }
                try
                {
-                  _loc11_ = MenuClass.charaAdd[param1].ashi1.thigh.thigh;
+                  _loc11_ = MenuClass.charaAdd[param1].ashi1.thigh.actual.thigh;
                }
                catch(myError:Error) { Main.logError(myError, "when getting sprite for character " + param1); }
 
@@ -191,12 +191,12 @@ package menu
             {
                try
                {
-                  _loc9_ = MenuClass.charaAdd[param1].ashi0.leg.leg;
+                  _loc9_ = MenuClass.charaAdd[param1].ashi0.leg.actual.leg;
                }
                catch(myError:Error) { Main.logError(myError, "when getting sprite for character " + param1); }
                try
                {
-                  _loc11_ = MenuClass.charaAdd[param1].ashi1.leg.leg;
+                  _loc11_ = MenuClass.charaAdd[param1].ashi1.leg.actual.leg;
                }
                catch(myError:Error) { Main.logError(myError, "when getting sprite for character " + param1); }
 
@@ -223,12 +223,12 @@ package menu
             {
                try
                {
-                  _loc9_ = MenuClass.charaAdd[param1].ashi0.foot.foot;
+                  _loc9_ = MenuClass.charaAdd[param1].ashi0.foot.actual.foot;
                }
                catch(myError:Error) { Main.logError(myError, "when getting sprite for character " + param1); }
                try
                {
-                  _loc11_ = MenuClass.charaAdd[param1].ashi1.foot.foot;
+                  _loc11_ = MenuClass.charaAdd[param1].ashi1.foot.actual.foot;
                }
                catch(myError:Error) { Main.logError(myError, "when getting sprite for character " + param1); }
 
@@ -1504,6 +1504,46 @@ package menu
                   catch(myError:Error) { /* Main.logError(myError, "in Huku_RibonSet.setFc(" + param1 + ", ...)"); */ }
                }
             }
+
+            /* Apply fine-tuning offsets after the main position values are applied,
+             * both for convenience/efficiency and so that we apply the fine-tuning to a rounded main position value.
+             */
+            new MeterPersentRibon(-2.5, 2.5, param1, "RibonFineX", param2);
+            var fineTuneX = MeterPersentRibon.MeterPersentNum;
+
+            new MeterPersentRibon(2.5, -2.5, param1, "RibonFineY", param2);
+            var fineTuneY = MeterPersentRibon.MeterPersentNum;
+            
+            var rightParent = _loc9_;
+
+            if((
+               (_loc4_["RibonAdd" + param2]["_add0"] == 5 || _loc4_["RibonAdd" + param2]["_add0"] == 6 || _loc4_["RibonAdd" + param2]["_add0"] == 7 || _loc4_["RibonAdd" + param2]["_add0"] == 8 || _loc4_["RibonAdd" + param2]["_add0"] == 9 || _loc4_["RibonAdd" + param2]["_add0"] == 10)
+               || (_loc4_["RibonAdd" + param2]["_add0"] >= 92 && _loc4_["RibonAdd" + param2]["_add0"] <= 97)
+            ))
+            {
+               rightParent = _loc11_;
+            }
+
+            if(_loc7_)
+            {
+               try
+               {
+                  _loc9_["Ribon" + param2 + "_0"].ribon0.x -= fineTuneX;
+                  _loc9_["Ribon" + param2 + "_0"].ribon0.y += fineTuneY;
+               }
+               catch(myError:Error) { /* Main.logError(myError, "in Huku_RibonSet.setFc(" + param1 + ", ...)"); */ }
+            }
+
+            if(_loc8_)
+            {
+               try
+               {
+                  rightParent["Ribon" + param2 + "_1"].ribon0.x += fineTuneX;
+                  rightParent["Ribon" + param2 + "_1"].ribon0.y += fineTuneY;
+               }
+               catch(myError:Error) { /* Main.logError(myError, "in Huku_RibonSet.setFc(" + param1 + ", ...)"); */ }
+            }
+
          }
          else
          {
@@ -1634,12 +1674,12 @@ package menu
          {
             try
             {
-               _loc4_.ashi0.thigh.thigh.removeChild(_loc4_.ashi0.thigh.thigh["Ribon" + param2 + "_" + 0]);
+               _loc4_.ashi0.thigh.actual.thigh.removeChild(_loc4_.ashi0.thigh.actual.thigh["Ribon" + param2 + "_" + 0]);
             }
             catch(myError:Error) { /* Main.logError(myError, "in Huku_RibonSet.deleteFc(" + param1 + ", ...)"); */ }
             try
             {
-               _loc4_.ashi0.thigh.thigh["Ribon" + param2 + "_" + 0] = null;
+               _loc4_.ashi0.thigh.actual.thigh["Ribon" + param2 + "_" + 0] = null;
             }
             catch(myError:Error) { /* Main.logError(myError, "in Huku_RibonSet.deleteFc(" + param1 + ", ...)"); */ }
          }
@@ -1647,12 +1687,12 @@ package menu
          {
             try
             {
-               _loc4_.ashi1.thigh.thigh.removeChild(_loc4_.ashi1.thigh.thigh["Ribon" + param2 + "_" + 1]);
+               _loc4_.ashi1.thigh.actual.thigh.removeChild(_loc4_.ashi1.thigh.actual.thigh["Ribon" + param2 + "_" + 1]);
             }
             catch(myError:Error) { /* Main.logError(myError, "in Huku_RibonSet.deleteFc(" + param1 + ", ...)"); */ }
             try
             {
-               _loc4_.ashi1.thigh.thigh["Ribon" + param2 + "_" + 1] = null;
+               _loc4_.ashi1.thigh.actual.thigh["Ribon" + param2 + "_" + 1] = null;
             }
             catch(myError:Error) { /* Main.logError(myError, "in Huku_RibonSet.deleteFc(" + param1 + ", ...)"); */ }
          }
@@ -1661,12 +1701,12 @@ package menu
          {
             try
             {
-               _loc4_.ashi0.leg.leg.removeChild(_loc4_.ashi0.leg.leg["Ribon" + param2 + "_" + 0]);
+               _loc4_.ashi0.leg.actual.leg.removeChild(_loc4_.ashi0.leg.actual.leg["Ribon" + param2 + "_" + 0]);
             }
             catch(myError:Error) { /* Main.logError(myError, "in Huku_RibonSet.deleteFc(" + param1 + ", ...)"); */ }
             try
             {
-               _loc4_.ashi0.leg.leg["Ribon" + param2 + "_" + 0] = null;
+               _loc4_.ashi0.leg.actual.leg["Ribon" + param2 + "_" + 0] = null;
             }
             catch(myError:Error) { /* Main.logError(myError, "in Huku_RibonSet.deleteFc(" + param1 + ", ...)"); */ }
          }
@@ -1674,12 +1714,12 @@ package menu
          {
             try
             {
-               _loc4_.ashi1.leg.leg.removeChild(_loc4_.ashi1.leg.leg["Ribon" + param2 + "_" + 1]);
+               _loc4_.ashi1.leg.actual.leg.removeChild(_loc4_.ashi1.leg.actual.leg["Ribon" + param2 + "_" + 1]);
             }
             catch(myError:Error) { /* Main.logError(myError, "in Huku_RibonSet.deleteFc(" + param1 + ", ...)"); */ }
             try
             {
-               _loc4_.ashi1.leg.leg["Ribon" + param2 + "_" + 1] = null;
+               _loc4_.ashi1.leg.actual.leg["Ribon" + param2 + "_" + 1] = null;
             }
             catch(myError:Error) { /* Main.logError(myError, "in Huku_RibonSet.deleteFc(" + param1 + ", ...)"); */ }
          }
@@ -1688,12 +1728,12 @@ package menu
          {
             try
             {
-               _loc4_.ashi0.foot.foot.removeChild(_loc4_.ashi0.foot.foot["Ribon" + param2 + "_" + 0]);
+               _loc4_.ashi0.foot.actual.foot.removeChild(_loc4_.ashi0.foot.actual.foot["Ribon" + param2 + "_" + 0]);
             }
             catch(myError:Error) { /* Main.logError(myError, "in Huku_RibonSet.deleteFc(" + param1 + ", ...)"); */ }
             try
             {
-               _loc4_.ashi0.foot.foot["Ribon" + param2 + "_" + 0] = null;
+               _loc4_.ashi0.foot.actual.foot["Ribon" + param2 + "_" + 0] = null;
             }
             catch(myError:Error) { /* Main.logError(myError, "in Huku_RibonSet.deleteFc(" + param1 + ", ...)"); */ }
          }
@@ -1701,12 +1741,12 @@ package menu
          {
             try
             {
-               _loc4_.ashi1.foot.foot.removeChild(_loc4_.ashi1.foot.foot["Ribon" + param2 + "_" + 1]);
+               _loc4_.ashi1.foot.actual.foot.removeChild(_loc4_.ashi1.foot.actual.foot["Ribon" + param2 + "_" + 1]);
             }
             catch(myError:Error) { /* Main.logError(myError, "in Huku_RibonSet.deleteFc(" + param1 + ", ...)"); */ }
             try
             {
-               _loc4_.ashi1.foot.foot["Ribon" + param2 + "_" + 1] = null;
+               _loc4_.ashi1.foot.actual.foot["Ribon" + param2 + "_" + 1] = null;
             }
             catch(myError:Error) { /* Main.logError(myError, "in Huku_RibonSet.deleteFc(" + param1 + ", ...)"); */ }
          }
@@ -1938,23 +1978,23 @@ package menu
 
             try {
                if (curAttach == 95) {
-                  leftParent = MenuClass.charaAdd[character].ashi0.thigh.thigh;
-                  rightParent = MenuClass.charaAdd[character].ashi1.thigh.thigh;
+                  leftParent = MenuClass.charaAdd[character].ashi0.thigh.actual.thigh;
+                  rightParent = MenuClass.charaAdd[character].ashi1.thigh.actual.thigh;
                } else if (curAttach == 96) {
                   if (MenuClass.charaAdd[character].ashi0.leg) {
-                     leftParent = MenuClass.charaAdd[character].ashi0.leg.leg;
+                     leftParent = MenuClass.charaAdd[character].ashi0.leg.actual.leg;
                   }
 
                   if (MenuClass.charaAdd[character].ashi1.leg) {
-                     rightParent = MenuClass.charaAdd[character].ashi1.leg.leg;
+                     rightParent = MenuClass.charaAdd[character].ashi1.leg.actual.leg;
                   }
                } else if (curAttach == 97) {
                   if (MenuClass.charaAdd[character].ashi0.leg) {
-                     leftParent = MenuClass.charaAdd[character].ashi0.foot.foot;
+                     leftParent = MenuClass.charaAdd[character].ashi0.foot.actual.foot;
                   }
 
                   if (MenuClass.charaAdd[character].ashi1.leg) {
-                     rightParent = MenuClass.charaAdd[character].ashi1.foot.foot;
+                     rightParent = MenuClass.charaAdd[character].ashi1.foot.actual.foot;
                   }
                } else if (curAttach == 92) {
                   leftParent = MenuClass.charaAdd[character].handm0_0.hand;
@@ -2108,57 +2148,57 @@ package menu
 
          try
          {
-            if (charaAdd.ashi0.thigh.thigh.ribonSwap == undefined) {
+            if (charaAdd.ashi0.thigh.actual.thigh.ribonSwap == undefined) {
                var newSwapSprite = new Sprite();
-               charaAdd.ashi0.thigh.thigh.addChild(newSwapSprite);
-               charaAdd.ashi0.thigh.thigh.ribonSwap = newSwapSprite;
+               charaAdd.ashi0.thigh.actual.thigh.addChild(newSwapSprite);
+               charaAdd.ashi0.thigh.actual.thigh.ribonSwap = newSwapSprite;
             }
          }
          catch(myError:Error) { Main.logError(myError, "in Huku_RibonSet.updateLegs(" + character + ")"); }
          try
          {
-            if (charaAdd.ashi1.thigh.thigh.ribonSwap == undefined) {
+            if (charaAdd.ashi1.thigh.actual.thigh.ribonSwap == undefined) {
                var newSwapSprite = new Sprite();
-               charaAdd.ashi1.thigh.thigh.addChild(newSwapSprite);
-               charaAdd.ashi1.thigh.thigh.ribonSwap = newSwapSprite;
+               charaAdd.ashi1.thigh.actual.thigh.addChild(newSwapSprite);
+               charaAdd.ashi1.thigh.actual.thigh.ribonSwap = newSwapSprite;
             }
          }
          catch(myError:Error) { Main.logError(myError, "in Huku_RibonSet.updateLegs(" + character + ")"); }
          
          try
          {
-            if (charaAdd.ashi0.leg != null && charaAdd.ashi0.leg.leg != null && charaAdd.ashi0.leg.leg.ribonSwap == undefined) {
+            if (charaAdd.ashi0.leg != null && charaAdd.ashi0.leg.actual.leg != null && charaAdd.ashi0.leg.actual.leg.ribonSwap == undefined) {
                var newSwapSprite = new Sprite();
-               charaAdd.ashi0.leg.leg.addChild(newSwapSprite);
-               charaAdd.ashi0.leg.leg.ribonSwap = newSwapSprite;
+               charaAdd.ashi0.leg.actual.leg.addChild(newSwapSprite);
+               charaAdd.ashi0.leg.actual.leg.ribonSwap = newSwapSprite;
             }
          }
          catch(myError:Error) { Main.logError(myError, "in Huku_RibonSet.updateLegs(" + character + ")"); }
          try
          {
-            if (charaAdd.ashi1.leg != null && charaAdd.ashi1.leg.leg != null && charaAdd.ashi1.leg.leg.ribonSwap == undefined) {
+            if (charaAdd.ashi1.leg != null && charaAdd.ashi1.leg.actual.leg != null && charaAdd.ashi1.leg.actual.leg.ribonSwap == undefined) {
                var newSwapSprite = new Sprite();
-               charaAdd.ashi1.leg.leg.addChild(newSwapSprite);
-               charaAdd.ashi1.leg.leg.ribonSwap = newSwapSprite;
+               charaAdd.ashi1.leg.actual.leg.addChild(newSwapSprite);
+               charaAdd.ashi1.leg.actual.leg.ribonSwap = newSwapSprite;
             }
          }
          catch(myError:Error) { Main.logError(myError, "in Huku_RibonSet.updateLegs(" + character + ")"); }
 
          try
          {
-            if (charaAdd.ashi0.foot.foot.ribonSwap == undefined) {
+            if (charaAdd.ashi0.foot.actual.foot.ribonSwap == undefined) {
                var newSwapSprite = new Sprite();
-               charaAdd.ashi0.foot.foot.addChild(newSwapSprite);
-               charaAdd.ashi0.foot.foot.ribonSwap = newSwapSprite;
+               charaAdd.ashi0.foot.actual.foot.addChild(newSwapSprite);
+               charaAdd.ashi0.foot.actual.foot.ribonSwap = newSwapSprite;
             }
          }
          catch(myError:Error) { Main.logError(myError, "in Huku_RibonSet.updateLegs(" + character + ")"); }
          try
          {
-            if (charaAdd.ashi1.foot.foot.ribonSwap == undefined) {
+            if (charaAdd.ashi1.foot.actual.foot.ribonSwap == undefined) {
                var newSwapSprite = new Sprite();
-               charaAdd.ashi1.foot.foot.addChild(newSwapSprite);
-               charaAdd.ashi1.foot.foot.ribonSwap = newSwapSprite;
+               charaAdd.ashi1.foot.actual.foot.addChild(newSwapSprite);
+               charaAdd.ashi1.foot.actual.foot.ribonSwap = newSwapSprite;
             }
          }
          catch(myError:Error) { Main.logError(myError, "in Huku_RibonSet.updateLegs(" + character + ")"); }
@@ -2171,15 +2211,15 @@ package menu
 
                   if(charaData["RibonAdd" + i]["_add0"] == 95)
                   {
-                     curParent = charaAdd.ashi0.thigh.thigh;
+                     curParent = charaAdd.ashi0.thigh.actual.thigh;
                   }
-                  else if(charaData["RibonAdd" + i]["_add0"] == 96 && charaAdd.ashi0.leg != null && charaAdd.ashi0.leg.leg != null)
+                  else if(charaData["RibonAdd" + i]["_add0"] == 96 && charaAdd.ashi0.leg != null && charaAdd.ashi0.leg.actual.leg != null)
                   {
-                     curParent = charaAdd.ashi0.leg.leg;
+                     curParent = charaAdd.ashi0.leg.actual.leg;
                   }
                   else if(charaData["RibonAdd" + i]["_add0"] == 97)
                   {
-                     curParent = charaAdd.ashi0.foot.foot;
+                     curParent = charaAdd.ashi0.foot.actual.foot;
                   } else {
                      continue;
                   }
@@ -2216,15 +2256,15 @@ package menu
 
                   if(charaData["RibonAdd" + i]["_add0"] == 95)
                   {
-                     curParent = charaAdd.ashi1.thigh.thigh;
+                     curParent = charaAdd.ashi1.thigh.actual.thigh;
                   }
-                  else if(charaData["RibonAdd" + i]["_add0"] == 96 && charaAdd.ashi1.leg != null && charaAdd.ashi1.leg.leg != null)
+                  else if(charaData["RibonAdd" + i]["_add0"] == 96 && charaAdd.ashi1.leg != null && charaAdd.ashi1.leg.actual.leg != null)
                   {
-                     curParent = charaAdd.ashi1.leg.leg;
+                     curParent = charaAdd.ashi1.leg.actual.leg;
                   }
                   else if(charaData["RibonAdd" + i]["_add0"] == 97)
                   {
-                     curParent = charaAdd.ashi1.foot.foot;
+                     curParent = charaAdd.ashi1.foot.actual.foot;
                   } else {
                      continue;
                   }

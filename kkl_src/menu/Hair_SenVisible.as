@@ -4,13 +4,10 @@ package menu
    
    public class Hair_SenVisible
    {
-       
-      
-      public function Hair_SenVisible(param1:int)
+      public static function apply(param1:int)
       {
          var _loc4_:Boolean = false;
          var _loc5_:Boolean = false;
-         super();
          var _loc2_:Object = MenuClass.charaData[param1];
          var _loc3_:Object = MenuClass.charaAdd[param1];
          if(_loc2_["Hair"]["_sen"] == 2)
@@ -46,6 +43,12 @@ package menu
          catch(myError:Error)
          {
          }
+      }
+      
+      public function Hair_SenVisible(param1:int)
+      {
+         super();
+         apply(param1);
       }
    }
 }

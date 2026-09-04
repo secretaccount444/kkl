@@ -201,7 +201,7 @@ package menu
          var _loc4_:int = 0;
          if(enterCount == 2)
          {
-            new Tab_IEInOut("IN",Chara_IEAllCharadata.IEAllCharaData[selectNum],0);
+            Tab_IEInOut.execute("IN",Chara_IEAllCharadata.IEAllCharaData[selectNum],0);
          }
          else if(enterCount == 3)
          {

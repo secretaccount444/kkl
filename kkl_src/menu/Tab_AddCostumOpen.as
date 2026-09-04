@@ -2,6 +2,7 @@ package menu
 {
    import flash.display.MovieClip;
    import flash.events.MouseEvent;
+   import undo.AttachPointAction;
    
    public class Tab_AddCostumOpen
    {
@@ -60,7 +61,7 @@ package menu
             MenuClass.AddOpenAdd[_loc3_] = _loc12_;
             MenuClass.AddOpenAdd[_loc3_].name = _loc7_;
             Main.stageVar.addChild(MenuClass.AddOpenAdd[_loc3_]);
-            MenuClass.AddOpenAdd[_loc3_].x = Math.floor((MenuClass.AddOpenAdd[_loc3_].width + 1) * _loc6_) - 1 * _loc6_ + 12;
+            MenuClass.AddOpenAdd[_loc3_].x = Air_StageSize.menuLeftEdge + Math.floor((MenuClass.AddOpenAdd[_loc3_].width + 1) * _loc6_) - 1 * _loc6_ + 12;
             if(MenuClass.hederSwitchCheck)
             {
                MenuClass.AddOpenAdd[_loc3_].y = 496 - 32 * _loc5_ + Main._stageResizeY;
@@ -122,7 +123,7 @@ package menu
          var _loc11_:MovieClip = new Menu_Load.TabCloseClass();
          MenuClass.AddCloseAdd["close"] = _loc11_;
          Main.stageVar.addChild(MenuClass.AddCloseAdd["close"]);
-         MenuClass.AddCloseAdd["close"].x = _loc8_ + 12;
+         MenuClass.AddCloseAdd["close"].x = Air_StageSize.menuLeftEdge + _loc8_ + 12;
          if(MenuClass.hederSwitchCheck)
          {
             MenuClass.AddCloseAdd["close"].y = 498 - 32 * _loc5_ + Main._stageResizeY;
@@ -203,6 +204,10 @@ package menu
       public static function MouseDown(param1:MouseEvent) : void
       {
          var _loc2_:int = 0;
+         
+         var undoAction = new AttachPointAction(MenuClass._nowHeaderName, _loc2_, 0, param1.currentTarget.number);
+         Main.undoTimeline.push(undoAction);
+
          if(MenuClass._nowHeaderName == "Loadmenu")
          {
             _loc2_ = MenuClass.systemData["LoadPlus"]["_menu"];

@@ -11,6 +11,7 @@ package menu
          super();
          if(!MenuClass._nowHederSwitch)
          {
+            HeaderbtnClass.layoutHeaderButtons();
             new Tab_headerSwitchSet();
          }
          if(param1 == 0)

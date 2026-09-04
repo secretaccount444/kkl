@@ -2,6 +2,7 @@ package menu
 {
    import parameter.Dress_data;
    import system.MeterPersent;
+   import flash.display.MovieClip;
    
    public class Move_UdeClass
    {
@@ -21,51 +22,59 @@ package menu
       
       private var charaNum:int;
       
-      public function Move_UdeClass(param1:int)
+      public function Move_UdeClass(character:int)
       {
-         var _loc12_:int = 0;
-         var _loc13_:String = null;
-         var _loc14_:int = 0;
-         var _loc15_:int = 0;
-         var _loc16_:int = 0;
-         var _loc17_:int = 0;
-         var _loc18_:int = 0;
+         var sideIdx:int = 0;
+         var sideName:String = null;
+         var curLayer:int = 0;
+         var curSwap0Layer:int = 0;
+         var curSwap1Layer:int = 0;
+         var leftArmLayer:int = 0;
+         var rightArmLayer:int = 0;
          super();
 
-         this.charaNum = param1;
+         this.charaNum = character;
          this.charaAdd = MenuClass.charaAdd[this.charaNum];
          this.charaData = MenuClass.charaData[this.charaNum];
 
-         setupAngleAr(param1);
+         setupAngleAr(character);
          
-         var _loc9_:Array = new Array(this.charaData["LeftArm2"]["_depth"],this.charaData["RightArm2"]["_depth"]);
+         var forearmDepth:Array = new Array(this.charaData["LeftArm2"]["_depth"],this.charaData["RightArm2"]["_depth"]);
 
-         var _loc10_:Array = new Array(Math.round(49 * this.charaData["LeftArm"]["_meter"] / 100),Math.round(49 * this.charaData["RightArm"]["_meter"] / 100));
-         var _loc11_:Array = new Array(Math.round(360 * this.charaData["LeftArm2"]["_meter"] / 360),Math.round(360 * this.charaData["RightArm2"]["_meter"] / 360));
+         if (forearmDepth[0] == 2) {
+            forearmDepth[0] = 1;
+         } else if (forearmDepth[0] == 3) {
+            forearmDepth[0] = 0;
+         }
+
+         if (forearmDepth[1] == 2) {
+            forearmDepth[1] = 1;
+         } else if (forearmDepth[1] == 3) {
+            forearmDepth[1] = 0;
+         }
+
+         var upperArmFrame:Array = new Array(Math.round(49 * this.charaData["LeftArm"]["_meter"] / 100), Math.round(49 * this.charaData["RightArm"]["_meter"] / 100));
+         var forearmFrame:Array = new Array(Math.round(360 * this.charaData["LeftArm2"]["_meter"] / 360), Math.round(360 * this.charaData["RightArm2"]["_meter"] / 360));
          
          var leftPos = null;
          var rightPos = null;
-
-         var leftIdx = this.charaAdd.getChildIndex(this.charaAdd["handm1_0"]);
-         var rightIdx = this.charaAdd.getChildIndex(this.charaAdd["handm1_1"]);
-
-         // if (
-         //    leftIdx > rightIdx &&
-         //    leftIdx == (rightIdx + 1)
-         // ) {
-         //    this.charaAdd.swapChildren(this.charaAdd.handm1_0,this.charaAdd.handm1_1);
-         // }
          
-         _loc12_ = 0;
-         while(_loc12_ <= 1)
+         sideIdx = 0;
+         while(sideIdx <= 1)
          {
-            if(_loc12_ == 0)
+            if(sideIdx == 0)
             {
-               _loc13_ = "Left";
+               sideName = "Left";
             }
             else
             {
-               _loc13_ = "Right";
+               sideName = "Right";
+            }
+
+            if (!this.charaAdd["handm1_" + sideIdx + "_layerTarget"]) {
+               var placeholder = new MovieClip();
+               this.charaAdd["handm1_" + sideIdx + "_layerTarget"] = placeholder;
+               this.charaAdd.addChildAt(placeholder, this.charaAdd.getChildIndex(this.charaAdd["handm1_" + sideIdx]) + 1);
             }
 
             // +X = right
@@ -74,18 +83,21 @@ package menu
 
             // hand (sym 1206) rotates around (-16, 100)
 
-            var updateRot = udeAngleAr[this.charaNum][_loc10_[_loc12_]][_loc9_[_loc12_]][_loc11_[_loc12_]][0];
-            var updateRotRadians = updateRot * (Math.PI / 180.0);
+            var updateRot = udeAngleAr[this.charaNum][upperArmFrame[sideIdx]][forearmDepth[sideIdx]][forearmFrame[sideIdx]][0];
+            if (this.charaData[sideName + "ArmFreeRotation"]["_check"]) {
+               updateRot = (forearmFrame[sideIdx] % 360) + 1;
+            }
 
+            var updateRotRadians = (updateRot - 1) * (Math.PI / 180.0);
             // displacement for hand frame
 
-            new MeterPersent(-25, 25, _loc13_ + "ArmOffsetX", this.charaNum);
+            new MeterPersent(-25, 25, sideName + "ArmOffsetX", this.charaNum);
             var dispX = MeterPersent.MeterPersentNum;
 
-            new MeterPersent(0.75, 1.25, _loc13_ + "ArmScaleY", this.charaNum);
+            new MeterPersent(0.75, 1.25, sideName + "ArmScaleY", this.charaNum);
             var dispY = 100 * (MeterPersent.MeterPersentNum - 1);
 
-            new MeterPersent(-25, 25, _loc13_ + "ArmOffsetY", this.charaNum);
+            new MeterPersent(-25, 25, sideName + "ArmOffsetY", this.charaNum);
             dispY += MeterPersent.MeterPersentNum;
 
             var actualDispX = (dispX * Math.cos(updateRotRadians)) - (dispY * Math.sin(updateRotRadians));
@@ -94,27 +106,27 @@ package menu
             var updateX = updateDataTbl[updateRot - 1][0] + actualDispX;
             var updateY = updateDataTbl[updateRot - 1][1] + actualDispY;
 
-            // trace(_loc12_, " m:", _loc11_[_loc12_], " R:", updateRot, " base:", updateDataTbl[updateRot - 1][0], updateDataTbl[updateRot - 1][1], " disp:", actualDispX, actualDispY, " update: ", updateX, updateY);
+            // trace(sideIdx, " m:", forearmFrame[sideIdx], " R:", updateRot, " base:", updateDataTbl[updateRot - 1][0], updateDataTbl[updateRot - 1][1], " disp:", actualDispX, actualDispY, " update: ", updateX, updateY);
             // updateDataTbl[updateRot - 1][2] = rotation for hand/item/image coordinate space
 
-            this.charaAdd["handm0_" + _loc12_].kataMask.gotoAndStop(Math.round(49 * this.charaData[_loc13_ + "Arm"]["_meter"] / 100) + 1);
-            this.charaAdd.mune.ue["color" + _loc12_].mask = this.charaAdd["handm0_" + _loc12_].kataMask;
-            this.charaAdd["handm0_" + _loc12_].hand.gotoAndStop(updateRot);
-            this.charaAdd["handm1_" + _loc12_].hand.arm1.gotoAndStop(updateRot);
-            this.charaAdd["handm1_" + _loc12_].hand.charaLoadswap2.x = updateX;
-            this.charaAdd["handm1_" + _loc12_].hand.charaLoadswap2.y = updateY;
-            this.charaAdd["handm1_" + _loc12_].hand.charaLoadswap2.rotation = updateDataTbl[updateRot - 1][2];
-            this.charaAdd["handm1_" + _loc12_].hand.item.x = updateX;
-            this.charaAdd["handm1_" + _loc12_].hand.item.y = updateY;
-            this.charaAdd["handm1_" + _loc12_].hand.item.rotation = updateDataTbl[updateRot - 1][2];
-            this.charaAdd["handm1_" + _loc12_].hand.arm0.x = updateX;
-            this.charaAdd["handm1_" + _loc12_].hand.arm0.y = updateY;
-            this.charaAdd["handm1_" + _loc12_].hand.arm0.rotation = updateDataTbl[updateRot - 1][2];
+            this.charaAdd["handm0_" + sideIdx].kataMask.gotoAndStop(Math.round(49 * this.charaData[sideName + "Arm"]["_meter"] / 100) + 1);
+            this.charaAdd.mune.ue["color" + sideIdx].mask = this.charaAdd["handm0_" + sideIdx].kataMask;
+            this.charaAdd["handm0_" + sideIdx].hand.gotoAndStop(updateRot);
+            this.charaAdd["handm1_" + sideIdx].hand.arm1.gotoAndStop(updateRot);
+            this.charaAdd["handm1_" + sideIdx].hand.charaLoadswap2.x = updateX;
+            this.charaAdd["handm1_" + sideIdx].hand.charaLoadswap2.y = updateY;
+            this.charaAdd["handm1_" + sideIdx].hand.charaLoadswap2.rotation = updateDataTbl[updateRot - 1][2];
+            this.charaAdd["handm1_" + sideIdx].hand.item.x = updateX;
+            this.charaAdd["handm1_" + sideIdx].hand.item.y = updateY;
+            this.charaAdd["handm1_" + sideIdx].hand.item.rotation = updateDataTbl[updateRot - 1][2];
+            this.charaAdd["handm1_" + sideIdx].hand.arm0.x = updateX;
+            this.charaAdd["handm1_" + sideIdx].hand.arm0.y = updateY;
+            this.charaAdd["handm1_" + sideIdx].hand.arm0.rotation = updateDataTbl[updateRot - 1][2];
 
-            Hair_HairExSet.updateArmRotation(this.charaNum, _loc12_, updateX, updateY, updateRot);
-            Add_LoadURL2.updateArmRotation(this.charaNum, _loc13_, updateX, updateY, updateRot);
+            Hair_HairExSet.updateArmRotation(this.charaNum, sideIdx, updateX, updateY, updateRot);
+            Add_LoadURL2.updateArmRotation(this.charaNum, sideName, updateX, updateY, updateRot);
 
-            if (_loc12_ == 0) {
+            if (sideIdx == 0) {
                leftPos = {
                   "x": updateX,
                   "y": updateY,
@@ -128,158 +140,185 @@ package menu
                };
             }
          
-            if(this.charaData["Item" + _loc12_]["_visible"][0])
+            if(this.charaData["Item" + sideIdx]["_visible"][0])
             {
-               if(Dress_data.ObjData["Item0"][this.charaData["Item" + _loc12_]["_menu"]]["arm1"] == 0)
+               if(Dress_data.ObjData["Item0"][this.charaData["Item" + sideIdx]["_menu"]]["arm1"] == 0)
                {
-                  this.charaAdd["handm1_" + _loc12_].hand.arm1.arm1.arm1.actual.item.visible = false;
-                  this.charaAdd["handm1_" + _loc12_].hand.arm1.arm1.arm1.actual.item.gotoAndStop(1);
+                  this.charaAdd["handm1_" + sideIdx].hand.arm1.arm1.arm1.actual.item.visible = false;
+                  this.charaAdd["handm1_" + sideIdx].hand.arm1.arm1.arm1.actual.item.gotoAndStop(1);
                }
                else
                {
-                  this.charaAdd["handm1_" + _loc12_].hand.arm1.arm1.arm1.actual.item.visible = true;
-                  this.charaAdd["handm1_" + _loc12_].hand.arm1.arm1.arm1.actual.item.gotoAndStop(Dress_data.ObjData["Item0"][this.charaData["Item" + _loc12_]["_menu"]]["arm1"] + 1);
+                  this.charaAdd["handm1_" + sideIdx].hand.arm1.arm1.arm1.actual.item.visible = true;
+                  this.charaAdd["handm1_" + sideIdx].hand.arm1.arm1.arm1.actual.item.gotoAndStop(Dress_data.ObjData["Item0"][this.charaData["Item" + sideIdx]["_menu"]]["arm1"] + 1);
                }
             }
             else
             {
-               this.charaAdd["handm1_" + _loc12_].hand.arm1.arm1.arm1.actual.item.visible = false;
-               this.charaAdd["handm1_" + _loc12_].hand.arm1.arm1.arm1.actual.item.gotoAndStop(1);
+               this.charaAdd["handm1_" + sideIdx].hand.arm1.arm1.arm1.actual.item.visible = false;
+               this.charaAdd["handm1_" + sideIdx].hand.arm1.arm1.arm1.actual.item.gotoAndStop(1);
             }
-            _loc14_ = this.charaAdd.getChildIndex(this.charaAdd["handm1_" + _loc12_]);
-            _loc15_ = this.charaAdd.getChildIndex(this.charaAdd["hand" + _loc12_ + "_swap0"]);
-            _loc16_ = this.charaAdd.getChildIndex(this.charaAdd["hand" + _loc12_ + "_swap1"]);
-            if(udeAngleAr[this.charaNum][_loc10_[_loc12_]][_loc9_[_loc12_]][_loc11_[_loc12_]][1] == 0)
+
+            curLayer = this.charaAdd.getChildIndex(this.charaAdd["handm1_" + sideIdx + "_layerTarget"]);
+            curSwap0Layer = this.charaAdd.getChildIndex(this.charaAdd["hand" + sideIdx + "_swap0"]);
+            curSwap1Layer = this.charaAdd.getChildIndex(this.charaAdd["hand" + sideIdx + "_swap1"]);
+            if(udeAngleAr[this.charaNum][upperArmFrame[sideIdx]][forearmDepth[sideIdx]][forearmFrame[sideIdx]][1] == 0)
             {
-               if(_loc15_ < _loc14_)
+               /* Push to bottom */
+               if(curSwap0Layer < curLayer)
                {
-                  this.charaAdd.swapChildren(this.charaAdd["hand" + _loc12_ + "_swap0"],this.charaAdd["handm1_" + _loc12_]);
+                  this.charaAdd.swapChildren(this.charaAdd["hand" + sideIdx + "_swap0"],this.charaAdd["handm1_" + sideIdx + "_layerTarget"]);
                }
-               _loc14_ = this.charaAdd.getChildIndex(this.charaAdd["handm1_" + _loc12_]);
-               if(_loc16_ < _loc14_)
+               curLayer = this.charaAdd.getChildIndex(this.charaAdd["handm1_" + sideIdx + "_layerTarget"]);
+               if(curSwap1Layer < curLayer)
                {
-                  this.charaAdd.swapChildren(this.charaAdd["hand" + _loc12_ + "_swap1"],this.charaAdd["handm1_" + _loc12_]);
+                  this.charaAdd.swapChildren(this.charaAdd["hand" + sideIdx + "_swap1"],this.charaAdd["handm1_" + sideIdx + "_layerTarget"]);
                }
             }
-            else if(udeAngleAr[this.charaNum][_loc10_[_loc12_]][_loc9_[_loc12_]][_loc11_[_loc12_]][1] == 2)
+            else if(udeAngleAr[this.charaNum][upperArmFrame[sideIdx]][forearmDepth[sideIdx]][forearmFrame[sideIdx]][1] == 2)
             {
-               if(_loc15_ > _loc14_)
+               /* Push to top */
+               if(curSwap0Layer > curLayer)
                {
-                  this.charaAdd.swapChildren(this.charaAdd["hand" + _loc12_ + "_swap0"],this.charaAdd["handm1_" + _loc12_]);
+                  this.charaAdd.swapChildren(this.charaAdd["hand" + sideIdx + "_swap0"],this.charaAdd["handm1_" + sideIdx + "_layerTarget"]);
                }
-               _loc14_ = this.charaAdd.getChildIndex(this.charaAdd["handm1_" + _loc12_]);
-               if(_loc16_ > _loc14_)
+               curLayer = this.charaAdd.getChildIndex(this.charaAdd["handm1_" + sideIdx + "_layerTarget"]);
+               if(curSwap1Layer > curLayer)
                {
-                  this.charaAdd.swapChildren(this.charaAdd["hand" + _loc12_ + "_swap1"],this.charaAdd["handm1_" + _loc12_]);
+                  this.charaAdd.swapChildren(this.charaAdd["hand" + sideIdx + "_swap1"],this.charaAdd["handm1_" + sideIdx + "_layerTarget"]);
                }
             }
-            else if(udeAngleAr[this.charaNum][_loc10_[_loc12_]][_loc9_[_loc12_]][_loc11_[_loc12_]][1] == 1)
+            else if(udeAngleAr[this.charaNum][upperArmFrame[sideIdx]][forearmDepth[sideIdx]][forearmFrame[sideIdx]][1] == 1)
             {
-               if(_loc15_ > _loc16_ && _loc16_ > _loc14_)
+               /* Push to middle */
+               if(curSwap0Layer > curSwap1Layer && curSwap1Layer > curLayer) /* swap0 > swap1 > current */
                {
-                  this.charaAdd.swapChildren(this.charaAdd["hand" + _loc12_ + "_swap1"],this.charaAdd["handm1_" + _loc12_]);
+                  this.charaAdd.swapChildren(this.charaAdd["hand" + sideIdx + "_swap1"],this.charaAdd["handm1_" + sideIdx + "_layerTarget"]);
                }
-               else if(_loc16_ > _loc15_ && _loc15_ > _loc14_)
+               else if(curSwap1Layer > curSwap0Layer && curSwap0Layer > curLayer) /* swap1 > swap0 > current */
                {
-                  this.charaAdd.swapChildren(this.charaAdd["hand" + _loc12_ + "_swap0"],this.charaAdd["handm1_" + _loc12_]);
+                  this.charaAdd.swapChildren(this.charaAdd["hand" + sideIdx + "_swap0"],this.charaAdd["handm1_" + sideIdx + "_layerTarget"]);
                }
-               else if(_loc14_ > _loc15_ && _loc15_ > _loc16_)
+               else if(curLayer > curSwap0Layer && curSwap0Layer > curSwap1Layer) /* current > swap0 > swap1 */
                {
-                  this.charaAdd.swapChildren(this.charaAdd["hand" + _loc12_ + "_swap0"],this.charaAdd["handm1_" + _loc12_]);
+                  this.charaAdd.swapChildren(this.charaAdd["hand" + sideIdx + "_swap0"],this.charaAdd["handm1_" + sideIdx + "_layerTarget"]);
                }
-               else if(_loc14_ > _loc16_ && _loc16_ > _loc15_)
+               else if(curLayer > curSwap1Layer && curSwap1Layer > curSwap0Layer) /* current > swap1 > swap0 */
                {
-                  this.charaAdd.swapChildren(this.charaAdd["hand" + _loc12_ + "_swap1"],this.charaAdd["handm1_" + _loc12_]);
+                  this.charaAdd.swapChildren(this.charaAdd["hand" + sideIdx + "_swap1"],this.charaAdd["handm1_" + sideIdx + "_layerTarget"]);
                }
             }
-            _loc12_++;
+            sideIdx++;
          }
-         _loc12_ = 0;
+         sideIdx = 0;
 
          var didSwap = false;
-         while(_loc12_ <= 1)
+         while(sideIdx <= 1)
          {
-            MenuClass.udeDepthBefore[this.charaNum][_loc12_] = udeAngleAr[this.charaNum][_loc10_[_loc12_]][_loc9_[_loc12_]][_loc11_[_loc12_]][1];
-            if(_loc10_[_loc12_] >= 0 && _loc10_[_loc12_] <= 10 && (udeAngleAr[this.charaNum][_loc10_[0]][_loc9_[0]][_loc11_[0]][1] == 0 && udeAngleAr[this.charaNum][_loc10_[1]][_loc9_[1]][_loc11_[1]][1] == 0 || udeAngleAr[this.charaNum][_loc10_[0]][_loc9_[0]][_loc11_[0]][1] == 1 && udeAngleAr[this.charaNum][_loc10_[1]][_loc9_[1]][_loc11_[1]][1] == 1))
+            MenuClass.udeDepthBefore[this.charaNum][sideIdx] = udeAngleAr[this.charaNum][upperArmFrame[sideIdx]][forearmDepth[sideIdx]][forearmFrame[sideIdx]][1];
+            if(upperArmFrame[sideIdx] >= 0 && upperArmFrame[sideIdx] <= 10 && (udeAngleAr[this.charaNum][upperArmFrame[0]][forearmDepth[0]][forearmFrame[0]][1] == 0 && udeAngleAr[this.charaNum][upperArmFrame[1]][forearmDepth[1]][forearmFrame[1]][1] == 0 || udeAngleAr[this.charaNum][upperArmFrame[0]][forearmDepth[0]][forearmFrame[0]][1] == 1 && udeAngleAr[this.charaNum][upperArmFrame[1]][forearmDepth[1]][forearmFrame[1]][1] == 1))
             {
-               _loc17_ = this.charaAdd.getChildIndex(this.charaAdd.handm1_0);
-               _loc18_ = this.charaAdd.getChildIndex(this.charaAdd.handm1_1);
-               if(_loc12_ == 0 && (_loc11_[_loc12_] >= 250 && _loc11_[_loc12_] <= 280) && _loc17_ < _loc18_)
+               leftArmLayer = this.charaAdd.getChildIndex(this.charaAdd.handm1_0_layerTarget);
+               rightArmLayer = this.charaAdd.getChildIndex(this.charaAdd.handm1_1_layerTarget);
+               if(sideIdx == 0 && (forearmFrame[sideIdx] >= 250 && forearmFrame[sideIdx] <= 280) && leftArmLayer < rightArmLayer)
                {
-                  this.charaAdd.swapChildren(this.charaAdd.handm1_0,this.charaAdd.handm1_1);
+                  this.charaAdd.swapChildren(this.charaAdd.handm1_0_layerTarget,this.charaAdd.handm1_1_layerTarget);
                   didSwap = true;
                }
-               else if(_loc12_ == 1 && (_loc11_[_loc12_] >= 250 && _loc11_[_loc12_] <= 280) && _loc17_ > _loc18_)
+               else if(sideIdx == 1 && (forearmFrame[sideIdx] >= 250 && forearmFrame[sideIdx] <= 280) && leftArmLayer > rightArmLayer)
                {
-                  this.charaAdd.swapChildren(this.charaAdd.handm1_0,this.charaAdd.handm1_1);
+                  this.charaAdd.swapChildren(this.charaAdd.handm1_0_layerTarget,this.charaAdd.handm1_1_layerTarget);
                   didSwap = true;
                }
             }
-            _loc12_++;
+            sideIdx++;
+         }
+         
+         for (sideIdx = 0; sideIdx <= 1; sideIdx++) {
+            if (sideIdx == 0) {
+               sideName = "Left";
+            } else {
+               sideName = "Right";
+            }
+
+            if (this.charaData[sideName + "Arm2"]["_depth"] == 2) {
+               curLayer = this.charaAdd.getChildIndex(this.charaAdd["handm1_" + sideIdx + "_layerTarget"]);
+               curSwap0Layer = this.charaAdd.getChildIndex(this.charaAdd["hand" + sideIdx + "_swap0"]);
+               curSwap1Layer = this.charaAdd.getChildIndex(this.charaAdd["hand" + sideIdx + "_swap1"]);
+               var targetLayer = curLayer;
+
+               if (curSwap0Layer > targetLayer) {
+                  targetLayer = curSwap0Layer;
+               }
+
+               if (curSwap1Layer > targetLayer) {
+                  targetLayer = curSwap1Layer;
+               }
+               
+               this.charaAdd.addChildAt(this.charaAdd["handm1_" + sideIdx], targetLayer + 1);
+            } else if (this.charaData[sideName + "Arm2"]["_depth"] == 3) {
+               this.charaAdd.addChildAt(this.charaAdd["handm1_" + sideIdx], 0);
+            } else {
+               this.charaAdd.addChildAt(this.charaAdd["handm1_" + sideIdx], this.charaAdd.getChildIndex(this.charaAdd["handm1_" + sideIdx + "_layerTarget"]));
+            }
          }
 
-         // leftIdx = this.charaAdd.getChildIndex(this.charaAdd["handm1_0"]);
-         // rightIdx = this.charaAdd.getChildIndex(this.charaAdd["handm1_1"]);
-         // if (
-         //    this.charaData["LeftArm2"]["_depth"] == 2 &&
-         //    this.charaData["RightArm2"]["_depth"] == 1 &&
-         //    leftIdx < rightIdx
-         // ) {
-         //    this.charaAdd.swapChildren(this.charaAdd.handm1_0,this.charaAdd.handm1_1);
-         // } else if (
-         //    this.charaData["LeftArm2"]["_depth"] == 1 && 
-         //    this.charaData["RightArm2"]["_depth"] == 2 &&
-         //    rightIdx < leftIdx
-         // ) {
-         //    this.charaAdd.swapChildren(this.charaAdd.handm1_0,this.charaAdd.handm1_1);
-         // }
-
-         _loc12_ = 0;
-         while(_loc12_ <= 1)
+         sideIdx = 0;
+         while(sideIdx <= 1)
          {
-            if(_loc12_ == 0)
+            if(sideIdx == 0)
             {
-               _loc13_ = "Left";
+               sideName = "Left";
             }
             else
             {
-               _loc13_ = "Right";
+               sideName = "Right";
             }
-            this.charaAdd["handm0_" + _loc12_].shoulder.sen.mask = this.charaAdd["handm0_" + _loc12_].hand.arm2.actual.arm2.maskMc0;
-            if(_loc10_[_loc12_] >= 30)
+
+            this.charaAdd["handm0_" + sideIdx].shoulder.sen.mask = this.charaAdd["handm0_" + sideIdx].hand.arm2.actual.arm2.maskMc0;
+
+            if (this.charaData[sideName + "ShoulderVisible"]["_visible"][0]) {
+               this.charaAdd["handm0_" + sideIdx].shoulder.visible = true;
+               this.charaAdd["handm0_" + sideIdx].shoulder_back.visible = true;
+            } else {
+               this.charaAdd["handm0_" + sideIdx].shoulder.visible = false;
+               this.charaAdd["handm0_" + sideIdx].shoulder_back.visible = false;
+            }
+
+            if(upperArmFrame[sideIdx] >= 30)
             {
-               this.charaAdd["handm0_" + _loc12_].hand.arm2.actual.arm2.gotoAndStop(2);
+               this.charaAdd["handm0_" + sideIdx].hand.arm2.actual.arm2.gotoAndStop(2);
             }
             else
             {
-               this.charaAdd["handm0_" + _loc12_].hand.arm2.actual.arm2.gotoAndStop(1);
+               this.charaAdd["handm0_" + sideIdx].hand.arm2.actual.arm2.gotoAndStop(1);
             }
-            if(_loc10_[_loc12_] >= 30)
+            if(upperArmFrame[sideIdx] >= 30)
             {
-               this.charaAdd.mune.ue["sen" + _loc12_].gotoAndStop(_loc10_[_loc12_] - 28);
-               this.charaAdd.mune["senNeck" + _loc12_].gotoAndStop(_loc10_[_loc12_] - 28);
+               this.charaAdd.mune.ue["sen" + sideIdx].gotoAndStop(upperArmFrame[sideIdx] - 28);
+               this.charaAdd.mune["senNeck" + sideIdx].gotoAndStop(upperArmFrame[sideIdx] - 28);
             }
             else
             {
-               this.charaAdd.mune.ue["sen" + _loc12_].gotoAndStop(1);
-               this.charaAdd.mune["senNeck" + _loc12_].gotoAndStop(1);
+               this.charaAdd.mune.ue["sen" + sideIdx].gotoAndStop(1);
+               this.charaAdd.mune["senNeck" + sideIdx].gotoAndStop(1);
             }
-            new Huku_BuraHimo(this.charaNum,_loc13_ + "Arm");
-            new Huku_Ude("Wristband" + _loc12_,this.charaNum,_loc12_);
-            new Huku_Ude("Glove" + _loc12_,this.charaNum,_loc12_);
-            new Huku_Ude("Bracelet" + _loc12_,this.charaNum,_loc12_);
-            new Huku_Ude("ArmBracelet" + _loc12_,this.charaNum,_loc12_);
-            new Huku_Ude("Armband" + _loc12_,this.charaNum,_loc12_);
-            new Huku_Ude("Elbowpad" + _loc12_,this.charaNum,_loc12_);
-            new Huku_Ude("Ysyatu",this.charaNum,_loc12_);
-            new Huku_Ude("Tsyatu",this.charaNum,_loc12_);
-            new Huku_Ude("Vest",this.charaNum,_loc12_);
-            new Huku_Ude("Seihuku",this.charaNum,_loc12_);
-            this.charaAdd["handm1_" + _loc12_].hand.arm1.arm1.arm1.actual.color0.mouseChildren = false;
-            this.charaAdd["handm1_" + _loc12_].hand.arm1.arm1.arm1.actual.color0.mouseEnabled = false;
-            this.charaAdd["handm1_" + _loc12_].hand.arm1.arm1.arm1.actual.sen.mouseChildren = false;
-            this.charaAdd["handm1_" + _loc12_].hand.arm1.arm1.arm1.actual.sen.mouseEnabled = false;
-            _loc12_++;
+            new Huku_BuraHimo(this.charaNum,sideName + "Arm");
+            new Huku_Ude("Wristband" + sideIdx,this.charaNum,sideIdx);
+            new Huku_Ude("Glove" + sideIdx,this.charaNum,sideIdx);
+            new Huku_Ude("Bracelet" + sideIdx,this.charaNum,sideIdx);
+            new Huku_Ude("ArmBracelet" + sideIdx,this.charaNum,sideIdx);
+            new Huku_Ude("Armband" + sideIdx,this.charaNum,sideIdx);
+            new Huku_Ude("Elbowpad" + sideIdx,this.charaNum,sideIdx);
+            new Huku_Ude("Ysyatu",this.charaNum,sideIdx);
+            new Huku_Ude("Tsyatu",this.charaNum,sideIdx);
+            new Huku_Ude("Vest",this.charaNum,sideIdx);
+            new Huku_Ude("Seihuku",this.charaNum,sideIdx);
+            this.charaAdd["handm1_" + sideIdx].hand.arm1.arm1.arm1.actual.color0.mouseChildren = false;
+            this.charaAdd["handm1_" + sideIdx].hand.arm1.arm1.arm1.actual.color0.mouseEnabled = false;
+            this.charaAdd["handm1_" + sideIdx].hand.arm1.arm1.arm1.actual.sen.mouseChildren = false;
+            this.charaAdd["handm1_" + sideIdx].hand.arm1.arm1.arm1.actual.sen.mouseEnabled = false;
+            sideIdx++;
          }
          new Move_HandClass(this.charaNum);
          Huku_RibonSet.updateArmRotation(this.charaNum, leftPos, rightPos);

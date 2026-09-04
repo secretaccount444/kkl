@@ -23,6 +23,7 @@ package parameter
          {
             MenuClass.charaData[_loc5_] = {
                "SelectCharacter":{"_visible":[true]},
+               "SourceVersion": {"_minor": Main.minor_version, "_alpha": Main.alpha_version},
                "AllHairSet":{
                   "_menu":0,
                   "_color0":[29]
@@ -36,12 +37,18 @@ package parameter
                   "_meter":0,
                   "_depth":0
                },
+               "LeftArmFreeRotation":{
+                  "_check":false
+               },
                "LeftHand":{"_menu":0},
                "LeftHand2":{"_meter":50},
                "RightArm":{"_meter":7},
                "RightArm2":{
                   "_meter":0,
                   "_depth":0
+               },
+               "RightArmFreeRotation":{
+                  "_check":false
                },
                "RightHand":{"_menu":0},
                "RightHand2":{"_meter":50},
@@ -64,6 +71,42 @@ package parameter
                   "_reversal":1
                },
                "Ashi2":{"_menu":5},
+               "LeftThighRotation": {"_meter": 0},
+               "RightThighRotation": {"_meter": 0},
+               "LeftLegRotation": {"_meter": 0},
+               "RightLegRotation": {"_meter": 0},
+               "LeftFootRotation": {"_meter": 0},
+               "RightFootRotation": {"_meter": 0},
+               "LeftThighScaleX": {"_meter": 50},
+               "LeftThighScaleY": {"_meter": 50},
+               "LeftThighOffsetX": {"_meter": 50},
+               "LeftThighOffsetY": {"_meter": 50},
+               "LeftThighVisible":{"_visible":[true]},
+               "RightThighScaleX": {"_meter": 50},
+               "RightThighScaleY": {"_meter": 50},
+               "RightThighOffsetX": {"_meter": 50},
+               "RightThighOffsetY": {"_meter": 50},
+               "RightThighVisible":{"_visible":[true]},
+               "LeftLegScaleX": {"_meter": 50},
+               "LeftLegScaleY": {"_meter": 50},
+               "LeftLegOffsetX": {"_meter": 50},
+               "LeftLegOffsetY": {"_meter": 50},
+               "LeftLegVisible":{"_visible":[true]},
+               "RightLegScaleX": {"_meter": 50},
+               "RightLegScaleY": {"_meter": 50},
+               "RightLegOffsetX": {"_meter": 50},
+               "RightLegOffsetY": {"_meter": 50},
+               "RightLegVisible":{"_visible":[true]},
+               "LeftFootScaleX": {"_meter": 50},
+               "LeftFootScaleY": {"_meter": 50},
+               "LeftFootOffsetX": {"_meter": 50},
+               "LeftFootOffsetY": {"_meter": 50},
+               "LeftFootVisible":{"_visible":[true]},
+               "RightFootScaleX": {"_meter": 50},
+               "RightFootScaleY": {"_meter": 50},
+               "RightFootOffsetX": {"_meter": 50},
+               "RightFootOffsetY": {"_meter": 50},
+               "RightFootVisible":{"_visible":[true]},
                "Xmove":{"_meter":0},
                "Ymove":{
                   "_meter":50,
@@ -87,26 +130,38 @@ package parameter
                "LeftUpperArmScaleY":{"_meter":50},
                "LeftUpperArmOffsetX":{"_meter":50},
                "LeftUpperArmOffsetY":{"_meter":50},
+               "LeftShoulderVisible":{"_visible":[true]},
+               "LeftUpperArmVisible":{"_visible":[true]},
                "RightUpperArmScaleX":{"_meter":50},
                "RightUpperArmScaleY":{"_meter":50},
                "RightUpperArmOffsetX":{"_meter":50},
                "RightUpperArmOffsetY":{"_meter":50},
+               "RightShoulderVisible":{"_visible":[true]},
+               "RightUpperArmVisible":{"_visible":[true]},
                "LeftArmScaleX":{"_meter":50},
                "LeftArmScaleY":{"_meter":50},
                "LeftArmOffsetX":{"_meter":50},
                "LeftArmOffsetY":{"_meter":50},
+               "LeftArmFlip":{"_check":false},
+               "LeftArmVisible":{"_visible":[true]},
                "LeftHandScaleX":{"_meter":50},
                "LeftHandScaleY":{"_meter":50},
                "LeftHandOffsetX":{"_meter":50},
                "LeftHandOffsetY":{"_meter":50},
+               "LeftHandVisible":{"_visible":[true]},
+               "LeftHandFlip":{"_check":false},
                "RightArmScaleX":{"_meter":50},
                "RightArmScaleY":{"_meter":50},
                "RightArmOffsetX":{"_meter":50},
                "RightArmOffsetY":{"_meter":50},
+               "RightArmFlip":{"_check":false},
+               "RightArmVisible":{"_visible":[true]},
                "RightHandScaleX":{"_meter":50},
                "RightHandScaleY":{"_meter":50},
                "RightHandOffsetX":{"_meter":50},
                "RightHandOffsetY":{"_meter":50},
+               "RightHandVisible":{"_visible":[true]},
+               "RightHandFlip":{"_check":false},
                "Body":{"_color0":[0]},
                "BodyPlus":{
                   "_menu":0,
@@ -180,6 +235,11 @@ package parameter
                "TinKawa":{"_menu":12},
                "TinEx":{"_meter":50},
                "TinSize":{"_meter":50},
+               "TinSizeAuto":{"_check":true},
+               "TinScaleX":{"_meter":50},
+               "TinScaleY":{"_meter":50},
+               "TinOffsetX":{"_meter":50},
+               "TinOffsetY":{"_meter":50},
                "TinMove":{"_mode":0},
                "Tama":{
                   "_visible":[false],
@@ -310,6 +370,7 @@ package parameter
                   "_color1":[0]
                },
                "EyebrowY":{"_meter":50},
+               "EyebrowX":{"_meter":50},
                "EyebrowRotation":{"_meter":75},
                "MouthY":{"_meter":61},
                "MouthScale":{"_meter":50},
@@ -427,9 +488,11 @@ package parameter
                "EmotionEyebrowLeft":{"_menu":0},
                "EyebrowRotationLeft":{"_meter":60},
                "EyebrowMoveLeft":{"_meter":40},
+               "EyebrowMoveHorizontalLeft":{"_meter":50},
                "EmotionEyebrowRight":{"_menu":0},
                "EyebrowRotationRight":{"_meter":60},
                "EyebrowMoveRight":{"_meter":40},
+               "EyebrowMoveHorizontalRight":{"_meter":50},
                "EmotionMouth":{
                   "_visible": [true],
                   "_menu":0,
@@ -975,6 +1038,8 @@ package parameter
                "MarkX0":{"_meter":620},
                "MarkY0":{"_meter":360},
                "MarkAlpha0":{"_meter":100},
+               "MarkVary0":{"_menu":0},
+               "MarkAdd0":{"_add0":0},
                "HairExPlus":{"_visible":[false]},
                "HairExAdd0":{"_add0":0},
                "HairEx0":{
@@ -1018,6 +1083,8 @@ package parameter
                "RibonRotation0":{"_meter":50},
                "RibonX0":{"_meter":600},
                "RibonY0":{"_meter":800},
+               "RibonFineX0":{"_meter":50},
+               "RibonFineY0":{"_meter":50},
                "RibonAlpha0":{"_meter":100},
                "HairpinPlus":{"_visible":[false]},
                "Hairpin0":{
@@ -1058,6 +1125,8 @@ package parameter
                "BeltRotation0":{"_meter":0},
                "BeltX0":{"_meter":500},
                "BeltY0":{"_meter":533},
+               "BeltFineX0":{"_meter":50},
+               "BeltFineY0":{"_meter":50},
                "BeltExtra0":{"_menu":0},
                "BeltAlpha0":{"_meter":100},
                "CharaLoadPlusCheck":{"_visibleCheck":[false]},
@@ -1077,6 +1146,8 @@ package parameter
                "CharaLoadRotation0":{"_meter":0},
                "CharaLoadX0":{"_meter":500},
                "CharaLoadY0":{"_meter":500},
+               "CharaLoadFineX0":{"_meter":50},
+               "CharaLoadFineY0":{"_meter":50},
                "CharaLoadSwfColor0":{
                   "_swfColor":["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],
                   "_swfMenu":0,
@@ -1117,6 +1188,8 @@ package parameter
                MenuClass.charaData[_loc5_]["MarkX" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["MarkX0"]);
                MenuClass.charaData[_loc5_]["MarkY" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["MarkY0"]);
                MenuClass.charaData[_loc5_]["MarkAlpha" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["MarkAlpha0"]);
+               MenuClass.charaData[_loc5_]["MarkVary" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["MarkVary0"]);
+               MenuClass.charaData[_loc5_]["MarkAdd" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["MarkAdd0"]);
                _loc1_++;
             }
             _loc1_ = 1;
@@ -1147,6 +1220,8 @@ package parameter
                MenuClass.charaData[_loc5_]["RibonRotation" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["RibonRotation0"]);
                MenuClass.charaData[_loc5_]["RibonX" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["RibonX0"]);
                MenuClass.charaData[_loc5_]["RibonY" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["RibonY0"]);
+               MenuClass.charaData[_loc5_]["RibonFineX" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["RibonFineX0"]);
+               MenuClass.charaData[_loc5_]["RibonFineY" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["RibonFineY0"]);
                MenuClass.charaData[_loc5_]["RibonAlpha" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["RibonAlpha0"]);
                _loc1_++;
             }
@@ -1174,6 +1249,8 @@ package parameter
                MenuClass.charaData[_loc5_]["BeltLine" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["BeltLine0"]);
                MenuClass.charaData[_loc5_]["BeltX" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["BeltX0"]);
                MenuClass.charaData[_loc5_]["BeltY" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["BeltY0"]);
+               MenuClass.charaData[_loc5_]["BeltFineX" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["BeltFineX0"]);
+               MenuClass.charaData[_loc5_]["BeltFineY" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["BeltFineY0"]);
                MenuClass.charaData[_loc5_]["BeltExtra" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["BeltExtra0"]);
                MenuClass.charaData[_loc5_]["BeltAlpha" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["BeltAlpha0"]);
                _loc1_++;
@@ -1190,6 +1267,8 @@ package parameter
                MenuClass.charaData[_loc5_]["CharaLoadRotation" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["CharaLoadRotation0"]);
                MenuClass.charaData[_loc5_]["CharaLoadX" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["CharaLoadX0"]);
                MenuClass.charaData[_loc5_]["CharaLoadY" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["CharaLoadY0"]);
+               MenuClass.charaData[_loc5_]["CharaLoadFineX" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["CharaLoadFineX0"]);
+               MenuClass.charaData[_loc5_]["CharaLoadFineY" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["CharaLoadFineY0"]);
                MenuClass.charaData[_loc5_]["CharaLoadSwfColor" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["CharaLoadSwfColor0"]);
                _loc1_++;
             }
@@ -1201,6 +1280,7 @@ package parameter
             _loc7_ = false;
          }
          MenuClass.systemData = {
+            "SourceVersion": {"_minor": Main.minor_version, "_alpha": Main.alpha_version},
             "DeformerReal":{"_menu":Main.accessObj.DeformerRealData},
             "HairType":{"_menu":Main.accessObj.HairTypeData},
             "BodyType":{"_menu":Main.accessObj.BodyTypeData},
@@ -1232,6 +1312,12 @@ package parameter
                "_color1":[0],
                "_color2":[0]
             },
+            "LinkThighSettings": {"_flag":_loc7_},
+            "LinkLegSettings": {"_flag":_loc7_},
+            "LinkFootSettings": {"_flag":_loc7_},
+            "LinkUpperArmSettings": {"_flag":_loc7_},
+            "LinkArmSettings": {"_flag":_loc7_},
+            "LinkHandSettings": {"_flag":_loc7_},
             "LinkCharaDropShadow":{"_flag":_loc7_},
             "LinkCharaBlur":{"_flag":_loc7_},
             "LinkNoseScale":{"_flag":_loc7_},
@@ -1300,6 +1386,8 @@ package parameter
             "FreeHandRotation0":{"_meter":0},
             "FreeHandX0":{"_meter":500},
             "FreeHandY0":{"_meter":600},
+            "FreeHandFineX0":{"_meter":50},
+            "FreeHandFineY0":{"_meter":50},
             "FreeHandDepth0":{"_meter":600},
             "FreeHandWrist0":{"_menu":0},
             "FreeHandWristRotation0":{"_meter":50},
@@ -1349,6 +1437,9 @@ package parameter
             "FreeRibonRotation0":{"_meter":0},
             "FreeRibonX0":{"_meter":500},
             "FreeRibonY0":{"_meter":600},
+            "FreeRibonAlpha0":{"_meter":100},
+            "FreeRibonFineX0":{"_meter":50},
+            "FreeRibonFineY0":{"_meter":50},
             "FreeRibonDepth0":{"_meter":600},
             "FreeBeltPlus":{
                "_menu":0,
@@ -1374,6 +1465,9 @@ package parameter
             "FreeBeltRotation0":{"_meter":0},
             "FreeBeltX0":{"_meter":500},
             "FreeBeltY0":{"_meter":600},
+            "FreeBeltFineX0":{"_meter":50},
+            "FreeBeltFineY0":{"_meter":50},
+            "FreeBeltAlpha0":{"_meter":100},
             "FreeBeltDepth0":{"_meter":600},
             "FreeBeltExtra0":{"_menu":0},
             "FreeChairPlus":{
@@ -1395,6 +1489,9 @@ package parameter
             "FreeChairX0":{"_meter":500},
             "FreeChairY0":{"_meter":360},
             "FreeChairDepth0":{"_meter":600},
+            "FreeChairFineX0":{"_meter":50},
+            "FreeChairFineY0":{"_meter":50},
+            "FreeChairAlpha0":{"_meter":100},
             "FreeChairExtra0":{"_menu":0},
             "FreeChairLine0":{
                "_menu":3,
@@ -1523,6 +1620,8 @@ package parameter
                "_width":800,
                "_height":600
             },
+            "MenuScale": {"_meter": 100},
+            "MenuAlign": {"_check":false},
             "txtFieldmenu":{
                "_visible":[false,false,false,false,false,false,false,false,false,false],
                "_menu":0
@@ -1547,6 +1646,8 @@ package parameter
             MenuClass.systemData["FreeHandRotation" + _loc1_] = this.clone(MenuClass.systemData["FreeHandRotation0"]);
             MenuClass.systemData["FreeHandX" + _loc1_] = this.clone(MenuClass.systemData["FreeHandX0"]);
             MenuClass.systemData["FreeHandY" + _loc1_] = this.clone(MenuClass.systemData["FreeHandY0"]);
+            MenuClass.systemData["FreeHandFineX" + _loc1_] = this.clone(MenuClass.systemData["FreeHandFineX0"]);
+            MenuClass.systemData["FreeHandFineY" + _loc1_] = this.clone(MenuClass.systemData["FreeHandFineY0"]);
             MenuClass.systemData["FreeHandDepth" + _loc1_] = this.clone(MenuClass.systemData["FreeHandDepth0"]);
             MenuClass.systemData["FreeHandWrist" + _loc1_] = this.clone(MenuClass.systemData["FreeHandWrist0"]);
             MenuClass.systemData["FreeHandWristRotation" + _loc1_] = this.clone(MenuClass.systemData["FreeHandWristRotation0"]);
@@ -1562,7 +1663,10 @@ package parameter
             MenuClass.systemData["FreeRibonRotation" + _loc1_] = this.clone(MenuClass.systemData["FreeRibonRotation0"]);
             MenuClass.systemData["FreeRibonX" + _loc1_] = this.clone(MenuClass.systemData["FreeRibonX0"]);
             MenuClass.systemData["FreeRibonY" + _loc1_] = this.clone(MenuClass.systemData["FreeRibonY0"]);
+            MenuClass.systemData["FreeRibonFineX" + _loc1_] = this.clone(MenuClass.systemData["FreeRibonFineX0"]);
+            MenuClass.systemData["FreeRibonFineY" + _loc1_] = this.clone(MenuClass.systemData["FreeRibonFineY0"]);
             MenuClass.systemData["FreeRibonDepth" + _loc1_] = this.clone(MenuClass.systemData["FreeRibonDepth0"]);
+            MenuClass.systemData["FreeRibonAlpha" + _loc1_] = this.clone(MenuClass.systemData["FreeRibonAlpha0"]);
             MenuClass.systemData["FreeBeltPlus"]["_visible"].push(false);
             MenuClass.systemData["FreeBelt" + _loc1_] = this.clone(MenuClass.systemData["FreeBelt0"]);
             MenuClass.systemData["FreeBeltScale" + _loc1_] = this.clone(MenuClass.systemData["FreeBeltScale0"]);
@@ -1572,6 +1676,9 @@ package parameter
             MenuClass.systemData["FreeBeltRotation" + _loc1_] = this.clone(MenuClass.systemData["FreeBeltRotation0"]);
             MenuClass.systemData["FreeBeltX" + _loc1_] = this.clone(MenuClass.systemData["FreeBeltX0"]);
             MenuClass.systemData["FreeBeltY" + _loc1_] = this.clone(MenuClass.systemData["FreeBeltY0"]);
+            MenuClass.systemData["FreeBeltFineX" + _loc1_] = this.clone(MenuClass.systemData["FreeBeltFineX0"]);
+            MenuClass.systemData["FreeBeltFineY" + _loc1_] = this.clone(MenuClass.systemData["FreeBeltFineY0"]);
+            MenuClass.systemData["FreeBeltAlpha" + _loc1_] = this.clone(MenuClass.systemData["FreeBeltAlpha0"]);
             MenuClass.systemData["FreeBeltDepth" + _loc1_] = this.clone(MenuClass.systemData["FreeBeltDepth0"]);
             MenuClass.systemData["FreeBeltExtra" + _loc1_] = this.clone(MenuClass.systemData["FreeBeltExtra0"]);
             MenuClass.systemData["FreeChairPlus"]["_visible"].push(false);
@@ -1581,6 +1688,9 @@ package parameter
             MenuClass.systemData["FreeChairX" + _loc1_] = this.clone(MenuClass.systemData["FreeChairX0"]);
             MenuClass.systemData["FreeChairY" + _loc1_] = this.clone(MenuClass.systemData["FreeChairY0"]);
             MenuClass.systemData["FreeChairDepth" + _loc1_] = this.clone(MenuClass.systemData["FreeChairDepth0"]);
+            MenuClass.systemData["FreeChairFineX" + _loc1_] = this.clone(MenuClass.systemData["FreeChairFineX0"]);
+            MenuClass.systemData["FreeChairFineY" + _loc1_] = this.clone(MenuClass.systemData["FreeChairFineY0"]);
+            MenuClass.systemData["FreeChairAlpha" + _loc1_] = this.clone(MenuClass.systemData["FreeChairAlpha0"]);
             MenuClass.systemData["FreeChairExtra" + _loc1_] = this.clone(MenuClass.systemData["FreeChairExtra0"]);
             MenuClass.systemData["FreeChairLine" + _loc1_] = this.clone(MenuClass.systemData["FreeChairLine0"]);
             MenuClass.systemData["FreeFlagPlus"]["_visible"].push(false);
@@ -1771,6 +1881,8 @@ package parameter
             MenuClass.systemData["LoadRotation" + _loc1_] = {"_meter":0};
             MenuClass.systemData["LoadX" + _loc1_] = {"_meter":500};
             MenuClass.systemData["LoadY" + _loc1_] = {"_meter":500};
+            MenuClass.systemData["LoadFineX" + _loc1_] = {"_meter":50};
+            MenuClass.systemData["LoadFineY" + _loc1_] = {"_meter":50};
             MenuClass.systemData["LoadSwfColor" + _loc1_] = {
                "_swfColor":["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],
                "_swfMenu":0,
@@ -1797,7 +1909,7 @@ package parameter
                }
             }
          }
-         MenuClass.charaMotoData = this.clone(MenuClass.charaData);
+         // MenuClass.charaMotoData = this.clone(MenuClass.charaData);
          MenuClass.charaDefoData = this.clone(MenuClass.charaData);
          MenuClass.systemDefoData = this.clone(MenuClass.systemData);
          for(_loc10_ in MenuClass.MY_MENUNAME)

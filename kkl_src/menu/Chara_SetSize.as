@@ -196,8 +196,14 @@ package menu
             upperArmY += MeterPersent.MeterPersentNum;
             this.charaAdd["handm0_" + i].hand.arm2.actual.y = upperArmY;
 
+            this.charaAdd["handm0_" + i].hand.arm2.actual.visible = this.charaData[dir + "UpperArmVisible"]["_visible"][0];
+
             /* Forearm */
-            new MeterPersent(0.75, 1.25, dir + "ArmScaleX", this.charaNum);
+            if (this.charaData[dir + "ArmFlip"]["_check"]) {
+               new MeterPersent(-0.75, -1.25, dir + "ArmScaleX", this.charaNum);
+            } else {
+               new MeterPersent(0.75, 1.25, dir + "ArmScaleX", this.charaNum);
+            }
             var xPos = -18.8 * (1.0 - MeterPersent.MeterPersentNum);
             this.charaAdd["handm1_" + i].hand.arm1.arm1.arm1.actual.scaleX = MeterPersent.MeterPersentNum;
 
@@ -214,6 +220,8 @@ package menu
             new MeterPersent(-25, 25, dir + "ArmOffsetY", this.charaNum);
             this.charaAdd["handm1_" + i].hand.arm1.arm1.arm1.actual.y = MeterPersent.MeterPersentNum;
 
+            this.charaAdd["handm1_" + i].hand.arm1.arm1.arm1.actual.visible = this.charaData[dir + "ArmVisible"]["_visible"][0];
+
             /* Hand */
             new MeterPersent(0.75, 1.25, dir + "HandScaleX", this.charaNum);
             this.charaAdd["handm1_" + i].hand.arm0.hand.actual.scaleX = MeterPersent.MeterPersentNum;
@@ -225,7 +233,11 @@ package menu
             this.charaAdd["handm1_" + i].hand.arm0.hand.actual.x = handPosX;
             this.charaAdd["handm1_" + i].hand.item.hand.actual.x = handPosX;
 
-            new MeterPersent(0.75, 1.25, dir + "HandScaleY", this.charaNum);
+            if (this.charaData[dir + "HandFlip"]["_check"]) {
+               new MeterPersent(-0.75, -1.25, dir + "HandScaleY", this.charaNum);
+            } else {
+               new MeterPersent(0.75, 1.25, dir + "HandScaleY", this.charaNum);
+            }
             this.charaAdd["handm1_" + i].hand.arm0.hand.actual.scaleY = MeterPersent.MeterPersentNum;
             this.charaAdd["handm1_" + i].hand.item.hand.actual.scaleY = MeterPersent.MeterPersentNum;
             var handPosY = 8 * (1.0 - MeterPersent.MeterPersentNum);
@@ -234,6 +246,9 @@ package menu
             handPosY += MeterPersent.MeterPersentNum
             this.charaAdd["handm1_" + i].hand.arm0.hand.actual.y = handPosY;
             this.charaAdd["handm1_" + i].hand.item.hand.actual.y = handPosY;
+
+            this.charaAdd["handm1_" + i].hand.arm0.hand.actual.visible = this.charaData[dir + "HandVisible"]["_visible"][0];
+            this.charaAdd["handm1_" + i].hand.item.hand.actual.visible = this.charaData[dir + "HandVisible"]["_visible"][0];
          }
       }
       
@@ -251,13 +266,13 @@ package menu
          {
             try
             {
-               this.charaAdd["ashi" + this.i].leg.leg.scaleX = _loc1_ + MeterPersent.MeterPersentNum;
-               this.charaAdd["ashi" + this.i].leg_huku.leg.scaleX = _loc1_ + MeterPersent.MeterPersentNum;
+               this.charaAdd["ashi" + this.i].leg.actual.leg.scaleX = _loc1_ + MeterPersent.MeterPersentNum;
+               this.charaAdd["ashi" + this.i].leg_huku.actual.leg.scaleX = _loc1_ + MeterPersent.MeterPersentNum;
             }
             catch(myError:Error)
             {
             }
-            this.charaAdd["ashi" + this.i].foot.foot.scaleX = _loc2_ + _loc3_;
+            this.charaAdd["ashi" + this.i].foot.actual.foot.scaleX = _loc2_ + _loc3_;
             ++this.i;
          }
       }
@@ -283,16 +298,16 @@ package menu
                _loc2_ = SizeDataClass.thighScaleX[1];
             }
             new MeterPersent(SizeDataClass.thighScaleX[0],_loc2_,"HipWidth",this.charaNum);
-            this.charaAdd["ashi" + this.i].thigh.thigh.scaleX = MeterPersent.MeterPersentNum;
+            this.charaAdd["ashi" + this.i].thigh.actual.thigh.scaleX = MeterPersent.MeterPersentNum;
             new MeterPersent(Move_DataClass.AshiFrameData[_loc1_]["thigthX_Y"] / 10,Move_DataClass.AshiFrameData[_loc1_]["thigthX_H"] / 10,"HipWidth",this.charaNum);
-            this.charaAdd["ashi" + this.i].thigh.thigh.x = MeterPersent.MeterPersentNum;
+            this.charaAdd["ashi" + this.i].thigh.actual.thigh.x = MeterPersent.MeterPersentNum;
             new MeterPersent(Move_DataClass.AshiFrameData[_loc1_]["legX_Y"] / 10,Move_DataClass.AshiFrameData[_loc1_]["legX_H"] / 10,"HipWidth",this.charaNum);
             _loc3_ = MeterPersent.MeterPersentNum;
             new MeterPersent(0,Move_DataClass.AshiFrameData[_loc1_]["legX_WH"] / 10,"AshiWidth",this.charaNum);
             try
             {
-               this.charaAdd["ashi" + this.i].leg.leg.x = _loc3_ + MeterPersent.MeterPersentNum;
-               this.charaAdd["ashi" + this.i].leg_huku.leg.x = _loc3_ + MeterPersent.MeterPersentNum;
+               this.charaAdd["ashi" + this.i].leg.actual.leg.x = _loc3_ + MeterPersent.MeterPersentNum;
+               this.charaAdd["ashi" + this.i].leg_huku.actual.leg.x = _loc3_ + MeterPersent.MeterPersentNum;
             }
             catch(myError:Error)
             {
@@ -301,8 +316,8 @@ package menu
             _loc4_ = MeterPersent.MeterPersentNum;
             try
             {
-               this.charaAdd["ashi" + this.i].leg.leg.y = _loc4_;
-               this.charaAdd["ashi" + this.i].leg_huku.leg.y = _loc4_;
+               this.charaAdd["ashi" + this.i].leg.actual.leg.y = _loc4_;
+               this.charaAdd["ashi" + this.i].leg_huku.actual.leg.y = _loc4_;
             }
             catch(myError:Error)
             {
@@ -313,7 +328,7 @@ package menu
             _loc6_ = MeterPersent.MeterPersentNum;
             try
             {
-               this.charaAdd["ashi" + this.i].foot.foot.x = _loc5_ + _loc6_;
+               this.charaAdd["ashi" + this.i].foot.actual.foot.x = _loc5_ + _loc6_;
             }
             catch(myError:Error)
             {
@@ -335,7 +350,13 @@ package menu
          this.charaAdd.dou.ueSenMask.scaleX = _loc1_;
          this.charaAdd.dou.nakaSen.scaleX = _loc1_;
          this.charaAdd.dou.dou_shita.scaleX = _loc1_;
-         this.charaAdd.peni.peni.scaleX = _loc1_;
+
+         if (this.charaData["TinSizeAuto"]["_check"]) {
+            this.charaAdd.peni.peni.scaleX = _loc1_;
+         } else {
+            this.charaAdd.peni.peni.scaleX = 1.0;
+         }
+
          this.charaAdd.dou.dou_shitaHuku.scaleX = _loc1_;
          var _loc2_:Array = new Array(Move_DataClass.AshiFrameData[this.charaData["Ashi"]["_menu"]]["depth"],Move_DataClass.AshiFrameData[this.charaData["Ashi2"]["_menu"]]["depth"]);
          if(_loc2_[0] >= 1 && _loc2_[1] >= 1)
@@ -548,6 +569,22 @@ package menu
             }
             ++this.i;
          }
+
+         if (this.charaData["LeftShoulderVisible"]["_visible"][0]) {
+            this.charaAdd["handm0_0"].shoulder.visible = true;
+            this.charaAdd["handm0_0"].shoulder_back.visible = true;
+         } else {
+            this.charaAdd["handm0_0"].shoulder.visible = false;
+            this.charaAdd["handm0_0"].shoulder_back.visible = false;
+         }
+
+         if (this.charaData["RightShoulderVisible"]["_visible"][0]) {
+            this.charaAdd["handm0_1"].shoulder.visible = true;
+            this.charaAdd["handm0_1"].shoulder_back.visible = true;
+         } else {
+            this.charaAdd["handm0_1"].shoulder.visible = false;
+            this.charaAdd["handm0_1"].shoulder_back.visible = false;
+         }
       }
       
       private function BodyAllWidth() : void
@@ -584,10 +621,10 @@ package menu
             this.charaAdd["ashi" + this.i].scaleY = _loc1_;
             if(this.i == 0 && this.charaData["Ashi"]["_menu"] >= 88 || this.i == 1 && this.charaData["Ashi2"]["_menu"] >= 88)
             {
-               this.charaAdd["ashi" + this.i].thigh.scaleY = 1 + (1 - _loc1_);
+               this.charaAdd["ashi" + this.i].thigh.actual.scaleY = 1 + (1 - _loc1_);
                new MeterPersent(200,160,"AshiHeight",this.charaNum);
                _loc5_ = MeterPersent.MeterPersentNum;
-               this.charaAdd["ashi" + this.i].thigh.y = _loc5_;
+               this.charaAdd["ashi" + this.i].thigh.actual.y = _loc5_;
             }
             this.charaAdd["handm0_" + this.i].scaleY = _loc2_;
             this.charaAdd["handm1_" + this.i].scaleY = _loc2_;

@@ -109,7 +109,7 @@ package parameter
       
       public static var DressCharaData:Array = new Array();
       
-      public static var DressCharaMotoData:Array = new Array();
+      // public static var DressCharaMotoData:Array = new Array();
       
       public static var menuCustom:Object = {};
       
@@ -12094,6 +12094,107 @@ package parameter
             "_color0":[0,"emerald1",1,0],
             "_color1":[0,"emerald1",1,0],
             "_color2":[0,"black1",1,0]
+         }, 
+         {  // #67: S-Bend
+            "_color0":[0,"black1",1,0],
+            "_color1":[0,"black7",1,1],
+            "_varyA": ["color1_0", 13]
+         },
+         {  // #68: Halved #103
+            "_color0":[0,"blue2",1,0],
+            "_color1":[0,"blue2",1,1]
+         }, 
+         {  // #69: Quarter #103
+            "_color0":[0,"blue2",1,0],
+            "_color1":[0,"blue2",1,1]
+         },
+         {  // #70: Solid-to-Clear Radial Gradient
+            "_color0":[0,"blue2",1,0]
+         },
+         {  // #71: Two-Color Radial Gradient
+            "_color0":[0,"blue2",1,0],
+            "_color1":[0,"blue4",1,1]
+         },
+         {  // #72: Half Solid-to-Clear Radial Gradient
+            "_color0":[0,"blue2",1,0]
+         },
+         {  // #73: Half Two-Color Radial Gradient
+            "_color0":[0,"blue2",1,0],
+            "_color1":[0,"blue4",1,1]
+         },
+         {  // #74: Quarter Solid-to-Clear Radial Gradient
+            "_color0":[0,"blue2",1,0]
+         },
+         {  // #75: Quarter Two-Color Radial Gradient
+            "_color0":[0,"blue2",1,0],
+            "_color1":[0,"blue4",1,1]
+         },
+         {  // #76: Solid-to-Clear Linear Gradient
+            "_color0":[0,"blue2",1,0]
+         },
+         {  // #77: Two-Color Linear Gradient
+            "_color0":[0,"blue2",1,0],
+            "_color1":[0,"blue4",1,1]
+         },
+         {  /* #78: Square Outline */
+            "_color0":[0,"black7",1,0],
+            "_varyA": ["color0_0", 13]
+         },
+         {  /* #79: Trapezoid Outline */
+            "_color0":[0,"black7",1,0],
+            "_varyA": ["color0_0", 13]
+         },
+         {  /* #80: Triangle Outline */
+            "_color0":[0,"black7",1,0],
+            "_varyA": ["color0_0", 13]
+         },
+         {  /* #81: Circle Outline */
+            "_color0":[0,"black7",1,0],
+            "_varyA": ["color0_0", 13]
+         },
+         {  /* #82: Half-Circle Outline */
+            "_color0":[0,"black7",1,0],
+            "_varyA": ["color0_0", 13]
+         },
+         {  /* #83: 1/4 Circle Outline */
+            "_color0":[0,"black7",1,0],
+            "_varyA": ["color0_0", 13]
+         },
+         {  /* #84: Rotated 1/4 Circle Outline */
+            "_color0":[0,"black7",1,0],
+            "_varyA": ["color0_0", 13]
+         },
+         {  /* #85: 1/8th Circle Outline */
+            "_color0":[0,"black7",1,0],
+            "_varyA": ["color0_0", 13]
+         },
+         {  /* #86: S-Bend Outline */
+            "_color0":[0,"black7",1,0],
+            "_varyA": ["color0_0", 13]
+         },
+         {  /* #87: Straight Line Segment */
+            "_color0":[0,"black7",1,0],
+            "_varyA": ["color0_0", 13]
+         },
+         {  /* #88: Half-Circle Curve */
+            "_color0":[0,"black7",1,0],
+            "_varyA": ["color0_0", 13]
+         },
+         {  /* #89: 1/4th Circle Curve */
+            "_color0":[0,"black7",1,0],
+            "_varyA": ["color0_0", 13]
+         },
+         {  /* #90: Rotated 1/4th Circle Curve */
+            "_color0":[0,"black7",1,0],
+            "_varyA": ["color0_0", 13]
+         },
+         {  /* #91: 1/8th Circle Curve */
+            "_color0":[0,"black7",1,0],
+            "_varyA": ["color0_0", 13]
+         },
+         {  /* #92: S-Bend Curve */
+            "_color0":[0,"black7",1,0],
+            "_varyA": ["color0_0", 13]
          }
          ];
          DressData["Ribon0"] = [{
@@ -12315,13 +12416,67 @@ package parameter
             "_color0":[0,"black1",1,0]
          },{
             "_color0":[0,"black1",1,0]
-         },{
+         },
+         {
             "_color0":[0,"black1",1,0]
-         },{
+         }, 
+         {  // Legacy 1/4 Annulus
+            "_color0":[0,"black1",1,0] 
+         }, 
+         {  // Legacy 1/8 Annulus
             "_color0":[0,"black1",1,0]
-         },{
-            "_color0":[0,"black1",1,0]
-         }
+         }, 
+         {  // #142: Halved #103
+            "_color0":[0,"blue2",1,0],
+            "_color1":[0,"blue2",1,1]
+         }, 
+         {  // #143: Quarter #103
+            "_color0":[0,"blue2",1,0],
+            "_color1":[0,"blue2",1,1]
+         },
+         {  // #144: Solid-to-Clear Radial Gradient
+            "_color0":[0,"blue2",1,0]
+         },
+         {  // #145: Two-Color Radial Gradient
+            "_color0":[0,"blue2",1,0],
+            "_color1":[0,"blue4",1,1]
+         },
+         {  // #146: Half Solid-to-Clear Radial Gradient
+            "_color0":[0,"blue2",1,0]
+         },
+         {  // #147: Half Two-Color Radial Gradient
+            "_color0":[0,"blue2",1,0],
+            "_color1":[0,"blue4",1,1]
+         },
+         {  // #148: Quarter Solid-to-Clear Radial Gradient
+            "_color0":[0,"blue2",1,0]
+         },
+         {  // #149: Quarter Two-Color Radial Gradient
+            "_color0":[0,"blue2",1,0],
+            "_color1":[0,"blue4",1,1]
+         },
+         {  // #150: Solid-to-Clear Linear Gradient
+            "_color0":[0,"blue2",1,0]
+         },
+         {  // #151: Two-Color Linear Gradient
+            "_color0":[0,"blue2",1,0],
+            "_color1":[0,"blue4",1,1]
+         },
+         {  /* #152: Square Outline */ },
+         {  /* #153: Trapezoid Outline */ },
+         {  /* #154: Triangle Outline */ },
+         {  /* #155: Circle Outline */ },
+         {  /* #156: Half-Circle Outline */ },
+         {  /* #157: 1/4 Circle Outline */ },
+         {  /* #158: Rotated 1/4 Circle Outline */ },
+         {  /* #159: 1/8th Circle Outline */ },
+         {  /* #160: S-Bend Outline */ },
+         {  /* #161: Straight Line Segment */ },
+         {  /* #162: Half-Circle Curve */ },
+         {  /* #163: 1/4th Circle Curve */ },
+         {  /* #164: Rotated 1/4th Circle Curve */ },
+         {  /* #165: 1/8th Circle Curve */ },
+         {  /* #166: S-Bend Curve */ }
          ];
          DressData["RibonLine0"] = [{"_color0":[0,"black7",1,0]}];
          DressData["Hairpin0"] = [{"_color0":[0,"orange2",1,0]},{

@@ -53,12 +53,12 @@ package menu
          var _loc20_:Boolean = false;
          var _loc21_:Boolean = false;
          var _loc22_:Boolean = false;
-         var _loc23_:Boolean = false;
-         var _loc24_:Boolean = false;
-         var _loc25_:Boolean = false;
-         var _loc26_:Boolean = false;
+         var ribbonModified:Boolean = false;
+         var faceMarkModified:Boolean = false;
+         var beltModified:Boolean = false;
+         var hairExModified:Boolean = false;
          var _loc27_:Boolean = false;
-         var _loc28_:Boolean = false;
+         var charaImageModified:Boolean = false;
          var _loc29_:Boolean = false;
          var _loc30_:Boolean = false;
          var _loc31_:Boolean = false;
@@ -80,18 +80,30 @@ package menu
          var _loc47_:Boolean = false;
          var _loc48_:Boolean = false;
          var _loc49_:Boolean = false;
-         var _loc50_:Boolean = false;
+         var armTabModified:Boolean = false;
          var _loc51_:Boolean = false;
+         var eyebrowEmotionModified: Boolean = false;
+         var eyebrowTabModified: Boolean = false;
+         var penisModified: Boolean = false;
+
          _loc4_ = 0;
          while(_loc4_ < _loc7_)
          {
-            if(Tab_IEInOut.SaveUpdateTabName[_loc4_] == "EyebrowRotation")
+            if(Tab_IEInOut.SaveUpdateTabName[_loc4_] == "Tin")
             {
-               _loc51_ = true;
+               penisModified = true;
+            }
+            else if(Tab_IEInOut.SaveUpdateTabName[_loc4_] == "EmotionEyebrowLeft")
+            {
+               eyebrowEmotionModified = true;
+            }
+            else if(Tab_IEInOut.SaveUpdateTabName[_loc4_] == "Eyebrow")
+            {
+               eyebrowTabModified = true;
             }
             else if(Tab_IEInOut.SaveUpdateTabName[_loc4_] == "LeftArm")
             {
-               _loc50_ = true;
+               armTabModified = true;
             }
             else if(Tab_IEInOut.SaveUpdateTabName[_loc4_] == "Seihuku")
             {
@@ -151,19 +163,19 @@ package menu
             }
             else if(Tab_IEInOut.SaveUpdateTabName[_loc4_].substring(0,5) == "Ribon")
             {
-               _loc23_ = true;
+               ribbonModified = true;
             }
             else if(Tab_IEInOut.SaveUpdateTabName[_loc4_].substring(0,4) == "Mark")
             {
-               _loc24_ = true;
+               faceMarkModified = true;
             }
             else if(Tab_IEInOut.SaveUpdateTabName[_loc4_].substring(0,4) == "Belt")
             {
-               _loc25_ = true;
+               beltModified = true;
             }
             else if(Tab_IEInOut.SaveUpdateTabName[_loc4_].substring(0,6) == "HairEx")
             {
-               _loc26_ = true;
+               hairExModified = true;
             }
             else if(Tab_IEInOut.SaveUpdateTabName[_loc4_].substring(0,7) == "Hairpin")
             {
@@ -171,7 +183,7 @@ package menu
             }
             else if(Tab_IEInOut.SaveUpdateTabName[_loc4_].substring(0,14) == "CharaLoadScale")
             {
-               _loc28_ = true;
+               charaImageModified = true;
             }
             else if(Tab_IEInOut.SaveUpdateTabName[_loc4_] == "BreastManualAuto")
             {
@@ -1487,7 +1499,7 @@ package menu
             _loc4_ = 0;
             while(_loc4_ <= Main.hukusuuNum)
             {
-               if(this.charaData["RibonPlus"]["_visible"][_loc4_] && _loc23_)
+               if(this.charaData["RibonPlus"]["_visible"][_loc4_] && ribbonModified)
                {
                   this.charaData["RibonScaleB" + _loc4_]["_meter"] = 500;
                }
@@ -1495,15 +1507,15 @@ package menu
                {
                   this.charaData["HairpinScaleB" + _loc4_]["_meter"] = 500;
                }
-               if(this.charaData["MarkPlus"]["_visible"][_loc4_] && _loc24_)
+               if(this.charaData["MarkPlus"]["_visible"][_loc4_] && faceMarkModified)
                {
                   this.charaData["MarkScaleB" + _loc4_]["_meter"] = 500;
                }
-               if(this.charaData["HairExPlus"]["_visible"][_loc4_] && _loc26_)
+               if(this.charaData["HairExPlus"]["_visible"][_loc4_] && hairExModified)
                {
                   this.charaData["HairExScaleB" + _loc4_]["_meter"] = 500;
                }
-               if(this.charaData["BeltPlus"]["_visible"][_loc4_] && _loc25_)
+               if(this.charaData["BeltPlus"]["_visible"][_loc4_] && beltModified)
                {
                   this.charaData["BeltScaleB" + _loc4_]["_meter"] = 500;
                }
@@ -1515,7 +1527,7 @@ package menu
             _loc4_ = 0;
             while(_loc4_ <= Main.hukusuuNum)
             {
-               if(!_loc28_)
+               if(!charaImageModified)
                {
                   this.charaData["CharaLoadPlus"]["_visible"][_loc4_] = false;
                }
@@ -1712,7 +1724,7 @@ package menu
             _loc4_ = 0;
             while(_loc4_ <= Main.hukusuuNum)
             {
-               if(this.charaData["RibonPlus"]["_visible"][_loc4_] && _loc23_)
+               if(this.charaData["RibonPlus"]["_visible"][_loc4_] && ribbonModified)
                {
                   this.charaData["RibonAdd" + _loc4_]["_add0"] = 0;
                   this.charaData["RibonRotation" + _loc4_]["_meter"] = Math.floor(this.charaData["RibonRotation" + _loc4_]["_meter"] * 3.6);
@@ -1857,7 +1869,7 @@ package menu
             _loc4_ = 0;
             while(_loc4_ <= Main.RibonhukusuuNum)
             {
-               if(this.charaData["RibonPlus"]["_visible"][_loc4_] && _loc23_)
+               if(this.charaData["RibonPlus"]["_visible"][_loc4_] && ribbonModified)
                {
                   this.charaData["Ribon" + _loc4_]["_shadow"] = 1;
                }
@@ -1883,7 +1895,7 @@ package menu
             _loc4_ = 0;
             while(_loc4_ <= Main.hukusuuNum)
             {
-               if(this.charaData["HairExPlus"]["_visible"][_loc4_] && _loc26_)
+               if(this.charaData["HairExPlus"]["_visible"][_loc4_] && hairExModified)
                {
                   this.charaData["HairEx" + _loc4_]["_shadow"] = 1;
                }
@@ -2060,7 +2072,7 @@ package menu
          {
             try
             {
-               if(_loc26_)
+               if(hairExModified)
                {
                   _loc4_ = 0;
                   while(_loc4_ <= Main.hukusuuNum)
@@ -2784,7 +2796,7 @@ package menu
             _loc4_ = 0;
             while(_loc4_ <= Main.hukusuuNum)
             {
-               if(this.charaData["MarkPlus"]["_visible"][_loc4_] && _loc24_)
+               if(this.charaData["MarkPlus"]["_visible"][_loc4_] && faceMarkModified)
                {
                   this.charaData["MarkAlpha" + _loc4_]["_meter"] = 100;
                   this.charaData["Mark" + _loc4_]["_depth"] = 0;
@@ -2805,7 +2817,7 @@ package menu
                }
             }
             this.charaData["EyebrowRotation"]["_meter"] = 75;
-            if(_loc50_)
+            if(armTabModified)
             {
                _loc4_ = 0;
                while(_loc4_ <= 1)
@@ -3136,17 +3148,72 @@ package menu
          }
          if(param2 <= 104)
          {
-            if(_loc26_)
+            if (hairExModified || ribbonModified || beltModified)
             {
-               _loc4_ = 0;
-               while(_loc4_ <= Main.hukusuuNum)
-               {
-                  if(this.charaData["HairExPlus"]["_visible"][_loc4_])
-                  {
-                     this.charaData["HairExAdd" + _loc4_]["_add0"] = 0;
+               for (var i = 0; i <= Main.hukusuuNum; i++) {
+                  if (hairExModified && this.charaData["HairExPlus"]["_visible"][i]) {
+                     this.charaData["HairExAdd" + i]["_add0"] = 0;
+                     this.charaData["HairExAlpha" + i]["_meter"] = 100;
                   }
-                  _loc4_++;
+
+                  if(ribbonModified && this.charaData["RibonPlus"]["_visible"][i])
+                  {
+                     this.charaData["RibonAlpha" + i]["_meter"] = 100;
+                  }
+
+                  if(beltModified && this.charaData["BeltPlus"]["_visible"][i])
+                  {
+                     this.charaData["BeltAlpha" + i]["_meter"] = 100;
+                  }
                }
+            }
+         }
+         if(param2 <= 105)
+         {
+            if (ribbonModified || beltModified || faceMarkModified || charaImageModified) {
+               for (var i = 0; i <= Main.hukusuuNum; i++) {
+                  if (charaImageModified && this.charaData["CharaLoadPlus"]["_visible"][i]) {
+                     this.charaData["CharaLoadFineX" + i]["_meter"] = 50;
+                     this.charaData["CharaLoadFineY" + i]["_meter"] = 50;
+                  }
+
+                  if(ribbonModified && this.charaData["RibonPlus"]["_visible"][i]) {
+                     this.charaData["RibonFineX" + i]["_meter"] = 50;
+                     this.charaData["RibonFineY" + i]["_meter"] = 50;
+                  }
+
+                  if(beltModified && this.charaData["BeltPlus"]["_visible"][i]) {
+                     this.charaData["BeltFineX" + i]["_meter"] = 50;
+                     this.charaData["BeltFineY" + i]["_meter"] = 50;
+                  }
+
+                  if(faceMarkModified && this.charaData["MarkPlus"]["_visible"][i]) {
+                     this.charaData["MarkVary" + i]["_menu"] = 0;
+                     this.charaData["MarkAdd" + i]["_add0"] = 0;
+                  }
+               }
+            }
+
+            if (penisModified) {
+               this.charaData["TinSizeAuto"]["_check"] = true;
+               this.charaData["TinScaleX"]["_meter"] = 50;
+               this.charaData["TinScaleY"]["_meter"] = 50;
+               this.charaData["TinOffsetX"]["_meter"] = 50;
+               this.charaData["TinOffsetY"]["_meter"] = 50;
+            }
+
+            if (eyebrowTabModified) {
+               this.charaData["EyebrowX"]["_meter"] = 50;
+            }
+
+            if (eyebrowEmotionModified) {
+               this.charaData["EyebrowMoveHorizontalLeft"]["_meter"] = 50;
+               this.charaData["EyebrowMoveHorizontalRight"]["_meter"] = 50;
+            }
+
+            if (armTabModified) {
+               this.charaData["LeftArmFreeRotation"]["_check"] = false;
+               this.charaData["RightArmFreeRotation"]["_check"] = false;
             }
          }
       }

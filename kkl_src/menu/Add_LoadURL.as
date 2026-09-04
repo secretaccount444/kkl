@@ -152,11 +152,11 @@ package menu
          {
             this.LoadRotationFc(menuNum);
          }
-         else if(tabName == "LoadX" && MenuClass.systemData["LoadPlus"]["_visible"][menuNum])
+         else if((tabName == "LoadX" || tabName == "LoadFineX") && MenuClass.systemData["LoadPlus"]["_visible"][menuNum])
          {
             this.LoadXFc(menuNum);
          }
-         else if(tabName == "LoadY" && MenuClass.systemData["LoadPlus"]["_visible"][menuNum])
+         else if((tabName == "LoadY" || tabName == "LoadFineY") && MenuClass.systemData["LoadPlus"]["_visible"][menuNum])
          {
             this.LoadYFc(menuNum);
          }
@@ -351,6 +351,8 @@ package menu
             new MeterPersent(-100,900,"LoadX",param1);
          }
          Main.mainWindow["loadObj" + param1].x = MeterPersent.MeterPersentNum;
+         new MeterPersent(-2.5,2.5,"LoadFineX",param1);
+         Main.mainWindow["loadObj" + param1].x += MeterPersent.MeterPersentNum;
       }
       
       private function LoadYFc(param1:int) : void
@@ -364,6 +366,8 @@ package menu
             new MeterPersent(800,-200,"LoadY",param1);
          }
          Main.mainWindow["loadObj" + param1].y = MeterPersent.MeterPersentNum;
+         new MeterPersent(2.5,-2.5,"LoadFineY",param1);
+         Main.mainWindow["loadObj" + param1].y += MeterPersent.MeterPersentNum;
       }
    }
 }

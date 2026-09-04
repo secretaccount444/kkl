@@ -3,6 +3,7 @@ package menu
    import flash.display.MovieClip;
    import flash.events.Event;
    import flash.events.MouseEvent;
+   import undo.MoveAction;
    
    public class Tab_MoveClass
    {
@@ -10,6 +11,8 @@ package menu
       public static var nowbtn:MovieClip;
       
       public static var Nagaoshi_count:int;
+
+      public static var curUndoAction: MoveAction;
        
       
       public function Tab_MoveClass()
@@ -19,6 +22,7 @@ package menu
       
       public static function setFc(param1:MovieClip) : void
       {
+         curUndoAction = null;
          param1.left.addEventListener(MouseEvent.MOUSE_DOWN,MouseDown);
          param1.left.buttonMode = true;
          param1.right.addEventListener(MouseEvent.MOUSE_DOWN,MouseDown);
@@ -27,6 +31,7 @@ package menu
       
       public static function deleteFc(param1:MovieClip) : void
       {
+         curUndoAction = null;
          param1.left.removeEventListener(MouseEvent.MOUSE_DOWN,MouseDown);
          param1.right.removeEventListener(MouseEvent.MOUSE_DOWN,MouseDown);
          try
@@ -43,7 +48,10 @@ package menu
          new Stage_MoveCheckClass();
          nowbtn = param1.currentTarget as MovieClip;
          nowbtn.gotoAndStop(2);
+
+         curUndoAction = new MoveAction();
          MenuAction(nowbtn);
+
          nowbtn.addEventListener(MouseEvent.MOUSE_UP,MouseUp);
          Main.stageVar.addEventListener(MouseEvent.MOUSE_UP,MouseUp);
          Nagaoshi_count = 0;
@@ -56,6 +64,11 @@ package menu
          nowbtn.removeEventListener(MouseEvent.MOUSE_UP,MouseUp);
          Main.stageVar.removeEventListener(MouseEvent.MOUSE_UP,MouseUp);
          Main.stageVar.removeEventListener(Event.ENTER_FRAME,EnterFrame);
+
+         if (curUndoAction) {
+            Main.undoTimeline.push(curUndoAction);
+         }
+         curUndoAction = null;
       }
       
       public static function MenuAction(param1:MovieClip) : void
@@ -67,6 +80,7 @@ package menu
          var _loc7_:int = 0;
          var _loc8_:int = 0;
          var _loc4_:Array = new Array(0,0);
+
          if(MenuClass._nowTargetMode == "All")
          {
             _loc5_ = new Array();
@@ -238,6 +252,11 @@ package menu
             MenuClass.charaData[MenuClass._nowCharaNum]["Xmove"]["_meter"] = _loc4_[1];
             MenuClass.charaData[MenuClass._nowCharaNum]["Ymove"]["_meter"] = _loc7_;
             MenuClass.charaData[MenuClass._nowCharaNum]["Jump"]["_meter"] = _loc8_;
+
+            if (curUndoAction) {
+               curUndoAction.recordNewData();
+            }
+
             new SetClass(_loc4_[0],"Xmove","tab");
             new SetClass(_loc4_[0],"Ymove","tab");
             new SetClass(_loc4_[0],"Jump","tab");

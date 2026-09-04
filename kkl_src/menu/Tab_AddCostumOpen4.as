@@ -2,6 +2,7 @@ package menu
 {
    import flash.display.MovieClip;
    import flash.events.MouseEvent;
+   import undo.AttachPointAction;
    
    public class Tab_AddCostumOpen4
    {
@@ -45,7 +46,7 @@ package menu
             MenuClass.AddOpenAdd[_loc4_] = _loc12_;
             MenuClass.AddOpenAdd[_loc4_].name = _loc8_;
             Main.stageVar.addChild(MenuClass.AddOpenAdd[_loc4_]);
-            MenuClass.AddOpenAdd[_loc4_].x = Math.floor((MenuClass.AddOpenAdd[_loc4_].width + 1) * _loc7_) - 1 * _loc7_ + 12;
+            MenuClass.AddOpenAdd[_loc4_].x = Air_StageSize.menuLeftEdge + Math.floor((MenuClass.AddOpenAdd[_loc4_].width + 1) * _loc7_) - 1 * _loc7_ + 12;
             if(MenuClass.hederSwitchCheck)
             {
                MenuClass.AddOpenAdd[_loc4_].y = 496 - 32 * _loc6_ + Main._stageResizeY;
@@ -76,7 +77,7 @@ package menu
          var _loc11_:MovieClip = new Menu_Load.TabCloseClass();
          MenuClass.AddCloseAdd["close"] = _loc11_;
          Main.stageVar.addChild(MenuClass.AddCloseAdd["close"]);
-         MenuClass.AddCloseAdd["close"].x = _loc9_ + 12;
+         MenuClass.AddCloseAdd["close"].x = Air_StageSize.menuLeftEdge + _loc9_ + 12;
          if(MenuClass.hederSwitchCheck)
          {
             MenuClass.AddCloseAdd["close"].y = 498 - 32 * _loc6_ + Main._stageResizeY;
@@ -190,6 +191,9 @@ package menu
          } else if (param1.currentTarget.number == 11) {
             curAdd0 = 94; /* Hand */
          }
+
+         var undoAction = new AttachPointAction("HairEx", _loc3_, _loc2_, curAdd0);
+         Main.undoTimeline.push(undoAction);
 
          MenuClass.charaData[_loc2_]["HairExAdd" + _loc3_]["_add0"] = curAdd0;
          new ColorChangeClass(addOpenAddData.icon.icon,"FFFFFF");

@@ -34,6 +34,21 @@ package menu
          var _loc20_:Boolean = false;
          super();
          this.clickTarget = param2;
+
+         var anyBlendErase = false;
+         for (var i = 0; i < MenuClass.systemData["FreeHukidashiPlus"]["_visible"].length; i++) {
+            if (MenuClass.systemData["FreeHukidashiPlus"]["_visible"][i] && (MenuClass.systemData["FreeHukidashiBlend" + i]["_menu"] == 10 || MenuClass.systemData["FreeHukidashiBlend" + i]["_menu"] == 11)) {
+               anyBlendErase = true;
+               break;
+            }
+         }
+
+         if (anyBlendErase) {
+            Chara_Class.chara_m.blendMode = BlendMode.LAYER;
+         } else {
+            Chara_Class.chara_m.blendMode = BlendMode.NORMAL;
+         }
+
          if(MenuClass.systemData["FreeHukidashiPlus"]["_visible"][param1])
          {
             _loc12_ = MenuClass.systemData["FreeHukidashiBlend" + param1]["_menu"];
@@ -98,9 +113,18 @@ package menu
                {
                   Chara_Class.chara_m["Hukidashi" + param1].blendMode = BlendMode.HARDLIGHT;
                }
+               else if(_loc12_ == 10)
+               {
+                  Chara_Class.chara_m["Hukidashi" + param1].blendMode = BlendMode.ERASE;
+               }
+               else if(_loc12_ == 11)
+               {
+                  Chara_Class.chara_m["Hukidashi" + param1].blendMode = BlendMode.ALPHA;
+               }
             }
             catch(myError:Error)
             {
+               trace(myError.getStackTrace());
             }
             _loc13_ = new Matrix();
             new MeterPersentRibon(1.5,-1.5,100,"FreeHukidashiScaleB",param1);

@@ -2,21 +2,28 @@ package
 {
    import flash.display.StageScaleMode;
    import flash.events.Event;
+   import flash.net.SharedObject;
    import menu.Tab_ColorBtnSet2;
    import menu.Tab_RandomCostumOpen;
    import menu.Tab_SaveClass;
    import menu.Tab_headerSwitchSet;
+   import menu.HeaderbtnClass;
+   import menu.Tab_ClassSet;
    
    public class Air_StageSize
    {
       
       public static var modeCheck:int = 0;
-       
+      public static var menuLeftEdge: int = 0;
+      public static var menuRightEdge: int = 800;
+      public static var menuBottomEdge: int = 600;
       
       public function Air_StageSize()
       {
          super();
+
          Main.stageVar.addEventListener(Event.RESIZE,resizeDisplay);
+         Main.stageVar.nativeWindow.addEventListener(Event.RESIZE,windowResized);
          Main.stageVar.addEventListener(Event.ENTER_FRAME,Enter);
       }
       
@@ -48,8 +55,59 @@ package
          dataFc();
       }
       
+      public static function windowResized(param1:Event) : void
+      {
+         recalculateMenuSize();
+      }
+
+      public static function saveMenuSettings() : void
+      {
+         var menuSettings: SharedObject = SharedObject.getLocal("menuSettings", "/");
+         menuSettings.data.menuScale = MenuClass.systemData["MenuScale"]["_meter"];
+         menuSettings.data.menuAlign = MenuClass.systemData["MenuAlign"]["_check"];
+         menuSettings.data.hasSettings = true;
+         menuSettings.flush();
+      }
+
+      public static function recalculateMenuSize() : void
+      {
+         var windowAR = Main.stageVar.nativeWindow.width / Main.stageVar.nativeWindow.height;
+         var menuAlign = MenuClass.systemData["MenuAlign"]["_check"];
+
+         if (menuAlign && windowAR > 1.33) {
+            var stageScaleFactor = Main.stageVar.nativeWindow.height / 600;
+            var scaledWidth = 800 * stageScaleFactor;
+            var horizMargin = ((Main.stageVar.nativeWindow.width - scaledWidth) / stageScaleFactor) / 2;
+            menuLeftEdge = -horizMargin;
+            menuRightEdge = 800 + horizMargin;
+         } else {
+            menuLeftEdge = 0;
+            menuRightEdge = 800;
+         }
+
+         // trace("Window resize event:");
+         // trace(Main.stageVar.scaleMode);
+         // trace(menuAlign);
+         // trace(Main.stageVar.stageWidth, Main.stageVar.stageHeight);
+         // trace(Main.stageVar.width, Main.stageVar.height);
+         // trace(Main.stageVar.scaleX, Main.stageVar.scaleY);
+         // trace(Main.stageVar.nativeWindow.width, Main.stageVar.nativeWindow.height);
+         // trace(menuLeftEdge, menuRightEdge);
+
+         HeaderbtnClass.layoutHeaderButtons();
+         Tab_ClassSet.rescaleMenu(MenuClass._nowHeaderName);
+      }
+
       public static function dataFc() : void
       {
+         try
+         {
+            HeaderbtnClass.layoutHeaderButtons();
+         }
+         catch(myError:Error)
+         {
+         }
+
          try
          {
             new Tab_headerSwitchSet();

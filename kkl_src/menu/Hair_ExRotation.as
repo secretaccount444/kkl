@@ -21,9 +21,11 @@ package menu
          super();
          this.charaAdd = MenuClass.charaAdd[param1];
          this.charaData = MenuClass.charaData[param1];
-         new MeterPersentRibon(360,0,param1,"HairExRotation",param2);
+
+         MeterPersentRibon.get(360,0,param1,"HairExRotation",param2);
          _loc3_ = MeterPersentRibon.MeterPersentNum;
-         new MeterPersentRibon(0,360,param1,"HairExRotation",param2);
+
+         MeterPersentRibon.get(0,360,param1,"HairExRotation",param2);
          _loc4_ = MeterPersentRibon.MeterPersentNum;
 
          // try {
@@ -36,20 +38,27 @@ package menu
          // {
          // }
 
+         var side0 = this.charaAdd["HairEx" + param2 + "_0"];
+         var side1 = this.charaAdd["HairEx" + param2 + "_1"];
+
          try
          {
             if(this.charaData["HairEx" + param2]["_turn"] == 0)
             {
                try
                {
-                  this.charaAdd["HairEx" + param2 + "_" + 0].HairEx0.rotation = _loc3_;
+                  if (side0) {
+                     side0.HairEx0.rotation = _loc3_;
+                  }
                }
                catch(myError:Error)
                {
                }
                try
                {
-                  this.charaAdd["HairEx" + param2 + "_" + 1].HairEx0.rotation = _loc4_;
+                  if (side1) {
+                     side1.HairEx0.rotation = _loc4_;
+                  }
                }
                catch(myError:Error)
                {
@@ -57,34 +66,41 @@ package menu
             }
             else if(this.charaData["HairEx" + param2]["_turn"] == 1)
             {
-               if(this.charaData["HairExAdd" + param2]["_add0"] == 2)
-               {
-                  if(this.charaData["Bangs"]["_reversal"])
+               if (side0 || side1) {
+                  if(this.charaData["HairExAdd" + param2]["_add0"] == 2)
                   {
-                     new MeterPersent(20,-20,"Head",param1);
+                     if(this.charaData["Bangs"]["_reversal"])
+                     {
+                        MeterPersent.get(20,-20,"Head",param1);
+                     }
+                     else
+                     {
+                        MeterPersent.get(-20,20,"Head",param1);
+                     }
                   }
                   else
                   {
-                     new MeterPersent(-20,20,"Head",param1);
+                     MeterPersent.get(20,-20,"Head",param1);
                   }
-               }
-               else
-               {
-                  new MeterPersent(20,-20,"Head",param1);
-               }
-               try
-               {
-                  this.charaAdd["HairEx" + param2 + "_" + 0].HairEx0.rotation = _loc3_ + MeterPersent.MeterPersentNum;
-               }
-               catch(myError:Error)
-               {
-               }
-               try
-               {
-                  this.charaAdd["HairEx" + param2 + "_" + 1].HairEx0.rotation = _loc4_ + MeterPersent.MeterPersentNum;
-               }
-               catch(myError:Error)
-               {
+
+                  try
+                  {
+                     if (side0) {
+                        side0.HairEx0.rotation = _loc3_ + MeterPersent.MeterPersentNum;
+                     }
+                  }
+                  catch(myError:Error)
+                  {
+                  }
+                  try
+                  {
+                     if (side1) {
+                        side1.HairEx0.rotation = _loc4_ + MeterPersent.MeterPersentNum;
+                     }
+                  }
+                  catch(myError:Error)
+                  {
+                  }
                }
             }
          }
@@ -104,14 +120,18 @@ package menu
                      {
                         try
                         {
-                           this.charaAdd["HairEx" + param2 + "_" + 0]["Ribon" + _loc5_ + "_" + 0].rotation = _loc3_;
+                           if (side0 && side0["Ribon" + _loc5_ + "_0"]) {
+                              side0["Ribon" + _loc5_ + "_0"].rotation = _loc3_;
+                           }
                         }
                         catch(myError:Error)
                         {
                         }
                         try
                         {
-                           this.charaAdd["HairEx" + param2 + "_" + 1]["Ribon" + _loc5_ + "_" + 1].rotation = _loc4_;
+                           if (side1 && side1["Ribon" + _loc5_ + "_1"]) {
+                              side1["Ribon" + _loc5_ + "_1"].rotation = _loc4_;
+                           }
                         }
                         catch(myError:Error)
                         {
@@ -123,31 +143,37 @@ package menu
                         {
                            if(this.charaData["Bangs"]["_reversal"])
                            {
-                              new MeterPersent(20,-20,"Head",param1);
+                              MeterPersent.get(20,-20,"Head",param1);
                            }
                            else
                            {
-                              new MeterPersent(-20,20,"Head",param1);
+                              MeterPersent.get(-20,20,"Head",param1);
                            }
                         }
                         else
                         {
-                           new MeterPersent(20,-20,"Head",param1);
+                           MeterPersent.get(20,-20,"Head",param1);
                         }
                         try
                         {
-                           this.charaAdd["HairEx" + param2 + "_" + 0]["Ribon" + _loc5_ + "_" + 0].y = this.charaAdd["HairEx" + param2 + "_" + 0].HairEx0.y;
-                           this.charaAdd["HairEx" + param2 + "_" + 0]["Ribon" + _loc5_ + "_" + 0].x = this.charaAdd["HairEx" + param2 + "_" + 0].HairEx0.x;
-                           this.charaAdd["HairEx" + param2 + "_" + 0]["Ribon" + _loc5_ + "_" + 0].rotation = _loc3_ + MeterPersent.MeterPersentNum;
+                           var ribbonSprite = side0["Ribon" + _loc5_ + "_0"];
+                           if (side0 && ribbonSprite) {
+                              ribbonSprite.y = side0.HairEx0.y;
+                              ribbonSprite.x = side0.HairEx0.x;
+                              ribbonSprite.rotation = _loc3_ + MeterPersent.MeterPersentNum;
+                           }
                         }
                         catch(myError:Error)
                         {
                         }
                         try
                         {
-                           this.charaAdd["HairEx" + param2 + "_" + 1]["Ribon" + _loc5_ + "_" + 1].y = this.charaAdd["HairEx" + param2 + "_" + 1].HairEx0.y;
-                           this.charaAdd["HairEx" + param2 + "_" + 1]["Ribon" + _loc5_ + "_" + 1].x = this.charaAdd["HairEx" + param2 + "_" + 1].HairEx0.x;
-                           this.charaAdd["HairEx" + param2 + "_" + 1]["Ribon" + _loc5_ + "_" + 1].rotation = _loc4_ + MeterPersent.MeterPersentNum;
+                           var ribbonSprite = side1["Ribon" + _loc5_ + "_1"];
+                           if (side1 && ribbonSprite) {
+                              ribbonSprite.y = side1.HairEx0.y;
+                              ribbonSprite.x = side1.HairEx0.x;
+                              ribbonSprite.rotation = _loc4_ + MeterPersent.MeterPersentNum;
+                           }
                         }
                         catch(myError:Error)
                         {

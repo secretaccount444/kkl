@@ -82,21 +82,21 @@ package menu
          var _loc3_:Array = new Array(Move_DataClass.AshiFrameData[this.charaData["Ashi"]["_menu"]]["depth"],Move_DataClass.AshiFrameData[this.charaData["Ashi2"]["_menu"]]["depth"]);
          if(_loc3_[0] == 1 || _loc3_[0] == 2)
          {
-            _loc1_ = this.shadowAdd.hitLine.hitTestObject(this.charaAdd["ashi" + 0].thigh.thigh.hitTest2);
+            _loc1_ = this.shadowAdd.hitLine.hitTestObject(this.charaAdd["ashi" + 0].thigh.actual.thigh.hitTest2);
          }
          else
          {
-            _loc1_ = this.shadowAdd.hitLine.hitTestObject(this.charaAdd["ashi" + 0].foot.foot.hitTest);
+            _loc1_ = this.shadowAdd.hitLine.hitTestObject(this.charaAdd["ashi" + 0].foot.actual.foot.hitTest);
          }
          if(_loc3_[1] == 1 || _loc3_[1] == 2)
          {
-            _loc2_ = this.shadowAdd.hitLine.hitTestObject(this.charaAdd["ashi" + 1].thigh.thigh.hitTest2);
+            _loc2_ = this.shadowAdd.hitLine.hitTestObject(this.charaAdd["ashi" + 1].thigh.actual.thigh.hitTest2);
          }
          else
          {
-            _loc2_ = this.shadowAdd.hitLine.hitTestObject(this.charaAdd["ashi" + 1].foot.foot.hitTest);
+            _loc2_ = this.shadowAdd.hitLine.hitTestObject(this.charaAdd["ashi" + 1].foot.actual.foot.hitTest);
          }
-         if(!(_loc1_ || _loc2_ || this.shadowAdd.hitLine.hitTestObject(this.charaAdd["ashi" + 0].thigh.thigh.hitTest) || this.shadowAdd.hitLine.hitTestObject(this.charaAdd["ashi" + 1].thigh.thigh.hitTest) || this.shadowAdd.hitLine.hitTestObject(this.charaAdd.head.hitTest) || this.shadowAdd.hitLine.hitTestObject(this.charaAdd.dou.dou_shita)))
+         if(!(_loc1_ || _loc2_ || this.shadowAdd.hitLine.hitTestObject(this.charaAdd["ashi" + 0].thigh.actual.thigh.hitTest) || this.shadowAdd.hitLine.hitTestObject(this.charaAdd["ashi" + 1].thigh.actual.thigh.hitTest) || this.shadowAdd.hitLine.hitTestObject(this.charaAdd.head.hitTest) || this.shadowAdd.hitLine.hitTestObject(this.charaAdd.dou.dou_shita)))
          {
             this.charaAddDepth.y += 1;
             this.hitCheckLine();
@@ -105,7 +105,7 @@ package menu
       
       private function hitCheckSide0() : void
       {
-         if(this.shadowAdd.hitLineSide0.hitTestObject(this.charaAdd["ashi" + 0].foot.foot.hitTest) || this.shadowAdd.hitLineSide0.hitTestObject(this.charaAdd["ashi" + 0].thigh.thigh.hitTest) || this.shadowAdd.hitLineSide0.hitTestObject(this.charaAdd["ashi" + 1].foot.foot.hitTest) || this.shadowAdd.hitLineSide0.hitTestObject(this.charaAdd["ashi" + 1].thigh.thigh.hitTest) || this.shadowAdd.hitLineSide0.hitTestObject(this.charaAdd.head.hitTest) || this.shadowAdd.hitLineSide0.hitTestObject(this.charaAdd.dou.dou_shita))
+         if(this.shadowAdd.hitLineSide0.hitTestObject(this.charaAdd["ashi" + 0].foot.actual.foot.hitTest) || this.shadowAdd.hitLineSide0.hitTestObject(this.charaAdd["ashi" + 0].thigh.actual.thigh.hitTest) || this.shadowAdd.hitLineSide0.hitTestObject(this.charaAdd["ashi" + 1].foot.actual.foot.hitTest) || this.shadowAdd.hitLineSide0.hitTestObject(this.charaAdd["ashi" + 1].thigh.actual.thigh.hitTest) || this.shadowAdd.hitLineSide0.hitTestObject(this.charaAdd.head.hitTest) || this.shadowAdd.hitLineSide0.hitTestObject(this.charaAdd.dou.dou_shita))
          {
             MenuClass.shadowSide0X[this.charaNum] = this.shadowAdd.hitLineSide0.x;
          }
@@ -118,7 +118,7 @@ package menu
       
       private function hitCheckSide1() : void
       {
-         if(this.shadowAdd.hitLineSide1.hitTestObject(this.charaAdd["ashi" + 0].foot.foot.hitTest) || this.shadowAdd.hitLineSide1.hitTestObject(this.charaAdd["ashi" + 0].thigh.thigh.hitTest) || this.shadowAdd.hitLineSide1.hitTestObject(this.charaAdd["ashi" + 1].foot.foot.hitTest) || this.shadowAdd.hitLineSide1.hitTestObject(this.charaAdd["ashi" + 1].thigh.thigh.hitTest) || this.shadowAdd.hitLineSide1.hitTestObject(this.charaAdd.head.hitTest) || this.shadowAdd.hitLineSide1.hitTestObject(this.charaAdd.dou.dou_shita))
+         if(this.shadowAdd.hitLineSide1.hitTestObject(this.charaAdd["ashi" + 0].foot.actual.foot.hitTest) || this.shadowAdd.hitLineSide1.hitTestObject(this.charaAdd["ashi" + 0].thigh.actual.thigh.hitTest) || this.shadowAdd.hitLineSide1.hitTestObject(this.charaAdd["ashi" + 1].foot.actual.foot.hitTest) || this.shadowAdd.hitLineSide1.hitTestObject(this.charaAdd["ashi" + 1].thigh.actual.thigh.hitTest) || this.shadowAdd.hitLineSide1.hitTestObject(this.charaAdd.head.hitTest) || this.shadowAdd.hitLineSide1.hitTestObject(this.charaAdd.dou.dou_shita))
          {
             MenuClass.shadowSide1X[this.charaNum] = this.shadowAdd.hitLineSide1.x;
          }

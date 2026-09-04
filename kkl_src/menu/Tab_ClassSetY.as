@@ -1,5 +1,7 @@
 package menu
 {
+   import system.MeterPersent;
+
    public class Tab_ClassSetY
    {
       
@@ -13,6 +15,7 @@ package menu
          var _loc4_:* = null;
          super();
          var _loc5_:Number = 0;
+
          for(_loc4_ in MenuClass.tabData[param1])
          {
             _loc2_ = _loc4_ as int;
@@ -24,6 +27,12 @@ package menu
                }
             }
          }
+
+         new MeterPersent(0.5, 1.0, "MenuScale", 0);
+         var menuScale = MeterPersent.MeterPersentNum;
+         var rowHeight = 32 * menuScale;
+         var startAdjust = 32 * (1 - menuScale);
+
          for(_loc4_ in MenuClass.tabData[param1])
          {
             _loc2_ = _loc4_ as int;
@@ -36,26 +45,26 @@ package menu
                   {
                      if(param1 == "CharacterSet" || param1 == "EasyCharacterSet" || param1 == "AllCharacterSet" || param1 == "EasyAllCharacterSet")
                      {
-                        MenuClass.tabMenuAdd[_loc3_].y = 493 + 32 * MenuClass.tabData[param1][_loc2_][2]["_sort"] - _loc5_ * 32 + Main._stageResizeY;
+                        MenuClass.tabMenuAdd[_loc3_].y = 493 + startAdjust + rowHeight * MenuClass.tabData[param1][_loc2_][2]["_sort"] - _loc5_ * rowHeight + Main._stageResizeY;
                      }
                      else if(param1 == "AllHukuSet" || param1 == "EasyAllHukuSet")
                      {
                         if(_loc3_ == "TabAllHukuSet")
                         {
-                           MenuClass.tabMenuAdd[_loc3_].y = 493 + 32 * MenuClass.tabData[param1][_loc2_][2]["_sort"] - _loc5_ * 32 + Main._stageResizeY;
+                           MenuClass.tabMenuAdd[_loc3_].y = 493 + startAdjust + rowHeight * MenuClass.tabData[param1][_loc2_][2]["_sort"] - _loc5_ * rowHeight + Main._stageResizeY;
                         }
                         else
                         {
-                           MenuClass.tabMenuAdd[_loc3_].y = 488 + 32 * MenuClass.tabData[param1][_loc2_][2]["_sort"] - _loc5_ * 32 + Main._stageResizeY;
+                           MenuClass.tabMenuAdd[_loc3_].y = 488 + startAdjust + rowHeight * MenuClass.tabData[param1][_loc2_][2]["_sort"] - _loc5_ * rowHeight + Main._stageResizeY;
                         }
                      }
                      else if(param1 == "StoryTool")
                      {
-                        MenuClass.tabMenuAdd[_loc3_].y = 560 + 32 * MenuClass.tabData[param1][_loc2_][2]["_sort"] - _loc5_ * 32 + Main._stageResizeY;
+                        MenuClass.tabMenuAdd[_loc3_].y = 560 + startAdjust + rowHeight * MenuClass.tabData[param1][_loc2_][2]["_sort"] - _loc5_ * rowHeight + Main._stageResizeY;
                      }
                      else
                      {
-                        MenuClass.tabMenuAdd[_loc3_].y = 525 + 32 * MenuClass.tabData[param1][_loc2_][2]["_sort"] - _loc5_ * 32 + Main._stageResizeY;
+                        MenuClass.tabMenuAdd[_loc3_].y = 525 + startAdjust + rowHeight * MenuClass.tabData[param1][_loc2_][2]["_sort"] - _loc5_ * rowHeight + Main._stageResizeY;
                      }
                      if(MenuClass.tabData[param1][_loc2_][2]["_sort"] == 0)
                      {
@@ -66,29 +75,29 @@ package menu
                   {
                      if(param1 == "CharacterSet" || param1 == "EasyCharacterSet" || param1 == "AllCharacterSet" || param1 == "EasyAllCharacterSet")
                      {
-                        MenuClass.tabMenuAdd[_loc3_].y = 75 + _loc5_ * 32 + Main._stageResizeY * -1;
+                        MenuClass.tabMenuAdd[_loc3_].y = 75 + startAdjust + _loc5_ * rowHeight + Main._stageResizeY * -1;
                      }
                      else if(param1 == "AllHukuSet" || param1 == "EasyAllHukuSet")
                      {
-                        MenuClass.tabMenuAdd[_loc3_].y = 80 + _loc5_ * 32 + Main._stageResizeY * -1;
+                        MenuClass.tabMenuAdd[_loc3_].y = 80 + startAdjust + _loc5_ * rowHeight + Main._stageResizeY * -1;
                      }
                      else
                      {
-                        MenuClass.tabMenuAdd[_loc3_].y = 43 + _loc5_ * 32 + Main._stageResizeY * -1;
+                        MenuClass.tabMenuAdd[_loc3_].y = 43 + startAdjust + _loc5_ * rowHeight + Main._stageResizeY * -1;
                      }
                      topY = MenuClass.tabMenuAdd[_loc3_].y;
                   }
                   else if(_loc3_ == "TabAllHukuSet")
                   {
-                     MenuClass.tabMenuAdd[_loc3_].y = 16 + 32 * MenuClass.tabData[param1][_loc2_][2]["_sort"] + Main._stageResizeY * -1;
+                     MenuClass.tabMenuAdd[_loc3_].y = 16 + startAdjust + rowHeight * MenuClass.tabData[param1][_loc2_][2]["_sort"] + Main._stageResizeY * -1;
                   }
                   else
                   {
-                     MenuClass.tabMenuAdd[_loc3_].y = 11 + 32 * MenuClass.tabData[param1][_loc2_][2]["_sort"] + Main._stageResizeY * -1;
+                     MenuClass.tabMenuAdd[_loc3_].y = 11 + startAdjust + rowHeight * MenuClass.tabData[param1][_loc2_][2]["_sort"] + Main._stageResizeY * -1;
                   }
                   if(_loc3_ == "AllCharacterSet_Close" || _loc3_ == "CharacterSet_Close" || _loc3_ == "AllHukuSet_Close" || _loc3_ == "Close")
                   {
-                     MenuClass.tabMenuAdd[_loc3_].y += 5;
+                     MenuClass.tabMenuAdd[_loc3_].y += 5 * menuScale;
                   }
                }
             }

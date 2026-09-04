@@ -286,13 +286,13 @@ package {
                 if (request["type"] == "reset_full") {
                     sendJSONData(reply_socket, {"status": "in_progress", "id": requestId}, MSG_TYPE_RESPONSE);
 
-                    new Tab_IEInOut("IN", Main.fullResetCode, MenuClass._nowCharaNum);
+                    Tab_IEInOut.execute("IN", Main.fullResetCode, MenuClass._nowCharaNum);
 
                     sendJSONData(reply_socket, {"status": "done", "id": requestId}, MSG_TYPE_RESPONSE);
                 } else if (request["type"] == "reset_partial") {
                     sendJSONData(reply_socket, {"status": "in_progress", "id": requestId}, MSG_TYPE_RESPONSE);
 
-                    new Tab_IEInOut("IN", Main.initCode, MenuClass._nowCharaNum);
+                    Tab_IEInOut.execute("IN", Main.initCode, MenuClass._nowCharaNum);
 
                     sendJSONData(reply_socket, {"status": "done", "id": requestId}, MSG_TYPE_RESPONSE);
                 } else if (request["type"] == "import_partial") {
@@ -303,7 +303,7 @@ package {
 
                     sendJSONData(reply_socket, {"status": "in_progress", "id": requestId}, MSG_TYPE_RESPONSE);
                     
-                    new Tab_IEInOut("IN", request["code"], character);
+                    Tab_IEInOut.execute("IN", request["code"], character);
 
                     sendJSONData(reply_socket, {"status": "done", "id": requestId}, MSG_TYPE_RESPONSE);
                 } else if (request["type"] == "export") {
@@ -369,7 +369,7 @@ package {
                 } else if (request["type"] == "graphics_data") {
                     this.graphicsDataRequest(request, requestId, remoteIdentifier, reply_socket);
                 } else if (request["type"] == "version") {
-                    sendJSONData(reply_socket, {"status": "done", "id": requestId, "data": {"major": Main.version, "minor": Main.minor_version, "appdir": File.applicationDirectory.nativePath}}, MSG_TYPE_RESPONSE);
+                    sendJSONData(reply_socket, {"status": "done", "id": requestId, "data": {"major": Main.version, "minor": Main.minor_version, "alpha": Main.alpha_version, "appdir": File.applicationDirectory.nativePath}}, MSG_TYPE_RESPONSE);
                 } else {
                     sendJSONData(reply_socket, {"status": "error", "id": requestId, "reason": "unknown command "+request["type"]}, MSG_TYPE_RESPONSE);
                 }
@@ -404,8 +404,8 @@ package {
                 }
 
                 Tab_IEInOut.dataStr = "";
-                new Tab_IEInOut("OUT", "0", charaNum);
-                new Tab_IEInOut("OUTLast","0",0);
+                Tab_IEInOut.execute("OUT", "0", charaNum);
+                Tab_IEInOut.execute("OUTLast","0",0);
                 exported_code = Tab_IEInOut.dataStr;
 
                 for (var i = 0; i < Tab_IEData1.IEGroup.length; i++) {
@@ -775,7 +775,7 @@ package {
                         if (tabParameter == "_menu") {
                             try
                             {
-                                tab["_menu"] = MenuClass.charaMotoData[character][tabName]["_menu"];
+                                tab["_menu"] = MenuClass.charaData[character][tabName]["_menu"];
                             }
                             catch(myError:Error) {}
                         } else {

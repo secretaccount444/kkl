@@ -39,6 +39,12 @@ package menu
          {
             MenuClass.tabMenuAdd["tabImportWindow"].y = 0 + Main._stageResizeY;
          }
+         
+         if (Tab_IEData1.IEGroup.length > 40) {
+            targetMC.myTa.scaleY = 0.92;
+            targetMC.getChildAt(5).scaleY = (51805.0 / 65536.0) * 0.925;
+         }
+
          targetMC.myTa.editable = true;
          targetMC.importBtn.addEventListener(MouseEvent.MOUSE_DOWN,ImportBtnClick);
          targetMC.importBtn.buttonMode = true;
@@ -103,27 +109,25 @@ package menu
             _loc3_ = Tab_IEData1.IEGroup.length;
             _loc4_ = 0;
             _loc2_ = 0;
+
+            var buttonsPerRow = 21;
+            var totalRows = Math.ceil((_loc3_ + 2) / buttonsPerRow);
+            var baseX = 25;
+            var baseY = 510 - (36 * totalRows);
+
             while(_loc2_ < _loc3_)
             {
                _loc5_ = new Menu_Load.TabRandomBoxClass();
                targetMC.addChild(_loc5_);
                MenuClass.importCheckAdd[_loc2_] = _loc5_;
-               if(!MenuClass.MY_MENUNAME[_loc2_ + 4][4] && Main.r18Check)
-               {
-                  _loc4_++;
-                  MenuClass.importCheckAdd[_loc2_].visible = false;
-               }
-               if(_loc2_ < 21)
-               {
-                  MenuClass.importCheckAdd[_loc2_].x = 34 * (_loc2_ - _loc4_) + 25;
-                  MenuClass.importCheckAdd[_loc2_].y = 438;
-               }
-               else
-               {
-                  MenuClass.importCheckAdd[_loc2_].x = 34 * (_loc2_ - 21) + 25;
-                  MenuClass.importCheckAdd[_loc2_].y = 474;
-               }
+               
+               var row = Math.floor(_loc2_ / buttonsPerRow);
+               var col = _loc2_ % buttonsPerRow;
+
+               MenuClass.importCheckAdd[_loc2_].x = baseX + (34 * col);
+               MenuClass.importCheckAdd[_loc2_].y = baseY + (36 * row);
                MenuClass.importCheckAdd[_loc2_].Num = _loc2_;
+
                _loc6_ = MenuClass.MY_MENUNAME[_loc2_ + 4][0];
                _loc7_ = MenuClass.MY_MENUNAME[_loc2_ + 4][1];
                if(_loc6_ == "Story")
@@ -135,6 +139,11 @@ package menu
                {
                   _loc6_ = "FreeHandScale";
                }
+               else if (_loc6_ == "LegHeight")
+               {
+                  _loc6_ = "Ashi2";
+               }
+
                MenuClass.importCheckAdd[_loc2_].icon.icon.gotoAndStop(_loc6_);
                if(MenuClass.importCheck[_loc2_])
                {
@@ -246,7 +255,7 @@ package menu
             }
             else
             {
-               new Tab_IEInOut("IN",targetMC.myTa.text,MenuClass._nowCharaNum);
+               Tab_IEInOut.execute("IN",targetMC.myTa.text,MenuClass._nowCharaNum);
                new Tab_SetClass();
             }
          }
