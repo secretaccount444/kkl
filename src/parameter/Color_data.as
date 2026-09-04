@@ -1,0 +1,625 @@
+package parameter
+{
+   import flash.display.BitmapData;
+   import flash.display.MovieClip;
+   import flash.net.SharedObject;
+   import menu.Menu_Load;
+   
+   public class Color_data
+   {
+      
+      public static var pict_bd:BitmapData;
+      
+      public static var checkColor:MovieClip;
+      
+      public static var MainColor:Array = new Array();
+      
+      public static var ColorData:Array = [[],[],[],[],[],[],[],[],[]];
+      
+      public static var colorObj:Object;
+      
+      public static var so_color:SharedObject;
+      
+      public static var SaveColor:Array = new Array();
+       
+      
+      public function Color_data()
+      {
+         var _loc1_:int = 0;
+         var _loc2_:int = 0;
+         var _loc4_:int = 0;
+         super();
+         MainColor = [[{
+            "_code":["pink1"],
+            "_color":["Bura","AllFaceSet"]
+         },"F4CCCC"],[{
+            "_code":["pink2"],
+            "_color":["Bura","AllFaceSet"]
+         },"F299AA"],[{
+            "_code":["pink3"],
+            "_color":["Bura","AllFaceSet"]
+         },"DF6480"],[{
+            "_code":["pink4"],
+            "_color":["Bura"]
+         },"B71740"],[{
+            "_code":["red1"],
+            "_color":["Bura","AllFaceSet"]
+         },"DD666C"],[{
+            "_code":["red2"],
+            "_color":["Bura","AllFaceSet"]
+         },"BA4146"],[{
+            "_code":["red3"],
+            "_color":["Bura"]
+         },"932225"],[{
+            "_code":["red4"],
+            "_color":["Bura"]
+         },"611624"],[{
+            "_code":["p_red1"],
+            "_color":["Bura","AllFaceSet"]
+         },"F1D0E1"],[{
+            "_code":["p_red2"],
+            "_color":["Bura","AllFaceSet"]
+         },"D993AF"],[{
+            "_code":["p_red3"],
+            "_color":["Bura","AllFaceSet"]
+         },"CE57A8"],[{
+            "_code":["p_red4"],
+            "_color":["Bura"]
+         },"8D296C"],[{
+            "_code":["p_red5"],
+            "_color":["Bura"]
+         },"8A2D4E"],[{
+            "_code":["purple1"],
+            "_color":["Bura","AllFaceSet"]
+         },"E4CCE8"],[{
+            "_code":["purple2"],
+            "_color":["Bura","AllFaceSet"]
+         },"CD9DE1"],[{
+            "_code":["purple3"],
+            "_color":["Bura","AllFaceSet"]
+         },"A44BC9"],[{
+            "_code":["purple4"],
+            "_color":["Bura"]
+         },"6F2B8C"],[{
+            "_code":["blue1"],
+            "_color":["Bura","AllFaceSet"]
+         },"CFE0F3"],[{
+            "_code":["blue2"],
+            "_color":["Bura","AllFaceSet"]
+         },"7EA5EB"],[{
+            "_code":["blue3"],
+            "_color":["Bura","AllFaceSet"]
+         },"2F78CA"],[{
+            "_code":["blue4"],
+            "_color":["Bura"]
+         },"234992"],[{
+            "_code":["blue5"],
+            "_color":["Bura"]
+         },"31316A"],[{
+            "_code":["deepBlue1"],
+            "_color":["Bura"]
+         },"365691"],[{
+            "_code":["deepBlue2"],
+            "_color":["Bura"]
+         },"455382"],[{
+            "_code":["deepBlue3"],
+            "_color":["Bura"]
+         },"2B3544"],[{
+            "_code":["deepBlue4"],
+            "_color":["Bura"]
+         },"374373"],[{
+            "_code":["emerald1"],
+            "_color":["Bura","AllFaceSet"]
+         },"41A9B8"],[{
+            "_code":["emerald2"],
+            "_color":["Bura"]
+         },"2E7883"],[{
+            "_code":["emerald3"],
+            "_color":["Bura","AllFaceSet"]
+         },"6296AF"],[{
+            "_code":["b_Green1"],
+            "_color":["Bura","AllFaceSet"]
+         },"A8DFCC"],[{
+            "_code":["b_Green2"],
+            "_color":["Bura","AllFaceSet"]
+         },"E4EBE3"],[{
+            "_code":["b_Green3"],
+            "_color":["Bura","AllFaceSet"]
+         },"BDD7C2"],[{
+            "_code":["b_Green4"],
+            "_color":["Bura","AllFaceSet"]
+         },"77AD83"],[{
+            "_code":["green1"],
+            "_color":["Bura","AllFaceSet"]
+         },"C4E2A5"],[{
+            "_code":["green2"],
+            "_color":["Bura","AllFaceSet"]
+         },"439931"],[{
+            "_code":["green3"],
+            "_color":["Bura"]
+         },"206C27"],[{
+            "_code":["y_green1"],
+            "_color":["Bura","AllFaceSet"]
+         },"90BA32"],[{
+            "_code":["y_green2"],
+            "_color":["Bura","AllFaceSet"]
+         },"959B24"],[{
+            "_code":["y_green3"],
+            "_color":["Bura"]
+         },"506C20"],[{
+            "_code":["yellow1"],
+            "_color":["Bura","AllFaceSet"]
+         },"F4E3B4"],[{
+            "_code":["yellow2"],
+            "_color":["Bura","AllFaceSet"]
+         },"F1D3A4"],[{
+            "_code":["yellow3"],
+            "_color":["Bura","AllFaceSet"]
+         },"E19A2F"],[{
+            "_code":["orange1"],
+            "_color":["Bura","AllFaceSet"]
+         },"FFE19B"],[{
+            "_code":["orange2"],
+            "_color":["Bura","AllFaceSet"]
+         },"F7B133"],[{
+            "_code":["orange3"],
+            "_color":["Bura","AllFaceSet"]
+         },"EC7C00"],[{
+            "_code":["redBrown1"],
+            "_color":["Bura","AllFaceSet"]
+         },"DD7F2B"],[{
+            "_code":["redBrown2"],
+            "_color":["Bura","AllFaceSet"]
+         },"C9715A"],[{
+            "_code":["redBrown3"],
+            "_color":["Bura"]
+         },"A84300"],[{
+            "_code":["redBrown4"],
+            "_color":["Bura"]
+         },"461F08"],[{
+            "_code":["brown1"],
+            "_color":["Bura","AllFaceSet"]
+         },"EBDFC7"],[{
+            "_code":["brown2"],
+            "_color":["Bura","AllFaceSet"]
+         },"AB7044"],[{
+            "_code":["brown3"],
+            "_color":["Bura","AllFaceSet"]
+         },"A67C57"],[{
+            "_code":["brown4"],
+            "_color":["Bura","AllFaceSet"]
+         },"8D693D"],[{
+            "_code":["brown5"],
+            "_color":["Bura"]
+         },"5A4327"],[{
+            "_code":["brown6"],
+            "_color":["Bura"]
+         },"4A3E3F"],[{
+            "_code":["black1"],
+            "_color":["Bura","AllFaceSet"]
+         },"F5F5F5"],[{
+            "_code":["black2"],
+            "_color":["Bura","AllFaceSet"]
+         },"DCDDE2"],[{
+            "_code":["black3"],
+            "_color":["Bura","AllFaceSet"]
+         },"ACB0BB"],[{
+            "_code":["black4"],
+            "_color":["Bura","AllFaceSet"]
+         },"777E91"],[{
+            "_code":["black5"],
+            "_color":["Bura"]
+         },"454956"],[{
+            "_code":["black6"],
+            "_color":["Bura"]
+         },"202226"],[{
+            "_code":["black7"],
+            "_color":["Bura"]
+         },"000000"],[{
+            "_code":["Gred"],
+            "_color":["defo"]
+         },"FF0000"],[{
+            "_code":["Gpink"],
+            "_color":["defo"]
+         },"FF3366"],[{
+            "_code":["Gpurple"],
+            "_color":["defo"]
+         },"9900FF"],[{
+            "_code":["Gblue"],
+            "_color":["defo"]
+         },"0099FF"],[{
+            "_code":["Gemerald"],
+            "_color":["defo"]
+         },"66FFFF"],[{
+            "_code":["Ggreen"],
+            "_color":["defo"]
+         },"66FF00"],[{
+            "_code":["Gorange"],
+            "_color":["defo"]
+         },"FF9900"],[{
+            "_code":["Gyellow"],
+            "_color":["defo"]
+         },"FFFF00"],[{
+            "_code":["Gwhite"],
+            "_color":["defo"]
+         },"FFFFFF"],[{
+            "_code":["Ggray"],
+            "_color":["defo"]
+         },"999999"],[{
+            "_code":["Gblack"],
+            "_color":["defo"]
+         },"000000"],[{
+            "_code":["Cred"],
+            "_color":["Curtain"]
+         },"C50B1C"],[{
+            "_code":["Cpink"],
+            "_color":["Curtain"]
+         },"C74463"],[{
+            "_code":["Cpurple"],
+            "_color":["Curtain"]
+         },"A02F78"],[{
+            "_code":["Cyellow"],
+            "_color":["Curtain"]
+         },"e6b422"],[{
+            "_code":["Cbrown"],
+            "_color":["Curtain"]
+         },"DFCC9F"],[{
+            "_code":["Cgreen"],
+            "_color":["Curtain"]
+         },"237000"],[{
+            "_code":["Cblue"],
+            "_color":["Curtain"]
+         },"1D699B"],[{
+            "_code":["Cwhite"],
+            "_color":["Curtain"]
+         },"E4F0F8"],[{
+            "_code":["Cblack"],
+            "_color":["Curtain"]
+         },"111D21"],[{
+            "_code":["Fbrown"],
+            "_color":["Floor"]
+         },"F2C570"],[{
+            "_code":["Fbrown1"],
+            "_color":["Floor"]
+         },"AA7A53"],[{
+            "_code":["Fbrown2"],
+            "_color":["Floor"]
+         },"96502E"],[{
+            "_code":["Fbrown3"],
+            "_color":["Floor"]
+         },"5D3B2B"],[{
+            "_code":["Fblack"],
+            "_color":["Floor"]
+         },"251D1B"],[{
+            "_code":["Hpink1"],
+            "_color":["hair","hair2"]
+         },"F9C4CE"],[{
+            "_code":["Hpink2"],
+            "_color":["hair","hair2"]
+         },"EB8199"],[{
+            "_code":["Hpink3"],
+            "_color":["hair","hair2"]
+         },"CF4770"],[{
+            "_code":["Hpink4"],
+            "_color":["hair","hair2"]
+         },"961F43"],[{
+            "_code":["Hred1"],
+            "_color":["hair","hair2"]
+         },"E04B50"],[{
+            "_code":["Hred2"],
+            "_color":["hair","hair2"]
+         },"BB262B"],[{
+            "_code":["Hred3"],
+            "_color":["hair","hair2"]
+         },"7D1A1C"],[{
+            "_code":["Hp_red1"],
+            "_color":["hair","hair2"]
+         },"CC6699"],[{
+            "_code":["Hp_red2"],
+            "_color":["hair","hair2"]
+         },"A6376F"],[{
+            "_code":["Hp_red3"],
+            "_color":["hair","hair2"]
+         },"6D2348"],[{
+            "_code":["Hpurple1"],
+            "_color":["hair","hair2"]
+         },"F2EBF2"],[{
+            "_code":["Hpurple2"],
+            "_color":["hair","hair2"]
+         },"CAAFE7"],[{
+            "_code":["Hpurple3"],
+            "_color":["hair","hair2"]
+         },"8669BC"],[{
+            "_code":["Hpurple4"],
+            "_color":["hair","hair2"]
+         },"482B75"],[{
+            "_code":["Hbrue1"],
+            "_color":["hair","hair2"]
+         },"C2D5F1"],[{
+            "_code":["Hbrue2"],
+            "_color":["hair","hair2"]
+         },"79A0E1"],[{
+            "_code":["Hbrue3"],
+            "_color":["hair","hair2"]
+         },"4062BB"],[{
+            "_code":["Hbrue4"],
+            "_color":["hair","hair2"]
+         },"2B417D"],[{
+            "_code":["Hb_Green1"],
+            "_color":["hair","hair2"]
+         },"7FC09E"],[{
+            "_code":["Hb_Green2"],
+            "_color":["hair","hair2"]
+         },"3F646D"],[{
+            "_code":["Hb_Green3"],
+            "_color":["hair","hair2"]
+         },"3F463E"],[{
+            "_code":["Hgreen1"],
+            "_color":["hair","hair2"]
+         },"BDDEA7"],[{
+            "_code":["Hgreen2"],
+            "_color":["hair","hair2"]
+         },"5A9438"],[{
+            "_code":["Hgreen3"],
+            "_color":["hair","hair2"]
+         },"2D5530"],[{
+            "_code":["Hyellow1"],
+            "_color":["hair","hair2"]
+         },"F7E9B9"],[{
+            "_code":["Hyellow2"],
+            "_color":["hair","hair2"]
+         },"E3C999"],[{
+            "_code":["Hyellow3"],
+            "_color":["hair","hair2"]
+         },"B79562"],[{
+            "_code":["Hyellow4"],
+            "_color":["hair","hair2"]
+         },"997131"],[{
+            "_code":["Hyellow5"],
+            "_color":["hair","hair2"]
+         },"7F6032"],[{
+            "_code":["Hyellow6"],
+            "_color":["hair","hair2"]
+         },"694604"],[{
+            "_code":["Horange1"],
+            "_color":["hair","hair2"]
+         },"ECC457"],[{
+            "_code":["Horange2"],
+            "_color":["hair","hair2"]
+         },"E29463"],[{
+            "_code":["Horange3"],
+            "_color":["hair","hair2"]
+         },"E9772C"],[{
+            "_code":["Horange4"],
+            "_color":["hair","hair2"]
+         },"EABD86"],[{
+            "_code":["Horange5"],
+            "_color":["hair","hair2"]
+         },"DC887D"],[{
+            "_code":["Hbrown1"],
+            "_color":["hair","hair2"]
+         },"4E2D26"],[{
+            "_code":["Hbrown2"],
+            "_color":["hair","hair2"]
+         },"734841"],[{
+            "_code":["Hbrown3"],
+            "_color":["hair","hair2"]
+         },"88483C"],[{
+            "_code":["Hbrown4"],
+            "_color":["hair","hair2"]
+         },"A8593A"],[{
+            "_code":["Hbrown5"],
+            "_color":["hair","hair2"]
+         },"7B4A2E"],[{
+            "_code":["Hbrown6"],
+            "_color":["hair","hair2"]
+         },"8B5936"],[{
+            "_code":["Hbrown7"],
+            "_color":["hair","hair2"]
+         },"865A2F"],[{
+            "_code":["Hbrown8"],
+            "_color":["hair","hair2"]
+         },"4F3A39"],[{
+            "_code":["Hbrown9"],
+            "_color":["hair","hair2"]
+         },"402E22"],[{
+            "_code":["Hbrown10"],
+            "_color":["hair","hair2"]
+         },"634D38"],[{
+            "_code":["Hbrown11"],
+            "_color":["hair","hair2"]
+         },"9E8B7A"],[{
+            "_code":["Hblack1"],
+            "_color":["hair","hair2"]
+         },"9F8691"],[{
+            "_code":["Hblack2"],
+            "_color":["hair","hair2"]
+         },"605841"],[{
+            "_code":["Hblack3"],
+            "_color":["hair","hair2"]
+         },"4B4B4B"],[{
+            "_code":["Hblack4"],
+            "_color":["hair","hair2"]
+         },"343536"],[{
+            "_code":["Hwhite1"],
+            "_color":["hair","hair2"]
+         },"FCFCFC"],[{
+            "_code":["Hblack5"],
+            "_color":["hair","hair2"]
+         },"CECDD6"],[{
+            "_code":["Hblack6"],
+            "_color":["hair","hair2"]
+         },"9F9CAD"],[{
+            "_code":["Hblack7"],
+            "_color":["hair","hair2"]
+         },"434456"],[{
+            "_code":["Hblack8"],
+            "_color":["hair","hair2"]
+         },"363440"],[{
+            "_code":["Hblack9"],
+            "_color":["hair"]
+         },"201F26"],[{
+            "_code":["Hblack10"],
+            "_color":["hair"]
+         },"000000"],[{
+            "_code":["hada1"],
+            "_color":["body"]
+         },"FAE8D3"],[{
+            "_code":["hada2"],
+            "_color":["body"]
+         },"F9DCC3"],[{
+            "_code":["hada3"],
+            "_color":["body"]
+         },"FADDBC"],[{
+            "_code":["hada4"],
+            "_color":["body"]
+         },"F8D7A9"],[{
+            "_code":["hada5"],
+            "_color":["body"]
+         },"EEC295"],[{
+            "_code":["hada6"],
+            "_color":["body"]
+         },"E1A881"],[{
+            "_code":["hada7"],
+            "_color":["body"]
+         },"D59171"],[{
+            "_code":["hada8"],
+            "_color":["body"]
+         },"BB7159"],[{
+            "_code":["hada9"],
+            "_color":["body"]
+         },"8C4E39"],[{
+            "_code":["hada10"],
+            "_color":["body"]
+         },"643728"],[{
+            "_code":["Nipple1"],
+            "_color":["Nipple"]
+         },"FBD6C4"],[{
+            "_code":["Nipple2"],
+            "_color":["Nipple"]
+         },"FAC7AF"],[{
+            "_code":["Nipple3"],
+            "_color":["Nipple"]
+         },"FAC5A0"],[{
+            "_code":["Nipple4"],
+            "_color":["Nipple"]
+         },"F4C197"],[{
+            "_code":["Nipple5"],
+            "_color":["Nipple"]
+         },"E1A881"],[{
+            "_code":["Nipple6"],
+            "_color":["Nipple"]
+         },"D59171"],[{
+            "_code":["Nipple7"],
+            "_color":["Nipple"]
+         },"BB7159"],[{
+            "_code":["Nipple8"],
+            "_color":["Nipple"]
+         },"9B5740"],[{
+            "_code":["Nipple9"],
+            "_color":["Nipple"]
+         },"683A2B"],[{
+            "_code":["Nipple10"],
+            "_color":["Nipple"]
+         },"44261C"]];
+         var _loc3_:int = MainColor.length;
+         checkColor = new Menu_Load.colorMakeClass();
+         Main.stageVar.addChild(checkColor);
+         checkColor.visible = false;
+         _loc1_ = 0;
+         while(_loc1_ < _loc3_)
+         {
+            new ColorMake(MainColor[_loc1_][1]);
+            MainColor[_loc1_].push(ColorMake.colorStr[1]);
+            MainColor[_loc1_].push(ColorMake.colorStr[2]);
+            MainColor[_loc1_].push(ColorMake.colorStr[3]);
+            MainColor[_loc1_].push(ColorMake.colorStr[4]);
+            MainColor[_loc1_].push(ColorMake.colorStr[5]);
+            MainColor[_loc1_].push(ColorMake.colorStr[6]);
+            MainColor[_loc1_].push(ColorMake.colorStr[7]);
+            MainColor[_loc1_].push(ColorMake.colorStr[8]);
+            _loc1_++;
+         }
+         _loc1_ = 0;
+         while(_loc1_ < _loc3_)
+         {
+            _loc4_ = MainColor[_loc1_][0]["_color"].length;
+            _loc2_ = 0;
+            while(_loc2_ < _loc4_)
+            {
+               if(MainColor[_loc1_][0]["_color"][_loc2_] == "Bura")
+               {
+                  ColorData[0].push(MainColor[_loc1_]);
+               }
+               if(MainColor[_loc1_][0]["_color"][_loc2_] == "hair")
+               {
+                  ColorData[1].push(MainColor[_loc1_]);
+               }
+               if(MainColor[_loc1_][0]["_color"][_loc2_] == "body")
+               {
+                  ColorData[2].push(MainColor[_loc1_]);
+               }
+               if(MainColor[_loc1_][0]["_color"][_loc2_] == "Nipple")
+               {
+                  ColorData[3].push(MainColor[_loc1_]);
+               }
+               if(MainColor[_loc1_][0]["_color"][_loc2_] == "defo")
+               {
+                  ColorData[4].push(MainColor[_loc1_]);
+               }
+               if(MainColor[_loc1_][0]["_color"][_loc2_] == "Curtain")
+               {
+                  ColorData[5].push(MainColor[_loc1_]);
+               }
+               if(MainColor[_loc1_][0]["_color"][_loc2_] == "Floor")
+               {
+                  ColorData[6].push(MainColor[_loc1_]);
+               }
+               if(MainColor[_loc1_][0]["_color"][_loc2_] == "hair2")
+               {
+                  ColorData[7].push(MainColor[_loc1_]);
+               }
+               if(MainColor[_loc1_][0]["_color"][_loc2_] == "AllFaceSet")
+               {
+                  ColorData[8].push(MainColor[_loc1_]);
+               }
+               _loc2_++;
+            }
+            _loc1_++;
+         }
+         SaveColor = ["CC6699","C74463","A02F78","DE8F92","ba2636","a19361","DFCC9F","8C503B","D55F3B","f39800","e6b422","69821b","9BB73C","316745","4C865C","80aba9","84a2d4","A0CDE8","4d5aaf","6E5192"];
+         so_color = SharedObject.getLocal("my_data3");
+         if(so_color)
+         {
+            colorObj = so_color.data;
+            if(colorObj.version != Main.colorVersion)
+            {
+               so_color.clear();
+               colorObj = so_color.data;
+               _loc1_ = 0;
+               while(_loc1_ <= 74)
+               {
+                  if(_loc1_ <= SaveColor.length - 1)
+                  {
+                     colorObj[_loc1_] = SaveColor[_loc1_];
+                  }
+                  else
+                  {
+                     colorObj[_loc1_] = 0;
+                  }
+                  _loc1_++;
+               }
+               colorObj.version = Main.colorVersion;
+               trace("初期化　color",colorObj.version);
+            }
+         }
+         try
+         {
+            so_color.flush();
+         }
+         catch(myError:Error)
+         {
+         }
+      }
+   }
+}

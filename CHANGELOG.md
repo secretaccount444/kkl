@@ -1,0 +1,42 @@
+
+# v105.5 Changelog
+
+- Upper arms, forearms, and hands can now be manually scaled and repositioned via sliders
+- Added alpha transparency sliders for ribbons, hair pieces, and belts
+- Added new attachment point settings for image attachments
+  - Images using the modded attachment points have a wide variety of layering options for flexibility
+- Added a new layering option for body-attached images that places images below the forearms but still above the rest of the body
+- Added a mouth visibility toggle button
+- Added the following shapes:
+  - Ribbons:
+    - #124: a concave curve
+    - #125: a semicircle
+    - #126: a quarter-circle
+    - #127: an eighth-circle
+    - #128: an S-bend
+    - #129: a ring / donut shape
+    - #130: half of a ring
+    - #131: a quarter of a ring
+    - #132: an eighth of a ring
+    - #133: a copy of the type 12 rope belt shape, minus the internal lines
+    - #134: type 11 rope belt shape, minus internal lines
+    - #135: type 10 rope belt shape, minus internal lines
+    - #136: a trapezoid
+    - #137: a rotated quarter circle (same as ribbon #126, but has different behavior when resized)
+    - #138: a halved version of ribbon #74
+    - #139: a halved version of ribbon #102
+    - #140: a rotated quarter-ring (same as #131, but has different behavior when resized)
+    - #141: a rotated eighth-ring (same as #132, but has different behavior when resized)
+  - Face Marks:
+    - #60: a ring / donut shape (same as ribbon #129)
+    - #61: a quarter ring / donut (same as ribbon #131)
+    - #62: a quarter circle (same as ribbon #126)
+    - #63: a rotated quarter circle (same as ribbon #137)
+    - #64: a halved version of ribbon #74 (same as ribbon #138)
+    - #65: a copy of ribbon #102
+    - #66: a halved version of ribbon #102 (same as ribbon #139)
+  - Hands:
+    - #58: an empty stump (useful for building custom hands)
+    - #59: an edit of hand 05 that removes the pinky
+    - #60: an edit of hand 18 that removes the thumb (useful for depicting characters holding things)
+- Removed the "Reset" and "Random" buttons on each tab
