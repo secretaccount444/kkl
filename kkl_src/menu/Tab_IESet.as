@@ -77,55 +77,55 @@ package menu
                Tab_IEInOut.dataStr = Main.version + "**";
             }
             Tab_IEInOut.systemOutCheck = false;
-            if(MenuClass.exportCheck[29] || param1 == "txtSave")
+            if(MenuClass.exportCheck[30] || param1 == "txtSave")
             {
                Tab_IEInOut.execute("FreeHand","0",0);
             }
-            if(MenuClass.exportCheck[30] || param1 == "txtSave")
+            if(MenuClass.exportCheck[31] || param1 == "txtSave")
             {
                Tab_IEInOut.execute("FreeRibon","0",0);
             }
-            if(MenuClass.exportCheck[31] || param1 == "txtSave")
+            if(MenuClass.exportCheck[32] || param1 == "txtSave")
             {
                Tab_IEInOut.execute("FreeBelt","0",0);
             }
-            if(MenuClass.exportCheck[32] || param1 == "txtSave")
+            if(MenuClass.exportCheck[33] || param1 == "txtSave")
             {
                Tab_IEInOut.execute("FreeChair","0",0);
             }
-            if(MenuClass.exportCheck[33] || param1 == "txtSave")
+            if(MenuClass.exportCheck[34] || param1 == "txtSave")
             {
                Tab_IEInOut.execute("FreeFlag","0",0);
             }
-            if(MenuClass.exportCheck[34] || param1 == "txtSave")
+            if(MenuClass.exportCheck[35] || param1 == "txtSave")
             {
                Tab_IEInOut.execute("FreeHukidashi","0",0);
             }
-            if(MenuClass.exportCheck[35] || param1 == "txtSave")
+            if(MenuClass.exportCheck[36] || param1 == "txtSave")
             {
                Tab_IEInOut.execute("Background","0",0);
             }
-            if(MenuClass.exportCheck[36] || param1 == "txtSave")
+            if(MenuClass.exportCheck[37] || param1 == "txtSave")
             {
                Tab_IEInOut.execute("txt","0",0);
             }
-            if(MenuClass.exportCheck[37] || param1 == "txtSave")
+            if(MenuClass.exportCheck[38] || param1 == "txtSave")
             {
                Tab_IEInOut.execute("Loadmenu","0",0);
             }
-            if(MenuClass.exportCheck[38] || param1 == "txtSave")
+            if(MenuClass.exportCheck[39] || param1 == "txtSave")
             {
                Tab_IEInOut.execute("SystemOption","0",0);
             }
-            if(MenuClass.exportCheck[39] || param1 == "txtSave")
+            if(MenuClass.exportCheck[40] || param1 == "txtSave")
             {
                Tab_IEInOut.execute("Tool","0",0);
             }
-            if(MenuClass.exportCheck[36] || param1 == "txtSave")
+            if(MenuClass.exportCheck[37] || param1 == "txtSave")
             {
                Tab_IEInOut.execute("OUTText","0",0);
             }
-            if(MenuClass.exportCheck[37] || param1 == "txtSave")
+            if(MenuClass.exportCheck[38] || param1 == "txtSave")
             {
                Tab_IEInOut.execute("LoadmenuText","0",0);
             }

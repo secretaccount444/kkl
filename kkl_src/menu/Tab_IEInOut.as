@@ -5,6 +5,8 @@ package menu
    import parameter.Dress_data;
    import parameter.Tab_IEData1;
    import parameter.Tab_IEDataOld;
+   import parts.Ribbon;
+   import parts.Hairpiece;
    
    public class Tab_IEInOut
    {
@@ -453,9 +455,62 @@ package menu
             CharaLoadCheck = false;
             this.n = Tab_IEData1.IEGroup.length;
             this.i = 0;
+
+            var exportRibbons = false;
+
+            /* Check if ribbons can be exported */
+            for (var u = 0; u < MenuClass.exportCheck.length; u++) {
+               if (MenuClass.exportCheck[u] && Tab_IEData1.IEGroup[u][0] == "m00") {
+                  exportRibbons = true;
+                  break;
+               }
+            }
+
+            var exportHairpieces = false;
+
+            /* Check if hairpieces can be exported */
+            for (var u = 0; u < MenuClass.exportCheck.length; u++) {
+               if (MenuClass.exportCheck[u] && Tab_IEData1.IEGroup[u][0] == "r00") {
+                  exportHairpieces = true;
+                  break;
+               }
+            }
+
             while(this.i <= this.n)
             {
-               if(MenuClass.MY_MENUNAME[this.i + 4][5] == "chara")
+               if (MenuClass.MY_MENUNAME[this.i + 4][0] == "Ribon") {
+                  /* special handling for ribbon exports -- do not fold this nested if */
+                  if (exportRibbons || this.Flag == "OUTTXT") {
+                     if (this.strPlus.charAt(this.strPlus.length - 1) == ".") {
+                        this.strPlus = this.strPlus.substring(0,this.strPlus.length - 1) + "_";
+                     }
+
+                     var visibleRibbons = Ribbon.getVisibleRibbons(this.charaNum);
+                     if (visibleRibbons.length == 0) {
+                        this.strPlus += "m00_";
+                     } else {
+                        for each (var ribbon in visibleRibbons) {
+                           this.strPlus += ribbon.exportData() + "_";
+                        }
+                     }
+                  }
+               } else if (MenuClass.MY_MENUNAME[this.i + 4][0] == "HairEx") {
+                  if (exportHairpieces || this.Flag == "OUTTXT") {
+                     if (this.strPlus.charAt(this.strPlus.length - 1) == ".") {
+                        this.strPlus = this.strPlus.substring(0,this.strPlus.length - 1) + "_";
+                     }
+
+                     var visibleHairpieces = Hairpiece.getVisibleHairpieces(this.charaNum);
+                     if (visibleHairpieces.length == 0) {
+                        this.strPlus += "r00_";
+                     } else {
+                        for each (var hairpiece in visibleHairpieces) {
+                           this.strPlus += hairpiece.exportData() + "_";
+                        }
+                     }
+                  }
+               }
+               else if(MenuClass.MY_MENUNAME[this.i + 4][5] == "chara")
                {
                   this.p = Tab_IEData1.IEGroup[this.i].length - 1;
                   this.strPlus = this.strPlus;
@@ -515,6 +570,7 @@ package menu
                                  this.renTabName = "CharaLoadPlus";
                                  CharaLoadCheck = true;
                               }
+
                               if(this.charaData[this.renTabName]["_visible"][this.IENameLast])
                               {
                                  if(this.j == this.m)
@@ -759,7 +815,7 @@ package menu
          {
             this.strPlus = "";
             this.k = 0;
-            while(this.k <= 98)
+            while(this.k <= Main.hukusuuNum)
             {
                if(MenuClass.systemData["LoadPlus"]["_visible"][this.k])
                {
@@ -983,7 +1039,7 @@ package menu
                      this.strPlus = this.strPlus.substring(0,this.strPlus.length - 3);
                      this.renCheck = false;
                      this.a = 0;
-                     while(this.a <= 98)
+                     while(this.a <= Main.hukusuuNum)
                      {
                         if(this.IENameFirst == "b" || this.IENameFirst == "c" || this.IENameFirst == "d")
                         {
@@ -1234,13 +1290,38 @@ package menu
          EyeOptionCheck = false;
          this.i = 0;
 
-         MenuClass.charaData[this.charaNum]["SourceVersion"]["_minor"] = 0;
-         MenuClass.charaData[this.charaNum]["SourceVersion"]["_alpha"] = 0;
+         if (this.dataVersion == Main.version) {
+            MenuClass.charaData[this.charaNum]["SourceVersion"]["_minor"] = Main.minor_version;
+            MenuClass.charaData[this.charaNum]["SourceVersion"]["_alpha"] = Main.alpha_version;
+         } else {
+            MenuClass.charaData[this.charaNum]["SourceVersion"]["_minor"] = 0;
+            MenuClass.charaData[this.charaNum]["SourceVersion"]["_alpha"] = 0;
+         }
+
+         var firstRibbonLoad = true;
+         var importRibbons = false;
+
+         /* Check if ribbons can be imported */
+         for (var u = 0; u < MenuClass.importCheck.length; u++) {
+            if (MenuClass.importCheck[u] && Tab_IEData1.IEGroup[u][0] == "m00") {
+               importRibbons = true;
+               break;
+            }
+         }
+
+         var firstHairpieceLoad = true;
+         var importHairpieces = false;
+
+         /* Check if hairpieces can be imported */
+         for (var u = 0; u < MenuClass.importCheck.length; u++) {
+            if (MenuClass.importCheck[u] && Tab_IEData1.IEGroup[u][0] == "r00") {
+               importHairpieces = true;
+               break;
+            }
+         }
 
          while(this.i <= this.n)
          {
-
-
             this.IENameFirst = this.INArray[this.i].substring(0,1);
             IENameNextCheck = false;
             IENameNext = this.INArray[this.i].substring(1,2);
@@ -1332,8 +1413,6 @@ package menu
                this.IENameLast = this.IEName.substring(1,2);
             }
 
-
-
             this.INArray2[this.IEName] = this.str.split(".");
             if(this.IEName == "cb")
             {
@@ -1347,6 +1426,35 @@ package menu
                }
                kobitoCheck2 = true;
             }
+            else if (this.IENameFirst == "m" || this.IEName == "xm")
+            {
+               if (importRibbons || this.Flag != "IN") {
+                  if (firstRibbonLoad) {
+                     /* Hide all ribbons */
+                     for each (var ribbon in Ribbon.getVisibleRibbons(this.charaNum)) {
+                        ribbon.visible = false;
+                     }
+                     firstRibbonLoad = false;
+                  }
+
+                  Ribbon.loadData(this.charaNum, this.IEName, this.str.split("."), this.Flag);
+                  SaveUpdateTabName.push("Ribon");
+               }
+            }
+            else if (this.IENameFirst == "r" || this.IEName == "xr")
+            {
+               if (importHairpieces || this.Flag != "IN") {
+                  if (firstHairpieceLoad) {
+                     for each (var hairpiece in Hairpiece.getVisibleHairpieces(this.charaNum)) {
+                        hairpiece.visible = false;
+                     }
+                     firstHairpieceLoad = false;
+                  }
+
+                  Hairpiece.loadData(this.charaNum, this.IEName, this.str.split("."), this.Flag);
+                  SaveUpdateTabName.push("HairEx");
+               }
+            } 
             else
             {
                if(this.IENameFirst == "s" && this.dataVersion == 80 && this.INArray2[this.IEName].length == 17)
@@ -1398,10 +1506,8 @@ package menu
                   //    ++this.u;
                   // }
 
-                  if(importEnabled || this.Flag != "IN")
+                  if(importEnabled || this.Flag != "IN" || this.IEName == "fv")
                   {
-
-
                      SaveUpdateTabName.push(this.IETopTabName);
                      this.IEtabName = Tab_IEData1.IEData[this.IEName][this.j][0];
                      this.IEtabParameter = Tab_IEData1.IEData[this.IEName][this.j][1];
@@ -1411,7 +1517,7 @@ package menu
                         prevMenu[this.IEtabName] = this.charaData[this.IEtabName]["_menu"];
                      }
 
-                     if(this.IETopTabName != "Xmove" || this.selectMode || this.allSelectOneMode)
+                     if(this.IETopTabName != "Xmove" || this.IEtabName == "Shadow" || this.selectMode || this.allSelectOneMode)
                      {
                         if(this.IENameFirst == "m" && IENameNextCheck)
                         {
@@ -1520,10 +1626,16 @@ package menu
                            this.IEtabName == "RightHandVisible" ||
                            this.IEtabName == "LeftThighVisible" ||
                            this.IEtabName == "RightThighVisible" ||
+                           this.IEtabName == "LeftShiriVisible" ||
+                           this.IEtabName == "RightShiriVisible" ||
                            this.IEtabName == "LeftLegVisible" ||
                            this.IEtabName == "RightLegVisible" ||
                            this.IEtabName == "LeftFootVisible" ||
-                           this.IEtabName == "RightFootVisible"
+                           this.IEtabName == "RightFootVisible" ||
+                           this.IEtabName == "NeckVisible" ||
+                           this.IEtabName == "HeadVisible" ||
+                           this.IEtabName == "UpperBodyVisible" ||
+                           this.IEtabName == "LowerBodyVisible"
                         ))
                         {
                            this.q = this.charaData[this.IEtabName]["_visible"].length - 1;
@@ -1580,6 +1692,7 @@ package menu
                                        {
                                           menuNum = 0;
                                        }
+
                                        this.charaData[this.IEtabName][this.IEtabParameter][0] = String(this.INArray2[this.IEName][this.j]);
                                        try
                                        {
@@ -1618,12 +1731,12 @@ package menu
                                           {
                                           }
                                        }
-                                       else if(this.Flag == "hairSet" && this.IEtabName != "HairEx0")
+                                       else if(this.Flag == "hairSet" && this.IEtabName != "HairEx")
                                        {
-                                          this.charaData[this.IEtabName][this.IEtabParameter][0] = this.charaData["HairEx0"][this.IEtabParameter][0];
+                                          this.charaData[this.IEtabName][this.IEtabParameter][0] = this.charaData["HairEx"][this.IEtabParameter][0];
                                           try
                                           {
-                                             this.DressCharaData[this.IEtabName][this.menuNum][this.IEtabParameter][0] = this.charaData["HairEx0"][this.IEtabParameter][0];
+                                             this.DressCharaData[this.IEtabName][this.menuNum][this.IEtabParameter][0] = this.charaData["HairEx"][this.IEtabParameter][0];
                                           }
                                           catch(myError:Error)
                                           {
@@ -1737,28 +1850,12 @@ package menu
             {
                this.charaData["HairpinPlus"]["_visible"][this.i] = renCheckHairpinAr[this.i];
             }
-            if(renCheckHairEx)
-            {
-               this.charaData["HairExPlus"]["_visible"][this.i] = renCheckHairExAr[this.i];
-            }
             if(renCheckLoad)
             {
                this.charaData["CharaLoadPlus"]["_visible"][this.i] = renCheckLoadAr[this.i];
             }
             ++this.i;
          }
-
-
-         this.i = 0;
-         while(this.i <= Main.RibonhukusuuNum)
-         {
-            if(renCheckRibon)
-            {
-               this.charaData["RibonPlus"]["_visible"][this.i] = renCheckRibonAr[this.i];
-            }
-            ++this.i;
-         }
-
 
          if(this.Flag != "hairSet")
          {
@@ -1860,7 +1957,7 @@ package menu
          }
 
          // trace("Performing post-load mod attach sprite sorting for character " + this.charaNum);
-         PartLayering.fixup(this.charaNum, ["mune", "dou", "thigh", "leg", "foot", "upperArm", "lowerArm", "hand"]);
+         PartLayering.fixup(this.charaNum, ["fullBody", "mune", "dou", "thigh", "leg", "foot", "upperArm", "lowerArm", "hand"]);
          // trace("Post-load mod attach sprite sorting for character " + this.charaNum + " complete");
       }
       
@@ -1894,7 +1991,7 @@ package menu
          var _loc20_:Boolean = false;
          var _loc21_:Array = new Array();
          this.i = 0;
-         while(this.i <= 98)
+         while(this.i <= Main.hukusuuNum)
          {
             _loc5_.push(false);
             _loc7_.push(false);
@@ -1922,8 +2019,15 @@ package menu
          {
             this.systemArray.push("z00");
          }
-         MenuClass.systemData["SourceVersion"]["_minor"] = 0;
-         MenuClass.systemData["SourceVersion"]["_alpha"] = 0;
+
+         if (this.dataVersion == Main.version) {
+            MenuClass.systemData["SourceVersion"]["_minor"] = Main.minor_version;
+            MenuClass.systemData["SourceVersion"]["_alpha"] = Main.alpha_version;
+         } else {
+            MenuClass.systemData["SourceVersion"]["_minor"] = 0;
+            MenuClass.systemData["SourceVersion"]["_alpha"] = 0;
+         }
+
          try
          {
             this.INArray = new Array();
@@ -2103,7 +2207,7 @@ package menu
                         }
                         ++this.u;
                      }
-                     if(MenuClass.importCheck[this.importCheckFlag] || this.Flag != "IN")
+                     if(MenuClass.importCheck[this.importCheckFlag] || this.Flag != "IN" || this.IEName == "fv")
                      {
                         this.IEtabName = Tab_IEData1.IEData[this.IEName][this.j][0];
                         this.IEtabParameter = Tab_IEData1.IEData[this.IEName][this.j][1];
@@ -2287,14 +2391,14 @@ package menu
          if(_loc4_)
          {
             this.i = 0;
-            while(this.i <= 98)
+            while(this.i <= Main.hukusuuNum)
             {
                MenuClass.systemData["FreeHandPlus"]["_visible"][this.i] = _loc5_[this.i];
                ++this.i;
             }
             new Tab_SaveUpdateSystem("FreeHand",this.dataVersion,"Non");
             this.i = 0;
-            while(this.i <= 98)
+            while(this.i <= Main.hukusuuNum)
             {
                new Free_HandSet(this.i,"move");
                ++this.i;
@@ -2303,14 +2407,14 @@ package menu
          if(_loc6_)
          {
             this.i = 0;
-            while(this.i <= 98)
+            while(this.i <= Main.hukusuuNum)
             {
                MenuClass.systemData["FreeHandItem" + this.i]["_visible"][0] = _loc7_[this.i];
                ++this.i;
             }
             new Tab_SaveUpdateSystem("FreeHandItem",this.dataVersion,"Non");
             this.i = 0;
-            while(this.i <= 98)
+            while(this.i <= Main.hukusuuNum)
             {
                new Free_HandSet(this.i,"move");
                ++this.i;
@@ -2319,7 +2423,7 @@ package menu
          if(_loc12_)
          {
             this.i = 0;
-            while(this.i <= 98)
+            while(this.i <= Main.hukusuuNum)
             {
                MenuClass.systemData["FreeRibonPlus"]["_visible"][this.i] = _loc13_[this.i];
                ++this.i;
@@ -2327,7 +2431,7 @@ package menu
             new Tab_SaveUpdateSystem("FreeRibon",this.dataVersion,"Non");
             _loc24_ = MenuClass.systemData["FreeRibonPlus"]["_menu"];
             this.i = 0;
-            while(this.i <= 98)
+            while(this.i <= Main.hukusuuNum)
             {
                MenuClass.systemData["FreeRibonPlus"]["_menu"] = this.i;
                new SetLinkSystemData();
@@ -2339,7 +2443,7 @@ package menu
          if(_loc14_)
          {
             this.i = 0;
-            while(this.i <= 98)
+            while(this.i <= Main.hukusuuNum)
             {
                MenuClass.systemData["FreeBeltPlus"]["_visible"][this.i] = _loc15_[this.i];
                ++this.i;
@@ -2347,7 +2451,7 @@ package menu
             new Tab_SaveUpdateSystem("FreeBelt",this.dataVersion,"Non");
             new SetLinkSystemData();
             this.i = 0;
-            while(this.i <= 98)
+            while(this.i <= Main.hukusuuNum)
             {
                new Free_BeltSet(this.i,"move");
                ++this.i;
@@ -2356,7 +2460,7 @@ package menu
          if(_loc16_)
          {
             this.i = 0;
-            while(this.i <= 98)
+            while(this.i <= Main.hukusuuNum)
             {
                MenuClass.systemData["FreeChairPlus"]["_visible"][this.i] = _loc17_[this.i];
                ++this.i;
@@ -2364,7 +2468,7 @@ package menu
             new Tab_SaveUpdateSystem("FreeChair",this.dataVersion,"Non");
             new SetLinkSystemData();
             this.i = 0;
-            while(this.i <= 98)
+            while(this.i <= Main.hukusuuNum)
             {
                new Free_ChairSet(this.i,"move");
                ++this.i;
@@ -2373,7 +2477,7 @@ package menu
          if(_loc18_)
          {
             this.i = 0;
-            while(this.i <= 98)
+            while(this.i <= Main.hukusuuNum)
             {
                MenuClass.systemData["FreeFlagPlus"]["_visible"][this.i] = _loc19_[this.i];
                ++this.i;
@@ -2381,7 +2485,7 @@ package menu
             new Tab_SaveUpdateSystem("FreeFlag",this.dataVersion,"Non");
             new SetLinkSystemData();
             this.i = 0;
-            while(this.i <= 98)
+            while(this.i <= Main.hukusuuNum)
             {
                new Free_FlagSet(this.i,"move");
                ++this.i;
@@ -2390,7 +2494,7 @@ package menu
          if(_loc20_)
          {
             this.i = 0;
-            while(this.i <= 98)
+            while(this.i <= Main.hukusuuNum)
             {
                MenuClass.systemData["FreeHukidashiPlus"]["_visible"][this.i] = _loc21_[this.i];
                ++this.i;
@@ -2398,7 +2502,7 @@ package menu
             new Tab_SaveUpdateSystem("FreeHukidashi",this.dataVersion,"Non");
             new SetLinkSystemData();
             this.i = 0;
-            while(this.i <= 98)
+            while(this.i <= Main.hukusuuNum)
             {
                new Free_HukidashiSet(this.i,"move");
                ++this.i;
@@ -2410,7 +2514,7 @@ package menu
             MenuClass.urlLoadCompCount = 0;
             MenuClass.urlLoadCompCheck = false;
             this.i = 0;
-            while(this.i <= 98)
+            while(this.i <= Main.hukusuuNum)
             {
                MenuClass.systemData["LoadPlus"]["_visible"][this.i] = _loc3_[this.i];
                if(MenuClass.systemData["LoadPlus"]["_visible"][this.i])
@@ -2424,7 +2528,7 @@ package menu
                MenuClass.urlLoadCompCheck = true;
             }
             this.i = 0;
-            while(this.i <= 98)
+            while(this.i <= Main.hukusuuNum)
             {
                if(MenuClass.systemData["LoadPlus"]["_visible"][this.i])
                {
@@ -2439,7 +2543,7 @@ package menu
             }
             new Tab_SaveUpdateSystem("urlLoad",this.dataVersion,"Non");
             this.i = 0;
-            while(this.i <= 98)
+            while(this.i <= Main.hukusuuNum)
             {
                new Tab_LoadURL("load",this.i);
                ++this.i;
@@ -2527,19 +2631,7 @@ package menu
                         this.IEtabParameter = Tab_IEDataOld.IEData[this.IEName][this.j][1];
                         if(this.IETopTabName != "Xmove" || this.selectMode || this.allSelectOneMode)
                         {
-                           if(this.IENameFirst == "m")
-                           {
-                              this.IENameLast = Tab_IEDataOld.IEGroup[this.i][this.k + 1].substring(1,2);
-                              if(this.INArray2[this.IEName] != undefined)
-                              {
-                                 this.charaData["RibonPlus"]["_visible"][this.IENameLast] = true;
-                              }
-                              else
-                              {
-                                 this.charaData["RibonPlus"]["_visible"][this.IENameLast] = false;
-                              }
-                           }
-                           else if(this.IENameFirst == "n")
+                           if(this.IENameFirst == "n")
                            {
                               this.IENameLast = Tab_IEDataOld.IEGroup[this.i][this.k + 1].substring(1,2);
                               if(this.INArray2[this.IEName] != undefined)
@@ -2549,18 +2641,6 @@ package menu
                               else
                               {
                                  this.charaData["HairpinPlus"]["_visible"][this.IENameLast] = false;
-                              }
-                           }
-                           else if(this.IENameFirst == "r")
-                           {
-                              this.IENameLast = Tab_IEDataOld.IEGroup[this.i][this.k + 1].substring(1,2);
-                              if(this.INArray2[this.IEName] != undefined)
-                              {
-                                 this.charaData["HairExPlus"]["_visible"][this.IENameLast] = true;
-                              }
-                              else
-                              {
-                                 this.charaData["HairExPlus"]["_visible"][this.IENameLast] = false;
                               }
                            }
                            else if(this.IENameFirst == "s")

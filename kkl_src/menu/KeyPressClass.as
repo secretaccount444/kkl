@@ -14,7 +14,15 @@ package menu
       public static var spaceKeyCheck:Boolean = true;
       
       public static var shiftKeyCheck:Boolean = true;
-      
+
+      public static var altKeyCheck:Boolean = true;
+
+      public static var f10KeyCheck:Boolean = true;
+
+      public static var f11KeyCheck:Boolean = true;
+
+      public static var f12KeyCheck:Boolean = true;
+
       public static var keyCodeNum:int = 0;
       
       public static var charCodeNum:int = 0;
@@ -154,10 +162,27 @@ package menu
                this.handCheck("Kiss",false);
             }
          }
+         if(keyCodeNum == 121)
+         {
+            f10KeyCheck = true;
+         }
+         if(keyCodeNum == 122)
+         {
+            f11KeyCheck = true;
+         }
+         if(keyCodeNum == 123)
+         {
+            f12KeyCheck = true;
+         }
          if(keyCodeNum == 16)
          {
             MenuClass.shiftKeyPress = false;
             shiftKeyCheck = true;
+         }
+         if(keyCodeNum == 18)
+         {
+            MenuClass.altKeyPress = false;
+            altKeyCheck = true;
          }
          if(keyCodeNum == 32)
          {
@@ -190,12 +215,43 @@ package menu
          var event:KeyboardEvent = param1;
          this.charaData = MenuClass.charaData[MenuClass._nowCharaNum];
          this.charaAdd = MenuClass.charaAdd[MenuClass._nowCharaNum];
+         var nowHeader:String = null;
          keyCodeNum = event.keyCode;
          charCodeNum = event.charCode;
+         if(keyCodeNum == 121 && f10KeyCheck)
+         {
+            MenuClass.f10KeyPress = !MenuClass.f10KeyPress;
+            if(MenuClass._nowHeaderName != null)
+            {
+               nowHeader = MenuClass._nowHeaderName;
+               new Tab_CloseClass();
+            }
+            f10KeyCheck = false;
+            if(nowHeader != null)
+            {
+               new HeaderbtnFc(nowHeader);
+               nowHeader = null;
+            }
+         }
+         if(keyCodeNum == 122 && f11KeyCheck)
+         {
+            MenuClass.f11KeyPress = !MenuClass.f11KeyPress;
+            f11KeyCheck = false;
+         }
+         if(keyCodeNum == 123 && f12KeyCheck)
+         {
+            MenuClass.f12KeyPress = !MenuClass.f12KeyPress;
+            f12KeyCheck = false;
+         }
          if(keyCodeNum == 16 && shiftKeyCheck)
          {
             MenuClass.shiftKeyPress = true;
             shiftKeyCheck = false;
+         }
+         if(keyCodeNum == 18 && altKeyCheck)
+         {
+            MenuClass.altKeyPress = true;
+            altKeyCheck = false;
          }
          if(keyCodeNum == 32 && spaceKeyCheck)
          {
@@ -249,6 +305,7 @@ package menu
             {
                Tab_MenuClass.menuKeyNum += "9";
             }
+
             if(Tab_MenuClass.keySetType == "menu")
             {
                tadDataName = MenuClass.tabData[Tab_MenuClass.headerName][Tab_MenuClass.targetJ][2]["_menu"];
@@ -273,73 +330,100 @@ package menu
                catch(myError:Error)
                {
                }
-               if(Tab_MenuClass.menuBtnType == String(Tab_MenuClass.menuKeyNum).length || charCodeNum == 13)
-               {
+
+               if (String(Tab_MenuClass.menuKeyNum).length > 0) {
                   menuKeyNum2 = Number(Tab_MenuClass.menuKeyNum);
-                  if(tadDataName == "chara" || tadDataName == "charaPlus")
-                  {
-                     if(menuKeyNum2 > MenuClass.menuData[Tab_MenuClass.tabName] + 1)
+
+                  if ((charCodeNum >= 48) && (charCodeNum <= 57)) {
+                     if(tadDataName == "chara" || tadDataName == "charaPlus")
                      {
-                        if(menuTypeFlag)
+                        if(menuKeyNum2 > MenuClass.menuData[Tab_MenuClass.tabName] + 1)
                         {
-                           Dress_data.menuCustomNum[MenuClass._nowCharaNum][Tab_MenuClass.tabName] = MenuClass.menuData[Tab_MenuClass.tabName];
-                           MenuClass.charaData[MenuClass._nowCharaNum][this.tabNamePlus]["_menu"] = Dress_data.menuCustom[Tab_MenuClass.tabName][Dress_data.menuCustomNum[MenuClass._nowCharaNum][Tab_MenuClass.tabName]];
+                           if(menuTypeFlag)
+                           {
+                              Dress_data.menuCustomNum[MenuClass._nowCharaNum][Tab_MenuClass.tabName] = MenuClass.menuData[Tab_MenuClass.tabName];
+                              MenuClass.charaData[MenuClass._nowCharaNum][this.tabNamePlus]["_menu"] = Dress_data.menuCustom[Tab_MenuClass.tabName][Dress_data.menuCustomNum[MenuClass._nowCharaNum][Tab_MenuClass.tabName]];
+                           }
+                           else
+                           {
+                              MenuClass.charaData[MenuClass._nowCharaNum][this.tabNamePlus]["_menu"] = MenuClass.menuData[Tab_MenuClass.tabName];
+                           }
+
+                           MenuClass.menuSetFlag = false;
                         }
                         else
                         {
-                           MenuClass.charaData[MenuClass._nowCharaNum][this.tabNamePlus]["_menu"] = MenuClass.menuData[Tab_MenuClass.tabName];
+                           if(menuKeyNum2 == 0)
+                           {
+                              menuKeyNum2 = 1;
+                           }
+                           if(menuTypeFlag)
+                           {
+                              Dress_data.menuCustomNum[MenuClass._nowCharaNum][Tab_MenuClass.tabName] = menuKeyNum2 - 1;
+                              MenuClass.charaData[MenuClass._nowCharaNum][this.tabNamePlus]["_menu"] = Dress_data.menuCustom[Tab_MenuClass.tabName][Dress_data.menuCustomNum[MenuClass._nowCharaNum][Tab_MenuClass.tabName]];
+                           }
+                           else
+                           {
+                              MenuClass.charaData[MenuClass._nowCharaNum][this.tabNamePlus]["_menu"] = menuKeyNum2 - 1;
+                           }
+
+                           MenuClass.menuSetFlag = true;
                         }
                      }
-                     else
+                     else if(tadDataName == "system" || tadDataName == "systemPlus" || tadDataName == "SelectCharacter")
                      {
-                        if(menuKeyNum2 == 0)
+                        if(menuKeyNum2 > MenuClass.menuData[Tab_MenuClass.tabName] + 1)
                         {
-                           menuKeyNum2 = 1;
-                        }
-                        if(menuTypeFlag)
-                        {
-                           Dress_data.menuCustomNum[MenuClass._nowCharaNum][Tab_MenuClass.tabName] = menuKeyNum2 - 1;
-                           MenuClass.charaData[MenuClass._nowCharaNum][this.tabNamePlus]["_menu"] = Dress_data.menuCustom[Tab_MenuClass.tabName][Dress_data.menuCustomNum[MenuClass._nowCharaNum][Tab_MenuClass.tabName]];
+                           if(menuTypeFlag)
+                           {
+                              Dress_data.menuCustomNum[0][Tab_MenuClass.tabName] = MenuClass.menuData[Tab_MenuClass.tabName];
+                              MenuClass.systemData[this.tabNamePlus]["_menu"] = Dress_data.menuCustom[Tab_MenuClass.tabName][Dress_data.menuCustomNum[0][Tab_MenuClass.tabName]];
+                           }
+                           else
+                           {
+                              MenuClass.systemData[this.tabNamePlus]["_menu"] = MenuClass.menuData[Tab_MenuClass.tabName];
+                           }
+
+                           MenuClass.menuSetFlag = false;
                         }
                         else
                         {
-                           MenuClass.charaData[MenuClass._nowCharaNum][this.tabNamePlus]["_menu"] = menuKeyNum2 - 1;
+                           if(menuKeyNum2 == 0)
+                           {
+                              menuKeyNum2 = 1;
+                           }
+                           if(menuTypeFlag)
+                           {
+                              Dress_data.menuCustomNum[0][Tab_MenuClass.tabName] = menuKeyNum2 - 1;
+                              MenuClass.systemData[this.tabNamePlus]["_menu"] = Dress_data.menuCustom[Tab_MenuClass.tabName][Dress_data.menuCustomNum[0][Tab_MenuClass.tabName]];
+                           }
+                           else
+                           {
+                              MenuClass.systemData[this.tabNamePlus]["_menu"] = menuKeyNum2 - 1;
+                           }
+
+                           MenuClass.menuSetFlag = true;
                         }
                      }
+
+                     Tab_MenuClass.MenuAction("key",Tab_MenuClass.tabName);
                   }
-                  else if(tadDataName == "system" || tadDataName == "systemPlus" || tadDataName == "SelectCharacter")
-                  {
-                     if(menuKeyNum2 > MenuClass.menuData[Tab_MenuClass.tabName] + 1)
-                     {
-                        if(menuTypeFlag)
-                        {
-                           Dress_data.menuCustomNum[0][Tab_MenuClass.tabName] = MenuClass.menuData[Tab_MenuClass.tabName];
-                           MenuClass.systemData[this.tabNamePlus]["_menu"] = Dress_data.menuCustom[Tab_MenuClass.tabName][Dress_data.menuCustomNum[0][Tab_MenuClass.tabName]];
-                        }
-                        else
-                        {
-                           MenuClass.systemData[this.tabNamePlus]["_menu"] = MenuClass.menuData[Tab_MenuClass.tabName];
-                        }
-                     }
-                     else
-                     {
-                        if(menuKeyNum2 == 0)
-                        {
-                           menuKeyNum2 = 1;
-                        }
-                        if(menuTypeFlag)
-                        {
-                           Dress_data.menuCustomNum[0][Tab_MenuClass.tabName] = menuKeyNum2 - 1;
-                           MenuClass.systemData[this.tabNamePlus]["_menu"] = Dress_data.menuCustom[Tab_MenuClass.tabName][Dress_data.menuCustomNum[0][Tab_MenuClass.tabName]];
-                        }
-                        else
-                        {
-                           MenuClass.systemData[this.tabNamePlus]["_menu"] = menuKeyNum2 - 1;
-                        }
-                     }
-                  }
-                  Tab_MenuClass.MenuAction("key",Tab_MenuClass.tabName);
+               }
+
+               if (
+                  (String(Tab_MenuClass.menuKeyNum).length >= 3) ||
+                  (charCodeNum < 48) || (charCodeNum > 57)
+               ) {
                   MenuClass.menuSetFlag = false;
+               } else {
+                  try {
+                     if (String(Tab_MenuClass.menuKeyNum).length >= String(MenuClass.menuData[Tab_MenuClass.tabName] + 1).length) {
+                        MenuClass.menuSetFlag = false;
+                     }
+                  } catch (err: Error) { }
+               }
+
+               if (!MenuClass.menuSetFlag) {
                   try
                   {
                      MenuClass.tabMenuAdd[Tab_MenuClass.tabName].menu0.btn0.gotoAndStop(1);
@@ -347,6 +431,7 @@ package menu
                   catch(myError:Error)
                   {
                   }
+
                   try
                   {
                      MenuClass.tabMenuAdd[Tab_MenuClass.tabName].menu0.btn1.gotoAndStop(1);
@@ -354,6 +439,7 @@ package menu
                   catch(myError:Error)
                   {
                   }
+
                   Tab_MenuClass.tabName = null;
                }
             }
@@ -375,20 +461,30 @@ package menu
                   meterTypeNum = 3;
                   meterMaxNum = 100;
                }
-               else if(MenuClass.tabData[Tab_MeterClass.headerName][Tab_MeterClass.targetJ][2]["_meterType"] == 2)
-               {
-                  meterTypeNum = 4;
-                  meterMaxNum = 1000;
-               }
                else if(MenuClass.tabData[Tab_MeterClass.headerName][Tab_MeterClass.targetJ][2]["_meterType"] == 1)
                {
                   meterTypeNum = 3;
                   meterMaxNum = 360;
                }
+               else if(MenuClass.tabData[Tab_MeterClass.headerName][Tab_MeterClass.targetJ][2]["_meterType"] == 2)
+               {
+                  meterTypeNum = 4;
+                  meterMaxNum = 1000;
+               }
+               else if(MenuClass.tabData[Tab_MeterClass.headerName][Tab_MeterClass.targetJ][2]["_meterType"] == 3)
+               {
+                  meterTypeNum = 4;
+                  meterMaxNum = MenuClass.f10KeyPress? 100 : 1000;
+               }
+               else if(MenuClass.tabData[Tab_MeterClass.headerName][Tab_MeterClass.targetJ][2]["_meterType"] == 4)
+               {
+                  meterTypeNum = 3;
+                  meterMaxNum = MenuClass.f10KeyPress? 360 : 3600;
+               }
                genkaiFlag = 0;
                if(meterTypeNum == String(Tab_MenuClass.menuKeyNum).length || charCodeNum == 13)
                {
-                  if(!MenuClass.spaceKeyPress || charCodeNum == 13)
+                  if(MenuClass.spaceKeyPress == MenuClass.f12KeyPress || charCodeNum == 13)
                   {
                      genkaiFlag = 1;
                   }
@@ -401,7 +497,7 @@ package menu
                      menuKeyNum2 = Number(Tab_MenuClass.menuKeyNum);
                      if(tadDataName == "chara" || tadDataName == "charaPlus")
                      {
-                        if(menuKeyNum2 > meterMaxNum && !MenuClass.spaceKeyPress)
+                        if(menuKeyNum2 > meterMaxNum && MenuClass.spaceKeyPress == MenuClass.f12KeyPress)
                         {
                            MenuClass.charaData[MenuClass._nowCharaNum][this.tabNamePlus]["_meter"] = meterMaxNum;
                         }
@@ -412,7 +508,7 @@ package menu
                      }
                      else if(tadDataName == "system" || tadDataName == "systemPlus" || tadDataName == "systemAll" || tadDataName == "SelectCharacter")
                      {
-                        if(menuKeyNum2 > meterMaxNum && !MenuClass.spaceKeyPress)
+                        if(menuKeyNum2 > meterMaxNum && MenuClass.spaceKeyPress == MenuClass.f12KeyPress)
                         {
                            MenuClass.systemData[this.tabNamePlus]["_meter"] = meterMaxNum;
                         }
@@ -700,7 +796,7 @@ package menu
                if(charCodeNum == 119 && this.keyName == null || this.keyName == "zoomPlus")
                {
                   MenuClass.systemData["Zoom"]["_meter"] += 10;
-                  if(MenuClass.systemData["Zoom"]["_meter"] >= 99 && !MenuClass.spaceKeyPress)
+                  if(MenuClass.systemData["Zoom"]["_meter"] >= 99 && MenuClass.spaceKeyPress == MenuClass.f12KeyPress)
                   {
                      MenuClass.systemData["Zoom"]["_meter"] = 99;
                   }
@@ -709,7 +805,7 @@ package menu
                if(charCodeNum == 113 && this.keyName == null || this.keyName == "zoomMinus")
                {
                   MenuClass.systemData["Zoom"]["_meter"] -= 10;
-                  if(MenuClass.systemData["Zoom"]["_meter"] <= 0 && !MenuClass.spaceKeyPress)
+                  if(MenuClass.systemData["Zoom"]["_meter"] <= 0 && MenuClass.spaceKeyPress == MenuClass.f12KeyPress)
                   {
                      MenuClass.systemData["Zoom"]["_meter"] = 0;
                   }
@@ -1939,7 +2035,7 @@ package menu
       private function fc_MoveSayuu() : void
       {
          var _loc1_:Number = Main.mainMask.width - 800;
-         if(!MenuClass.spaceKeyPress)
+         if(MenuClass.spaceKeyPress == MenuClass.f12KeyPress)
          {
             if(Main.mainWindow.x >= 0)
             {
@@ -1956,7 +2052,7 @@ package menu
       private function fc_MoveJyouge() : void
       {
          var _loc1_:Number = Main.mainMask.height - 600;
-         if(!MenuClass.spaceKeyPress)
+         if(MenuClass.spaceKeyPress == MenuClass.f12KeyPress)
          {
             if(Main.mainWindow.y >= 0)
             {

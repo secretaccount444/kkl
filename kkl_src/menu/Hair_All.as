@@ -1,6 +1,7 @@
 package menu
 {
    import parameter.Dress_data;
+   import parts.Hairpiece;
    
    public class Hair_All
    {
@@ -94,18 +95,19 @@ package menu
             this.DressCharaData["SideBurnRight"][0]["_color2"][0] = MenuClass.systemData["HairAll"]["_color2"][0];
          }
          new Chara_ColorClass(param1,"SideBurnRight");
-         _loc3_ = 0;
-         while(_loc3_ <= Main.hukusuuNum)
+
+         for each (var hairpiece:Hairpiece in Hairpiece.getAllHairpieces(param1))
          {
-            this.charaData["HairEx" + _loc3_]["_color0"][0] = MenuClass.systemData["HairAll"]["_color0"][0];
-            this.DressCharaData["HairEx" + _loc3_][0]["_color0"][0] = MenuClass.systemData["HairAll"]["_color0"][0];
-            this.charaData["HairEx" + _loc3_]["_color1"][0] = MenuClass.systemData["HairAll"]["_color1"][0];
-            this.DressCharaData["HairEx" + _loc3_][0]["_color1"][0] = MenuClass.systemData["HairAll"]["_color1"][0];
-            this.charaData["HairEx" + _loc3_]["_color2"][0] = MenuClass.systemData["HairAll"]["_color2"][0];
-            this.DressCharaData["HairEx" + _loc3_][0]["_color2"][0] = MenuClass.systemData["HairAll"]["_color2"][0];
-            new Chara_ColorClass(param1,"HairEx" + _loc3_);
-            _loc3_++;
+            hairpiece.ensureInitialized();
+            hairpiece.color0[0] = MenuClass.systemData["HairAll"]["_color0"][0];
+            hairpiece.color1[0] = MenuClass.systemData["HairAll"]["_color1"][0];
+            hairpiece.color2[0] = MenuClass.systemData["HairAll"]["_color2"][0];
+            this.DressCharaData["HairEx" + hairpiece.slot][0]["_color0"][0] = MenuClass.systemData["HairAll"]["_color0"][0];
+            this.DressCharaData["HairEx" + hairpiece.slot][0]["_color1"][0] = MenuClass.systemData["HairAll"]["_color1"][0];
+            this.DressCharaData["HairEx" + hairpiece.slot][0]["_color2"][0] = MenuClass.systemData["HairAll"]["_color2"][0];
+            new Chara_ColorClass(param1,"HairEx" + hairpiece.slot);
          }
+
          if(param2 == "HairAll")
          {
             this.charaData["Ear"]["_senColor"] = 1;

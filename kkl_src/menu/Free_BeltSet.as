@@ -56,7 +56,7 @@ package menu
             {
                if(MenuClass.systemData["LinkFreeBeltLine"]["_flag"] && MenuClass._nowTabName == "FreeBeltScale")
                {
-                  if(MenuClass.systemData["FreeBeltScale" + param1]["_meter"] >= 80)
+                  if(MenuClass.systemData["FreeBeltScale" + param1]["_meter"] >= 800)
                   {
                      _loc4_ = 0;
                      while(_loc4_ <= 5)
@@ -72,7 +72,7 @@ package menu
                      }
                      MenuClass.systemData["FreeBeltLine" + param1]["_menu"] = 1;
                   }
-                  else if(MenuClass.systemData["FreeBeltScale" + param1]["_meter"] >= 60)
+                  else if(MenuClass.systemData["FreeBeltScale" + param1]["_meter"] >= 600)
                   {
                      _loc4_ = 0;
                      while(_loc4_ <= 5)
@@ -88,7 +88,7 @@ package menu
                      }
                      MenuClass.systemData["FreeBeltLine" + param1]["_menu"] = 2;
                   }
-                  else if(MenuClass.systemData["FreeBeltScale" + param1]["_meter"] >= 40)
+                  else if(MenuClass.systemData["FreeBeltScale" + param1]["_meter"] >= 400)
                   {
                      _loc4_ = 0;
                      while(_loc4_ <= 5)
@@ -104,7 +104,7 @@ package menu
                      }
                      MenuClass.systemData["FreeBeltLine" + param1]["_menu"] = 3;
                   }
-                  else if(MenuClass.systemData["FreeBeltScale" + param1]["_meter"] >= 20)
+                  else if(MenuClass.systemData["FreeBeltScale" + param1]["_meter"] >= 200)
                   {
                      _loc4_ = 0;
                      while(_loc4_ <= 5)

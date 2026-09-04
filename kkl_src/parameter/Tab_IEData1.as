@@ -1,5 +1,8 @@
 package parameter
 {
+   import parts.Ribbon;
+   import parts.Hairpiece;
+   
    public class Tab_IEData1
    {
 
@@ -32,20 +35,7 @@ package parameter
          }
          IEGroup[7] = ["qa", "qb", "dc", "eh"];
          IEGroup[8] = ["ea", "ec", "ed", "ef", "eg"];
-         IEGroup[9] = [];
-         this.i = 0;
-         while (this.i <= Main.hukusuuNum)
-         {
-            if (this.i <= 9)
-            {
-               IEGroup[9].push("r0" + this.i);
-            }
-            else
-            {
-               IEGroup[9].push("r" + this.i);
-            }
-            ++ this.i;
-         }
+         IEGroup[9] = ["r00"];
          IEGroup[10] = ["fa", "fb", "fh", "fk", "fc", "fj"];
          IEGroup[11] = ["fd", "fe", "ff", "fg", "fi", "pa"];
          IEGroup[12] = [];
@@ -88,20 +78,9 @@ package parameter
          }
          IEGroup[23] = ["kg"];
          IEGroup[24] = ["la", "lb", "oa", "os", "ob", "oc", "od", "oe", "of", "lc"];
-         IEGroup[25] = [];
-         this.i = 0;
-         while (this.i <= Main.RibonhukusuuNum)
-         {
-            if (this.i <= 9)
-            {
-               IEGroup[25].push("m0" + this.i);
-            }
-            else
-            {
-               IEGroup[25].push("m" + this.i);
-            }
-            ++ this.i;
-         }
+
+         IEGroup[25] = ["m00"];
+
          IEGroup[26] = [];
          this.i = 0;
          while (this.i <= Main.hukusuuNum)
@@ -293,16 +272,16 @@ package parameter
          IEData["bi"] = [["BodyPlus", "_menu"], ["BodyPlus", "_color0"], ["BodyAlpha", "_meter"], ["BodyPlusMeter", "_meter"]];
          IEData["bh"] = [["CharaFilterEmotion", "_check"]];
          IEData["be"] = [["Rmove", "_meter"]];
-         IEData["ca"] = [["BodyHeight", "_meter"], ["Waist", "_menu"], ["douHeight", "_meter"], ["AshiHeight", "_meter"], ["BodyWidth", "_meter"], ["HipWidth", "_meter"], ["HandWidth", "_meter"], ["AshiWidth", "_meter"], ["ShoulderWidth", "_meter"], ["Heso", "_menu"], ["WaistAlpha", "_meter"], ["BodySize", "_meter"]];
+         IEData["ca"] = [["BodyHeight", "_meter"], ["Waist", "_menu"], ["douHeight", "_meter"], ["AshiHeight", "_meter"], ["BodyWidth", "_meter"], ["HipWidth", "_meter"], ["HandWidth", "_meter"], ["AshiWidth", "_meter"], ["ShoulderWidth", "_meter"], ["Heso", "_menu"], ["WaistAlpha", "_meter"], ["BodySize", "_meter"], ["UpperBodyVisible", "_visible"], ["LowerBodyVisible", "_visible"]];
          IEData["cc"] = [["LeftArmScaleX", "_meter"], ["LeftArmScaleY", "_meter"], ["LeftArmOffsetX", "_meter"], ["LeftArmOffsetY", "_meter"], ["RightArmScaleX", "_meter"], ["RightArmScaleY", "_meter"], ["RightArmOffsetX", "_meter"], ["RightArmOffsetY", "_meter"], ["LeftArmVisible", "_visible"], ["RightArmVisible", "_visible"], ["LeftArmFlip", "_check"], ["RightArmFlip", "_check"]];
          IEData["cd"] = [["LeftHandScaleX", "_meter"], ["LeftHandScaleY", "_meter"], ["LeftHandOffsetX", "_meter"], ["LeftHandOffsetY", "_meter"], ["RightHandScaleX", "_meter"], ["RightHandScaleY", "_meter"], ["RightHandOffsetX", "_meter"], ["RightHandOffsetY", "_meter"], ["LeftHandVisible", "_visible"], ["RightHandVisible", "_visible"], ["LeftHandFlip", "_check"], ["RightHandFlip", "_check"]];
          IEData["ce"] = [["LeftUpperArmScaleX", "_meter"], ["LeftUpperArmScaleY", "_meter"], ["LeftUpperArmOffsetX", "_meter"], ["LeftUpperArmOffsetY", "_meter"], ["RightUpperArmScaleX", "_meter"], ["RightUpperArmScaleY", "_meter"], ["RightUpperArmOffsetX", "_meter"], ["RightUpperArmOffsetY", "_meter"], ["LeftShoulderVisible", "_visible"], ["RightShoulderVisible", "_visible"], ["LeftUpperArmVisible", "_visible"], ["RightUpperArmVisible", "_visible"]];
-         IEData["cf"] = [["LeftThighRotation", "_meter"],["LeftThighScaleX", "_meter"],["LeftThighScaleY", "_meter"],["LeftThighOffsetX", "_meter"],["LeftThighOffsetY", "_meter"],["RightThighRotation", "_meter"],["RightThighScaleX", "_meter"],["RightThighScaleY", "_meter"],["RightThighOffsetX", "_meter"],["RightThighOffsetY", "_meter"], ["LeftThighVisible", "_visible"], ["RightThighVisible", "_visible"]];
+         IEData["cf"] = [["LeftThighRotation", "_meter"],["LeftThighScaleX", "_meter"],["LeftThighScaleY", "_meter"],["LeftThighOffsetX", "_meter"],["LeftThighOffsetY", "_meter"],["RightThighRotation", "_meter"],["RightThighScaleX", "_meter"],["RightThighScaleY", "_meter"],["RightThighOffsetX", "_meter"],["RightThighOffsetY", "_meter"], ["LeftThighVisible", "_visible"], ["RightThighVisible", "_visible"], ["LeftShiriVisible", "_visible"], ["RightShiriVisible", "_visible"]];
          IEData["cg"] = [["LeftLegRotation", "_meter"],["LeftLegScaleX", "_meter"],["LeftLegScaleY", "_meter"],["LeftLegOffsetX", "_meter"],["LeftLegOffsetY", "_meter"],["RightLegRotation", "_meter"],["RightLegScaleX", "_meter"],["RightLegScaleY", "_meter"],["RightLegOffsetX", "_meter"],["RightLegOffsetY", "_meter"], ["LeftLegVisible", "_visible"], ["RightLegVisible", "_visible"]];
          IEData["ch"] = [["LeftFootRotation", "_meter"],["LeftFootScaleX", "_meter"],["LeftFootScaleY", "_meter"],["LeftFootOffsetX", "_meter"],["LeftFootOffsetY", "_meter"],["RightFootRotation", "_meter"],["RightFootScaleX", "_meter"],["RightFootScaleY", "_meter"],["RightFootOffsetX", "_meter"],["RightFootOffsetY", "_meter"], ["LeftFootVisible", "_visible"], ["RightFootVisible", "_visible"]];
          IEData["da"] = [["Body", "_color0"]];
          IEData["db"] = [["Hiyake", "_menu"], ["Hiyake", "_color0"]];
-         IEData["dd"] = [["Hoho", "_menu"], ["Contour", "_menu"], ["ContourWidth", "_meter"], ["ContourHeight", "_meter"], ["HeadScale", "_meter"], ["NeckHeight", "_meter"]];
+         IEData["dd"] = [["Hoho", "_menu"], ["Contour", "_menu"], ["ContourWidth", "_meter"], ["ContourHeight", "_meter"], ["HeadScale", "_meter"], ["NeckHeight", "_meter"], ["NeckVisible", "_visible"], ["HeadVisible", "_visible"]];
          IEData["dh"] = [["Nipple", "_color0"], ["NippleSize", "_meter"], ["NippleHeight", "_meter"], ["NippleWidth", "_meter"], ["Nipple", "_menu"]];
          IEData["di"] = [["Breast", "_menu"]];
          IEData["qa"] = [["Tin", "_menu"], ["Tin", "_color0"], ["Tin", "_color1"], ["TinSize", "_meter"], ["TinEx", "_meter"], ["Tin", "_color2"], ["Tin", "_depth"], ["TinManualAuto", "_check"], ["TinBokki", "_check"], ["TinSwing", "_meter"], ["TinKawa", "_menu"], ["Tin", "_tClick"], ["TinSizeAuto", "_check"], ["TinScaleX", "_meter"], ["TinScaleY", "_meter"], ["TinOffsetX", "_meter"], ["TinOffsetY", "_meter"]];
@@ -314,20 +293,12 @@ package parameter
          IEData["ed"] = [["Bangs", "_menu"], ["Bangs_Height", "_meter"], ["Bangs", "_reversal"], ["Bangs", "_depth"], ["Bangs", "_color0"], ["Bangs", "_color1"]];
          IEData["ef"] = [["SideBurnLeft", "_menu"], ["SideBurnLeft", "_depth"], ["SideBurnLeft_Height", "_meter"], ["SideBurnLeft", "_color0"], ["SideBurnLeft", "_color1"], ["SideBurnLeft", "_color2"], ["SideBurnLeft_x", "_meter"], ["SideBurnLeft", "_turn"]];
          IEData["eg"] = [["SideBurnRight", "_menu"], ["SideBurnRight", "_depth"], ["SideBurnRight_Height", "_meter"], ["SideBurnRight", "_color0"], ["SideBurnRight", "_color1"], ["SideBurnRight", "_color2"], ["SideBurnRight_x", "_meter"], ["SideBurnRight", "_turn"]];
-         this.i = 0;
-         while (this.i <= Main.hukusuuNum)
-         {
-            if (this.i <= 9)
-            {
-               this.str = "0" + this.i;
-            }
-            else
-            {
-               this.str = String(this.i);
-            }
-            IEData["r" + this.str] = [["HairEx" + this.i, "_menu"], ["HairEx" + this.i, "_color0"], ["HairEx" + this.i, "_color1"], ["HairEx" + this.i, "_color2"], ["HairEx" + this.i, "_reversal2"], ["HairEx" + this.i, "_depth"], ["HairExScaleX" + this.i, "_meter"], ["HairExScaleY" + this.i, "_meter"], ["HairExRotation" + this.i, "_meter"], ["HairExX" + this.i, "_meter"], ["HairExY" + this.i, "_meter"], ["HairEx" + this.i, "_turn"], ["HairExLine" + this.i, "_menu"], ["HairExScaleB" + this.i, "_meter"], ["HairEx" + this.i, "_shadow"], ["HairExRotationPlus" + this.i, "_meter"], ["HairExAdd" + this.i, "_add0"], ["HairExAlpha" + this.i, "_meter"]];
-            ++this.i;
+                  
+         IEData["r00"] = [];
+         for each (var prop in Hairpiece.codeProps) {
+            IEData["r00"].push(["HairEx" + prop[0] + "0", prop[1]]);
          }
+
          IEData["fa"] = [["Eye", "_menu"], ["EyeX", "_meter"], ["EyeY", "_meter"], ["EyeScaleX", "_meter"], ["EyeScaleY", "_meter"], ["EyeRotation", "_meter"], ["Eye", "_color0"], ["Eye", "_depth"]];
          IEData["fb"] = [["Eyelib", "_menu"]];
          IEData["fh"] = [["Lowerlash", "_menu"]];
@@ -350,7 +321,7 @@ package parameter
             {
                this.str = String(this.i);
             }
-            IEData["t" + this.str] = [["Mark" + this.i, "_menu"], ["Mark" + this.i, "_color0"], ["Mark" + this.i, "_color1"], ["Mark" + this.i, "_color2"], ["MarkScaleX" + this.i, "_meter"], ["MarkScaleY" + this.i, "_meter"], ["MarkRotation" + this.i, "_meter"], ["MarkX" + this.i, "_meter"], ["MarkY" + this.i, "_meter"], ["Mark" + this.i, "_reversal2"], ["MarkScaleB" + this.i, "_meter"], ["Mark" + this.i, "_depth"], ["MarkAlpha" + this.i, "_meter"], ["MarkVary" + this.i, "_menu"], ["MarkAdd" + this.i, "_add0"]];
+            IEData["t" + this.str] = [["Mark" + this.i, "_menu"], ["Mark" + this.i, "_color0"], ["Mark" + this.i, "_color1"], ["Mark" + this.i, "_color2"], ["MarkScaleX" + this.i, "_meter"], ["MarkScaleY" + this.i, "_meter"], ["MarkRotation" + this.i, "_meter"], ["MarkX" + this.i, "_meter"], ["MarkY" + this.i, "_meter"], ["Mark" + this.i, "_reversal2"], ["MarkScaleB" + this.i, "_meter"], ["Mark" + this.i, "_depth"], ["MarkAlpha" + this.i, "_meter"], ["MarkVary" + this.i, "_menu"], ["MarkAdd" + this.i, "_add0"], ["MarkFineX" + this.i, "_meter"], ["MarkFineY" + this.i, "_meter"]];
             ++this.i;
          }
          IEData["pa"] = [["Ear", "_menu"], ["Ear", "_color0"], ["Ear", "_color1"], ["Ear", "_color2"], ["EarScale", "_meter"], ["EarRotation", "_meter"], ["EarX", "_meter"], ["EarY", "_meter"], ["Ear", "_sen"], ["Ear", "_senColor"]];
@@ -369,7 +340,7 @@ package parameter
          IEData["ha"] = [["EmotionEyeLeft", "_meter"], ["EmotionEyeRight", "_meter"]];
          IEData["hb"] = [["EyeballXMove", "_meter"], ["EyeballXMove", "_reversal"], ["EyeballYMove", "_meter"], ["EyeballWidth", "_meter"], ["EyeballWidthRight", "_meter"], ["EyeballXMoveRight", "_meter"], ["EyeballYMoveRight", "_meter"]];
          IEData["hc"] = [["EmotionEyebrowLeft", "_menu"], ["EyebrowRotationLeft", "_meter"], ["EyebrowMoveLeft", "_meter"], ["EmotionEyebrowRight", "_menu"], ["EyebrowRotationRight", "_meter"], ["EyebrowMoveRight", "_meter"], ["EyebrowMoveHorizontalLeft", "_meter"], ["EyebrowMoveHorizontalRight", "_meter"]];
-         IEData["hd"] = [["EmotionMouth", "_menu"], ["EmotionMouth", "_reversal"], ["MouthWidth", "_meter"], ["MouthHeight", "_meter"], ["MouthSen", "_menu"], ["MouthYMove", "_meter"], ["MouthXMove", "_meter"], ["MouthRotation", "_meter"], ["EmotionMouth", "_visible"]];
+         IEData["hd"] = [["EmotionMouth", "_menu"], ["EmotionMouth", "_reversal"], ["MouthWidth", "_meter"], ["MouthHeight", "_meter"], ["MouthSen", "_menu"], ["MouthYMove", "_meter"], ["MouthXMove", "_meter"], ["MouthRotation", "_meter"], ["EmotionMouth", "_visible"], ["MouthSen", "_color0"]];
          this.i = 0;
          while (this.i <= Main.hukusuuNum)
          {
@@ -400,27 +371,19 @@ package parameter
          IEData["ka"] = [["Bura", "_menu"], ["Bura", "_color0"], ["Bura", "_color1"], ["Bura", "_color2"], ["Bura", "_separate"]];
          IEData["kb"] = [["Pantu", "_menu"], ["Pantu", "_color0"], ["Pantu", "_color1"], ["Pantu", "_color2"], ["Pantu", "_depth"]];
          IEData["kf"] = [["Nawa", "_menu"], ["Nawa", "_color0"], ["Nawa", "_color1"], ["Nawa", "_color2"]];
-         IEData["kg"] = [["Vibrator", "_menu"], ["Vibrator", "_color0"], ["Vibrator", "_color1"], ["Vibrator", "_color2"], ["VibratorMove", "_menu"], ["VibratorSpeed", "_menu"], ["VibratorMove", "_count"], ["VibratorMove", "_turn"], ["VibratorSpeed", "_turn"], ["VibratorMove", "_turn2"], ["VibratorScale", "_meter"], ["VibratorThrough", "_check"]];
+         IEData["kg"] = [["Vibrator", "_menu"], ["Vibrator", "_color0"], ["Vibrator", "_color1"], ["Vibrator", "_color2"], ["VibratorMove", "_menu"], ["VibratorSpeed", "_menu"], ["VibratorMove", "_count"], ["VibratorMove", "_turn"], ["VibratorSpeed", "_turn"], ["VibratorMove", "_turn2"], ["VibratorScale", "_meter"], ["VibratorThrough", "_check"], ["VibratorAlpha", "_meter"]];
          IEData["kc"] = [["NippleGLeft", "_menu"], ["NippleGLeft", "_color0"], ["NippleGLeft", "_color1"], ["NippleGLeftSize", "_meter"], ["NippleGLeft", "_color2"]];
          IEData["kd"] = [["NippleGRight", "_menu"], ["NippleGRight", "_color0"], ["NippleGRight", "_color1"], ["NippleGRightSize", "_meter"], ["NippleGRight", "_color2"]];
          IEData["ke"] = [["SG", "_menu"], ["SG", "_color0"], ["SG", "_color1"], ["SGSize", "_meter"], ["SG", "_color2"]];
          IEData["la"] = [["Hat", "_menu"], ["Hat", "_color0"], ["Hat", "_color1"], ["Hat", "_color2"], ["Hat", "_reversal"], ["Hat", "_hair0"], ["Hat", "_hair1"], ["Hat", "_hair2"], ["Hat", "_hair3"], ["Hat", "_hair4"]];
          IEData["lb"] = [["Megane", "_menu"], ["Megane", "_color0"], ["Megane", "_color1"], ["Megane", "_color2"], ["Megane", "_reversal"], ["Megane", "_g0"], ["MeganeY", "_meter"], ["Megane", "_depth"]];
          IEData["lc"] = [["Headband", "_menu"], ["Headband", "_color0"], ["Headband", "_color1"], ["Headband", "_color2"], ["Headband", "_depth"]];
-         this.i = 0;
-         while (this.i <= Main.RibonhukusuuNum)
-         {
-            if (this.i <= 9)
-            {
-               this.str = "0" + this.i;
-            }
-            else
-            {
-               this.str = String(this.i);
-            }
-            IEData["m" + this.str] = [["Ribon" + this.i, "_menu"], ["Ribon" + this.i, "_color0"], ["Ribon" + this.i, "_color1"], ["Ribon" + this.i, "_color2"], ["Ribon" + this.i, "_reversal2"], ["Ribon" + this.i, "_depth"], ["RibonScale" + this.i, "_meter"], ["RibonRotation" + this.i, "_meter"], ["RibonX" + this.i, "_meter"], ["RibonY" + this.i, "_meter"], ["RibonLine" + this.i, "_menu"], ["RibonLine" + this.i, "_color0"], ["RibonScaleY" + this.i, "_meter"], ["RibonScaleB" + this.i, "_meter"], ["Ribon" + this.i, "_reversal"], ["RibonAdd" + this.i, "_add0"], ["Ribon" + this.i, "_shadow"], ["RibonAlpha" + this.i, "_meter"], ["RibonFineX" + this.i, "_meter"], ["RibonFineY" + this.i, "_meter"]];
-            ++this.i;
+         
+         IEData["m00"] = [];
+         for each (var prop in Ribbon.codeProps) {
+            IEData["m00"].push(["Ribon" + prop[0] + "0", prop[1]]);
          }
+
          this.i = 0;
          while (this.i <= Main.hukusuuNum)
          {

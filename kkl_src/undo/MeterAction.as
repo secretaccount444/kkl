@@ -15,7 +15,7 @@ package undo {
         private function clampValue(value:Number) : Number {
             var clampMode = MenuClass.tabData[this.headerName][this.targetJ][2]["_free"];
 
-            if (!MenuClass.spaceKeyPress || clampMode == 3) {
+            if (MenuClass.spaceKeyPress == MenuClass.f12KeyPress || clampMode == 3) {
                 if (value >= this.maxNum) {
                     value = this.maxNum;
                 }

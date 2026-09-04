@@ -2,6 +2,8 @@ package menu
 {
    import flash.utils.ByteArray;
    import parameter.Dress_data;
+   import parts.Ribbon;
+   import parts.Hairpiece;
    
    public class SetCharaData
    {
@@ -180,6 +182,11 @@ package menu
          var _loc149_:Boolean = true;
          var _loc150_:Boolean = true;
          var _loc151_:Boolean = true;
+         var lowerBodyVisibleChanged = true;
+
+         var hideOldRibbons = {};
+         var hideOldHairpieces = {};
+
          if(param3 == 0 || param3 == 2)
          {
             try
@@ -216,7 +223,7 @@ package menu
                {
                   _loc13_ = false;
                }
-               if(this.charaOldData["ShoulderWidth"]["_meter"] == this.charaData["ShoulderWidth"]["_meter"] && this.charaOldData["LeftShoulderVisible"]["_visible"][0] == this.charaData["LeftShoulderVisible"]["_visible"][0] && this.charaOldData["RightShoulderVisible"]["_visible"][0] == this.charaData["RightShoulderVisible"]["_visible"][0])
+               if(this.charaOldData["ShoulderWidth"]["_meter"] == this.charaData["ShoulderWidth"]["_meter"] && this.charaOldData["LeftShoulderVisible"]["_visible"][0] == this.charaData["LeftShoulderVisible"]["_visible"][0] && this.charaOldData["RightShoulderVisible"]["_visible"][0] == this.charaData["RightShoulderVisible"]["_visible"][0] && this.charaOldData["UpperBodyVisible"]["_visible"][0] == this.charaData["UpperBodyVisible"]["_visible"][0])
                {
                   _loc14_ = false;
                }
@@ -232,7 +239,7 @@ package menu
                {
                   _loc43_ = false;
                }
-               if(this.charaOldData["HeadScale"]["_meter"] == this.charaData["HeadScale"]["_meter"])
+               if(this.charaOldData["HeadScale"]["_meter"] == this.charaData["HeadScale"]["_meter"] && this.charaOldData["HeadVisible"]["_visible"][0] == this.charaData["HeadVisible"]["_visible"][0])
                {
                   _loc16_ = false;
                }
@@ -284,6 +291,8 @@ package menu
                   this.charaOldData["RightFootOffsetY"]["_meter"] == this.charaData["RightFootOffsetY"]["_meter"] &&
                   this.charaOldData["LeftThighVisible"]["_visible"][0] == this.charaData["LeftThighVisible"]["_visible"][0] &&
                   this.charaOldData["RightThighVisible"]["_visible"][0] == this.charaData["RightThighVisible"]["_visible"][0] &&
+                  this.charaOldData["LeftShiriVisible"]["_visible"][0] == this.charaData["LeftShiriVisible"]["_visible"][0] &&
+                  this.charaOldData["RightShiriVisible"]["_visible"][0] == this.charaData["RightShiriVisible"]["_visible"][0] &&
                   this.charaOldData["LeftLegVisible"]["_visible"][0] == this.charaData["LeftLegVisible"]["_visible"][0] &&
                   this.charaOldData["RightLegVisible"]["_visible"][0] == this.charaData["RightLegVisible"]["_visible"][0] &&
                   this.charaOldData["LeftFootVisible"]["_visible"][0] == this.charaData["LeftFootVisible"]["_visible"][0] &&
@@ -371,7 +380,7 @@ package menu
                {
                   _loc28_ = false;
                }
-               if(this.charaOldData["Vibrator"]["_visible"][0] == this.charaData["Vibrator"]["_visible"][0] && this.charaOldData["Vibrator"]["_menu"] == this.charaData["Vibrator"]["_menu"] && String(this.charaOldData["Vibrator"]["_color0"][0]) == String(this.charaData["Vibrator"]["_color0"][0]) && String(this.charaOldData["Vibrator"]["_color1"][0]) == String(this.charaData["Vibrator"]["_color1"][0]) && String(this.charaOldData["Vibrator"]["_color2"][0]) == String(this.charaData["Vibrator"]["_color2"][0]) && this.charaOldData["VibratorMove"]["_menu"] == this.charaData["VibratorMove"]["_menu"] && this.charaOldData["VibratorMove"]["_count"] == this.charaData["VibratorMove"]["_count"] && this.charaOldData["VibratorMove"]["_turn"] == this.charaData["VibratorMove"]["_turn"] && this.charaOldData["VibratorMove"]["_turn2"] == this.charaData["VibratorMove"]["_turn2"] && this.charaOldData["VibratorSpeed"]["_menu"] == this.charaData["VibratorSpeed"]["_menu"] && this.charaOldData["VibratorSpeed"]["_turn"] == this.charaData["VibratorSpeed"]["_turn"] && this.charaOldData["VibratorScale"]["_meter"] == this.charaData["VibratorScale"]["_meter"])
+               if(this.charaOldData["Vibrator"]["_visible"][0] == this.charaData["Vibrator"]["_visible"][0] && this.charaOldData["Vibrator"]["_menu"] == this.charaData["Vibrator"]["_menu"] && String(this.charaOldData["Vibrator"]["_color0"][0]) == String(this.charaData["Vibrator"]["_color0"][0]) && String(this.charaOldData["Vibrator"]["_color1"][0]) == String(this.charaData["Vibrator"]["_color1"][0]) && String(this.charaOldData["Vibrator"]["_color2"][0]) == String(this.charaData["Vibrator"]["_color2"][0]) && this.charaOldData["VibratorMove"]["_menu"] == this.charaData["VibratorMove"]["_menu"] && this.charaOldData["VibratorMove"]["_count"] == this.charaData["VibratorMove"]["_count"] && this.charaOldData["VibratorMove"]["_turn"] == this.charaData["VibratorMove"]["_turn"] && this.charaOldData["VibratorMove"]["_turn2"] == this.charaData["VibratorMove"]["_turn2"] && this.charaOldData["VibratorSpeed"]["_menu"] == this.charaData["VibratorSpeed"]["_menu"] && this.charaOldData["VibratorSpeed"]["_turn"] == this.charaData["VibratorSpeed"]["_turn"] && this.charaOldData["VibratorScale"]["_meter"] == this.charaData["VibratorScale"]["_meter"] && this.charaOldData["VibratorAlpha"]["_meter"] == this.charaData["VibratorAlpha"]["_meter"])
                {
                   _loc29_ = false;
                }
@@ -491,7 +500,7 @@ package menu
                {
                   _loc60_ = false;
                }
-               if(this.charaOldData["NeckHeight"]["_meter"] == this.charaData["NeckHeight"]["_meter"])
+               if(this.charaOldData["NeckHeight"]["_meter"] == this.charaData["NeckHeight"]["_meter"] && this.charaOldData["NeckVisible"]["_visible"][0] == this.charaData["NeckVisible"]["_visible"][0])
                {
                   _loc62_ = false;
                }
@@ -558,17 +567,29 @@ package menu
                {
                   _loc72_ = false;
                }
-               _loc4_ = 0;
-               while(_loc4_ <= Main.hukusuuNum)
-               {
-                  if(!(this.charaOldData["HairExPlus"]["_visible"][_loc4_] == this.charaData["HairExPlus"]["_visible"][_loc4_] && this.charaOldData["HairEx" + _loc4_]["_menu"] == this.charaData["HairEx" + _loc4_]["_menu"] && this.charaOldData["HairEx" + _loc4_]["_reversal2"] == this.charaData["HairEx" + _loc4_]["_reversal2"] && String(this.charaOldData["HairEx" + _loc4_]["_color0"][0]) == String(this.charaData["HairEx" + _loc4_]["_color0"][0]) && String(this.charaOldData["HairEx" + _loc4_]["_color1"][0]) == String(this.charaData["HairEx" + _loc4_]["_color1"][0]) && String(this.charaOldData["HairEx" + _loc4_]["_color2"][0]) == String(this.charaData["HairEx" + _loc4_]["_color2"][0]) && this.charaOldData["HairEx" + _loc4_]["_turn"] == this.charaData["HairEx" + _loc4_]["_turn"] && this.charaOldData["HairExScaleX" + _loc4_]["_meter"] == this.charaData["HairExScaleX" + _loc4_]["_meter"] && this.charaOldData["HairExScaleY" + _loc4_]["_meter"] == this.charaData["HairExScaleY" + _loc4_]["_meter"] && this.charaOldData["HairExScaleB" + _loc4_]["_meter"] == this.charaData["HairExScaleB" + _loc4_]["_meter"] && this.charaOldData["HairExLine" + _loc4_]["_menu"] == this.charaData["HairExLine" + _loc4_]["_menu"] && this.charaOldData["HairExRotation" + _loc4_]["_meter"] == this.charaData["HairExRotation" + _loc4_]["_meter"] && this.charaOldData["HairExRotationPlus" + _loc4_]["_meter"] == this.charaData["HairExRotationPlus" + _loc4_]["_meter"] && this.charaOldData["HairExX" + _loc4_]["_meter"] == this.charaData["HairExX" + _loc4_]["_meter"] && this.charaOldData["HairExY" + _loc4_]["_meter"] == this.charaData["HairExY" + _loc4_]["_meter"] && this.charaOldData["HairEx" + _loc4_]["_shadow"] == this.charaData["HairEx" + _loc4_]["_shadow"] && this.charaOldData["HairExAdd" + _loc4_]["_add0"] == this.charaData["HairExAdd" + _loc4_]["_add0"] && this.charaOldData["HairExAlpha" + _loc4_]["_meter"] == this.charaData["HairExAlpha" + _loc4_]["_meter"]))
-                  {
-                     _loc73_ = true;
-                     break;
-                  }
-                  _loc73_ = false;
-                  _loc4_++;
+
+               _loc73_ = false;
+               var combinedHairpieceSlots = {};
+               for each (var hairpiece: Hairpiece in Hairpiece.getVisibleHairpieces(param1)) {
+                  combinedHairpieceSlots[hairpiece.slot] = true;
                }
+
+               for each (var hairpiece: Hairpiece in Hairpiece.getVisibleHairpieces(param1, true)) {
+                  combinedHairpieceSlots[hairpiece.slot] = true;
+               }
+
+               for (var slot in combinedHairpieceSlots) {
+                  var newHairpiece = Hairpiece.fromCharacter(param1, slot);
+                  var oldHairpiece = Hairpiece.fromCharacter(param1, slot, true);
+                  if (!_loc73_) {
+                     _loc73_ = _loc73_ || newHairpiece.hasChanged();
+                  }
+
+                  if (oldHairpiece.visible && MenuClass.charaData[param1]["HairExPlus"]["_visible"][slot] == undefined) {
+                     hideOldHairpieces[slot] = true;
+                  }
+               }
+
                _loc5_ = this.charaData["FaceOption"]["_visible"].length - 1;
                _loc4_ = 0;
                while(_loc4_ <= _loc5_)
@@ -806,7 +827,9 @@ package menu
                      this.charaOldData["MarkAlpha" + _loc4_]["_meter"] == this.charaData["MarkAlpha" + _loc4_]["_meter"] &&
                      this.charaOldData["Mark" + _loc4_]["_depth"] == this.charaData["Mark" + _loc4_]["_depth"] &&
                      this.charaOldData["MarkVary" + _loc4_]["_menu"] == this.charaData["MarkVary" + _loc4_]["_menu"] &&
-                     this.charaOldData["MarkAdd" + _loc4_]["_add0"] == this.charaData["MarkAdd" + _loc4_]["_add0"]
+                     this.charaOldData["MarkAdd" + _loc4_]["_add0"] == this.charaData["MarkAdd" + _loc4_]["_add0"] &&
+                     this.charaOldData["MarkFineX" + _loc4_]["_meter"] == this.charaData["MarkFineX" + _loc4_]["_meter"] &&
+                     this.charaOldData["MarkFineY" + _loc4_]["_meter"] == this.charaData["MarkFineY" + _loc4_]["_meter"]
                   )) {
                      _loc120_ = true;
                      break;
@@ -814,39 +837,29 @@ package menu
                   _loc120_ = false;
                   _loc4_++;
                }
-               _loc4_ = 0;
-               while(_loc4_ <= Main.RibonhukusuuNum)
-               {
-                  if(!(
-                     this.charaOldData["RibonPlus"]["_visible"][_loc4_] == this.charaData["RibonPlus"]["_visible"][_loc4_] &&
-                     this.charaOldData["Ribon" + _loc4_]["_menu"] == this.charaData["Ribon" + _loc4_]["_menu"] &&
-                     this.charaOldData["Ribon" + _loc4_]["_reversal2"] == this.charaData["Ribon" + _loc4_]["_reversal2"] &&
-                     this.charaOldData["Ribon" + _loc4_]["_depth"] == this.charaData["Ribon" + _loc4_]["_depth"] &&
-                     String(this.charaOldData["Ribon" + _loc4_]["_color0"][0]) == String(this.charaData["Ribon" + _loc4_]["_color0"][0]) &&
-                     String(this.charaOldData["Ribon" + _loc4_]["_color1"][0]) == String(this.charaData["Ribon" + _loc4_]["_color1"][0]) &&
-                     String(this.charaOldData["Ribon" + _loc4_]["_color2"][0]) == String(this.charaData["Ribon" + _loc4_]["_color2"][0]) &&
-                     this.charaOldData["RibonLine" + _loc4_]["_menu"] == this.charaData["RibonLine" + _loc4_]["_menu"] &&
-                     String(this.charaOldData["RibonLine" + _loc4_]["_color0"]) == String(this.charaData["RibonLine" + _loc4_]["_color0"]) &&
-                     this.charaOldData["RibonScale" + _loc4_]["_meter"] == this.charaData["RibonScale" + _loc4_]["_meter"] &&
-                     this.charaOldData["RibonScaleY" + _loc4_]["_meter"] == this.charaData["RibonScaleY" + _loc4_]["_meter"] &&
-                     this.charaOldData["RibonScaleB" + _loc4_]["_meter"] == this.charaData["RibonScaleB" + _loc4_]["_meter"] &&
-                     this.charaOldData["RibonRotation" + _loc4_]["_meter"] == this.charaData["RibonRotation" + _loc4_]["_meter"] &&
-                     this.charaOldData["RibonX" + _loc4_]["_meter"] == this.charaData["RibonX" + _loc4_]["_meter"] &&
-                     this.charaOldData["RibonY" + _loc4_]["_meter"] == this.charaData["RibonY" + _loc4_]["_meter"] &&
-                     this.charaOldData["RibonAdd" + _loc4_]["_add0"] == this.charaData["RibonAdd" + _loc4_]["_add0"] &&
-                     this.charaOldData["Ribon" + _loc4_]["_reversal"] == this.charaData["Ribon" + _loc4_]["_reversal"] &&
-                     this.charaOldData["Ribon" + _loc4_]["_shadow"] == this.charaData["Ribon" + _loc4_]["_shadow"] &&
-                     this.charaOldData["RibonAlpha" + _loc4_]["_meter"] == this.charaData["RibonAlpha" + _loc4_]["_meter"] &&
-                     this.charaOldData["RibonFineX" + _loc4_]["_meter"] == this.charaData["RibonFineX" + _loc4_]["_meter"] &&
-                     this.charaOldData["RibonFineY" + _loc4_]["_meter"] == this.charaData["RibonFineY" + _loc4_]["_meter"]
-                  ))
-                  {
-                     _loc121_ = true;
-                     break;
-                  }
-                  _loc121_ = false;
-                  _loc4_++;
+
+               _loc121_ = false;
+               var combinedRibbonSlots = {};
+               for each (var ribbon: Ribbon in Ribbon.getVisibleRibbons(param1)) {
+                  combinedRibbonSlots[ribbon.slot] = true;
                }
+
+               for each (var ribbon: Ribbon in Ribbon.getVisibleRibbons(param1, true)) {
+                  combinedRibbonSlots[ribbon.slot] = true;
+               }
+
+               for (var slot in combinedRibbonSlots) {
+                  var newRibbon = Ribbon.fromCharacter(param1, slot);
+                  var oldRibbon = Ribbon.fromCharacter(param1, slot, true);
+                  if (!_loc121_) {
+                     _loc121_ = _loc121_ || newRibbon.hasChanged();
+                  }
+
+                  if (oldRibbon.visible && MenuClass.charaData[param1]["RibonPlus"]["_visible"][slot] == undefined) {
+                     hideOldRibbons[slot] = true;
+                  }
+               }
+
                _loc4_ = 0;
                while(_loc4_ <= Main.hukusuuNum)
                {
@@ -1015,6 +1028,8 @@ package menu
                {
                   _loc151_ = false;
                }
+
+               lowerBodyVisibleChanged = (this.charaOldData["LowerBodyVisible"]["_visible"][0] != this.charaData["LowerBodyVisible"]["_visible"][0]);
             }
             catch(myError:Error)
             {
@@ -1062,6 +1077,10 @@ package menu
             if(_loc12_)
             {
                new SetClass(param1,"BodyHeight","move");
+            }
+            if (lowerBodyVisibleChanged)
+            {
+               new SetClass(param1, "LowerBodyVisible", "move");
             }
             if(_loc13_)
             {
@@ -1311,6 +1330,11 @@ package menu
             }
             if(_loc73_)
             {
+               for (var slot in hideOldHairpieces) {
+                  Hair_HairExSet.deleteFc(param1, slot, 0);
+                  Hair_HairExSet.deleteFc(param1, slot, 1);
+               }
+
                new SetClass(param1,"HairExPlus","move");
             }
             if(_loc74_)
@@ -1504,6 +1528,12 @@ package menu
             }
             if(_loc121_)
             {
+               /* Delete extra ribbons that might be missed by getAllRibbons. */
+               for (var slot in hideOldRibbons) {
+                  Huku_RibonSet.deleteFc(param1, slot, 0);
+                  Huku_RibonSet.deleteFc(param1, slot, 1);
+               }
+
                new SetClass(param1,"RibonPlus","move");
             }
             if(_loc123_)

@@ -15,13 +15,13 @@ package menu
          {
             if(param2 == "random")
             {
-               _loc4_ = Math.floor(Math.random() * 45) + 45;
+               _loc4_ = Math.floor(Math.random() * 450) + 450;
                _loc3_["BodyHeight"]["_meter"] = _loc4_;
-               new MeterPersent(30,80,"BodyHeight",param1);
+               new MeterPersent(300,800,"BodyHeight",param1);
             }
             else if(param2 == "tab")
             {
-               new MeterPersent(30,80,"AllBodyHeightSet",param1);
+               new MeterPersent(300,800,"AllBodyHeightSet",param1);
             }
             _loc3_["BodyHeight"]["_meter"] = Math.floor(MeterPersent.MeterPersentNum);
          }
@@ -29,13 +29,13 @@ package menu
          {
             if(param2 == "random")
             {
-               _loc4_ = Math.floor(Math.random() * 40) + 15;
+               _loc4_ = Math.floor(Math.random() * 400) + 150;
                _loc3_["BodyHeight"]["_meter"] = _loc4_;
-               new MeterPersent(0,50,"BodyHeight",param1);
+               new MeterPersent(0,500,"BodyHeight",param1);
             }
             else if(param2 == "tab")
             {
-               new MeterPersent(0,50,"AllBodyHeightSet",param1);
+               new MeterPersent(0,500,"AllBodyHeightSet",param1);
             }
             _loc3_["BodyHeight"]["_meter"] = Math.floor(MeterPersent.MeterPersentNum);
          }
@@ -45,58 +45,58 @@ package menu
             new SetClass(param1,"BodySize","tab");
             _loc3_["Heso"]["_menu"] = 0;
             new SetClass(param1,"Heso","tab");
-            _loc3_["douHeight"]["_meter"] = 30;
+            _loc3_["douHeight"]["_meter"] = 300;
             if(MenuClass.systemData["BodyType"]["_menu"] == 0)
             {
-               new MeterPersent(50,40,"BodyHeight",param1);
+               new MeterPersent(500,400,"BodyHeight",param1);
             }
             else if(MenuClass.systemData["BodyType"]["_menu"] == 1)
             {
-               new MeterPersent(90,-60,"BodyHeight",param1);
+               new MeterPersent(900,-600,"BodyHeight",param1);
             }
             _loc3_["HeadScale"]["_meter"] = Math.floor(MeterPersent.MeterPersentNum);
             new SetClass(param1,"HeadScale","tab");
-            new MeterPersent(50,55,"BodyHeight",param1);
+            new MeterPersent(500,550,"BodyHeight",param1);
             _loc3_["NeckHeight"]["_meter"] = Math.floor(MeterPersent.MeterPersentNum);
             new SetClass(param1,"NeckHeight","tab");
-            new MeterPersent(50,70,"BodyHeight",param1);
+            new MeterPersent(500,700,"BodyHeight",param1);
             _loc3_["AshiHeight"]["_meter"] = Math.floor(MeterPersent.MeterPersentNum);
          }
          else if(MenuClass.systemData["DeformerReal"]["_menu"] == 1)
          {
-            _loc3_["BodySize"]["_meter"] = 87;
+            _loc3_["BodySize"]["_meter"] = 870;
             new SetClass(param1,"BodySize","tab");
             _loc3_["Heso"]["_menu"] = 2;
             new SetClass(param1,"Heso","tab");
-            _loc3_["douHeight"]["_meter"] = 10;
+            _loc3_["douHeight"]["_meter"] = 100;
             if(MenuClass.systemData["BodyType"]["_menu"] == 0)
             {
-               new MeterPersent(10,5,"BodyHeight",param1);
+               new MeterPersent(100,50,"BodyHeight",param1);
             }
             else if(MenuClass.systemData["BodyType"]["_menu"] == 1)
             {
-               new MeterPersent(25,-45,"BodyHeight",param1);
+               new MeterPersent(250,-450,"BodyHeight",param1);
             }
             _loc3_["HeadScale"]["_meter"] = Math.floor(MeterPersent.MeterPersentNum);
             new SetClass(param1,"HeadScale","tab");
-            new MeterPersent(35,40,"BodyHeight",param1);
+            new MeterPersent(350,400,"BodyHeight",param1);
             _loc3_["NeckHeight"]["_meter"] = Math.floor(MeterPersent.MeterPersentNum);
             new SetClass(param1,"NeckHeight","tab");
-            new MeterPersent(50,75,"BodyHeight",param1);
+            new MeterPersent(500,750,"BodyHeight",param1);
             _loc3_["AshiHeight"]["_meter"] = Math.floor(MeterPersent.MeterPersentNum);
          }
          if(MenuClass.systemData["DeformerReal"]["_menu"] == 0)
          {
             if(MenuClass.systemData["BodyType"]["_menu"] == 0)
             {
-               new MeterPersent(30,15,"BodyHeight",param1);
+               new MeterPersent(300,150,"BodyHeight",param1);
             }
             else if(MenuClass.systemData["BodyType"]["_menu"] == 1)
             {
-               new MeterPersent(50,35,"BodyHeight",param1);
+               new MeterPersent(500,350,"BodyHeight",param1);
             }
             _loc3_["BodyWidth"]["_meter"] = Math.floor(MeterPersent.MeterPersentNum);
-            new MeterPersent(40,10,"BodyHeight",param1);
+            new MeterPersent(400,100,"BodyHeight",param1);
             _loc3_["ShoulderWidth"]["_meter"] = Math.floor(MeterPersent.MeterPersentNum);
          }
          else if(MenuClass.systemData["DeformerReal"]["_menu"] == 1)
@@ -107,7 +107,7 @@ package menu
             }
             else if(MenuClass.systemData["BodyType"]["_menu"] == 1)
             {
-               _loc3_["BodyWidth"]["_meter"] = 25;
+               _loc3_["BodyWidth"]["_meter"] = 250;
             }
             _loc3_["ShoulderWidth"]["_meter"] = 0;
          }

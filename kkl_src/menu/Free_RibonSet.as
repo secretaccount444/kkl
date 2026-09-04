@@ -47,22 +47,22 @@ package menu
                {
                   // Chara_Class.chara_m["Ribon" + param1].ribon0.sen.alpha = 100;
                   Chara_Class.chara_m["Ribon" + param1].ribon0.sen.visible = true;
-                  if(MenuClass.systemData["FreeRibonScale" + param1]["_meter"] >= 70)
+                  if(MenuClass.systemData["FreeRibonScale" + param1]["_meter"] >= 700)
                   {
                      Chara_Class.chara_m["Ribon" + param1].ribon0.sen.gotoAndStop(1);
                      MenuClass.systemData["FreeRibonLine" + param1]["_menu"] = 1;
                   }
-                  else if(MenuClass.systemData["FreeRibonScale" + param1]["_meter"] >= 50)
+                  else if(MenuClass.systemData["FreeRibonScale" + param1]["_meter"] >= 500)
                   {
                      Chara_Class.chara_m["Ribon" + param1].ribon0.sen.gotoAndStop(2);
                      MenuClass.systemData["FreeRibonLine" + param1]["_menu"] = 2;
                   }
-                  else if(MenuClass.systemData["FreeRibonScale" + param1]["_meter"] >= 30)
+                  else if(MenuClass.systemData["FreeRibonScale" + param1]["_meter"] >= 300)
                   {
                      Chara_Class.chara_m["Ribon" + param1].ribon0.sen.gotoAndStop(3);
                      MenuClass.systemData["FreeRibonLine" + param1]["_menu"] = 3;
                   }
-                  else if(MenuClass.systemData["FreeRibonScale" + param1]["_meter"] >= 10)
+                  else if(MenuClass.systemData["FreeRibonScale" + param1]["_meter"] >= 100)
                   {
                      Chara_Class.chara_m["Ribon" + param1].ribon0.sen.gotoAndStop(4);
                      MenuClass.systemData["FreeRibonLine" + param1]["_menu"] = 4;
@@ -110,22 +110,22 @@ package menu
                   {
                      Chara_Class.chara_m["Ribon" + param1].ribon0["ball" + _loc4_].sen.visible = true;
                      // Chara_Class.chara_m["Ribon" + param1].ribon0["ball" + _loc4_].sen.alpha = 100;
-                     if(MenuClass.systemData["FreeRibonScale" + param1]["_meter"] >= 70)
+                     if(MenuClass.systemData["FreeRibonScale" + param1]["_meter"] >= 700)
                      {
                         Chara_Class.chara_m["Ribon" + param1].ribon0["ball" + _loc4_].sen.gotoAndStop(1);
                         MenuClass.systemData["FreeRibonLine" + param1]["_menu"] = 1;
                      }
-                     else if(MenuClass.systemData["FreeRibonScale" + param1]["_meter"] >= 50)
+                     else if(MenuClass.systemData["FreeRibonScale" + param1]["_meter"] >= 500)
                      {
                         Chara_Class.chara_m["Ribon" + param1].ribon0["ball" + _loc4_].sen.gotoAndStop(2);
                         MenuClass.systemData["FreeRibonLine" + param1]["_menu"] = 2;
                      }
-                     else if(MenuClass.systemData["FreeRibonScale" + param1]["_meter"] >= 30)
+                     else if(MenuClass.systemData["FreeRibonScale" + param1]["_meter"] >= 300)
                      {
                         Chara_Class.chara_m["Ribon" + param1].ribon0["ball" + _loc4_].sen.gotoAndStop(3);
                         MenuClass.systemData["FreeRibonLine" + param1]["_menu"] = 3;
                      }
-                     else if(MenuClass.systemData["FreeRibonScale" + param1]["_meter"] >= 10)
+                     else if(MenuClass.systemData["FreeRibonScale" + param1]["_meter"] >= 100)
                      {
                         Chara_Class.chara_m["Ribon" + param1].ribon0["ball" + _loc4_].sen.gotoAndStop(4);
                         MenuClass.systemData["FreeRibonLine" + param1]["_menu"] = 4;

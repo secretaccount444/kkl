@@ -66,10 +66,18 @@ package {
                             path = name;
                         }
 
+                        var lowerName = name.toLowerCase();
+                        if (lowerName.indexOf("hairex") >= 0 || lowerName.indexOf("ribon") >= 0) {
+                            trace("\n[" + path + "]");
+                            trace("X: " + Number(cur.x).toFixed(2) + " Y: " + Number(cur.y).toFixed(2));
+                            trace("Scale X: " + Number(cur.scaleX).toFixed(2) + " Scale Y: " + Number(cur.scaleY).toFixed(2));
+                            trace("Rotation: " + Number(cur.rotation).toFixed(2));
+                        }
+
                         cur = parent;
                     }
 
-                    trace("identify: " + path);
+                    trace("\nidentify: " + path);
                 }
             } catch (err) {
                 trace("Failed to identify click target:");

@@ -4,7 +4,10 @@ package menu
    import flash.events.MouseEvent;
    import flash.utils.ByteArray;
    import parameter.Dress_data;
-   
+   import parts.Ribbon;
+   import parts.Hairpiece;
+
+
    public class Tab_CopyTargetClass
    {
       
@@ -294,6 +297,16 @@ package menu
          }
          else
          {
+            var visibleRibbons = [];
+            if (param1.currentTarget.headerName == "Ribon") {
+               visibleRibbons = Ribbon.getVisibleRibbons(MenuClass._nowCharaNum);
+            }
+
+            var visibleHairpieces = [];
+            if (param1.currentTarget.headerName == "HairEx") {
+               visibleHairpieces = Hairpiece.getVisibleHairpieces(MenuClass._nowCharaNum);
+            }
+
             for(_loc6_ in MenuClass.tabData[param1.currentTarget.headerName])
             {
                _loc8_ = false;
@@ -309,21 +322,49 @@ package menu
                if(_loc8_)
                {
                   _loc10_ = MenuClass.tabData[param1.currentTarget.headerName][_loc6_][2]["_data"];
-                  _loc11_ = MenuClass.charaData[MenuClass._nowCharaNum][_loc10_]["_visible"].length - 1;
-                  _loc5_ = 0;
-                  while(_loc5_ <= _loc11_)
-                  {
-                     _loc12_ = _loc4_ + _loc5_;
-                     dressCopyData[0][_loc12_] = clone(Dress_data.DressCharaData[MenuClass._nowCharaNum][_loc12_]);
-                     charaCopyData[0][_loc12_] = clone(MenuClass.charaData[MenuClass._nowCharaNum][_loc12_]);
-                     try
-                     {
-                        menuCustomCopyNum[0][_loc12_] = clone(Dress_data.menuCustomNum[MenuClass._nowCharaNum][_loc12_]);
+                  if (_loc10_ == "RibonPlus") {
+                     for each (var ribbon in visibleRibbons) {
+                        _loc12_ = _loc4_ + ribbon.slot;
+                        dressCopyData[0][_loc12_] = clone(Dress_data.DressCharaData[MenuClass._nowCharaNum][_loc12_]);
+                        charaCopyData[0][_loc12_] = clone(MenuClass.charaData[MenuClass._nowCharaNum][_loc12_]);
+                        try
+                        {
+                           menuCustomCopyNum[0][_loc12_] = clone(Dress_data.menuCustomNum[MenuClass._nowCharaNum][_loc12_]);
+                        }
+                        catch(myError:Error)
+                        {
+                        }
                      }
-                     catch(myError:Error)
-                     {
+                  } else if (_loc10_ == "HairExPlus") {
+                        for each (var hairpiece in visibleHairpieces) {
+                        _loc12_ = _loc4_ + hairpiece.slot;
+                        dressCopyData[0][_loc12_] = clone(Dress_data.DressCharaData[MenuClass._nowCharaNum][_loc12_]);
+                        charaCopyData[0][_loc12_] = clone(MenuClass.charaData[MenuClass._nowCharaNum][_loc12_]);
+                        try
+                        {
+                           menuCustomCopyNum[0][_loc12_] = clone(Dress_data.menuCustomNum[MenuClass._nowCharaNum][_loc12_]);
+                        }
+                        catch(myError:Error)
+                        {
+                        }
                      }
-                     _loc5_++;
+                  } else {
+                     _loc11_ = MenuClass.charaData[MenuClass._nowCharaNum][_loc10_]["_visible"].length - 1;
+                     _loc5_ = 0;
+                     while(_loc5_ <= _loc11_)
+                     {
+                        _loc12_ = _loc4_ + _loc5_;
+                        dressCopyData[0][_loc12_] = clone(Dress_data.DressCharaData[MenuClass._nowCharaNum][_loc12_]);
+                        charaCopyData[0][_loc12_] = clone(MenuClass.charaData[MenuClass._nowCharaNum][_loc12_]);
+                        try
+                        {
+                           menuCustomCopyNum[0][_loc12_] = clone(Dress_data.menuCustomNum[MenuClass._nowCharaNum][_loc12_]);
+                        }
+                        catch(myError:Error)
+                        {
+                        }
+                        _loc5_++;
+                     }
                   }
                }
                else

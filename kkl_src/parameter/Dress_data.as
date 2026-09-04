@@ -1,6 +1,8 @@
 package parameter
 {
    import flash.utils.ByteArray;
+   import parts.Ribbon;
+   import parts.Hairpiece;
    
    public class Dress_data
    {
@@ -285,7 +287,7 @@ package parameter
                "_color1":[1,"Hpink1",1,2],
                "_color2":[1,"Hblack10",1,1]
             }],
-            "HairEx0":[{
+            "HairEx":[{
                "_color0":[1,"Hpink1",1,2,"Hair"],
                "_color1":[1,"Hpink1",1,2],
                "_color2":[1,"Hblack10",1,1]
@@ -12011,16 +12013,34 @@ package parameter
          },{
             "_color0":[0,"pink4",1,0],
             "_color1":[0,"pink4",1,2]
-         },{"_color0":[0,"pink3",1,0]},{"_color0":[0,"green2",1,0]},{"_color0":[0,"blue5",1,0]},{
+         },
+         {"_color0":[0,"pink3",1,0]},
+         {"_color0":[0,"green2",1,0]},
+         {"_color0":[0,"blue5",1,0]},{
             "_color0":[0,"orange2",1,0],
             "_color1":[0,"orange2",1,2]
-         },{"_color0":[0,"orange2",1,0]},{"_color0":[0,"orange2",1,0]},{"_color0":[0,"orange2",1,0]},{"_color0":[0,"orange2",1,0]},{"_color0":[0,"orange2",1,0]},{"_color0":[0,"orange2",1,0]},{"_color0":[0,"orange2",1,0]},{"_color0":[0,"orange2",1,0]},{"_color0":[0,"orange2",1,0]},{"_color0":[0,"red4",1,0]},{"_color0":[0,"red4",1,0]},{"_color0":[0,"red4",1,0]},{
+         },
+         {"_color0":[0,"orange2",1,0]},
+         {"_color0":[0,"orange2",1,0]},
+         {"_color0":[0,"orange2",1,0]},
+         {"_color0":[0,"orange2",1,0]},
+         {"_color0":[0,"orange2",1,0]},
+         {"_color0":[0,"orange2",1,0]},
+         {"_color0":[0,"orange2",1,0]},
+         {"_color0":[0,"orange2",1,0]},
+         {"_color0":[0,"orange2",1,0]},
+         {"_color0":[0,"red4",1,0]},
+         {"_color0":[0,"red4",1,0]},
+         {"_color0":[0,"red4",1,0]},
+         {
             "_color0":[0,"emerald1",1,0],
             "_color1":[0,"emerald1",1,2]
          },{
             "_color0":[0,"emerald1",1,0],
             "_color1":[0,"emerald1",1,2]
-         },{"_color0":[0,"emerald1",1,0]},{
+         },
+         {"_color0":[0,"emerald1",1,0]},
+         {
             "_color0":[0,"blue4",1,0],
             "_color1":[0,"blue4",1,2]
          },{
@@ -12029,7 +12049,15 @@ package parameter
          },{
             "_color0":[0,"black1",1,0],
             "_color1":[0,"black7",1,1]
-         },{"_color0":[0,"brown6",1,0]},{"_color0":[0,"brown6",1,0]},{"_color0":[0,"brown6",1,0]},{"_color0":[0,"brown6",1,0]},{"_color0":[0,"pink2",1,0]},{"_color0":[0,"pink3",1,0]},{"_color0":[0,"emerald1",1,0]},{"_color0":[0,"pink4",1,0]},{
+         },
+         {"_color0":[0,"brown6",1,0]},
+         {"_color0":[0,"brown6",1,0]},
+         {"_color0":[0,"brown6",1,0]},
+         {"_color0":[0,"brown6",1,0]},
+         {"_color0":[0,"pink2",1,0]},
+         {"_color0":[0,"pink3",1,0]},
+         {"_color0":[0,"emerald1",1,0]},
+         {"_color0":[0,"pink4",1,0]},{
             "_color0":[0,"yellow3",1,0],
             "_color1":[0,"black7",1,1]
          },{
@@ -12039,7 +12067,9 @@ package parameter
             "_color0":[0,"black1",1,0],
             "_color1":[0,"black1",1,2],
             "_color2":[0,"black7",1,1]
-         },{"_color0":[0,"y_green1",1,0]},{"_color0":[0,"y_green1",1,0]},{
+         },
+         {"_color0":[0,"y_green1",1,0]},
+         {"_color0":[0,"y_green1",1,0]},{
             "_color0":[0,"y_green1",1,0],
             "_color1":[0,"black7",1,1]
          },{
@@ -12051,7 +12081,9 @@ package parameter
          },{
             "_color0":[0,"blue2",1,0],
             "_color1":[0,"black7",1,1]
-         },{"_color0":[0,"black7",1,0]},{"_color0":[0,"red3",1,0]},{
+         },
+         {"_color0":[0,"black7",1,0]},
+         {"_color0":[0,"red3",1,0]},{
             "_color0":[0,"brown4",1,0],
             "_color1":[0,"black1",1,1],
             "_color2":[0,"black7",1,1]
@@ -12074,7 +12106,15 @@ package parameter
          },{
             "_color0":[0,"pink4",1,0],
             "_color1":[0,"pink4",1,2]
-         },{"_color0":[0,"blue2",1,0]},{"_color0":[0,"blue2",1,0]},{"_color0":[0,"blue2",1,0]},{"_color0":[0,"blue2",1,0]},{"_color0":[0,"emerald1",1,0]},{"_color0":[0,"emerald1",1,0]},{"_color0":[0,"emerald1",1,0]},{"_color0":[0,"emerald1",1,0]},
+         },
+         {"_color0":[0,"blue2",1,0]},
+         {"_color0":[0,"blue2",1,0]},
+         {"_color0":[0,"blue2",1,0]},
+         {"_color0":[0,"blue2",1,0]},
+         {"_color0":[0,"emerald1",1,0]},
+         {"_color0":[0,"emerald1",1,0]},
+         {"_color0":[0,"emerald1",1,0]},
+         {"_color0":[0,"emerald1",1,0]},
          {"_color0":[0,"emerald1",1,0]},
          {"_color0":[0,"emerald1",1,0]},
          {"_color0":[0,"emerald1",1,0]},
@@ -12197,7 +12237,7 @@ package parameter
             "_varyA": ["color0_0", 13]
          }
          ];
-         DressData["Ribon0"] = [{
+         DressData["Ribon"] = [{
             "_color0":[0,"pink4",1,0],
             "_color1":[0,"pink4",1,2]
          },{
@@ -12476,9 +12516,35 @@ package parameter
          {  /* #163: 1/4th Circle Curve */ },
          {  /* #164: Rotated 1/4th Circle Curve */ },
          {  /* #165: 1/8th Circle Curve */ },
-         {  /* #166: S-Bend Curve */ }
+         {  /* #166: S-Bend Curve */ },
+         {  // #167: Bidirectional Solid-to-Clear Linear Gradient
+            "_color0":[0,"blue2",1,0]
+         },
+         {  // #168: Rotated Bidirectional Solid-to-Clear Linear Gradient
+            "_color0":[0,"blue2",1,0],
+            "_color1":[0,"blue4",1,1]
+         },
+         {  // #169: Bidirectional Two-Color Linear Gradient
+            "_color0":[0,"blue2",1,0]
+         },
+         {  // #170: Rotated Bidirectional Two-Color Linear Gradient
+            "_color0":[0,"blue2",1,0],
+            "_color1":[0,"blue4",1,1]
+         },
+         {  // #171: Clear-to-Solid Radial Gradient
+            "_color0":[0,"blue2",1,0]
+         },
+         {  // #172: Half Clear-to-Solid Radial Gradient
+            "_color0":[0,"blue2",1,0]
+         },
+         {  // #173: Quarter Clear-to-Solid Radial Gradient
+            "_color0":[0,"blue2",1,0]
+         },
+         {  /* #174: Lipstick */
+            "_color0":[0,"pink4",1,0]
+         }
          ];
-         DressData["RibonLine0"] = [{"_color0":[0,"black7",1,0]}];
+         DressData["RibonLine"] = [{"_color0":[0,"black7",1,0]}];
          DressData["Hairpin0"] = [{"_color0":[0,"orange2",1,0]},{
             "_color0":[0,"orange2",1,0],
             "_color1":[0,"orange2",1,2]
@@ -13700,6 +13766,15 @@ package parameter
             "_color2":[0,"black7",1,2]
          },{"_color0":[0,"black1",1,0]},{"_color0":[0,"black1",1,0]},{"_color0":[0,"black1",1,0]},{"_color0":[0,"black1",1,0]},{"_color0":[0,"black1",1,0]},{"_color0":[0,"black1",1,0]},{"_color0":[0,"black1",1,0]},{"_color0":[0,"black1",1,0]}];
          DressData["FreeHukidashiLine0"] = [{"_color0":[0,"black7",1,0]}];
+
+         /* NOTE: update depending on number of mouth types */
+         DressData["EmotionMouth"] = [];
+         for (var i = 0; i <= 100; i++) {
+            DressData["EmotionMouth"].push({});
+         }
+         
+         DressData["MouthSen"] = [{"_color0":[0,"black7",1,0]}];
+
          for(_loc5_ in DressData)
          {
             this.FcCodeNumChange(_loc5_);
@@ -13798,7 +13873,6 @@ package parameter
          while(_loc1_ <= Main.hukusuuNum)
          {
             DressData["Mark" + _loc1_] = this.clone(DressData["Mark0"]);
-            DressData["HairEx" + _loc1_] = this.clone(DressData["HairEx0"]);
             DressData["Belt" + _loc1_] = this.clone(DressData["Belt0"]);
             DressData["BeltLine" + _loc1_] = this.clone(DressData["BeltLine0"]);
             _loc1_++;
@@ -13807,44 +13881,39 @@ package parameter
          while(_loc1_ <= Main.hukusuuNum)
          {
             DressCharaData[0]["Mark" + _loc1_] = this.clone(DressCharaData[0]["Mark0"]);
-            DressCharaData[0]["HairEx" + _loc1_] = this.clone(DressCharaData[0]["HairEx0"]);
             DressCharaData[0]["Belt" + _loc1_] = this.clone(DressCharaData[0]["Belt0"]);
             DressCharaData[0]["BeltLine" + _loc1_] = this.clone(DressCharaData[0]["BeltLine0"]);
             _loc1_++;
          }
-         _loc1_ = 1;
-         while(_loc1_ <= Main.RibonhukusuuNum)
-         {
-            DressData["Ribon" + _loc1_] = this.clone(DressData["Ribon0"]);
-            DressData["RibonLine" + _loc1_] = this.clone(DressData["RibonLine0"]);
-            _loc1_++;
-         }
-         _loc1_ = 1;
-         while(_loc1_ <= Main.RibonhukusuuNum)
-         {
-            DressCharaData[0]["Ribon" + _loc1_] = this.clone(DressCharaData[0]["Ribon0"]);
-            DressCharaData[0]["RibonLine" + _loc1_] = this.clone(DressCharaData[0]["RibonLine0"]);
-            _loc1_++;
-         }
+
+         Ribbon._dressDefaults[""] = this.clone(DressData["Ribon"]);
+         Ribbon._dressDefaults["Line"] = this.clone(DressData["RibonLine"]);
+         Hairpiece._dressDefaults[""] = this.clone(DressData["HairEx"]);
+
+         Ribbon._dressInit[""] = this.clone(DressCharaData[0]["Ribon"]);
+         Ribbon._dressInit["Line"] = this.clone(DressCharaData[0]["RibonLine"]);
+         Hairpiece._dressInit[""] = this.clone(DressCharaData[0]["HairEx"]);
+
          _loc1_ = 1;
          while(_loc1_ <= MenuClass._characterNum)
          {
             DressCharaData[_loc1_] = this.clone(DressCharaData[0]);
             _loc1_++;
          }
+
          _loc1_ = 0;
-         while(_loc1_ <= 98)
+         while(_loc1_ <= Main.hukusuuNum)
          {
             DressData["FreeHand" + _loc1_] = this.clone(DressData["Body"]);
             DressData["FreeHandItem" + _loc1_] = this.clone(DressData["Item0"]);
-            DressData["FreeRibon" + _loc1_] = this.clone(DressData["Ribon0"]);
-            DressData["FreeRibonLine" + _loc1_] = this.clone(DressData["RibonLine0"]);
+            DressData["FreeRibon" + _loc1_] = this.clone(DressData["Ribon"]);
+            DressData["FreeRibonLine" + _loc1_] = this.clone(DressData["RibonLine"]);
             DressData["FreeBelt" + _loc1_] = this.clone(DressData["Belt0"]);
             DressData["FreeBeltLine" + _loc1_] = this.clone(DressData["BeltLine0"]);
             _loc1_++;
          }
          _loc1_ = 1;
-         while(_loc1_ <= 98)
+         while(_loc1_ <= Main.hukusuuNum)
          {
             DressData["FreeHandVest" + _loc1_] = this.clone(DressData["FreeHandVest0"]);
             DressData["FreeHandWristband" + _loc1_] = this.clone(DressData["FreeHandWristband0"]);
@@ -13859,8 +13928,8 @@ package parameter
          this.FcSystemSet("FreeHandItem0","Item0");
          this.FcSystemSet("FreeHandVest0","FreeHandVest0");
          this.FcSystemSet("FreeHandWristband0","FreeHandWristband0");
-         this.FcSystemSet("FreeRibon0","Ribon0");
-         this.FcSystemSet("FreeRibonLine0","RibonLine0");
+         this.FcSystemSet("FreeRibon0","Ribon");
+         this.FcSystemSet("FreeRibonLine0","RibonLine");
          this.FcSystemSet("FreeBelt0","Belt0");
          this.FcSystemSet("FreeBeltLine0","BeltLine0");
          this.FcSystemSet("FreeChair0","FreeChair0");
@@ -13869,7 +13938,7 @@ package parameter
          this.FcSystemSet("FreeHukidashi0","FreeHukidashi0");
          this.FcSystemSet("FreeHukidashiLine0","FreeHukidashiLine0");
          _loc1_ = 1;
-         while(_loc1_ <= 98)
+         while(_loc1_ <= Main.hukusuuNum)
          {
             DressCharaData[0]["FreeHand" + _loc1_] = this.clone(DressCharaData[0]["FreeHand0"]);
             DressCharaData[0]["FreeHandItem" + _loc1_] = this.clone(DressCharaData[0]["FreeHandItem0"]);

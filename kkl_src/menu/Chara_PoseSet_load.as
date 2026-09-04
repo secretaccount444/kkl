@@ -64,7 +64,7 @@ package menu
             _loc2_["Ashi2"]["_menu"] = _loc2_["Ashi"]["_menu"];
             _loc2_["Ashi"]["_menu"] = _loc9_;
             _loc2_["Head"]["_meter"] = 100 - _loc2_["Head"]["_meter"];
-            _loc2_["Rmove"]["_meter"] = 360 - _loc2_["Rmove"]["_meter"];
+            _loc2_["Rmove"]["_meter"] = 3600 - _loc2_["Rmove"]["_meter"];
          }
          else if(MenuClass.systemData["PoseSet"]["_reversal"] == 1)
          {
@@ -109,7 +109,7 @@ package menu
             _loc2_["Ashi"]["_menu"] = _loc2_["Ashi2"]["_menu"];
             _loc2_["Ashi2"]["_menu"] = _loc9_;
             _loc2_["Head"]["_meter"] = 100 - _loc2_["Head"]["_meter"];
-            _loc2_["Rmove"]["_meter"] = 360 - _loc2_["Rmove"]["_meter"];
+            _loc2_["Rmove"]["_meter"] = 3600 - _loc2_["Rmove"]["_meter"];
          }
          new SetClass(param1,"LeftArm","move");
          new SetClass(param1,"LeftArm2","move");

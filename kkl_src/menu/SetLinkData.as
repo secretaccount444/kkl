@@ -1,6 +1,8 @@
 package menu
 {
    import parameter.Dress_data;
+   import parts.Ribbon;
+   import parts.Hairpiece;
    
    public class SetLinkData
    {
@@ -95,23 +97,26 @@ package menu
          {
             MenuClass.systemData["LinkSideBurn"]["_flag"] = false;
          }
-         _loc2_ = MenuClass.systemData["HairExPlus"]["_menu"];
-         if(this.charaData["HairExScaleX" + _loc2_]["_meter"] == this.charaData["HairExScaleY" + _loc2_]["_meter"])
-         {
-            MenuClass.systemData["LinkHairExScale"]["_flag"] = true;
-         }
-         else
-         {
-            MenuClass.systemData["LinkHairExScale"]["_flag"] = false;
-         }
-         if(this.charaData["HairExScaleX" + _loc2_]["_meter"] == this.charaData["HairExScaleY" + _loc2_]["_meter"] && (this.charaData["HairExScaleX" + _loc2_]["_meter"] >= 70 && this.charaData["HairExLine" + _loc2_]["_menu"] == 1 || this.charaData["HairExScaleX" + _loc2_]["_meter"] < 70 && this.charaData["HairExScaleX" + _loc2_]["_meter"] >= 50 && this.charaData["HairExLine" + _loc2_]["_menu"] == 2 || this.charaData["HairExScaleX" + _loc2_]["_meter"] < 50 && this.charaData["HairExScaleX" + _loc2_]["_meter"] >= 30 && this.charaData["HairExLine" + _loc2_]["_menu"] == 3 || this.charaData["HairExScaleX" + _loc2_]["_meter"] < 30 && this.charaData["HairExScaleX" + _loc2_]["_meter"] >= 10 && this.charaData["HairExLine" + _loc2_]["_menu"] == 4 || this.charaData["HairExScaleX" + _loc2_]["_meter"] < 10 && this.charaData["HairExScaleX" + _loc2_]["_meter"] >= 0 && this.charaData["HairExLine" + _loc2_]["_menu"] == 5))
-         {
+         var curHairpiece = Hairpiece.fromCharacter(param1, MenuClass.systemData["HairExPlus"]["_menu"]);
+         MenuClass.systemData["LinkHairExScale"]["_flag"] = curHairpiece.scaleX == curHairpiece.scaleY;
+
+         if (
+            curHairpiece.scaleX == curHairpiece.scaleY &&
+            (
+               curHairpiece.scaleX >= 700 && curHairpiece.lineType == 1 ||
+               curHairpiece.scaleX < 700 && curHairpiece.scaleX >= 500 && curHairpiece.lineType == 2 ||
+               curHairpiece.scaleX < 500 && curHairpiece.scaleX >= 300 && curHairpiece.lineType == 3 ||
+               curHairpiece.scaleX < 300 && curHairpiece.scaleX >= 100 && curHairpiece.lineType == 4 ||
+               curHairpiece.scaleX < 100 && curHairpiece.scaleX >= 0 && curHairpiece.lineType == 5
+            )
+         ) {
             MenuClass.systemData["LinkHairExLine"]["_flag"] = true;
          }
          else
          {
             MenuClass.systemData["LinkHairExLine"]["_flag"] = false;
          }
+
          if(this.charaData["EyeballLeft"]["_menu"] == this.charaData["EyeballRight"]["_menu"] && String(this.charaData["EyeballLeft"]["_color0"][0]) == String(this.charaData["EyeballRight"]["_color0"][0]) && String(this.charaData["EyeballLeft"]["_color1"][0]) == String(this.charaData["EyeballRight"]["_color1"][0]) && String(this.charaData["EyeballLeft"]["_color2"][0]) == String(this.charaData["EyeballRight"]["_color2"][0]))
          {
             MenuClass.systemData["LinkEyeball"]["_flag"] = true;
@@ -232,23 +237,27 @@ package menu
          {
             MenuClass.systemData["LinkMark"]["_flag"] = false;
          }
-         _loc2_ = MenuClass.systemData["RibonPlus"]["_menu"];
-         if(this.charaData["RibonScale" + _loc2_]["_meter"] == this.charaData["RibonScaleY" + _loc2_]["_meter"])
-         {
-            MenuClass.systemData["LinkRibonScale"]["_flag"] = true;
-         }
-         else
-         {
-            MenuClass.systemData["LinkRibonScale"]["_flag"] = false;
-         }
-         if(this.charaData["RibonScale" + _loc2_]["_meter"] == this.charaData["RibonScaleY" + _loc2_]["_meter"] && (this.charaData["RibonScale" + _loc2_]["_meter"] >= 70 && this.charaData["RibonLine" + _loc2_]["_menu"] == 1 || this.charaData["RibonScale" + _loc2_]["_meter"] < 70 && this.charaData["RibonScale" + _loc2_]["_meter"] >= 50 && this.charaData["RibonLine" + _loc2_]["_menu"] == 2 || this.charaData["RibonScale" + _loc2_]["_meter"] < 50 && this.charaData["RibonScale" + _loc2_]["_meter"] >= 30 && this.charaData["RibonLine" + _loc2_]["_menu"] == 3 || this.charaData["RibonScale" + _loc2_]["_meter"] < 30 && this.charaData["RibonScale" + _loc2_]["_meter"] >= 10 && this.charaData["RibonLine" + _loc2_]["_menu"] == 4 || this.charaData["RibonScale" + _loc2_]["_meter"] < 10 && this.charaData["RibonScale" + _loc2_]["_meter"] >= 0 && this.charaData["RibonLine" + _loc2_]["_menu"] == 5) && this.charaData["RibonLine" + _loc2_]["_color0"][0] == 61)
-         {
+
+         var curRibbon = Ribbon.fromCharacter(param1, MenuClass.systemData["RibonPlus"]["_menu"]);
+         MenuClass.systemData["LinkRibonScale"]["_flag"] = curRibbon.scaleX == curRibbon.scaleY;
+
+         if (
+            curRibbon.scaleX == curRibbon.scaleY &&
+            (
+               curRibbon.scaleX >= 700 && curRibbon.lineType == 1 ||
+               curRibbon.scaleX < 700 && curRibbon.scaleX >= 500 && curRibbon.lineType == 2 ||
+               curRibbon.scaleX < 500 && curRibbon.scaleX >= 300 && curRibbon.lineType == 3 ||
+               curRibbon.scaleX < 300 && curRibbon.scaleX >= 100 && curRibbon.lineType == 4 ||
+               curRibbon.scaleX < 100 && curRibbon.scaleX >= 0 && curRibbon.lineType == 5
+            ) && curRibbon.lineColor[0] == 61
+         ) {
             MenuClass.systemData["LinkRibonLine"]["_flag"] = true;
          }
          else
          {
             MenuClass.systemData["LinkRibonLine"]["_flag"] = false;
          }
+
          _loc2_ = MenuClass.systemData["BeltPlus"]["_menu"];
          if(this.charaData["BeltScale" + _loc2_]["_meter"] == this.charaData["BeltScaleY" + _loc2_]["_meter"])
          {
@@ -258,7 +267,11 @@ package menu
          {
             MenuClass.systemData["LinkBeltScale"]["_flag"] = false;
          }
-         if(this.charaData["BeltScale" + _loc2_]["_meter"] == this.charaData["BeltScaleY" + _loc2_]["_meter"] && (this.charaData["BeltScale" + _loc2_]["_meter"] >= 80 && this.charaData["BeltLine" + _loc2_]["_menu"] == 1 || this.charaData["BeltScale" + _loc2_]["_meter"] < 80 && this.charaData["BeltScale" + _loc2_]["_meter"] >= 60 && this.charaData["BeltLine" + _loc2_]["_menu"] == 2 || this.charaData["BeltScale" + _loc2_]["_meter"] < 60 && this.charaData["BeltScale" + _loc2_]["_meter"] >= 40 && this.charaData["BeltLine" + _loc2_]["_menu"] == 3 || this.charaData["BeltScale" + _loc2_]["_meter"] < 40 && this.charaData["BeltScale" + _loc2_]["_meter"] >= 20 && this.charaData["BeltLine" + _loc2_]["_menu"] == 4 || this.charaData["BeltScale" + _loc2_]["_meter"] < 20 && this.charaData["BeltScale" + _loc2_]["_meter"] >= 0 && this.charaData["BeltLine" + _loc2_]["_menu"] == 5) && this.charaData["BeltLine" + _loc2_]["_color0"][0] == 61)
+         if(this.charaData["BeltScale" + _loc2_]["_meter"] == this.charaData["BeltScaleY" + _loc2_]["_meter"] && (this.charaData["BeltScale" + _loc2_]["_meter"] >= 800 && this.charaData["BeltLine" + _loc2_]["_menu"] == 1
+         || this.charaData["BeltScale" + _loc2_]["_meter"] < 800 && this.charaData["BeltScale" + _loc2_]["_meter"] >= 600 && this.charaData["BeltLine" + _loc2_]["_menu"] == 2
+         || this.charaData["BeltScale" + _loc2_]["_meter"] < 600 && this.charaData["BeltScale" + _loc2_]["_meter"] >= 400 && this.charaData["BeltLine" + _loc2_]["_menu"] == 3
+         || this.charaData["BeltScale" + _loc2_]["_meter"] < 400 && this.charaData["BeltScale" + _loc2_]["_meter"] >= 200 && this.charaData["BeltLine" + _loc2_]["_menu"] == 4
+         || this.charaData["BeltScale" + _loc2_]["_meter"] < 200 && this.charaData["BeltScale" + _loc2_]["_meter"] >= 0 && this.charaData["BeltLine" + _loc2_]["_menu"] == 5) && this.charaData["BeltLine" + _loc2_]["_color0"][0] == 61)
          {
             MenuClass.systemData["LinkBeltLine"]["_flag"] = true;
          }
@@ -363,7 +376,8 @@ package menu
             this.charaData["LeftThighScaleY"]["_meter"] == this.charaData["RightThighScaleY"]["_meter"] &&
             this.charaData["LeftThighOffsetX"]["_meter"] == this.charaData["RightThighOffsetX"]["_meter"] &&
             this.charaData["LeftThighOffsetY"]["_meter"] == this.charaData["RightThighOffsetY"]["_meter"] &&
-            this.charaData["LeftThighVisible"]["_visible"][0] == this.charaData["RightThighVisible"]["_visible"][0]
+            this.charaData["LeftThighVisible"]["_visible"][0] == this.charaData["RightThighVisible"]["_visible"][0] &&
+            this.charaData["LeftShiriVisible"]["_visible"][0] == this.charaData["RightShiriVisible"]["_visible"][0]
          ) {
             MenuClass.systemData["LinkThighSettings"]["_flag"] = true;
          } else {

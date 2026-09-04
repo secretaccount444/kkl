@@ -77,35 +77,37 @@ package parameter
                "RightLegRotation": {"_meter": 0},
                "LeftFootRotation": {"_meter": 0},
                "RightFootRotation": {"_meter": 0},
-               "LeftThighScaleX": {"_meter": 50},
-               "LeftThighScaleY": {"_meter": 50},
-               "LeftThighOffsetX": {"_meter": 50},
-               "LeftThighOffsetY": {"_meter": 50},
+               "LeftThighScaleX": {"_meter": 500},
+               "LeftThighScaleY": {"_meter": 500},
+               "LeftThighOffsetX": {"_meter": 500},
+               "LeftThighOffsetY": {"_meter": 500},
                "LeftThighVisible":{"_visible":[true]},
-               "RightThighScaleX": {"_meter": 50},
-               "RightThighScaleY": {"_meter": 50},
-               "RightThighOffsetX": {"_meter": 50},
-               "RightThighOffsetY": {"_meter": 50},
+               "LeftShiriVisible":{"_visible":[true]},
+               "RightThighScaleX": {"_meter": 500},
+               "RightThighScaleY": {"_meter": 500},
+               "RightThighOffsetX": {"_meter": 500},
+               "RightThighOffsetY": {"_meter": 500},
                "RightThighVisible":{"_visible":[true]},
-               "LeftLegScaleX": {"_meter": 50},
-               "LeftLegScaleY": {"_meter": 50},
-               "LeftLegOffsetX": {"_meter": 50},
-               "LeftLegOffsetY": {"_meter": 50},
+               "RightShiriVisible":{"_visible":[true]},
+               "LeftLegScaleX": {"_meter": 500},
+               "LeftLegScaleY": {"_meter": 500},
+               "LeftLegOffsetX": {"_meter": 500},
+               "LeftLegOffsetY": {"_meter": 500},
                "LeftLegVisible":{"_visible":[true]},
-               "RightLegScaleX": {"_meter": 50},
-               "RightLegScaleY": {"_meter": 50},
-               "RightLegOffsetX": {"_meter": 50},
-               "RightLegOffsetY": {"_meter": 50},
+               "RightLegScaleX": {"_meter": 500},
+               "RightLegScaleY": {"_meter": 500},
+               "RightLegOffsetX": {"_meter": 500},
+               "RightLegOffsetY": {"_meter": 500},
                "RightLegVisible":{"_visible":[true]},
-               "LeftFootScaleX": {"_meter": 50},
-               "LeftFootScaleY": {"_meter": 50},
-               "LeftFootOffsetX": {"_meter": 50},
-               "LeftFootOffsetY": {"_meter": 50},
+               "LeftFootScaleX": {"_meter": 500},
+               "LeftFootScaleY": {"_meter": 500},
+               "LeftFootOffsetX": {"_meter": 500},
+               "LeftFootOffsetY": {"_meter": 500},
                "LeftFootVisible":{"_visible":[true]},
-               "RightFootScaleX": {"_meter": 50},
-               "RightFootScaleY": {"_meter": 50},
-               "RightFootOffsetX": {"_meter": 50},
-               "RightFootOffsetY": {"_meter": 50},
+               "RightFootScaleX": {"_meter": 500},
+               "RightFootScaleY": {"_meter": 500},
+               "RightFootOffsetX": {"_meter": 500},
+               "RightFootOffsetY": {"_meter": 500},
                "RightFootVisible":{"_visible":[true]},
                "Xmove":{"_meter":0},
                "Ymove":{
@@ -118,48 +120,51 @@ package parameter
                "HeadY":{"_meter":50},
                "Shadow":{"_visible":[false]},
                "BodyHeight":{"_meter":0},
-               "AshiHeight":{"_meter":50},
-               "douHeight":{"_meter":40},
+               "AshiHeight":{"_meter":500},
+               "douHeight":{"_meter":400},
                "Waist":{"_menu":0},
                "WaistAlpha":{"_meter":60},
                "Heso":{"_menu":0},
-               "HeadScale":{"_meter":50},
+               "HeadScale":{"_meter":500},
+               "HeadVisible":{"_visible":[true]},
                "AshiWidth":{"_meter":0},
                "ShoulderWidth":{"_meter":0},
-               "LeftUpperArmScaleX":{"_meter":50},
-               "LeftUpperArmScaleY":{"_meter":50},
-               "LeftUpperArmOffsetX":{"_meter":50},
-               "LeftUpperArmOffsetY":{"_meter":50},
+               "UpperBodyVisible":{"_visible":[true]},
+               "LowerBodyVisible":{"_visible":[true]},
+               "LeftUpperArmScaleX":{"_meter":500},
+               "LeftUpperArmScaleY":{"_meter":500},
+               "LeftUpperArmOffsetX":{"_meter":500},
+               "LeftUpperArmOffsetY":{"_meter":500},
                "LeftShoulderVisible":{"_visible":[true]},
                "LeftUpperArmVisible":{"_visible":[true]},
-               "RightUpperArmScaleX":{"_meter":50},
-               "RightUpperArmScaleY":{"_meter":50},
-               "RightUpperArmOffsetX":{"_meter":50},
-               "RightUpperArmOffsetY":{"_meter":50},
+               "RightUpperArmScaleX":{"_meter":500},
+               "RightUpperArmScaleY":{"_meter":500},
+               "RightUpperArmOffsetX":{"_meter":500},
+               "RightUpperArmOffsetY":{"_meter":500},
                "RightShoulderVisible":{"_visible":[true]},
                "RightUpperArmVisible":{"_visible":[true]},
-               "LeftArmScaleX":{"_meter":50},
-               "LeftArmScaleY":{"_meter":50},
-               "LeftArmOffsetX":{"_meter":50},
-               "LeftArmOffsetY":{"_meter":50},
+               "LeftArmScaleX":{"_meter":500},
+               "LeftArmScaleY":{"_meter":500},
+               "LeftArmOffsetX":{"_meter":500},
+               "LeftArmOffsetY":{"_meter":500},
                "LeftArmFlip":{"_check":false},
                "LeftArmVisible":{"_visible":[true]},
-               "LeftHandScaleX":{"_meter":50},
-               "LeftHandScaleY":{"_meter":50},
-               "LeftHandOffsetX":{"_meter":50},
-               "LeftHandOffsetY":{"_meter":50},
+               "LeftHandScaleX":{"_meter":500},
+               "LeftHandScaleY":{"_meter":500},
+               "LeftHandOffsetX":{"_meter":500},
+               "LeftHandOffsetY":{"_meter":500},
                "LeftHandVisible":{"_visible":[true]},
                "LeftHandFlip":{"_check":false},
-               "RightArmScaleX":{"_meter":50},
-               "RightArmScaleY":{"_meter":50},
-               "RightArmOffsetX":{"_meter":50},
-               "RightArmOffsetY":{"_meter":50},
+               "RightArmScaleX":{"_meter":500},
+               "RightArmScaleY":{"_meter":500},
+               "RightArmOffsetX":{"_meter":500},
+               "RightArmOffsetY":{"_meter":500},
                "RightArmFlip":{"_check":false},
                "RightArmVisible":{"_visible":[true]},
-               "RightHandScaleX":{"_meter":50},
-               "RightHandScaleY":{"_meter":50},
-               "RightHandOffsetX":{"_meter":50},
-               "RightHandOffsetY":{"_meter":50},
+               "RightHandScaleX":{"_meter":500},
+               "RightHandScaleY":{"_meter":500},
+               "RightHandOffsetX":{"_meter":500},
+               "RightHandOffsetY":{"_meter":500},
                "RightHandVisible":{"_visible":[true]},
                "RightHandFlip":{"_check":false},
                "Body":{"_color0":[0]},
@@ -177,9 +182,10 @@ package parameter
                "Breast":{"_menu":0},
                "Hoho":{"_menu":0},
                "NeckHeight":{"_meter":50},
+               "NeckVisible":{"_visible":[true]},
                "Contour":{"_menu":0},
-               "ContourWidth":{"_meter":34},
-               "ContourHeight":{"_meter":50},
+               "ContourWidth":{"_meter":340},
+               "ContourHeight":{"_meter":500},
                "Mimi":{
                   "_visible":[false],
                   "_menu":0,
@@ -324,10 +330,10 @@ package parameter
                   "_color0":[0],
                   "_depth":0
                },
-               "EyeY":{"_meter":50},
-               "EyeX":{"_meter":50},
-               "EyeScaleX":{"_meter":50},
-               "EyeScaleY":{"_meter":50},
+               "EyeY":{"_meter":500},
+               "EyeX":{"_meter":500},
+               "EyeScaleX":{"_meter":500},
+               "EyeScaleY":{"_meter":500},
                "EyeRotation":{"_meter":65},
                "EyeballLeft":{
                   "_menu":0,
@@ -341,10 +347,10 @@ package parameter
                   "_color1":[0],
                   "_color2":[0]
                },
-               "EyeballScale":{"_meter":50},
-               "EyeballScaleY":{"_meter":50},
-               "EyeballX":{"_meter":50},
-               "EyeballY":{"_meter":50},
+               "EyeballScale":{"_meter":500},
+               "EyeballScaleY":{"_meter":500},
+               "EyeballX":{"_meter":500},
+               "EyeballY":{"_meter":500},
                "EyeballLight":{
                   "_visible":[false],
                   "_menu":0,
@@ -404,7 +410,7 @@ package parameter
                   "_reversal":1,
                   "_depth":1
                },
-               "Bangs_Height":{"_meter":50},
+               "Bangs_Height":{"_meter":500},
                "HairBack":{
                   "_visible":[false],
                   "_menu":0,
@@ -431,13 +437,13 @@ package parameter
                   "_depth":2,
                   "_turn":1
                },
-               "HairBack_Height":{"_meter":30},
-               "HairBack_Width":{"_meter":30},
-               "HairBack_Y":{"_meter":65},
-               "SideBurnLeft_Height":{"_meter":50},
-               "SideBurnRight_Height":{"_meter":50},
-               "SideBurnLeft_x":{"_meter":50},
-               "SideBurnRight_x":{"_meter":50},
+               "HairBack_Height":{"_meter":300},
+               "HairBack_Width":{"_meter":300},
+               "HairBack_Y":{"_meter":650},
+               "SideBurnLeft_Height":{"_meter":500},
+               "SideBurnRight_Height":{"_meter":500},
+               "SideBurnLeft_x":{"_meter":500},
+               "SideBurnRight_x":{"_meter":500},
                "UnderHair":{
                   "_visible":[false],
                   "_menu":0,
@@ -474,35 +480,42 @@ package parameter
                "EmotionEyeLeft":{"_meter":90},
                "EmotionEyeRight":{"_meter":90},
                "EyeballXMove":{
-                  "_meter":50,
+                  "_meter":500,
                   "_reversal":1
                },
                "EyeballXMoveRight":{
-                  "_meter":50,
+                  "_meter":500,
                   "_reversal":1
                },
-               "EyeballYMove":{"_meter":45},
-               "EyeballYMoveRight":{"_meter":45},
-               "EyeballWidth":{"_meter":100},
-               "EyeballWidthRight":{"_meter":100},
+               "EyeballYMove":{"_meter":450},
+               "EyeballYMoveRight":{"_meter":450},
+               "EyeballWidth":{"_meter":1000},
+               "EyeballWidthRight":{"_meter":1000},
                "EmotionEyebrowLeft":{"_menu":0},
                "EyebrowRotationLeft":{"_meter":60},
-               "EyebrowMoveLeft":{"_meter":40},
-               "EyebrowMoveHorizontalLeft":{"_meter":50},
+               "EyebrowMoveLeft":{"_meter":400},
+               "EyebrowMoveHorizontalLeft":{"_meter":500},
                "EmotionEyebrowRight":{"_menu":0},
                "EyebrowRotationRight":{"_meter":60},
-               "EyebrowMoveRight":{"_meter":40},
-               "EyebrowMoveHorizontalRight":{"_meter":50},
+               "EyebrowMoveRight":{"_meter":400},
+               "EyebrowMoveHorizontalRight":{"_meter":500},
                "EmotionMouth":{
                   "_visible": [true],
-                  "_menu":0,
-                  "_reversal":1
+                  "_reversal":1,
+                  "_depth": 0,
+                  "_color0": [0],
+                  "_color1": [0],
+                  "_color2": [0],
+                  "_menu":0
                },
-               "MouthYMove":{"_meter":60},
-               "MouthXMove":{"_meter":50},
-               "MouthWidth":{"_meter":50},
-               "MouthHeight":{"_meter":50},
-               "MouthSen":{"_menu":0},
+               "MouthYMove":{"_meter":600},
+               "MouthXMove":{"_meter":500},
+               "MouthWidth":{"_meter":500},
+               "MouthHeight":{"_meter":500},
+               "MouthSen":{
+                  "_menu":0,
+                  "_color0": [0]
+               },
                "MouthRotation":{"_menu":50},
                "KandoSet":{"_meter":10},
                "NamidaSet":{"_meter":40},
@@ -763,6 +776,7 @@ package parameter
                "VibratorX":{"_meter":0},
                "VibratorY":{"_meter":0},
                "VibratorRotation":{"_meter":0},
+               "VibratorAlpha":{"_meter":100},
                "Socks0":{
                   "_visible":[false],
                   "_menu":4,
@@ -1040,52 +1054,10 @@ package parameter
                "MarkAlpha0":{"_meter":100},
                "MarkVary0":{"_menu":0},
                "MarkAdd0":{"_add0":0},
-               "HairExPlus":{"_visible":[false]},
-               "HairExAdd0":{"_add0":0},
-               "HairEx0":{
-                  "_menu":0,
-                  "_reversal2":0,
-                  "_depth":0,
-                  "_color0":[0],
-                  "_color1":[0],
-                  "_color2":[56],
-                  "_turn":0,
-                  "_shadow":1
-               },
-               "HairExScaleX0":{"_meter":50},
-               "HairExScaleY0":{"_meter":50},
-               "HairExScaleB0":{"_meter":500},
-               "HairExLine0":{"_menu":2},
-               "HairExRotation0":{"_meter":0},
-               "HairExRotationPlus0":{"_meter":0},
-               "HairExX0":{"_meter":620},
-               "HairExY0":{"_meter":660},
-               "HairExAlpha0":{"_meter":100},
-               "RibonPlus":{"_visible":[false]},
-               "RibonAdd0":{"_add0":0},
-               "Ribon0":{
-                  "_menu":0,
-                  "_reversal2":0,
-                  "_reversal":0,
-                  "_depth":1,
-                  "_shadow":1,
-                  "_color0":[0],
-                  "_color1":[0],
-                  "_color2":[0]
-               },
-               "RibonScale0":{"_meter":40},
-               "RibonScaleY0":{"_meter":40},
-               "RibonScaleB0":{"_meter":500},
-               "RibonLine0":{
-                  "_menu":3,
-                  "_color0":[61]
-               },
-               "RibonRotation0":{"_meter":50},
-               "RibonX0":{"_meter":600},
-               "RibonY0":{"_meter":800},
-               "RibonFineX0":{"_meter":50},
-               "RibonFineY0":{"_meter":50},
-               "RibonAlpha0":{"_meter":100},
+               "MarkFineX0":{"_meter":50},
+               "MarkFineY0":{"_meter":50},
+               "HairExPlus":{"_visible": {}},
+               "RibonPlus":{"_visible": {}},
                "HairpinPlus":{"_visible":[false]},
                "Hairpin0":{
                   "_menu":0,
@@ -1115,8 +1087,8 @@ package parameter
                   "_color1":[0],
                   "_color2":[0]
                },
-               "BeltScale0":{"_meter":50},
-               "BeltScaleY0":{"_meter":50},
+               "BeltScale0":{"_meter":500},
+               "BeltScaleY0":{"_meter":500},
                "BeltScaleB0":{"_meter":500},
                "BeltLine0":{
                   "_menu":3,
@@ -1139,8 +1111,8 @@ package parameter
                   "_depth":1,
                   "_reversal":0
                },
-               "CharaLoadScale0":{"_meter":100},
-               "CharaLoadScaleY0":{"_meter":100},
+               "CharaLoadScale0":{"_meter":1000},
+               "CharaLoadScaleY0":{"_meter":1000},
                "CharaLoadAlpha0":{"_meter":100},
                "CharaLoadScaleB0":{"_meter":500},
                "CharaLoadRotation0":{"_meter":0},
@@ -1159,16 +1131,9 @@ package parameter
             {
                MenuClass.charaData[_loc5_]["BeltPlus"]["_visible"].push(false);
                MenuClass.charaData[_loc5_]["HairpinPlus"]["_visible"].push(false);
-               MenuClass.charaData[_loc5_]["HairExPlus"]["_visible"].push(false);
                MenuClass.charaData[_loc5_]["MarkPlus"]["_visible"].push(false);
                MenuClass.charaData[_loc5_]["CharaLoadPlusCheck"]["_visibleCheck"].push(false);
                MenuClass.charaData[_loc5_]["CharaLoadPlus"]["_visible"].push(false);
-               _loc1_++;
-            }
-            _loc1_ = 0;
-            while(_loc1_ < Number(Main.RibonhukusuuNum - 1))
-            {
-               MenuClass.charaData[_loc5_]["RibonPlus"]["_visible"].push(false);
                _loc1_++;
             }
             _loc1_ = 0;
@@ -1187,42 +1152,11 @@ package parameter
                MenuClass.charaData[_loc5_]["MarkRotation" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["MarkRotation0"]);
                MenuClass.charaData[_loc5_]["MarkX" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["MarkX0"]);
                MenuClass.charaData[_loc5_]["MarkY" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["MarkY0"]);
+               MenuClass.charaData[_loc5_]["MarkFineX" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["MarkFineX0"]);
+               MenuClass.charaData[_loc5_]["MarkFineY" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["MarkFineY0"]);
                MenuClass.charaData[_loc5_]["MarkAlpha" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["MarkAlpha0"]);
                MenuClass.charaData[_loc5_]["MarkVary" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["MarkVary0"]);
                MenuClass.charaData[_loc5_]["MarkAdd" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["MarkAdd0"]);
-               _loc1_++;
-            }
-            _loc1_ = 1;
-            while(_loc1_ <= Main.hukusuuNum)
-            {
-               MenuClass.charaData[_loc5_]["HairEx" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["HairEx0"]);
-               MenuClass.charaData[_loc5_]["HairExAdd" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["HairExAdd0"]);
-               MenuClass.charaData[_loc5_]["HairExScaleX" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["HairExScaleX0"]);
-               MenuClass.charaData[_loc5_]["HairExScaleY" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["HairExScaleY0"]);
-               MenuClass.charaData[_loc5_]["HairExScaleB" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["HairExScaleB0"]);
-               MenuClass.charaData[_loc5_]["HairExLine" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["HairExLine0"]);
-               MenuClass.charaData[_loc5_]["HairExRotation" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["HairExRotation0"]);
-               MenuClass.charaData[_loc5_]["HairExRotationPlus" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["HairExRotation0"]);
-               MenuClass.charaData[_loc5_]["HairExX" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["HairExX0"]);
-               MenuClass.charaData[_loc5_]["HairExY" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["HairExY0"]);
-               MenuClass.charaData[_loc5_]["HairExAlpha" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["HairExAlpha0"]);
-               _loc1_++;
-            }
-            _loc1_ = 1;
-            while(_loc1_ <= Main.RibonhukusuuNum)
-            {
-               MenuClass.charaData[_loc5_]["Ribon" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["Ribon0"]);
-               MenuClass.charaData[_loc5_]["RibonAdd" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["RibonAdd0"]);
-               MenuClass.charaData[_loc5_]["RibonScale" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["RibonScale0"]);
-               MenuClass.charaData[_loc5_]["RibonScaleY" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["RibonScaleY0"]);
-               MenuClass.charaData[_loc5_]["RibonScaleB" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["RibonScaleB0"]);
-               MenuClass.charaData[_loc5_]["RibonLine" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["RibonLine0"]);
-               MenuClass.charaData[_loc5_]["RibonRotation" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["RibonRotation0"]);
-               MenuClass.charaData[_loc5_]["RibonX" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["RibonX0"]);
-               MenuClass.charaData[_loc5_]["RibonY" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["RibonY0"]);
-               MenuClass.charaData[_loc5_]["RibonFineX" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["RibonFineX0"]);
-               MenuClass.charaData[_loc5_]["RibonFineY" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["RibonFineY0"]);
-               MenuClass.charaData[_loc5_]["RibonAlpha" + _loc1_] = this.clone(MenuClass.charaData[_loc5_]["RibonAlpha0"]);
                _loc1_++;
             }
             _loc1_ = 1;
@@ -1296,7 +1230,7 @@ package parameter
             "SeihukuSet0":{"_menu":0},
             "SeihukuSet1":{"_menu":0},
             "SeihukuSet2":{"_menu":0},
-            "AllBodyHeightSet":{"_meter":50},
+            "AllBodyHeightSet":{"_meter":500},
             "AllBodySet":{"_menu":0},
             "LinkDressSet":{"_flag":_loc7_},
             "UnderwearSet":{"_menu":0},
@@ -1381,7 +1315,7 @@ package parameter
                "_depth":1000
             },
             "FreeHandAlpha0":{"_meter":100},
-            "FreeHandScale0":{"_meter":50},
+            "FreeHandScale0":{"_meter":500},
             "FreeHandWidth0":{"_meter":34},
             "FreeHandRotation0":{"_meter":0},
             "FreeHandX0":{"_meter":500},
@@ -1427,8 +1361,8 @@ package parameter
                "_color2":[0],
                "_depth":1000
             },
-            "FreeRibonScale0":{"_meter":50},
-            "FreeRibonScaleY0":{"_meter":50},
+            "FreeRibonScale0":{"_meter":500},
+            "FreeRibonScaleY0":{"_meter":500},
             "FreeRibonScaleB0":{"_meter":500},
             "FreeRibonLine0":{
                "_menu":2,
@@ -1455,8 +1389,8 @@ package parameter
                "_color2":[56],
                "_depth":1000
             },
-            "FreeBeltScale0":{"_meter":50},
-            "FreeBeltScaleY0":{"_meter":50},
+            "FreeBeltScale0":{"_meter":500},
+            "FreeBeltScaleY0":{"_meter":500},
             "FreeBeltScaleB0":{"_meter":500},
             "FreeBeltLine0":{
                "_menu":3,
@@ -1484,7 +1418,7 @@ package parameter
                "_depth":1000,
                "_depth2":1000
             },
-            "FreeChairScale0":{"_meter":50},
+            "FreeChairScale0":{"_meter":500},
             "FreeChairRotation0":{"_meter":0},
             "FreeChairX0":{"_meter":500},
             "FreeChairY0":{"_meter":360},
@@ -1605,7 +1539,7 @@ package parameter
             "SoundVolume":{"_meter":Main.accessObj.soundVolume},
             "SoundPan":{"_check":Main.accessObj.soundPan},
             "EExpert":{"_check":false},
-            "CameraKaizoudo":{"_menu":1},
+            "CameraKaizoudo":{"_menu":4},
             "LoadPlus":{
                "_visible":[false],
                "_menu":0
@@ -1636,7 +1570,7 @@ package parameter
             "storyBtnY":{"_meter":500}
          };
          _loc1_ = 1;
-         while(_loc1_ <= 98)
+         while(_loc1_ <= Main.hukusuuNum)
          {
             MenuClass.systemData["FreeHandPlus"]["_visible"].push(false);
             MenuClass.systemData["FreeHand" + _loc1_] = this.clone(MenuClass.systemData["FreeHand0"]);
@@ -1728,7 +1662,7 @@ package parameter
          }
          var _loc8_:int = MenuClass.DepthMeter.length;
          _loc1_ = 0;
-         while(_loc1_ <= 98)
+         while(_loc1_ <= Main.hukusuuNum)
          {
             if(MenuClass.systemData["FreeRibonPlus"]["_visible"][_loc1_])
             {
@@ -1742,7 +1676,7 @@ package parameter
          }
          _loc8_ = MenuClass.DepthMeter.length;
          _loc1_ = 0;
-         while(_loc1_ <= 98)
+         while(_loc1_ <= Main.hukusuuNum)
          {
             if(MenuClass.systemData["FreeBeltPlus"]["_visible"][_loc1_])
             {
@@ -1756,7 +1690,7 @@ package parameter
          }
          _loc8_ = MenuClass.DepthMeter.length;
          _loc1_ = 0;
-         while(_loc1_ <= 98)
+         while(_loc1_ <= Main.hukusuuNum)
          {
             if(MenuClass.systemData["FreeChairPlus"]["_visible"][_loc1_])
             {
@@ -1770,7 +1704,7 @@ package parameter
          }
          _loc8_ = MenuClass.DepthMeter.length;
          _loc1_ = 0;
-         while(_loc1_ <= 98)
+         while(_loc1_ <= Main.hukusuuNum)
          {
             if(MenuClass.systemData["FreeChairPlus"]["_visible"][_loc1_])
             {
@@ -1784,7 +1718,7 @@ package parameter
          }
          _loc8_ = MenuClass.DepthMeter.length;
          _loc1_ = 0;
-         while(_loc1_ <= 98)
+         while(_loc1_ <= Main.hukusuuNum)
          {
             if(MenuClass.systemData["FreeFlagPlus"]["_visible"][_loc1_])
             {
@@ -1798,7 +1732,7 @@ package parameter
          }
          _loc8_ = MenuClass.DepthMeter.length;
          _loc1_ = 0;
-         while(_loc1_ <= 98)
+         while(_loc1_ <= Main.hukusuuNum)
          {
             if(MenuClass.systemData["FreeHukidashiPlus"]["_visible"][_loc1_])
             {
@@ -1812,7 +1746,7 @@ package parameter
          }
          _loc8_ = MenuClass.DepthMeter.length;
          _loc1_ = 0;
-         while(_loc1_ <= 98)
+         while(_loc1_ <= Main.hukusuuNum)
          {
             if(MenuClass.systemData["FreeHandPlus"]["_visible"][_loc1_])
             {
@@ -1871,10 +1805,10 @@ package parameter
                "_reversal":0
             };
             MenuClass.systemData["LoadScale" + _loc1_] = {
-               "_meter":100,
+               "_meter":1000,
                "_name":""
             };
-            MenuClass.systemData["LoadScaleY" + _loc1_] = {"_meter":100};
+            MenuClass.systemData["LoadScaleY" + _loc1_] = {"_meter":1000};
             MenuClass.systemData["LoadSize" + _loc1_] = {"_check":false};
             MenuClass.systemData["LoadAlpha" + _loc1_] = {"_meter":100};
             MenuClass.systemData["LoadScaleB" + _loc1_] = {"_meter":500};

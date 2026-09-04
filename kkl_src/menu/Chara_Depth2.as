@@ -10,46 +10,12 @@ package menu
          var j:int = 0;
          var nnn:Number = NaN;
          var eee:Number = NaN;
-         var DepthNum:int = 0;
-         var DepthNum2:int = 0;
          var charaNum:int = param1;
          var str:String = param2;
          var clickTarget:String = param3;
          super();
          var bbb:Number = 0;
          var ccc:Number = 0;
-         if(charaNum < 9)
-         {
-            DepthNum = MenuClass.charaData[charaNum]["Ymove"]["_depth"];
-         }
-         else if(charaNum < 108)
-         {
-            DepthNum = MenuClass.systemData["FreeRibon" + (charaNum - 9)]["_depth"];
-         }
-         else if(charaNum < 207)
-         {
-            DepthNum = MenuClass.systemData["FreeBelt" + (charaNum - 108)]["_depth"];
-         }
-         else if(charaNum < 306)
-         {
-            DepthNum = MenuClass.systemData["FreeFlag" + (charaNum - 207)]["_depth"];
-         }
-         else if(charaNum < 405)
-         {
-            DepthNum = MenuClass.systemData["FreeHukidashi" + (charaNum - 306)]["_depth"];
-         }
-         else if(charaNum < 504)
-         {
-            DepthNum = MenuClass.systemData["FreeHand" + (charaNum - 405)]["_depth"];
-         }
-         else if(charaNum < 603)
-         {
-            DepthNum = MenuClass.systemData["FreeChair" + (charaNum - 504)]["_depth"];
-         }
-         else if(charaNum < 702)
-         {
-            DepthNum = MenuClass.systemData["FreeChair" + (charaNum - 603)]["_depth2"];
-         }
          i = 0;
          while(i < MenuClass.DepthMeter.length)
          {
@@ -62,60 +28,26 @@ package menu
                }
                else if(MenuClass.DepthMeter[charaNum] == MenuClass.DepthMeter[i])
                {
-                  if(i < 9)
-                  {
-                     DepthNum2 = MenuClass.charaData[i]["Ymove"]["_depth"];
-                  }
-                  else if(i < 108)
-                  {
-                     DepthNum2 = MenuClass.systemData["FreeRibon" + (i - 9)]["_depth"];
-                  }
-                  else if(i < 207)
-                  {
-                     DepthNum2 = MenuClass.systemData["FreeBelt" + (i - 108)]["_depth"];
-                  }
-                  else if(i < 306)
-                  {
-                     DepthNum2 = MenuClass.systemData["FreeFlag" + (i - 207)]["_depth"];
-                  }
-                  else if(i < 405)
-                  {
-                     DepthNum2 = MenuClass.systemData["FreeHukidashi" + (i - 306)]["_depth"];
-                  }
-                  else if(i < 504)
-                  {
-                     DepthNum2 = MenuClass.systemData["FreeHand" + (i - 405)]["_depth"];
-                  }
-                  else if(i < 603)
-                  {
-                     nnn = i - 504;
-                     if(MenuClass.systemData["FreeChair" + nnn]["_depth"] < MenuClass.systemData["FreeChair" + nnn]["_depth2"])
+                  if (charaNum < 504) {
+                     if (i < charaNum)
                      {
-                        eee = MenuClass.systemData["FreeChair" + nnn]["_depth"];
-                        MenuClass.systemData["FreeChair" + nnn]["_depth"] = MenuClass.systemData["FreeChair" + nnn]["_depth2"];
-                        MenuClass.systemData["FreeChair" + nnn]["_depth2"] = eee;
+                        bbb++;
                      }
-                     DepthNum2 = MenuClass.systemData["FreeChair" + nnn]["_depth"];
-                  }
-                  else if(i < 702)
-                  {
-                     nnn = i - 603;
-                     if(MenuClass.systemData["FreeChair" + nnn]["_depth"] < MenuClass.systemData["FreeChair" + nnn]["_depth2"])
+                     if (str == "select" && charaNum < 9 && i < 9)
                      {
-                        eee = MenuClass.systemData["FreeChair" + nnn]["_depth"];
-                        MenuClass.systemData["FreeChair" + nnn]["_depth"] = MenuClass.systemData["FreeChair" + nnn]["_depth2"];
-                        MenuClass.systemData["FreeChair" + nnn]["_depth2"] = eee;
+                        ccc++;
                      }
-                     DepthNum2 = MenuClass.systemData["FreeChair" + nnn]["_depth2"];
-                  }
-                  if(str == "Ymove")
-                  {
-                     if(DepthNum > DepthNum2)
+                  } else if (charaNum < 603) {
+                     if (i < charaNum || i >= 603 && i < 702 && i - 99 < charaNum)
+                     {
+                        bbb++;
+                     }
+                  } else if (charaNum < 702) {
+                     if (i < 503 || i >= 504 && i < 603 && i < charaNum - 99 || i >= 604 && i < charaNum)
                      {
                         bbb++;
                      }
                   }
-                  ccc++;
                }
             }
             i++;

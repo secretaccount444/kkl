@@ -7,6 +7,8 @@ package menu
    import undo.CharacterHeaderCopyAction;
    import undo.SystemHeaderCopyAction;
    import undo.FullCharacterCopyAction;
+   import parts.Ribbon;
+   import parts.Hairpiece;
    
    public class Tab_PasteTargetClass
    {
@@ -472,6 +474,17 @@ package menu
          var _loc7_:String = null;
          var _loc8_:int = 0;
          var _loc9_:String = null;
+         var storedRibbons = null;
+         var storedHairpieces = null;
+
+         if (headerName == "Ribon") {
+            storedRibbons = Tab_CopyTargetClass.charaCopyData[0]["RibonPlus"]["_visible"];
+         }
+
+         if (headerName == "HairEx") {
+            storedHairpieces = Tab_CopyTargetClass.charaCopyData[0]["HairExPlus"]["_visible"];
+         }
+
          for(_loc3_ in MenuClass.tabData[headerName])
          {
             _loc2_ = MenuClass.tabData[headerName][_loc3_][0];
@@ -484,24 +497,51 @@ package menu
             {
                _loc5_ = true;
             }
+            
             if(_loc5_)
             {
-               _loc7_ = MenuClass.tabData[headerName][_loc3_][2]["_data"];
-               _loc8_ = MenuClass.charaData[param1][_loc7_]["_visible"].length - 1;
-               _loc4_ = 0;
-               while(_loc4_ <= _loc8_)
-               {
-                  _loc9_ = _loc2_ + _loc4_;
-                  Dress_data.DressCharaData[param1][_loc9_] = clone(Tab_CopyTargetClass.dressCopyData[0][_loc9_]);
-                  MenuClass.charaData[param1][_loc9_] = clone(Tab_CopyTargetClass.charaCopyData[0][_loc9_]);
-                  try
-                  {
-                     Dress_data.menuCustomNum[param1][_loc9_] = clone(Tab_CopyTargetClass.menuCustomCopyNum[0][_loc9_]);
+               if (headerName == "Ribon") {
+                  for (var ribbonIdx in storedRibbons) {
+                     if (storedRibbons[ribbonIdx]) {
+                        _loc9_ = _loc2_ + ribbonIdx;
+                        Dress_data.DressCharaData[param1][_loc9_] = clone(Tab_CopyTargetClass.dressCopyData[0][_loc9_]);
+                        MenuClass.charaData[param1][_loc9_] = clone(Tab_CopyTargetClass.charaCopyData[0][_loc9_]);
+                        try
+                        {
+                           Dress_data.menuCustomNum[param1][_loc9_] = clone(Tab_CopyTargetClass.menuCustomCopyNum[0][_loc9_]);
+                        } catch(myError:Error) { }
+                     }
                   }
-                  catch(myError:Error)
-                  {
+               } else if (headerName == "HairEx") {
+                     for (var hairpieceIdx in storedHairpieces) {
+                     if (storedHairpieces[hairpieceIdx]) {
+                        _loc9_ = _loc2_ + hairpieceIdx;
+                        Dress_data.DressCharaData[param1][_loc9_] = clone(Tab_CopyTargetClass.dressCopyData[0][_loc9_]);
+                        MenuClass.charaData[param1][_loc9_] = clone(Tab_CopyTargetClass.charaCopyData[0][_loc9_]);
+                        try
+                        {
+                           Dress_data.menuCustomNum[param1][_loc9_] = clone(Tab_CopyTargetClass.menuCustomCopyNum[0][_loc9_]);
+                        } catch(myError:Error) { }
+                     }
                   }
-                  _loc4_++;
+               } else {
+                  _loc7_ = MenuClass.tabData[headerName][_loc3_][2]["_data"];
+                  _loc8_ = MenuClass.charaData[param1][_loc7_]["_visible"].length - 1;
+                  _loc4_ = 0;
+                  while(_loc4_ <= _loc8_)
+                  {
+                     _loc9_ = _loc2_ + _loc4_;
+                     Dress_data.DressCharaData[param1][_loc9_] = clone(Tab_CopyTargetClass.dressCopyData[0][_loc9_]);
+                     MenuClass.charaData[param1][_loc9_] = clone(Tab_CopyTargetClass.charaCopyData[0][_loc9_]);
+                     try
+                     {
+                        Dress_data.menuCustomNum[param1][_loc9_] = clone(Tab_CopyTargetClass.menuCustomCopyNum[0][_loc9_]);
+                     }
+                     catch(myError:Error)
+                     {
+                     }
+                     _loc4_++;
+                  }
                }
             }
             else

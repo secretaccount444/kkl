@@ -678,9 +678,9 @@ package menu
             ashi = MenuClass.charaAdd[character].ashi1;
          }
 
-         var thighRot = charaData[sideName + "ThighRotation"]["_meter"];
-         var legRot = charaData[sideName + "LegRotation"]["_meter"];
-         var footRot = charaData[sideName + "FootRotation"]["_meter"];
+         var thighRot = charaData[sideName + "ThighRotation"]["_meter"]/10;
+         var legRot = charaData[sideName + "LegRotation"]["_meter"]/10;
+         var footRot = charaData[sideName + "FootRotation"]["_meter"]/10;
 
          var thighOffset = getOffsetDataVector(character, sideName, "Thigh");
          var thighScale = getScaleVector(character, sideName, "Thigh");
@@ -697,7 +697,7 @@ package menu
          ashi.thigh.actual.scaleY = thighScale.y;
          ashi.thigh.actual.rotation = thighRot;
          ashi.thigh.actual.visible = charaData[sideName + "ThighVisible"]["_visible"][0];
-         ashi.shiri.actual.visible = charaData[sideName + "ThighVisible"]["_visible"][0];
+         ashi.shiri.actual.visible = charaData[sideName + "ShiriVisible"]["_visible"][0];
 
          if (ashi.leg) {
             var legOffset = getOffsetDataVector(character, sideName, "Leg");

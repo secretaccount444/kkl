@@ -327,6 +327,8 @@ package menu
             {
                this.charaAdd["mark" + param2 + "_" + 0].mark0.scaleX = _loc9_ * -1;
                this.charaAdd["mark" + param2 + "_" + 0].mark0.x = _loc13_;
+               new MeterPersentRibon(0.25,-0.25,param1,"MarkFineX",param2);
+               this.charaAdd["mark" + param2 + "_" + 0].mark0.x += MeterPersentRibon.MeterPersentNum;
             }
             if(this.flag1)
             {
@@ -336,7 +338,13 @@ package menu
                   this.charaAdd["mark" + param2 + "_" + 1].mark0.scaleX = _loc9_;
                }
                this.charaAdd["mark" + param2 + "_" + 1].mark0.x = _loc14_;
+               new MeterPersentRibon(-0.25,0.25,param1,"MarkFineX",param2);
+               this.charaAdd["mark" + param2 + "_" + 1].mark0.x += MeterPersentRibon.MeterPersentNum;
             }
+
+            new MeterPersentRibon(0.25, -0.25,param1,"MarkFineY",param2);
+            var fineTuneY = MeterPersentRibon.MeterPersentNum;
+
             _loc4_ = 0;
             while(_loc4_ <= 1)
             {
@@ -344,6 +352,7 @@ package menu
                {
                   this.charaAdd["mark" + param2 + "_" + _loc4_].mark0.scaleY = _loc10_;
                   this.charaAdd["mark" + param2 + "_" + _loc4_].mark0.y = _loc8_;
+                  this.charaAdd["mark" + param2 + "_" + _loc4_].mark0.y += fineTuneY;
                   this.charaAdd["mark" + param2 + "_" + _loc4_].faceMask.gotoAndStop(this.charaData["Contour"]["_menu"] + 1);
                   new MeterPersent(0.92,1.1,"ContourWidth",param1);
                   this.charaAdd["mark" + param2 + "_" + _loc4_].faceMask.scaleX = MeterPersent.MeterPersentNum;

@@ -5,6 +5,8 @@ package menu
    import flash.utils.ByteArray;
    import parameter.Dress_data;
    import undo.SlotShiftAction;
+   import parts.Ribbon;
+   import parts.Hairpiece;
    
    public class Tab_UpDownTargetClass
    {
@@ -47,29 +49,217 @@ package menu
       
       public static function upMouseDown(param1:MouseEvent) : void
       {
+         var header:String;
+         var dataTarget:String;
+         var currentSlot:Number;
+         var tabId:String;
+         var tabDataIdx:*;
+         var topSlot:Number = 999;
+         var i:Number;
+         var downTo:Number = 999;
          targetMC = param1.currentTarget.parent as MovieClip;
          targetMC.upTarget.gotoAndStop(2);
          targetMC.upTarget.addEventListener(MouseEvent.MOUSE_UP,MouseUp);
          Main.stageVar.addEventListener(MouseEvent.MOUSE_UP,MouseUp);
-         btnFc(param1.currentTarget.tabName,param1.currentTarget.headerName,1);
+         header = param1.currentTarget.headerName;
+
+         if ((Main.keypressHandler.shift || Main.keypressHandler.ctrl) && param1.currentTarget.tabName != "SystemUpDown") {
+            if (header == "Ribon") {
+               for (tabDataIdx in MenuClass.tabData["Ribon"]) {
+                  if((tabId = MenuClass.tabData["Ribon"][tabDataIdx][2]["_data"]) != null) {
+                     currentSlot = Number(MenuClass.systemData[tabId]["_menu"]);
+                     break;
+                  }
+               }
+               if (!Main.keypressHandler.shift) {
+                  for each (var ribbon:Ribbon in Ribbon.getVisibleRibbons(MenuClass._nowCharaNum).reverse()) {
+                     if (ribbon.slot < downTo - 1) {
+                        topSlot = ribbon.slot;
+                        downTo = ribbon.slot;
+                     } else {
+                        downTo = ribbon.slot;
+                     }
+                     if (ribbon.slot <= currentSlot) {
+                        if (topSlot == 999) return;
+                        for (i = topSlot; i >= currentSlot; i--) {
+                           btnFc(param1.currentTarget.tabName,param1.currentTarget.headerName,1,i);
+                        }
+                        return;
+                     }
+                  }
+               } else if (MenuClass.spaceKeyPress) {
+                  for each (var ribbon:Ribbon in Ribbon.getVisibleRibbons(MenuClass._nowCharaNum).reverse()) {
+                     if (ribbon.slot >= 989) {
+                        return;
+                     } else if (ribbon.slot >= currentSlot) {
+                        btnFc(param1.currentTarget.tabName,param1.currentTarget.headerName,10,ribbon.slot);
+                     }
+                  }
+               } else {
+                  for each (var ribbon:Ribbon in Ribbon.getVisibleRibbons(MenuClass._nowCharaNum).reverse()) {
+                     if (ribbon.slot == 998) {
+                        return;
+                     } else if (ribbon.slot >= currentSlot) {
+                        btnFc(param1.currentTarget.tabName,param1.currentTarget.headerName,1,ribbon.slot);
+                     }
+                  }
+               }
+            } else if (header == "HairEx") {
+               for (tabDataIdx in MenuClass.tabData["HairEx"]) {
+                  if((tabId = MenuClass.tabData["HairEx"][tabDataIdx][2]["_data"]) != null) {
+                     currentSlot = Number(MenuClass.systemData[tabId]["_menu"]);
+                     break;
+                  }
+               }
+               if (!Main.keypressHandler.shift) {
+                  for each (var hairpiece:Hairpiece in Hairpiece.getVisibleHairpieces(MenuClass._nowCharaNum).reverse()) {
+                     if (hairpiece.slot < downTo - 1) {
+                        topSlot = hairpiece.slot;
+                        downTo = hairpiece.slot;
+                     } else {
+                        downTo = hairpiece.slot;
+                     }
+                     if (hairpiece.slot <= currentSlot) {
+                        if (topSlot == 999) return;
+                        for (i = topSlot; i >= currentSlot; i--) {
+                           btnFc(param1.currentTarget.tabName,param1.currentTarget.headerName,1,i);
+                        }
+                        return;
+                     }
+                  }
+               } else if (MenuClass.spaceKeyPress) {
+                  for each (var hairpiece:Hairpiece in Hairpiece.getVisibleHairpieces(MenuClass._nowCharaNum).reverse()) {
+                     if (hairpiece.slot >= 989) {
+                        return;
+                     } else if (hairpiece.slot >= currentSlot) {
+                        btnFc(param1.currentTarget.tabName,param1.currentTarget.headerName,10,hairpiece.slot);
+                     }
+                  }
+               } else {
+                  for each (var hairpiece:Hairpiece in Hairpiece.getVisibleHairpieces(MenuClass._nowCharaNum).reverse()) {
+                     if (hairpiece.slot == 998) {
+                        return;
+                     } else if (hairpiece.slot >= currentSlot) {
+                        btnFc(param1.currentTarget.tabName,param1.currentTarget.headerName,1,hairpiece.slot);
+                     }
+                  }
+               }
+            }
+         } else {
+            btnFc(param1.currentTarget.tabName,param1.currentTarget.headerName,1);
+         }
       }
       
       public static function downMouseDown(param1:MouseEvent) : void
       {
+         var header:String;
+         var dataTarget:String;
+         var currentSlot:Number;
+         var tabId:String;
+         var tabDataIdx:*;
+         var bottomSlot:Number = -1;
+         var i:Number;
+         var upTo:Number = -1;
          targetMC = param1.currentTarget.parent as MovieClip;
          targetMC.downTarget.gotoAndStop(2);
          targetMC.downTarget.addEventListener(MouseEvent.MOUSE_UP,MouseUp);
          Main.stageVar.addEventListener(MouseEvent.MOUSE_UP,MouseUp);
-         btnFc(param1.currentTarget.tabName,param1.currentTarget.headerName,-1);
+         header = param1.currentTarget.headerName;
+
+         if ((Main.keypressHandler.shift || Main.keypressHandler.ctrl) && param1.currentTarget.tabName != "SystemUpDown") {
+            if (header == "Ribon") {
+               for (tabDataIdx in MenuClass.tabData["Ribon"]) {
+                  if((tabId = MenuClass.tabData["Ribon"][tabDataIdx][2]["_data"]) != null) {
+                     currentSlot = Number(MenuClass.systemData[tabId]["_menu"]);
+                     break;
+                  }
+               }
+               if (!Main.keypressHandler.shift) {
+                  for each (var ribbon:Ribbon in Ribbon.getVisibleRibbons(MenuClass._nowCharaNum)) {
+                     if (ribbon.slot > upTo + 1) {
+                        bottomSlot = ribbon.slot;
+                        upTo = ribbon.slot;
+                     } else {
+                        upTo = ribbon.slot;
+                     }
+                     if (ribbon.slot >= currentSlot) {
+                        if (bottomSlot == 0) return;
+                        for (i = bottomSlot; i <= currentSlot; i++) {
+                           btnFc(param1.currentTarget.tabName,param1.currentTarget.headerName,-1,i);
+                        }
+                        return;
+                     }
+                  }
+               } else if (MenuClass.spaceKeyPress) {
+                  for each (var ribbon:Ribbon in Ribbon.getVisibleRibbons(MenuClass._nowCharaNum)) {
+                     if (ribbon.slot <= 9) {
+                        return;
+                     } else if (ribbon.slot <= currentSlot) {
+                        btnFc(param1.currentTarget.tabName,param1.currentTarget.headerName,-10,ribbon.slot);
+                     }
+                  }
+               } else {
+                  for each (var ribbon:Ribbon in Ribbon.getVisibleRibbons(MenuClass._nowCharaNum)) {
+                     if (ribbon.slot == 0) {
+                        return;
+                     } else if (ribbon.slot <= currentSlot) {
+                        btnFc(param1.currentTarget.tabName,param1.currentTarget.headerName,-1,ribbon.slot);
+                     }
+                  }
+               }
+            } else if (header == "HairEx") {
+               for (tabDataIdx in MenuClass.tabData["HairEx"]) {
+                  if((tabId = MenuClass.tabData["HairEx"][tabDataIdx][2]["_data"]) != null) {
+                     currentSlot = Number(MenuClass.systemData[tabId]["_menu"]);
+                     break;
+                  }
+               }
+               if (!Main.keypressHandler.shift) {
+                  for each (var hairpiece:Hairpiece in Hairpiece.getVisibleHairpieces(MenuClass._nowCharaNum)) {
+                     if (hairpiece.slot > upTo + 1) {
+                        bottomSlot = hairpiece.slot;
+                        upTo = hairpiece.slot;
+                     } else {
+                        upTo = hairpiece.slot;
+                     }
+                     if (hairpiece.slot >= currentSlot) {
+                        if (bottomSlot == 0) return;
+                        for (i = bottomSlot; i <= currentSlot; i++) {
+                           btnFc(param1.currentTarget.tabName,param1.currentTarget.headerName,-1,i);
+                        }
+                        return;
+                     }
+                  }
+               } else if (MenuClass.spaceKeyPress) {
+                  for each (var hairpiece:Hairpiece in Hairpiece.getVisibleHairpieces(MenuClass._nowCharaNum)) {
+                     if (hairpiece.slot <= 9) {
+                        return;
+                     } else if (hairpiece.slot <= currentSlot) {
+                        btnFc(param1.currentTarget.tabName,param1.currentTarget.headerName,-10,hairpiece.slot);
+                     }
+                  }
+               } else {
+                  for each (var hairpiece:Hairpiece in Hairpiece.getVisibleHairpieces(MenuClass._nowCharaNum)) {
+                     if (hairpiece.slot == 0) {
+                        return;
+                     } else if (hairpiece.slot <= currentSlot) {
+                        btnFc(param1.currentTarget.tabName,param1.currentTarget.headerName,-1,hairpiece.slot);
+                     }
+                  }
+               }
+            }
+         } else {
+            btnFc(param1.currentTarget.tabName,param1.currentTarget.headerName,-1);
+         }
       }
       
-      public static function btnFc(param1:String, param2:String, param3:Number) : void
+      public static function btnFc(param1:String, param2:String, param3:Number, slotOption:Number = -1) : void
       {
          var undoAction = null;
          if (param1 == "SystemUpDown") {
-            undoAction = new SlotShiftAction(param2, param3, 100);
+            undoAction = new SlotShiftAction(param2, param3, 100, slotOption);
          } else {
-            undoAction = new SlotShiftAction(param2, param3, MenuClass._nowCharaNum);
+            undoAction = new SlotShiftAction(param2, param3, MenuClass._nowCharaNum, slotOption);
          }
 
          undoAction.redo();

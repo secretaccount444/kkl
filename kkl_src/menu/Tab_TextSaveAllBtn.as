@@ -3,16 +3,22 @@ package menu
    import flash.display.MovieClip;
    import flash.events.Event;
    import flash.events.MouseEvent;
-   import flash.net.FileReference;
+   import flash.filesystem.File;
+   import flash.filesystem.FileStream;
+   import flash.filesystem.FileMode;
    
    public class Tab_TextSaveAllBtn
    {
       
       public static var targetMC:MovieClip;
       
-      public static var fr:FileReference = new FileReference();
+      public static var fr: File = new File();
       
       public static var txtSaveData:String;
+
+      public static var exportFileData: String;
+
+      public static var exportDefaultFilename: String;
        
       
       public function Tab_TextSaveAllBtn()
@@ -82,6 +88,7 @@ package menu
          }
          fr.addEventListener(Event.COMPLETE,onComplete);
          fr.addEventListener(Event.CANCEL,onCancel);
+         fr.addEventListener(Event.SELECT,onSaveSelected);
          var _loc4_:Date = new Date();
          var _loc5_:* = (_loc5_ = String(_loc4_.getFullYear())).substring(2,4);
          var _loc6_:String;
@@ -95,7 +102,30 @@ package menu
             _loc7_ = "0" + _loc7_;
          }
          _loc5_ = _loc5_ + _loc6_ + _loc7_ + "save_all";
-         fr.save(_loc2_,_loc5_ + ".txt");
+
+         // fr.save(_loc2_,_loc5_ + ".txt");
+
+         exportDefaultFilename = _loc5_ + ".txt";
+         exportFileData = _loc2_;
+         fr.browseForSave("Save All Code");
+      }
+
+      public static function onSaveSelected(ev: Event) : void {
+         var targetFile: File = ev.target as File;
+         var dotIdx = targetFile.nativePath.lastIndexOf(".");
+
+         if (targetFile.nativePath.length == 0) {
+            targetFile.nativePath = exportDefaultFilename;
+         } else if (dotIdx < 0 || targetFile.nativePath.substring(dotIdx) != ".txt") {
+            targetFile.nativePath += ".txt";
+         }
+
+         var stream: FileStream = new FileStream();
+         stream.open(targetFile, FileMode.WRITE);
+         stream.writeUTFBytes(exportFileData);
+         stream.close();
+
+         onComplete(ev);
       }
       
       public static function onComplete(param1:Event) : void

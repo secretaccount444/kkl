@@ -10,6 +10,8 @@ package menu
    import parameter.Color_data;
    import parameter.Dress_data;
    import undo.ColorAction;
+   import parts.Ribbon;
+   import parts.Hairpiece;
    
    public class Tab_ColorBtnSet2
    {
@@ -29,6 +31,10 @@ package menu
       public static var anotherMenuNum:int;
       
       public static var tabNamePlus:String;
+
+      public static var tabName: String;
+
+      public static var curTargetPart;
       
       public static var enterCount:int;
       
@@ -59,8 +65,8 @@ package menu
          var _loc6_:int = 0;
          var _loc7_:String = null;
          var _loc8_:int = 0;
-         var _loc9_:String = null;
-         var _loc10_:int = 0;
+         var dataTarget:String = null;
+         var selectedSlot:int = 0;
          var _loc11_:int = 0;
          var _loc12_:MovieClip = null;
          var _loc13_:MovieClip = null;
@@ -72,27 +78,48 @@ package menu
          var _loc19_:String = null;
          var _loc20_:Object = null;
          var _loc21_:int = 0;
-         var _loc5_:String;
-         if((_loc5_ = MenuClass.tabData[param1][param2][2]["_color"]) == "charaPlus" || _loc5_ == "systemPlus")
+         var _loc5_:String = MenuClass.tabData[param1][param2][2]["_color"];
+
+         tabName = param3;
+
+         curTargetPart = null;
+         if(_loc5_ == "charaPlus" || _loc5_ == "systemPlus")
          {
-            _loc9_ = MenuClass.tabData[param1][param2][2]["_data"];
-            _loc10_ = MenuClass.systemData[_loc9_]["_menu"];
-            tabNamePlus = param3 + _loc10_;
+            dataTarget = MenuClass.tabData[param1][param2][2]["_data"];
+            selectedSlot = MenuClass.systemData[dataTarget]["_menu"];
+            tabNamePlus = tabName + selectedSlot;
+
+            if (dataTarget == "RibonPlus") {
+               curTargetPart = Ribbon.fromCharacter(MenuClass._nowCharaNum, selectedSlot);
+            }
+            else if (dataTarget == "HairExPlus") {
+               curTargetPart = Hairpiece.fromCharacter(MenuClass._nowCharaNum, selectedSlot);
+            }
          }
          else
          {
-            tabNamePlus = param3;
+            tabNamePlus = tabName;
+         }
+
+         if (curTargetPart) {
+            curTargetPart.ensureInitialized();
          }
 
          curUndoAction = new ColorAction(param1, param2);
-         curUndoSlot = _loc10_;
+         curUndoSlot = selectedSlot;
          curUndoAction.recordPreviousValue(curUndoSlot);
          colorPickerActive = false;
 
          MenuClass.colorSelectNum = param4;
-         MenuClass._nowTabName = param3;
+         MenuClass._nowTabName = tabName;
          new Stage_MoveCheckClass();
-         if(Dress_data.DressData[tabNamePlus].length == 1)
+         if (curTargetPart) {
+            _loc6_ = curTargetPart.getData(tabName, "_menu");
+            if (curTargetPart.getAllDefaultDressData(tabName).length == 1) {
+               _loc6_ = 0;
+            }
+         }
+         else if(Dress_data.DressData[tabNamePlus].length == 1)
          {
             _loc6_ = 0;
          }
@@ -104,9 +131,19 @@ package menu
          {
             _loc6_ = MenuClass.systemData[tabNamePlus]["_menu"];
          }
+
          MenuClass.colorMenuNum = _loc6_;
          new Tab_VMC(param1,tabNamePlus,MenuClass._nowCharaNum,param2);
-         if(MenuClass.tabData[param1][param2][2]["_color"] == "chara" || MenuClass.tabData[param1][param2][2]["_color"] == "charaPlus")
+
+         if (curTargetPart) {
+            _loc7_ = curTargetPart.getData(tabName, "_color" + param4)[Tab_VMC.menuNum];
+            if (MenuClass.tabData[param1][param2][2]["_color"] == "chara" || MenuClass.tabData[param1][param2][2]["_color"] == "charaPlus") {
+               _loc8_ = curTargetPart.character;
+            } else {
+               _loc8_ = 0;
+            }
+         }
+         else if(MenuClass.tabData[param1][param2][2]["_color"] == "chara" || MenuClass.tabData[param1][param2][2]["_color"] == "charaPlus")
          {
             _loc7_ = MenuClass.charaData[MenuClass._nowCharaNum][tabNamePlus]["_color" + param4][Tab_VMC.menuNum];
             _loc8_ = MenuClass._nowCharaNum;
@@ -116,6 +153,7 @@ package menu
             _loc7_ = MenuClass.systemData[tabNamePlus]["_color" + param4][Tab_VMC.menuNum];
             _loc8_ = 0;
          }
+
          if(MenuClass.shiftKeyPress)
          {
             spuitFc();
@@ -156,7 +194,14 @@ package menu
                MenuClass.colorPlusAdd["sc" + _loc11_]._number = _loc11_;
                _loc11_++;
             }
-            if((_loc18_ = Color_data.ColorData[Dress_data.DressData[tabNamePlus][_loc6_]["_color" + param4][0]].length - 1) >= 9)
+
+            if (curTargetPart) {
+               _loc18_ = curTargetPart.getDefaultColorData(tabName, _loc6_, param4).length - 1;
+            } else {
+               _loc18_ = Color_data.ColorData[Dress_data.DressData[tabNamePlus][_loc6_]["_color" + param4][0]].length - 1;
+            }
+
+            if(_loc18_ >= 9)
             {
                MenuClass.colorPlusAdd["Custom"].y = -20;
                MenuClass.colorPlusAdd["link"].y = 4;
@@ -204,8 +249,16 @@ package menu
                if(_loc11_ <= _loc18_)
                {
                   MenuClass.colorPlusAdd["sc" + _loc11_].visible = true;
-                  _loc20_ = Color_data.ColorData[Dress_data.DressData[tabNamePlus][_loc6_]["_color" + param4][0]];
-                  new ColorChangeClass(MenuClass.colorPlusAdd["sc" + _loc11_].color,_loc20_[_loc11_][Dress_data.DressData[tabNamePlus][_loc6_]["_color" + param4][2]]);
+                  
+                  var curDressData = null;
+                  if (curTargetPart) {
+                     curDressData = curTargetPart.getDefaultDressData(tabName, _loc6_, param4);
+                  } else {
+                     curDressData = Dress_data.DressData[tabNamePlus][_loc6_]["_color" + param4];
+                  }
+                  _loc20_ = Color_data.ColorData[curDressData[0]];
+
+                  new ColorChangeClass(MenuClass.colorPlusAdd["sc" + _loc11_].color,_loc20_[_loc11_][curDressData[2]]);
                   if(_loc18_ > 70)
                   {
                      _loc21_ = 39;
@@ -257,10 +310,21 @@ package menu
             catch(myError:Error)
             {
             }
+
             _loc19_ = String(_loc7_);
-            if(Dress_data.DressData[tabNamePlus][MenuClass.colorMenuNum]["_color" + param4][3] >= 1)
+            var curDressData = null;
+            var characterDressData = null;
+            if (curTargetPart) {
+               curDressData = curTargetPart.getDefaultDressData(tabName, MenuClass.colorMenuNum, param4);
+               characterDressData = curTargetPart.getDressData(tabName, MenuClass.colorMenuNum, param4);
+            } else {
+               curDressData = Dress_data.DressData[tabNamePlus][MenuClass.colorMenuNum]["_color" + param4];
+               characterDressData = Dress_data.DressCharaData[_loc8_][tabNamePlus][MenuClass.colorMenuNum]["_color" + param4];
+            }
+
+            if(curDressData[3] >= 1)
             {
-               if(_loc19_.length >= 4 && Dress_data.DressCharaData[_loc8_][tabNamePlus][MenuClass.colorMenuNum]["_color" + param4][1] == 1)
+               if(_loc19_.length >= 4 && characterDressData[1] == 1)
                {
                   MenuClass.colorPlusAdd["Custom"].gotoAndStop(2);
                }
@@ -269,20 +333,20 @@ package menu
                   MenuClass.colorPlusAdd["Custom"].gotoAndStop(1);
                }
                MenuClass.colorPlusAdd["link"].visible = true;
-               if(Dress_data.DressCharaData[_loc8_][tabNamePlus][MenuClass.colorMenuNum]["_color" + param4][1] == 2)
+               if(characterDressData[1] == 2)
                {
                   MenuClass.colorPlusAdd["link"].gotoAndStop(2);
-                  MenuClass.tabMenuAdd[param3]["color" + param4].gotoAndStop(3);
+                  MenuClass.tabMenuAdd[tabName]["color" + param4].gotoAndStop(3);
                }
                else
                {
                   MenuClass.colorPlusAdd["link"].gotoAndStop(1);
-                  MenuClass.tabMenuAdd[param3]["color" + param4].gotoAndStop(1);
+                  MenuClass.tabMenuAdd[tabName]["color" + param4].gotoAndStop(1);
                }
             }
             else
             {
-               if((_loc18_ = Color_data.ColorData[Dress_data.DressData[tabNamePlus][MenuClass.colorMenuNum]["_color" + param4][0]].length - 1) >= 39)
+               if((_loc18_ = Color_data.ColorData[curDressData[0]].length - 1) >= 39)
                {
                   if(_loc19_.length >= 4)
                   {
@@ -311,7 +375,7 @@ package menu
             {
                MenuClass.colorAdd["small"].y = Tab_ClassSetY.topY + 55;
             }
-            MenuClass.colorAdd["small"].x = Math.floor(MenuClass.tabMenuAdd[param3].x + 24 + MenuClass.tabMenuAdd[param3].color0.x - (MenuClass.colorAdd["small"].width - 8) / 2);
+            MenuClass.colorAdd["small"].x = Math.floor(MenuClass.tabMenuAdd[tabName].x + 24 + MenuClass.tabMenuAdd[tabName].color0.x - (MenuClass.colorAdd["small"].width - 8) / 2);
             if(MenuClass.colorAdd["small"].x < 10)
             {
                MenuClass.colorAdd["small"].x = 10;
@@ -1953,6 +2017,7 @@ package menu
                while(_loc3_ <= MenuClass._characterNum)
                {
                   anotherMenuNumFc(_loc3_);
+                  LinkKaijyo(_loc3_,anotherMenuNum);
                   linkCheck(_loc4_,anotherMenuNum,_loc3_);
                   _loc3_++;
                }
@@ -1965,6 +2030,7 @@ package menu
                   if(MenuClass._nowSelectChara[_loc3_])
                   {
                      anotherMenuNumFc(_loc3_);
+                     LinkKaijyo(_loc3_,anotherMenuNum);
                      linkCheck(_loc4_,anotherMenuNum,_loc3_);
                   }
                   _loc3_++;
@@ -1972,6 +2038,7 @@ package menu
             }
             else
             {
+               LinkKaijyo(_loc9_,MenuClass.colorMenuNum);
                linkCheck(_loc4_,MenuClass.colorMenuNum,_loc9_);
             }
             charaSet();
@@ -2175,11 +2242,20 @@ package menu
          }
          else
          {
-            _loc9_ = Color_data.ColorData[Dress_data.DressData[tabNamePlus][MenuClass.colorMenuNum]["_color" + MenuClass.colorSelectNum][0]];
-            _loc10_ = Dress_data.DressData[tabNamePlus][MenuClass.colorMenuNum]["_color" + MenuClass.colorSelectNum][2];
+            var selectedDressData = getDefaultDressData(MenuClass.colorMenuNum, MenuClass.colorSelectNum);
+            _loc9_ = Color_data.ColorData[selectedDressData[0]];
+            _loc10_ = selectedDressData[2];
             new ColorChangeClass(MenuClass.colorAdd["colorCustom"].color,_loc9_[_loc8_][_loc10_]);
             new ColorChangeClass(MenuClass.colorAdd["colorCustom"].colorParet1.color,_loc9_[_loc8_][_loc10_]);
             MenuClass.colorAdd["colorCustom"].frameNumTxt.text = _loc9_[_loc8_][_loc10_];
+         }
+      }
+
+      public static function getDefaultDressData(menuNum: int, colorIdx: int) : Array {
+         if (curTargetPart) {
+            return curTargetPart.getDefaultDressData(tabName, menuNum, colorIdx);
+         } else {
+            return Dress_data.DressData[tabNamePlus][menuNum]["_color" + colorIdx];
          }
       }
       
@@ -2191,15 +2267,30 @@ package menu
          var _loc1_:String = Tab_TabNameCheck.headerName;
          var _loc2_:int = Tab_TabNameCheck.targetJ;
          var _loc3_:String = MenuClass.tabData[_loc1_][_loc2_][2]["_color"];
+
+         tabName = MenuClass._nowTabName;
+         curTargetPart = null;
+
          if(_loc3_ == "charaPlus" || _loc3_ == "systemPlus")
          {
             _loc4_ = MenuClass.tabData[_loc1_][_loc2_][2]["_data"];
             _loc5_ = MenuClass.systemData[_loc4_]["_menu"];
             tabNamePlus = MenuClass._nowTabName + _loc5_;
+
+            if (_loc4_ == "RibonPlus") {
+               curTargetPart = Ribbon.fromCharacter(MenuClass._nowCharaNum, _loc5_);
+            }
+            else if (_loc4_ == "HairExPlus") {
+               curTargetPart = Hairpiece.fromCharacter(MenuClass._nowCharaNum, _loc5_);
+            }
          }
          else
          {
             tabNamePlus = MenuClass._nowTabName;
+         }
+
+         if (curTargetPart) {
+            curTargetPart.ensureInitialized();
          }
       }
       
@@ -2446,7 +2537,9 @@ package menu
                         if(param1.length >= 4)
                         {
                            ColorMake.compute(param1);
-                           smallCheck2(param2,ColorMake.colorStr[Dress_data.DressData[tabNamePlus][anotherMenuNum]["_color" + param2][2] - 1],anotherMenuNum,_loc8_);
+                           
+                           var selectedDressData = getDefaultDressData(anotherMenuNum, param2);
+                           smallCheck2(param2,ColorMake.colorStr[selectedDressData[2] - 1],anotherMenuNum,_loc8_);
                         }
                         else
                         {
@@ -2475,7 +2568,9 @@ package menu
                            if(param1.length >= 4)
                            {
                               ColorMake.compute(param1);
-                              smallCheck2(param2,ColorMake.colorStr[Dress_data.DressData[tabNamePlus][anotherMenuNum]["_color" + param2][2] - 1],anotherMenuNum,_loc8_);
+
+                              var selectedDressData = getDefaultDressData(anotherMenuNum, param2);
+                              smallCheck2(param2,ColorMake.colorStr[selectedDressData[2] - 1],anotherMenuNum,_loc8_);
                            }
                            else
                            {
@@ -2495,7 +2590,9 @@ package menu
                if(param1.length >= 4)
                {
                   ColorMake.compute(param1);
-                  smallCheck2(param2,ColorMake.colorStr[Dress_data.DressData[tabNamePlus][MenuClass.colorMenuNum]["_color" + param2][2] - 1],MenuClass.colorMenuNum,_loc6_);
+
+                  var selectedDressData = getDefaultDressData(MenuClass.colorMenuNum, param2);
+                  smallCheck2(param2,ColorMake.colorStr[selectedDressData[2] - 1],MenuClass.colorMenuNum,_loc6_);
                }
                else
                {
@@ -2513,9 +2610,17 @@ package menu
          var targetJ:int = 0;
          var charaNum:int = param1;
          tabNameSet();
+         
          try
          {
-            if(Dress_data.DressData[tabNamePlus].length == 1)
+            var defaultDressData = null;
+            if (curTargetPart) {
+               defaultDressData = curTargetPart.getAllDefaultDressData(tabName);
+            } else {
+               defaultDressData = Dress_data.DressData[tabNamePlus];
+            }
+
+            if(defaultDressData.length == 1)
             {
                anotherMenuNum = 0;
             }
@@ -2648,14 +2753,14 @@ package menu
                      {
                         try
                         {
-                           _loc9_ = Dress_data.DressData[tabNamePlus][0]["_color0"][4];
+                           _loc9_ = getDefaultDressData(0, 0)[4];
                         }
                         catch(myError:Error)
                         {
                         }
                         try
                         {
-                           _loc9_ = Dress_data.DressData[tabNamePlus][1]["_color0"][4];
+                           _loc9_ = getDefaultDressData(1, 0)[4];
                         }
                         catch(myError:Error)
                         {
@@ -2669,7 +2774,8 @@ package menu
                      ColorMake.compute(_loc8_);
                      if(_loc8_.length >= 4)
                      {
-                        smallCheck2(MenuClass.colorSelectNum,ColorMake.colorStr[Dress_data.DressData[tabNamePlus][anotherMenuNum]["_color" + MenuClass.colorSelectNum][2] - 1],anotherMenuNum,_loc7_);
+                        var selectedColorData = getDefaultDressData(anotherMenuNum, MenuClass.colorSelectNum);
+                        smallCheck2(MenuClass.colorSelectNum,ColorMake.colorStr[selectedColorData[2] - 1],anotherMenuNum,_loc7_);
                      }
                      else
                      {
@@ -2701,14 +2807,14 @@ package menu
                         {
                            try
                            {
-                              _loc9_ = Dress_data.DressData[tabNamePlus][0]["_color0"][4];
+                              _loc9_ = getDefaultDressData(0, 0)[4];
                            }
                            catch(myError:Error)
                            {
                            }
                            try
                            {
-                              _loc9_ = Dress_data.DressData[tabNamePlus][1]["_color0"][4];
+                              _loc9_ = getDefaultDressData(1, 0)[4];
                            }
                            catch(myError:Error)
                            {
@@ -2722,7 +2828,8 @@ package menu
                         ColorMake.compute(_loc8_);
                         if(_loc8_.length >= 4)
                         {
-                           smallCheck2(MenuClass.colorSelectNum,ColorMake.colorStr[Dress_data.DressData[tabNamePlus][anotherMenuNum]["_color" + MenuClass.colorSelectNum][2] - 1],anotherMenuNum,_loc7_);
+                           var selectedColorData = getDefaultDressData(anotherMenuNum, MenuClass.colorSelectNum);
+                           smallCheck2(MenuClass.colorSelectNum,ColorMake.colorStr[selectedColorData[2] - 1],anotherMenuNum,_loc7_);
                         }
                         else
                         {
@@ -2747,14 +2854,14 @@ package menu
                {
                   try
                   {
-                     _loc9_ = Dress_data.DressData[tabNamePlus][0]["_color0"][4];
+                     _loc9_ = getDefaultDressData(0, 0)[4];
                   }
                   catch(myError:Error)
                   {
                   }
                   try
                   {
-                     _loc9_ = Dress_data.DressData[tabNamePlus][1]["_color0"][4];
+                     _loc9_ = getDefaultDressData(1, 0)[4];
                   }
                   catch(myError:Error)
                   {
@@ -2768,7 +2875,8 @@ package menu
                ColorMake.compute(_loc8_);
                if(_loc8_.length >= 4)
                {
-                  smallCheck2(MenuClass.colorSelectNum,ColorMake.colorStr[Dress_data.DressData[tabNamePlus][MenuClass.colorMenuNum]["_color" + MenuClass.colorSelectNum][2] - 1],MenuClass.colorMenuNum,_loc5_);
+                  var selectedColorData = getDefaultDressData(MenuClass.colorMenuNum, MenuClass.colorSelectNum);
+                  smallCheck2(MenuClass.colorSelectNum,ColorMake.colorStr[selectedColorData[2] - 1],MenuClass.colorMenuNum,_loc5_);
                }
                else
                {
@@ -2796,7 +2904,20 @@ package menu
          {
             Tab_TabNameCheck.lookup(MenuClass._nowTabName);
             _loc5_ = Tab_TabNameCheck.targetJ;
-            if(MenuClass.tabData[MenuClass._nowHeaderName][_loc5_][2]["_color"] == "chara" || MenuClass.tabData[MenuClass._nowHeaderName][_loc5_][2]["_color"] == "charaPlus")
+            if (curTargetPart) {
+               if (curTargetPart.isSystem) {
+                  colorCustomCheck(MenuClass.systemData,param1,0);
+               } else {
+                  colorCustomCheck(MenuClass.charaData[param4],param1,param4);
+               }
+
+               var colorArr = curTargetPart.getData(tabName, "_color" + param1);
+               colorArr[menuNum] = param2;
+
+               var dressArr = curTargetPart.getDressData(tabName, param3, param1);
+               dressArr[0] = param2;
+            }
+            else if(MenuClass.tabData[MenuClass._nowHeaderName][_loc5_][2]["_color"] == "chara" || MenuClass.tabData[MenuClass._nowHeaderName][_loc5_][2]["_color"] == "charaPlus")
             {
                colorCustomCheck(MenuClass.charaData[param4],param1,param4);
                MenuClass.charaData[param4][tabNamePlus]["_color" + param1][menuNum] = param2;
@@ -2832,7 +2953,15 @@ package menu
          var num:int = param2;
          var charaNum:int = param3;
          tabNameSet();
-         if(Dress_data.DressData[tabNamePlus].length == 1)
+
+         var defaultDressData = null;
+         if (curTargetPart) {
+            defaultDressData = curTargetPart.getAllDefaultDressData(tabName);
+         } else {
+            defaultDressData = Dress_data.DressData[tabNamePlus];
+         }
+
+         if(defaultDressData.length == 1)
          {
             menuNum2 = 0;
          }
@@ -2840,6 +2969,7 @@ package menu
          {
             menuNum2 = obj[tabNamePlus]["_menu"];
          }
+
          try
          {
             if(obj[tabNamePlus]["_visible"].length > 1)
@@ -2855,6 +2985,7 @@ package menu
          {
             menuNum = 0;
          }
+
          var colorStrChange:String = String(obj[tabNamePlus]["_color" + num][menuNum]);
          if(colorStrChange.length >= 4)
          {
@@ -2870,7 +3001,7 @@ package menu
             }
             else
             {
-               n = Color_data.ColorData[Dress_data.DressData[tabNamePlus][menuNum2]["_color" + num][0]].length - 1;
+               n = Color_data.ColorData[getDefaultDressData(menuNum2, num)[0]].length - 1;
                try
                {
                   if(n >= 39)

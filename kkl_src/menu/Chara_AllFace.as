@@ -122,54 +122,54 @@ package menu
          new SetClass(param1,"MouthY","tab");
          if(MenuClass.systemData["DeformerReal"]["_menu"] == 0)
          {
-            _loc5_["EyeScaleX"]["_meter"] = _loc5_["EyeScaleY"]["_meter"] = 50;
+            _loc5_["EyeScaleX"]["_meter"] = _loc5_["EyeScaleY"]["_meter"] = 500;
          }
          else if(MenuClass.systemData["DeformerReal"]["_menu"] == 1)
          {
             if(param2 == "AllFace")
             {
-               _loc4_ = Math.floor(Math.random() * 5) + 20;
+               _loc4_ = Math.floor(Math.random() * 50) + 200;
             }
             else
             {
-               _loc4_ = 20;
+               _loc4_ = 200;
             }
             _loc5_["EyeScaleX"]["_meter"] = _loc5_["EyeScaleY"]["_meter"] = _loc4_;
          }
          if((_loc4_ = Math.floor(Math.random() * 10)) == 0)
          {
-            _loc5_["EyeballScale"]["_meter"] = 45;
-            _loc5_["EyeballScaleY"]["_meter"] = 45;
-            _loc5_["EyeballY"]["_meter"] = 49;
+            _loc5_["EyeballScale"]["_meter"] = 450;
+            _loc5_["EyeballScaleY"]["_meter"] = 450;
+            _loc5_["EyeballY"]["_meter"] = 490;
          }
          else if(_loc4_ == 1)
          {
-            _loc5_["EyeballScale"]["_meter"] = 40;
-            _loc5_["EyeballScaleY"]["_meter"] = 40;
-            _loc5_["EyeballY"]["_meter"] = 48;
+            _loc5_["EyeballScale"]["_meter"] = 400;
+            _loc5_["EyeballScaleY"]["_meter"] = 400;
+            _loc5_["EyeballY"]["_meter"] = 480;
          }
          else if(_loc4_ == 2)
          {
-            _loc5_["EyeballScale"]["_meter"] = 35;
-            _loc5_["EyeballScaleY"]["_meter"] = 35;
-            _loc5_["EyeballY"]["_meter"] = 47;
+            _loc5_["EyeballScale"]["_meter"] = 350;
+            _loc5_["EyeballScaleY"]["_meter"] = 350;
+            _loc5_["EyeballY"]["_meter"] = 470;
          }
          else if(_loc4_ == 3)
          {
-            _loc5_["EyeballScale"]["_meter"] = 45;
-            _loc5_["EyeballScaleY"]["_meter"] = 45;
+            _loc5_["EyeballScale"]["_meter"] = 450;
+            _loc5_["EyeballScaleY"]["_meter"] = 450;
          }
          else if(_loc4_ == 4)
          {
-            _loc5_["EyeballScale"]["_meter"] = 40;
-            _loc5_["EyeballScaleY"]["_meter"] = 40;
-            _loc5_["EyeballY"]["_meter"] = 49;
+            _loc5_["EyeballScale"]["_meter"] = 400;
+            _loc5_["EyeballScaleY"]["_meter"] = 400;
+            _loc5_["EyeballY"]["_meter"] = 490;
          }
          else
          {
-            _loc5_["EyeballScale"]["_meter"] = 50;
-            _loc5_["EyeballScaleY"]["_meter"] = 50;
-            _loc5_["EyeballY"]["_meter"] = 50;
+            _loc5_["EyeballScale"]["_meter"] = 500;
+            _loc5_["EyeballScaleY"]["_meter"] = 500;
+            _loc5_["EyeballY"]["_meter"] = 500;
          }
          new SetClass(param1,"EyeballScale","tab");
          new SetClass(param1,"EyeScaleX","tab");

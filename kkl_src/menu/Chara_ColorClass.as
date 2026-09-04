@@ -6,10 +6,11 @@ package menu
    import parameter.Color_data;
    import parameter.Dress_data;
    import system.MeterPersentRibon;
+   import parts.Ribbon;
+   import parts.Hairpiece;
    
    public class Chara_ColorClass
    {
-       
       
       private var charaNum:int;
       
@@ -251,12 +252,22 @@ package menu
          }
          else if(this.tabName.slice(0,6) == "HairEx")
          {
-            _loc3_ = this.tabName.slice(6,8);
+            _loc3_ = this.tabName.slice(6);
+            if (isNaN(parseInt(_loc3_, 10))) {
+               _loc3_ = this.tabName.slice(6, 8);
+               trace("could not extract extended slot number from " + this.tabName);
+            }
+
             this.HairExColor(_loc3_);
          }
          else if(this.tabName.slice(0,4) == "Mark")
          {
-            _loc3_ = this.tabName.slice(4,6);
+            _loc3_ = this.tabName.slice(4);
+            if (isNaN(parseInt(_loc3_, 10))) {
+               _loc3_ = this.tabName.slice(4, 6);
+               trace("could not extract extended slot number from " + this.tabName);
+            }
+
             this.MarkColor(_loc3_);
          }
          else if(this.tabName == "Hige")
@@ -430,12 +441,22 @@ package menu
          }
          else if(this.tabName.slice(0,5) == "Ribon")
          {
-            _loc3_ = this.tabName.slice(5,7);
+            _loc3_ = this.tabName.slice(5);
+            if (isNaN(parseInt(_loc3_, 10))) {
+               _loc3_ = this.tabName.slice(5, 7);
+               trace("could not extract extended slot number from " + this.tabName);
+            }
+
             this.RibonColor(_loc3_);
          }
          else if(this.tabName.slice(0,4) == "Belt")
          {
-            _loc3_ = this.tabName.slice(4,6);
+            _loc3_ = this.tabName.slice(4);
+            if (isNaN(parseInt(_loc3_, 10))) {
+               _loc3_ = this.tabName.slice(4, 6);
+               trace("could not extract extended slot number from " + this.tabName);
+            }
+
             this.BeltColor(_loc3_);
             this.BeltLineColor(_loc3_);
          }
@@ -586,6 +607,46 @@ package menu
          {
             _loc3_ = this.tabName.slice(8,10);
             this.FreeHandColor(_loc3_);
+         }
+         else if (this.tabName == "MouthSen")
+         {
+            this.MouthLineColor();
+         }
+      }
+
+      private function ribbonCodeCheck(slotData: Ribbon, subKey: String, colorIdx: int, param3: int) : void {
+         var _loc8_: String = slotData.getData(subKey, "_color" + colorIdx)[0];
+         var dressColorData = slotData.getDefaultDressData(subKey, slotData.getData(subKey, "_menu"), colorIdx);
+         this.dressNum = dressColorData[2];
+         this.ccChange = String(_loc8_);
+         
+         var adjKKChange1: Boolean = false;
+         var adjKKChange3: Boolean = false;
+
+         if(this.ccChange.length >= 4) {
+            ColorMakeNew.compute(this.ccChange,param3 - 1);
+            this.kkChange = ColorMakeNew.colorStr;
+         } else {
+            this.kkChange = Color_data.ColorData[dressColorData[0]][_loc8_][param3];
+            this.ccChange = Color_data.ColorData[dressColorData[0]][_loc8_][this.dressNum];
+         }
+      }
+
+      private function hairpieceCodeCheck(slotData: Hairpiece, subKey: String, colorIdx: int, param3:int) : void {
+         var _loc8_: String = slotData.getData(subKey, "_color" + colorIdx)[0];
+         var dressColorData = slotData.getDefaultDressData(subKey, slotData.getData(subKey, "_menu"), colorIdx);
+         this.dressNum = dressColorData[2];
+         this.ccChange = String(_loc8_);
+         
+         var adjKKChange1: Boolean = false;
+         var adjKKChange3: Boolean = false;
+
+         if(this.ccChange.length >= 4) {
+            ColorMakeNew.compute(this.ccChange,param3 - 1);
+            this.kkChange = ColorMakeNew.colorStr;
+         } else {
+            this.kkChange = Color_data.ColorData[dressColorData[0]][_loc8_][param3];
+            this.ccChange = Color_data.ColorData[dressColorData[0]][_loc8_][this.dressNum];
          }
       }
       
@@ -2330,26 +2391,31 @@ package menu
       
       private function HairExColor(param1:String) : void
       {
+
          var _loc2_:int = 0;
-         if(String(this.charaData["HairEx" + param1]["_color0"][0]) == String(this.charaData["HairEx" + param1]["_color1"][0]))
+
+         this.j = 0;
+         var slotData: Hairpiece = Hairpiece.fromCharacter(this.charaNum, parseInt(param1, 10));
+
+
+         if(slotData.color0[0] == slotData.color1[0])
          {
             this.i = 0;
             while(this.i <= 1)
             {
+               var sprite = slotData.getSprite(this.i);
                try
                {
-                  this.charaAdd["HairEx" + param1 + "_" + this.i].HairEx0.color1_0.visible = false;
+                  sprite.HairEx0.color1_0.visible = false;
                }
-               catch(myError:Error)
-               {
-               }
+               catch(myError:Error) {}
+
                try
                {
-                  this.charaAdd["HairEx" + param1 + "_" + this.i].HairEx0.kage1_0.visible = false;
+                  sprite.HairEx0.kage1_0.visible = false;
                }
-               catch(myError:Error)
-               {
-               }
+               catch(myError:Error) {}
+
                ++this.i;
             }
          }
@@ -2358,20 +2424,19 @@ package menu
             this.i = 0;
             while(this.i <= 1)
             {
+               var sprite = slotData.getSprite(this.i);
                try
                {
-                  this.charaAdd["HairEx" + param1 + "_" + this.i].HairEx0.color1_0.visible = true;
+                  sprite.HairEx0.color1_0.visible = true;
                }
-               catch(myError:Error)
-               {
-               }
+               catch(myError:Error) {}
+
                try
                {
-                  this.charaAdd["HairEx" + param1 + "_" + this.i].HairEx0.kage1_0.visible = true;
+                  sprite.HairEx0.kage1_0.visible = true;
                }
-               catch(myError:Error)
-               {
-               }
+               catch(myError:Error) {}
+
                ++this.i;
             }
          }
@@ -2380,34 +2445,30 @@ package menu
          {
             try
             {
-               this.codeCheck("HairEx" + param1,this.j,4,"chara");
+               this.hairpieceCodeCheck(slotData, "", this.j, 4);
                this.i = 0;
                while(this.i <= 1)
                {
+                  var sprite = slotData.getSprite(this.i);
+                     if (sprite) {
+                        this.Obj = sprite.HairEx0;
+                     } else {
+                        ++this.i;
+                        continue;
+                     }
                   this.k = 0;
                   while(this.k <= 1)
                   {
                      try
                      {
-                        this.Obj = this.charaAdd["HairEx" + param1 + "_" + this.i].HairEx0;
-                     }
-                     catch(myError:Error)
-                     {
-                     }
-                     try
-                     {
                         new ColorChangeClass(this.Obj["color" + this.j + "_" + this.k],this.ccChange);
                      }
-                     catch(myError:Error)
-                     {
-                     }
+                     catch(myError:Error) {}
                      try
                      {
                         new ColorChangeClass(this.Obj["kage" + this.j + "_" + this.k],this.kkChange);
                      }
-                     catch(myError:Error)
-                     {
-                     }
+                     catch(myError:Error) {}
                      ++this.k;
                   }
                   ++this.i;
@@ -5059,190 +5120,52 @@ package menu
       {
          var _loc2_:int = 0;
          this.j = 0;
+
+         var slotData: Ribbon = Ribbon.fromCharacter(this.charaNum, parseInt(param1, 10));
          for(; this.j <= 2; ++this.j)
          {
             try
             {
-               this.codeCheck("Ribon" + param1,this.j,4,"chara");
+               this.ribbonCodeCheck(slotData, "", this.j, 4);
+
                this.k = 0;
                while(this.k <= 1)
                {
                   this.i = 0;
                   for(; this.i <= 1; ++this.i)
                   {
-                     try
-                     {
-                        if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 0)
-                        {
-                           this.Obj = this.charaAdd["Ribon" + param1 + "_" + this.i].ribon0;
-                        }
-                        else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 1)
-                        {
-                           this.Obj = this.charaAdd.head["Ribon" + param1 + "_" + this.i].ribon0;
-                        }
-                        else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 2 || MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 99)
-                        {
-                           this.Obj = this.charaAdd.mune["Ribon" + param1 + "_" + this.i].ribon0;
-                        }
-                        else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 3 || MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 98)
-                        {
-                           this.Obj = this.charaAdd.dou["Ribon" + param1 + "_" + this.i].ribon0;
-                        }
-                        else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 4)
-                        {
-                           this.Obj = this.charaAdd.HairBack.hairBack["Ribon" + param1 + "_" + this.i].ribon0;
-                        }
-                        else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 5 && this.i == 0)
-                        {
-                           if(MenuClass.charaData[this.charaNum]["SideBurnLeft"]["_depth"] == 0)
-                           {
-                              this.Obj = this.charaAdd.SideBurnMiddle.SideBurnLeft.SideBurn["Ribon" + param1 + "_" + 0].ribon0;
-                           }
-                           else
-                           {
-                              this.Obj = this.charaAdd.head.SideBurnLeft.SideBurn["Ribon" + param1 + "_" + 0].ribon0;
-                           }
-                        }
-                        else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 5 && this.i == 1)
-                        {
-                           if(MenuClass.charaData[this.charaNum]["SideBurnRight"]["_depth"] == 0)
-                           {
-                              this.Obj = this.charaAdd.SideBurnMiddle.SideBurnRight.SideBurn["Ribon" + param1 + "_" + 1].ribon0;
-                           }
-                           else
-                           {
-                              this.Obj = this.charaAdd.head.SideBurnRight.SideBurn["Ribon" + param1 + "_" + 1].ribon0;
-                           }
-                        }
-                        else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 6 && this.i == 0)
-                        {
-                           this.Obj = this.charaAdd["HairEx" + 0 + "_" + 0]["Ribon" + param1 + "_" + 0].ribon0;
-                        }
-                        else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 6 && this.i == 1)
-                        {
-                           this.Obj = this.charaAdd["HairEx" + 0 + "_" + 1]["Ribon" + param1 + "_" + 1].ribon0;
-                        }
-                        else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 7 && this.i == 0)
-                        {
-                           this.Obj = this.charaAdd["HairEx" + 1 + "_" + 0]["Ribon" + param1 + "_" + 0].ribon0;
-                        }
-                        else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 7 && this.i == 1)
-                        {
-                           this.Obj = this.charaAdd["HairEx" + 1 + "_" + 1]["Ribon" + param1 + "_" + 1].ribon0;
-                        }
-                        else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 8 && this.i == 0)
-                        {
-                           this.Obj = this.charaAdd["HairEx" + 2 + "_" + 0]["Ribon" + param1 + "_" + 0].ribon0;
-                        }
-                        else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 8 && this.i == 1)
-                        {
-                           this.Obj = this.charaAdd["HairEx" + 2 + "_" + 1]["Ribon" + param1 + "_" + 1].ribon0;
-                        }
-                        else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 9 && this.i == 0)
-                        {
-                           this.Obj = this.charaAdd["HairEx" + 3 + "_" + 0]["Ribon" + param1 + "_" + 0].ribon0;
-                        }
-                        else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 9 && this.i == 1)
-                        {
-                           this.Obj = this.charaAdd["HairEx" + 3 + "_" + 1]["Ribon" + param1 + "_" + 1].ribon0;
-                        }
-                        else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 10 && this.i == 0)
-                        {
-                           this.Obj = this.charaAdd["HairEx" + 4 + "_" + 0]["Ribon" + param1 + "_" + 0].ribon0;
-                        }
-                        else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 10 && this.i == 1)
-                        {
-                           this.Obj = this.charaAdd["HairEx" + 4 + "_" + 1]["Ribon" + param1 + "_" + 1].ribon0;
-                        }
-                        else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 95 && this.i == 0)
-                        {
-                           this.Obj = this.charaAdd.ashi0.thigh.actual.thigh["Ribon" + param1 + "_" + 0].ribon0;
-                        }
-                        else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 95 && this.i == 1)
-                        {
-                           this.Obj = this.charaAdd.ashi1.thigh.actual.thigh["Ribon" + param1 + "_" + 1].ribon0;
-                        }
-                        else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 96 && this.i == 0 && this.charaAdd.ashi0.leg != null && this.charaAdd.ashi0.leg.actual.leg != null)
-                        {
-                           this.Obj = this.charaAdd.ashi0.leg.actual.leg["Ribon" + param1 + "_" + 0].ribon0;
-                        }
-                        else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 96 && this.i == 1 && this.charaAdd.ashi1.leg != null && this.charaAdd.ashi1.leg.actual.leg != null)
-                        {
-                           this.Obj = this.charaAdd.ashi1.leg.actual.leg["Ribon" + param1 + "_" + 1].ribon0;
-                        }
-                        else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 97 && this.i == 0)
-                        {
-                           this.Obj = this.charaAdd.ashi0.foot.actual.foot["Ribon" + param1 + "_" + 0].ribon0;
-                        }
-                        else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 97 && this.i == 1)
-                        {
-                           this.Obj = this.charaAdd.ashi1.foot.actual.foot["Ribon" + param1 + "_" + 1].ribon0;
-                        }
-                        else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 92 && this.i == 0)
-                        {
-                           this.Obj = this.charaAdd.handm0_0.hand["Ribon" + param1 + "_" + 0].ribon0;
-                        }
-                        else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 92 && this.i == 1)
-                        {
-                           this.Obj = this.charaAdd.handm0_1.hand["Ribon" + param1 + "_" + 1].ribon0;
-                        }
-                        else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 93 && this.i == 0)
-                        {
-                           this.Obj = this.charaAdd.handm1_0.hand["Ribon" + param1 + "_" + 0].ribon0;
-                        }
-                        else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 93 && this.i == 1)
-                        {
-                           this.Obj = this.charaAdd.handm1_1.hand["Ribon" + param1 + "_" + 1].ribon0;
-                        }
-                        else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 94 && this.i == 0)
-                        {
-                           this.Obj = this.charaAdd.handm1_0.hand.arm0["Ribon" + param1 + "_" + 0].ribon0;
-                        }
-                        else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 94 && this.i == 1)
-                        {
-                           this.Obj = this.charaAdd.handm1_1.hand.arm0["Ribon" + param1 + "_" + 1].ribon0;
-                        }
+                     var sprite = slotData.getSprite(this.i);
+                     if (sprite) {
+                        this.Obj = sprite.ribon0;
+                     } else {
+                        continue;
                      }
-                     catch(myError:Error)
-                     {
-                     }
-                     try
-                     {
+
+                     try {
                         new ColorChangeClass(this.Obj["color" + this.j + "_" + this.k],this.ccChange);
-                     }
-                     catch(myError:Error)
-                     {
-                     }
-                     try
-                     {
+                     } catch(myError:Error) { }
+
+                     try {
                         new ColorChangeClass(this.Obj["kage" + this.j + "_" + this.k],this.kkChange);
-                     }
-                     catch(myError:Error)
-                     {
-                     }
-                     try
-                     {
+                     } catch(myError:Error) { }
+
+                     try {
                         _loc2_ = 0;
                         while(_loc2_ <= 3)
                         {
                            new ColorChangeClass(this.Obj["ball" + _loc2_]["color" + this.j + "_" + this.k],this.ccChange);
                            _loc2_++;
                         }
-                     }
-                     catch(myError:Error)
-                     {
-                     }
-                     try
-                     {
+                     } catch(myError:Error) { }
+
+                     try {
                         _loc2_ = 0;
                         while(_loc2_ <= 3)
                         {
                            new ColorChangeClass(this.Obj["ball" + _loc2_]["kage" + this.j + "_" + this.k],this.kkChange);
                            _loc2_++;
                         }
-                     }
-                     catch(myError:Error)
-                     {
+                     } catch(myError:Error) {
                         continue;
                      }
                   }
@@ -5254,173 +5177,37 @@ package menu
                continue;
             }
          }
+
          try
          {
-            this.codeCheck("RibonLine" + param1,0,4,"chara");
+            this.ribbonCodeCheck(slotData, "Line", 0, 4);
             this.i = 0;
+
             for(; this.i <= 1; ++this.i)
             {
-               try
-               {
-                  if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 0)
-                  {
-                     this.Obj = this.charaAdd["Ribon" + param1 + "_" + this.i].ribon0;
-                  }
-                  else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 1)
-                  {
-                     this.Obj = this.charaAdd.head["Ribon" + param1 + "_" + this.i].ribon0;
-                  }
-                  else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 2 || MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 99)
-                  {
-                     this.Obj = this.charaAdd.mune["Ribon" + param1 + "_" + this.i].ribon0;
-                  }
-                  else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 3 || MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 98)
-                  {
-                     this.Obj = this.charaAdd.dou["Ribon" + param1 + "_" + this.i].ribon0;
-                  }
-                  else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 4)
-                  {
-                     this.Obj = this.charaAdd.HairBack.hairBack["Ribon" + param1 + "_" + this.i].ribon0;
-                  }
-                  else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 5 && this.i == 0)
-                  {
-                     if(MenuClass.charaData[this.charaNum]["SideBurnLeft"]["_depth"] == 0)
-                     {
-                        this.Obj = this.charaAdd.SideBurnMiddle.SideBurnLeft.SideBurn["Ribon" + param1 + "_" + 0].ribon0;
-                     }
-                     else
-                     {
-                        this.Obj = this.charaAdd.head.SideBurnLeft.SideBurn["Ribon" + param1 + "_" + 0].ribon0;
-                     }
-                  }
-                  else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 5 && this.i == 1)
-                  {
-                     if(MenuClass.charaData[this.charaNum]["SideBurnRight"]["_depth"] == 0)
-                     {
-                        this.Obj = this.charaAdd.SideBurnMiddle.SideBurnRight.SideBurn["Ribon" + param1 + "_" + 1].ribon0;
-                     }
-                     else
-                     {
-                        this.Obj = this.charaAdd.head.SideBurnRight.SideBurn["Ribon" + param1 + "_" + 1].ribon0;
-                     }
-                  }
-                  else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 6 && this.i == 0)
-                  {
-                     this.Obj = this.charaAdd["HairEx" + 0 + "_" + 0]["Ribon" + param1 + "_" + 0].ribon0;
-                  }
-                  else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 6 && this.i == 1)
-                  {
-                     this.Obj = this.charaAdd["HairEx" + 0 + "_" + 1]["Ribon" + param1 + "_" + 1].ribon0;
-                  }
-                  else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 7 && this.i == 0)
-                  {
-                     this.Obj = this.charaAdd["HairEx" + 1 + "_" + 0]["Ribon" + param1 + "_" + 0].ribon0;
-                  }
-                  else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 7 && this.i == 1)
-                  {
-                     this.Obj = this.charaAdd["HairEx" + 1 + "_" + 1]["Ribon" + param1 + "_" + 1].ribon0;
-                  }
-                  else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 8 && this.i == 0)
-                  {
-                     this.Obj = this.charaAdd["HairEx" + 2 + "_" + 0]["Ribon" + param1 + "_" + 0].ribon0;
-                  }
-                  else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 8 && this.i == 1)
-                  {
-                     this.Obj = this.charaAdd["HairEx" + 2 + "_" + 1]["Ribon" + param1 + "_" + 1].ribon0;
-                  }
-                  else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 9 && this.i == 0)
-                  {
-                     this.Obj = this.charaAdd["HairEx" + 3 + "_" + 0]["Ribon" + param1 + "_" + 0].ribon0;
-                  }
-                  else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 9 && this.i == 1)
-                  {
-                     this.Obj = this.charaAdd["HairEx" + 3 + "_" + 1]["Ribon" + param1 + "_" + 1].ribon0;
-                  }
-                  else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 10 && this.i == 0)
-                  {
-                     this.Obj = this.charaAdd["HairEx" + 4 + "_" + 0]["Ribon" + param1 + "_" + 0].ribon0;
-                  }
-                  else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 10 && this.i == 1)
-                  {
-                     this.Obj = this.charaAdd["HairEx" + 4 + "_" + 1]["Ribon" + param1 + "_" + 1].ribon0;
-                  }
-                  else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 95 && this.i == 0)
-                  {
-                     this.Obj = this.charaAdd.ashi0.thigh.actual.thigh["Ribon" + param1 + "_" + 0].ribon0;
-                  }
-                  else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 95 && this.i == 1)
-                  {
-                     this.Obj = this.charaAdd.ashi1.thigh.actual.thigh["Ribon" + param1 + "_" + 1].ribon0;
-                  }
-                  else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 96 && this.i == 0 && this.charaAdd.ashi0.leg != null && this.charaAdd.ashi0.leg.actual.leg != null)
-                  {
-                     this.Obj = this.charaAdd.ashi0.leg.actual.leg["Ribon" + param1 + "_" + 0].ribon0;
-                  }
-                  else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 96 && this.i == 1 && this.charaAdd.ashi1.leg != null && this.charaAdd.ashi1.leg.actual.leg != null)
-                  {
-                     this.Obj = this.charaAdd.ashi1.leg.actual.leg["Ribon" + param1 + "_" + 1].ribon0;
-                  }
-                  else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 97 && this.i == 0)
-                  {
-                     this.Obj = this.charaAdd.ashi0.foot.actual.foot["Ribon" + param1 + "_" + 0].ribon0;
-                  }
-                  else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 97 && this.i == 1)
-                  {
-                     this.Obj = this.charaAdd.ashi1.foot.actual.foot["Ribon" + param1 + "_" + 1].ribon0;
-                  }
-                  else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 92 && this.i == 0)
-                  {
-                     this.Obj = this.charaAdd.handm0_0.hand["Ribon" + param1 + "_" + 0].ribon0;
-                  }
-                  else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 92 && this.i == 1)
-                  {
-                     this.Obj = this.charaAdd.handm0_1.hand["Ribon" + param1 + "_" + 1].ribon0;
-                  }
-                  else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 93 && this.i == 0)
-                  {
-                     this.Obj = this.charaAdd.handm1_0.hand["Ribon" + param1 + "_" + 0].ribon0;
-                  }
-                  else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 93 && this.i == 1)
-                  {
-                     this.Obj = this.charaAdd.handm1_1.hand["Ribon" + param1 + "_" + 1].ribon0;
-                  }
-                  else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 94 && this.i == 0)
-                  {
-                     this.Obj = this.charaAdd.handm1_0.hand.arm0["Ribon" + param1 + "_" + 0].ribon0;
-                  }
-                  else if(MenuClass.charaData[this.charaNum]["RibonAdd" + param1]["_add0"] == 94 && this.i == 1)
-                  {
-                     this.Obj = this.charaAdd.handm1_1.hand.arm0["Ribon" + param1 + "_" + 1].ribon0;
-                  }
+               var sprite = slotData.getSprite(this.i);
+               if (sprite) {
+                  this.Obj = sprite.ribon0;
+               } else {
+                  continue;
                }
-               catch(myError:Error)
-               {
-               }
-               try
-               {
+               
+               try {
                   new ColorChangeClass(this.Obj.sen,this.ccChange);
-               }
-               catch(myError:Error)
-               {
-               }
-               try
-               {
+               } catch(myError:Error) { }
+
+               try {
                   _loc2_ = 0;
                   while(_loc2_ <= 3)
                   {
                      new ColorChangeClass(this.Obj["ball" + _loc2_].sen,this.ccChange);
                      _loc2_++;
                   }
-               }
-               catch(myError:Error)
-               {
+               } catch(myError:Error) {
                   continue;
                }
             }
-         }
-         catch(myError:Error)
-         {
-         }
+         } catch(myError:Error) { }
       }
       
       private function FreeRibonColor(param1:String) : void
@@ -7640,6 +7427,15 @@ package menu
          }
          catch(myError:Error)
          {
+         }
+      }
+
+      private function MouthLineColor() : void {
+         try {
+            this.codeCheck("MouthSen", 0, 4, "chara");
+            new ColorChangeClass(this.charaAdd.head.mouth.sen0, this.ccChange);
+         } catch (err: Error) {
+            trace(err.getStackTrace());
          }
       }
       

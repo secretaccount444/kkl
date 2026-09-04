@@ -33,7 +33,7 @@ package {
    public class Main extends MovieClip
    {
       
-      public static var version:int = 106;
+      public static var version:int = 108;
       
       public static var saveAllVersion:int = 1;
       
@@ -47,7 +47,7 @@ package {
       
       public static var r18Check:Boolean = false;
       
-      public static var loadName:Array = new Array("tail2","hane1","bura21","mune31","dou63","hand0_10_1","hand1_45_1","ashi31_1","head63","peni7","mune_m32","ysyatu30","hairEx17","belt15","background13","mob5","character7","mark13_1","ribon22_1","sideburn3","hairBack3","bangs2","horn","bodyDress11","mouth4","hair","breastOption2","hat3","megane3","eye","hukidashi6");
+      public static var loadName:Array = new Array("tail2","hane1","bura21","mune31","dou63","hand0_10_1","hand1_45_1","ashi31_1","head63","peni7","mune_m32","ysyatu30","hairEx17_1","belt15","background13","mob5","character7","mark13_1","ribon22_1","sideburn3","hairBack3","bangs2","horn","bodyDress11","mouth4","hair","breastOption2","hat3","megane3","eye","hukidashi6");
       
       public static var loadItemName:Array = new Array("flag0","","chair20","charaSet11","allCharaSet5","allHukuSet6");
       
@@ -152,7 +152,7 @@ package {
       public static var fullResetCode: String = "68***ba50_bb6.0_bc410.500.8.0.1.0_bd6_be180_ad0.0.0.0.0.0.0.0.0.0_ae0.3.3.0.0*0*0*0*0*0*0*0*0#/]a00_b00_c00_d00_w00_x00_e00_y00_z00_ua1.0.0.0.100_uf0.3.0.0_ue_ub_u0_v00_ud7.8_uc7.2.24";
       public static var initCode: String = "100**#/]a00_b00_c00_d00_w00_x00_e00_y00_z00_ua1.57.57.59.100_uf0.3.59.0_ue_ub_u0_v00";
 
-      public static var minor_version: Number = 0;
+      public static var minor_version: Number = 1;
       public static var alpha_version: Number = 0;
 
       public static var ready: Boolean = false;
@@ -454,8 +454,76 @@ package {
          stage.addChild(mainMask);
          mainMask.visible = false;
             
-               new MenuClass();
+         new MenuClass();
+      }
+
+      /**
+       * Find the leftmost insertion point for a target value in the given array.
+       * 
+       * The returned index partitions the array `arr` into two halves:
+       *     arr[:idx] contains all items strictly less than the target value.
+       *     arr[idx:] contains all items greater than or equal to the target value.
+       */
+      public static function binarySearchLeft(arr: Array, target: *, cmp: * = null) : int {
+         var left = 0;
+         var right = arr.length;
+         var mid = 0;
+
+         while (left < right) {
+            mid = Math.floor((left + right) / 2);
+
+            if (cmp) {
+               var cmpResult = cmp(arr[mid], target);
+               if (cmpResult < 0) {
+                  left = mid + 1;
+               } else {
+                  right = mid;
+               }
+            } else {
+               if (arr[mid] < target) {
+                  left = mid + 1;
+               } else {
+                  right = mid;
+               }
             }
+         }
+
+         return right;
+      }
+
+      /**
+       * Find the rightmost insertion point for a target value in the given array.
+       * 
+       * The returned index partitions the array `arr` into two halves:
+       *     arr[:idx] contains all items less than or equal to the target value.
+       *     arr[idx:] contains all items greater than the target value.
+       */
+      public static function binarySearchRight(arr: Array, target: *, cmp: * = null) : int {
+         var left = 0;
+         var right = arr.length;
+         var mid = 0;
+
+         while (left < right) {
+            mid = Math.floor((left + right) / 2);
+
+            if (cmp) {
+               var cmpResult = cmp(arr[mid], target);
+               if (cmpResult <= 0) {
+                  left = mid + 1;
+               } else {
+                  right = mid;
+               }
+            } else {
+               if (arr[mid] <= target) {
+                  left = mid + 1;
+               } else {
+                  right = mid;
+               }
+            }
+         }
+
+         return right;
+      }
 
       public static function onKisekaeReady() : void {
          trace("Kisekae is ready!");

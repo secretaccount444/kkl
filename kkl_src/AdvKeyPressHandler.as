@@ -27,6 +27,7 @@ package {
             Main.stageVar.addEventListener(KeyboardEvent.KEY_UP, this.handleKeyUp);
             Main.stageVar.addEventListener(KeyboardEvent.KEY_DOWN, this.sendServerKeyEvent);
             Main.stageVar.addEventListener(KeyboardEvent.KEY_UP, this.sendServerKeyEvent);
+            Main.stageVar.nativeWindow.addEventListener(Event.ACTIVATE, this.windowActivated);
         }
 
         public function get shift() : Boolean {
@@ -71,6 +72,13 @@ package {
             });
 
             tm.start();
+        }
+
+        private function windowActivated(ev) : void {
+            this.keyState = {};
+            this._shift = false;
+            this._ctrl = false;
+            this._alt = false;
         }
 
         private function sendServerKeyEvent(ev: KeyboardEvent) {

@@ -65,6 +65,7 @@ package menu
             }
             _loc6_ = true;
             new SetClass(param1,"VibratorScale","tab");
+            new SetClass(param1,"VibratorAlpha","tab");
             _loc5_.vibrator.visible = true;
          }
          else if(_loc5_.vibrator.visible)

@@ -7,6 +7,8 @@ package undo {
     import menu.Huku_MarkSet;
     import menu.Hair_HairExSet;
     import menu.Add_LoadURL2;
+    import parts.Ribbon;
+    import parts.Hairpiece;
 
     public class AttachPointAction extends UndoAction {
         private var headerName: String;
@@ -38,11 +40,11 @@ package undo {
                             MenuClass.charaData[i]["SelectCharacter"]["_visible"][0] &&
                             (MenuClass._nowTargetMode == "All" || MenuClass._nowSelectChara[i])
                         ) {
-                            this.oldVal[i] = MenuClass.charaData[i]["RibonAdd" + slot]["_add0"];
+                            this.oldVal[i] = Ribbon.fromCharacter(i, slot).attachPoint;
                         }
                     }
                 } else {
-                    this.oldVal[curCharacter] = MenuClass.charaData[curCharacter]["RibonAdd" + slot]["_add0"];
+                    this.oldVal[curCharacter] = Ribbon.fromCharacter(curCharacter, slot).attachPoint;
                 }
                 break;
             case "HairEx":
@@ -53,11 +55,11 @@ package undo {
                             MenuClass.charaData[i]["SelectCharacter"]["_visible"][0] &&
                             (MenuClass._nowTargetMode == "All" || MenuClass._nowSelectChara[i])
                         ) {
-                            this.oldVal[i] = MenuClass.charaData[i]["HairExAdd" + slot]["_add0"];
+                            this.oldVal[i] = Hairpiece.fromCharacter(i, slot).attachPoint;
                         }
                     }
                 } else {
-                    this.oldVal[curCharacter] = MenuClass.charaData[curCharacter]["HairExAdd" + slot]["_add0"];
+                    this.oldVal[curCharacter] = Hairpiece.fromCharacter(curCharacter, slot).attachPoint;
                 }
                 break;
             case "Mark":
@@ -106,13 +108,13 @@ package undo {
                 new Add_LoadURL2("CharaLoadSwfColor", character, this.slot, "menu");
                 break;
             case "Ribon":
-                MenuClass.charaData[character]["RibonAdd" + this.slot]["_add0"] = val;
+                Ribbon.fromCharacter(character, this.slot).attachPoint = val;
                 Huku_RibonSet.deleteFc(character, slot, 0);
                 Huku_RibonSet.deleteFc(character, slot, 1);
                 Huku_RibonSet.setFc(character, slot, "random");
                 break;
             case "HairEx":
-                MenuClass.charaData[character]["HairExAdd" + this.slot]["_add0"] = val;
+                Hairpiece.fromCharacter(character, this.slot).attachPoint = val;
                 Hair_HairExSet.deleteFc(character, slot, 0);
                 Hair_HairExSet.deleteFc(character, slot, 1);
                 Hair_HairExSet.setFc(character, slot, "move");

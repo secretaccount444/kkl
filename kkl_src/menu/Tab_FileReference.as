@@ -39,7 +39,7 @@ package menu
          super();
          fileReference = new FileReference();
          _loc1_ = 0;
-         while(_loc1_ <= 98)
+         while(_loc1_ <= Main.hukusuuNum)
          {
             Arloader.push(0);
             Arloader2.push(0);

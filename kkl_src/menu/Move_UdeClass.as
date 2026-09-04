@@ -41,13 +41,13 @@ package menu
          
          var forearmDepth:Array = new Array(this.charaData["LeftArm2"]["_depth"],this.charaData["RightArm2"]["_depth"]);
 
-         if (forearmDepth[0] == 2) {
+         if (forearmDepth[0] == 2 || forearmDepth[0] == 4) {
             forearmDepth[0] = 1;
          } else if (forearmDepth[0] == 3) {
             forearmDepth[0] = 0;
          }
 
-         if (forearmDepth[1] == 2) {
+         if (forearmDepth[1] == 2 || forearmDepth[1] == 4) {
             forearmDepth[1] = 1;
          } else if (forearmDepth[1] == 3) {
             forearmDepth[1] = 0;
@@ -123,7 +123,6 @@ package menu
             this.charaAdd["handm1_" + sideIdx].hand.arm0.y = updateY;
             this.charaAdd["handm1_" + sideIdx].hand.arm0.rotation = updateDataTbl[updateRot - 1][2];
 
-            Hair_HairExSet.updateArmRotation(this.charaNum, sideIdx, updateX, updateY, updateRot);
             Add_LoadURL2.updateArmRotation(this.charaNum, sideName, updateX, updateY, updateRot);
 
             if (sideIdx == 0) {
@@ -234,6 +233,7 @@ package menu
             sideIdx++;
          }
          
+         var topLayerIdx = this.charaAdd.getChildIndex(this.charaAdd.beltSwap1Guide);
          for (sideIdx = 0; sideIdx <= 1; sideIdx++) {
             if (sideIdx == 0) {
                sideName = "Left";
@@ -258,8 +258,16 @@ package menu
                this.charaAdd.addChildAt(this.charaAdd["handm1_" + sideIdx], targetLayer + 1);
             } else if (this.charaData[sideName + "Arm2"]["_depth"] == 3) {
                this.charaAdd.addChildAt(this.charaAdd["handm1_" + sideIdx], 0);
+            } else if (this.charaData[sideName + "Arm2"]["_depth"] == 4) {
+               this.charaAdd.addChildAt(this.charaAdd["handm1_" + sideIdx], topLayerIdx);
             } else {
                this.charaAdd.addChildAt(this.charaAdd["handm1_" + sideIdx], this.charaAdd.getChildIndex(this.charaAdd["handm1_" + sideIdx + "_layerTarget"]));
+            }
+         }
+
+         if (this.charaData["LeftArm2"]["_depth"] == 4 && this.charaData["RightArm2"]["_depth"] == 4) {
+            if (this.charaAdd.getChildIndex(this.charaAdd["handm1_0"]) > this.charaAdd.getChildIndex(this.charaAdd["handm1_1"])) {
+               this.charaAdd.swapChildren(this.charaAdd["handm1_0"], this.charaAdd["handm1_1"]);
             }
          }
 
@@ -321,6 +329,7 @@ package menu
             sideIdx++;
          }
          new Move_HandClass(this.charaNum);
+         Hair_HairExSet.updateArmRotation(this.charaNum, leftPos, rightPos);
          Huku_RibonSet.updateArmRotation(this.charaNum, leftPos, rightPos);
 
          PartLayering.fixup(this.charaNum, ["upperArm", "lowerArm", "hand"]);

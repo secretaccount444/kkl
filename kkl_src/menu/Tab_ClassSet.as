@@ -125,6 +125,50 @@ package menu
          "FreeRibonAlpha": {
             "icon": "CharaLoadAlpha"
          },
+         "HairExFineX": {
+            "icon": "HairExX",
+            "scaleX": 0.85,
+            "scaleY": 0.85,
+            "x": (38.15 * 0.55),
+            "y": (33.80 * 0.20),
+            "tint": {
+               "amount": 0.33,
+               "rgb": [210, 114, 217]
+            }
+         },
+         "HairExFineY": {
+            "icon": "HairExY",
+            "scaleX": 0.85,
+            "scaleY": 0.85,
+            "x": (38.15 * 0.55),
+            "y": (33.80 * 0.20),
+            "tint": {
+               "amount": 0.33,
+               "rgb": [210, 114, 217]
+            }
+         },
+         "MarkFineX": {
+            "icon": "MarkX",
+            "scaleX": 0.85,
+            "scaleY": 0.85,
+            "x": (38.15 * 0.55),
+            "y": (33.80 * 0.20),
+            "tint": {
+               "amount": 0.33,
+               "rgb": [210, 114, 217]
+            }
+         },
+         "MarkFineY": {
+            "icon": "MarkY",
+            "scaleX": 0.85,
+            "scaleY": 0.85,
+            "x": (38.15 * 0.55),
+            "y": (33.80 * 0.20),
+            "tint": {
+               "amount": 0.33,
+               "rgb": [210, 114, 217]
+            }
+         },
          "BeltFineX": {
             "icon": "BeltX",
             "scaleX": 0.85,
@@ -286,6 +330,17 @@ package menu
          "LeftThighVisible": {
             "icon": "Ashi"
          },
+         "LeftShiriVisible": {
+            "icon": "Ashi",
+            "scaleX": 0.85,
+            "scaleY": 0.85,
+            "x": (38.15 * 0.55),
+            "y": (33.80 * 0.20),
+            "tint": {
+               "amount": 0.33,
+               "rgb": [210, 114, 217]
+            }
+         },
          "LeftThighOffsetX": {
             "icon": "CharaLoadX"
          },
@@ -303,6 +358,17 @@ package menu
          },
          "RightThighVisible": {
             "icon": "Ashi2"
+         },
+         "RightShiriVisible": {
+            "icon": "Ashi2",
+            "scaleX": 0.85,
+            "scaleY": 0.85,
+            "x": (38.15 * 0.55),
+            "y": (33.80 * 0.20),
+            "tint": {
+               "amount": 0.33,
+               "rgb": [210, 114, 217]
+            }
          },
          "RightThighOffsetX": {
             "icon": "CharaLoadX"
@@ -391,6 +457,15 @@ package menu
          },
          "RightFootScaleY": {
             "icon": "CharaLoadScaleY"
+         },
+         "NeckVisible": {
+            "icon": "NeckHeight"
+         },
+         "HeadVisible": {
+            "icon": "HeadScale"
+         },
+         "VibratorAlpha": {
+            "icon": "CharaLoadAlpha"
          }
       };
       
@@ -560,10 +635,10 @@ package menu
                            iconSprite.gotoAndStop("LeftHand");
                         } else if (MenuClass.tabData[param1][_loc3_][0] == "RightHandScaleX" || MenuClass.tabData[param1][_loc3_][0] == "RightHandScaleY") {
                            iconSprite.gotoAndStop("RightHand");
-                        } else if (MenuClass.tabData[param1][_loc3_][0] == "LeftShoulderVisible") {
+                        } else if (MenuClass.tabData[param1][_loc3_][0] == "LeftShoulderVisible" || MenuClass.tabData[param1][_loc3_][0] == "RightShoulderVisible" || MenuClass.tabData[param1][_loc3_][0] == "UpperBodyVisible") {
                            iconSprite.gotoAndStop("ShoulderWidth");
-                        } else if (MenuClass.tabData[param1][_loc3_][0] == "RightShoulderVisible") {
-                           iconSprite.gotoAndStop("ShoulderWidth");
+                        } else if (MenuClass.tabData[param1][_loc3_][0] == "LowerBodyVisible") {
+                           iconSprite.gotoAndStop("douHeight");
                         } else {
                            iconSprite.gotoAndStop(MenuClass.tabData[param1][_loc3_][0]);
                         }

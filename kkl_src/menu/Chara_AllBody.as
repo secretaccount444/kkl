@@ -18,11 +18,11 @@ package menu
             {
                if(MenuClass.systemData["BodyType"]["_menu"] == 0)
                {
-                  _loc4_ = Math.floor(Math.random() * 40) + 8;
+                  _loc4_ = Math.floor(Math.random() * 400) + 80;
                }
                else if(MenuClass.systemData["BodyType"]["_menu"] == 1)
                {
-                  _loc4_ = Math.floor(Math.random() * 18);
+                  _loc4_ = Math.floor(Math.random() * 180);
                }
                if(MenuClass._nowTargetMode == "Select")
                {
@@ -52,7 +52,7 @@ package menu
                _loc3_["Nipple"]["_menu"] = 0;
                if(MenuClass.systemData["BodyType"]["_menu"] == 0)
                {
-                  _loc3_["HipWidth"]["_meter"] = 34;
+                  _loc3_["HipWidth"]["_meter"] = 340;
                   _loc3_["Waist"]["_menu"] = 0;
                   if((_loc4_ = Math.floor(Math.random() * 2)) == 0)
                   {
@@ -62,39 +62,39 @@ package menu
                   {
                      _loc3_["Contour"]["_menu"] = 3;
                   }
-                  _loc3_["ContourWidth"]["_meter"] = 34;
-                  _loc3_["ContourHeight"]["_meter"] = 50;
-                  _loc3_["AshiWidth"]["_meter"] = 25;
+                  _loc3_["ContourWidth"]["_meter"] = 340;
+                  _loc3_["ContourHeight"]["_meter"] = 500;
+                  _loc3_["AshiWidth"]["_meter"] = 250;
                }
                else if(MenuClass.systemData["BodyType"]["_menu"] == 1)
                {
                   if((_loc4_ = Math.floor(Math.random() * 3)) == 0)
                   {
-                     _loc3_["HipWidth"]["_meter"] = 60;
+                     _loc3_["HipWidth"]["_meter"] = 600;
                      _loc3_["Waist"]["_menu"] = 2;
                   }
                   else if(_loc4_ == 1)
                   {
-                     _loc3_["HipWidth"]["_meter"] = 50;
+                     _loc3_["HipWidth"]["_meter"] = 500;
                      _loc3_["Waist"]["_menu"] = 2;
                   }
                   else if(_loc4_ == 2)
                   {
-                     _loc3_["HipWidth"]["_meter"] = 40;
+                     _loc3_["HipWidth"]["_meter"] = 400;
                      _loc3_["Waist"]["_menu"] = 1;
                   }
                   if((_loc4_ = Math.floor(Math.random() * 2)) == 0)
                   {
                      _loc3_["Contour"]["_menu"] = 0;
-                     _loc3_["ContourHeight"]["_meter"] = 25;
+                     _loc3_["ContourHeight"]["_meter"] = 250;
                   }
                   else
                   {
                      _loc3_["Contour"]["_menu"] = 2;
-                     _loc3_["ContourHeight"]["_meter"] = 10;
+                     _loc3_["ContourHeight"]["_meter"] = 100;
                   }
-                  _loc3_["ContourWidth"]["_meter"] = 50;
-                  _loc3_["AshiWidth"]["_meter"] = 20;
+                  _loc3_["ContourWidth"]["_meter"] = 500;
+                  _loc3_["AshiWidth"]["_meter"] = 200;
                   _loc3_["UnderHair"]["_visible"][0] = false;
                   new SetClass(param1,"UnderHair","tab");
                }
@@ -106,7 +106,7 @@ package menu
                _loc3_["Nipple"]["_menu"] = 3;
                if(MenuClass.systemData["BodyType"]["_menu"] == 0)
                {
-                  _loc3_["HipWidth"]["_meter"] = 15;
+                  _loc3_["HipWidth"]["_meter"] = 150;
                   if((_loc4_ = Math.floor(Math.random() * 2)) == 0)
                   {
                      _loc3_["Contour"]["_menu"] = 0;
@@ -131,56 +131,56 @@ package menu
                   else if(_loc4_ == 6 || _loc4_ == 7 || _loc4_ == 8)
                   {
                      _loc3_["Waist"]["_menu"] = 1;
-                     _loc3_["HipWidth"]["_meter"] = 40;
+                     _loc3_["HipWidth"]["_meter"] = 400;
                      _loc3_["HandWidth"]["_meter"] = 25;
                   }
                   else if(_loc4_ == 9 || _loc4_ == 10 || _loc4_ == 11 || _loc4_ == 12)
                   {
                      _loc3_["Waist"]["_menu"] = 1;
-                     _loc3_["HipWidth"]["_meter"] = 25;
+                     _loc3_["HipWidth"]["_meter"] = 250;
                      _loc3_["HandWidth"]["_meter"] = 15;
                   }
                   else if(_loc4_ == 13 || _loc4_ == 14 || _loc4_ == 15 || _loc4_ == 16 || _loc4_ == 17)
                   {
                      _loc3_["Waist"]["_menu"] = 1;
-                     _loc3_["HipWidth"]["_meter"] = 10;
+                     _loc3_["HipWidth"]["_meter"] = 100;
                      _loc3_["HandWidth"]["_meter"] = 5;
                   }
                   if(_loc4_ == 0 || _loc4_ == 1 || _loc4_ == 2 || _loc4_ == 4 || _loc4_ == 5)
                   {
                      _loc3_["Nipple"]["_menu"] = 4;
                   }
-                  _loc3_["ContourWidth"]["_meter"] = 20;
-                  _loc3_["ContourHeight"]["_meter"] = 40;
+                  _loc3_["ContourWidth"]["_meter"] = 200;
+                  _loc3_["ContourHeight"]["_meter"] = 400;
                }
                else if(MenuClass.systemData["BodyType"]["_menu"] == 1)
                {
                   if((_loc4_ = Math.floor(Math.random() * 3)) == 0)
                   {
-                     _loc3_["HipWidth"]["_meter"] = 40;
+                     _loc3_["HipWidth"]["_meter"] = 400;
                      _loc3_["Waist"]["_menu"] = 2;
                   }
                   else if(_loc4_ == 1)
                   {
-                     _loc3_["HipWidth"]["_meter"] = 30;
+                     _loc3_["HipWidth"]["_meter"] = 300;
                      _loc3_["Waist"]["_menu"] = 2;
                   }
                   else if(_loc4_ == 2)
                   {
-                     _loc3_["HipWidth"]["_meter"] = 20;
+                     _loc3_["HipWidth"]["_meter"] = 200;
                      _loc3_["Waist"]["_menu"] = 1;
                   }
                   if((_loc4_ = Math.floor(Math.random() * 2)) == 0)
                   {
                      _loc3_["Contour"]["_menu"] = 0;
-                     _loc3_["ContourHeight"]["_meter"] = 25;
+                     _loc3_["ContourHeight"]["_meter"] = 250;
                   }
                   else
                   {
                      _loc3_["Contour"]["_menu"] = 2;
-                     _loc3_["ContourHeight"]["_meter"] = 10;
+                     _loc3_["ContourHeight"]["_meter"] = 100;
                   }
-                  _loc3_["ContourWidth"]["_meter"] = 40;
+                  _loc3_["ContourWidth"]["_meter"] = 400;
                   _loc3_["UnderHair"]["_visible"][0] = false;
                   new SetClass(param1,"UnderHair","tab");
                }

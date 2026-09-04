@@ -64,7 +64,31 @@ package undo {
             var charaDataBuf = new ByteArray();
             var customNumBuf = new ByteArray();
             var customNumPresent = new Array();
+            var storedRibbonVisibility = [];
+            var storedHairpieceVisibility = [];
             var visibility = false;
+
+            if (this.headerName == "Ribon" && this.copyAllParts) {
+                for (var idx in charaSource["RibonPlus"]["_visible"]) {
+                    idx = int(idx);
+                    if (charaSource["RibonPlus"]["_visible"][idx]) {
+                        storedRibbonVisibility.push(idx);
+                    }
+                }
+
+                charaDataBuf.writeObject(storedRibbonVisibility);
+            }
+
+            if (this.headerName == "HairEx" && this.copyAllParts) {
+                for (var idx in charaSource["HairExPlus"]["_visible"]) {
+                    idx = int(idx);
+                    if (charaSource["HairExPlus"]["_visible"][idx]) {
+                        storedHairpieceVisibility.push(idx);
+                    }
+                }
+
+                charaDataBuf.writeObject(storedHairpieceVisibility);
+            }
 
             for (var i = 0; i < MenuClass.tabData[this.headerName].length; i++) {
                 var tabName = MenuClass.tabData[this.headerName][i][0];
@@ -73,16 +97,42 @@ package undo {
                     if (this.copyAllParts) {
                         var customNumLocalPresent = new Array();
 
-                        for (var j = 0; j < charaSource[dataTarget]["_visible"].length; j++) {
-                            var dataKey = tabName + j;
+                        if (this.headerName == "Ribon") {
+                            for each (var j in storedRibbonVisibility) {
+                                var dataKey = tabName + j;
 
-                            charaDataBuf.writeObject(charaSource[dataKey]);
-                            dressDataBuf.writeObject(dressSource[dataKey]);
-                            customNumLocalPresent.push(false);
-                            try {
-                                customNumBuf.writeObject(customNumSrc[dataKey]);
-                                customNumLocalPresent[customNumLocalPresent.length - 1] = true;
-                            } catch(err) {}
+                                charaDataBuf.writeObject(charaSource[dataKey]);
+                                dressDataBuf.writeObject(dressSource[dataKey]);
+                                customNumLocalPresent.push(false);
+                                try {
+                                    customNumBuf.writeObject(customNumSrc[dataKey]);
+                                    customNumLocalPresent[customNumLocalPresent.length - 1] = true;
+                                } catch(err) {}
+                            }
+                        } else if (this.headerName == "HairEx") {
+                            for each (var j in storedHairpieceVisibility) {
+                                var dataKey = tabName + j;
+
+                                charaDataBuf.writeObject(charaSource[dataKey]);
+                                dressDataBuf.writeObject(dressSource[dataKey]);
+                                customNumLocalPresent.push(false);
+                                try {
+                                    customNumBuf.writeObject(customNumSrc[dataKey]);
+                                    customNumLocalPresent[customNumLocalPresent.length - 1] = true;
+                                } catch(err) {}
+                            }
+                        } else {
+                            for (var j = 0; j < charaSource[dataTarget]["_visible"].length; j++) {
+                                var dataKey = tabName + j;
+
+                                charaDataBuf.writeObject(charaSource[dataKey]);
+                                dressDataBuf.writeObject(dressSource[dataKey]);
+                                customNumLocalPresent.push(false);
+                                try {
+                                    customNumBuf.writeObject(customNumSrc[dataKey]);
+                                    customNumLocalPresent[customNumLocalPresent.length - 1] = true;
+                                } catch(err) {}
+                            }
                         }
 
                         customNumPresent.push(customNumLocalPresent);
@@ -126,6 +176,15 @@ package undo {
             src["charaData"].position = 0;
             src["customNum"].position = 0;
 
+            var storedRibbonVisibility = [];
+            if (this.headerName == "Ribon" && this.copyAllParts) {
+                storedRibbonVisibility = src["charaData"].readObject();
+            }
+            var storedHairpieceVisibility = [];
+            if (this.headerName == "HairEx" && this.copyAllParts) {
+                storedHairpieceVisibility = src["charaData"].readObject();
+            }
+
             var dataTarget = null;
             for (var i = 0; i < MenuClass.tabData[this.headerName].length; i++) {
                 var tabName = MenuClass.tabData[this.headerName][i][0];
@@ -134,14 +193,38 @@ package undo {
                 if (MenuClass.tabData[this.headerName][i][2]["_menu"] == "charaPlus" || MenuClass.tabData[this.headerName][i][2]["_meter"] == "charaPlus") {
                     dataTarget = MenuClass.tabData[this.headerName][i][2]["_data"];
                     if (this.copyAllParts) {
-                        for (var j = 0; j < MenuClass.charaData[destChar][dataTarget]["_visible"].length; j++) {
-                            var dataKey = tabName + j;
-                            Dress_data.DressCharaData[destChar][dataKey] = src["dressData"].readObject();
-                            MenuClass.charaData[destChar][dataKey] = src["charaData"].readObject();
-                            if (customNumPresent[j]) {
-                                try {
-                                    Dress_data.menuCustomNum[destChar][dataKey] = src["customNum"].readObject();
-                                } catch (err) {}
+                        if (this.headerName == "Ribon") {
+                            for each (var j in storedRibbonVisibility) {
+                                var dataKey = tabName + j;
+                                Dress_data.DressCharaData[destChar][dataKey] = src["dressData"].readObject();
+                                MenuClass.charaData[destChar][dataKey] = src["charaData"].readObject();
+                                if (customNumPresent[j]) {
+                                    try {
+                                        Dress_data.menuCustomNum[destChar][dataKey] = src["customNum"].readObject();
+                                    } catch (err) {}
+                                }
+                            }
+                        } else if (this.headerName == "HairEx") {
+                            for each (var j in storedHairpieceVisibility) {
+                                var dataKey = tabName + j;
+                                Dress_data.DressCharaData[destChar][dataKey] = src["dressData"].readObject();
+                                MenuClass.charaData[destChar][dataKey] = src["charaData"].readObject();
+                                if (customNumPresent[j]) {
+                                    try {
+                                        Dress_data.menuCustomNum[destChar][dataKey] = src["customNum"].readObject();
+                                    } catch (err) {}
+                                }
+                            }
+                        } else {
+                            for (var j = 0; j < MenuClass.charaData[destChar][dataTarget]["_visible"].length; j++) {
+                                var dataKey = tabName + j;
+                                Dress_data.DressCharaData[destChar][dataKey] = src["dressData"].readObject();
+                                MenuClass.charaData[destChar][dataKey] = src["charaData"].readObject();
+                                if (customNumPresent[j]) {
+                                    try {
+                                        Dress_data.menuCustomNum[destChar][dataKey] = src["customNum"].readObject();
+                                    } catch (err) {}
+                                }
                             }
                         }
                         new SetClass(destChar, tabName, "tab");

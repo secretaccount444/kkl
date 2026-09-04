@@ -14,11 +14,11 @@ package menu
          var _loc2_:Object = MenuClass.charaAdd[param1];
          var _loc3_:Object = MenuClass.charaData[param1];
          var _loc4_:int = 800;
-         if(_loc3_["Rmove"]["_meter"] >= 90 && _loc3_["Rmove"]["_meter"] <= 270)
+         if(_loc3_["Rmove"]["_meter"] >= 900 && _loc3_["Rmove"]["_meter"] <= 2700)
          {
             new MeterPersent(_loc4_ * -1,_loc4_,"Rmove",param1);
          }
-         else if(_loc3_["Rmove"]["_meter"] <= 90)
+         else if(_loc3_["Rmove"]["_meter"] <= 900)
          {
             new MeterPersent(0,_loc4_ * -2,"Rmove",param1);
          }

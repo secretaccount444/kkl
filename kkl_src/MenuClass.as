@@ -4,6 +4,7 @@ package
    import flash.events.Event;
    import flash.net.SharedObject;
    import flash.text.Font;
+   import flash.ui.Keyboard;
    import menu.Chara_Loading;
    import menu.HeaderbtnClass;
    import menu.Menu_Load;
@@ -47,7 +48,72 @@ package
       
       public static var AllMenuBtn:Boolean = false;
       
-      public static const MY_MENUNAME:Array = [["AllCharacterSet","006798",null,1,true,"Non"],["CharacterSet","006798",null,1,true,"Non"],["AllHukuSet","006798",null,1,true,"Non"],["Character","006798",null,1,true,"Non"],["Pose","FFBF00",true,1,true,"chara"],["FootPose","FFBF00",true,1,true,"chara"],["CharaFilter","FFBF00",null,1,true,"chara"],["BodyHeight","EC2F5E",true,1,true,"chara"],["ArmHeight","EC2F5E",true,1,true,"chara"],["LegHeight","EC2F5E",true,1,true,"chara"],["Hiyake","EC2F5E",true,1,true,"chara"],["Tin","EC2F5E",true,1,false,"chara"],["Hair","339900",true,2,true,"chara"],["HairEx","339900",null,2,true,"chara"],["Eye","339900",true,2,true,"chara"],["Eyebrow","339900",true,2,true,"chara"],["Mark","339900",null,2,true,"chara"],["Mimi","339900",true,2,true,"chara"],["Heart","3399CC",true,2,true,"chara"],["Emotion","3399CC",true,2,true,"chara"],["Hand","3399CC",null,2,false,"chara"],["Seihuku","CC0000",true,3,true,"chara"],["Ysyatu","CC0000",true,3,true,"chara"],["Skirt","993366",true,3,true,"chara"],["Socks0","993366",true,3,true,"chara"],["Kutu","993366",true,3,true,"chara"],["Bura","009999",true,3,true,"chara"],["Vibrator","009999",true,3,false,"chara"],["Hat","999900",true,3,true,"chara"],["Ribon","999900",null,3,true,"chara"],["Belt","FF6600",null,3,true,"chara"],["Wristband0","FF6600",true,3,true,"chara"],["ArmBracelet0","FF6600",true,3,true,"chara"],["CharaLoad","666666",null,3,true,"chara"],["HeaderFreeHand","FFBF00",null,4,true,"system"],["HeaderFreeRibon","999900",null,4,true,"system"],["HeaderFreeBelt","999900",null,4,true,"system"],["HeaderFreeChair","9F8691",null,4,true,"system"],["HeaderFreeFlag","9F8691",null,4,true,"system"],["HeaderFreeHukidashi","9F8691",null,4,true,"system"],["Background","666666",null,4,true,"system"],["txt","666666",null,4,true,"system"],["Loadmenu","666666",null,4,true,"system"],["SystemOption","666666",null,4,true,"system"],["Story","bda057",null,4,true,"Non"],["Save","CC6699",null,0,true,"Non"],["Tool","666666",null,0,true,"system"],["Escape","669933",null,0,true,"Non"],["StoryTool","666666",null,0,true,"Non"],["EasyAllCharacterSet","006798",null,10,true,"Non"],["EasyCharacterSet","006798",null,10,true,"Non"],["EasyAllHukuSet","006798",null,10,true,"Non"],["EasyCharacter","006798",null,10,true,"Non"],["EasyPose","FFBF00",null,10,true,"chara"],["EasyFootPose","FFBF00",null,10,true,"chara"],["EasyBodyHeight","EC2F5E",null,10,true,"chara"],["EasyHair","339900",null,10,true,"chara"],["EasyEye","339900",null,10,true,"chara"],["EasySeihuku","CC0000",null,10,true,"chara"],["EasySkirt","993366",null,10,true,"chara"],["EasyBura","009999",null,10,true,"chara"],["EasyHat","999900",null,10,true,"chara"],["EasyWristband0","FF6600",null,10,true,"chara"],["EasyBackground","666666",null,10,true,"system"],["EasySave","CC6699",null,10,true,"Non"],["EasyTool","666666",null,10,true,"system"]];
+      public static const MY_MENUNAME:Array = [["AllCharacterSet","006798",null,1,true,"Non"
+      ],["CharacterSet","006798",null,1,true,"Non"
+      ],["AllHukuSet","006798",null,1,true,"Non"
+      ],["Character","006798",null,1,true,"Non"
+      ],["Pose","FFBF00",true,1,true,"chara"
+      ],["FootPose","FFBF00",true,1,true,"chara"
+      ],["CharaFilter","FFBF00",null,1,true,"chara"
+      ],["BodyHeight","EC2F5E",true,1,true,"chara"
+      ],["ArmHeight","EC2F5E",true,1,true,"chara"
+      ],["LegHeight","EC2F5E",true,1,true,"chara"
+      ],["Hiyake","EC2F5E",true,1,true,"chara"
+      ],["Tin","EC2F5E",true,1,false,"chara"
+      ],["Hair","339900",true,2,true,"chara"
+      ],["HairEx","339900",null,2,true,"chara"
+      ],["Eye","339900",true,2,true,"chara"
+      ],["Eyebrow","339900",true,2,true,"chara"
+      ],["Mark","339900",null,2,true,"chara"
+      ],["Mimi","339900",true,2,true,"chara"
+      ],["Heart","3399CC",true,2,true,"chara"
+      ],["Emotion","3399CC",true,2,true,"chara"
+      ],["Hand","3399CC",null,2,false,"chara"
+      ],["Seihuku","CC0000",true,3,true,"chara"
+      ],["Ysyatu","CC0000",true,3,true,"chara"
+      ],["Skirt","993366",true,3,true,"chara"
+      ],["Socks0","993366",true,3,true,"chara"
+      ],["Kutu","993366",true,3,true,"chara"
+      ],["Bura","009999",true,3,true,"chara"
+      ],["Vibrator","009999",true,3,false,"chara"
+      ],["Hat","999900",true,3,true,"chara"
+      ],["Ribon","999900",null,3,true,"chara"
+      ],["Belt","FF6600",null,3,true,"chara"
+      ],["Wristband0","FF6600",true,3,true,"chara"
+      ],["ArmBracelet0","FF6600",true,3,true,"chara"
+      ],["CharaLoad","666666",null,3,true,"chara"
+      ],["HeaderFreeHand","FFBF00",null,4,true,"system"
+      ],["HeaderFreeRibon","999900",null,4,true,"system"
+      ],["HeaderFreeBelt","999900",null,4,true,"system"
+      ],["HeaderFreeChair","9F8691",null,4,true,"system"
+      ],["HeaderFreeFlag","9F8691",null,4,true,"system"
+      ],["HeaderFreeHukidashi","9F8691",null,4,true,"system"
+      ],["Background","666666",null,4,true,"system"
+      ],["txt","666666",null,4,true,"system"
+      ],["Loadmenu","666666",null,4,true,"system"
+      ],["SystemOption","666666",null,4,true,"system"
+      ],["Story","bda057",null,4,true,"Non"
+      ],["Save","CC6699",null,0,true,"Non"
+      ],["Tool","666666",null,0,true,"system"
+      ],["Escape","669933",null,0,true,"Non"
+      ],["StoryTool","666666",null,0,true,"Non"
+      ],["EasyAllCharacterSet","006798",null,10,true,"Non"
+      ],["EasyCharacterSet","006798",null,10,true,"Non"
+      ],["EasyAllHukuSet","006798",null,10,true,"Non"
+      ],["EasyCharacter","006798",null,10,true,"Non"
+      ],["EasyPose","FFBF00",null,10,true,"chara"
+      ],["EasyFootPose","FFBF00",null,10,true,"chara"
+      ],["EasyBodyHeight","EC2F5E",null,10,true,"chara"
+      ],["EasyHair","339900",null,10,true,"chara"
+      ],["EasyEye","339900",null,10,true,"chara"
+      ],["EasySeihuku","CC0000",null,10,true,"chara"
+      ],["EasySkirt","993366",null,10,true,"chara"
+      ],["EasyBura","009999",null,10,true,"chara"
+      ],["EasyHat","999900",null,10,true,"chara"
+      ],["EasyWristband0","FF6600",null,10,true,"chara"
+      ],["EasyBackground","666666",null,10,true,"system"
+      ],["EasySave","CC6699",null,10,true,"Non"
+      ],["EasyTool","666666",null,10,true,"system"]];
       
       public static var DepthMeter:Array = new Array();
       
@@ -164,6 +230,14 @@ package
       public static var spaceKeyPress:Boolean = false;
       
       public static var shiftKeyPress:Boolean = false;
+
+      public static var altKeyPress:Boolean = false;
+
+      public static var f10KeyPress:Boolean = true;
+
+      public static var f11KeyPress:Boolean = false;
+
+      public static var f12KeyPress:Boolean = false;
 
       public static var menuData:Object;
       
@@ -293,6 +367,22 @@ package
        
       
       private var enterCount:int = 0;
+
+      // public static function get spaceKeyPress() : Boolean {
+      //    if (Main.keypressHandler) {
+      //       return Main.keypressHandler.pressed(Keyboard.SPACE);
+      //    } else {
+      //       return false;
+      //    }
+      // }
+      
+      // public static function get shiftKeyPress() : Boolean {
+      //    if (Main.keypressHandler) {
+      //       return Main.keypressHandler.pressed(Keyboard.SHIFT);
+      //    } else {
+      //       return false;
+      //    }
+      // }
       
       public function MenuClass()
       {
@@ -388,7 +478,8 @@ package
             }
             catch(myError:Error)
             {
-               trace("MenuClass DataSetting Error     ",myError);
+               trace("MenuClass DataSetting Error     ", myError);
+               trace(myError.getStackTrace());
             }
          }
          else if(this.enterCount == 1)
@@ -401,6 +492,7 @@ package
             catch(myError:Error)
             {
                trace("MenuClass Move_DataClass Error     ",myError);
+               trace(myError.getStackTrace());
             }
          }
          else if(this.enterCount == 2)
@@ -413,6 +505,7 @@ package
             catch(myError:Error)
             {
                trace("MenuClass  HeaderbtnClass Error    ",myError);
+               trace(myError.getStackTrace());
             }
          }
          else if(this.enterCount == 3)
@@ -425,6 +518,7 @@ package
             catch(myError:Error)
             {
                trace("MenuClass  Tab_Class Error    ",myError);
+               trace(myError.getStackTrace());
             }
          }
          else if(this.enterCount == 4)
@@ -437,6 +531,7 @@ package
             catch(myError:Error)
             {
                trace("MenuClass Stage_MoveClass Error     ",myError);
+               trace(myError.getStackTrace());
             }
          }
          else if(this.enterCount == 5)
@@ -449,6 +544,7 @@ package
             catch(myError:Error)
             {
                trace("MenuClass FullScreenClass Error     ",myError);
+               trace(myError.getStackTrace());
             }
          }
          else if(this.enterCount == 6)
@@ -461,6 +557,7 @@ package
             catch(myError:Error)
             {
                trace("MenuClass Tab_ErrorWindowClass  Error    ",myError);
+               trace(myError.getStackTrace());
             }
          }
          else if(this.enterCount == 7)
@@ -473,6 +570,7 @@ package
             catch(myError:Error)
             {
                trace("MenuClass Chara_Loading Error    ",myError);
+               trace(myError.getStackTrace());
             }
             Main.loadObj.removeEventListener(Event.ENTER_FRAME,this.Enter);
          }
@@ -513,12 +611,17 @@ package
             "_sort":1,
             "_random":true
          }],["TabAllHukuSet",new Menu_Load.TabCharaClass(),{"_sort":2}]];
-         tabData["Character"] = [["SelectTarget",new Menu_Load.TabSelectTargetClass(),{"_sort":0}],["SortTarget",new Menu_Load.TabSortTargetClass(),{"_sort":0}],["CopyAllCharacter",new Menu_Load.TabCopyAllBodyTargetClass(),{"_sort":0}],["ResetTargetAll",new Menu_Load.TabResetAllTargetClass(),{"_sort":0}],["Random",new Menu_Load.TabRandomTargetClass(),{
+         tabData["Character"] = [["SelectTarget",new Menu_Load.TabSelectTargetClass(),{"_sort":0
+         }],["SortTarget",new Menu_Load.TabSortTargetClass(),{"_sort":0
+         }],["CopyAllCharacter",new Menu_Load.TabCopyAllBodyTargetClass(),{"_sort":0
+         }],["ResetTargetAll",new Menu_Load.TabResetAllTargetClass(),{"_sort":0
+         }],["Random",new Menu_Load.TabRandomTargetClass(),{
             "_sort":0,
             "_menu":true,
             "_color0":true,
             "_meter":true
-         }],["HeaderSwitch",new Menu_Load.TabHeaderSwitchClass(),{"_sort":0}],["Close",new Menu_Load.TabCloseClass(),{"_sort":0}],["SelectCharacter",new Menu_Load.TabMenuINEyeClass(),{
+         }],["HeaderSwitch",new Menu_Load.TabHeaderSwitchClass(),{"_sort":0
+         }],["Close",new Menu_Load.TabCloseClass(),{"_sort":0}],["SelectCharacter",new Menu_Load.TabMenuINEyeClass(),{
             "_visible":"SelectCharacter",
             "_menu":"SelectCharacter",
             "_sort":1
@@ -531,7 +634,7 @@ package
             "_sort":1,
             "_random":true
          }],["AllBodyHeightSet",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"systemAll",
             "_sort":1,
             "_random":true,
@@ -582,7 +685,7 @@ package
             "_sort":1,
             "_random":true
          }],["AllBodyHeightSet",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"system",
             "_sort":1,
             "_random":true,
@@ -632,7 +735,7 @@ package
          }],["LeftArm2",new Menu_Load.TabMeter2ShortDepthClass(),{
             "_meterType":1,
             "_meter":"chara",
-            "_depth":3,
+            "_depth":4,
             "_sort":1,
             "_random":true,
             "_free":3
@@ -659,7 +762,7 @@ package
          }],["RightArm2",new Menu_Load.TabMeter2ShortDepthClass(),{
             "_meterType":1,
             "_meter":"chara",
-            "_depth":3,
+            "_depth":4,
             "_sort":2,
             "_random":true,
             "_free":3
@@ -749,16 +852,23 @@ package
             "_sort":3,
             "_random":true
          }]];
-         tabData["FootPose"] = [["SelectTarget",new Menu_Load.TabSelectTargetClass(),{"_sort":0}],["Copy",new Menu_Load.TabCopyTargetClass(),{"_sort":0}],["ResetTarget",new Menu_Load.TabResetTargetClass(),{"_sort":0}],["Random",new Menu_Load.TabRandomTargetClass(),{
+         tabData["FootPose"] = [["SelectTarget",new Menu_Load.TabSelectTargetClass(),{"_sort":0
+         }],["Copy",new Menu_Load.TabCopyTargetClass(),{"_sort":0
+         }],["ResetTarget",new Menu_Load.TabResetTargetClass(),{"_sort":0
+         }],["Random",new Menu_Load.TabRandomTargetClass(),{
             "_sort":0,
             "_visible":true,
             "_menu":true,
             "_meter":true
-         }],["SortTarget",new Menu_Load.TabSortTargetClass(),{"_sort":0}],["HeaderSwitch",new Menu_Load.TabHeaderSwitchClass(),{"_sort":0}],["Close",new Menu_Load.TabCloseClass(),{"_sort":0}],["Ashi",new Menu_Load.TabMenuReversalClass(),{
+         }],["SortTarget",new Menu_Load.TabSortTargetClass(),{"_sort":0
+         }],["HeaderSwitch",new Menu_Load.TabHeaderSwitchClass(),{"_sort":0
+         }],["Close",new Menu_Load.TabCloseClass(),{"_sort":0
+         }],["Ashi",new Menu_Load.TabMenuReversalClass(),{
             "_menu":"chara",
             "_sort":1,
             "_random":true
-         }],["LinkAshi",new Menu_Load.TabLinkClass(),{"_sort":1}],["Ashi2",new Menu_Load.TabMenuClass(),{
+         }],["LinkAshi",new Menu_Load.TabLinkClass(),{"_sort":1
+         }],["Ashi2",new Menu_Load.TabMenuClass(),{
             "_menu":"chara",
             "_sort":1,
             "_random":true
@@ -769,12 +879,13 @@ package
             "_random":true,
             "_free":3
          }],["Rmove",new Menu_Load.TabMeter2Class(),{
-            "_meterType":1,
+            "_meterType":4,
             "_meter":"chara",
             "_sort":1,
             "_random":false,
             "_free":3
-         }],["CharaShift",new Menu_Load.TabMoveClass(),{"_sort":2}],["Xmove",new Menu_Load.TabMeter2Class(),{
+         }],["CharaShift",new Menu_Load.TabMoveClass(),{"_sort":2
+         }],["Xmove",new Menu_Load.TabMeter2Class(),{
             "_meterType":2,
             "_meter":"chara",
             "_sort":2,
@@ -793,7 +904,7 @@ package
             "_random":false,
             "_free":0
          }],["Jump",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":2,
             "_random":false,
@@ -867,7 +978,7 @@ package
             "_sort":3,
             "_random":true
          }],["CharaDropShadowRotation",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":1,
+            "_meterType":4,
             "_meter":"chara",
             "_sort":3,
             "_random":true
@@ -896,11 +1007,14 @@ package
             "_sort":4,
             "_random":true
          }]];
-         tabData["EasyFootPose"] = [["SelectTarget",new Menu_Load.TabSelectTargetClass(),{"_sort":0}],["HeaderSwitch",new Menu_Load.TabHeaderSwitchClass(),{"_sort":0}],["Close",new Menu_Load.TabCloseClass(),{"_sort":0}],["Ashi",new Menu_Load.TabMenuReversalClass(),{
+         tabData["EasyFootPose"] = [["SelectTarget",new Menu_Load.TabSelectTargetClass(),{"_sort":0}],["HeaderSwitch",new Menu_Load.TabHeaderSwitchClass(),{"_sort":0}],["Close",new Menu_Load.TabCloseClass(),{"_sort":0
+         }],["Ashi",new Menu_Load.TabMenuReversalClass(),{
             "_menu":"chara",
             "_sort":1,
             "_random":true
-         }],["LinkAshi",new Menu_Load.TabLinkClass(),{"_sort":1}],["Ashi2",new Menu_Load.TabMenuClass(),{
+         }],["LinkAshi",new Menu_Load.TabLinkClass(),{
+            "_sort":1
+         }],["Ashi2",new Menu_Load.TabMenuClass(),{
             "_menu":"chara",
             "_sort":1,
             "_random":true
@@ -911,7 +1025,7 @@ package
             "_random":true,
             "_free":3
          }],["Rmove",new Menu_Load.TabMeter2Class(),{
-            "_meterType":1,
+            "_meterType":4,
             "_meter":"chara",
             "_sort":1,
             "_random":false,
@@ -929,36 +1043,43 @@ package
             "_random":false,
             "_free":0
          }],["Jump",new Menu_Load.TabMeter2Class(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":2,
             "_random":false,
             "_free":0
          }]];
-         tabData["BodyHeight"] = [["SelectTarget",new Menu_Load.TabSelectTargetClass(),{"_sort":0}],["Copy",new Menu_Load.TabCopyTargetClass(),{"_sort":0}],["ResetTarget",new Menu_Load.TabResetTargetClass(),{"_sort":0}],["Random",new Menu_Load.TabRandomTargetClass(),{
+         tabData["BodyHeight"] = [["SelectTarget",new Menu_Load.TabSelectTargetClass(),{"_sort":0
+         }],["Copy",new Menu_Load.TabCopyTargetClass(),{"_sort":0
+         }],["ResetTarget",new Menu_Load.TabResetTargetClass(),{"_sort":0
+         }],["Random",new Menu_Load.TabRandomTargetClass(),{
             "_sort":0,
             "_menu":true,
             "_meter":true
-         }],["HeaderSwitch",new Menu_Load.TabHeaderSwitchClass(),{"_sort":0}],["Close",new Menu_Load.TabCloseClass(),{"_sort":0}],["BodySize",new Menu_Load.TabMeterClass(),{
+         }],["HeaderSwitch",new Menu_Load.TabHeaderSwitchClass(),{"_sort":0
+         }],["Close",new Menu_Load.TabCloseClass(),{"_sort":0
+         }],["BodySize",new Menu_Load.TabMeterClass(),{
             "_meterType":2,
             "_meter":"chara",
             "_sort":1,
             "_random":false,
             "_free":0
          }],["BodyHeight",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":1,
             "_random":true,
             "_free":0
-         }],["LinkBodyHeight",new Menu_Load.TabLinkClass(),{"_sort":1}],["AshiHeight",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+         }],["LinkBodyHeight",new Menu_Load.TabLinkClass(),{
+            "_sort":1
+         }],["AshiHeight",new Menu_Load.TabMeterShortClass(),{
+            "_meterType":3,
             "_meter":"chara",
             "_sort":1,
             "_random":true,
             "_free":0
          }],["AshiWidth",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":2,
             "_random":false,
@@ -970,19 +1091,23 @@ package
             "_random":true,
             "_free":3
          }],["BodyWidth",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":2,
             "_random":true,
             "_free":0
          }],["ShoulderWidth",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":2,
             "_random":false,
             "_free":0
+         }],["UpperBodyVisible",new Menu_Load.TabEyeClass(),{
+            "_visible":"chara",
+            "_sort":2,
+            "_random":false
          }],["HipWidth",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":2,
             "_random":true,
@@ -1002,11 +1127,15 @@ package
             "_random":false,
             "_free":3
          }],["douHeight",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":3,
             "_random":true,
             "_free":0
+         }],["LowerBodyVisible",new Menu_Load.TabEyeClass(),{
+            "_visible":"chara",
+            "_sort":3,
+            "_random":false
          }]
          ];
          tabData["ArmHeight"] = [
@@ -1021,28 +1150,28 @@ package
             ["HeaderSwitch",new Menu_Load.TabHeaderSwitchClass(),{"_sort":0}],
             ["Close",new Menu_Load.TabCloseClass(),{"_sort":0}],
             ["LeftUpperArmScaleX",new Menu_Load.TabMeterShortClass(),{
-               "_meterType":0,
+               "_meterType":3,
                "_meter":"chara",
                "_sort":1,
                "_random":false,
                "_free":0
             }],
             ["LeftUpperArmOffsetX",new Menu_Load.TabMeter2ShortClass(),{
-               "_meterType":0,
+               "_meterType":3,
                "_meter":"chara",
                "_sort":1,
                "_random":false,
                "_free":0
             }],
             ["LeftUpperArmScaleY",new Menu_Load.TabMeterShortClass(),{
-               "_meterType":0,
+               "_meterType":3,
                "_meter":"chara",
                "_sort":1,
                "_random":false,
                "_free":0
             }],
             ["LeftUpperArmOffsetY",new Menu_Load.TabMeter2ShortClass(),{
-               "_meterType":0,
+               "_meterType":3,
                "_meter":"chara",
                "_sort":1,
                "_random":false,
@@ -1060,28 +1189,28 @@ package
             }],
             ["LinkUpperArmSettings",new Menu_Load.TabLinkClass(),{"_sort":1}],
             ["RightUpperArmScaleX",new Menu_Load.TabMeterShortClass(),{
-               "_meterType":0,
+               "_meterType":3,
                "_meter":"chara",
                "_sort":2,
                "_random":false,
                "_free":0
             }],
             ["RightUpperArmOffsetX",new Menu_Load.TabMeter2ShortClass(),{
-               "_meterType":0,
+               "_meterType":3,
                "_meter":"chara",
                "_sort":2,
                "_random":false,
                "_free":0
             }],
             ["RightUpperArmScaleY",new Menu_Load.TabMeterShortClass(),{
-               "_meterType":0,
+               "_meterType":3,
                "_meter":"chara",
                "_sort":2,
                "_random":false,
                "_free":0
             }],
             ["RightUpperArmOffsetY",new Menu_Load.TabMeter2ShortClass(),{
-               "_meterType":0,
+               "_meterType":3,
                "_meter":"chara",
                "_sort":2,
                "_random":false,
@@ -1098,7 +1227,7 @@ package
                "_random":false
             }],
             ["LeftArmScaleX",new Menu_Load.TabMeterShortClass(),{
-               "_meterType":0,
+               "_meterType":3,
                "_meter":"chara",
                "_sort":3,
                "_random":false,
@@ -1106,7 +1235,7 @@ package
                "_overrideMenuColor": "D272D9"
             }],
             ["LeftArmOffsetX",new Menu_Load.TabMeter2ShortClass(),{
-               "_meterType":0,
+               "_meterType":3,
                "_meter":"chara",
                "_sort":3,
                "_random":false,
@@ -1114,7 +1243,7 @@ package
                "_overrideMenuColor": "D272D9"
             }],
             ["LeftArmScaleY",new Menu_Load.TabMeterShortClass(),{
-               "_meterType":0,
+               "_meterType":3,
                "_meter":"chara",
                "_sort":3,
                "_random":false,
@@ -1122,7 +1251,7 @@ package
                "_overrideMenuColor": "D272D9"
             }],
             ["LeftArmOffsetY",new Menu_Load.TabMeter2ShortClass(),{
-               "_meterType":0,
+               "_meterType":3,
                "_meter":"chara",
                "_sort":3,
                "_random":false,
@@ -1143,7 +1272,7 @@ package
             }],
             ["LinkArmSettings",new Menu_Load.TabLinkClass(),{"_sort":3}],
             ["RightArmScaleX",new Menu_Load.TabMeterShortClass(),{
-               "_meterType":0,
+               "_meterType":3,
                "_meter":"chara",
                "_sort":4,
                "_random":false,
@@ -1151,7 +1280,7 @@ package
                "_overrideMenuColor": "D272D9"
             }],
             ["RightArmOffsetX",new Menu_Load.TabMeter2ShortClass(),{
-               "_meterType":0,
+               "_meterType":3,
                "_meter":"chara",
                "_sort":4,
                "_random":false,
@@ -1159,7 +1288,7 @@ package
                "_overrideMenuColor": "D272D9"
             }],
             ["RightArmScaleY",new Menu_Load.TabMeterShortClass(),{
-               "_meterType":0,
+               "_meterType":3,
                "_meter":"chara",
                "_sort":4,
                "_random":false,
@@ -1167,7 +1296,7 @@ package
                "_overrideMenuColor": "D272D9"
             }],
             ["RightArmOffsetY",new Menu_Load.TabMeter2ShortClass(),{
-               "_meterType":0,
+               "_meterType":3,
                "_meter":"chara",
                "_sort":4,
                "_random":false,
@@ -1187,7 +1316,7 @@ package
                "_overrideMenuColor": "D272D9"
             }],
             ["LeftHandScaleX",new Menu_Load.TabMeterShortClass(),{
-               "_meterType":0,
+               "_meterType":3,
                "_meter":"chara",
                "_sort":5,
                "_random":false,
@@ -1195,7 +1324,7 @@ package
                "_overrideMenuColor": "006798"
             }],
             ["LeftHandOffsetX",new Menu_Load.TabMeter2ShortClass(),{
-               "_meterType":0,
+               "_meterType":3,
                "_meter":"chara",
                "_sort":5,
                "_random":false,
@@ -1203,7 +1332,7 @@ package
                "_overrideMenuColor": "006798"
             }],
             ["LeftHandScaleY",new Menu_Load.TabMeterShortClass(),{
-               "_meterType":0,
+               "_meterType":3,
                "_meter":"chara",
                "_sort":5,
                "_random":false,
@@ -1211,7 +1340,7 @@ package
                "_overrideMenuColor": "006798"
             }],
             ["LeftHandOffsetY",new Menu_Load.TabMeter2ShortClass(),{
-               "_meterType":0,
+               "_meterType":3,
                "_meter":"chara",
                "_sort":5,
                "_random":false,
@@ -1232,7 +1361,7 @@ package
             }],
             ["LinkHandSettings",new Menu_Load.TabLinkClass(),{"_sort":5}],
             ["RightHandScaleX",new Menu_Load.TabMeterShortClass(),{
-               "_meterType":0,
+               "_meterType":3,
                "_meter":"chara",
                "_sort":6,
                "_random":false,
@@ -1240,7 +1369,7 @@ package
                "_overrideMenuColor": "006798"
             }],
             ["RightHandOffsetX",new Menu_Load.TabMeter2ShortClass(),{
-               "_meterType":0,
+               "_meterType":3,
                "_meter":"chara",
                "_sort":6,
                "_random":false,
@@ -1248,7 +1377,7 @@ package
                "_overrideMenuColor": "006798"
             }],
             ["RightHandScaleY",new Menu_Load.TabMeterShortClass(),{
-               "_meterType":0,
+               "_meterType":3,
                "_meter":"chara",
                "_sort":6,
                "_random":false,
@@ -1256,7 +1385,7 @@ package
                "_overrideMenuColor": "006798"
             }],
             ["RightHandOffsetY",new Menu_Load.TabMeter2ShortClass(),{
-               "_meterType":0,
+               "_meterType":3,
                "_meter":"chara",
                "_sort":6,
                "_random":false,
@@ -1287,36 +1416,36 @@ package
             }],
             ["HeaderSwitch",new Menu_Load.TabHeaderSwitchClass(),{"_sort":0}],
             ["Close",new Menu_Load.TabCloseClass(),{"_sort":0}],
-            ["LeftThighRotation",new Menu_Load.TabMeter2ShortClass(),{
-               "_meterType":1,
+            ["LeftThighRotation",new Menu_Load.TabMeter2Short2Class(),{
+               "_meterType":4,
                "_meter":"chara",
                "_sort":1,
                "_random":false,
                "_free":0
             }],
-            ["LeftThighScaleX",new Menu_Load.TabMeterShortClass(),{
-               "_meterType":0,
+            ["LeftThighScaleX",new Menu_Load.TabMeterShort3Class(),{
+               "_meterType":3,
                "_meter":"chara",
                "_sort":1,
                "_random":false,
                "_free":0
             }],
-            ["LeftThighOffsetX",new Menu_Load.TabMeter2ShortClass(),{
-               "_meterType":0,
+            ["LeftThighOffsetX",new Menu_Load.TabMeter2Short2Class(),{
+               "_meterType":3,
                "_meter":"chara",
                "_sort":1,
                "_random":false,
                "_free":0
             }],
-            ["LeftThighScaleY",new Menu_Load.TabMeterShortClass(),{
-               "_meterType":0,
+            ["LeftThighScaleY",new Menu_Load.TabMeterShort3Class(),{
+               "_meterType":3,
                "_meter":"chara",
                "_sort":1,
                "_random":false,
                "_free":0
             }],
-            ["LeftThighOffsetY",new Menu_Load.TabMeter2ShortClass(),{
-               "_meterType":0,
+            ["LeftThighOffsetY",new Menu_Load.TabMeter2Short2Class(),{
+               "_meterType":3,
                "_meter":"chara",
                "_sort":1,
                "_random":false,
@@ -1327,37 +1456,41 @@ package
                "_sort":1,
                "_random":false
             }],
-            ["LinkThighSettings",new Menu_Load.TabLinkClass(),{"_sort":1}],
-            ["RightThighRotation",new Menu_Load.TabMeter2ShortClass(),{
-               "_meterType":1,
+            ["LeftShiriVisible",new Menu_Load.TabEyeClass(),{
+               "_visible":"chara",
+               "_sort":1,
+               "_random":false
+            }],
+            ["RightThighRotation",new Menu_Load.TabMeter2Short2Class(),{
+               "_meterType":4,
                "_meter":"chara",
                "_sort":2,
                "_random":false,
                "_free":0
             }],
-            ["RightThighScaleX",new Menu_Load.TabMeterShortClass(),{
-               "_meterType":0,
+            ["RightThighScaleX",new Menu_Load.TabMeterShort3Class(),{
+               "_meterType":3,
                "_meter":"chara",
                "_sort":2,
                "_random":false,
                "_free":0
             }],
-            ["RightThighOffsetX",new Menu_Load.TabMeter2ShortClass(),{
-               "_meterType":0,
+            ["RightThighOffsetX",new Menu_Load.TabMeter2Short2Class(),{
+               "_meterType":3,
                "_meter":"chara",
                "_sort":2,
                "_random":false,
                "_free":0
             }],
-            ["RightThighScaleY",new Menu_Load.TabMeterShortClass(),{
-               "_meterType":0,
+            ["RightThighScaleY",new Menu_Load.TabMeterShort3Class(),{
+               "_meterType":3,
                "_meter":"chara",
                "_sort":2,
                "_random":false,
                "_free":0
             }],
-            ["RightThighOffsetY",new Menu_Load.TabMeter2ShortClass(),{
-               "_meterType":0,
+            ["RightThighOffsetY",new Menu_Load.TabMeter2Short2Class(),{
+               "_meterType":3,
                "_meter":"chara",
                "_sort":2,
                "_random":false,
@@ -1368,40 +1501,45 @@ package
                "_sort":2,
                "_random":false
             }],
-            ["LeftLegRotation",new Menu_Load.TabMeter2ShortClass(),{
-               "_meterType":1,
+            ["RightShiriVisible",new Menu_Load.TabEyeClass(),{
+               "_visible":"chara",
+               "_sort":2,
+               "_random":false
+            }],
+            ["LeftLegRotation",new Menu_Load.TabMeter2Short2Class(),{
+               "_meterType":4,
                "_meter":"chara",
                "_sort":3,
                "_random":false,
                "_free":0,
                "_overrideMenuColor": "D272D9"
             }],
-            ["LeftLegScaleX",new Menu_Load.TabMeterShortClass(),{
-               "_meterType":0,
+            ["LeftLegScaleX",new Menu_Load.TabMeterShort3Class(),{
+               "_meterType":3,
                "_meter":"chara",
                "_sort":3,
                "_random":false,
                "_free":0,
                "_overrideMenuColor": "D272D9"
             }],
-            ["LeftLegOffsetX",new Menu_Load.TabMeter2ShortClass(),{
-               "_meterType":0,
+            ["LeftLegOffsetX",new Menu_Load.TabMeter2Short2Class(),{
+               "_meterType":3,
                "_meter":"chara",
                "_sort":3,
                "_random":false,
                "_free":0,
                "_overrideMenuColor": "D272D9"
             }],
-            ["LeftLegScaleY",new Menu_Load.TabMeterShortClass(),{
-               "_meterType":0,
+            ["LeftLegScaleY",new Menu_Load.TabMeterShort3Class(),{
+               "_meterType":3,
                "_meter":"chara",
                "_sort":3,
                "_random":false,
                "_free":0,
                "_overrideMenuColor": "D272D9"
             }],
-            ["LeftLegOffsetY",new Menu_Load.TabMeter2ShortClass(),{
-               "_meterType":0,
+            ["LeftLegOffsetY",new Menu_Load.TabMeter2Short2Class(),{
+               "_meterType":3,
                "_meter":"chara",
                "_sort":3,
                "_random":false,
@@ -1415,40 +1553,41 @@ package
                "_overrideMenuColor": "D272D9"
             }],
             ["LinkLegSettings",new Menu_Load.TabLinkClass(),{"_sort":3}],
-            ["RightLegRotation",new Menu_Load.TabMeter2ShortClass(),{
-               "_meterType":1,
+            ["LinkThighSettings",new Menu_Load.TabLinkClass(),{"_sort":3}],
+            ["RightLegRotation",new Menu_Load.TabMeter2Short2Class(),{
+               "_meterType":4,
                "_meter":"chara",
                "_sort":4,
                "_random":false,
                "_free":0,
                "_overrideMenuColor": "D272D9"
             }],
-            ["RightLegScaleX",new Menu_Load.TabMeterShortClass(),{
-               "_meterType":0,
+            ["RightLegScaleX",new Menu_Load.TabMeterShort3Class(),{
+               "_meterType":3,
                "_meter":"chara",
                "_sort":4,
                "_random":false,
                "_free":0,
                "_overrideMenuColor": "D272D9"
             }],
-            ["RightLegOffsetX",new Menu_Load.TabMeter2ShortClass(),{
-               "_meterType":0,
+            ["RightLegOffsetX",new Menu_Load.TabMeter2Short2Class(),{
+               "_meterType":3,
                "_meter":"chara",
                "_sort":4,
                "_random":false,
                "_free":0,
                "_overrideMenuColor": "D272D9"
             }],
-            ["RightLegScaleY",new Menu_Load.TabMeterShortClass(),{
-               "_meterType":0,
+            ["RightLegScaleY",new Menu_Load.TabMeterShort3Class(),{
+               "_meterType":3,
                "_meter":"chara",
                "_sort":4,
                "_random":false,
                "_free":0,
                "_overrideMenuColor": "D272D9"
             }],
-            ["RightLegOffsetY",new Menu_Load.TabMeter2ShortClass(),{
-               "_meterType":0,
+            ["RightLegOffsetY",new Menu_Load.TabMeter2Short2Class(),{
+               "_meterType":3,
                "_meter":"chara",
                "_sort":4,
                "_random":false,
@@ -1461,40 +1600,40 @@ package
                "_random":false,
                "_overrideMenuColor": "D272D9"
             }],
-            ["LeftFootRotation",new Menu_Load.TabMeter2ShortClass(),{
-               "_meterType":1,
+            ["LeftFootRotation",new Menu_Load.TabMeter2Short2Class(),{
+               "_meterType":4,
                "_meter":"chara",
                "_sort":5,
                "_random":false,
                "_free":0,
                "_overrideMenuColor": "006798"
             }],
-            ["LeftFootScaleX",new Menu_Load.TabMeterShortClass(),{
-               "_meterType":0,
+            ["LeftFootScaleX",new Menu_Load.TabMeterShort3Class(),{
+               "_meterType":3,
                "_meter":"chara",
                "_sort":5,
                "_random":false,
                "_free":0,
                "_overrideMenuColor": "006798"
             }],
-            ["LeftFootOffsetX",new Menu_Load.TabMeter2ShortClass(),{
-               "_meterType":0,
+            ["LeftFootOffsetX",new Menu_Load.TabMeter2Short2Class(),{
+               "_meterType":3,
                "_meter":"chara",
                "_sort":5,
                "_random":false,
                "_free":0,
                "_overrideMenuColor": "006798"
             }],
-            ["LeftFootScaleY",new Menu_Load.TabMeterShortClass(),{
-               "_meterType":0,
+            ["LeftFootScaleY",new Menu_Load.TabMeterShort3Class(),{
+               "_meterType":3,
                "_meter":"chara",
                "_sort":5,
                "_random":false,
                "_free":0,
                "_overrideMenuColor": "006798"
             }],
-            ["LeftFootOffsetY",new Menu_Load.TabMeter2ShortClass(),{
-               "_meterType":0,
+            ["LeftFootOffsetY",new Menu_Load.TabMeter2Short2Class(),{
+               "_meterType":3,
                "_meter":"chara",
                "_sort":5,
                "_random":false,
@@ -1508,40 +1647,40 @@ package
                "_overrideMenuColor": "006798"
             }],
             ["LinkFootSettings",new Menu_Load.TabLinkClass(),{"_sort":5}],
-            ["RightFootRotation",new Menu_Load.TabMeter2ShortClass(),{
-               "_meterType":1,
+            ["RightFootRotation",new Menu_Load.TabMeter2Short2Class(),{
+               "_meterType":4,
                "_meter":"chara",
                "_sort":6,
                "_random":false,
                "_free":0,
                "_overrideMenuColor": "006798"
             }],
-            ["RightFootScaleX",new Menu_Load.TabMeterShortClass(),{
-               "_meterType":0,
+            ["RightFootScaleX",new Menu_Load.TabMeterShort3Class(),{
+               "_meterType":3,
                "_meter":"chara",
                "_sort":6,
                "_random":false,
                "_free":0,
                "_overrideMenuColor": "006798"
             }],
-            ["RightFootOffsetX",new Menu_Load.TabMeter2ShortClass(),{
-               "_meterType":0,
+            ["RightFootOffsetX",new Menu_Load.TabMeter2Short2Class(),{
+               "_meterType":3,
                "_meter":"chara",
                "_sort":6,
                "_random":false,
                "_free":0,
                "_overrideMenuColor": "006798"
             }],
-            ["RightFootScaleY",new Menu_Load.TabMeterShortClass(),{
-               "_meterType":0,
+            ["RightFootScaleY",new Menu_Load.TabMeterShort3Class(),{
+               "_meterType":3,
                "_meter":"chara",
                "_sort":6,
                "_random":false,
                "_free":0,
                "_overrideMenuColor": "006798"
             }],
-            ["RightFootOffsetY",new Menu_Load.TabMeter2ShortClass(),{
-               "_meterType":0,
+            ["RightFootOffsetY",new Menu_Load.TabMeter2Short2Class(),{
+               "_meterType":3,
                "_meter":"chara",
                "_sort":6,
                "_random":false,
@@ -1555,7 +1694,10 @@ package
                "_overrideMenuColor": "006798"
             }]
          ];
-         tabData["Hiyake"] = [["SelectTarget",new Menu_Load.TabSelectTargetClass(),{"_sort":0}],["Copy",new Menu_Load.TabCopyTargetClass(),{"_sort":0}],["ResetTarget",new Menu_Load.TabResetTargetClass(),{"_sort":0}],["Random",new Menu_Load.TabRandomTargetClass(),{
+         tabData["Hiyake"] = [["SelectTarget",new Menu_Load.TabSelectTargetClass(),{"_sort":0
+         }],["Copy",new Menu_Load.TabCopyTargetClass(),{"_sort":0
+         }],["ResetTarget",new Menu_Load.TabResetTargetClass(),{"_sort":0
+         }],["Random",new Menu_Load.TabRandomTargetClass(),{
             "_sort":0,
             "_visible":true,
             "_menu":true,
@@ -1563,7 +1705,9 @@ package
             "_color0":true,
             "_color1":true,
             "_color2":true
-         }],["HeaderSwitch",new Menu_Load.TabHeaderSwitchClass(),{"_sort":0}],["Close",new Menu_Load.TabCloseClass(),{"_sort":0}],["Body",new Menu_Load.TabColorClass(),{
+         }],["HeaderSwitch",new Menu_Load.TabHeaderSwitchClass(),{"_sort":0
+         }],["Close",new Menu_Load.TabCloseClass(),{"_sort":0
+         }],["Body",new Menu_Load.TabColorClass(),{
             "_color":"chara",
             "_sort":1,
             "_random":true
@@ -1578,13 +1722,13 @@ package
             "_sort":1,
             "_random":true
          }],["HeadScale",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":1,
             "_random":false,
             "_free":0
          }],["NeckHeight",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":1,
             "_random":false,
@@ -1594,17 +1738,25 @@ package
             "_sort":2,
             "_random":false
          }],["ContourWidth",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":2,
             "_random":false,
             "_free":0
          }],["ContourHeight",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":2,
             "_random":false,
             "_free":0
+         }],["HeadVisible",new Menu_Load.TabEyeClass(),{
+            "_visible":"chara",
+            "_sort":2,
+            "_random":false
+         }],["NeckVisible",new Menu_Load.TabEyeClass(),{
+            "_visible":"chara",
+            "_sort":2,
+            "_random":false
          }],["Breast",new Menu_Load.TabMenuClass(),{
             "_menu":"chara",
             "_sort":3,
@@ -1810,7 +1962,10 @@ package
             "_random":true,
             "_free":3
          }]];
-         tabData["Hair"] = [["SelectTarget",new Menu_Load.TabSelectTargetClass(),{"_sort":0}],["Copy",new Menu_Load.TabCopyTargetClass(),{"_sort":0}],["ResetTarget",new Menu_Load.TabResetTargetClass(),{"_sort":0}],["Random",new Menu_Load.TabRandomTargetClass(),{
+         tabData["Hair"] = [["SelectTarget",new Menu_Load.TabSelectTargetClass(),{"_sort":0
+         }],["Copy",new Menu_Load.TabCopyTargetClass(),{"_sort":0
+         }],["ResetTarget",new Menu_Load.TabResetTargetClass(),{"_sort":0
+         }],["Random",new Menu_Load.TabRandomTargetClass(),{
             "_sort":0,
             "_visible":true,
             "_menu":true,
@@ -1818,7 +1973,9 @@ package
             "_color0":true,
             "_color1":false,
             "_color2":false
-         }],["HeaderSwitch",new Menu_Load.TabHeaderSwitchClass(),{"_sort":0}],["Close",new Menu_Load.TabCloseClass(),{"_sort":0}],["HairAll",new Menu_Load.TabCCCClass(),{
+         }],["HeaderSwitch",new Menu_Load.TabHeaderSwitchClass(),{"_sort":0
+         }],["Close",new Menu_Load.TabCloseClass(),{"_sort":0
+         }],["HairAll",new Menu_Load.TabCCCClass(),{
             "_color":"system",
             "_sort":1
          }],["Hair",new Menu_Load.TabMenuCCCReversalClass(),{
@@ -1834,7 +1991,7 @@ package
             "_depth":1,
             "_random":true
          }],["Bangs_Height",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":1,
             "_random":true,
@@ -1846,19 +2003,19 @@ package
             "_sort":2,
             "_random":true
          }],["HairBack_Height",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":2,
             "_random":true,
             "_free":0
          }],["HairBack_Width",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":2,
             "_random":true,
             "_free":0
          }],["HairBack_Y",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":2,
             "_random":false,
@@ -1871,18 +2028,19 @@ package
             "_sort":3,
             "_random":true
          }],["SideBurnLeft_Height",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":3,
             "_random":true,
             "_free":0
          }],["SideBurnLeft_x",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":3,
             "_random":true,
             "_free":0
-         }],["LinkSideBurn",new Menu_Load.TabLinkClass(),{"_sort":3}],["SideBurnRight",new Menu_Load.TabEyeMenuCCCDepthTurnClass(),{
+         }],["LinkSideBurn",new Menu_Load.TabLinkClass(),{"_sort":3
+         }],["SideBurnRight",new Menu_Load.TabEyeMenuCCCDepthTurnClass(),{
             "_visible":"chara",
             "_menu":"chara",
             "_color":"chara",
@@ -1890,13 +2048,13 @@ package
             "_sort":4,
             "_random":true
          }],["SideBurnRight_Height",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":4,
             "_random":true,
             "_free":0
          }],["SideBurnRight_x",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":4,
             "_random":true,
@@ -1914,7 +2072,7 @@ package
             "_sort":1,
             "_random":true
          }],["HairBack_Height",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":1,
             "_random":true,
@@ -1927,7 +2085,7 @@ package
             "_depth":1,
             "_random":true
          }],["Bangs_Height",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":2,
             "_random":true,
@@ -1940,7 +2098,7 @@ package
             "_sort":2,
             "_random":true
          }],["SideBurnLeft_Height",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":2,
             "_random":true,
@@ -1981,27 +2139,43 @@ package
             "_data":"HairExPlus",
             "_sort":1,
             "_random":false
+         }],["HairExAlpha",new Menu_Load.TabMeterShortClass(),{
+            "_meterType":0,
+            "_meter":"charaPlus",
+            "_data":"HairExPlus",
+            "_sort":1,
+            "_random":false,
+            "_free":0
          }],["HairExScaleX",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"charaPlus",
             "_data":"HairExPlus",
             "_sort":2,
             "_random":false,
             "_free":0
-         }],["LinkHairExScale",new Menu_Load.TabLinkClass(),{"_sort":2}],["HairExScaleY",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+         }],["LinkHairExScale",new Menu_Load.TabLinkClass(),{"_sort":2
+         }],["HairExScaleY",new Menu_Load.TabMeterShortClass(),{
+            "_meterType":3,
             "_meter":"charaPlus",
             "_data":"HairExPlus",
             "_sort":2,
             "_random":false,
             "_free":0
-         }],["LinkHairExLine",new Menu_Load.TabLinkClass(),{"_sort":2}],["HairExLine",new Menu_Load.TabMenuClass(),{
+         }],["LinkHairExLine",new Menu_Load.TabLinkClass(),{"_sort":2
+         }],["HairExLine",new Menu_Load.TabMenuClass(),{
             "_menu":"charaPlus",
             "_data":"HairExPlus",
             "_sort":2,
             "_random":false
-         }],["HairExAlpha",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+         }],["HairExX",new Menu_Load.TabMeter2ShortClass(),{
+            "_meterType":2,
+            "_meter":"charaPlus",
+            "_data":"HairExPlus",
+            "_sort":2,
+            "_random":false,
+            "_free":0
+         }],["HairExY",new Menu_Load.TabMeter2ShortClass(),{
+            "_meterType":2,
             "_meter":"charaPlus",
             "_data":"HairExPlus",
             "_sort":2,
@@ -2015,35 +2189,38 @@ package
             "_random":false,
             "_free":0
          }],["HairExRotation",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":1,
+            "_meterType":4,
             "_meter":"charaPlus",
             "_data":"HairExPlus",
             "_sort":3,
             "_random":false,
             "_free":3
          }],["HairExRotationPlus",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":1,
+            "_meterType":4,
             "_meter":"charaPlus",
             "_data":"HairExPlus",
             "_sort":3,
             "_random":false,
             "_free":3
-         }],["HairExX",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":2,
+         }],["HairExFineX",new Menu_Load.TabMeter2ShortClass(),{
+            "_meterType":0,
             "_meter":"charaPlus",
             "_data":"HairExPlus",
             "_sort":3,
             "_random":false,
             "_free":0
-         }],["HairExY",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":2,
+         }],["HairExFineY",new Menu_Load.TabMeter2ShortClass(),{
+            "_meterType":0,
             "_meter":"charaPlus",
             "_data":"HairExPlus",
             "_sort":3,
             "_random":false,
             "_free":0
          }]];
-         tabData["Eye"] = [["SelectTarget",new Menu_Load.TabSelectTargetClass(),{"_sort":0}],["Copy",new Menu_Load.TabCopyTargetClass(),{"_sort":0}],["ResetTarget",new Menu_Load.TabResetTargetClass(),{"_sort":0}],["Random",new Menu_Load.TabRandomTargetClass(),{
+         tabData["Eye"] = [["SelectTarget",new Menu_Load.TabSelectTargetClass(),{"_sort":0
+         }],["Copy",new Menu_Load.TabCopyTargetClass(),{"_sort":0
+         }],["ResetTarget",new Menu_Load.TabResetTargetClass(),{"_sort":0
+         }],["Random",new Menu_Load.TabRandomTargetClass(),{
             "_sort":0,
             "_visible":true,
             "_menu":true,
@@ -2051,32 +2228,34 @@ package
             "_color0":true,
             "_color1":true,
             "_color2":true
-         }],["HeaderSwitch",new Menu_Load.TabHeaderSwitchClass(),{"_sort":0}],["Close",new Menu_Load.TabCloseClass(),{"_sort":0}],["Eye",new Menu_Load.TabMenuColorDepthClass(),{
+         }],["HeaderSwitch",new Menu_Load.TabHeaderSwitchClass(),{"_sort":0
+         }],["Close",new Menu_Load.TabCloseClass(),{"_sort":0
+         }],["Eye",new Menu_Load.TabMenuColorDepthClass(),{
             "_menu":"chara",
             "_color":"chara",
             "_depth":1,
             "_sort":1,
             "_random":true
          }],["EyeX",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":1,
             "_random":false,
             "_free":0
          }],["EyeY",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":1,
             "_random":false,
             "_free":0
          }],["EyeScaleX",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":1,
             "_random":false,
             "_free":0
          }],["EyeScaleY",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":1,
             "_random":false,
@@ -2107,31 +2286,33 @@ package
             "_color":"chara",
             "_sort":3,
             "_random":true
-         }],["LinkEyeball",new Menu_Load.TabLinkClass(),{"_sort":3}],["EyeballRight",new Menu_Load.TabMenuCCCClass(),{
+         }],["LinkEyeball",new Menu_Load.TabLinkClass(),{"_sort":3
+         }],["EyeballRight",new Menu_Load.TabMenuCCCClass(),{
             "_menu":"chara",
             "_color":"chara",
             "_sort":3,
             "_random":true
          }],["EyeballScale",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":3,
             "_random":false,
             "_free":0
-         }],["LinkEyeballScale",new Menu_Load.TabLinkClass(),{"_sort":3}],["EyeballScaleY",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+         }],["LinkEyeballScale",new Menu_Load.TabLinkClass(),{"_sort":3
+         }],["EyeballScaleY",new Menu_Load.TabMeterShortClass(),{
+            "_meterType":3,
             "_meter":"chara",
             "_sort":3,
             "_random":false,
             "_free":0
          }],["EyeballX",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":4,
             "_random":false,
             "_free":0
          }],["EyeballY",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":4,
             "_random":false,
@@ -2142,7 +2323,7 @@ package
             "_sort":4,
             "_random":false
          }],["EyeballLightRotation",new Menu_Load.TabMeter2Class(),{
-            "_meterType":1,
+            "_meterType":4,
             "_meter":"chara",
             "_sort":4,
             "_random":false,
@@ -2210,7 +2391,8 @@ package
             "_sort":3,
             "_random":false,
             "_free":0
-         }],["LinkNoseScale",new Menu_Load.TabLinkClass(),{"_sort":3}],["NoseScaleY",new Menu_Load.TabMeterShortClass(),{
+         }],["LinkNoseScale",new Menu_Load.TabLinkClass(),{"_sort":3
+         }],["NoseScaleY",new Menu_Load.TabMeterShortClass(),{
             "_meterType":0,
             "_meter":"chara",
             "_sort":3,
@@ -2239,7 +2421,8 @@ package
             "_sort":4,
             "_random":false,
             "_free":0
-         }],["LinkNoseShadowScale",new Menu_Load.TabLinkClass(),{"_sort":4}],["NoseShadowScaleY",new Menu_Load.TabMeterShortClass(),{
+         }],["LinkNoseShadowScale",new Menu_Load.TabLinkClass(),{"_sort":4
+         }],["NoseShadowScaleY",new Menu_Load.TabMeterShortClass(),{
             "_meterType":0,
             "_meter":"chara",
             "_sort":4,
@@ -2314,14 +2497,16 @@ package
             "_random":true,
             "_free":0
          }],["MarkScaleX",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"charaPlus",
             "_data":"MarkPlus",
-            "_sort":1,
+            "_sort":2,
             "_random":true,
             "_free":0
-         }],["LinkMark",new Menu_Load.TabLinkClass(),{"_sort":1}],["MarkScaleY",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+         }],["LinkMark",new Menu_Load.TabLinkClass(),{
+            "_sort":2
+         }],["MarkScaleY",new Menu_Load.TabMeterShortClass(),{
+            "_meterType":3,
             "_meter":"charaPlus",
             "_data":"MarkPlus",
             "_sort":2,
@@ -2335,34 +2520,50 @@ package
             "_random":false,
             "_free":0
          }],["MarkRotation",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":1,
+            "_meterType":4,
             "_meter":"charaPlus",
             "_data":"MarkPlus",
             "_sort":2,
             "_random":true,
             "_free":3
+         }],["MarkVary",new Menu_Load.TabMenuClass(),{
+            "_menu":"charaPlus",
+            "_data":"MarkPlus",
+            "_sort":2,
+            "_random":false
          }],["MarkX",new Menu_Load.TabMeter2ShortClass(),{
             "_meterType":2,
             "_meter":"charaPlus",
             "_data":"MarkPlus",
-            "_sort":2,
+            "_sort":3,
             "_random":false,
             "_free":0
          }],["MarkY",new Menu_Load.TabMeter2ShortClass(),{
             "_meterType":2,
             "_meter":"charaPlus",
             "_data":"MarkPlus",
-            "_sort":2,
+            "_sort":3,
             "_random":false,
             "_free":0
-         }],["MarkVary",new Menu_Load.TabMenuClass(),{
-            "_menu":"charaPlus",
+         }],["MarkFineX",new Menu_Load.TabMeter2ShortClass(),{
+            "_meterType":0,
+            "_meter":"charaPlus",
             "_data":"MarkPlus",
-            "_sort":2,
-            "_random":false
-         }]
-         ];
-         tabData["Mimi"] = [["SelectTarget",new Menu_Load.TabSelectTargetClass(),{"_sort":0}],["Copy",new Menu_Load.TabCopyTargetClass(),{"_sort":0}],["ResetTarget",new Menu_Load.TabResetTargetClass(),{"_sort":0}],["Random",new Menu_Load.TabRandomTargetClass(),{
+            "_sort":3,
+            "_random":false,
+            "_free":0
+         }],["MarkFineY",new Menu_Load.TabMeter2ShortClass(),{
+            "_meterType":0,
+            "_meter":"charaPlus",
+            "_data":"MarkPlus",
+            "_sort":3,
+            "_random":false,
+            "_free":0
+         }]];
+         tabData["Mimi"] = [["SelectTarget",new Menu_Load.TabSelectTargetClass(),{"_sort":0
+         }],["Copy",new Menu_Load.TabCopyTargetClass(),{"_sort":0
+         }],["ResetTarget",new Menu_Load.TabResetTargetClass(),{"_sort":0
+         }],["Random",new Menu_Load.TabRandomTargetClass(),{
             "_sort":0,
             "_visible":true,
             "_menu":true,
@@ -2370,7 +2571,9 @@ package
             "_color0":true,
             "_color1":true,
             "_color2":true
-         }],["HeaderSwitch",new Menu_Load.TabHeaderSwitchClass(),{"_sort":0}],["Close",new Menu_Load.TabCloseClass(),{"_sort":0}],["Mimi",new Menu_Load.TabEyeMenuCCCHatClass(),{
+         }],["HeaderSwitch",new Menu_Load.TabHeaderSwitchClass(),{"_sort":0
+         }],["Close",new Menu_Load.TabCloseClass(),{"_sort":0
+         }],["Mimi",new Menu_Load.TabEyeMenuCCCHatClass(),{
             "_visible":"chara",
             "_menu":"chara",
             "_color":"chara",
@@ -2426,7 +2629,10 @@ package
             "_random":true,
             "_free":3
          }]];
-         tabData["EasyEye"] = [["SelectTarget",new Menu_Load.TabSelectTargetClass(),{"_sort":0}],["HeaderSwitch",new Menu_Load.TabHeaderSwitchClass(),{"_sort":0}],["Close",new Menu_Load.TabCloseClass(),{"_sort":0}],["Eye",new Menu_Load.TabMenuClass(),{
+         tabData["EasyEye"] = [["SelectTarget",new Menu_Load.TabSelectTargetClass(),{"_sort":0
+         }],["HeaderSwitch",new Menu_Load.TabHeaderSwitchClass(),{"_sort":0
+         }],["Close",new Menu_Load.TabCloseClass(),{"_sort":0
+         }],["Eye",new Menu_Load.TabMenuClass(),{
             "_menu":"chara",
             "_color":"chara",
             "_sort":1,
@@ -2485,7 +2691,10 @@ package
             "_random":true,
             "_headerName":"Mimi"
          }]];
-         tabData["Heart"] = [["SelectTarget",new Menu_Load.TabSelectTargetClass(),{"_sort":0}],["Copy",new Menu_Load.TabCopyTargetClass(),{"_sort":0}],["ResetTarget",new Menu_Load.TabResetTargetClass(),{"_sort":0}],["Random",new Menu_Load.TabRandomTargetClass(),{
+         tabData["Heart"] = [["SelectTarget",new Menu_Load.TabSelectTargetClass(),{"_sort":0
+         }],["Copy",new Menu_Load.TabCopyTargetClass(),{"_sort":0
+         }],["ResetTarget",new Menu_Load.TabResetTargetClass(),{"_sort":0
+         }],["Random",new Menu_Load.TabRandomTargetClass(),{
             "_sort":0,
             "_visible":true,
             "_menu":true,
@@ -2494,7 +2703,9 @@ package
             "_color0":true,
             "_color1":true,
             "_color2":true
-         }],["HeaderSwitch",new Menu_Load.TabHeaderSwitchClass(),{"_sort":0}],["Close",new Menu_Load.TabCloseClass(),{"_sort":0}],["EmotionManualAuto",new Menu_Load.TabManualAutoClass(),{
+         }],["HeaderSwitch",new Menu_Load.TabHeaderSwitchClass(),{"_sort":0
+         }],["Close",new Menu_Load.TabCloseClass(),{"_sort":0
+         }],["EmotionManualAuto",new Menu_Load.TabManualAutoClass(),{
             "_check":"chara",
             "_kando":0,
             "_sort":1
@@ -2580,55 +2791,64 @@ package
             "_sort":3,
             "_random":true
          }]];
-         tabData["Emotion"] = [["SelectTarget",new Menu_Load.TabSelectTargetClass(),{"_sort":0}],["Copy",new Menu_Load.TabCopyTargetClass(),{"_sort":0}],["ResetTarget",new Menu_Load.TabResetTargetClass(),{"_sort":0}],["Random",new Menu_Load.TabRandomTargetClass(),{
+         tabData["Emotion"] = [["SelectTarget",new Menu_Load.TabSelectTargetClass(),{"_sort":0
+         }],["Copy",new Menu_Load.TabCopyTargetClass(),{"_sort":0
+         }],["ResetTarget",new Menu_Load.TabResetTargetClass(),{"_sort":0
+         }],["Random",new Menu_Load.TabRandomTargetClass(),{
             "_sort":0,
             "_visible":true,
             "_menu":true,
             "_meter":true
-         }],["HeaderSwitch",new Menu_Load.TabHeaderSwitchClass(),{"_sort":0}],["Close",new Menu_Load.TabCloseClass(),{"_sort":0}],["EmotionEyeLeft",new Menu_Load.TabMeterShortClass(),{
+         }],["HeaderSwitch",new Menu_Load.TabHeaderSwitchClass(),{"_sort":0
+         }],["Close",new Menu_Load.TabCloseClass(),{"_sort":0
+         }],["EmotionEyeLeft",new Menu_Load.TabMeterShortClass(),{
             "_meterType":0,
             "_meter":"chara",
             "_sort":1,
             "_random":true,
             "_free":3
-         }],["LinkEmotionEye",new Menu_Load.TabLinkClass(),{"_sort":1}],["EmotionEyeRight",new Menu_Load.TabMeterShortClass(),{
+         }],["LinkEmotionEye",new Menu_Load.TabLinkClass(),{"_sort":1
+         }],["EmotionEyeRight",new Menu_Load.TabMeterShortClass(),{
             "_meterType":0,
             "_meter":"chara",
             "_sort":1,
             "_random":true,
             "_free":3
          }],["EyeballWidth",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":1,
             "_random":false,
             "_free":0
-         }],["LinkEyeballWidth",new Menu_Load.TabLinkClass(),{"_sort":1}],["EyeballWidthRight",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+         }],["LinkEyeballWidth",new Menu_Load.TabLinkClass(),{"_sort":1
+         }],["EyeballWidthRight",new Menu_Load.TabMeterShortClass(),{
+            "_meterType":3,
             "_meter":"chara",
             "_sort":1,
             "_random":false,
             "_free":0
          }],["EyeballXMove",new Menu_Load.TabMeter2ReversalClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":2,
             "_random":true,
             "_free":0
-         }],["LinkEyeballXMove",new Menu_Load.TabLinkClass(),{"_sort":2}],["EyeballXMoveRight",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":0,
+         }],["LinkEyeballXMove",new Menu_Load.TabLinkClass(),{"_sort":2
+         }],["EyeballXMoveRight",new Menu_Load.TabMeter2ShortClass(),{
+            "_meterType":3,
             "_meter":"chara",
             "_sort":2,
             "_random":true,
             "_free":0
          }],["EyeballYMove",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":2,
             "_random":true,
             "_free":0
-         }],["LinkEyeballYMove",new Menu_Load.TabLinkClass(),{"_sort":2}],["EyeballYMoveRight",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":0,
+         }],["LinkEyeballYMove",new Menu_Load.TabLinkClass(),{"_sort":2
+         }],["EyeballYMoveRight",new Menu_Load.TabMeter2ShortClass(),{
+            "_meterType":3,
             "_meter":"chara",
             "_sort":2,
             "_random":true,
@@ -2644,19 +2864,20 @@ package
             "_random":true,
             "_free":3
          }],["EyebrowMoveLeft",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":3,
             "_random":true,
             "_free":0
          }],
          ["EyebrowMoveHorizontalLeft",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":3,
             "_random":true,
             "_free":0
-         }],["LinkEmotionEyebrow",new Menu_Load.TabLinkClass(),{"_sort":3}],["EmotionEyebrowRight",new Menu_Load.TabMenuClass(),{
+         }],["LinkEmotionEyebrow",new Menu_Load.TabLinkClass(),{"_sort":3
+         }],["EmotionEyebrowRight",new Menu_Load.TabMenuClass(),{
             "_menu":"chara",
             "_sort":4,
             "_random":true
@@ -2667,36 +2888,40 @@ package
             "_random":true,
             "_free":3
          }],["EyebrowMoveRight",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":4,
             "_random":true,
             "_free":0
          }],["EyebrowMoveHorizontalRight",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":4,
             "_random":true,
             "_free":0
-         }],["EmotionMouth",new Menu_Load.TabEyeMenuReversalClass(),{
+         }],["EmotionMouth",new Menu_Load.TabEyeMenuCCCReversalDepthClass(),{
             "_visible":"chara",
             "_menu":"chara",
+            "_color":"chara",
             "_sort":5,
+            "_depth":1,
             "_random":true
          }],["MouthWidth",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":5,
             "_random":true,
             "_free":0
-         }],["LinkMouthWidth",new Menu_Load.TabLinkClass(),{"_sort":5}],["MouthHeight",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+         }],["LinkMouthWidth",new Menu_Load.TabLinkClass(),{"_sort":5
+         }],["MouthHeight",new Menu_Load.TabMeterShortClass(),{
+            "_meterType":3,
             "_meter":"chara",
             "_sort":5,
             "_random":true,
             "_free":0
-         }],["MouthSen",new Menu_Load.TabMenuClass(),{
+         }],["MouthSen",new Menu_Load.TabMenuColorClass(),{
             "_menu":"chara",
+            "_color":"chara",
             "_sort":5,
             "_random":false
          }],["MouthRotation",new Menu_Load.TabMeter2ShortClass(),{
@@ -2706,13 +2931,13 @@ package
             "_random":true,
             "_free":0
          }],["MouthXMove",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":6,
             "_random":true,
             "_free":0
          }],["MouthYMove",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"chara",
             "_sort":6,
             "_random":true,
@@ -3316,6 +3541,11 @@ package
             "_sort":1,
             "_random":true,
             "_r18":1
+         }],["VibratorAlpha",new Menu_Load.TabMeterShortClass(),{
+            "_meter":"chara",
+            "_sort":2,
+            "_random":true,
+            "_r18":1
          }]];
          tabData["Hat"] = [["SelectTarget",new Menu_Load.TabSelectTargetClass(),{"_sort":0}],["Copy",new Menu_Load.TabCopyTargetClass(),{"_sort":0}],["ResetTarget",new Menu_Load.TabResetTargetClass(),{"_sort":0}],["Random",new Menu_Load.TabRandomTargetClass(),{
             "_sort":0,
@@ -3479,20 +3709,22 @@ package
             "_sort":1,
             "_random":true
          }],["RibonScale",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"charaPlus",
             "_data":"RibonPlus",
             "_sort":2,
             "_random":true,
             "_free":0
-         }],["LinkRibonScale",new Menu_Load.TabLinkClass(),{"_sort":2}],["RibonScaleY",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+         }],["LinkRibonScale",new Menu_Load.TabLinkClass(),{"_sort":2
+         }],["RibonScaleY",new Menu_Load.TabMeterShortClass(),{
+            "_meterType":3,
             "_meter":"charaPlus",
             "_data":"RibonPlus",
             "_sort":2,
             "_random":false,
             "_free":0
-         }],["LinkRibonLine",new Menu_Load.TabLinkClass(),{"_sort":2}],["RibonLine",new Menu_Load.TabMenuColorClass(),{
+         }],["LinkRibonLine",new Menu_Load.TabLinkClass(),{"_sort":2
+         }],["RibonLine",new Menu_Load.TabMenuColorClass(),{
             "_menu":"charaPlus",
             "_color":"charaPlus",
             "_data":"RibonPlus",
@@ -3506,7 +3738,7 @@ package
             "_random":false,
             "_free":0
          }],["RibonRotation",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":1,
+            "_meterType":4,
             "_meter":"charaPlus",
             "_data":"RibonPlus",
             "_sort":3,
@@ -3526,6 +3758,13 @@ package
             "_sort":3,
             "_random":false,
             "_free":0
+         }],["RibonAlpha",new Menu_Load.TabMeterShortClass(),{
+            "_meterType":0,
+            "_meter":"charaPlus",
+            "_data":"RibonPlus",
+            "_sort":4,
+            "_random":false,
+            "_free":0
          }],["RibonFineX",new Menu_Load.TabMeter2ShortClass(),{
             "_meterType":0,
             "_meter":"charaPlus",
@@ -3540,15 +3779,7 @@ package
             "_sort":4,
             "_random":false,
             "_free":0
-         }],["RibonAlpha",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
-            "_meter":"charaPlus",
-            "_data":"RibonPlus",
-            "_sort":4,
-            "_random":false,
-            "_free":0
-         }]
-         ];
+         }]];
          tabData["Belt"] = [["SelectTarget",new Menu_Load.TabSelectTargetClass(),{"_sort":0}],["TabUpDown",new Menu_Load.TabUpDownTargetClass(),{"_sort":0}],["Copy",new Menu_Load.TabCopyAllTargetClass(),{"_sort":0}],["CopyRibon",new Menu_Load.TabCopyTargetClass(),{"_sort":0}],["ResetTarget",new Menu_Load.TabResetTargetClass(),{"_sort":0}],["Random",new Menu_Load.TabRandomTargetClass(),{
             "_sort":0,
             "_visible":true,
@@ -3575,14 +3806,15 @@ package
             "_sort":1,
             "_random":false
          }],["BeltScale",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"charaPlus",
             "_data":"BeltPlus",
             "_sort":2,
             "_random":true,
             "_free":0
-         }],["LinkBeltScale",new Menu_Load.TabLinkClass(),{"_sort":2}],["BeltScaleY",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+         }],["LinkBeltScale",new Menu_Load.TabLinkClass(),{"_sort":2
+         }],["BeltScaleY",new Menu_Load.TabMeterShortClass(),{
+            "_meterType":3,
             "_meter":"charaPlus",
             "_data":"BeltPlus",
             "_sort":2,
@@ -3602,7 +3834,7 @@ package
             "_random":false,
             "_free":0
          }],["BeltRotation",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":1,
+            "_meterType":4,
             "_meter":"charaPlus",
             "_data":"BeltPlus",
             "_sort":3,
@@ -3622,6 +3854,13 @@ package
             "_sort":3,
             "_random":false,
             "_free":0
+         }],["BeltAlpha",new Menu_Load.TabMeterShortClass(),{
+            "_meterType":0,
+            "_meter":"charaPlus",
+            "_data":"BeltPlus",
+            "_sort":4,
+            "_random":false,
+            "_free":0
          }],["BeltFineX",new Menu_Load.TabMeter2ShortClass(),{
             "_meterType":0,
             "_meter":"charaPlus",
@@ -3630,13 +3869,6 @@ package
             "_random":false,
             "_free":0
          }],["BeltFineY",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":0,
-            "_meter":"charaPlus",
-            "_data":"BeltPlus",
-            "_sort":4,
-            "_random":false,
-            "_free":0
-         }],["BeltAlpha",new Menu_Load.TabMeterShortClass(),{
             "_meterType":0,
             "_meter":"charaPlus",
             "_data":"BeltPlus",
@@ -3895,49 +4127,51 @@ package
             "_sort":2,
             "_free":3
          }],["CharaLoadScale",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"charaPlus",
             "_data":"CharaLoadPlus",
             "_sort":2,
             "_free":0
-         }],["CharaLinkLoadScale",new Menu_Load.TabLinkClass(),{"_sort":2}],["CharaLoadScaleY",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+         }],["CharaLinkLoadScale",new Menu_Load.TabLinkClass(),{
+            "_sort":2
+         }],["CharaLoadScaleY",new Menu_Load.TabMeterShortClass(),{
+            "_meterType":3,
             "_meter":"charaPlus",
             "_data":"CharaLoadPlus",
             "_depth":2,
             "_sort":2,
             "_free":0
-         }],["CharaLoadScaleB",new Menu_Load.TabMeter2ShortClass(),{
+         }],["CharaLoadScaleB",new Menu_Load.TabMeter2Short2Class(),{
             "_meterType":2,
             "_meter":"charaPlus",
             "_data":"CharaLoadPlus",
             "_sort":3,
             "_free":0
-         }],["CharaLoadRotation",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":1,
+         }],["CharaLoadRotation",new Menu_Load.TabMeter2Short2Class(),{
+            "_meterType":4,
             "_meter":"charaPlus",
             "_data":"CharaLoadPlus",
             "_sort":3,
             "_free":3
-         }],["CharaLoadX",new Menu_Load.TabMeter2ShortClass(),{
+         }],["CharaLoadX",new Menu_Load.TabMeter2Short2Class(),{
             "_meterType":2,
             "_meter":"charaPlus",
             "_data":"CharaLoadPlus",
             "_sort":3,
             "_free":0
-         }],["CharaLoadY",new Menu_Load.TabMeter2ShortClass(),{
+         }],["CharaLoadY",new Menu_Load.TabMeter2Short2Class(),{
             "_meterType":2,
             "_meter":"charaPlus",
             "_data":"CharaLoadPlus",
             "_sort":3,
             "_free":0
-         }],["CharaLoadFineX",new Menu_Load.TabMeter2ShortClass(),{
+         }],["CharaLoadFineX",new Menu_Load.TabMeter2Short3Class(),{
             "_meterType":0,
             "_meter":"charaPlus",
             "_data":"CharaLoadPlus",
             "_sort":3,
             "_free":0
-         }],["CharaLoadFineY",new Menu_Load.TabMeter2ShortClass(),{
+         }],["CharaLoadFineY",new Menu_Load.TabMeter2Short3Class(),{
             "_meterType":0,
             "_meter":"charaPlus",
             "_data":"CharaLoadPlus",
@@ -3961,7 +4195,7 @@ package
             "_sort":1,
             "_free":3
          }],["FreeHandScale",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"systemPlus",
             "_data":"FreeHandPlus",
             "_sort":1,
@@ -3973,7 +4207,7 @@ package
             "_sort":1,
             "_free":3
          }],["FreeHandRotation",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":1,
+            "_meterType":4,
             "_meter":"systemPlus",
             "_data":"FreeHandPlus",
             "_sort":2,
@@ -3996,18 +4230,6 @@ package
             "_data":"FreeHandPlus",
             "_sort":2,
             "_free":0
-         }],["FreeHandFineX",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":0,
-            "_meter":"systemPlus",
-            "_data":"FreeHandPlus",
-            "_sort":2,
-            "_free":0
-         }],["FreeHandFineY",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":0,
-            "_meter":"systemPlus",
-            "_data":"FreeHandPlus",
-            "_sort":2,
-            "_free":0
          }],["FreeHandWrist",new Menu_Load.TabMenuClass(),{
             "_menu":"systemPlus",
             "_data":"FreeHandPlus",
@@ -4018,12 +4240,24 @@ package
             "_data":"FreeHandPlus",
             "_sort":3,
             "_free":3
+         }],["FreeHandFineX",new Menu_Load.TabMeter2ShortClass(),{
+            "_meterType":0,
+            "_meter":"systemPlus",
+            "_data":"FreeHandPlus",
+            "_sort":3,
+            "_free":0
+         }],["FreeHandFineY",new Menu_Load.TabMeter2ShortClass(),{
+            "_meterType":0,
+            "_meter":"systemPlus",
+            "_data":"FreeHandPlus",
+            "_sort":3,
+            "_free":0
          }],["FreeHandItem",new Menu_Load.TabEyeMenuCCCClass(),{
             "_visible":"systemPlus",
             "_menu":"systemPlus",
             "_data":"FreeHandPlus",
             "_color":"systemPlus",
-            "_sort":3
+            "_sort":4
          }],["FreeHandVest",new Menu_Load.TabEyeMenuCCCClass(),{
             "_visible":"systemPlus",
             "_menu":"systemPlus",
@@ -4048,13 +4282,14 @@ package
             "_data":"FreeRibonPlus",
             "_sort":1
          }],["FreeRibonScale",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"systemPlus",
             "_data":"FreeRibonPlus",
             "_sort":2,
             "_free":0
-         }],["LinkFreeRibonScale",new Menu_Load.TabLinkClass(),{"_sort":2}],["FreeRibonScaleY",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+         }],["LinkFreeRibonScale",new Menu_Load.TabLinkClass(),{"_sort":2
+         }],["FreeRibonScaleY",new Menu_Load.TabMeterShortClass(),{
+            "_meterType":3,
             "_meter":"systemPlus",
             "_data":"FreeRibonPlus",
             "_sort":2,
@@ -4071,7 +4306,7 @@ package
             "_sort":3,
             "_free":0
          }],["FreeRibonRotation",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":1,
+            "_meterType":4,
             "_meter":"systemPlus",
             "_data":"FreeRibonPlus",
             "_sort":3,
@@ -4094,6 +4329,12 @@ package
             "_data":"FreeRibonPlus",
             "_sort":3,
             "_free":0
+         }],["FreeRibonAlpha",new Menu_Load.TabMeterShortClass(),{
+            "_meterType":0,
+            "_meter":"systemPlus",
+            "_data":"FreeRibonPlus",
+            "_sort":4,
+            "_free":0
          }],["FreeRibonFineX",new Menu_Load.TabMeter2ShortClass(),{
             "_meterType":0,
             "_meter":"systemPlus",
@@ -4106,14 +4347,7 @@ package
             "_data":"FreeRibonPlus",
             "_sort":4,
             "_free":0
-         }],["FreeRibonAlpha",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
-            "_meter":"systemPlus",
-            "_data":"FreeRibonPlus",
-            "_sort":4,
-            "_free":0
-         }]
-         ];
+         }]];
          tabData["HeaderFreeBelt"] = [["SystemUpDown",new Menu_Load.TabUpDownTargetRightClass(),{"_sort":0}],["SystemCopy",new Menu_Load.TabCopyTargetClass(),{"_sort":0}],["HeaderSwitch",new Menu_Load.TabHeaderSwitchClass(),{"_sort":0}],["Close",new Menu_Load.TabCloseClass(),{"_sort":0}],["FreeBeltPlus",new Menu_Load.TabMenuINEyeClass(),{
             "_visible":"system",
             "_menu":"system",
@@ -4129,13 +4363,14 @@ package
             "_data":"FreeBeltPlus",
             "_sort":1
          }],["FreeBeltScale",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"systemPlus",
             "_data":"FreeBeltPlus",
             "_sort":2,
             "_free":0
-         }],["LinkFreeBeltScale",new Menu_Load.TabLinkClass(),{"_sort":2}],["FreeBeltScaleY",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+         }],["LinkFreeBeltScale",new Menu_Load.TabLinkClass(),{"_sort":2
+         }],["FreeBeltScaleY",new Menu_Load.TabMeterShortClass(),{
+            "_meterType":3,
             "_meter":"systemPlus",
             "_data":"FreeBeltPlus",
             "_sort":2,
@@ -4152,7 +4387,7 @@ package
             "_sort":3,
             "_free":0
          }],["FreeBeltRotation",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":1,
+            "_meterType":4,
             "_meter":"systemPlus",
             "_data":"FreeBeltPlus",
             "_sort":3,
@@ -4175,6 +4410,12 @@ package
             "_data":"FreeBeltPlus",
             "_sort":3,
             "_free":0
+         }],["FreeBeltAlpha",new Menu_Load.TabMeterShortClass(),{
+            "_meterType":0,
+            "_meter":"systemPlus",
+            "_data":"FreeBeltPlus",
+            "_sort":4,
+            "_free":0
          }],["FreeBeltFineX",new Menu_Load.TabMeter2ShortClass(),{
             "_meterType":0,
             "_meter":"systemPlus",
@@ -4187,14 +4428,7 @@ package
             "_data":"FreeBeltPlus",
             "_sort":4,
             "_free":0
-         }],["FreeBeltAlpha",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
-            "_meter":"systemPlus",
-            "_data":"FreeBeltPlus",
-            "_sort":4,
-            "_free":0
-         }]
-         ];
+         }]];
          tabData["HeaderFreeChair"] = [["SystemUpDown",new Menu_Load.TabUpDownTargetRightClass(),{"_sort":0}],["SystemCopy",new Menu_Load.TabCopyTargetClass(),{"_sort":0}],["HeaderSwitch",new Menu_Load.TabHeaderSwitchClass(),{"_sort":0}],["Close",new Menu_Load.TabCloseClass(),{"_sort":0}],["FreeChairPlus",new Menu_Load.TabMenuINEyeClass(),{
             "_visible":"system",
             "_menu":"system",
@@ -4210,18 +4444,19 @@ package
             "_data":"FreeChairPlus",
             "_sort":1
          }],["FreeChairScale",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"systemPlus",
             "_data":"FreeChairPlus",
             "_sort":1,
             "_free":0
-         }],["LinkFreeChairScale",new Menu_Load.TabLinkClass(),{"_sort":1}],["FreeChairLine",new Menu_Load.TabMenuColorClass(),{
+         }],["LinkFreeChairScale",new Menu_Load.TabLinkClass(),{"_sort":1
+         }],["FreeChairLine",new Menu_Load.TabMenuColorClass(),{
             "_menu":"systemPlus",
             "_color":"systemPlus",
             "_data":"FreeChairPlus",
             "_sort":2
          }],["FreeChairRotation",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":1,
+            "_meterType":4,
             "_meter":"systemPlus",
             "_data":"FreeChairPlus",
             "_sort":2,
@@ -4244,6 +4479,12 @@ package
             "_data":"FreeChairPlus",
             "_sort":2,
             "_free":0
+         }],["FreeChairAlpha",new Menu_Load.TabMeterShortClass(),{
+            "_meterType":0,
+            "_meter":"systemPlus",
+            "_data":"FreeChairPlus",
+            "_sort":3,
+            "_free":0
          }],["FreeChairFineX",new Menu_Load.TabMeter2ShortClass(),{
             "_meterType":0,
             "_meter":"systemPlus",
@@ -4251,12 +4492,6 @@ package
             "_sort":3,
             "_free":0
          }],["FreeChairFineY",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":0,
-            "_meter":"systemPlus",
-            "_data":"FreeChairPlus",
-            "_sort":3,
-            "_free":0
-         }],["FreeChairAlpha",new Menu_Load.TabMeterShortClass(),{
             "_meterType":0,
             "_meter":"systemPlus",
             "_data":"FreeChairPlus",
@@ -4282,7 +4517,8 @@ package
             "_data":"FreeFlagPlus",
             "_sort":1,
             "_free":0
-         }],["LinkFreeFlagScale",new Menu_Load.TabLinkClass(),{"_sort":1}],["FreeFlagScaleY",new Menu_Load.TabMeterShortClass(),{
+         }],["LinkFreeFlagScale",new Menu_Load.TabLinkClass(),{"_sort":1
+         }],["FreeFlagScaleY",new Menu_Load.TabMeterShortClass(),{
             "_meterType":2,
             "_meter":"systemPlus",
             "_data":"FreeFlagPlus",
@@ -4295,7 +4531,7 @@ package
             "_sort":2,
             "_free":0
          }],["FreeFlagRotation",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":1,
+            "_meterType":4,
             "_meter":"systemPlus",
             "_data":"FreeFlagPlus",
             "_sort":2,
@@ -4345,7 +4581,8 @@ package
             "_data":"FreeHukidashiPlus",
             "_sort":2,
             "_free":0
-         }],["LinkFreeHukidashiScale",new Menu_Load.TabLinkClass(),{"_sort":2}],["FreeHukidashiScaleY",new Menu_Load.TabMeterShortClass(),{
+         }],["LinkFreeHukidashiScale",new Menu_Load.TabLinkClass(),{"_sort":2
+         }],["FreeHukidashiScaleY",new Menu_Load.TabMeterShortClass(),{
             "_meterType":2,
             "_meter":"systemPlus",
             "_data":"FreeHukidashiPlus",
@@ -4363,7 +4600,7 @@ package
             "_sort":2,
             "_free":0
          }],["FreeHukidashiRotation",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":1,
+            "_meterType":4,
             "_meter":"systemPlus",
             "_data":"FreeHukidashiPlus",
             "_sort":2,
@@ -4401,14 +4638,15 @@ package
             "_data":"FreeHukidashiPlus",
             "_sort":4,
             "_free":0
-         }],["LinkFreeHukidashiExtraScale",new Menu_Load.TabLinkClass(),{"_sort":4}],["FreeHukidashiExtraScaleY",new Menu_Load.TabMeterShortClass(),{
+         }],["LinkFreeHukidashiExtraScale",new Menu_Load.TabLinkClass(),{"_sort":4
+         }],["FreeHukidashiExtraScaleY",new Menu_Load.TabMeterShortClass(),{
             "_meterType":2,
             "_meter":"systemPlus",
             "_data":"FreeHukidashiPlus",
             "_sort":4,
             "_free":0
          }],["FreeHukidashiExtraRotation",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":1,
+            "_meterType":4,
             "_meter":"systemPlus",
             "_data":"FreeHukidashiPlus",
             "_sort":4,
@@ -4526,7 +4764,8 @@ package
             "_data":"txtFieldmenu",
             "_sort":2,
             "_free":0
-         }],["LinktxtFieldBoxScale",new Menu_Load.TabLinkClass(),{"_sort":2}],["txtFieldBoxScaleY",new Menu_Load.TabMeterShortClass(),{
+         }],["LinktxtFieldBoxScale",new Menu_Load.TabLinkClass(),{"_sort":2
+         }],["txtFieldBoxScaleY",new Menu_Load.TabMeterShortClass(),{
             "_meterType":0,
             "_meter":"systemPlus",
             "_data":"txtFieldmenu",
@@ -4545,7 +4784,7 @@ package
             "_sort":3,
             "_free":1
          }],["txtFieldRotation",new Menu_Load.TabMeter2Short3Class(),{
-            "_meterType":1,
+            "_meterType":4,
             "_meter":"systemPlus",
             "_data":"txtFieldmenu",
             "_sort":3,
@@ -4605,13 +4844,14 @@ package
             "_sort":2,
             "_free":3
          }],["LoadScale",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+            "_meterType":3,
             "_meter":"systemPlus",
             "_data":"LoadPlus",
             "_sort":2,
             "_free":0
-         }],["LinkLoadScale",new Menu_Load.TabLinkClass(),{"_sort":2}],["LoadScaleY",new Menu_Load.TabMeterShortClass(),{
-            "_meterType":0,
+         }],["LinkLoadScale",new Menu_Load.TabLinkClass(),{"_sort":2
+         }],["LoadScaleY",new Menu_Load.TabMeterShortClass(),{
+            "_meterType":3,
             "_meter":"systemPlus",
             "_data":"LoadPlus",
             "_depth":2,
@@ -4621,37 +4861,37 @@ package
             "_data":"LoadPlus",
             "_check":"systemPlus",
             "_sort":2
-         }],["LoadScaleB",new Menu_Load.TabMeter2ShortClass(),{
+         }],["LoadScaleB",new Menu_Load.TabMeter2Short2Class(),{
             "_meterType":2,
             "_meter":"systemPlus",
             "_data":"LoadPlus",
             "_sort":3,
             "_free":0
-         }],["LoadRotation",new Menu_Load.TabMeter2ShortClass(),{
-            "_meterType":1,
+         }],["LoadRotation",new Menu_Load.TabMeter2Short2Class(),{
+            "_meterType":4,
             "_meter":"systemPlus",
             "_data":"LoadPlus",
             "_sort":3,
             "_free":3
-         }],["LoadX",new Menu_Load.TabMeter2ShortClass(),{
+         }],["LoadX",new Menu_Load.TabMeter2Short2Class(),{
             "_meterType":2,
             "_meter":"systemPlus",
             "_data":"LoadPlus",
             "_sort":3,
             "_free":0
-         }],["LoadY",new Menu_Load.TabMeter2ShortClass(),{
+         }],["LoadY",new Menu_Load.TabMeter2Short2Class(),{
             "_meterType":2,
             "_meter":"systemPlus",
             "_data":"LoadPlus",
             "_sort":3,
             "_free":0
-         }],["LoadFineX",new Menu_Load.TabMeter2ShortClass(),{
+         }],["LoadFineX",new Menu_Load.TabMeter2Short3Class(),{
             "_meterType":0,
             "_meter":"systemPlus",
             "_data":"LoadPlus",
             "_sort":3,
             "_free":0
-         }],["LoadFineY",new Menu_Load.TabMeter2ShortClass(),{
+         }],["LoadFineY",new Menu_Load.TabMeter2Short3Class(),{
             "_meterType":0,
             "_meter":"systemPlus",
             "_data":"LoadPlus",
@@ -4813,8 +5053,8 @@ package
             "HairBack":Dress_data.HairBackData.length - 1,
             "SideBurnLeft":Dress_data.SideBurnData.length - 1,
             "SideBurnRight":Dress_data.SideBurnData.length - 1,
-            "HairExPlus":Main.hukusuuNum,
-            "HairEx":86,
+            "HairExPlus": 998,
+            "HairEx":136,
             "HairExLine":5,
             "Eyebrow":16,
             "MouthSen":4,
@@ -4913,8 +5153,8 @@ package
             "Collar":Dress_data.menuCustom["Collar"].length - 1,
             "Necklace":Dress_data.menuCustom["Necklace"].length - 1,
             "Necktie":Dress_data.NecktieData.length - 1,
-            "RibonPlus":Main.RibonhukusuuNum,
-            "Ribon":Dress_data.DressData["Ribon1"].length - 1,
+            "RibonPlus": 998,
+            "Ribon":Dress_data.DressData["Ribon"].length - 1,
             "RibonLine":5,
             "Wristband0":Dress_data.WristbandData.length - 1,
             "Wristband1":Dress_data.WristbandData.length - 1,
@@ -4945,7 +5185,7 @@ package
             "FreeHandVest":Dress_data.FreeHandVestData.length - 1,
             "FreeHandWristband":Dress_data.FreeHandWristbandData.length - 1,
             "FreeRibonPlus":98,
-            "FreeRibon":Dress_data.DressData["Ribon0"].length - 1,
+            "FreeRibon":Dress_data.DressData["Ribon"].length - 1,
             "FreeRibonLine":5,
             "FreeBeltPlus":98,
             "FreeBelt":Dress_data.DressData["Belt0"].length - 1,

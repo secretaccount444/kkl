@@ -1,6 +1,8 @@
 package undo {
     import menu.Tab_SetClass;
     import menu.SetClass;
+    import parts.Ribbon;
+    import parts.Hairpiece;
 
     public class ClickAction extends UndoAction {
         private var character: int;
@@ -41,7 +43,15 @@ package undo {
         private function getTabData(tabName: String) : Object {
             var ret = {};
 
-            if (tabName == "CharaLoad" || tabName == "HairEx" || tabName == "Belt" || tabName == "Mark" || tabName == "Ribon") {
+            if (tabName == "Ribon") {
+                var ribbon = Ribbon.fromCharacter(this.character, this.slot);
+                ret["visible"] = ribbon.visible;
+                ret["_reversal2"] = ribbon.reversal2;
+            } else if (tabName == "HairEx") {
+                var hairpiece = Hairpiece.fromCharacter(this.character, this.slot);
+                ret["visible"] = hairpiece.visible;
+                ret["_reversal2"] = hairpiece.reversal2;
+            } else if (tabName == "CharaLoad" || tabName == "Belt" || tabName == "Mark") {
                 ret["visible"] = this.charaData[tabName + "Plus"]["_visible"][this.slot];
                 if ("_reversal2" in this.charaData[tabName + this.slot]) {
                     ret["_reversal2"] = this.charaData[tabName + this.slot]["_reversal2"];
@@ -96,7 +106,11 @@ package undo {
         private function applyTabData(tabName: String, src: Object) : void {
             for (var prop in src) {
                 if (prop == "visible") {
-                    if (tabName == "CharaLoad" || tabName == "HairEx" || tabName == "Belt" || tabName == "Mark" || tabName == "Ribon") {
+                    if (tabName == "Ribon") {
+                        Ribbon.fromCharacter(this.character, this.slot).visible = src[prop];
+                    } else if (tabName == "HairEx") {
+                        Hairpiece.fromCharacter(this.character, this.slot).visible = src[prop];
+                    } else if (tabName == "CharaLoad" || tabName == "Belt" || tabName == "Mark") {
                         this.charaData[tabName + "Plus"]["_visible"][this.slot] = src[prop];
                     } else if (tabName == "FaceOption" || tabName == "EmotionOption") {
                         this.charaData[tabName]["_visible"][this.slot] = src[prop];
@@ -106,7 +120,13 @@ package undo {
                         this.charaData[tabName]["_visible"][0] = src[prop];
                     }
                 } else if (prop == "_reversal2") {
-                    this.charaData[tabName + this.slot][prop] = src[prop];
+                    if (tabName == "Ribon") {
+                        Ribbon.fromCharacter(this.character, this.slot).reversal2 = src[prop];
+                    } else if (tabName == "HairEx") {
+                        Hairpiece.fromCharacter(this.character, this.slot).reversal2 = src[prop];
+                    } else {
+                        this.charaData[tabName + this.slot][prop] = src[prop];
+                    }
                 } else {
                     this.charaData[tabName][prop] = src[prop];
                 }

@@ -1,6 +1,8 @@
 package system
 {
    import menu.Tab_TabNameCheck;
+   import parts.Ribbon;
+   import parts.Hairpiece;
    
    public class MeterPersent
    {
@@ -17,6 +19,7 @@ package system
          var _loc5_:String = Tab_TabNameCheck.headerName;
          var _loc6_:int = Tab_TabNameCheck.targetJ;
          var _loc7_:Number = param2 - param1;
+         
          try
          {
             _loc10_ = MenuClass.tabData[_loc5_][_loc6_][2]["_data"];
@@ -26,6 +29,7 @@ package system
          catch(myError:Error)
          {
          }
+
          var _loc9_:int = 100;
          try
          {
@@ -37,13 +41,30 @@ package system
             {
                _loc9_ = 1000;
             }
+            else if(MenuClass.tabData[_loc5_][_loc6_][2]["_meterType"] == 3)
+            {
+               _loc9_ = 1000;
+            }
+            else if(MenuClass.tabData[_loc5_][_loc6_][2]["_meterType"] == 4)
+            {
+               _loc9_ = 3600;
+            }
          }
          catch(myError:Error)
          {
          }
+
          if(MenuClass.tabData[_loc5_][_loc6_][2]["_meter"] == "charaPlus")
          {
-            _loc8_ = MenuClass.charaData[param4][param3 + _loc11_]["_meter"] / _loc9_;
+            if (_loc5_ == "Ribon") {
+               var ribbon = Ribbon.fromCharacter(param4, _loc11_);
+               _loc8_ = ribbon.getData(param3.substring(5), "_meter") / _loc9_;
+            } else if (_loc5_ == "HairEx") {
+               var hairpiece = Hairpiece.fromCharacter(param4, _loc11_);
+               _loc8_ = hairpiece.getData(param3.substring(6), "_meter") / _loc9_;
+            } else {
+               _loc8_ = MenuClass.charaData[param4][param3 + _loc11_]["_meter"] / _loc9_;
+            }
          }
          else if(MenuClass.tabData[_loc5_][_loc6_][2]["_meter"] == "chara")
          {
@@ -51,12 +72,18 @@ package system
          }
          else if(MenuClass.tabData[_loc5_][_loc6_][2]["_meter"] == "systemPlus")
          {
-            _loc8_ = MenuClass.systemData[param3 + _loc12_]["_meter"] / _loc9_;
+            if (_loc5_ == "FreeRibon") {
+               var ribbon = Ribbon.fromGlobal(_loc12_);
+               _loc8_ = ribbon.getData(param3.substring(9), "_meter") / _loc9_;
+            } else {
+               _loc8_ = MenuClass.systemData[param3 + _loc12_]["_meter"] / _loc9_;
+            }
          }
          else if(MenuClass.tabData[_loc5_][_loc6_][2]["_meter"] == "system" || MenuClass.tabData[_loc5_][_loc6_][2]["_meter"] == "systemAll")
          {
             _loc8_ = MenuClass.systemData[param3]["_meter"] / _loc9_;
          }
+
          MeterPersentNum = param1 + _loc7_ * _loc8_;
       }
       

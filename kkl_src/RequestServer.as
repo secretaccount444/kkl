@@ -234,7 +234,18 @@ package {
 
             var msg = this.readMessage(buf);
             while (msg !== null) {
-                this.handleRequest(JSON.parse(msg), remoteIdentifier, socket);
+                var data = null;
+                try {
+                    msg = (msg as String).replace("\n", "");
+                    data = JSON.parse(msg);
+                } catch (err) {
+                    trace("caught error when parsing request: ");
+                    trace(err);
+                    msg = this.readMessage(buf);
+                    continue;
+                }
+
+                this.handleRequest(data, remoteIdentifier, socket);
                 msg = this.readMessage(buf);
             }
 
@@ -861,7 +872,7 @@ package {
             MenuClass.systemData["CameraKaizoudo"]["_menu"] = 4;
             MenuClass.cameraMode = 1;
             MenuClass.ClickRock = false;
-            
+
             var disableBg = true;
             if (request["bg"] != null) {
                 disableBg = !Boolean(request["bg"]);
@@ -894,7 +905,7 @@ package {
             sendJSONData(reply_socket, {"status": "in_progress", "id": requestId}, MSG_TYPE_RESPONSE);
 
             Main.processingCode = req;
-            
+
             var tm2:Timer = new Timer(750, 1);
             tm2.addEventListener("timer", function (e2:TimerEvent) {
                 if (disableBg) {
@@ -963,7 +974,6 @@ package {
 
         private function getScreenshotDirect(request: Object, requestId: uint, remoteIdentifier: String, reply_socket: Socket) : void {
             sendJSONData(reply_socket, {"status": "in_progress", "id": requestId}, MSG_TYPE_RESPONSE);
-
             var bm: BitmapData = null;
             var sf: Number = request["scale"] || 2.5;
             var fastEncode: Boolean = !request.hasOwnProperty("fastEncode") || !!request["fastEncode"];
@@ -1335,7 +1345,7 @@ package {
                 return targetSprite;
             }
 
-            var parts: Array = path.split('.');
+            var parts: Array = RequestProcessor.fixLegPaths(path.split('.'));
             for (var i: uint = 0; i < parts.length; i++) {
                 if (parts[i].length > 0 && parts[i].substring(0, 1) == '!') {
                     targetSprite = Sprite(targetSprite.getChildAt(parseInt(parts[i].substring(1), 10)));

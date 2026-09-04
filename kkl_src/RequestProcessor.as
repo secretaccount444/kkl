@@ -6,6 +6,7 @@ package {
     import flash.filesystem.File;
     import flash.filesystem.FileStream;
     import flash.display.Sprite;
+    import flash.display.StageDisplayState;
     import flash.utils.ByteArray;
     import flash.geom.ColorTransform;
     import flash.geom.Matrix;
@@ -30,6 +31,10 @@ package {
         private var controlDirs: Array = [];
 
         private var identifier: uint = 0;
+
+        private var storedWidth: Number; 
+        private var storedHeight: Number;
+        private var fullScreen: Boolean;
 
         public function RequestProcessor() {
             trace("app dir:" + File.applicationDirectory.nativePath);
@@ -180,6 +185,19 @@ package {
                 return;
             }
 
+            fullScreen = MenuClass.systemData["FullScreen"]["_check"];
+
+            if (fullScreen) {
+                  MenuClass.systemData["FullScreen"]["_check"] = false;
+                  MenuClass.systemData["StoryFullScreen"]["_check"] = false;
+                  Main.stageVar.displayState = StageDisplayState.NORMAL;
+            } else {
+                storedWidth = Main.stageVar.nativeWindow.width;
+                storedHeight = Main.stageVar.nativeWindow.height;
+            }
+
+            Main.stageVar.stageWidth = 800;
+            Main.stageVar.stageHeight = 600;
             var req: ProcessingRequest = codesToProcess.shift();
             var code: String = req.getCode();
 
@@ -187,6 +205,8 @@ package {
             req.addEventListener(ProcessingRequest.CODE_PROCESSED, function (ev: Event) : void {
                 processor.onProcessCodeComplete();
             });
+
+
 
             Main.processingCode = req;
 
@@ -198,7 +218,7 @@ package {
                     var t:Array = lines[i].split('=');
 
                     if(t.length > 1) {
-                        var path:Array = StringUtil.trim(t[0]).split('.');                        
+                        var path:Array = fixLegPaths(StringUtil.trim(t[0]).split('.'));
                         var alpha:Number = Number(t[1]);
                         
                         alpha_values.push([path, [0, alpha]]);
@@ -252,7 +272,7 @@ package {
                     lastSelectVisibility[i] = MenuClass.charaAddDepth[i].charaSelect.visible;
                     MenuClass.charaAddDepth[i].charaSelect.visible = false;
                 }
-                
+
                 var tm2:Timer = new Timer(25, 1);
                 tm2.addEventListener("timer", function (e2:TimerEvent) {
                     Main.mainWindow.bg.visible = false;
@@ -279,6 +299,15 @@ package {
             });
             
             t.start();
+
+            if (fullScreen) {
+                MenuClass.systemData["FullScreen"]["_check"] = true;
+                MenuClass.systemData["StoryFullScreen"]["_check"] = true;
+                Main.stageVar.displayState = StageDisplayState.FULL_SCREEN;
+            } else {
+                Main.stageVar.nativeWindow.width = storedWidth;
+                Main.stageVar.nativeWindow.height = storedHeight;
+            }
         }
 
         public static function getChildren(param1:Sprite, curPath:Array) : Array {
@@ -332,6 +361,21 @@ package {
             }
         }
 
+        public static function fixLegPaths(path: Array) : Array {
+            if (
+                path.length >= 2 &&
+                (path[0] == "ashi0" || path[0] == "ashi1") &&
+                (path[1] == "thigh" || path[1] == "leg" || path[1] == "leg_huku" || path[1] == "shiri" || path[1] == "foot") &&
+                !(path.length >= 3 && path[2] == "actual")
+            ) {
+                trace("adding 'actual' to path: " + path);
+                path.splice(2, 0, "actual");
+                trace(path);
+            }
+
+            return path;
+        }
+
         public static function getHSValueFromPath(chara:Sprite, path:Array) : Array {
             try
             {
@@ -350,7 +394,7 @@ package {
             }
             catch(myError:Error)
             {
-                trace("Caught error in getHSValueFromPath: " + myError.getStackTrace());
+                trace("Caught error in getHSValueFromPath for " + path + ": " + myError.getStackTrace());
                 return [1, 0];
             }
             
@@ -363,7 +407,7 @@ package {
             for (var path: String in transforms) {
                 try {
                     var matxData = transforms[path];
-                    var pathParts: Array = StringUtil.trim(path).split('.');
+                    var pathParts: Array = fixLegPaths(StringUtil.trim(path).split('.'));
                     var applyMatx: Matrix = new Matrix(
                         matxData["a"], matxData["b"], matxData["c"], matxData["d"], matxData["tx"], matxData["ty"]
                     );
@@ -403,7 +447,7 @@ package {
         public static function restoreTransformMatrices(chara:Sprite, transforms: Object) : void {
             for (var path: String in transforms) {
                 try {
-                    var pathParts: Array = StringUtil.trim(path).split('.');
+                    var pathParts: Array = fixLegPaths(StringUtil.trim(path).split('.'));
                     var cur: Sprite = chara;
                     
                     for(var i2: uint = 0; i2 < pathParts.length; i2++) {
@@ -433,7 +477,7 @@ package {
             for(var i=0;i<arr.length;i++) {
                 try
                 {
-                    var path: Array = arr[i][0];
+                    var path: Array = fixLegPaths(arr[i][0]);
                     var alpha: Array = arr[i][1];
                     
                     var cur:Sprite = chara;

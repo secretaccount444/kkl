@@ -9,6 +9,8 @@ package menu
       private var menuNum:int;
       
       private var DressCharaData:Object;
+
+      private var loadedDataVersion:int;
       
       public function Tab_SaveUpdateSystem(param1:String, param2:int, param3:String)
       {
@@ -16,6 +18,9 @@ package menu
          var _loc5_:int = 0;
          super();
          this.DressCharaData = Dress_data.DressCharaData[0];
+
+         loadedDataVersion = param2;
+
          if(param2 <= 39 && param1 == "Background")
          {
             if(MenuClass.systemData["Background"]["_menu"] == 1 || MenuClass.systemData["Background"]["_menu"] == 2)
@@ -87,7 +92,7 @@ package menu
          if(param2 <= 40 && param1 == "FreeHukidashi")
          {
             _loc4_ = 0;
-            while(_loc4_ <= 98)
+            while(_loc4_ <= Main.hukusuuNum)
             {
                if(MenuClass.systemData["FreeHukidashiPlus"]["_visible"][_loc4_])
                {
@@ -100,7 +105,7 @@ package menu
          if(param2 <= 62 && param1 == "urlLoad")
          {
             _loc4_ = 0;
-            while(_loc4_ <= 98)
+            while(_loc4_ <= Main.hukusuuNum)
             {
                if(MenuClass.systemData["LoadPlus"]["_visible"][_loc4_])
                {
@@ -112,7 +117,7 @@ package menu
          if(param2 <= 63 && param1 == "urlLoad")
          {
             _loc4_ = 0;
-            while(_loc4_ <= 98)
+            while(_loc4_ <= Main.hukusuuNum)
             {
                if(MenuClass.systemData["LoadPlus"]["_visible"][_loc4_])
                {
@@ -124,7 +129,7 @@ package menu
          if(param2 <= 64 && param1 == "FreeRibon")
          {
             _loc4_ = 0;
-            while(_loc4_ <= 98)
+            while(_loc4_ <= Main.hukusuuNum)
             {
                if(MenuClass.systemData["FreeRibonPlus"]["_visible"][_loc4_])
                {
@@ -136,7 +141,7 @@ package menu
          if(param2 <= 64 && param1 == "FreeBelt")
          {
             _loc4_ = 0;
-            while(_loc4_ <= 98)
+            while(_loc4_ <= Main.hukusuuNum)
             {
                if(MenuClass.systemData["FreeBeltPlus"]["_visible"][_loc4_])
                {
@@ -148,7 +153,7 @@ package menu
          if(param2 <= 64 && param1 == "FreeFlag")
          {
             _loc4_ = 0;
-            while(_loc4_ <= 98)
+            while(_loc4_ <= Main.hukusuuNum)
             {
                if(MenuClass.systemData["FreeFlagPlus"]["_visible"][_loc4_])
                {
@@ -160,7 +165,7 @@ package menu
          if(param2 <= 64 && param1 == "FreeHukidashi")
          {
             _loc4_ = 0;
-            while(_loc4_ <= 98)
+            while(_loc4_ <= Main.hukusuuNum)
             {
                if(MenuClass.systemData["FreeHukidashiPlus"]["_visible"][_loc4_])
                {
@@ -172,7 +177,7 @@ package menu
          if(param2 <= 64 && param1 == "urlLoad")
          {
             _loc4_ = 0;
-            while(_loc4_ <= 98)
+            while(_loc4_ <= Main.hukusuuNum)
             {
                if(MenuClass.systemData["LoadPlus"]["_visible"][_loc4_])
                {
@@ -184,7 +189,7 @@ package menu
          if(param2 <= 65 && param1 == "urlLoad")
          {
             _loc4_ = 0;
-            while(_loc4_ <= 98)
+            while(_loc4_ <= Main.hukusuuNum)
             {
                if(MenuClass.systemData["LoadPlus"]["_visible"][_loc4_])
                {
@@ -197,7 +202,7 @@ package menu
          if(param2 <= 81 && param1 == "FreeRibon")
          {
             _loc4_ = 0;
-            while(_loc4_ <= 98)
+            while(_loc4_ <= Main.hukusuuNum)
             {
                if(MenuClass.systemData["FreeRibonPlus"]["_visible"][_loc4_])
                {
@@ -265,6 +270,113 @@ package menu
                }
             }
          }
+
+         if (beforeVersion(107, 1, 1)) {
+            if (param1 == "FreeRibon" || param1 == "FreeBelt" || param1 == "FreeChair" || param1 == "urlLoad" || param1 == "FreeHand" || param1 == "FreeFlag" || param1 == "FreeHukidashi") {
+               var baseName = param1;
+               if (param1 == "urlLoad") {
+                  baseName = "Load";
+               }
+
+               for (var i = 0; i < 99; i++) {
+                  if(MenuClass.systemData[baseName + "Plus"]["_visible"][i])
+                  {
+                     MenuClass.systemData[baseName + "Rotation" + i]["_meter"] *= 10;
+
+                     //if (baseName == "FreeBelt" || baseName == "FreeChair" || baseName == "FreeRibon") {
+                     //   MenuClass.systemData[baseName + "Alpha" + i]["_meter"] = 100;
+                     //}
+                  }
+               }
+            }
+
+            if (param1 == "FreeHukidashi") {
+               for (var i = 0; i < 99; i++) {
+                  if(MenuClass.systemData["FreeHukidashiPlus"]["_visible"][i])
+                  {
+                     MenuClass.systemData["FreeHukidashiExtraRotation" + i]["_meter"] *= 10;
+                  }
+               }
+            }
+
+            if (param1 == "txtField") {
+               for (var i = 0; i < 99; i++) {
+                  if(MenuClass.systemData["txtFieldmenu"]["_visible"][i])
+                  {
+                     MenuClass.systemData["txtFieldRotation" + i]["_meter"] *= 10;
+                  }
+               }
+            }
+
+            if (param1 == "urlLoad") {
+               for (var i = 0; i < 99; i++) {
+                  if(MenuClass.systemData["LoadPlus"]["_visible"][i])
+                  {
+                     MenuClass.systemData["LoadScale" + i]["_meter"] *= 10;
+                     MenuClass.systemData["LoadScaleY" + i]["_meter"] *= 10;
+                  }
+               }
+            }
+
+            if (param1 == "FreeRibon") {
+               for (var i = 0; i < 99; i++) {
+                  if(MenuClass.systemData["FreeRibonPlus"]["_visible"][i])
+                  {
+                     MenuClass.systemData["FreeRibonScale" + i]["_meter"] *= 10;
+                     MenuClass.systemData["FreeRibonScaleY" + i]["_meter"] *= 10;
+                  }
+               }
+            }
+            if (param1 == "FreeBelt") {
+               for (var i = 0; i < 99; i++) {
+                  if(MenuClass.systemData["FreeBeltPlus"]["_visible"][i])
+                  {
+                     MenuClass.systemData["FreeBeltScale" + i]["_meter"] *= 10;
+                     MenuClass.systemData["FreeBeltScaleY" + i]["_meter"] *= 10;
+                  }
+               }
+            }
+            if (param1 == "FreeHand") {
+               for (var i = 0; i < 99; i++) {
+                  if(MenuClass.systemData["FreeHandPlus"]["_visible"][i])
+                  {
+                     MenuClass.systemData["FreeHandScale" + i]["_meter"] *= 10;
+                  }
+               }
+            }
+                        if (param1 == "FreeChair") {
+               for (var i = 0; i < 99; i++) {
+                  if(MenuClass.systemData["FreeChairPlus"]["_visible"][i])
+                  {
+                     MenuClass.systemData["FreeChairScale" + i]["_meter"] *= 10;
+                  }
+               }
+            }
+
+
+         }
+
+
+      }
+
+      private function compareVersions(major: int, minor: int, alpha: int) : int {
+         if (this.loadedDataVersion < major) {
+            return -1;
+         } else if (this.loadedDataVersion > major) {
+            return 1;
+         } else {
+            if (MenuClass.systemData["SourceVersion"]["_minor"] < minor) {
+               return -1;
+            } else if (MenuClass.systemData["SourceVersion"]["_minor"] > minor) {
+               return 1;
+            } else {
+               return MenuClass.systemData["SourceVersion"]["_alpha"] - alpha;
+            }
+         }
+      }
+
+      private function beforeVersion(major: int, minor: int, alpha: int) : Boolean {
+         return compareVersions(major, minor, alpha) < 0;
       }
    }
 }

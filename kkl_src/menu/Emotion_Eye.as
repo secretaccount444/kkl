@@ -75,7 +75,7 @@ package menu
                {
                   this.charaData["EyeballWidthRight"]["_meter"] = this.charaData["EyeballWidth"]["_meter"];
                }
-               _loc6_ = 6 - this.charaData["EyeballWidth" + _loc5_]["_meter"] / 20;
+               _loc6_ = 6 - this.charaData["EyeballWidth" + _loc5_]["_meter"] / 200;
                new MeterPersent(0.5,0,"EyeballWidth" + _loc5_,param1);
                _loc7_ = MeterPersent.MeterPersentNum;
                new MeterPersent(-0.5,0.5,"EyeballScale",param1);

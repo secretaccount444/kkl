@@ -12,15 +12,15 @@ package menu
          var _loc2_:Object = MenuClass.charaAdd[param1];
          var _loc3_:Object = MenuClass.charaData[param1];
          var _loc4_:Array = new Array(Math.round(49 * _loc3_["LeftArm"]["_meter"] / 100),Math.round(49 * _loc3_["RightArm"]["_meter"] / 100));
-         if(_loc3_["ShoulderWidth"]["_meter"] <= 30)
+         if(_loc3_["ShoulderWidth"]["_meter"] <= 300)
          {
             _loc5_ = 0;
          }
-         else if(_loc3_["ShoulderWidth"]["_meter"] <= 60)
+         else if(_loc3_["ShoulderWidth"]["_meter"] <= 600)
          {
             _loc5_ = 1;
          }
-         else if(_loc3_["ShoulderWidth"]["_meter"] <= 100)
+         else if(_loc3_["ShoulderWidth"]["_meter"] <= 1000)
          {
             _loc5_ = 2;
          }

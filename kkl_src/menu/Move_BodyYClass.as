@@ -232,27 +232,29 @@ package menu
          }
          new Move_BodyX(param1);
          var _loc29_:Number = 0;
-         if(_loc4_["Rmove"]["_meter"] >= 90 && _loc4_["Rmove"]["_meter"] <= 170)
+         if(_loc4_["Rmove"]["_meter"] >= 900 && _loc4_["Rmove"]["_meter"] <= 1700)
          {
-            _loc29_ = 80 - (170 - _loc4_["Rmove"]["_meter"]);
+            _loc29_ = 80 - (170 - _loc4_["Rmove"]["_meter"]/10);
             _loc29_ = 500 - 500 * (_loc29_ / 80);
          }
-         else if(_loc4_["Rmove"]["_meter"] <= 270 && _loc4_["Rmove"]["_meter"] >= 190)
+         else if(_loc4_["Rmove"]["_meter"] <= 2700 && _loc4_["Rmove"]["_meter"] >= 1900)
          {
-            _loc29_ = 80 - (_loc4_["Rmove"]["_meter"] - 190);
+            _loc29_ = 80 - (_loc4_["Rmove"]["_meter"]/10 - 190);
             _loc29_ = 500 - 500 * (_loc29_ / 80);
          }
-         else if(_loc4_["Rmove"]["_meter"] <= 90 && _loc4_["Rmove"]["_meter"] >= 0)
+         else if(_loc4_["Rmove"]["_meter"] <= 900 && _loc4_["Rmove"]["_meter"] >= 0)
          {
-            _loc29_ = 90 - (90 - _loc4_["Rmove"]["_meter"]);
+            _loc29_ = 90 - (90 - _loc4_["Rmove"]["_meter"]/10);
             _loc29_ = 500 + 200 - 200 * (_loc29_ / 90);
          }
-         else if(_loc4_["Rmove"]["_meter"] >= 270 && _loc4_["Rmove"]["_meter"] <= 360)
+         else if(_loc4_["Rmove"]["_meter"] >= 2700 && _loc4_["Rmove"]["_meter"] <= 3600)
          {
-            _loc29_ = 360 - _loc4_["Rmove"]["_meter"];
+            _loc29_ = 360 - _loc4_["Rmove"]["_meter"]/10;
             _loc29_ = 500 + 200 - 200 * (_loc29_ / 90);
          }
          _loc3_.charaSelect.y = SizeDataClass.bodyDefault_y["charaSelect"] + _loc29_;
+
+         Move_AshiClass.updateLegRotation(param1);
       }
    }
 }

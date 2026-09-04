@@ -703,18 +703,12 @@ package menu
                }
                else if(HukuClickClass.targetName == "ribon0")
                {
-                  if(HukuClickClass.targetNameP.length == 9)
-                  {
-                     HukuClickClass.plusNum = HukuClickClass.targetNameP.substring(5,7);
-                  }
-                  else if(HukuClickClass.targetNameP.length == 8)
-                  {
-                     HukuClickClass.plusNum = HukuClickClass.targetNameP.substring(5,6);
-                  }
-
+                  HukuClickClass.plusNum = HukuClickClass.targetNameP.substring(5, HukuClickClass.targetNameP.length - 2);
+                  
                   undoAction = new ClickAction(param1, "Ribon", HukuClickClass.plusNum);
                   _loc5_ = HukuClickClass.targetNameP.charAt(HukuClickClass.targetNameP.length - 1);
                   new Tab_EmotionCheck(param1,1);
+
                   if(_loc5_ == "0")
                   {
                      if(this.charaData["Ribon" + HukuClickClass.plusNum]["_reversal2"] == 0)
@@ -734,6 +728,7 @@ package menu
                   {
                      this.charaData["RibonPlus"]["_visible"][HukuClickClass.plusNum] = false;
                   }
+
                   HukuClickClass.targetName = "Ribon";
                }
                else if(HukuClickClass.targetName == "beltDou")

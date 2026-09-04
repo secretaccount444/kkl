@@ -3,6 +3,7 @@ package menu
    import flash.display.MovieClip;
    import flash.events.MouseEvent;
    import undo.PropertyAction;
+   import parts.Ribbon;
    
    public class Tab_ReversalClass
    {
@@ -35,6 +36,7 @@ package menu
          var selectedSlot:int = 0;
          var itemType:String = null;
          var dataKey:String = null;
+         var targetPart = null;
          var _loc6_:int = 0;
          targetMC = param1.currentTarget as MovieClip;
          MenuClass._nowTabName = targetMC.tabName;
@@ -62,6 +64,12 @@ package menu
             "tab", true
          );
 
+         if (targetMC.headerName == "Ribon") 
+         {
+            targetPart = Ribbon.fromCharacter(MenuClass._nowCharaNum, MenuClass.systemData["RibonPlus"]["_menu"]);
+            targetPart.ensureInitialized();
+         }
+
          if(itemType == "charaPlus" || itemType == "systemPlus")
          {
             dataTarget = MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_data"];
@@ -83,32 +91,19 @@ package menu
 
             if(MenuClass._nowTargetMode == "All")
             {
-               MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal"] = int(!MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal"]);
+               if (targetMC.headerName == "Ribon") {
+                  targetPart.reversal = newReversal;
+               } else {
+                  MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal"] = int(!MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal"]);
+               }
+
                _loc6_ = 0;
                for(; _loc6_ <= MenuClass._characterNum; new SetClass(_loc6_,targetMC.tabName,"tab"),_loc6_++)
                {
-                  MenuClass.charaData[_loc6_][dataKey]["_reversal"] = int(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal"]);
-                  try
-                  {
-                     if(MenuClass.charaData[_loc6_][dataKey]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[_loc6_][dataKey]["_visible"].length == 1)
-                     {
-                        MenuClass.charaData[_loc6_][dataKey]["_visible"][Tab_VC.menuNum] = true;
-                     }
-                  }
-                  catch(myError:Error)
-                  {
-                     continue;
-                  }
-               }
-            }
-            else if(MenuClass._nowTargetMode == "SelectPlus")
-            {
-               MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal"] = int(!MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal"]);
-               _loc6_ = 0;
-               while(_loc6_ <= MenuClass._characterNum)
-               {
-                  if(MenuClass._nowSelectChara[_loc6_])
-                  {
+                  if (targetMC.headerName == "Ribon") {
+                     var ribbon = Ribbon.fromCharacter(_loc6_, selectedSlot);
+                     ribbon.reversal = newReversal;
+                  } else {
                      MenuClass.charaData[_loc6_][dataKey]["_reversal"] = int(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal"]);
                      try
                      {
@@ -119,6 +114,40 @@ package menu
                      }
                      catch(myError:Error)
                      {
+                        continue;
+                     }
+                  }
+               }
+            }
+            else if(MenuClass._nowTargetMode == "SelectPlus")
+            {
+               if (targetMC.headerName == "Ribon") {
+                  targetPart.reversal = newReversal;
+               } else {
+                  MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal"] = int(!MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal"]);
+               }
+
+               _loc6_ = 0;
+               while(_loc6_ <= MenuClass._characterNum)
+               {
+                  if(MenuClass._nowSelectChara[_loc6_])
+                  {
+                     if (targetMC.headerName == "Ribon") {
+                        var ribbon = Ribbon.fromCharacter(_loc6_, selectedSlot);
+                        ribbon.reversal = newReversal;
+                     } else {
+                        MenuClass.charaData[_loc6_][dataKey]["_reversal"] = int(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal"]);
+                        try
+                        {
+                           if(MenuClass.charaData[_loc6_][dataKey]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[_loc6_][dataKey]["_visible"].length == 1)
+                           {
+                              MenuClass.charaData[_loc6_][dataKey]["_visible"][Tab_VC.menuNum] = true;
+                           }
+                        }
+                        catch(myError:Error)
+                        {
+                           continue;
+                        }
                      }
                      new SetClass(_loc6_,targetMC.tabName,"tab");
                   }
@@ -127,7 +156,12 @@ package menu
             }
             else
             {
-               MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal"] = int(!MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal"]);
+               if (targetMC.headerName == "Ribon") {
+                  targetPart.reversal = newReversal;
+               } else {
+                  MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal"] = int(!MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal"]);
+               }
+
                try
                {
                   if(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_visible"].length == 1)
@@ -140,14 +174,22 @@ package menu
                }
                new SetClass(MenuClass._nowCharaNum,targetMC.tabName,"tab");
             }
-            if(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal"])
-            {
-               targetMC.gotoAndStop(3);
+
+
+            if (targetMC.headerName == "Ribon") {
+               if(targetPart.reversal) {
+                  targetMC.gotoAndStop(3);
+               } else {
+                  targetMC.gotoAndStop(4);
+               }
+            } else {
+               if(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal"]) {
+                  targetMC.gotoAndStop(3);
+               } else {
+                  targetMC.gotoAndStop(4);
+               }
             }
-            else
-            {
-               targetMC.gotoAndStop(4);
-            }
+
          }
          else if(itemType == "system" || itemType == "systemPlus")
          {

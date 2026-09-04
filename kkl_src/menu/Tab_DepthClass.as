@@ -4,6 +4,8 @@ package menu
    import flash.events.MouseEvent;
    import flash.geom.ColorTransform; 
    import undo.PropertyAction;
+   import parts.Ribbon;
+   import parts.Hairpiece;
    
    public class Tab_DepthClass
    {
@@ -37,6 +39,7 @@ package menu
          var dataTarget:String = null;
          var selectedSlot:int = 0;
          var dataKey:String = null;
+         var targetPart = null;
 
          targetMC = param1.currentTarget as MovieClip;
          MenuClass._nowTabName = targetMC.tabName;
@@ -69,6 +72,19 @@ package menu
             (itemType == "charaPlus" || itemType == "systemPlus"),
             "depth", (itemType == "charaPlus" || itemType == "chara")
          );
+
+         
+         if (targetMC.headerName == "Ribon") 
+         {
+            targetPart = Ribbon.fromCharacter(MenuClass._nowCharaNum, MenuClass.systemData["RibonPlus"]["_menu"]);
+            targetPart.ensureInitialized();
+         }
+         else if (targetMC.headerName == "HairEx") 
+         {
+            targetPart = Hairpiece.fromCharacter(MenuClass._nowCharaNum, MenuClass.systemData["HairExPlus"]["_menu"]);
+            targetPart.ensureInitialized();
+         }
+
 
          undoAction.recordPreviousValue(selectedSlot);
 
@@ -147,20 +163,11 @@ package menu
             else if(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_depth"] == 2)
             {
                if (
-                  targetMC.tabName === "CharaLoadReversalDepth" && MenuClass.charaData[MenuClass._nowCharaNum][dataKey.replace("ReversalDepth", "Add")]["_add0"] == 0
+                  (targetMC.tabName === "CharaLoadReversalDepth" && MenuClass.charaData[MenuClass._nowCharaNum][dataKey.replace("ReversalDepth", "Add")]["_add0"] == 0) ||
+                  (targetMC.tabName === "Ribon" && Ribbon.fromCharacter(MenuClass._nowCharaNum, selectedSlot).attachPoint == 91) ||
+                  (targetMC.tabName === "HairEx" && Hairpiece.fromCharacter(MenuClass._nowCharaNum, selectedSlot).attachPoint == 91)
                ) {
-                  var prevCxForm = targetMC.transform.colorTransform;
-
-                  prevCxForm.redMultiplier = 0.5;
-                  prevCxForm.greenMultiplier = 0.5;
-                  prevCxForm.blueMultiplier = 0.5;
-
-                  prevCxForm.redOffset = 139 * 0.5;
-                  prevCxForm.greenOffset = 75 * 0.5;
-                  prevCxForm.blueOffset = 143 * 0.5;
-
-                  targetMC.transform.colorTransform = prevCxForm;
-
+                  applyTint(targetMC, 139, 75, 143, 0.5);
                   targetMC.gotoAndStop(6);
                } else {
                   targetMC.gotoAndStop(7);
@@ -172,7 +179,15 @@ package menu
                   targetMC.gotoAndStop(5);
                   targetMC.y = 30;
                   targetMC.scaleY = -1;
+               } else if (targetMC.tabName === "Ribon" && Ribbon.fromCharacter(MenuClass._nowCharaNum, selectedSlot).attachPoint == 91) {
+                  targetMC.gotoAndStop(7);
                } else {
+                  targetMC.gotoAndStop(8);
+               }
+            }
+            else if(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_depth"] == 4)
+            {
+               if (targetMC.tabName === "LeftArm2" || targetMC.tabName === "RightArm2") {
                   targetMC.gotoAndStop(8);
                }
             }
@@ -200,6 +215,20 @@ package menu
 
          Main.undoTimeline.push(undoAction);
       }
+
+      public static function applyTint(sprite, r, g, b, tintPct) {
+         var prevCxForm = sprite.transform.colorTransform;
+
+         prevCxForm.redMultiplier = (1 - tintPct);
+         prevCxForm.greenMultiplier = (1 - tintPct);
+         prevCxForm.blueMultiplier = (1 - tintPct);
+
+         prevCxForm.redOffset = r * tintPct;
+         prevCxForm.greenOffset = g * tintPct;
+         prevCxForm.blueOffset = b * tintPct;
+
+         sprite.transform.colorTransform = prevCxForm;
+      }
       
       public static function MouseUp(param1:MouseEvent) : void
       {
@@ -214,24 +243,25 @@ package menu
          if(param3 == "HairEx")
          {
             _loc6_ = param5.replace("HairEx","");
-            if(MenuClass.charaData[param1]["HairExAdd" + _loc6_]["_add0"] == 2 || MenuClass.charaData[param1]["HairExAdd" + _loc6_]["_add0"] == 3)
+            var hairpiece:Hairpiece = Hairpiece.fromCharacter(param1, parseInt(_loc6_,10));
+            if(hairpiece.attachPoint == 2 || hairpiece.attachPoint == 3)
             {
-               if(MenuClass.charaData[param1][param5]["_depth"] == 0)
+               if(hairpiece.depth == 0)
                {
-                  MenuClass.charaData[param1][param5]["_depth"] = 1;
+                  hairpiece.depth = 1;
                }
                else
                {
-                  MenuClass.charaData[param1][param5]["_depth"] = 0;
+                  hairpiece.depth = 0;
                }
             }
-            else if(MenuClass.charaData[param1][param5]["_depth"] < 2)
+            else if(hairpiece.depth < 2)
             {
-               MenuClass.charaData[param1][param5]["_depth"] += 1;
+               hairpiece.depth += 1;
             }
             else
             {
-               MenuClass.charaData[param1][param5]["_depth"] = 0;
+               hairpiece.depth = 0;
             }
          }
          else if(param5 == "LeftArm2" || param5 == "RightArm2") {

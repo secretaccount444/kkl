@@ -3,16 +3,22 @@ package menu
    import flash.display.MovieClip;
    import flash.events.Event;
    import flash.events.MouseEvent;
-   import flash.net.FileReference;
+   import flash.filesystem.File;
+   import flash.filesystem.FileStream;
+   import flash.filesystem.FileMode;
    
    public class Tab_TextSaveBtn
    {
       
       public static var targetMC:MovieClip;
       
-      public static var fr:FileReference = new FileReference();
+      public static var fr:File = new File();
       
       public static var txtSaveData:String;
+
+      public static var exportFileData: String;
+
+      public static var exportDefaultFilename: String;
        
       
       public function Tab_TextSaveBtn()
@@ -84,6 +90,7 @@ package menu
             _loc2_ = _loc2_.replace(/\r/g,"\r\n");
             fr.addEventListener(Event.COMPLETE,onComplete);
             fr.addEventListener(Event.CANCEL,onCancel);
+            fr.addEventListener(Event.SELECT,onSaveSelected);
             _loc3_ = new Date();
             _loc4_ = (_loc4_ = String(_loc3_.getFullYear())).substring(2,4);
             if((_loc5_ = String(_loc3_.getMonth() + 1)).length == 1)
@@ -102,8 +109,31 @@ package menu
             {
                _loc4_ = _loc4_ + _loc5_ + _loc6_ + "kisekae";
             }
-            fr.save(_loc2_,_loc4_ + ".txt");
+
+            exportDefaultFilename = _loc4_ + ".txt";
+            exportFileData = _loc2_;
+            fr.browseForSave("Save Export Code");
+
+            // fr.save(_loc2_,_loc4_ + ".txt");
          }
+      }
+
+      public static function onSaveSelected(ev: Event) : void {
+         var targetFile: File = ev.target as File;
+         var dotIdx = targetFile.nativePath.lastIndexOf(".");
+
+         if (targetFile.nativePath.length == 0) {
+            targetFile.nativePath = exportDefaultFilename;
+         } else if (dotIdx < 0 || targetFile.nativePath.substring(dotIdx) != ".txt") {
+            targetFile.nativePath += ".txt";
+         }
+
+         var stream: FileStream = new FileStream();
+         stream.open(targetFile, FileMode.WRITE);
+         stream.writeUTFBytes(exportFileData);
+         stream.close();
+
+         onComplete(ev);
       }
       
       public static function onComplete(param1:Event) : void

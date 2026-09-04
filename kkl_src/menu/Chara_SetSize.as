@@ -3,6 +3,8 @@ package menu
    import flash.geom.Point;
    import parameter.Dress_data;
    import system.MeterPersent;
+   import parts.Ribbon;
+   import parts.Hairpiece;
    
    public class Chara_SetSize
    {
@@ -105,7 +107,7 @@ package menu
          {
             this.BreastWidthFc();
          }
-         else if(this.tabName == "HeadScale")
+         else if(this.tabName == "HeadScale" || this.tabName == "HeadVisible")
          {
             this.HeadScaleFc();
          }
@@ -250,6 +252,7 @@ package menu
             this.charaAdd["handm1_" + i].hand.arm0.hand.actual.visible = this.charaData[dir + "HandVisible"]["_visible"][0];
             this.charaAdd["handm1_" + i].hand.item.hand.actual.visible = this.charaData[dir + "HandVisible"]["_visible"][0];
          }
+         new Move_UdeClass(this.charaNum);
       }
       
       private function AshiWidthFc() : void
@@ -585,6 +588,8 @@ package menu
             this.charaAdd["handm0_1"].shoulder.visible = false;
             this.charaAdd["handm0_1"].shoulder_back.visible = false;
          }
+
+         this.charaAdd["mune"].visible = this.charaData["UpperBodyVisible"]["_visible"][0];
       }
       
       private function BodyAllWidth() : void
@@ -872,6 +877,13 @@ package menu
       
       private function HeadScaleFc() : void
       {
+         var hatType = this.charaData["Hat"]["_menu"];
+         this.charaAdd.head.visible = this.charaData["HeadVisible"]["_visible"][0];
+         this.charaAdd.SideBurnMiddle.visible = this.charaData["HeadVisible"]["_visible"][0];
+         this.charaAdd.HairBack.visible = this.charaData["HeadVisible"]["_visible"][0] && this.charaData["HairBack"]["_visible"][0] && !(this.charaData["Hat"]["_visible"][0] && this.charaData["Hat"]["_hair1"] == 0);
+         this.charaAdd.HairUshiro.visible = this.charaData["HeadVisible"]["_visible"][0] && (Dress_data.HairData[this.charaData["Hair"]["_menu"]]["_ushiro"] != 0);
+         this.charaAdd.HatBack.visible = this.charaData["HeadVisible"]["_visible"][0] && this.charaData["Hat"]["_visible"][0] && (Dress_data.HatData[hatType]["back2"] != 0);
+
          new MeterPersent(-0.16,0.16,"HeadScale",this.charaNum);
          var _loc1_:Number = MeterPersent.MeterPersentNum;
          new MeterPersent(1.38,0.85,"BodyHeight",this.charaNum);
@@ -893,88 +905,50 @@ package menu
          {
             this.charaAdd.HatBack.scaleX = (MeterPersent.MeterPersentNum + _loc1_ + Dress_data.HairData[this.charaData["Hair"]["_menu"]]["_hatScale"]) * -1;
          }
-         this.i = 0;
-         while(this.i <= Main.RibonhukusuuNum)
-         {
-            if(this.charaData["RibonPlus"]["_visible"][this.i])
-            {
-               try
-               {
-                  this.charaAdd["Ribon" + this.i + "_0"].scaleX = this.charaAdd["Ribon" + this.i + "_0"].scaleY = MeterPersent.MeterPersentNum + _loc1_;
-               }
-               catch(myError:Error)
-               {
-               }
-               try
-               {
-                  this.charaAdd["Ribon" + this.i + "_1"].scaleX = this.charaAdd["Ribon" + this.i + "_1"].scaleY = MeterPersent.MeterPersentNum + _loc1_;
-               }
-               catch(myError:Error)
-               {
-               }
-            }
-            ++this.i;
-         }
-         this.i = 0;
-         while(this.i <= Main.hukusuuNum)
-         {
-            if(this.charaData["HairExPlus"]["_visible"][this.i])
-            {
-               if(this.charaData["HairExAdd" + this.i]["_add0"] == 0)
-               {
-                  try
-                  {
-                     this.charaAdd["HairEx" + this.i + "_" + 0].scaleX = this.charaAdd["HairEx" + this.i + "_" + 0].scaleY = MeterPersent.MeterPersentNum + _loc1_;
-                  }
-                  catch(myError:Error)
-                  {
-                  }
-                  try
-                  {
-                     this.charaAdd["HairEx" + this.i + "_" + 1].scaleX = this.charaAdd["HairEx" + this.i + "_" + 1].scaleY = MeterPersent.MeterPersentNum + _loc1_;
-                  }
-                  catch(myError:Error)
-                  {
-                  }
-               } else if (this.charaData["HairExAdd" + this.i]["_add0"] >= 92 && this.charaData["HairExAdd" + this.i]["_add0"] <= 97) 
-               {
-                  try
-                  {
-                     this.charaAdd["HairEx" + this.i + "_" + 0].scaleX = this.charaAdd["HairEx" + this.i + "_" + 0].scaleY = 1;
-                  }
-                  catch(myError:Error)
-                  {
-                  }
 
-                  try
-                  {
-                     this.charaAdd["HairEx" + this.i + "_" + 1].scaleX = -1;
-                     this.charaAdd["HairEx" + this.i + "_" + 1].scaleY = 1;
-                  }
-                  catch(myError:Error)
-                  {
-                  }
-               }
-               else
-               {
-                  try
-                  {
-                     this.charaAdd["HairEx" + this.i + "_" + 0].scaleX = this.charaAdd["HairEx" + this.i + "_" + 0].scaleY = 1;
-                  }
-                  catch(myError:Error)
-                  {
-                  }
-                  try
-                  {
-                     this.charaAdd["HairEx" + this.i + "_" + 1].scaleX = this.charaAdd["HairEx" + this.i + "_" + 1].scaleY = 1;
-                  }
-                  catch(myError:Error)
-                  {
-                  }
-               }
+         for each (var ribbon in Ribbon.getVisibleRibbons(this.charaNum)) {
+            if (ribbon.attachPoint == 0) {
+               try {
+                  ribbon.leftSprite.scaleX = ribbon.leftSprite.scaleY = MeterPersent.MeterPersentNum + _loc1_;
+               } catch(myError:Error) { }
+               
+               try {
+                  ribbon.rightSprite.scaleX = ribbon.rightSprite.scaleY = MeterPersent.MeterPersentNum + _loc1_;
+               } catch(myError:Error) {}
             }
-            ++this.i;
          }
+
+         for each (var hairpiece in Hairpiece.getVisibleHairpieces(this.charaNum)) {
+            if (hairpiece.attachPoint == 0) {
+               try {
+                  hairpiece.leftSprite.scaleX = hairpiece.leftSprite.scaleY = MeterPersent.MeterPersentNum + _loc1_;
+               } catch(myError:Error) {}
+               
+               try {
+                  hairpiece.rightSprite.scaleX = hairpiece.rightSprite.scaleY = MeterPersent.MeterPersentNum + _loc1_;
+               } catch(myError:Error) {}
+            }
+            else if (hairpiece.attachPoint >= 92 && hairpiece.attachPoint <= 97) {
+               try {
+                  hairpiece.leftSprite.scaleX = hairpiece.leftSprite.scaleY = 1;
+               } catch(myError:Error) {}
+                              
+               try {
+                  hairpiece.rightSprite.scaleX = -1;
+                  hairpiece.rightSprite.scaleY = 1;
+               } catch(myError:Error) { }
+            }
+            else {
+               try {
+                  hairpiece.leftSprite.scaleX = hairpiece.leftSprite.scaleY = 1;
+               } catch(myError:Error) {}
+                              
+               try {
+                  hairpiece.rightSprite.scaleX = hairpiece.rightSprite.scaleY = 1;
+               } catch(myError:Error) {}
+            }
+         }
+
          new Move_HeadYClass(this.charaNum);
       }
       
@@ -1002,7 +976,7 @@ package menu
          _loc7_ = MeterPersent.MeterPersentNum;
          new MeterPersent(0,6000,"BodyYMove",this.charaNum);
          MenuClass.shadowAdd[this.charaNum].y = _loc7_ + MeterPersent.MeterPersentNum;
-         if(this.charaData["Jump"]["_meter"] > 15 || this.charaData["Rmove"]["_meter"] < 115 || this.charaData["Rmove"]["_meter"] > 245)
+         if(this.charaData["Jump"]["_meter"] > 150 || this.charaData["Rmove"]["_meter"] < 1150 || this.charaData["Rmove"]["_meter"] > 2450)
          {
             this.charaAdd.dou.dou_shitaHuku.s.tare.mask = null;
          }

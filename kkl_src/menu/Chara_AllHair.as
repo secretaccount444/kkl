@@ -2,10 +2,10 @@ package menu
 {
    import parameter.Chara_IEdata;
    import parameter.Dress_data;
+   import parts.Hairpiece;
    
    public class Chara_AllHair
    {
-       
       
       public function Chara_AllHair(param1:int, param2:String)
       {
@@ -141,53 +141,59 @@ package menu
          Dress_data.DressCharaData[param1]["Eyebrow"][0]["_color1"][0] = _loc3_["Hair"]["_color2"][0];
          _loc3_["UnderHair"]["_color0"][0] = _loc3_["Hair"]["_color0"][0];
          Dress_data.DressCharaData[param1]["UnderHair"][0]["_color0"][0] = _loc3_["Hair"]["_color0"][0];
+         var hairpiece:Hairpiece = Hairpiece.fromCharacter(param1, 0);
+         hairpiece.ensureInitialized();
          if(Chara_IEdata.AllHairSetData[_loc3_["AllHairSet"]["_menu"]][2][2] == 0)
          {
-            _loc3_["HairEx" + 0]["_color0"][0] = _loc3_["Hair"]["_color0"][0];
-            _loc3_["HairEx" + 0]["_color1"][0] = _loc3_["Hair"]["_color1"][0];
+            hairpiece.color0[0] = _loc3_["Hair"]["_color0"][0];
+            hairpiece.color1[0] = _loc3_["Hair"]["_color1"][0];
             Dress_data.DressCharaData[param1]["HairEx" + 0][0]["_color0"][0] = _loc3_["Hair"]["_color0"][0];
             Dress_data.DressCharaData[param1]["HairEx" + 0][0]["_color1"][0] = _loc3_["Hair"]["_color1"][0];
          }
          else
          {
-            _loc3_["HairEx" + 0]["_color0"][0] = _loc3_["Hair"]["_color1"][0];
-            _loc3_["HairEx" + 0]["_color1"][0] = _loc3_["Hair"]["_color0"][0];
+            hairpiece.color0[0] = _loc3_["Hair"]["_color1"][0];
+            hairpiece.color1[0] = _loc3_["Hair"]["_color0"][0];
             Dress_data.DressCharaData[param1]["HairEx" + 0][0]["_color0"][0] = _loc3_["Hair"]["_color1"][0];
             Dress_data.DressCharaData[param1]["HairEx" + 0][0]["_color1"][0] = _loc3_["Hair"]["_color0"][0];
          }
-         _loc3_["HairEx" + 0]["_color2"][0] = _loc3_["Hair"]["_color2"][0];
+         hairpiece.color2[0] = _loc3_["Hair"]["_color2"][0];
          Dress_data.DressCharaData[param1]["HairEx" + 0][0]["_color2"][0] = _loc3_["Hair"]["_color2"][0];
+         var hairpiece1:Hairpiece = Hairpiece.fromCharacter(param1, 1);
+         hairpiece1.ensureInitialized();
          if(Chara_IEdata.AllHairSetData[_loc3_["AllHairSet"]["_menu"]][2][3] == 0)
          {
-            _loc3_["HairEx" + 1]["_color0"][0] = _loc3_["Hair"]["_color0"][0];
-            _loc3_["HairEx" + 1]["_color1"][0] = _loc3_["Hair"]["_color1"][0];
+            hairpiece1.color0[0] = _loc3_["Hair"]["_color0"][0];
+            hairpiece1.color1[0] = _loc3_["Hair"]["_color1"][0];
             Dress_data.DressCharaData[param1]["HairEx" + 1][0]["_color0"][0] = _loc3_["Hair"]["_color0"][0];
             Dress_data.DressCharaData[param1]["HairEx" + 1][0]["_color1"][0] = _loc3_["Hair"]["_color1"][0];
          }
          else
          {
-            _loc3_["HairEx" + 1]["_color0"][0] = _loc3_["Hair"]["_color1"][0];
-            _loc3_["HairEx" + 1]["_color1"][0] = _loc3_["Hair"]["_color0"][0];
+            hairpiece1.color0[0] = _loc3_["Hair"]["_color1"][0];
+            hairpiece1.color1[0] = _loc3_["Hair"]["_color0"][0];
             Dress_data.DressCharaData[param1]["HairEx" + 1][0]["_color0"][0] = _loc3_["Hair"]["_color1"][0];
             Dress_data.DressCharaData[param1]["HairEx" + 1][0]["_color1"][0] = _loc3_["Hair"]["_color0"][0];
          }
-         _loc3_["HairEx" + 1]["_color2"][0] = _loc3_["Hair"]["_color2"][0];
+         hairpiece1.color2[0] = _loc3_["Hair"]["_color2"][0];
          Dress_data.DressCharaData[param1]["HairEx" + 1][0]["_color2"][0] = _loc3_["Hair"]["_color2"][0];
+         var hairpiece2:Hairpiece = Hairpiece.fromCharacter(param1, 2);
+         hairpiece2.ensureInitialized();
          if(Chara_IEdata.AllHairSetData[_loc3_["AllHairSet"]["_menu"]][2][4] == 0)
          {
-            _loc3_["HairEx" + 2]["_color0"][0] = _loc3_["Hair"]["_color0"][0];
-            _loc3_["HairEx" + 2]["_color1"][0] = _loc3_["Hair"]["_color1"][0];
+            hairpiece2.color0[0] = _loc3_["Hair"]["_color0"][0];
+            hairpiece2.color1[0] = _loc3_["Hair"]["_color1"][0];
             Dress_data.DressCharaData[param1]["HairEx" + 2][0]["_color0"][0] = _loc3_["Hair"]["_color0"][0];
             Dress_data.DressCharaData[param1]["HairEx" + 2][0]["_color1"][0] = _loc3_["Hair"]["_color1"][0];
          }
          else
          {
-            _loc3_["HairEx" + 2]["_color0"][0] = _loc3_["Hair"]["_color1"][0];
-            _loc3_["HairEx" + 2]["_color1"][0] = _loc3_["Hair"]["_color0"][0];
+            hairpiece2.color0[0] = _loc3_["Hair"]["_color1"][0];
+            hairpiece2.color1[0] = _loc3_["Hair"]["_color0"][0];
             Dress_data.DressCharaData[param1]["HairEx" + 2][0]["_color0"][0] = _loc3_["Hair"]["_color1"][0];
             Dress_data.DressCharaData[param1]["HairEx" + 2][0]["_color1"][0] = _loc3_["Hair"]["_color0"][0];
          }
-         _loc3_["HairEx" + 2]["_color2"][0] = _loc3_["Hair"]["_color2"][0];
+         hairpiece2.color2[0] = _loc3_["Hair"]["_color2"][0];
          Dress_data.DressCharaData[param1]["HairEx" + 2][0]["_color2"][0] = _loc3_["Hair"]["_color2"][0];
          new Chara_ColorClass(param1,"Hair");
          new Chara_ColorClass(param1,"Bangs");

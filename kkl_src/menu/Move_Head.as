@@ -2,6 +2,8 @@ package menu
 {
    import parameter.Dress_data;
    import system.MeterPersent;
+   import parts.Ribbon;
+   import parts.Hairpiece;
    
    public class Move_Head
    {
@@ -36,126 +38,120 @@ package menu
          }
          this.charaAdd.head.rotation = this.charaAdd.SideBurnMiddle.rotation = this.charaAdd.HairBack.rotation = this.charaAdd.HairUshiro.rotation = this.charaAdd.HatBack.rotation = this.charaAdd.CharaloadAdd.rotation = this.charaAdd.CharaloadAdd1.rotation = _loc4_;
          this.charaAdd.head.x = this.charaAdd.SideBurnMiddle.x = this.charaAdd.HairBack.x = this.charaAdd.HairUshiro.x = this.charaAdd.HatBack.x = this.charaAdd.CharaloadAdd.x = this.charaAdd.CharaloadAdd1.x = _loc5_;
-         _loc2_ = 0;
-         while(_loc2_ <= Main.hukusuuNum)
-         {
-            if(this.charaData["HairExPlus"]["_visible"][_loc2_])
-            {
-               if(this.charaData["HairExAdd" + _loc2_]["_add0"] == 0)
-               {
-                  try
-                  {
-                     if (this.charaAdd["HairEx" + _loc2_ + "_0"]) {
-                        this.charaAdd["HairEx" + _loc2_ + "_0"].rotation = _loc4_;
-                        this.charaAdd["HairEx" + _loc2_ + "_0"].x = _loc5_;
-                     }
-                  }
-                  catch(myError:Error)
-                  {
-                  }
-                  try
-                  {
-                     if (this.charaAdd["HairEx" + _loc2_ + "_1"]) {
-                        this.charaAdd["HairEx" + _loc2_ + "_1"].rotation = _loc4_;
-                        this.charaAdd["HairEx" + _loc2_ + "_1"].x = _loc5_;
-                     }
-                  }
-                  catch(myError:Error)
-                  {
-                  }
-               } else if (this.charaData["HairExAdd" + _loc2_]["_add0"] == 93) {
-                     try
-                     {
-                        if (this.charaAdd["HairEx" + _loc2_ + "_0"]) {
-                           this.charaAdd["HairEx" + _loc2_ + "_0"].x = this.charaAdd.handm1_0.hand.arm0.x;
-                           this.charaAdd["HairEx" + _loc2_ + "_0"].rotation = this.charaAdd.handm1_0.hand.arm1.currentFrame;
-                        }
-                     } catch(myError:Error) {
-                        Main.logError(myError, "in Move_Head(" + param1 + ")");
-                     }
-
-                     try
-                     {
-                        if (this.charaAdd["HairEx" + _loc2_ + "_1"]) {
-                           this.charaAdd["HairEx" + _loc2_ + "_1"].x = this.charaAdd.handm1_1.hand.arm0.x;
-                           this.charaAdd["HairEx" + _loc2_ + "_1"].rotation = this.charaAdd.handm1_1.hand.arm1.currentFrame;
-                        }
-                     } catch(myError:Error) {
-                        Main.logError(myError, "in Move_Head(" + param1 + ")");
-                     }
-               } else if (this.charaData["HairExAdd" + _loc2_]["_add0"] == 94) {
-                     try
-                     {
-                        if (this.charaAdd["HairEx" + _loc2_ + "_0"]) {
-                           this.charaAdd["HairEx" + _loc2_ + "_0"].x = -15;
-                           this.charaAdd["HairEx" + _loc2_ + "_0"].rotation = ((this.charaAdd.handm1_0.hand.arm0.currentFrame / 100) * -120) + 30;
-                        }
-                     } catch(myError:Error) {
-                        Main.logError(myError, "in Move_Head(" + param1 + ")");
-                     }
-
-                     try
-                     {
-                        if (this.charaAdd["HairEx" + _loc2_ + "_1"]) {
-                           this.charaAdd["HairEx" + _loc2_ + "_1"].x = -15;
-                           this.charaAdd["HairEx" + _loc2_ + "_1"].rotation = ((this.charaAdd.handm1_1.hand.arm0.currentFrame / 100) * -120) + 30;
-                        }
-                     }  catch(myError:Error) {
-                        Main.logError(myError, "in Move_Head(" + param1 + ")");
-                     }
-               } else {
-                  try
-                  {
-                     if (this.charaAdd["HairEx" + _loc2_ + "_0"]) {
-                        this.charaAdd["HairEx" + _loc2_ + "_0"].rotation = 0;
-                        this.charaAdd["HairEx" + _loc2_ + "_0"].x = 0;
-                     }
-                  }
-                  catch(myError:Error)
-                  {
-                  }
-                  try
-                  {
-                     if (this.charaAdd["HairEx" + _loc2_ + "_1"]) {
-                        this.charaAdd["HairEx" + _loc2_ + "_1"].rotation = 0;
-                        this.charaAdd["HairEx" + _loc2_ + "_1"].x = 0;
-                     }
-                  }
-                  catch(myError:Error)
-                  {
-                  }
-               }
-            }
-            _loc2_++;
-         }
-         _loc2_ = 0;
-         while(_loc2_ <= Main.RibonhukusuuNum)
-         {
-            if(this.charaData["RibonPlus"]["_visible"][_loc2_])
-            {
+         
+         for each (var hairpiece: Hairpiece in Hairpiece.getVisibleHairpieces(param1)) {
+            if (hairpiece.attachPoint == 0) {
                try
                {
-                  if (this.charaAdd["Ribon" + _loc2_ + "_0"]) {
-                     this.charaAdd["Ribon" + _loc2_ + "_0"].rotation = _loc4_;
-                     this.charaAdd["Ribon" + _loc2_ + "_0"].x = _loc5_;
+                  if (hairpiece.leftSprite) {
+                     hairpiece.leftSprite.rotation = _loc4_;
+                     hairpiece.leftSprite.x = _loc5_;
+                  }
+               }
+               catch(myError:Error){}
+
+               try
+               {
+                  if (hairpiece.rightSprite) {
+                     hairpiece.rightSprite.rotation = _loc4_;
+                     hairpiece.rightSprite.x = _loc5_;
+                  }
+               }
+               catch(myError:Error){}
+            }
+            else if (hairpiece.attachPoint == 93) {
+               try
+               {
+                  if (hairpiece.leftSprite) {
+                     hairpiece.leftSprite.x = this.charaAdd.handm1_0.hand.arm0.x;
+                     hairpiece.leftSprite.rotation = this.charaAdd.handm1_0.hand.arm1.currentFrame;
+                  }
+               }
+               catch(myError:Error){
+                  Main.logError(myError, "in Move_Head(" + param1 + ")");
+               }
+
+               try
+               {
+                  if (hairpiece.rightSprite) {
+                     hairpiece.rightSprite.x = this.charaAdd.handm1_1.hand.arm0.x;
+                     hairpiece.rightSprite.rotation = this.charaAdd.handm1_1.hand.arm1.currentFrame;
+                  }
+               }
+               catch(myError:Error){
+                  Main.logError(myError, "in Move_Head(" + param1 + ")");
+               }
+            }
+            else if (hairpiece.attachPoint == 94) {
+               try
+               {
+                  if (hairpiece.leftSprite) {
+                     hairpiece.leftSprite.x = -15;
+                     hairpiece.leftSprite.rotation = ((this.charaAdd.handm1_0.hand.arm0.currentFrame / 100) * -120) + 30;
+                  }
+               }
+               catch(myError:Error){
+                  Main.logError(myError, "in Move_Head(" + param1 + ")");
+               }
+
+               try
+               {
+                  if (hairpiece.rightSprite) {
+                     hairpiece.rightSprite.x = -15;
+                     hairpiece.rightSprite.rotation = ((this.charaAdd.handm1_1.hand.arm0.currentFrame / 100) * -120) + 30;
+                  }
+               }
+               catch(myError:Error){
+                  Main.logError(myError, "in Move_Head(" + param1 + ")");
+               }
+            }
+            else {
+               try
+               {
+                  if (hairpiece.leftSprite) {
+                     hairpiece.leftSprite.rotation = 0;
+                     hairpiece.leftSprite.x = 0;
+                  }
+               }
+               catch(myError:Error){}
+
+               try
+               {
+                  if (hairpiece.rightSprite) {
+                     hairpiece.rightSprite.rotation = 0;
+                     hairpiece.rightSprite.x = 0;
+                  }
+               }
+               catch(myError:Error){}
+            }
+         }
+
+         for each (var ribbon: Ribbon in Ribbon.getVisibleRibbons(param1)) {
+            if (ribbon.attachPoint == 0) {
+               try
+               {
+                  if (ribbon.leftSprite) {
+                     ribbon.leftSprite.rotation = _loc4_;
+                     ribbon.leftSprite.x = _loc5_;
                   }
                }
                catch(myError:Error)
                {
                }
+
                try
                {
-                  if (this.charaAdd["Ribon" + _loc2_ + "_1"]) {
-                     this.charaAdd["Ribon" + _loc2_ + "_1"].rotation = _loc4_;
-                     this.charaAdd["Ribon" + _loc2_ + "_1"].x = _loc5_;
+                  if (ribbon.rightSprite) {
+                     ribbon.rightSprite.rotation = _loc4_;
+                     ribbon.rightSprite.x = _loc5_;
                   }
                }
                catch(myError:Error)
                {
                }
             }
-            _loc2_++;
          }
+
          _loc2_ = 0;
          for(; _loc2_ <= 1; _loc2_++)
          {
@@ -203,14 +199,11 @@ package menu
          {
             this.charaAdd.HairBack.gotoAndStop(1);
          }
-         _loc2_ = 0;
-         while(_loc2_ <= Main.hukusuuNum)
-         {
-            if(this.charaData["HairExPlus"]["_visible"][_loc2_])
+         for each (var hairpiece:Hairpiece in Hairpiece.getAllHairpieces(param1)) {
+            if (hairpiece.visible)
             {
-               new Hair_ExRotation(param1,_loc2_);
+               new Hair_ExRotation(param1, hairpiece.slot);
             }
-            _loc2_++;
          }
       }
    }

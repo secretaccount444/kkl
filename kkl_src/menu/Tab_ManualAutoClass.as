@@ -140,7 +140,7 @@ package menu
                   {
                      MenuClass.charaData[_loc2_]["MouthSen"]["_menu"] = 2;
                      MenuClass.charaData[_loc2_]["MouthRotation"]["_meter"] = 50;
-                     MenuClass.charaData[_loc2_]["MouthXMove"]["_meter"] = 50;
+                     MenuClass.charaData[_loc2_]["MouthXMove"]["_meter"] = 500;
                   }
                   else if(param1.currentTarget.parent.tabName == "TinSizeAuto")
                   {
@@ -162,7 +162,7 @@ package menu
                      {
                         MenuClass.charaData[_loc2_]["MouthSen"]["_menu"] = 2;
                         MenuClass.charaData[_loc2_]["MouthRotation"]["_meter"] = 50;
-                        MenuClass.charaData[_loc2_]["MouthXMove"]["_meter"] = 50;
+                        MenuClass.charaData[_loc2_]["MouthXMove"]["_meter"] = 500;
                      }
                   else if(param1.currentTarget.parent.tabName == "TinSizeAuto")
                   {
@@ -180,7 +180,7 @@ package menu
                {
                   MenuClass.charaData[MenuClass._nowCharaNum]["MouthSen"]["_menu"] = 2;
                   MenuClass.charaData[MenuClass._nowCharaNum]["MouthRotation"]["_meter"] = 50;
-                  MenuClass.charaData[MenuClass._nowCharaNum]["MouthXMove"]["_meter"] = 50;
+                  MenuClass.charaData[MenuClass._nowCharaNum]["MouthXMove"]["_meter"] = 500;
                }
                else if(param1.currentTarget.parent.tabName == "TinSizeAuto")
                {

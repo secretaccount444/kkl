@@ -112,6 +112,7 @@ package menu
          }
          catch(myError:Error)
          {
+            Tab_ColorBtnSet2.customDeleteFc();
             trace(myError.getStackTrace());
          }
       }
@@ -151,6 +152,7 @@ package menu
          try {
             Tab_ColorBtnSet2.customSetFc("swfColor");
          } catch (err) {
+            Tab_ColorBtnSet2.customDeleteFc();
             trace(err.getStackTrace());
          }
          new Stage_MoveCheckClass();

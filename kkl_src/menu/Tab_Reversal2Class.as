@@ -3,6 +3,8 @@ package menu
    import flash.display.MovieClip;
    import flash.events.MouseEvent;
    import undo.PropertyAction;
+   import parts.Ribbon;
+   import parts.Hairpiece;
    
    public class Tab_Reversal2Class
    {
@@ -29,14 +31,95 @@ package menu
          param1.removeEventListener(MouseEvent.MOUSE_DOWN,MouseDown);
       }
       
-      public static function MouseDown(param1:MouseEvent) : void
+      public static function ChangeReversal2Ribbon(targetPart:Ribbon, mc:MovieClip, flip:Boolean) : void
       {
          var dataKey:String = null;
          var _loc4_:int = 0;
-         var dataTarget:String = null;
-         var selectedSlot:int = 0;
-         targetMC = param1.currentTarget as MovieClip;
-         MenuClass._nowTabName = targetMC.tabName;
+         var targetMC:MovieClip = mc;
+         var menuType:String = MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_menu"];
+
+         var undoAction:PropertyAction = new PropertyAction(
+            targetMC.headerName, targetMC.targetJ,"_reversal2",
+            true, menuType == "charaPlus",
+            "tab", true
+         );
+
+         if(menuType == "charaPlus")
+         {
+            dataKey = targetMC.tabName + targetPart.slot;
+         }
+         else
+         {
+            dataKey = targetMC.tabName;
+         }
+
+         undoAction.recordPreviousValue(targetPart.slot);
+
+         if (flip) {
+            targetPart.reversal2 = (targetPart.reversal2 * 5) % 3;
+         } else {
+            if (targetPart.reversal2 == 2) {
+               targetPart.reversal2 = 0;
+            } else {
+               ++targetPart.reversal2;
+            }
+         }
+
+         undoAction.recordNewValue(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal2"], targetPart.slot);
+         Main.undoTimeline.push(undoAction);
+
+         if(MenuClass._nowTargetMode == "All")
+         {
+            _loc4_ = 0;
+            for(; _loc4_ <= MenuClass._characterNum; new SetClass(_loc4_,targetMC.tabName,"tab"),_loc4_++)
+            {
+               var ribbon = Ribbon.fromCharacter(_loc4_, targetPart.slot);
+               ribbon.reversal2 = targetPart.reversal2;
+            }
+         }
+         else if(MenuClass._nowTargetMode == "SelectPlus")
+         {
+            _loc4_ = 0;
+            while(_loc4_ <= MenuClass._characterNum)
+            {
+               if(MenuClass._nowSelectChara[_loc4_])
+               {
+                  var ribbon = Ribbon.fromCharacter(_loc4_, targetPart.slot);
+                  ribbon.reversal2 = targetPart.reversal2;
+                  new SetClass(_loc4_,targetMC.tabName,"tab");
+               }
+               _loc4_++;
+            }
+         }
+         else
+         {
+            try
+            {
+               if(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_visible"].length == 1)
+               {
+                  MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_visible"][Tab_VC.menuNum] = true;
+               }
+            }
+            catch(myError:Error)
+            {
+            }
+            new SetClass(MenuClass._nowCharaNum,targetMC.tabName,"tab");
+         }
+         
+            if(targetPart.reversal2 == 0) {
+               targetMC.gotoAndStop(4);
+            } else if(targetPart.reversal2 == 1) {
+               targetMC.gotoAndStop(5);
+            } else if(targetPart.reversal2 == 2) {
+               targetMC.gotoAndStop(6);
+            }
+      }
+
+      public static function ChangeReversal2Hairpiece(targetPart:Hairpiece, mc:MovieClip, flip:Boolean) : void
+      {
+         var dataKey:String = null;
+         var _loc4_:int = 0;
+         var targetMC:MovieClip = mc;
          var menuType:String = MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_menu"];
 
          var undoAction = new PropertyAction(
@@ -47,30 +130,26 @@ package menu
 
          if(menuType == "charaPlus")
          {
-            dataTarget = MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_data"];
-            selectedSlot = MenuClass.systemData[dataTarget]["_menu"];
-            dataKey = targetMC.tabName + selectedSlot;
+            dataKey = targetMC.tabName + targetPart.slot;
          }
          else
          {
             dataKey = targetMC.tabName;
          }
 
-         undoAction.recordPreviousValue(selectedSlot);
+         undoAction.recordPreviousValue(targetPart.slot);
 
-         targetMC.addEventListener(MouseEvent.MOUSE_UP,MouseUp);
-         Main.stageVar.addEventListener(MouseEvent.MOUSE_UP,MouseUp);
-         new Tab_VC(targetMC.headerName,targetMC.targetJ,dataKey);
-         if(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal2"] == 2)
-         {
-            MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal2"] = 0;
-         }
-         else
-         {
-            ++MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal2"];
+         if (flip) {
+            targetPart.reversal2 = (targetPart.reversal2 * 5) % 3;
+         } else {
+            if (targetPart.reversal2 == 2) {
+               targetPart.reversal2 = 0;
+            } else {
+               ++targetPart.reversal2;
+            }
          }
 
-         undoAction.recordNewValue(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal2"], selectedSlot);
+         undoAction.recordNewValue(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal2"], targetPart.slot);
          Main.undoTimeline.push(undoAction);
 
          if(MenuClass._nowTargetMode == "All")
@@ -78,18 +157,8 @@ package menu
             _loc4_ = 0;
             for(; _loc4_ <= MenuClass._characterNum; new SetClass(_loc4_,targetMC.tabName,"tab"),_loc4_++)
             {
-               MenuClass.charaData[_loc4_][dataKey]["_reversal2"] = MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal2"];
-               try
-               {
-                  if(MenuClass.charaData[_loc4_][dataKey]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[_loc4_][dataKey]["_visible"].length == 1)
-                  {
-                     MenuClass.charaData[_loc4_][dataKey]["_visible"][Tab_VC.menuNum] = true;
-                  }
-               }
-               catch(myError:Error)
-               {
-                  continue;
-               }
+               var hairpiece = Hairpiece.fromCharacter(_loc4_, targetPart.slot);
+               hairpiece.reversal2 = targetPart.reversal2;
             }
          }
          else if(MenuClass._nowTargetMode == "SelectPlus")
@@ -99,17 +168,18 @@ package menu
             {
                if(MenuClass._nowSelectChara[_loc4_])
                {
-                  MenuClass.charaData[_loc4_][dataKey]["_reversal2"] = MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal2"];
-                  try
-                  {
-                     if(MenuClass.charaData[_loc4_][dataKey]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[_loc4_][dataKey]["_visible"].length == 1)
+                     MenuClass.charaData[_loc4_][dataKey]["_reversal2"] = MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal2"];
+                     try
                      {
-                        MenuClass.charaData[_loc4_][dataKey]["_visible"][Tab_VC.menuNum] = true;
+                        if(MenuClass.charaData[_loc4_][dataKey]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[_loc4_][dataKey]["_visible"].length == 1)
+                        {
+                           MenuClass.charaData[_loc4_][dataKey]["_visible"][Tab_VC.menuNum] = true;
+                        }
                      }
-                  }
-                  catch(myError:Error)
-                  {
-                  }
+                     catch(myError:Error)
+                     {
+                        continue;
+                     }
                   new SetClass(_loc4_,targetMC.tabName,"tab");
                }
                _loc4_++;
@@ -130,18 +200,182 @@ package menu
             new SetClass(MenuClass._nowCharaNum,targetMC.tabName,"tab");
          }
 
-         if(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal2"] == 0)
+            if(targetPart.reversal2 == 0) {
+               targetMC.gotoAndStop(4);
+            } else if(targetPart.reversal2 == 1) {
+               targetMC.gotoAndStop(5);
+            } else if(targetPart.reversal2 == 2) {
+               targetMC.gotoAndStop(6);
+            }
+      }
+
+      public static function MouseDown(param1:MouseEvent) : void
+      {
+         var dataKey:String = null;
+         var _loc4_:int = 0;
+         var dataTarget:String = null;
+         var selectedSlot:int = 0;
+         var targetPart = null;
+         targetMC = param1.currentTarget as MovieClip;
+         MenuClass._nowTabName = targetMC.tabName;
+         var menuType:String = MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_menu"];
+         var character:int = MenuClass._nowCharaNum;
+         var attach:int = -1;
+
+         if(menuType == "charaPlus")
          {
-            targetMC.gotoAndStop(4);
+            dataTarget = MenuClass.tabData[targetMC.headerName][targetMC.targetJ][2]["_data"];
+            selectedSlot = MenuClass.systemData[dataTarget]["_menu"];
+            dataKey = targetMC.tabName + selectedSlot;
          }
-         else if(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal2"] == 1)
+         else
          {
-            targetMC.gotoAndStop(5);
+            dataKey = targetMC.tabName;
          }
-         else if(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal2"] == 2)
+
+         targetMC.addEventListener(MouseEvent.MOUSE_UP,MouseUp);
+         Main.stageVar.addEventListener(MouseEvent.MOUSE_UP,MouseUp);
+         new Tab_VC(targetMC.headerName,targetMC.targetJ,dataKey);
+
+         if (targetMC.headerName == "Ribon") 
          {
-            targetMC.gotoAndStop(6);
+            targetPart = Ribbon.fromCharacter(character, MenuClass.systemData["RibonPlus"]["_menu"]);
+            targetPart.ensureInitialized();
+            if (Main.keypressHandler.shift || Main.keypressHandler.ctrl) {
+               if (Main.keypressHandler.ctrl) {
+                  attach = targetPart.attachPoint;
+               }
+               if (targetPart.reversal2 != 0) {
+                  for each(var ribbon:Ribbon in Ribbon.getVisibleRibbons(character))
+                  {
+                     if (ribbon.reversal2 != 0 && (attach < 0 || attach == ribbon.attachPoint)) {
+                        ChangeReversal2Ribbon(ribbon, targetMC, true);
+                        Huku_RibonSet.setFc(character, ribbon.slot, "move");
+                     }
+                  }
+               }
+               return;
+            } else {
+               ChangeReversal2Ribbon(targetPart, targetMC, false);
+               return;
+            }
+         } else if (targetMC.headerName == "HairEx") 
+         {
+            targetPart = Hairpiece.fromCharacter(character, MenuClass.systemData["HairExPlus"]["_menu"]);
+            targetPart.ensureInitialized();
+            if (Main.keypressHandler.shift || Main.keypressHandler.ctrl) {
+               if (Main.keypressHandler.ctrl) {
+                  attach = targetPart.attachPoint;
+               }
+               if (targetPart.reversal2 != 0) {
+                  for each(var hairpiece:Hairpiece in Hairpiece.getVisibleHairpieces(character))
+                  {
+                     if (hairpiece.reversal2 != 0 && (attach < 0 || attach == hairpiece.attachPoint)) {
+                        ChangeReversal2Hairpiece(hairpiece, targetMC, true);
+                        Hair_HairExSet.setFc(character, hairpiece.slot, "swap");
+                     }
+                  }
+               }
+               return;
+            } else {
+               ChangeReversal2Hairpiece(targetPart, targetMC, false);
+               return;
+            }
          }
+
+         var undoAction = new PropertyAction(
+            targetMC.headerName, targetMC.targetJ,"_reversal2",
+            true, menuType == "charaPlus",
+            "tab", true
+         );
+
+         undoAction.recordPreviousValue(selectedSlot);
+
+         //targetMC.addEventListener(MouseEvent.MOUSE_UP,MouseUp);
+         //Main.stageVar.addEventListener(MouseEvent.MOUSE_UP,MouseUp);
+         //new Tab_VC(targetMC.headerName,targetMC.targetJ,dataKey);
+         if(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal2"] == 2)
+         {
+            MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal2"] = 0;
+         }
+         else
+         {
+            ++MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal2"];
+         }
+
+         undoAction.recordNewValue(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal2"], selectedSlot);
+         Main.undoTimeline.push(undoAction);
+
+         if(MenuClass._nowTargetMode == "All")
+         {
+            _loc4_ = 0;
+            for(; _loc4_ <= MenuClass._characterNum; new SetClass(_loc4_,targetMC.tabName,"tab"),_loc4_++)
+            {
+                  MenuClass.charaData[_loc4_][dataKey]["_reversal2"] = MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal2"];
+                  try
+                  {
+                     if(MenuClass.charaData[_loc4_][dataKey]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[_loc4_][dataKey]["_visible"].length == 1)
+                     {
+                        MenuClass.charaData[_loc4_][dataKey]["_visible"][Tab_VC.menuNum] = true;
+                     }
+                  }
+                  catch(myError:Error)
+                  {
+                     continue;
+                  }
+            }
+         }
+         else if(MenuClass._nowTargetMode == "SelectPlus")
+         {
+            _loc4_ = 0;
+            while(_loc4_ <= MenuClass._characterNum)
+            {
+               if(MenuClass._nowSelectChara[_loc4_])
+               {
+                     MenuClass.charaData[_loc4_][dataKey]["_reversal2"] = MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal2"];
+                     try
+                     {
+                        if(MenuClass.charaData[_loc4_][dataKey]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[_loc4_][dataKey]["_visible"].length == 1)
+                        {
+                           MenuClass.charaData[_loc4_][dataKey]["_visible"][Tab_VC.menuNum] = true;
+                        }
+                     }
+                     catch(myError:Error)
+                     {
+                        continue;
+                     }
+                  new SetClass(_loc4_,targetMC.tabName,"tab");
+               }
+               _loc4_++;
+            }
+         }
+         else
+         {
+            try
+            {
+               if(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_visible"][Tab_VC.menuNum] == false && MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_visible"].length == 1)
+               {
+                  MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_visible"][Tab_VC.menuNum] = true;
+               }
+            }
+            catch(myError:Error)
+            {
+            }
+            new SetClass(MenuClass._nowCharaNum,targetMC.tabName,"tab");
+         }
+         
+            if(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal2"] == 0)
+            {
+               targetMC.gotoAndStop(4);
+            }
+            else if(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal2"] == 1)
+            {
+               targetMC.gotoAndStop(5);
+            }
+            else if(MenuClass.charaData[MenuClass._nowCharaNum][dataKey]["_reversal2"] == 2)
+            {
+               targetMC.gotoAndStop(6);
+            }
       }
       
       public static function MouseUp(param1:MouseEvent) : void

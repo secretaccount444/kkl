@@ -132,7 +132,7 @@ package menu
          var _loc33_:int = 0;
          var _loc34_:Number = NaN;
          var _loc35_:int = 0;
-         if(MenuClass.spaceKeyPress || Main.mainWindow.scaleX < 1)
+         if(MenuClass.spaceKeyPress != MenuClass.f12KeyPress || Main.mainWindow.scaleX < 1)
          {
             if(Stage_MoveClass.MouseUpCheck && MenuClass.stageMoveCheck && MenuClass._nowWindowName == null && !MenuClass.StoryMode && !SystemText2.textFocusCheck && !Tab_URLTextClass.urlTextFocusCheck && !Tab_CameraClass.urlTextFocusCheck)
             {
@@ -148,7 +148,7 @@ package menu
             {
                Main.mainWindow.x = Main.stageVar.mouseX - Stage_MoveClass.beforeMouseX + Stage_MoveClass.beforeX;
                Main.mainWindow.y = Main.stageVar.mouseY - Stage_MoveClass.beforeMouseY + Stage_MoveClass.beforeY;
-               if(MenuClass.spaceKeyPress == false && Main.mainWindow.scaleX != 1)
+               if(MenuClass.spaceKeyPress == MenuClass.f12KeyPress && Main.mainWindow.scaleX != 1)
                {
                   _loc8_ = Main.mainMask.width - 800;
                   if(Main.mainWindow.x >= 0)
@@ -929,13 +929,13 @@ package menu
                _loc13_ = _loc10_.mune.getChildIndex(_loc10_.mune.mune1);
                _loc17_ = new Array(_loc9_["LeftArm2"]["_depth"],_loc9_["RightArm2"]["_depth"]);
 
-               if (_loc17_[0] == 2) {
+               if (_loc17_[0] == 2 || _loc17_[0] == 4) {
                   _loc17_[0] = 1;
                } else if (_loc17_[0] == 3) {
                   _loc17_[0] = 0;
                }
 
-               if (_loc17_[1] == 2) {
+               if (_loc17_[1] == 2 || _loc17_[1] == 4) {
                   _loc17_[1] = 1;
                } else if (_loc17_[1] == 3) {
                   _loc17_[1] = 0;
@@ -1582,7 +1582,7 @@ package menu
                      {
                         if(_loc9_["EmotionEyeLeft"]["_meter"] > 42 && charaEyeLeft[_loc2_] == null)
                         {
-                           _loc9_["EyebrowMoveLeft"]["_meter"] -= 5;
+                           _loc9_["EyebrowMoveLeft"]["_meter"] -= 50;
                            charaEyeLeft[_loc2_] = _loc9_["EmotionEyeLeft"]["_meter"];
                            charaEyeLeftCheck[_loc2_] = _loc9_["EmotionEyeLeft"]["_meter"] - Math.floor((_loc9_["EmotionEyeLeft"]["_meter"] - 42) / 2);
                            _loc9_["EmotionEyeLeft"]["_meter"] = charaEyeLeftCheck[_loc2_];
@@ -1590,7 +1590,7 @@ package menu
                         else if(_loc9_["EmotionEyeLeft"]["_meter"] == charaEyeLeftCheck[_loc2_] && charaEyeLeft[_loc2_] != null)
                         {
                            _loc9_["EmotionEyeLeft"]["_meter"] = 10;
-                           _loc9_["EyebrowMoveLeft"]["_meter"] -= 5;
+                           _loc9_["EyebrowMoveLeft"]["_meter"] -= 50;
                         }
                         else if(_loc9_["EmotionEyeLeft"]["_meter"] == 10 && charaEyeLeft[_loc2_] != null)
                         {
@@ -1600,19 +1600,19 @@ package menu
                               if(charaEyeLeftClick[_loc2_][1] == 10)
                               {
                                  charaEyeLeftClick[_loc2_][1] = 0;
-                                 _loc9_["EyebrowMoveLeft"]["_meter"] += 5;
+                                 _loc9_["EyebrowMoveLeft"]["_meter"] += 50;
                                  _loc9_["EmotionEyeLeft"]["_meter"] = charaEyeLeftCheck[_loc2_] + 1;
                               }
                            }
                            else
                            {
-                              _loc9_["EyebrowMoveLeft"]["_meter"] += 5;
+                              _loc9_["EyebrowMoveLeft"]["_meter"] += 50;
                               _loc9_["EmotionEyeLeft"]["_meter"] = charaEyeLeftCheck[_loc2_] + 1;
                            }
                         }
                         else if(_loc9_["EmotionEyeLeft"]["_meter"] == charaEyeLeftCheck[_loc2_] + 1 && charaEyeLeft[_loc2_] != null)
                         {
-                           _loc9_["EyebrowMoveLeft"]["_meter"] += 5;
+                           _loc9_["EyebrowMoveLeft"]["_meter"] += 50;
                            _loc9_["EmotionEyeLeft"]["_meter"] = charaEyeLeft[_loc2_];
                            charaEyeLeft[_loc2_] = null;
                            charaEyeLeftCheck[_loc2_] = null;
@@ -1633,7 +1633,7 @@ package menu
                      {
                         if(_loc9_["EmotionEyeRight"]["_meter"] > 42 && charaEyeRight[_loc2_] == null)
                         {
-                           _loc9_["EyebrowMoveRight"]["_meter"] -= 5;
+                           _loc9_["EyebrowMoveRight"]["_meter"] -= 50;
                            charaEyeRight[_loc2_] = _loc9_["EmotionEyeRight"]["_meter"];
                            charaEyeRightCheck[_loc2_] = _loc9_["EmotionEyeRight"]["_meter"] - Math.floor((_loc9_["EmotionEyeRight"]["_meter"] - 42) / 2);
                            _loc9_["EmotionEyeRight"]["_meter"] = charaEyeRightCheck[_loc2_];
@@ -1641,7 +1641,7 @@ package menu
                         else if(_loc9_["EmotionEyeRight"]["_meter"] == charaEyeRightCheck[_loc2_] && charaEyeRight[_loc2_] != null)
                         {
                            _loc9_["EmotionEyeRight"]["_meter"] = 10;
-                           _loc9_["EyebrowMoveRight"]["_meter"] -= 5;
+                           _loc9_["EyebrowMoveRight"]["_meter"] -= 50;
                         }
                         else if(_loc9_["EmotionEyeRight"]["_meter"] == 10 && charaEyeRight[_loc2_] != null)
                         {
@@ -1651,19 +1651,19 @@ package menu
                               if(charaEyeRightClick[_loc2_][1] == 10)
                               {
                                  charaEyeRightClick[_loc2_][1] = 0;
-                                 _loc9_["EyebrowMoveRight"]["_meter"] += 5;
+                                 _loc9_["EyebrowMoveRight"]["_meter"] += 50;
                                  _loc9_["EmotionEyeRight"]["_meter"] = charaEyeRightCheck[_loc2_] + 1;
                               }
                            }
                            else
                            {
-                              _loc9_["EyebrowMoveRight"]["_meter"] += 5;
+                              _loc9_["EyebrowMoveRight"]["_meter"] += 50;
                               _loc9_["EmotionEyeRight"]["_meter"] = charaEyeRightCheck[_loc2_] + 1;
                            }
                         }
                         else if(_loc9_["EmotionEyeRight"]["_meter"] == charaEyeRightCheck[_loc2_] + 1 && charaEyeRight[_loc2_] != null)
                         {
-                           _loc9_["EyebrowMoveRight"]["_meter"] += 5;
+                           _loc9_["EyebrowMoveRight"]["_meter"] += 50;
                            _loc9_["EmotionEyeRight"]["_meter"] = charaEyeRight[_loc2_];
                            charaEyeRight[_loc2_] = null;
                            charaEyeRightCheck[_loc2_] = null;

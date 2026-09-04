@@ -1,7 +1,9 @@
 package menu
 {
    import parameter.Dress_data;
-   
+   import parts.Ribbon;
+   import parts.Hairpiece;
+
    public class Tab_TextNum0Class
    {
        
@@ -26,7 +28,34 @@ package menu
          {
             _loc4_ = MenuClass.tabData[param2][param3][2]["_data"];
             _loc5_ = MenuClass.systemData[_loc4_]["_menu"];
-            if(_loc6_)
+
+            if (_loc4_ == "RibonPlus") {
+               var ribbon = Ribbon.fromCharacter(MenuClass._nowCharaNum, _loc5_);
+               
+               /* shouldn't have to deal with customNum here? */
+               var prevVal = ribbon.getData(param1, "_menu");
+               if (prevVal < 0) {
+                  ribbon.setData(param1, "_menu", MenuClass.menuData[param1]);
+               } else if (prevVal > MenuClass.menuData[param1]) {
+                  ribbon.setData(param1, "_menu", 0);
+               }
+
+               new Tab_TextInClass(0, param1, ribbon.getData(param1, "_menu"));
+            } 
+            else if (_loc4_ == "HairExPlus")
+            {
+               var hairpiece = Hairpiece.fromCharacter(MenuClass._nowCharaNum, _loc5_);
+               
+               var prevVal = hairpiece.getData(param1, "_menu");
+               if (prevVal < 0) {
+                  hairpiece.setData(param1, "_menu", MenuClass.menuData[param1]);
+               } else if (prevVal > MenuClass.menuData[param1]) {
+                  hairpiece.setData(param1, "_menu", 0);
+               }
+
+               new Tab_TextInClass(0, param1, hairpiece.getData(param1, "_menu"));
+            }
+            else if(_loc6_)
             {
                if(Dress_data.menuCustomNum[MenuClass._nowCharaNum][param1] < 0)
                {

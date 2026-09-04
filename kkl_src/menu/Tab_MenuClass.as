@@ -69,6 +69,17 @@ package menu
          MenuClass.tabMenuAdd[param1].menu0.plus.addEventListener(MouseEvent.MOUSE_DOWN,MouseDown);
          MenuClass.tabMenuAdd[param1].menu0.plus.buttonMode = true;
          new Tab_TextInClass(1,param1,MenuClass.menuData[param1]);
+
+         if (MenuClass.menuData[param1] >= 998) {
+            MenuClass.tabMenuAdd[param1].menu0.num0.width = 45;
+            MenuClass.tabMenuAdd[param1].menu0.num0.x = 12.5;
+            MenuClass.tabMenuAdd[param1].menu0.getChildAt(MenuClass.tabMenuAdd[param1].menu0.getChildIndex(MenuClass.tabMenuAdd[param1].menu0.num1) + 1).visible = false;
+            MenuClass.tabMenuAdd[param1].menu0.num1.visible = false;
+         } else if (MenuClass.menuData[param1] > 99) {
+            MenuClass.tabMenuAdd[param1].menu0.num0.width = 35;
+            MenuClass.tabMenuAdd[param1].menu0.getChildAt(MenuClass.tabMenuAdd[param1].menu0.getChildIndex(MenuClass.tabMenuAdd[param1].menu0.num1) + 1).x = 5;
+            MenuClass.tabMenuAdd[param1].menu0.num1.x = 10;
+         }
       }
       
       public static function deleteFc(param1:String) : void
@@ -128,9 +139,13 @@ package menu
          targetJ = param1.currentTarget.parent.targetJ;
          headerName = param1.currentTarget.parent.headerName;
          menuBtnType = 2;
-         MenuClass.tabMenuAdd[tabName].menu0.btn0.gotoAndStop(2);
-         MenuClass.menuSetFlag = true;
+         MenuClass.menuSetFlag = !MenuClass.menuSetFlag;
          menuKeyNum = "";
+         if (MenuClass.menuSetFlag) {
+            MenuClass.tabMenuAdd[tabName].menu0.btn0.gotoAndStop(2);
+         } else {
+            MenuClass.tabMenuAdd[tabName].menu0.btn0.gotoAndStop(1);
+         }
       }
       
       public static function btn1Click(param1:MouseEvent) : void
@@ -140,9 +155,13 @@ package menu
          targetJ = param1.currentTarget.parent.targetJ;
          headerName = param1.currentTarget.parent.headerName;
          menuBtnType = 3;
-         MenuClass.tabMenuAdd[tabName].menu0.btn1.gotoAndStop(2);
-         MenuClass.menuSetFlag = true;
+         MenuClass.menuSetFlag = !MenuClass.menuSetFlag;
          menuKeyNum = "";
+         if (MenuClass.menuSetFlag) {
+            MenuClass.tabMenuAdd[tabName].menu0.btn1.gotoAndStop(2);
+         } else {
+            MenuClass.tabMenuAdd[tabName].menu0.btn1.gotoAndStop(1);
+         }
       }
       
       public static function MouseDown(param1:MouseEvent) : void
@@ -230,7 +249,53 @@ package menu
             MenuClass.BeforePage = MenuClass.systemData["Story_Page"]["_menu"];
          }
 
-         if(menuType == "chara" || menuType == "charaPlus")
+         if (Main.keypressHandler && (Main.keypressHandler.shift || Main.keypressHandler.ctrl) && tabName.substring(tabName.length - 4) == "Plus")
+         {
+            /* Shift for next visible slot, Ctrl+Shift for next invisible slot */
+            var ctrlShift = Main.keypressHandler.shift && Main.keypressHandler.ctrl;
+            var reverse = action == "minus";
+            var findVisibility = !Main.keypressHandler.ctrl;
+            var limit = Main.RibonhukusuuNum + 1;
+            var dataSource = null;
+
+            if (MenuClass.tabData[headerName][targetJ][2]["_visible"] == "chara") {
+               dataSource = MenuClass.charaData[MenuClass._nowCharaNum];
+            } else {
+               dataSource = MenuClass.systemData;
+            }
+
+            if (tabName == "RibonPlus" || tabName == "HairExPlus") {
+               limit = 999;
+            }
+
+            if (ctrlShift) {
+               findVisibility = !dataSource[tabName]["_visible"][MenuClass.systemData[tabName]["_menu"]];
+            }
+
+            for (var i = 1; i < limit; i++) {
+               var idx = 0;
+               if (reverse) {
+                  idx = (MenuClass.systemData[dataKey]["_menu"] + (limit - i)) % limit;
+               } else {
+                  idx = (MenuClass.systemData[dataKey]["_menu"] + i) % limit;
+               }
+
+               if (!!dataSource[tabName]["_visible"][idx] == findVisibility) {
+                  if (ctrlShift && i > 1) {
+                     if (reverse) {
+                        MenuClass.systemData[dataKey]["_menu"] = idx + 1;
+                     } else {
+                        MenuClass.systemData[dataKey]["_menu"] = idx - 1;
+                     }
+                  } else {
+                     MenuClass.systemData[dataKey]["_menu"] = idx;
+                  }
+
+                  break;
+               }
+            }
+         }
+         else if(menuType == "chara" || menuType == "charaPlus")
          {
             if(action == "plus")
             {

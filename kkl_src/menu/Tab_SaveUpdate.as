@@ -3,6 +3,8 @@ package menu
    import flash.utils.ByteArray;
    import parameter.Dress_data;
    import parameter.Tab_IEData1;
+   import parts.Ribbon;
+   import parts.Hairpiece;
    
    public class Tab_SaveUpdate
    {
@@ -13,6 +15,8 @@ package menu
       private var charaData:Object;
       
       private var DressCharaData:Object;
+
+      private var loadedDataVersion:int;
       
       public function Tab_SaveUpdate(param1:int, param2:int, param3:String)
       {
@@ -85,17 +89,35 @@ package menu
          var eyebrowEmotionModified: Boolean = false;
          var eyebrowTabModified: Boolean = false;
          var penisModified: Boolean = false;
+         var rmoveModified: Boolean = false;
+         var legHeightTabModified: Boolean = false;
+         var armHeightTabModified: Boolean = false;
+         var bodyHeightModified: Boolean = false;
+         var bodyTabModified: Boolean = false;
+         var eyeTabModified: Boolean = false;
+         var emotionTabModified: Boolean = false;
+         var hairTabModified: Boolean = false;
+
+         loadedDataVersion = param2;
 
          _loc4_ = 0;
          while(_loc4_ < _loc7_)
          {
-            if(Tab_IEInOut.SaveUpdateTabName[_loc4_] == "Tin")
+            if(Tab_IEInOut.SaveUpdateTabName[_loc4_] == "Rmove")
+            {
+               rmoveModified = true;
+            }
+            else if(Tab_IEInOut.SaveUpdateTabName[_loc4_] == "Tin")
             {
                penisModified = true;
             }
             else if(Tab_IEInOut.SaveUpdateTabName[_loc4_] == "EmotionEyebrowLeft")
             {
                eyebrowEmotionModified = true;
+            }
+            else if(Tab_IEInOut.SaveUpdateTabName[_loc4_] == "EmotionEyeLeft")
+            {
+               emotionTabModified = true;
             }
             else if(Tab_IEInOut.SaveUpdateTabName[_loc4_] == "Eyebrow")
             {
@@ -104,6 +126,30 @@ package menu
             else if(Tab_IEInOut.SaveUpdateTabName[_loc4_] == "LeftArm")
             {
                armTabModified = true;
+            }
+            else if(Tab_IEInOut.SaveUpdateTabName[_loc4_] == "LeftThighRotation")
+            {
+               legHeightTabModified = true;
+            }
+            else if(Tab_IEInOut.SaveUpdateTabName[_loc4_] == "LeftUpperArmScaleX")
+            {
+               armHeightTabModified = true;
+            }
+            else if(Tab_IEInOut.SaveUpdateTabName[_loc4_] == "BodyHeight")
+            {
+               bodyHeightModified = true;
+            }
+            else if(Tab_IEInOut.SaveUpdateTabName[_loc4_] == "Body")
+            {
+               bodyTabModified = true;
+            }
+            else if(Tab_IEInOut.SaveUpdateTabName[_loc4_] == "Eye")
+            {
+               eyeTabModified = true;
+            }
+            else if(Tab_IEInOut.SaveUpdateTabName[_loc4_] == "Hair")
+            {
+               hairTabModified = true;
             }
             else if(Tab_IEInOut.SaveUpdateTabName[_loc4_] == "Seihuku")
             {
@@ -482,25 +528,30 @@ package menu
             _loc4_ = 0;
             while(_loc4_ <= 9)
             {
-               if(this.charaData["Ribon" + _loc4_]["_menu"] == 0)
-               {
-                  this.charaData["Ribon" + _loc4_]["_color1"][0] = this.charaData["Ribon" + _loc4_]["_color0"][0];
-                  this.DressCharaData["Ribon" + _loc4_][0]["_color1"][0] = this.charaData["Ribon" + _loc4_]["_color0"][0];
-               }
-               else if(this.charaData["Ribon" + _loc4_]["_menu"] == 8)
-               {
-                  this.charaData["Ribon" + _loc4_]["_color1"][0] = this.charaData["Ribon" + _loc4_]["_color0"][0];
-                  this.DressCharaData["Ribon" + _loc4_][8]["_color1"][0] = this.charaData["Ribon" + _loc4_]["_color0"][0];
-               }
-               else if(this.charaData["Ribon" + _loc4_]["_menu"] == 9)
-               {
-                  this.charaData["Ribon" + _loc4_]["_color1"][0] = this.charaData["Ribon" + _loc4_]["_color0"][0];
-                  this.DressCharaData["Ribon" + _loc4_][9]["_color1"][0] = this.charaData["Ribon" + _loc4_]["_color0"][0];
-               }
-               else if(this.charaData["Ribon" + _loc4_]["_menu"] == 24)
-               {
-                  this.charaData["Ribon" + _loc4_]["_color1"][0] = this.charaData["Ribon" + _loc4_]["_color0"][0];
-                  this.DressCharaData["Ribon" + _loc4_][24]["_color1"][0] = this.charaData["Ribon" + _loc4_]["_color0"][0];
+               var ribbon0 = Ribbon.fromCharacter(param1, _loc4_);
+               if (ribbon0.visible) {
+                  var dressColor1 = ribbon0.getDressData("", "_color1");
+
+                  if(ribbon0.itemType == 0)
+                  {
+                     ribbon0.color1 = clone(ribbon0.color0);
+                     dressColor1[0] = clone(ribbon0.color0);
+                  }
+                  else if(ribbon0.itemType == 8)
+                  {
+                     ribbon0.color1 = clone(ribbon0.color0);
+                     dressColor1[0] = clone(ribbon0.color0);
+                  }
+                  else if(ribbon0.itemType == 9)
+                  {
+                     ribbon0.color1 = clone(ribbon0.color0);
+                     dressColor1[0] = clone(ribbon0.color0);
+                  }
+                  else if(ribbon0.itemType == 24)
+                  {
+                     ribbon0.color1 = clone(ribbon0.color0);
+                     dressColor1[0] = clone(ribbon0.color0);
+                  }
                }
                _loc4_++;
             }
@@ -664,8 +715,8 @@ package menu
             if(this.charaData["HairBack"]["_visible"][0] && _loc12_)
             {
                this.charaData["HairBack"]["_turn"] = Dress_data.HairBackData[this.charaData["HairBack"]["_menu"]]["rotationMode"];
-               this.charaData["HairBack_Height"]["_meter"] = Dress_data.HairBackData[this.charaData["HairBack"]["_menu"]]["height_DOWN"] + (Dress_data.HairBackData[this.charaData["HairBack"]["_menu"]]["height_UP"] - Dress_data.HairBackData[this.charaData["HairBack"]["_menu"]]["height_DOWN"]) * (this.charaData["HairBack_Height"]["_meter"] / 100);
-               this.charaData["HairBack_Width"]["_meter"] = Dress_data.HairBackData[this.charaData["HairBack"]["_menu"]]["width_DOWN"] + (Dress_data.HairBackData[this.charaData["HairBack"]["_menu"]]["width_UP"] - Dress_data.HairBackData[this.charaData["HairBack"]["_menu"]]["width_DOWN"]) * (this.charaData["HairBack_Width"]["_meter"] / 100);
+               this.charaData["HairBack_Height"]["_meter"] = Dress_data.HairBackData[this.charaData["HairBack"]["_menu"]]["height_DOWN"] + (Dress_data.HairBackData[this.charaData["HairBack"]["_menu"]]["height_UP"] - Dress_data.HairBackData[this.charaData["HairBack"]["_menu"]]["height_DOWN"]) * (this.charaData["HairBack_Height"]["_meter"] / 1000);
+               this.charaData["HairBack_Width"]["_meter"] = Dress_data.HairBackData[this.charaData["HairBack"]["_menu"]]["width_DOWN"] + (Dress_data.HairBackData[this.charaData["HairBack"]["_menu"]]["width_UP"] - Dress_data.HairBackData[this.charaData["HairBack"]["_menu"]]["width_DOWN"]) * (this.charaData["HairBack_Width"]["_meter"] / 1000);
                this.charaData["HairBack_Y"]["_meter"] = Dress_data.HairBackData[this.charaData["HairBack"]["_menu"]]["_y"];
             }
          }
@@ -1369,9 +1420,9 @@ package menu
             _loc4_ = 0;
             while(_loc4_ <= Main.hukusuuNum)
             {
-               if(this.charaData["RibonPlus"]["_visible"][_loc4_])
-               {
-                  this.charaData["RibonScaleY" + _loc4_]["_meter"] = this.charaData["RibonScale" + _loc4_]["_meter"];
+               var ribbon = Ribbon.fromCharacter(param1, _loc4_);
+               if (ribbon.visible) {
+                  ribbon.scaleY = ribbon.scaleX;
                }
                if(this.charaData["HairpinPlus"]["_visible"][_loc4_])
                {
@@ -1379,6 +1430,7 @@ package menu
                }
                _loc4_++;
             }
+
             _loc7_ = MenuClass.systemData["FreeRibonPlus"]["_visible"].length - 1;
             _loc4_ = 0;
             for(; _loc4_ <= _loc7_; _loc4_++)
@@ -1499,10 +1551,11 @@ package menu
             _loc4_ = 0;
             while(_loc4_ <= Main.hukusuuNum)
             {
-               if(this.charaData["RibonPlus"]["_visible"][_loc4_] && ribbonModified)
-               {
-                  this.charaData["RibonScaleB" + _loc4_]["_meter"] = 500;
+               var ribbon = Ribbon.fromCharacter(param1, _loc4_);
+               if(ribbon.visible && ribbonModified) {
+                  ribbon.scaleB = 500;
                }
+
                if(this.charaData["HairpinPlus"]["_visible"][_loc4_] && _loc27_)
                {
                   this.charaData["HairpinScaleB" + _loc4_]["_meter"] = 500;
@@ -1724,154 +1777,127 @@ package menu
             _loc4_ = 0;
             while(_loc4_ <= Main.hukusuuNum)
             {
-               if(this.charaData["RibonPlus"]["_visible"][_loc4_] && ribbonModified)
-               {
-                  this.charaData["RibonAdd" + _loc4_]["_add0"] = 0;
-                  this.charaData["RibonRotation" + _loc4_]["_meter"] = Math.floor(this.charaData["RibonRotation" + _loc4_]["_meter"] * 3.6);
-                  this.charaData["RibonX" + _loc4_]["_meter"] = Math.floor(this.charaData["RibonX" + _loc4_]["_meter"] * 10);
-                  this.charaData["RibonY" + _loc4_]["_meter"] = Math.floor(this.charaData["RibonY" + _loc4_]["_meter"] * 10);
-                  this.charaData["Ribon" + _loc4_]["_reversal"] = 0;
+               var ribbon = Ribbon.fromCharacter(param1, _loc4_);
+               if(ribbon.visible && ribbonModified) {
+                  ribbon.attachPoint = 0;
+                  ribbon.rotation = Math.floor(ribbon.rotation * 3.6);
+                  ribbon.x = Math.floor(ribbon.x * 10);
+                  ribbon.x = Math.floor(ribbon.x * 10);
+                  ribbon.reversal = 0;
                }
                _loc4_++;
             }
+
             _loc4_ = 0;
             while(_loc4_ <= Main.hukusuuNum)
             {
                if(this.charaData["HairpinPlus"]["_visible"][_loc4_] && _loc27_)
                {
                   _loc6_ = 30 + _loc4_;
-                  this.charaData["RibonPlus"]["_visible"][_loc6_] = true;
-                  this.charaData["Ribon" + _loc6_]["_reversal"] = 0;
-                  if(this.charaData["Hairpin" + _loc4_]["_menu"] == 0)
-                  {
-                     this.charaData["Ribon" + _loc6_]["_menu"] = 71;
+
+                  var ribbon = Ribbon.fromCharacter(param1, _loc6_);
+                  var pinType = this.charaData["Hairpin" + _loc4_]["_menu"];
+
+                  ribbon.visible = true;
+                  ribbon.reversal = 0;
+
+                  switch (pinType) {
+                  case 0:
+                  case 1:
+                  case 2:
+                  case 3:
+                  case 4:
+                  case 5:
+                     ribbon.itemType = 71 + pinType;
+                     break;
+                  case 6:
+                     ribbon.itemType = 20;
+                     break;
+                  case 7:
+                  case 8:
+                     ribbon.itemType = 70 + pinType;
+                     break;
+                  case 9:
+                     ribbon.itemType = 28;
+                     break;
+                  case 10:
+                     ribbon.itemType = 23;
+                     break;
+                  case 11:
+                  case 12:
+                     ribbon.itemType = 68 + pinType;
+                     break;
+                  case 13:
+                     ribbon.itemType = 29;
+                     break;
+                  case 14:
+                     ribbon.itemType = 81;
+                     break;
+                  case 15:
+                     ribbon.itemType = 30;
+                     break;
+                  case 16:
+                     ribbon.itemType = 31;
+                     break;
+                  case 17:
+                     ribbon.itemType = 82;
+                     break;
+                  case 18:
+                     ribbon.itemType = 83;
+                     break;
+                  case 19:
+                     ribbon.itemType = 66;
+                     break;
+                  case 20:
+                     ribbon.itemType = 84;
+                     break;
+                  case 21:
+                     ribbon.itemType = 85;
+                     break;
                   }
-                  else if(this.charaData["Hairpin" + _loc4_]["_menu"] == 1)
-                  {
-                     this.charaData["Ribon" + _loc6_]["_menu"] = 72;
-                  }
-                  else if(this.charaData["Hairpin" + _loc4_]["_menu"] == 2)
-                  {
-                     this.charaData["Ribon" + _loc6_]["_menu"] = 73;
-                  }
-                  else if(this.charaData["Hairpin" + _loc4_]["_menu"] == 3)
-                  {
-                     this.charaData["Ribon" + _loc6_]["_menu"] = 74;
-                  }
-                  else if(this.charaData["Hairpin" + _loc4_]["_menu"] == 4)
-                  {
-                     this.charaData["Ribon" + _loc6_]["_menu"] = 75;
-                  }
-                  else if(this.charaData["Hairpin" + _loc4_]["_menu"] == 5)
-                  {
-                     this.charaData["Ribon" + _loc6_]["_menu"] = 76;
-                  }
-                  else if(this.charaData["Hairpin" + _loc4_]["_menu"] == 6)
-                  {
-                     this.charaData["Ribon" + _loc6_]["_menu"] = 20;
-                  }
-                  else if(this.charaData["Hairpin" + _loc4_]["_menu"] == 7)
-                  {
-                     this.charaData["Ribon" + _loc6_]["_menu"] = 77;
-                  }
-                  else if(this.charaData["Hairpin" + _loc4_]["_menu"] == 8)
-                  {
-                     this.charaData["Ribon" + _loc6_]["_menu"] = 78;
-                  }
-                  else if(this.charaData["Hairpin" + _loc4_]["_menu"] == 9)
-                  {
-                     this.charaData["Ribon" + _loc6_]["_menu"] = 28;
-                  }
-                  else if(this.charaData["Hairpin" + _loc4_]["_menu"] == 10)
-                  {
-                     this.charaData["Ribon" + _loc6_]["_menu"] = 23;
-                  }
-                  else if(this.charaData["Hairpin" + _loc4_]["_menu"] == 11)
-                  {
-                     this.charaData["Ribon" + _loc6_]["_menu"] = 79;
-                  }
-                  else if(this.charaData["Hairpin" + _loc4_]["_menu"] == 12)
-                  {
-                     this.charaData["Ribon" + _loc6_]["_menu"] = 80;
-                  }
-                  else if(this.charaData["Hairpin" + _loc4_]["_menu"] == 13)
-                  {
-                     this.charaData["Ribon" + _loc6_]["_menu"] = 29;
-                  }
-                  else if(this.charaData["Hairpin" + _loc4_]["_menu"] == 14)
-                  {
-                     this.charaData["Ribon" + _loc6_]["_menu"] = 81;
-                  }
-                  else if(this.charaData["Hairpin" + _loc4_]["_menu"] == 15)
-                  {
-                     this.charaData["Ribon" + _loc6_]["_menu"] = 30;
-                  }
-                  else if(this.charaData["Hairpin" + _loc4_]["_menu"] == 16)
-                  {
-                     this.charaData["Ribon" + _loc6_]["_menu"] = 31;
-                  }
-                  else if(this.charaData["Hairpin" + _loc4_]["_menu"] == 17)
-                  {
-                     this.charaData["Ribon" + _loc6_]["_menu"] = 82;
-                  }
-                  else if(this.charaData["Hairpin" + _loc4_]["_menu"] == 18)
-                  {
-                     this.charaData["Ribon" + _loc6_]["_menu"] = 83;
-                  }
-                  else if(this.charaData["Hairpin" + _loc4_]["_menu"] == 19)
-                  {
-                     this.charaData["Ribon" + _loc6_]["_menu"] = 66;
-                  }
-                  else if(this.charaData["Hairpin" + _loc4_]["_menu"] == 20)
-                  {
-                     this.charaData["Ribon" + _loc6_]["_menu"] = 84;
-                  }
-                  else if(this.charaData["Hairpin" + _loc4_]["_menu"] == 21)
-                  {
-                     this.charaData["Ribon" + _loc6_]["_menu"] = 85;
-                  }
-                  this.charaData["RibonAdd" + _loc6_]["_add0"] = 1;
-                  this.charaData["Ribon" + _loc6_]["_reversal2"] = this.charaData["Hairpin" + _loc4_]["_reversal2"];
-                  this.charaData["Ribon" + _loc6_]["_color0"] = this.charaData["Hairpin" + _loc4_]["_color0"];
-                  this.DressCharaData["Ribon" + _loc6_][this.charaData["Ribon" + _loc6_]["_menu"]]["_color0"][0] = this.clone(this.charaData["Ribon" + _loc6_]["_color0"]);
+
+                  ribbon.attachPoint = 1;
+                  ribbon.reversal2 = this.charaData["Hairpin" + _loc4_]["_reversal2"];
+                  ribbon.color0 = this.charaData["Hairpin" + _loc4_]["_color0"];
+                  this.DressCharaData["Ribon" + _loc6_][ribbon.itemType]["_color0"][0] = this.clone(ribbon.color0);
                   try
                   {
-                     this.charaData["Ribon" + _loc6_]["_color1"] = this.charaData["Hairpin" + _loc4_]["_color1"];
-                     this.DressCharaData["Ribon" + _loc6_][this.charaData["Ribon" + _loc6_]["_menu"]]["_color1"][0] = this.clone(this.charaData["Ribon" + _loc6_]["_color1"]);
+                     ribbon.color1 = this.charaData["Hairpin" + _loc4_]["_color1"];
+                     this.DressCharaData["Ribon" + _loc6_][ribbon.itemType]["_color1"][0] = this.clone(ribbon.color1);
                   }
                   catch(myError:Error)
                   {
                   }
                   try
                   {
-                     this.charaData["Ribon" + _loc6_]["_color2"] = this.charaData["Hairpin" + _loc4_]["_color2"];
-                     this.DressCharaData["Ribon" + _loc6_][this.charaData["Ribon" + _loc6_]["_menu"]]["_color2"][0] = this.clone(this.charaData["Ribon" + _loc6_]["_color2"]);
+                     ribbon.color2 = this.charaData["Hairpin" + _loc4_]["_color2"];
+                     this.DressCharaData["Ribon" + _loc6_][ribbon.itemType]["_color2"][0] = this.clone(ribbon.color2);
                   }
                   catch(myError:Error)
                   {
                   }
-                  this.charaData["RibonLine" + _loc6_]["_menu"] = this.charaData["HairpinLine" + _loc4_]["_menu"];
-                  this.charaData["RibonLine" + _loc6_]["_color0"] = this.charaData["HairpinLine" + _loc4_]["_color0"];
-                  this.DressCharaData["RibonLine" + _loc6_][0]["_color0"][0] = this.clone(this.charaData["RibonLine" + _loc6_]["_color0"]);
-                  this.charaData["RibonScale" + _loc6_]["_meter"] = this.charaData["HairpinScale" + _loc4_]["_meter"];
-                  this.charaData["RibonScaleY" + _loc6_]["_meter"] = this.charaData["HairpinScaleY" + _loc4_]["_meter"];
-                  this.charaData["RibonScaleB" + _loc6_]["_meter"] = this.charaData["HairpinScaleB" + _loc4_]["_meter"];
-                  this.charaData["RibonRotation" + _loc6_]["_meter"] = Math.floor(this.charaData["HairpinRotation" + _loc4_]["_meter"] * 3.6);
-                  this.charaData["RibonX" + _loc6_]["_meter"] = Math.floor(this.charaData["HairpinX" + _loc4_]["_meter"] * 10);
-                  this.charaData["RibonY" + _loc6_]["_meter"] = Math.floor(this.charaData["HairpinY" + _loc4_]["_meter"] * 10);
+                  ribbon.lineType = this.charaData["HairpinLine" + _loc4_]["_menu"];
+                  ribbon.lineColor = this.charaData["HairpinLine" + _loc4_]["_color0"];
+                  this.DressCharaData["RibonLine" + _loc6_][0]["_color0"][0] = this.clone(ribbon.lineColor);
+                  ribbon.scaleX = this.charaData["HairpinScale" + _loc4_]["_meter"];
+                  ribbon.scaleY = this.charaData["HairpinScaleY" + _loc4_]["_meter"];
+                  ribbon.scaleB = this.charaData["HairpinScaleB" + _loc4_]["_meter"];
+                  ribbon.rotation = Math.floor(this.charaData["HairpinRotation" + _loc4_]["_meter"] * 3.6);
+                  ribbon.x = Math.floor(this.charaData["HairpinX" + _loc4_]["_meter"] * 10);
+                  ribbon.y = Math.floor(this.charaData["HairpinY" + _loc4_]["_meter"] * 10);
                   this.charaData["HairpinPlus"]["_visible"][_loc4_] = false;
                }
                _loc4_++;
             }
          }
-         if(param2 <= 81)
+         if(param2 <= 81 && ribbonModified)
          {
             _loc4_ = 0;
             while(_loc4_ <= Main.RibonhukusuuNum)
             {
-               if(this.charaData["RibonPlus"]["_visible"][_loc4_] && ribbonModified)
-               {
-                  this.charaData["Ribon" + _loc4_]["_shadow"] = 1;
+               var ribbon = Ribbon.fromCharacter(param1, _loc4_);
+               if(ribbon.visible) {
+                  ribbon.shadow = true;
                }
                _loc4_++;
             }
@@ -3156,9 +3182,10 @@ package menu
                      this.charaData["HairExAlpha" + i]["_meter"] = 100;
                   }
 
-                  if(ribbonModified && this.charaData["RibonPlus"]["_visible"][i])
+                  var ribbon = Ribbon.fromCharacter(param1, i);
+                  if(ribbonModified && ribbon.visible)
                   {
-                     this.charaData["RibonAlpha" + i]["_meter"] = 100;
+                     ribbon.alpha = 100;
                   }
 
                   if(beltModified && this.charaData["BeltPlus"]["_visible"][i])
@@ -3177,9 +3204,10 @@ package menu
                      this.charaData["CharaLoadFineY" + i]["_meter"] = 50;
                   }
 
-                  if(ribbonModified && this.charaData["RibonPlus"]["_visible"][i]) {
-                     this.charaData["RibonFineX" + i]["_meter"] = 50;
-                     this.charaData["RibonFineY" + i]["_meter"] = 50;
+                  var ribbon = Ribbon.fromCharacter(param1, i);
+                  if(ribbonModified && ribbon.visible) {
+                     ribbon.fineX = 50;
+                     ribbon.fineY = 50;
                   }
 
                   if(beltModified && this.charaData["BeltPlus"]["_visible"][i]) {
@@ -3216,6 +3244,272 @@ package menu
                this.charaData["RightArmFreeRotation"]["_check"] = false;
             }
          }
+
+         if (beforeVersion(107, 0, 2) && ribbonModified) {
+            for (var i = 0; i <= Main.hukusuuNum; i++) {
+               var ribbon = Ribbon.fromCharacter(param1, i);
+               if (
+                  ribbon.visible &&
+                  ribbon.itemType >= 143 &&
+                  ribbon.itemType <= 150
+               ) {
+                  ribbon.lineType = 0;
+               }
+            }
+         }
+
+         if (beforeVersion(107, 0, 5)) {
+            this.charaData["LeftShiriVisible"]["_visible"][0] = this.charaData["LeftThighVisible"]["_visible"][0];
+            this.charaData["RightShiriVisible"]["_visible"][0] = this.charaData["RightThighVisible"]["_visible"][0];
+
+            if (hairExModified) {
+               for each (var hairpiece:Hairpiece in Hairpiece.getVisibleHairpieces(param1)) {
+                  hairpiece.fineX = 50;
+                  hairpiece.fineY = 50;
+               }
+            }
+
+            if (faceMarkModified) {
+               for (var i = 0; i <= Main.hukusuuNum; i++) {
+                  if (this.charaData["MarkPlus"]["_visible"][i]) {
+                     this.charaData["MarkFineX" + i]["_meter"] = 50;
+                     this.charaData["MarkFineY" + i]["_meter"] = 50;
+                  }
+               }
+            }
+         }
+
+         if (beforeVersion(107, 0, 6)) {
+            if (ribbonModified) {
+               for each (var ribbon_i:Ribbon in Ribbon.getVisibleRibbons(param1)) {
+                  ribbon_i.fineX = ribbon_i.fineX * 5 - 200;
+                  ribbon_i.fineY = ribbon_i.fineY * 5 - 200;
+               }
+            }
+
+            if (beltModified) {
+               for (var i = 0; i <= Main.hukusuuNum; i++) {
+                  if (this.charaData["BeltPlus"]["_visible"][i]) {
+                     this.charaData["BeltFineX" + i]["_meter"] = this.charaData["BeltFineX" + i]["_meter"] * 5 - 200;
+                     this.charaData["BeltFineY" + i]["_meter"] = this.charaData["BeltFineY" + i]["_meter"] * 5 - 200;
+                  }
+               }
+            }
+
+            if (charaImageModified) {
+               for (var i = 0; i <= Main.hukusuuNum; i++) {
+                  if (this.charaData["CharaLoadPlus"]["_visible"][i]) {
+                     this.charaData["CharaLoadFineX" + i]["_meter"] = this.charaData["CharaLoadFineX" + i]["_meter"] * 5 - 200;
+                     this.charaData["CharaLoadFineY" + i]["_meter"] = this.charaData["CharaLoadFineY" + i]["_meter"] * 5 - 200;
+                  }
+               }
+            }
+         }
+
+         if (beforeVersion(107, 1, 1)) {
+            if (rmoveModified) {
+               this.charaData["Rmove"]["_meter"] *= 10;
+               this.charaData["Jump"]["_meter"] *= 10;
+            }
+            if (_loc22_ && this.charaData["CharaDropShadow"]["_visible"][0]) {
+               this.charaData["CharaDropShadowRotation"]["_meter"] *= 10;
+            }
+            if (legHeightTabModified) {
+               this.charaData["LeftThighRotation"]["_meter"] *= 10;
+               this.charaData["RightThighRotation"]["_meter"] *= 10;
+            //}
+            //if (legRotationModified) {
+               this.charaData["LeftLegRotation"]["_meter"] *= 10;
+               this.charaData["RightLegRotation"]["_meter"] *= 10;
+            //}
+            //if (footRotationModified) {
+               this.charaData["LeftFootRotation"]["_meter"] *= 10;
+               this.charaData["RightFootRotation"]["_meter"] *= 10;
+
+               this.charaData["LeftThighScaleX"]["_meter"] *= 10;
+               this.charaData["LeftThighScaleY"]["_meter"] *= 10;
+               this.charaData["LeftThighOffsetX"]["_meter"] *= 10;
+               this.charaData["LeftThighOffsetY"]["_meter"] *= 10;
+               this.charaData["RightThighScaleX"]["_meter"] *= 10;
+               this.charaData["RightThighScaleY"]["_meter"] *= 10;
+               this.charaData["RightThighOffsetX"]["_meter"] *= 10;
+               this.charaData["RightThighOffsetY"]["_meter"] *= 10;
+               this.charaData["LeftLegScaleX"]["_meter"] *= 10;
+               this.charaData["LeftLegScaleY"]["_meter"] *= 10;
+               this.charaData["LeftLegOffsetX"]["_meter"] *= 10;
+               this.charaData["LeftLegOffsetY"]["_meter"] *= 10;
+               this.charaData["RightLegScaleX"]["_meter"] *= 10;
+               this.charaData["RightLegScaleY"]["_meter"] *= 10;
+               this.charaData["RightLegOffsetX"]["_meter"] *= 10;
+               this.charaData["RightLegOffsetY"]["_meter"] *= 10;
+               this.charaData["LeftFootScaleX"]["_meter"] *= 10;
+               this.charaData["LeftFootScaleY"]["_meter"] *= 10;
+               this.charaData["LeftFootOffsetX"]["_meter"] *= 10;
+               this.charaData["LeftFootOffsetY"]["_meter"] *= 10;
+               this.charaData["RightFootScaleX"]["_meter"] *= 10;
+               this.charaData["RightFootScaleY"]["_meter"] *= 10;
+               this.charaData["RightFootOffsetX"]["_meter"] *= 10;
+               this.charaData["RightFootOffsetY"]["_meter"] *= 10;
+            }
+
+            if (bodyHeightModified) {
+               this.charaData["BodyHeight"]["_meter"] *= 10;
+               this.charaData["AshiHeight"]["_meter"] *= 10;
+               this.charaData["AshiWidth"]["_meter"] *= 10;
+               this.charaData["BodyWidth"]["_meter"] *= 10;
+               this.charaData["ShoulderWidth"]["_meter"] *= 10;
+               this.charaData["HipWidth"]["_meter"] *= 10;
+               this.charaData["douHeight"]["_meter"] *= 10;
+            }
+
+            if (bodyTabModified) {
+               this.charaData["HeadScale"]["_meter"] *= 10;
+               this.charaData["NeckHeight"]["_meter"] *= 10;
+               this.charaData["ContourWidth"]["_meter"] *= 10;
+               this.charaData["ContourHeight"]["_meter"] *= 10;
+            }
+
+            if (armHeightTabModified) {
+               this.charaData["LeftUpperArmScaleX"]["_meter"] *= 10;
+               this.charaData["LeftUpperArmScaleY"]["_meter"] *= 10;
+               this.charaData["LeftUpperArmOffsetX"]["_meter"] *= 10;
+               this.charaData["LeftUpperArmOffsetY"]["_meter"] *= 10;
+               this.charaData["RightUpperArmScaleX"]["_meter"] *= 10;
+               this.charaData["RightUpperArmScaleY"]["_meter"] *= 10;
+               this.charaData["RightUpperArmOffsetX"]["_meter"] *= 10;
+               this.charaData["RightUpperArmOffsetY"]["_meter"] *= 10;
+               this.charaData["LeftArmScaleX"]["_meter"] *= 10;
+               this.charaData["LeftArmScaleY"]["_meter"] *= 10;
+               this.charaData["LeftArmOffsetX"]["_meter"] *= 10;
+               this.charaData["LeftArmOffsetY"]["_meter"] *= 10;
+               this.charaData["LeftHandScaleX"]["_meter"] *= 10;
+               this.charaData["LeftHandScaleY"]["_meter"] *= 10;
+               this.charaData["LeftHandOffsetX"]["_meter"] *= 10;
+               this.charaData["LeftHandOffsetY"]["_meter"] *= 10;
+               this.charaData["RightArmScaleX"]["_meter"] *= 10;
+               this.charaData["RightArmScaleY"]["_meter"] *= 10;
+               this.charaData["RightArmOffsetX"]["_meter"] *= 10;
+               this.charaData["RightArmOffsetY"]["_meter"] *= 10;
+               this.charaData["RightHandScaleX"]["_meter"] *= 10;
+               this.charaData["RightHandScaleY"]["_meter"] *= 10;
+               this.charaData["RightHandOffsetX"]["_meter"] *= 10;
+               this.charaData["RightHandOffsetY"]["_meter"] *= 10;
+            }
+
+            if (eyeTabModified) {
+               this.charaData["EyeX"]["_meter"] *= 10;
+               this.charaData["EyeY"]["_meter"] *= 10;
+               this.charaData["EyeScaleX"]["_meter"] *= 10;
+               this.charaData["EyeScaleY"]["_meter"] *= 10;
+               this.charaData["EyeballScale"]["_meter"] *= 10;
+               this.charaData["EyeballScaleY"]["_meter"] *= 10;
+               this.charaData["EyeballX"]["_meter"] *= 10;
+               this.charaData["EyeballY"]["_meter"] *= 10;
+               this.charaData["EyeballLightRotation"]["_meter"] *= 10;
+            }
+
+            if (emotionTabModified) {
+               this.charaData["EyeballWidth"]["_meter"] *= 10;
+               this.charaData["EyeballWidthRight"]["_meter"] *= 10;
+               this.charaData["EyeballXMove"]["_meter"] *= 10;
+               this.charaData["EyeballXMoveRight"]["_meter"] *= 10;
+               this.charaData["EyeballYMove"]["_meter"] *= 10;
+               this.charaData["EyeballYMoveRight"]["_meter"] *= 10;
+               this.charaData["EyebrowMoveLeft"]["_meter"] *= 10;
+               this.charaData["EyebrowMoveHorizontalLeft"]["_meter"] *= 10;
+               this.charaData["EyebrowMoveRight"]["_meter"] *= 10;
+               this.charaData["EyebrowMoveHorizontalRight"]["_meter"] *= 10;
+               this.charaData["MouthWidth"]["_meter"] *= 10;
+               this.charaData["MouthHeight"]["_meter"] *= 10;
+               this.charaData["MouthXMove"]["_meter"] *= 10;
+               this.charaData["MouthYMove"]["_meter"] *= 10;
+            }
+
+            if (hairTabModified) {
+               if (this.charaData["Bangs"]["_visible"][0]) {
+                  this.charaData["Bangs_Height"]["_meter"] *= 10;
+               }
+               if (this.charaData["HairBack"]["_visible"][0]) {
+                  this.charaData["HairBack_Height"]["_meter"] *= 10;
+                  this.charaData["HairBack_Width"]["_meter"] *= 10;
+                  this.charaData["HairBack_Y"]["_meter"] *= 10;
+               }
+               if (this.charaData["SideBurnLeft"]["_visible"][0]) {
+                  this.charaData["SideBurnLeft_Height"]["_meter"] *= 10;
+                  this.charaData["SideBurnLeft_x"]["_meter"] *= 10;
+               }
+               if (this.charaData["SideBurnRight"]["_visible"][0]) {
+                  this.charaData["SideBurnRight_Height"]["_meter"] *= 10;
+                  this.charaData["SideBurnRight_x"]["_meter"] *= 10;
+               }
+            }
+
+            if (hairExModified) {
+               for each (var hairpiece1:Hairpiece in Hairpiece.getVisibleHairpieces(param1)) {
+                  hairpiece1.rotation = hairpiece1.rotation * 10;
+                  hairpiece1.rotationPlus = hairpiece1.rotationPlus * 10;
+                  hairpiece1.scaleX = hairpiece1.scaleX * 10;
+                  hairpiece1.scaleY = hairpiece1.scaleY * 10;
+               }
+            }
+            if (ribbonModified) {
+               for each (var ribbon1:Ribbon in Ribbon.getVisibleRibbons(param1)) {
+                  ribbon1.rotation = ribbon1.rotation * 10;
+                  ribbon1.scaleX = ribbon1.scaleX * 10;
+                  ribbon1.scaleY = ribbon1.scaleY * 10;
+               }
+            }
+
+            if (beltModified) {
+               for (var i = 0; i <= Main.hukusuuNum; i++) {
+                  if (this.charaData["BeltPlus"]["_visible"][i]) {
+                     this.charaData["BeltRotation" + i]["_meter"] *= 10;
+                     this.charaData["BeltScale" + i]["_meter"] *= 10;
+                     this.charaData["BeltScaleY" + i]["_meter"] *= 10;
+                  }
+               }
+            }
+            if (faceMarkModified) {
+               for (var i = 0; i <= Main.hukusuuNum; i++) {
+                  if (this.charaData["MarkPlus"]["_visible"][i]) {
+                     this.charaData["MarkRotation" + i]["_meter"] *= 10;
+                     this.charaData["MarkScaleX" + i]["_meter"] *= 10;
+                     this.charaData["MarkScaleY" + i]["_meter"] *= 10;
+                  }
+               }
+            }
+            if (charaImageModified) {
+               for (var i = 0; i <= Main.hukusuuNum; i++) {
+                  if (this.charaData["CharaLoadPlus"]["_visible"][i]) {
+                     this.charaData["CharaLoadScale" + i]["_meter"] *= 10;
+                     this.charaData["CharaLoadScaleY" + i]["_meter"] *= 10;
+                     this.charaData["CharaLoadRotation" + i]["_meter"] *= 10;
+                  }
+               }
+            }
+
+         }
+
+      }
+
+      private function compareVersions(major: int, minor: int, alpha: int) : int {
+         if (this.loadedDataVersion < major) {
+            return -1;
+         } else if (this.loadedDataVersion > major) {
+            return 1;
+         } else {
+            if (this.charaData["SourceVersion"]["_minor"] < minor) {
+               return -1;
+            } else if (this.charaData["SourceVersion"]["_minor"] > minor) {
+               return 1;
+            } else {
+               return this.charaData["SourceVersion"]["_alpha"] - alpha;
+            }
+         }
+      }
+
+      private function beforeVersion(major: int, minor: int, alpha: int) : Boolean {
+         return compareVersions(major, minor, alpha) < 0;
       }
       
       private function Version91Fc2() : void

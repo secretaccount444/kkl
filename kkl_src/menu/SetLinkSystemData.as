@@ -19,7 +19,11 @@ package menu
          {
             MenuClass.systemData["LinkFreeRibonScale"]["_flag"] = false;
          }
-         if(MenuClass.systemData["FreeRibonScale" + _loc1_]["_meter"] == MenuClass.systemData["FreeRibonScaleY" + _loc1_]["_meter"] && (MenuClass.systemData["FreeRibonScale" + _loc1_]["_meter"] >= 70 && MenuClass.systemData["FreeRibonLine" + _loc1_]["_menu"] == 1 || MenuClass.systemData["FreeRibonScale" + _loc1_]["_meter"] < 70 && MenuClass.systemData["FreeRibonScale" + _loc1_]["_meter"] >= 50 && MenuClass.systemData["FreeRibonLine" + _loc1_]["_menu"] == 2 || MenuClass.systemData["FreeRibonScale" + _loc1_]["_meter"] < 50 && MenuClass.systemData["FreeRibonScale" + _loc1_]["_meter"] >= 30 && MenuClass.systemData["FreeRibonLine" + _loc1_]["_menu"] == 3 || MenuClass.systemData["FreeRibonScale" + _loc1_]["_meter"] < 30 && MenuClass.systemData["FreeRibonScale" + _loc1_]["_meter"] >= 10 && MenuClass.systemData["FreeRibonLine" + _loc1_]["_menu"] == 4 || MenuClass.systemData["FreeRibonScale" + _loc1_]["_meter"] < 10 && MenuClass.systemData["FreeRibonScale" + _loc1_]["_meter"] >= 0 && MenuClass.systemData["FreeRibonLine" + _loc1_]["_menu"] == 5) && MenuClass.systemData["FreeRibonLine" + _loc1_]["_color0"][0] == 61)
+         if(MenuClass.systemData["FreeRibonScale" + _loc1_]["_meter"] == MenuClass.systemData["FreeRibonScaleY" + _loc1_]["_meter"] && (MenuClass.systemData["FreeRibonScale" + _loc1_]["_meter"] >= 700 && MenuClass.systemData["FreeRibonLine" + _loc1_]["_menu"] == 1
+         || MenuClass.systemData["FreeRibonScale" + _loc1_]["_meter"] < 700 && MenuClass.systemData["FreeRibonScale" + _loc1_]["_meter"] >= 500 && MenuClass.systemData["FreeRibonLine" + _loc1_]["_menu"] == 2
+         || MenuClass.systemData["FreeRibonScale" + _loc1_]["_meter"] < 500 && MenuClass.systemData["FreeRibonScale" + _loc1_]["_meter"] >= 300 && MenuClass.systemData["FreeRibonLine" + _loc1_]["_menu"] == 3
+         || MenuClass.systemData["FreeRibonScale" + _loc1_]["_meter"] < 300 && MenuClass.systemData["FreeRibonScale" + _loc1_]["_meter"] >= 100 && MenuClass.systemData["FreeRibonLine" + _loc1_]["_menu"] == 4
+         || MenuClass.systemData["FreeRibonScale" + _loc1_]["_meter"] < 100 && MenuClass.systemData["FreeRibonScale" + _loc1_]["_meter"] >= 0 && MenuClass.systemData["FreeRibonLine" + _loc1_]["_menu"] == 5) && MenuClass.systemData["FreeRibonLine" + _loc1_]["_color0"][0] == 61)
          {
             MenuClass.systemData["LinkFreeRibonLine"]["_flag"] = true;
          }
@@ -36,7 +40,11 @@ package menu
          {
             MenuClass.systemData["LinkFreeBeltScale"]["_flag"] = false;
          }
-         if(MenuClass.systemData["FreeBeltScale" + _loc1_]["_meter"] == MenuClass.systemData["FreeBeltScaleY" + _loc1_]["_meter"] && (MenuClass.systemData["FreeBeltScale" + _loc1_]["_meter"] >= 80 && MenuClass.systemData["FreeBeltLine" + _loc1_]["_menu"] == 1 || MenuClass.systemData["FreeBeltScale" + _loc1_]["_meter"] < 80 && MenuClass.systemData["FreeBeltScale" + _loc1_]["_meter"] >= 60 && MenuClass.systemData["FreeBeltLine" + _loc1_]["_menu"] == 2 || MenuClass.systemData["FreeBeltScale" + _loc1_]["_meter"] < 60 && MenuClass.systemData["FreeBeltScale" + _loc1_]["_meter"] >= 40 && MenuClass.systemData["FreeBeltLine" + _loc1_]["_menu"] == 3 || MenuClass.systemData["FreeBeltScale" + _loc1_]["_meter"] < 40 && MenuClass.systemData["FreeBeltScale" + _loc1_]["_meter"] >= 20 && MenuClass.systemData["FreeBeltLine" + _loc1_]["_menu"] == 4 || MenuClass.systemData["FreeBeltScale" + _loc1_]["_meter"] < 20 && MenuClass.systemData["FreeBeltScale" + _loc1_]["_meter"] >= 0 && MenuClass.systemData["FreeBeltLine" + _loc1_]["_menu"] == 5) && MenuClass.systemData["FreeBeltLine" + _loc1_]["_color0"][0] == 61)
+         if(MenuClass.systemData["FreeBeltScale" + _loc1_]["_meter"] == MenuClass.systemData["FreeBeltScaleY" + _loc1_]["_meter"] && (MenuClass.systemData["FreeBeltScale" + _loc1_]["_meter"] >= 800 && MenuClass.systemData["FreeBeltLine" + _loc1_]["_menu"] == 1
+         || MenuClass.systemData["FreeBeltScale" + _loc1_]["_meter"] < 800 && MenuClass.systemData["FreeBeltScale" + _loc1_]["_meter"] >= 600 && MenuClass.systemData["FreeBeltLine" + _loc1_]["_menu"] == 2
+         || MenuClass.systemData["FreeBeltScale" + _loc1_]["_meter"] < 600 && MenuClass.systemData["FreeBeltScale" + _loc1_]["_meter"] >= 400 && MenuClass.systemData["FreeBeltLine" + _loc1_]["_menu"] == 3
+         || MenuClass.systemData["FreeBeltScale" + _loc1_]["_meter"] < 400 && MenuClass.systemData["FreeBeltScale" + _loc1_]["_meter"] >= 200 && MenuClass.systemData["FreeBeltLine" + _loc1_]["_menu"] == 4
+         || MenuClass.systemData["FreeBeltScale" + _loc1_]["_meter"] < 200 && MenuClass.systemData["FreeBeltScale" + _loc1_]["_meter"] >= 0 && MenuClass.systemData["FreeBeltLine" + _loc1_]["_menu"] == 5) && MenuClass.systemData["FreeBeltLine" + _loc1_]["_color0"][0] == 61)
          {
             MenuClass.systemData["LinkFreeBeltLine"]["_flag"] = true;
          }
@@ -45,7 +53,11 @@ package menu
             MenuClass.systemData["LinkFreeBeltLine"]["_flag"] = false;
          }
          _loc1_ = MenuClass.systemData["FreeChairPlus"]["_menu"];
-         if((MenuClass.systemData["FreeChairScale" + _loc1_]["_meter"] >= 80 && MenuClass.systemData["FreeChairLine" + _loc1_]["_menu"] == 1 || MenuClass.systemData["FreeChairScale" + _loc1_]["_meter"] < 80 && MenuClass.systemData["FreeChairScale" + _loc1_]["_meter"] >= 60 && MenuClass.systemData["FreeChairLine" + _loc1_]["_menu"] == 2 || MenuClass.systemData["FreeChairScale" + _loc1_]["_meter"] < 60 && MenuClass.systemData["FreeChairScale" + _loc1_]["_meter"] >= 40 && MenuClass.systemData["FreeChairLine" + _loc1_]["_menu"] == 3 || MenuClass.systemData["FreeChairScale" + _loc1_]["_meter"] < 40 && MenuClass.systemData["FreeChairScale" + _loc1_]["_meter"] >= 20 && MenuClass.systemData["FreeChairLine" + _loc1_]["_menu"] == 4 || MenuClass.systemData["FreeChairScale" + _loc1_]["_meter"] < 20 && MenuClass.systemData["FreeChairScale" + _loc1_]["_meter"] >= 0 && MenuClass.systemData["FreeChairLine" + _loc1_]["_menu"] == 5) && MenuClass.systemData["FreeChairLine" + _loc1_]["_color0"][0] == 61)
+         if((MenuClass.systemData["FreeChairScale" + _loc1_]["_meter"] >= 800 && MenuClass.systemData["FreeChairLine" + _loc1_]["_menu"] == 1 
+         || MenuClass.systemData["FreeChairScale" + _loc1_]["_meter"] < 800 && MenuClass.systemData["FreeChairScale" + _loc1_]["_meter"] >= 600 && MenuClass.systemData["FreeChairLine" + _loc1_]["_menu"] == 2
+         || MenuClass.systemData["FreeChairScale" + _loc1_]["_meter"] < 600 && MenuClass.systemData["FreeChairScale" + _loc1_]["_meter"] >= 400 && MenuClass.systemData["FreeChairLine" + _loc1_]["_menu"] == 3
+         || MenuClass.systemData["FreeChairScale" + _loc1_]["_meter"] < 400 && MenuClass.systemData["FreeChairScale" + _loc1_]["_meter"] >= 200 && MenuClass.systemData["FreeChairLine" + _loc1_]["_menu"] == 4
+         || MenuClass.systemData["FreeChairScale" + _loc1_]["_meter"] < 200 && MenuClass.systemData["FreeChairScale" + _loc1_]["_meter"] >= 0 && MenuClass.systemData["FreeChairLine" + _loc1_]["_menu"] == 5) && MenuClass.systemData["FreeChairLine" + _loc1_]["_color0"][0] == 61)
          {
             MenuClass.systemData["LinkFreeChairScale"]["_flag"] = true;
          }

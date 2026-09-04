@@ -52,6 +52,13 @@ package {
                 "ribbon": 94,
                 "imageLeft": "LeftHandMod",
                 "imageRight": "RightHandMod"
+            },
+            /* NOTE: we should only need to sort one attach point */
+            "fullBody": {
+                "hair": 91,
+                "ribbon": 91,
+                "imageLeft": "Body",
+                "imageRight": null
             }
         };
 
@@ -85,6 +92,34 @@ package {
                 try {
                     var parent = sprites[j][0].parent;
                     parent.setChildIndex(sprites[j][0], parent.numChildren - 1);
+                } catch (error: Error) {
+                    trace(error.getStackTrace());
+                }
+            }
+        }
+
+        
+        public static function pushSpritesToTarget(sprites: Array, targetSprite, offset: int) {
+            try {
+                sprites.sort(sortFixupSprites);
+            } catch (error: Error) {
+                trace(error.getStackTrace());
+            }
+
+            var targetIdx = -1;
+            for (var j = sprites.length - 1; j >= 0; j--) {
+                try {
+                    var parent = sprites[j][0].parent;
+                    var curIdx = parent.getChildIndex(sprites[j][0]);
+
+                    if (targetIdx < 0) {
+                        targetIdx = parent.getChildIndex(targetSprite) + offset;
+                    }
+
+                    parent.setChildIndex(sprites[j][0], targetIdx);
+                    if (curIdx < targetIdx) {
+                        targetIdx--;
+                    }
                 } catch (error: Error) {
                     trace(error.getStackTrace());
                 }
@@ -126,11 +161,23 @@ package {
         // }
 
         public static function fixup(character: int, attachPoints: Array) {
+            var imageAttachPoints = [];
+            for (var i = 0; i < attachPoints.length; i++) {
+                var attachPoint = attachPoints[i];
+                if (groupKeys[attachPoint]["imageLeft"]) {
+                    imageAttachPoints.push(groupKeys[attachPoint]["imageLeft"]);
+                }
+
+                if (groupKeys[attachPoint]["imageRight"]) {
+                    imageAttachPoints.push(groupKeys[attachPoint]["imageRight"]);
+                }
+            }
+
             /* shape: (attach point, depth, index) */
             try {
                 var hairSprites = Hair_HairExSet.collectSpriteGroups(character);
                 var ribbonSprites = Huku_RibonSet.collectSpriteGroups(character);
-                var images = Add_LoadURL2.collectSpriteGroups(character);
+                var images = Add_LoadURL2.collectSpriteGroups(character, imageAttachPoints);
             } catch (error: Error) {
                 trace(error.getStackTrace());
                 return;
@@ -141,9 +188,10 @@ package {
                     var attachPoint = attachPoints[i];
 
                     // trace("Fixing up sprites for character " + character + " modded attach point " + attachPoint);
-
+                    
                     var topSprites = [];
                     var bottomSprites = [];
+                    var midSprites = []; // Used for fullBody
 
                     if (ribbonSprites[groupKeys[attachPoint]["ribbon"]]) {
                         var key = groupKeys[attachPoint]["ribbon"];
@@ -151,74 +199,112 @@ package {
                         for (var depth: Object in attachedRibbons) {
                             for (var j=0; j < attachedRibbons[depth].length; j++) {
                                 var item = [attachedRibbons[depth][j][0], 0, depth, attachedRibbons[depth][j][1]];
-                                if (key === 2 || key === 3 || depth > 1) {
-                                    topSprites.push(item);
+                                if (key === 91) {
+                                    /* full body */
+                                    if (depth == 0) {
+                                        bottomSprites.push(item);
+                                    } else if (depth == 2) {
+                                        midSprites.push(item);
+                                    } else {
+                                        topSprites.push(item);
+                                    }
                                 } else {
-                                    bottomSprites.push(item);
+                                    if (depth > 1) {
+                                        topSprites.push(item);
+                                    } else {
+                                        bottomSprites.push(item);
+                                    }
                                 }
                             }
                         }
                     }
 
                     if (hairSprites[groupKeys[attachPoint]["hair"]]) {
-                        var attachedHair = hairSprites[groupKeys[attachPoint]["hair"]];
+                        var key = groupKeys[attachPoint]["hair"];
+                        var attachedHair = hairSprites[key];
                         for (var depth: Object in attachedHair) {
                             for (var j=0; j < attachedHair[depth].length; j++) {
                                 var item = [attachedHair[depth][j][0], 1, depth, attachedHair[depth][j][1]];
-                                if (depth === 0) {
-                                    bottomSprites.push(item);
+                                if (key === 91) {
+                                    /* full body */
+                                    if (depth == 0) {
+                                        bottomSprites.push(item);
+                                    } else if (depth == 2) {
+                                        midSprites.push(item);
+                                    } else {
+                                        topSprites.push(item);
+                                    }
                                 } else {
-                                    topSprites.push(item);
+                                    if (depth === 0) {
+                                        bottomSprites.push(item);
+                                    } else {
+                                        topSprites.push(item);
+                                    }
                                 }
                             }
                         }
                     }
 
                     if (images[groupKeys[attachPoint]["imageLeft"]]) {
-                        var attachedImages = images[groupKeys[attachPoint]["imageLeft"]];
+                        var key = groupKeys[attachPoint]["imageLeft"];
+                        var attachedImages = images[key];
                         for (var depth: Object in attachedImages) {
-                            var tup = [attachedImages[depth], 2, depth];
                             for (var j=0; j < attachedImages[depth].length; j++) {
                                 var item = [attachedImages[depth][j][0], 2, depth, attachedImages[depth][j][1]];
-                                if (depth === 0) {
-                                    bottomSprites.push(item);
+                                if (key === "Body") {
+                                    /* full body */
+                                    if (depth == 0) {
+                                        bottomSprites.push(item);
+                                    } else if (depth == 1 || depth >= 3) {
+                                        topSprites.push(item);
+                                    } else if (depth == 2) {
+                                        midSprites.push(item);
+                                    }
                                 } else {
-                                    topSprites.push(item);
+                                    if (depth === 0) {
+                                        bottomSprites.push(item);
+                                    } else {
+                                        topSprites.push(item);
+                                    }
                                 }
                             }
                         }
                     }
 
                     if (images[groupKeys[attachPoint]["imageRight"]]) {
-                        var attachedImages = images[groupKeys[attachPoint]["imageRight"]];
+                        var key = groupKeys[attachPoint]["imageRight"];
+                        var attachedImages = images[key];
                         for (var depth: Object in attachedImages) {
                             for (var j=0; j < attachedImages[depth].length; j++) {
                                 var item = [attachedImages[depth][j][0], 2, depth, attachedImages[depth][j][1]];
-                                if (depth === 0) {
-                                    bottomSprites.push(item);
+                                if (key === "Body") {
+                                    /* full body */
+                                    if (depth == 0) {
+                                        bottomSprites.push(item);
+                                    } else if (depth == 1 || depth >= 3) {
+                                        topSprites.push(item);
+                                    } else if (depth == 2) {
+                                        midSprites.push(item);
+                                    }
                                 } else {
-                                    topSprites.push(item);
+                                    if (depth === 0) {
+                                        bottomSprites.push(item);
+                                    } else {
+                                        topSprites.push(item);
+                                    }
                                 }
                             }
                         }
                     }
 
                     pushSpritesToBottom(bottomSprites);
-                    pushSpritesToTop(topSprites);
 
-                    // if (attachPoint === "mune") {
-                    //     pushSpritesToName(topLeftSprites, "Collar1");
-                    //     pushSpritesToName(topRightSprites, "Collar1");
-                    // } else if (attachPoint === "dou") {
-                    //     pushSpritesToName(topLeftSprites, "ribonSwap");
-                    //     pushSpritesToName(topRightSprites, "ribonSwap");
-                    // } else {
-                    //     pushSpritesToTop(topLeftSprites);
-                    //     pushSpritesToTop(topRightSprites);
-                    // }
-
-                    // trace("Finished fixing up sprites for character " + character + " modded attach point " + attachPoint);
-
+                    if (attachPoint === "fullBody") {
+                        pushSpritesToTarget(midSprites, MenuClass.charaAdd[character].Collar, 0);
+                        pushSpritesToTarget(topSprites, MenuClass.charaAdd[character].CharaloadAdd1, 1);
+                    } else {
+                        pushSpritesToTop(topSprites);
+                    }
                 } catch (error: Error) {
                     trace(error.getStackTrace());
                 }
@@ -245,20 +331,20 @@ package {
             var swaps = 0;
 
             while (true) {
-            do {
-                i += 1;
-            } while(pairs[i][1] < pivot);
-            
-            do {
-                j -= 1;
-            } while(pairs[j][1] > pivot);
+                do {
+                    i += 1;
+                } while(pairs[i][1] < pivot);
+                
+                do {
+                    j -= 1;
+                } while(pairs[j][1] > pivot);
 
-            if (i >= j) {
-                return [j, swaps];
-            }
+                if (i >= j) {
+                    return [j, swaps];
+                }
 
-            swapSprites(pairs, i, j);
-            swaps += 1;
+                swapSprites(pairs, i, j);
+                swaps += 1;
             }
 
             return [j, swaps];
@@ -270,38 +356,38 @@ package {
             var swaps = 0;
             
             if (len <= 1) {
-            return 0;
-            } else if (len == 2) {
-            if (pairs[lo][1] > pairs[hi][1]) {
-                swapSprites(pairs, lo, hi-1);
-                return 1;
-            } else {
                 return 0;
-            }
+            } else if (len == 2) {
+                if (pairs[lo][1] > pairs[hi][1]) {
+                    swapSprites(pairs, lo, hi-1);
+                    return 1;
+                } else {
+                    return 0;
+                }
             }
 
             if (pairs[lo][1] > pairs[mid][1]) {
-            swapSprites(pairs, lo, mid);
-            swaps += 1;
+                swapSprites(pairs, lo, mid);
+                swaps += 1;
             }
 
             if (pairs[lo][1] > pairs[hi][1]) {
-            swapSprites(pairs, lo, hi);
-            swaps += 1;
+                swapSprites(pairs, lo, hi);
+                swaps += 1;
             }
 
             if (pairs[mid][1] > pairs[hi][1]) {
-            swapSprites(pairs, mid, hi);
-            swaps += 1;
+                swapSprites(pairs, mid, hi);
+                swaps += 1;
             }
 
             if (len > 3) {
-            var partitionRet = partitionSprites(pairs, lo, hi);
-            var p = partitionRet[0];
+                var partitionRet = partitionSprites(pairs, lo, hi);
+                var p = partitionRet[0];
 
-            swaps += partitionRet[1];
-            swaps += quicksortSprites(pairs, lo, p);
-            swaps += quicksortSprites(pairs, p+1, hi);
+                swaps += partitionRet[1];
+                swaps += quicksortSprites(pairs, lo, p);
+                swaps += quicksortSprites(pairs, p+1, hi);
             }
 
             return swaps;
@@ -325,13 +411,13 @@ package {
             }
 
             try {
-            pairs.sort(function (a, b) {
-                return parent.getChildIndex(a[0]) - parent.getChildIndex(b[0]);
-            });
+                pairs.sort(function (a, b) {
+                    return parent.getChildIndex(a[0]) - parent.getChildIndex(b[0]);
+                });
 
-            swaps = quicksortSprites(pairs, 0, pairs.length - 1);
+                swaps = quicksortSprites(pairs, 0, pairs.length - 1);
             } catch(myError:Error) {
-            Main.logError(myError, "while fixing up " + trace_details + " sprites");
+                Main.logError(myError, "while fixing up " + trace_details + " sprites");
             }
 
             /* This is a bubble sorting network; I don't think we can use a traditional sorting algorithm
@@ -359,7 +445,7 @@ package {
             // }
 
             if (swaps > 0) {
-            trace("Performed " + swaps + " swaps when fixing up " + trace_details + " sprites");
+                trace("Performed " + swaps + " swaps when fixing up " + trace_details + " sprites");
             }
         }
     }

@@ -52,7 +52,9 @@ package menu
          else
          {
             _loc4_ = param1.currentTarget.tabName;
-            if (visType == "system" || visType == "systemPlus") {
+            if (_loc4_ == "RibonPlus" || _loc4_ == "HairExPlus") {
+               hasSlots = true;
+            } else if (visType == "system" || visType == "systemPlus") {
                hasSlots = MenuClass.systemData[tabName]["_visible"].length > 1;
             } else {
                hasSlots = MenuClass.charaData[MenuClass._nowCharaNum][tabName]["_visible"].length > 1;

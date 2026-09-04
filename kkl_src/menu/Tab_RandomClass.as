@@ -148,6 +148,14 @@ package menu
                   {
                      this.charaData[this.tabNamePlus]["_meter"] = Math.floor(Math.random() * 1000);
                   }
+                  else if(this.tabData[count][2]["_meterType"] == 3)
+                  {
+                     this.charaData[this.tabNamePlus]["_meter"] = Math.floor(Math.random() * 1000);
+                  }
+                  else if(this.tabData[count][2]["_meterType"] == 4)
+                  {
+                     this.charaData[this.tabNamePlus]["_meter"] = Math.floor(Math.random() * 3600);
+                  }
                }
                catch(myError:Error)
                {

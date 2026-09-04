@@ -22,7 +22,7 @@ package undo {
         private var visibleB: Boolean;
 
         /* NOTE: character > 10 indicates a system movement */
-        public function SlotShiftAction(headerName:String, offset: Number, character: int = 100) {
+        public function SlotShiftAction(headerName:String, offset: Number, character: int = 100, slotO: Number = -1) {
             super();
 
             this.headerName = headerName;
@@ -53,13 +53,26 @@ package undo {
 
                 if (first) {
                     this.dataTarget = dataTarget;
-                    this.slotA = Number(MenuClass.systemData[dataTarget]["_menu"]);
+                    if (slotO != -1) {
+                        this.slotA = slotO;
+                    } else {
+                        this.slotA = Number(MenuClass.systemData[dataTarget]["_menu"]);
+                    }
                     this.slotB = this.slotA + offset;
 
-                    if (this.slotB < 0) {
-                        this.slotB = dataSource[dataTarget]["_visible"].length - 1;
-                    } else if (this.slotB >= dataSource[dataTarget]["_visible"].length) {
+                    if (this.dataTarget == "RibonPlus" || this.dataTarget == "HairExPlus") {
+                        if (this.slotB < 0) {
+                            this.slotB = 998;
+                        } else if (this.slotB >= 999) {
+                            this.slotB = 0;
+                        }
+                    }
+                    else { 
+                        if (this.slotB < 0) {
+                            this.slotB = dataSource[dataTarget]["_visible"].length - 1;
+                        } else if (this.slotB >= dataSource[dataTarget]["_visible"].length) {
                         this.slotB = 0;
+                        }
                     }
 
                     this.visibleA = dataSource[dataTarget]["_visible"][this.slotA];
@@ -159,7 +172,7 @@ package undo {
             if (this.isSystem) {
                 if(this.dataTarget == "LoadPlus")
                 {
-                    for (var i = 0; i < 99; i++) {
+                    for (var i = 0; i <= Main.hukusuuNum; i++) {
                         new Tab_LoadURL("load", i);
                     }
                 }
@@ -186,8 +199,8 @@ package undo {
             }
             else if (this.dataTarget == "HairExPlus")
             {
-                Hair_HairExSet.setFc(this.character, this.slotA, "move");
-                Hair_HairExSet.setFc(this.character, this.slotB, "move");
+                Hair_HairExSet.setFc(this.character, this.slotA, "swap");
+                Hair_HairExSet.setFc(this.character, this.slotB, "swap");
             }
             else if (this.dataTarget == "MarkPlus")
             {

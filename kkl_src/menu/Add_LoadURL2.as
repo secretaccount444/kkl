@@ -15,6 +15,7 @@ package menu
       private var charaData:Object;
 
       public static var attachPointLayeringKeys = {
+         "Body": "fullBody",
          "LeftThighMod": "thigh",
          "LeftThighMod": "thigh",
          "RightLegMod": "leg",
@@ -402,7 +403,7 @@ package menu
             {
                new MeterPersentRibon(-500,500,charaNum,"CharaLoadX",num);
                this.charaAdd["loadObj" + num].x = MeterPersentRibon.MeterPersentNum;
-               new MeterPersentRibon(-2.5,2.5,charaNum,"CharaLoadFineX",num);
+               new MeterPersentRibon(-0.5,0.5,charaNum,"CharaLoadFineX",num);
                this.charaAdd["loadObj" + num].x += MeterPersentRibon.MeterPersentNum;
             }
             else if (
@@ -422,7 +423,7 @@ package menu
             {
                new MeterPersentRibon(-515,485,charaNum,"CharaLoadX",num);
                this.charaAdd["loadObj" + num].x = MeterPersentRibon.MeterPersentNum;
-               new MeterPersentRibon(-2.5,2.5,charaNum,"CharaLoadFineX",num);
+               new MeterPersentRibon(-0.5,0.5,charaNum,"CharaLoadFineX",num);
                this.charaAdd["loadObj" + num].x += MeterPersentRibon.MeterPersentNum;
             }
             else if (addName0 == "HeadMod")
@@ -464,28 +465,28 @@ package menu
             {
                new MeterPersentRibon(100,-900,charaNum,"CharaLoadY",num);
                this.charaAdd["loadObj" + num].y = MeterPersentRibon.MeterPersentNum;
-               new MeterPersentRibon(2.5,-2.5,charaNum,"CharaLoadFineY",num);
+               new MeterPersentRibon(0.5,-0.5,charaNum,"CharaLoadFineY",num);
                this.charaAdd["loadObj" + num].y += MeterPersentRibon.MeterPersentNum;
             }
             else if(addName0 == "headAdd")
             {
                new MeterPersentRibon(500,-500,charaNum,"CharaLoadY",num);
                this.charaAdd["loadObj" + num].y = MeterPersentRibon.MeterPersentNum;
-               new MeterPersentRibon(2.5,-2.5,charaNum,"CharaLoadFineY",num);
+               new MeterPersentRibon(0.5,-0.5,charaNum,"CharaLoadFineY",num);
                this.charaAdd["loadObj" + num].y += MeterPersentRibon.MeterPersentNum;
             }
             else if(addName0 == "LoadLeftArm" || addName0 == "LoadRightArm")
             {
                new MeterPersentRibon(650,-350,charaNum,"CharaLoadY",num);
                this.charaAdd["loadObj" + num].y = MeterPersentRibon.MeterPersentNum;
-               new MeterPersentRibon(2.5,-2.5,charaNum,"CharaLoadFineY",num);
+               new MeterPersentRibon(0.5,-0.5,charaNum,"CharaLoadFineY",num);
                this.charaAdd["loadObj" + num].y += MeterPersentRibon.MeterPersentNum;
             }
             else if(addName0 == "LoadLeftHand" || addName0 == "LoadRightHand")
             {
                new MeterPersentRibon(650,-350,charaNum,"CharaLoadY",num);
                this.charaAdd["loadObj" + num].y = MeterPersentRibon.MeterPersentNum;
-               new MeterPersentRibon(2.5,-2.5,charaNum,"CharaLoadFineY",num);
+               new MeterPersentRibon(0.5,-0.5,charaNum,"CharaLoadFineY",num);
                this.charaAdd["loadObj" + num].y += MeterPersentRibon.MeterPersentNum;
             }
             else if (
@@ -501,7 +502,7 @@ package menu
             {
                new MeterPersentRibon(650,-350,charaNum,"CharaLoadY",num);
                this.charaAdd["loadObj" + num].y = MeterPersentRibon.MeterPersentNum;
-               new MeterPersentRibon(2.5,-2.5,charaNum,"CharaLoadFineY",num);
+               new MeterPersentRibon(0.5,-0.5,charaNum,"CharaLoadFineY",num);
                this.charaAdd["loadObj" + num].y += MeterPersentRibon.MeterPersentNum;
             }
             else if (addName0 == "HeadMod")
@@ -599,14 +600,14 @@ package menu
          }
       }
 
-      public static function collectSpriteGroups (character: int) : Object {
+      public static function collectSpriteGroups (character: int, attachPoints: Array) : Object {
          var charaAdd = MenuClass.charaAdd[character];
          var charaData = MenuClass.charaData[character];
          var curSprite = null;
          var spriteGroups = {};
          var sortByDepth = false;
 
-         forEachAttachedSprite(character, ["LeftUpperArmMod", "RightUpperArmMod", "LeftLowerArmMod", "RightLowerArmMod", "LeftHandMod", "RightHandMod", "LeftThighMod", "RightThighMod", "LeftLegMod", "RightLegMod", "LeftFootMod", "RightFootMod"], function (curSprite, slot, curAttach, charaAdd, charaData) {
+         forEachAttachedSprite(character, attachPoints, function (curSprite, slot, curAttach, charaAdd, charaData) {
             var curDepth = charaData["CharaLoadReversalDepth" + slot]["_depth"];
             if (!spriteGroups[curAttach]) spriteGroups[curAttach] = {};
             if (!spriteGroups[curAttach][curDepth]) spriteGroups[curAttach][curDepth] = [];
@@ -617,7 +618,7 @@ package menu
       }
 
       public static function sortModAttachSprites (character: int, attachPoints: Array, sortByDepth: Boolean) : void {
-         var spriteGroups = collectSpriteGroups(character);
+         var spriteGroups = collectSpriteGroups(character, attachPoints);
 
          for (var i = 0; i < attachPoints.length; i++) {
             var groupKey = attachPoints[i];
@@ -657,12 +658,12 @@ package menu
       public static function calculateRotatedOffset(character: int, slot: int, xBounds: Array, yBounds: Array, inRot: int) : Array {
          new MeterPersentRibon(xBounds[0], xBounds[1], character,"CharaLoadX",slot);
          var offsetX = Number(MeterPersentRibon.MeterPersentNum);
-         new MeterPersentRibon(-2.5, 2.5, character,"CharaLoadFineX",slot);
+         new MeterPersentRibon(-0.5, 0.5, character,"CharaLoadFineX",slot);
          offsetX += Number(MeterPersentRibon.MeterPersentNum);
 
          new MeterPersentRibon(yBounds[0], yBounds[1], character,"CharaLoadY",slot);
          var offsetY = Number(MeterPersentRibon.MeterPersentNum);
-         new MeterPersentRibon(2.5, -2.5, character,"CharaLoadFineY",slot);
+         new MeterPersentRibon(0.5, -0.5, character,"CharaLoadFineY",slot);
          offsetY += Number(MeterPersentRibon.MeterPersentNum);
 
          var rotation = Number(inRot) * (Math.PI / 180.0);

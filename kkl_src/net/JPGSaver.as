@@ -11,14 +11,19 @@ package net
    import flash.events.IOErrorEvent;
    import flash.events.ProgressEvent;
    import flash.events.SecurityErrorEvent;
-   import flash.net.FileReference;
+   import flash.filesystem.File;
+   import flash.filesystem.FileStream;
+   import flash.filesystem.FileMode;
    import flash.utils.ByteArray;
    
    public class JPGSaver extends EventDispatcher
    {
        
       
-      private var file:FileReference;
+      private var file: File;
+      private var data: ByteArray;
+      private var defaultFilename: String;
+      private var formatExtension: String;
       
       public function JPGSaver()
       {
@@ -28,7 +33,8 @@ package net
       
       private function init() : void
       {
-         this.file = new FileReference();
+         this.file = new File();
+         this.file.addEventListener(Event.SELECT,this.select);
          this.file.addEventListener(Event.OPEN,this.open,false,0,true);
          this.file.addEventListener(ProgressEvent.PROGRESS,this.progress,false,0,true);
          this.file.addEventListener(Event.COMPLETE,this.complete,false,0,true);
@@ -40,8 +46,10 @@ package net
       public function save(param1:BitmapData, param2:String) : void
       {
          var _loc3_:BitmapData = null;
-         var _loc4_:ByteArray = null;
          var _loc5_:JPGEncoder = null;
+
+         this.defaultFilename = param2;
+
          if(MenuClass.cameraMode == 0)
          {
             _loc3_ = new BitmapData(param1.width,param1.height);
@@ -55,23 +63,45 @@ package net
          _loc3_.unlock();
          if(MenuClass.cameraMode == 0)
          {
-            _loc4_ = (_loc5_ = new JPGEncoder(MenuClass.jpgMeter)).encode(_loc3_);
+            this.data = (_loc5_ = new JPGEncoder(MenuClass.jpgMeter)).encode(_loc3_);
+            this.formatExtension = ".jpg";
          }
          else if(MenuClass.cameraMode == 1)
          {
             if (Main.processingCode != null && Main.processingCode.doFastEncode()) {
                var opts: PNGEncoderOptions = new PNGEncoderOptions(true);
-               _loc4_ = _loc3_.encode(new Rectangle(0, 0, _loc3_.width, _loc3_.height), opts);
+               this.data = _loc3_.encode(new Rectangle(0, 0, _loc3_.width, _loc3_.height), opts);
             } else {
-               _loc4_ = PNGEncoder.encode(_loc3_);
+               this.data = PNGEncoder.encode(_loc3_);
             }
+            this.formatExtension = ".png";
          }
 
          if(Main.processingCode != null) {
-            Main.processingCode.storeData(_loc4_);
+            Main.processingCode.storeData(this.data);
          } else {
-            this.file.save(_loc4_,param2);
+            this.file.browseForSave("Save Image");
+            // this.file.save(this.data,param2);
          }
+      }
+      
+      private function select(ev:Event) : void
+      {
+         var targetFile: File = ev.target as File;
+         var dotIdx = targetFile.nativePath.lastIndexOf(".");
+
+         if (targetFile.nativePath.length == 0) {
+            targetFile.nativePath = this.defaultFilename;
+         } else if (dotIdx < 0 || targetFile.nativePath.substring(dotIdx) != this.formatExtension) {
+            targetFile.nativePath += this.formatExtension;
+         }
+
+         var stream: FileStream = new FileStream();
+         stream.open(targetFile, FileMode.WRITE);
+         stream.writeBytes(this.data);
+         stream.close();
+
+         this.dispatchEvent(new Event(Event.COMPLETE));
       }
       
       private function open(param1:Event) : void

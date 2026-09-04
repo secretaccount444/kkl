@@ -47,7 +47,7 @@ package menu
          else
          {
             this.charaAdd.head.Gag.visible = false;
-            this.charaAdd.head.mouth.visible = true;
+            this.charaAdd.head.mouth.visible = this.charaData["EmotionMouth"]["_visible"][0];
             this.charaAdd.head.Gag.gotoAndStop(1);
          }
       }

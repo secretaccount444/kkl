@@ -376,6 +376,7 @@ package menu
             catch(myError:Error)
             {
                trace("MenuClass Chara_Class Error    ",myError);
+               trace(myError.getStackTrace());
             }
          }
          else

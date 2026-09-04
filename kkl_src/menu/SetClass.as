@@ -13,6 +13,8 @@ package menu
    import parameter.Vibrator_data;
    import system.MeterPersent;
    import system.QualityClass;
+   import parts.Ribbon;
+   import parts.Hairpiece;
    
    public class SetClass
    {
@@ -74,6 +76,7 @@ package menu
          var j:int = 0;
          var h:int = 0;
          var n:int = 0;
+         var hairpiece:Hairpiece = null;
          var testNum:int = 0;
          var tabStr:Array = null;
          var visibleCheck:int = 0;
@@ -616,24 +619,13 @@ package menu
                   }
                   else
                   {
-                     i = 0;
-                     while(i <= Main.hukusuuNum)
-                     {
-                        try
-                        {
-                           this.charaAdd["HairEx" + i + "_0"].HairEx0.visible = false;
+                     for each (hairpiece in Hairpiece.getVisibleHairpieces(this.charaNum)) {
+                        if (hairpiece.leftSprite) {
+                           hairpiece.leftSprite.visible = false;
                         }
-                        catch(myError:Error)
-                        {
+                        if (hairpiece.rightSprite) {
+                           hairpiece.rightSprite.visible = false;
                         }
-                        try
-                        {
-                           this.charaAdd["HairEx" + i + "_1"].HairEx0.visible = false;
-                        }
-                        catch(myError:Error)
-                        {
-                        }
-                        i++;
                      }
                   }
                }
@@ -883,6 +875,8 @@ package menu
             this.tabName == "RightFootOffsetY" ||
             this.tabName == "LeftThighVisible" ||
             this.tabName == "RightThighVisible" ||
+            this.tabName == "LeftShiriVisible" ||
+            this.tabName == "RightShiriVisible" ||
             this.tabName == "LeftLegVisible" ||
             this.tabName == "RightLegVisible" ||
             this.tabName == "LeftFootVisible" ||
@@ -897,6 +891,7 @@ package menu
                   this.charaData["RightThighOffsetX"]["_meter"] = this.charaData["LeftThighOffsetX"]["_meter"];
                   this.charaData["RightThighOffsetY"]["_meter"] = this.charaData["LeftThighOffsetY"]["_meter"];
                   this.charaData["RightThighVisible"]["_visible"][0] = this.charaData["LeftThighVisible"]["_visible"][0];
+                  this.charaData["RightShiriVisible"]["_visible"][0] = this.charaData["LeftShiriVisible"]["_visible"][0];
                }
 
                if (MenuClass.systemData["LinkLegSettings"]["_flag"]) {
@@ -1186,6 +1181,10 @@ package menu
                ErrorFc(myError);
             }
          }
+         else if (this.tabName == "LowerBodyVisible")
+         {
+            this.charaAdd.dou.visible = this.charaData["LowerBodyVisible"]["_visible"][0];
+         }
          else if(this.tabName == "BodySize" || this.tabName == "BodyYMove")
          {
             try
@@ -1210,7 +1209,7 @@ package menu
                ErrorFc(myError);
             }
          }
-         else if(this.tabName == "ShoulderWidth" || this.tabName == "LeftShoulderVisible" || this.tabName == "RightShoulderVisible")
+         else if(this.tabName == "ShoulderWidth" || this.tabName == "LeftShoulderVisible" || this.tabName == "RightShoulderVisible" || this.tabName == "UpperBodyVisible")
          {
             if (MenuClass.systemData["LinkUpperArmSettings"]["_flag"]) {
                this.charaData["RightUpperArmScaleX"]["_meter"] = this.charaData["LeftUpperArmScaleX"]["_meter"];
@@ -1253,7 +1252,7 @@ package menu
                ErrorFc(myError);
             }
          }
-         else if(this.tabName == "NeckHeight")
+         else if(this.tabName == "NeckHeight" || this.tabName == "NeckVisible")
          {
             try
             {
@@ -1356,7 +1355,7 @@ package menu
                ErrorFc(myError);
             }
          }
-         else if(this.tabName == "HeadScale")
+         else if(this.tabName == "HeadScale" || this.tabName == "HeadVisible")
          {
             try
             {
@@ -1982,17 +1981,11 @@ package menu
                   {
                      this.charaAdd.head.Bangs.scaleX = -1;
                   }
-                  i = 0;
-                  while(i <= Main.hukusuuNum)
-                  {
-                     if(this.charaData["HairExPlus"]["_visible"][i])
-                     {
-                        if(this.charaData["HairExAdd" + i]["_add0"] == 2)
-                        {
-                           new Hair_ExRotation(this.charaNum,i);
-                        }
+
+                  for each (hairpiece in Hairpiece.getVisibleHairpieces(this.charaNum)) {
+                     if (hairpiece.attachPoint == 2) {
+                        new Hair_ExRotation(this.charaNum, hairpiece.slot);
                      }
-                     i++;
                   }
                   this.charaAdd.head.Bangs.gotoAndStop(this.charaData[this.tabName]["_menu"] + 2);
                   if(MenuClass.bangsHeightData[this.charaNum][0] != this.charaData[this.tabName]["_menu"])
@@ -2119,11 +2112,8 @@ package menu
                }
                else if(this.clickTarget != "paste")
                {
-                  i = 0;
-                  while(i <= Main.hukusuuNum)
-                  {
-                     Hair_HairExSet.setFc(this.charaNum,i,this.clickTarget);
-                     i++;
+                  for each (hairpiece in Hairpiece.getAllHairpieces(this.charaNum)) {
+                     Hair_HairExSet.setFc(this.charaNum, hairpiece.slot, this.clickTarget);
                   }
                }
             }
@@ -2132,7 +2122,7 @@ package menu
                ErrorFc(myError);
             }
          }
-         else if(this.tabName == "HairEx" || this.tabName == "HairExRotation" || this.tabName == "HairExRotationPlus" || this.tabName == "HairExY" || this.tabName == "HairExX" || this.tabName == "HairExScaleX" || this.tabName == "HairExScaleY" || this.tabName == "HairExLine" || this.tabName == "HairExScaleB" || this.tabName == "HairExAdd" || this.tabName == "HairExAlpha")
+         else if(this.tabName == "HairEx" || this.tabName == "HairExRotation" || this.tabName == "HairExRotationPlus" || this.tabName == "HairExY" || this.tabName == "HairExX" || this.tabName == "HairExScaleX" || this.tabName == "HairExScaleY" || this.tabName == "HairExLine" || this.tabName == "HairExScaleB" || this.tabName == "HairExAdd" || this.tabName == "HairExAlpha" || this.tabName == "HairExFineX" || this.tabName == "HairExFineY")
          {
             try
             {
@@ -2142,13 +2132,10 @@ package menu
                }
                else if(this.clickTarget == "paste")
                {
-                  if(this.tabName == "HairExY")
+                  if(this.tabName == "HairExY" || this.tabName == "HairExFineY")
                   {
-                     i = 0;
-                     while(i <= Main.hukusuuNum)
-                     {
-                        Hair_HairExSet.setFc(this.charaNum,i,this.clickTarget);
-                        i++;
+                     for each (hairpiece in Hairpiece.getAllHairpieces(this.charaNum)) {
+                        Hair_HairExSet.setFc(this.charaNum, hairpiece.slot, this.clickTarget);
                      }
                   }
                   if(this.charaData["HairExScaleX" + MenuClass.systemData["HairExPlus"]["_menu"]]["_meter"] != this.charaData["HairExScaleY" + MenuClass.systemData["HairExPlus"]["_menu"]]["_meter"])
@@ -2162,20 +2149,14 @@ package menu
                }
                else if(this.clickTarget == "HatHair")
                {
-                  i = 0;
-                  while(i <= Main.hukusuuNum)
-                  {
-                     Hair_HairExSet.setFc(this.charaNum,i,this.clickTarget);
-                     i++;
+                  for each (hairpiece in Hairpiece.getAllHairpieces(this.charaNum)) {
+                     Hair_HairExSet.setFc(this.charaNum, hairpiece.slot, this.clickTarget);
                   }
                }
                else if(this.clickTarget != "move")
                {
-                  i = 0;
-                  while(i <= Main.hukusuuNum)
-                  {
-                     Hair_HairExSet.setFc(this.charaNum,i,this.clickTarget);
-                     i++;
+                  for each (hairpiece in Hairpiece.getAllHairpieces(this.charaNum)) {
+                     Hair_HairExSet.setFc(this.charaNum, hairpiece.slot, this.clickTarget);
                   }
                }
             }
@@ -2188,8 +2169,8 @@ package menu
          {
             try
             {
-               this.charaAdd.HairBack.hairBack.visible = this.charaData["HairBack"]["_visible"][0];
-               if(this.charaData["HairBack"]["_visible"][0])
+               this.charaAdd.HairBack.hairBack.visible = this.charaData["HeadVisible"]["_visible"][0] && this.charaData["HairBack"]["_visible"][0];
+               if(this.charaData["HeadVisible"]["_visible"][0] && this.charaData["HairBack"]["_visible"][0])
                {
                   this.charaAdd.HairBack.hairBack.gotoAndStop(this.charaData[this.tabName]["_menu"] + 2);
                   this.charaAdd.HairBack.hairBack.hairBack.mouseChildren = false;
@@ -2279,11 +2260,8 @@ package menu
                {
                   if(this.charaData["SideBurnLeft"]["_visible"][0] || this.charaData["SideBurnRight"]["_visible"][0])
                   {
-                     i = 0;
-                     while(i <= Main.RibonhukusuuNum)
-                     {
-                        Huku_RibonSet.setFc(this.charaNum,i,"depth");
-                        i++;
+                     for each (var ribbon in Ribbon.getVisibleRibbons(this.charaNum)) {
+                        Huku_RibonSet.setFc(this.charaNum, ribbon.slot,"depth");
                      }
                   }
                }
@@ -2511,8 +2489,8 @@ package menu
          {
             try
             {
-               this.charaAdd.head["eye" + 0].eyeball.eyeLight.rotation = this.charaData["EyeballLightRotation"]["_meter"] * -1;
-               this.charaAdd.head["eye" + 1].eyeball.eyeLight.rotation = this.charaData["EyeballLightRotation"]["_meter"];
+               this.charaAdd.head["eye" + 0].eyeball.eyeLight.rotation = this.charaData["EyeballLightRotation"]["_meter"] * -0.1;
+               this.charaAdd.head["eye" + 1].eyeball.eyeLight.rotation = this.charaData["EyeballLightRotation"]["_meter"] * 0.1;
             }
             catch(myError:Error)
             {
@@ -3482,8 +3460,9 @@ package menu
             {
                this.charaAdd.head.eye0.x = -18.8 + MeterPersent.MeterPersentNum;
                this.charaAdd.head.eye1.x = 18.8 + MeterPersent.MeterPersentNum * -1;
-               this.charaAdd.head.eyebrow0.x = SizeDataClass.bodyDefault_y["eyebrow0X"] + MeterPersent.MeterPersentNum;
-               this.charaAdd.head.eyebrow1.x = SizeDataClass.bodyDefault_y["eyebrow1X"] + MeterPersent.MeterPersentNum * -1;
+               new Emotion_Eyebrow(this.charaNum);
+               // this.charaAdd.head.eyebrow0.x = SizeDataClass.bodyDefault_y["eyebrow0X"] + MeterPersent.MeterPersentNum;
+               // this.charaAdd.head.eyebrow1.x = SizeDataClass.bodyDefault_y["eyebrow1X"] + MeterPersent.MeterPersentNum * -1;
             }
             catch(myError:Error)
             {
@@ -3579,6 +3558,12 @@ package menu
          {
             try
             {
+               if (!this.charaAdd.head.mouthLayerTarget0) {
+                  var pt = new MovieClip();
+                  this.charaAdd.head.addChildAt(pt, this.charaAdd.head.getChildIndex(this.charaAdd.head.mouth));
+                  this.charaAdd.head.mouthLayerTarget0 = pt;
+               }
+
                Huku_MarkSet.clearMouthAttachedMarks(this.charaNum);
                new Emotion_MouthReversal(this.charaNum);
                this.charaAdd.head.mouth.gotoAndStop(this.charaData[this.tabName]["_menu"] + 1);
@@ -3593,6 +3578,14 @@ package menu
                }
                Huku_MarkSet.updateMouth(this.charaNum);
                this.charaAdd.head.mouth.visible = this.charaData[this.tabName]["_visible"][0];
+
+               if (this.charaData["EmotionMouth"]["_depth"] == 0) {
+                  this.charaAdd.head.setChildIndex(this.charaAdd.head.mouth, this.charaAdd.head.getChildIndex(this.charaAdd.head.mouthLayerTarget0) + 1);
+               } else if (this.charaData["EmotionMouth"]["_depth"] == 1) {
+                  this.charaAdd.head.setChildIndex(this.charaAdd.head.mouth, this.charaAdd.head.numChildren - 1);
+               }
+
+               new Chara_ColorClass(this.charaNum, "MouthSen");
             }
             catch(myError:Error)
             {
@@ -3612,6 +3605,8 @@ package menu
                catch(myError:Error)
                {
                }
+
+               new Chara_ColorClass(this.charaNum, "MouthSen");
             }
             catch(myError:Error)
             {
@@ -3626,6 +3621,7 @@ package menu
                if(MenuClass.charaData[this.charaNum]["MouthSen"]["_menu"] + 1 != this.charaAdd.head.mouth.sen0.currentFrame)
                {
                   this.charaAdd.head.mouth.sen0.gotoAndStop(MenuClass.charaData[this.charaNum]["MouthSen"]["_menu"] + 1);
+                  new Chara_ColorClass(this.charaNum, "MouthSen");
                }
                try
                {
@@ -4051,6 +4047,18 @@ package menu
             catch(myError:Error)
             {
                ErrorFc(myError);
+            }
+         }
+         else if(this.tabName == "VibratorAlpha")
+         {
+            try
+            {
+               new MeterPersent(0, 1, "VibratorAlpha", this.charaNum);
+               this.charaAdd.vibrator.vibrator.alpha = MeterPersent.MeterPersentNum;
+            }
+            catch(err: Error)
+            {
+               ErrorFc(err);
             }
          }
          else if(this.tabName == "Kutu0" || this.tabName == "Kutu1" || this.tabName == "KutuLong0" || this.tabName == "KutuLong1")
@@ -4760,179 +4768,65 @@ package menu
                new SetClass(this.charaNum,"HairBack","tab");
                new SetClass(this.charaNum,"SideBurnLeft","tab");
                new SetClass(this.charaNum,"SideBurnRight","tab");
-               i = 0;
-               while(i <= Main.hukusuuNum)
-               {
-                  if(this.charaData["HairExPlus"]["_visible"][i])
-                  {
-                     if(this.charaData["Hat"]["_visible"][0])
+               for each (hairpiece in Hairpiece.getVisibleHairpieces(this.charaNum)){
+                  if(this.charaData["Hat"]["_visible"][0])
                      {
                         if(this.charaData["Hat"]["_hair3"] == 0)
                         {
-                           try
-                           {
-                              this.charaAdd["HairEx" + i + "_0"].visible = false;
+                           if (hairpiece.leftSprite) {
+                              hairpiece.leftSprite.visible = false;
                            }
-                           catch(myError:Error)
-                           {
-                           }
-                           try
-                           {
-                              this.charaAdd["HairEx" + i + "_1"].visible = false;
-                           }
-                           catch(myError:Error)
-                           {
+                           if (hairpiece.rightSprite) {
+                              hairpiece.rightSprite.visible = false;
                            }
                         }
                         else
                         {
-                           try
-                           {
-                              this.charaAdd["HairEx" + i + "_0"].visible = true;
+                           if (hairpiece.leftSprite) {
+                              hairpiece.leftSprite.visible = true;
                            }
-                           catch(myError:Error)
-                           {
-                           }
-                           try
-                           {
-                              this.charaAdd["HairEx" + i + "_1"].visible = true;
-                           }
-                           catch(myError:Error)
-                           {
+                           if (hairpiece.rightSprite) {
+                              hairpiece.rightSprite.visible = true;
                            }
                         }
                      }
                      else
                      {
-                        try
-                        {
-                           this.charaAdd["HairEx" + i + "_0"].visible = true;
+                        if (hairpiece.leftSprite) {
+                           hairpiece.leftSprite.visible = true;
                         }
-                        catch(myError:Error)
-                        {
+                        if (hairpiece.rightSprite) {
+                           hairpiece.rightSprite.visible = true;
                         }
-                        try
-                        {
-                           this.charaAdd["HairEx" + i + "_1"].visible = true;
+                     }
+               }
+
+               for each (var ribbon: Ribbon in Ribbon.getVisibleRibbons(this.charaNum)) {
+                  if (ribbon.attachPoint == 0 || ribbon.attachPoint == 1) {
+                     if (this.charaData["Hat"]["_visible"][0] && this.charaData["Hat"]["_hair4"] == 0) {
+                        if (ribbon.leftSprite) {
+                           ribbon.leftSprite.visible = false;
                         }
-                        catch(myError:Error)
-                        {
+
+                        if (ribbon.rightSprite) {
+                           ribbon.rightSprite.visible = false;
+                        }
+                     } else {
+                        if (ribbon.leftSprite) {
+                           ribbon.leftSprite.visible = true;
+                        }
+
+                        if (ribbon.rightSprite) {
+                           ribbon.rightSprite.visible = true;
                         }
                      }
                   }
-                  i++;
                }
-               i = 0;
-               while(i <= Main.RibonhukusuuNum)
-               {
-                  if(this.charaData["RibonPlus"]["_visible"][i])
-                  {
-                     if(this.charaData["Hat"]["_visible"][0])
-                     {
-                        if(this.charaData["Hat"]["_hair4"] == 0)
-                        {
-                           if(this.charaData["RibonAdd" + i]["_add0"] == 0 || this.charaData["RibonAdd" + i]["_add0"] == 1)
-                           {
-                              try
-                              {
-                                 this.charaAdd["Ribon" + i + "_0"].visible = false;
-                              }
-                              catch(myError:Error)
-                              {
-                              }
-                              try
-                              {
-                                 this.charaAdd["Ribon" + i + "_1"].visible = false;
-                              }
-                              catch(myError:Error)
-                              {
-                              }
-                              try
-                              {
-                                 this.charaAdd.head["Ribon" + i + "_0"].visible = false;
-                              }
-                              catch(myError:Error)
-                              {
-                              }
-                              try
-                              {
-                                 this.charaAdd.head["Ribon" + i + "_1"].visible = false;
-                              }
-                              catch(myError:Error)
-                              {
-                              }
-                           }
-                        }
-                        else if(this.charaData["RibonAdd" + i]["_add0"] == 0 || this.charaData["RibonAdd" + i]["_add0"] == 1)
-                        {
-                           try
-                           {
-                              this.charaAdd["Ribon" + i + "_0"].visible = true;
-                           }
-                           catch(myError:Error)
-                           {
-                           }
-                           try
-                           {
-                              this.charaAdd["Ribon" + i + "_1"].visible = true;
-                           }
-                           catch(myError:Error)
-                           {
-                           }
-                           try
-                           {
-                              this.charaAdd.head["Ribon" + i + "_0"].visible = true;
-                           }
-                           catch(myError:Error)
-                           {
-                           }
-                           try
-                           {
-                              this.charaAdd.head["Ribon" + i + "_1"].visible = true;
-                           }
-                           catch(myError:Error)
-                           {
-                           }
-                        }
-                     }
-                     else if(this.charaData["RibonAdd" + i]["_add0"] == 0 || this.charaData["RibonAdd" + i]["_add0"] == 1)
-                     {
-                        try
-                        {
-                           this.charaAdd["Ribon" + i + "_0"].visible = true;
-                        }
-                        catch(myError:Error)
-                        {
-                        }
-                        try
-                        {
-                           this.charaAdd["Ribon" + i + "_1"].visible = true;
-                        }
-                        catch(myError:Error)
-                        {
-                        }
-                        try
-                        {
-                           this.charaAdd.head["Ribon" + i + "_0"].visible = true;
-                        }
-                        catch(myError:Error)
-                        {
-                        }
-                        try
-                        {
-                           this.charaAdd.head["Ribon" + i + "_1"].visible = true;
-                        }
-                        catch(myError:Error)
-                        {
-                        }
-                     }
-                  }
-                  i++;
-               }
+
                if(Dress_data.HatData[this.menuNum]["back2"] != 0)
                {
-                  this.charaAdd.HatBack.visible = this.charaData["Hat"]["_visible"][0];
-                  if(this.charaData["Hat"]["_visible"][0])
+                  this.charaAdd.HatBack.visible = this.charaData["HeadVisible"]["_visible"][0] && this.charaData["Hat"]["_visible"][0];
+                  if(this.charaData["HeadVisible"]["_visible"][0] && this.charaData["Hat"]["_visible"][0])
                   {
                      this.charaAdd.HatBack.gotoAndStop(Dress_data.HatData[this.menuNum]["back2"] + 1);
                   }
@@ -4981,7 +4875,7 @@ package menu
                ErrorFc(myError);
             }
          }
-         else if(this.tabName == "Mark" || this.tabName == "MarkRotation" || this.tabName == "MarkY" || this.tabName == "MarkX" || this.tabName == "MarkScaleX" || this.tabName == "MarkScaleY" || this.tabName == "MarkScaleB" || this.tabName == "MarkAlpha" || this.tabName == "MarkVary" || this.tabName == "MarkAdd")
+         else if(this.tabName == "Mark" || this.tabName == "MarkRotation" || this.tabName == "MarkY" || this.tabName == "MarkX" || this.tabName == "MarkScaleX" || this.tabName == "MarkScaleY" || this.tabName == "MarkScaleB" || this.tabName == "MarkAlpha" || this.tabName == "MarkVary" || this.tabName == "MarkAdd" || this.tabName == "MarkFineX" || this.tabName == "MarkFineY")
          {
             try
             {
@@ -4995,7 +4889,7 @@ package menu
                }
                else if(this.clickTarget == "paste")
                {
-                  if(this.tabName == "MarkY")
+                  if(this.tabName == "MarkY" || this.tabName == "MarkFineY")
                   {
                      i = 0;
                      while(i <= Main.hukusuuNum)
@@ -5043,11 +4937,8 @@ package menu
                }
                else if(this.clickTarget != "paste")
                {
-                  i = 0;
-                  while(i <= Main.RibonhukusuuNum)
-                  {
-                     Huku_RibonSet.setFc(this.charaNum,i,this.clickTarget);
-                     i++;
+                  for each (var ribbon: Ribbon in Ribbon.getAllRibbons(this.charaNum)) {
+                     Huku_RibonSet.setFc(this.charaNum, ribbon.slot, this.clickTarget);
                   }
                }
             }
@@ -5072,13 +4963,12 @@ package menu
                {
                   if(this.tabName == "RibonY" || this.tabName == "RibonFineY")
                   {
-                     i = 0;
-                     while(i <= Main.RibonhukusuuNum)
-                     {
-                        Huku_RibonSet.setFc(this.charaNum,i,this.clickTarget);
-                        i++;
+                     for each (var ribbon: Ribbon in Ribbon.getAllRibbons(this.charaNum)) {
+                        Huku_RibonSet.setFc(this.charaNum, ribbon.slot, this.clickTarget);
                      }
-                     if(this.charaData["RibonScale" + MenuClass.systemData["RibonPlus"]["_menu"]]["_meter"] != this.charaData["RibonScaleY" + MenuClass.systemData["RibonPlus"]["_menu"]]["_meter"])
+
+                     var curRibbon = Ribbon.fromCharacter(this.charaNum, MenuClass.systemData["RibonPlus"]["_menu"]);
+                     if(curRibbon.scaleX != curRibbon.scaleY)
                      {
                         MenuClass.systemData["LinkRibonScale"]["_flag"] = false;
                      }
@@ -5088,22 +4978,10 @@ package menu
                      }
                   }
                }
-               else if(this.clickTarget == "HatHair")
-               {
-                  i = 0;
-                  while(i <= Main.RibonhukusuuNum)
-                  {
-                     Huku_RibonSet.setFc(this.charaNum,i,this.clickTarget);
-                     i++;
-                  }
-               }
                else if(this.clickTarget != "move")
                {
-                  i = 0;
-                  while(i <= Main.RibonhukusuuNum)
-                  {
-                     Huku_RibonSet.setFc(this.charaNum,i,this.clickTarget);
-                     i++;
+                  for each (var ribbon: Ribbon in Ribbon.getAllRibbons(this.charaNum)) {
+                     Huku_RibonSet.setFc(this.charaNum, ribbon.slot, this.clickTarget);
                   }
                }
             }
@@ -6849,6 +6727,7 @@ package menu
          else
          {
             trace(this.tabName,"エラー");
+            trace(error.getStackTrace());
          }
       }
       

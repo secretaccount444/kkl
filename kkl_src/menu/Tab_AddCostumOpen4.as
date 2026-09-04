@@ -3,13 +3,14 @@ package menu
    import flash.display.MovieClip;
    import flash.events.MouseEvent;
    import undo.AttachPointAction;
+   import parts.Hairpiece;
    
    public class Tab_AddCostumOpen4
    {
       
       public static var headerName:String;
       
-      public static var openAr:Array = [["headAdd","339900"],["Hair","339900"],["Bangs","339900"],["HairBack","339900"],["WaistSet","339900"],["Breast","339900"],["Tights","339900"],["RightAshi","339900"],["Kutu1","339900"],["LoadRightArm","339900"],["LoadRightArm2","339900"],["LoadRightHand","339900"]];
+      public static var openAr:Array = [["headAdd","339900"],["Hair","339900"],["Bangs","339900"],["HairBack","339900"],["WaistSet","339900"],["Breast","339900"],["Tights","339900"],["RightAshi","339900"],["Kutu1","339900"],["LoadRightArm","339900"],["LoadRightArm2","339900"],["LoadRightHand","339900"],["Body","8B4B8F"]];
        
       
       public function Tab_AddCostumOpen4()
@@ -39,6 +40,8 @@ package menu
          _loc9_ = 0;
          _loc10_ = MenuClass.systemData["HairExPlus"]["_menu"];
          _loc4_ = 0;
+
+         var curHairpiece = Hairpiece.fromCharacter(param2, _loc10_);
          while(_loc4_ < openAr.length)
          {
             _loc8_ = openAr[_loc4_][0];
@@ -56,7 +59,7 @@ package menu
                MenuClass.AddOpenAdd[_loc4_].y = 75 + 32 * _loc6_ + Main._stageResizeY * -1;
             }
             MenuClass.AddOpenAdd[_loc4_].icon.icon.gotoAndStop(_loc8_);
-            if(MenuClass.charaData[param2]["HairExAdd" + _loc10_]["_add0"] == _loc4_)
+            if (curHairpiece.attachPoint == _loc4_)
             {
                new ColorChangeClass(MenuClass.AddOpenAdd[_loc4_].icon.icon,"FFFFFF");
                new ColorChangeClass(MenuClass.AddOpenAdd[_loc4_].bg,openAr[_loc4_][1]);
@@ -146,8 +149,9 @@ package menu
          var _loc4_:int = 0;
          var _loc2_:int = param1.currentTarget.charaNum;
          var _loc3_:int = MenuClass.systemData["HairExPlus"]["_menu"];
+         var curHairpiece = Hairpiece.fromCharacter(_loc2_, _loc3_);
 
-         var curAdd0 = MenuClass.charaData[_loc2_]["HairExAdd" + _loc3_]["_add0"];
+         var curAdd0 = curHairpiece.attachPoint;
          var addOpenAddData = MenuClass.AddOpenAdd[curAdd0];
          var curArData = openAr[param1.currentTarget.number];
 
@@ -167,6 +171,8 @@ package menu
             addOpenAddData = MenuClass.AddOpenAdd[10];
          } else if (curAdd0 == 94) {
             addOpenAddData = MenuClass.AddOpenAdd[11];
+         } else if (curAdd0 == 91) {
+            addOpenAddData = MenuClass.AddOpenAdd[12];
          }
 
          new ColorChangeClass(addOpenAddData.icon.icon,"CCCCCC");
@@ -190,12 +196,14 @@ package menu
             curAdd0 = 93; /* Lower Arm */
          } else if (param1.currentTarget.number == 11) {
             curAdd0 = 94; /* Hand */
+         } else if (param1.currentTarget.number == 12) {
+            curAdd0 = 91; /* Full Body */
          }
 
          var undoAction = new AttachPointAction("HairEx", _loc3_, _loc2_, curAdd0);
          Main.undoTimeline.push(undoAction);
 
-         MenuClass.charaData[_loc2_]["HairExAdd" + _loc3_]["_add0"] = curAdd0;
+         curHairpiece.attachPoint = curAdd0;
          new ColorChangeClass(addOpenAddData.icon.icon,"FFFFFF");
          new ColorChangeClass(addOpenAddData.bg,curArData[1]);
          new ColorChangeClass(MenuClass.tabMenuAdd["HairExAdd"].addBox0.bg,curArData[1]);
@@ -207,7 +215,8 @@ package menu
             {
                if(MenuClass.charaData[_loc4_]["SelectCharacter"]["_visible"][0])
                {
-                  MenuClass.charaData[_loc4_]["HairExAdd" + _loc3_]["_add0"] = MenuClass.charaData[_loc2_]["HairExAdd" + _loc3_]["_add0"];
+                  var hairpiece = Hairpiece.fromCharacter(_loc4_, _loc3_);
+                  hairpiece.attachPoint = curHairpiece.attachPoint;
                   Hair_HairExSet.deleteFc(_loc4_,_loc3_,0);
                   Hair_HairExSet.deleteFc(_loc4_,_loc3_,1);
                   Hair_HairExSet.setFc(_loc4_,_loc3_,"move");
@@ -224,7 +233,8 @@ package menu
                {
                   if(MenuClass._nowSelectChara[_loc4_])
                   {
-                     MenuClass.charaData[_loc4_]["HairExAdd" + _loc3_]["_add0"] = MenuClass.charaData[_loc2_]["HairExAdd" + _loc3_]["_add0"];
+                     var hairpiece = Hairpiece.fromCharacter(_loc4_, _loc3_);
+                     hairpiece.attachPoint = curHairpiece.attachPoint;
                      Hair_HairExSet.deleteFc(_loc4_,_loc3_,0);
                      Hair_HairExSet.deleteFc(_loc4_,_loc3_,1);
                      Hair_HairExSet.setFc(_loc4_,_loc3_,"move");

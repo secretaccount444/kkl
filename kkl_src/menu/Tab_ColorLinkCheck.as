@@ -1,6 +1,7 @@
 package menu
 {
    import parameter.Dress_data;
+   import parts.Part;
    
    public class Tab_ColorLinkCheck
    {
@@ -25,9 +26,11 @@ package menu
          this.tabName = param2;
          this.charaData = MenuClass.charaData[param1];
          this.DressCharaData = Dress_data.DressCharaData[param1];
+         var defaultDressData = Part.getDefaultDressData(param2);
+
          try
          {
-            if(Dress_data.DressData[this.tabName].length == 1)
+            if(defaultDressData.length == 1)
             {
                this.menuNum = 0;
             }
@@ -42,7 +45,7 @@ package menu
          var _loc7_:Number = 0;
          try
          {
-            _loc6_ = Dress_data.DressData[this.tabName][0]["_color0"][4];
+            _loc6_ = defaultDressData[0]["_color0"][4];
             _loc7_ = 0;
          }
          catch(myError:Error)
@@ -50,7 +53,7 @@ package menu
          }
          try
          {
-            _loc6_ = Dress_data.DressData[this.tabName][1]["_color0"][4];
+            _loc6_ = defaultDressData[1]["_color0"][4];
             _loc7_ = 1;
          }
          catch(myError:Error)
@@ -67,7 +70,7 @@ package menu
                   {
                      if(_loc4_ == 0)
                      {
-                        if(Dress_data.DressData[this.tabName][_loc7_]["_color0"][4] != undefined)
+                        if(defaultDressData[_loc7_]["_color0"][4] != undefined)
                         {
                            if(String(this.charaData[this.tabName]["_color0"][0]) == String(this.charaData[_loc6_]["_color0"][0]))
                            {
@@ -101,7 +104,7 @@ package menu
                   {
                      if(_loc4_ == 0)
                      {
-                        if(Dress_data.DressData[this.tabName][_loc7_]["_color0"][4] != undefined)
+                        if(defaultDressData[_loc7_]["_color0"][4] != undefined)
                         {
                            if(String(MenuClass.systemData[this.tabName]["_color0"][0]) == String(MenuClass.systemData[_loc6_]["_color0"][0]))
                            {

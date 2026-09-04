@@ -150,7 +150,7 @@ package menu
                {
                   if(MenuClass.systemData["LinkFreeChairScale"]["_flag"] && MenuClass._nowTabName == "FreeChairScale")
                   {
-                     if(MenuClass.systemData["FreeChairScale" + param1]["_meter"] >= 80)
+                     if(MenuClass.systemData["FreeChairScale" + param1]["_meter"] >= 800)
                      {
                         _loc3_ = 0;
                         while(_loc3_ <= 3)
@@ -178,7 +178,7 @@ package menu
                         }
                         MenuClass.systemData["FreeChairLine" + param1]["_menu"] = 1;
                      }
-                     else if(MenuClass.systemData["FreeChairScale" + param1]["_meter"] >= 60)
+                     else if(MenuClass.systemData["FreeChairScale" + param1]["_meter"] >= 600)
                      {
                         _loc3_ = 0;
                         while(_loc3_ <= 3)
@@ -206,7 +206,7 @@ package menu
                         }
                         MenuClass.systemData["FreeChairLine" + param1]["_menu"] = 2;
                      }
-                     else if(MenuClass.systemData["FreeChairScale" + param1]["_meter"] >= 40)
+                     else if(MenuClass.systemData["FreeChairScale" + param1]["_meter"] >= 400)
                      {
                         _loc3_ = 0;
                         while(_loc3_ <= 3)
@@ -234,7 +234,7 @@ package menu
                         }
                         MenuClass.systemData["FreeChairLine" + param1]["_menu"] = 3;
                      }
-                     else if(MenuClass.systemData["FreeChairScale" + param1]["_meter"] >= 20)
+                     else if(MenuClass.systemData["FreeChairScale" + param1]["_meter"] >= 200)
                      {
                         _loc3_ = 0;
                         while(_loc3_ <= 3)

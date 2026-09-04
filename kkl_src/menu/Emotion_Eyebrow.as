@@ -52,12 +52,20 @@ package menu
             MenuClass.charaAdd[param1].head["eyebrow" + _loc3_].eyebrow.y = MeterPersent.MeterPersentNum;
             new MeterPersent(8,-8,"EyebrowMove" + _loc5_,param1);
             MenuClass.charaAdd[param1].head["eyebrow" + _loc3_].y = -30 + MeterPersent.MeterPersentNum + _loc6_;
+            
+            var baseEyeX = SizeDataClass.bodyDefault_y["eyebrow" + _loc3_ + "X"];
+            new MeterPersent(-3, 3, "EyeX", param1);
+            if (_loc3_ == 0) {
+               baseEyeX += MeterPersent.MeterPersentNum;
+            } else {
+               baseEyeX -= MeterPersent.MeterPersentNum;
+            }
 
             new MeterPersent(-2.5, 2.5, "EyebrowMoveHorizontal" + _loc5_, param1);
             if (_loc3_ == 0) {
-               MenuClass.charaAdd[param1].head["eyebrow" + _loc3_].x = -10.05 - baseEyebrowX - MeterPersent.MeterPersentNum;
+               MenuClass.charaAdd[param1].head["eyebrow" + _loc3_].x = baseEyeX - baseEyebrowX - MeterPersent.MeterPersentNum;
             } else {
-               MenuClass.charaAdd[param1].head["eyebrow" + _loc3_].x = 10.50 + baseEyebrowX + MeterPersent.MeterPersentNum;
+               MenuClass.charaAdd[param1].head["eyebrow" + _loc3_].x = baseEyeX + baseEyebrowX + MeterPersent.MeterPersentNum;
             }
 
             try

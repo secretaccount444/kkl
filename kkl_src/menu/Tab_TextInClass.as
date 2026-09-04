@@ -9,7 +9,7 @@ package menu
          super();
          try
          {
-            if(MenuClass.tabMenuAdd[param2].menu0.width == 102)
+            if(MenuClass.tabMenuAdd[param2].menu0.width == 102 || param2 == "HairEx")
             {
                if(param3 < 9)
                {

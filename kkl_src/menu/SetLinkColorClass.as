@@ -1,6 +1,8 @@
 package menu
 {
    import parameter.Dress_data;
+   import parts.Ribbon;
+   import parts.Hairpiece;
    
    public class SetLinkColorClass
    {
@@ -206,6 +208,8 @@ package menu
             new ColorFilterClass(MenuClass.tabMenuAdd["LinkMark"],!_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["MarkAdd"],!_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["MarkAlpha"],!_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["MarkFineX"],!_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["MarkFineY"],!_loc2_,-0.4,"link");
 
             if (_loc2_) {
                var slot = MenuClass.systemData["MarkPlus"]["_menu"];
@@ -644,6 +648,7 @@ package menu
             new ColorFilterClass(MenuClass.tabMenuAdd["VibratorThrough"],!_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["VibratorMove"],!_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["VibratorSpeed"],!_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["VibratorAlpha"],!_loc2_,-0.4,"link");
          }
          else if(param1 == "Hair")
          {
@@ -687,7 +692,8 @@ package menu
          }
          else if(param1 == "LinkHairExScale")
          {
-            if(this.charaData["HairExPlus"]["_visible"][MenuClass.systemData["HairExPlus"]["_menu"]])
+            var hairpiece = Hairpiece.fromCharacter(MenuClass._nowCharaNum, MenuClass.systemData["HairExPlus"]["_menu"]);
+            if (hairpiece.visible)
             {
                new ColorFilterClass(MenuClass.tabMenuAdd["HairExScaleY"],MenuClass.systemData[param1]["_flag"],-0.4,"link");
                new SetLinkColorClass("HairExScaleY");
@@ -695,14 +701,16 @@ package menu
          }
          else if(param1 == "LinkHairExLine")
          {
-            if(this.charaData["HairExPlus"]["_visible"][MenuClass.systemData["HairExPlus"]["_menu"]])
+            var hairpiece = Hairpiece.fromCharacter(MenuClass._nowCharaNum, MenuClass.systemData["HairExPlus"]["_menu"]);
+            if (hairpiece.visible)
             {
                new ColorFilterClass(MenuClass.tabMenuAdd["HairExLine"],MenuClass.systemData[param1]["_flag"],-0.4,"link");
             }
          }
          else if(param1 == "HairExPlus")
          {
-            _loc2_ = this.charaData["HairExPlus"]["_visible"][MenuClass.systemData["HairExPlus"]["_menu"]];
+            var hairpiece = Hairpiece.fromCharacter(MenuClass._nowCharaNum, MenuClass.systemData["HairExPlus"]["_menu"]);
+            _loc2_ = hairpiece.visible;
             new ColorFilterClass(MenuClass.tabMenuAdd["HairEx"],!_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["HairExRotation"],!_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["HairExRotationPlus"],!_loc2_,-0.4,"link");
@@ -716,24 +724,29 @@ package menu
             new ColorFilterClass(MenuClass.tabMenuAdd["LinkHairExLine"],!_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["HairExAdd"],!_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["HairExAlpha"],!_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["HairExFineX"],!_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["HairExFineY"],!_loc2_,-0.4,"link");
          }
          else if(param1 == "LinkRibonScale")
          {
-            if(this.charaData["RibonPlus"]["_visible"][MenuClass.systemData["RibonPlus"]["_menu"]])
+            var ribbon = Ribbon.fromCharacter(MenuClass._nowCharaNum, MenuClass.systemData["RibonPlus"]["_menu"]);
+            if(ribbon.visible)
             {
                new ColorFilterClass(MenuClass.tabMenuAdd["RibonScaleY"],MenuClass.systemData[param1]["_flag"],-0.4,"link");
             }
          }
          else if(param1 == "LinkRibonLine")
          {
-            if(this.charaData["RibonPlus"]["_visible"][MenuClass.systemData["RibonPlus"]["_menu"]])
+            var ribbon = Ribbon.fromCharacter(MenuClass._nowCharaNum, MenuClass.systemData["RibonPlus"]["_menu"]);
+            if(ribbon.visible)
             {
                new ColorFilterClass(MenuClass.tabMenuAdd["RibonLine"],MenuClass.systemData[param1]["_flag"],-0.4,"link");
             }
          }
          else if(param1 == "RibonPlus")
          {
-            _loc2_ = this.charaData["RibonPlus"]["_visible"][MenuClass.systemData["RibonPlus"]["_menu"]];
+            var ribbon = Ribbon.fromCharacter(MenuClass._nowCharaNum, MenuClass.systemData["RibonPlus"]["_menu"]);
+            _loc2_ = ribbon.visible;
             new ColorFilterClass(MenuClass.tabMenuAdd["Ribon"],!_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["RibonRotation"],!_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["RibonY"],!_loc2_,-0.4,"link");
@@ -1179,6 +1192,7 @@ package menu
             new ColorFilterClass(MenuClass.tabMenuAdd["RightThighOffsetX"],_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["RightThighOffsetY"],_loc2_,-0.4,"link");
             new ColorFilterClass(MenuClass.tabMenuAdd["RightThighVisible"],_loc2_,-0.4,"link");
+            new ColorFilterClass(MenuClass.tabMenuAdd["RightShiriVisible"],_loc2_,-0.4,"link");
          }
          else if(param1 == "LinkLegSettings")
          {

@@ -52,6 +52,7 @@ package {
             "VibratorMove": [["Vibrator", "move"]],
             "VibratorSpeed": [["Vibrator", "move"]],
             "VibratorScale": [["Vibrator", "move"]],
+            "VibratorAlpha": [["Vibrator", "move"]],
             "SG": [["SG", "move"]],
             "SGSize": [["SGSize", "move"]],
             "Socks0": [["Socks0", "huku"]],

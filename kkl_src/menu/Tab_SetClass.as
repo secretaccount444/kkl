@@ -4,6 +4,8 @@ package menu
    import flash.geom.ColorTransform;
    import parameter.Color_data;
    import parameter.Dress_data;
+   import parts.Ribbon;
+   import parts.Hairpiece;
    
    public class Tab_SetClass
    {
@@ -228,14 +230,30 @@ package menu
                      {
                         tabNamePlus = tabName;
                      }
+
                      if(MenuClass.tabData[headerName][j][2]["_meter"] == "chara" || MenuClass.tabData[headerName][j][2]["_meter"] == "charaPlus")
                      {
-                        num = MenuClass.charaData[MenuClass._nowCharaNum][tabNamePlus]["_meter"];
+                        if (headerName == "Ribon") {
+                           var ribbon = Ribbon.fromCharacter(MenuClass._nowCharaNum, MenuClass.systemData[plusStr]["_menu"]);
+                           num = ribbon.getData(tabName, "_meter");
+                        } else if (headerName == "HairEx") {
+                           var hairpiece = Hairpiece.fromCharacter(MenuClass._nowCharaNum, MenuClass.systemData[plusStr]["_menu"]);
+                           num = hairpiece.getData(tabName, "_meter");
+                        } else {
+                           num = MenuClass.charaData[MenuClass._nowCharaNum][tabNamePlus]["_meter"];
+                        }
                      }
                      else if(MenuClass.tabData[headerName][j][2]["_meter"] == "system" || MenuClass.tabData[headerName][j][2]["_meter"] == "systemPlus" || MenuClass.tabData[headerName][j][2]["_meter"] == "systemAll")
                      {
                         num = MenuClass.systemData[tabNamePlus]["_meter"];
                      }
+
+                     var oldSliders:Boolean = MenuClass.tabData[headerName][j][2]["_meterType"] > 2 && MenuClass.f10KeyPress;
+                     if (oldSliders)
+                     {
+                        num = Math.floor(num / 10);
+                     }
+
                      targetWidth = MenuClass.tabMenuAdd[tabName]["meter0"].width - 49;
                      maxNum = 100;
                      try
@@ -247,6 +265,14 @@ package menu
                         else if(MenuClass.tabData[headerName][j][2]["_meterType"] == 2)
                         {
                            maxNum = 1000;
+                        }
+                        else if(MenuClass.tabData[headerName][j][2]["_meterType"] == 3)
+                        {
+                           maxNum = oldSliders? 100 : 1000;
+                        }
+                        else if(MenuClass.tabData[headerName][j][2]["_meterType"] == 4)
+                        {
+                           maxNum = oldSliders? 360 : 3600;
                         }
                      }
                      catch(myError:Error)
@@ -267,6 +293,8 @@ package menu
                         MenuClass.tabMenuAdd[tabName]["meter0"].box.gotoAndStop(1);
                      }
                      targetNum = Math.floor(targetWidth * (num / maxNum));
+                     trace("targetnum " + targetNum + " num " + num + " maxNum " + maxNum );
+                     //trace(MenuClass.charaData[MenuClass._nowCharaNum]["RMove"]["_meter"]);
                      MenuClass.tabMenuAdd[tabName]["meter0"].box.x = targetNum + 3;
                      try
                      {
@@ -284,14 +312,25 @@ package menu
                {
                   if(MenuClass.tabMenuAdd[tabName].color0 != undefined)
                   {
+                     var dressDataKey = tabName;
                      if(MenuClass.tabData[headerName][j][2]["_color"] == "charaPlus" || MenuClass.tabData[headerName][j][2]["_color"] == "systemPlus")
                      {
                         tabNamePlus = tabName + MenuClass.systemData[plusStr]["_menu"];
+                        if (plusStr == "RibonPlus") {
+                           dressDataKey = tabName;
+                           Ribbon.fromCharacter(MenuClass._nowCharaNum, MenuClass.systemData[plusStr]["_menu"]).ensureInitialized();
+                        } else if (plusStr == "HairExPlus") {
+                           dressDataKey = tabName;
+                           Hairpiece.fromCharacter(MenuClass._nowCharaNum, MenuClass.systemData[plusStr]["_menu"]).ensureInitialized();
+                        } else {
+                           dressDataKey = tabNamePlus;
+                        }
                      }
                      else
                      {
                         tabNamePlus = tabName;
                      }
+                     
                      if(MenuClass.tabData[headerName][j][2]["_color"] == "chara" || MenuClass.tabData[headerName][j][2]["_color"] == "charaPlus")
                      {
                         this.charaNum = MenuClass._nowCharaNum;
@@ -300,8 +339,9 @@ package menu
                      {
                         this.charaNum = 0;
                      }
+                     
                      new Tab_VDB(headerName,tabNamePlus,j,"_color",this.charaNum);
-                     if(Dress_data.DressData[tabNamePlus].length == 1)
+                     if(Dress_data.DressData[dressDataKey].length == 1)
                      {
                         menuNum2 = 0;
                      }
@@ -309,18 +349,57 @@ package menu
                      {
                         menuNum2 = Tab_VDB.dataBox["_menu"];
                      }
+
+
                      colorParetCheck = new Array(0,0,0);
-                     if(Dress_data.DressData[tabNamePlus][menuNum2]["_color0"] != null)
+                     if(Dress_data.DressData[dressDataKey][menuNum2]["_color0"] != null)
                      {
                         colorParetCheck[0] = 1;
                      }
-                     if(Dress_data.DressData[tabNamePlus][menuNum2]["_color1"])
+                     if(Dress_data.DressData[dressDataKey][menuNum2]["_color1"])
                      {
                         colorParetCheck[1] = 1;
                      }
-                     if(Dress_data.DressData[tabNamePlus][menuNum2]["_color2"])
+                     if(Dress_data.DressData[dressDataKey][menuNum2]["_color2"])
                      {
                         colorParetCheck[2] = 1;
+                     }
+                     if (tabName == "HairEx")
+                     {
+                        var slotNum = MenuClass.systemData["HairExPlus"]["_menu"];
+
+                        var curHairpiece = Hairpiece.fromCharacter(this.charaNum, slotNum);
+
+                        var storedInfo0 = curHairpiece.getDressData("", 0, 0);
+                        var storedInfo1 = curHairpiece.getDressData("", 0, 1);
+                        var storedInfo2 = curHairpiece.getDressData("", 0, 2);
+                        
+                        if (curHairpiece.visible && storedInfo0[1] == 2) {
+                           curHairpiece.color0[0] = MenuClass.charaData[this.charaNum]["Hair"]["_color0"][0];
+                           storedInfo0[0] = MenuClass.charaData[this.charaNum]["Hair"]["_color0"][0];
+                           try
+                           {
+                              if(storedInfo1[1] == 2)
+                              {
+                                 curHairpiece.color1[0] = MenuClass.charaData[this.charaNum]["Hair"]["_color0"][0];
+                                 storedInfo1[0] = MenuClass.charaData[this.charaNum]["Hair"]["_color0"][0];
+                              }
+                           }
+                           catch(myError:Error)
+                           {
+                           }
+                           try
+                           {
+                              if(storedInfo2[1] == 2)
+                              {
+                                 curHairpiece.color2[0] = MenuClass.charaData[this.charaNum]["Hair"]["_color0"][0];
+                                 storedInfo2[0] = MenuClass.charaData[this.charaNum]["Hair"]["_color0"][0];
+                              }
+                           }
+                           catch(myError:Error)
+                           {
+                           }
+                        }
                      }
                      if(tabName == "HairEx")
                      {
@@ -381,6 +460,7 @@ package menu
                            }
                         }
                      }
+
                      if(MenuClass.tabData[headerName][j][2]["_color"] == "chara" || MenuClass.tabData[headerName][j][2]["_color"] == "charaPlus")
                      {
                         new Tab_ColorLinkCheck(MenuClass._nowCharaNum,tabNamePlus,"chara");
@@ -389,6 +469,7 @@ package menu
                      {
                         new Tab_ColorLinkCheck(0,tabNamePlus,"system");
                      }
+
                      i = 0;
                      while(i <= 2)
                      {
@@ -419,7 +500,34 @@ package menu
                            }
                            else
                            {
-                              if(MenuClass.tabData[headerName][j][2]["_color"] == "chara" || MenuClass.tabData[headerName][j][2]["_color"] == "charaPlus")
+                              var defaultColorStr = "";
+                              if (headerName == "Ribon") {
+                                 var ribbon = Ribbon.fromCharacter(this.charaNum, MenuClass.systemData["RibonPlus"]["_menu"]);
+                                 var storedInfo = ribbon.getDressData(tabName, menuNum2, i);
+                                 if (storedInfo[1] == 2) {
+                                    MenuClass.tabMenuAdd[tabName]["color" + i].gotoAndStop(3);
+                                 } else {
+                                    MenuClass.tabMenuAdd[tabName]["color" + i].gotoAndStop(1);
+                                 }
+
+                                 colorStrChange = String(storedInfo[0]);
+                                 colorNum = ribbon.getDefaultDressData(tabName, menuNum2, i)[2];
+                                 defaultColorStr = ribbon.getDefaultDressData(tabName, menuNum2, i)[0];
+                              } 
+                              else if(headerName == "HairEx") {
+                                 var hairpiece = Hairpiece.fromCharacter(this.charaNum, MenuClass.systemData["HairExPlus"]["_menu"]);
+                                 var storedInfo = hairpiece.getDressData(tabName, menuNum2, i);
+                                 if (storedInfo[1] == 2) {
+                                    MenuClass.tabMenuAdd[tabName]["color" + i].gotoAndStop(3);
+                                 } else {
+                                    MenuClass.tabMenuAdd[tabName]["color" + i].gotoAndStop(1);
+                                 }
+
+                                 colorStrChange = String(storedInfo[0]);
+                                 colorNum = hairpiece.getDefaultDressData(tabName, menuNum2, i)[2];
+                                 defaultColorStr = hairpiece.getDefaultDressData(tabName, menuNum2, i)[0];
+                              }
+                              else if (MenuClass.tabData[headerName][j][2]["_color"] == "chara" || MenuClass.tabData[headerName][j][2]["_color"] == "charaPlus")
                               {
                                  if(Dress_data.DressCharaData[this.charaNum][tabNamePlus][menuNum2]["_color" + i][1] == 2)
                                  {
@@ -430,6 +538,8 @@ package menu
                                     MenuClass.tabMenuAdd[tabName]["color" + i].gotoAndStop(1);
                                  }
                                  colorStrChange = String(Dress_data.DressCharaData[this.charaNum][tabNamePlus][menuNum2]["_color" + i][0]);
+                                 colorNum = Dress_data.DressData[dressDataKey][menuNum2]["_color" + i][2];
+                                 defaultColorStr = Dress_data.DressData[dressDataKey][menuNum2]["_color" + i][0];
                               }
                               else if(MenuClass.tabData[headerName][j][2]["_color"] == "system" || MenuClass.tabData[headerName][j][2]["_color"] == "systemPlus")
                               {
@@ -442,18 +552,21 @@ package menu
                                     MenuClass.tabMenuAdd[tabName]["color" + i].gotoAndStop(1);
                                  }
                                  colorStrChange = String(Dress_data.DressCharaData[0][tabNamePlus][menuNum2]["_color" + i][0]);
+                                 colorNum = Dress_data.DressData[dressDataKey][menuNum2]["_color" + i][2];
+                                 defaultColorStr = Dress_data.DressData[dressDataKey][menuNum2]["_color" + i][0];
                               }
+
                               MenuClass.tabMenuAdd[tabName]["color" + i].buttonMode = true;
                               MenuClass.tabMenuAdd[tabName]["color" + i].mouseChildren = true;
                               MenuClass.tabMenuAdd[tabName]["color" + i].mouseEnabled = true;
-                              colorNum = Dress_data.DressData[tabNamePlus][menuNum2]["_color" + i][2];
+
                               if(colorStrChange.length >= 4)
                               {
                                  new ColorChangeClass(MenuClass.tabMenuAdd[tabName]["color" + i].color,colorStrChange);
                               }
                               else
                               {
-                                 obj = Color_data.ColorData[Dress_data.DressData[tabNamePlus][menuNum2]["_color" + i][0]];
+                                 obj = Color_data.ColorData[defaultColorStr];
                                  new ColorChangeClass(MenuClass.tabMenuAdd[tabName]["color" + i].color,obj[colorStrChange][colorNum]);
                               }
                            }
@@ -494,25 +607,40 @@ package menu
                      {
                         tabNamePlus = tabName;
                      }
+
                      this.menuNumFc(headerName,tabName,j);
-                     Tab_TabNameCheck.lookup(tabName);
-                     targetJ = Tab_TabNameCheck.targetJ;
-                     new Tab_VDB(headerName,tabNamePlus,targetJ,"_visible",MenuClass._nowCharaNum);
-                     if(Tab_VDB.dataBox["_visible"].length == 1)
-                     {
-                        this.menuNum = 0;
-                     }
-                     if(MenuClass.systemData["EExpert"]["_check"])
-                     {
-                        if(MenuClass.tabData[headerName][j][2]["_easyLink"] != undefined)
+
+                     if (tabName == "RibonPlus") {
+                        var ribbon = Ribbon.fromCharacter(MenuClass._nowCharaNum, MenuClass.systemData["RibonPlus"]["_menu"]);
+                        MenuClass.tabMenuAdd[tabName].eyeBox.gotoAndStop(2 - int(ribbon.visible));
+                     } else if (tabName == "HairExPlus") {
+                        var hairpiece = Hairpiece.fromCharacter(MenuClass._nowCharaNum, MenuClass.systemData["HairExPlus"]["_menu"]);
+                        MenuClass.tabMenuAdd[tabName].eyeBox.gotoAndStop(2 - int(hairpiece.visible));
+                     } else {
+                        Tab_TabNameCheck.lookup(tabName);
+                        targetJ = Tab_TabNameCheck.targetJ;
+                        new Tab_VDB(headerName,tabNamePlus,targetJ,"_visible",MenuClass._nowCharaNum);
+
+                        if(Tab_VDB.dataBox["_visible"].length == 1)
                         {
-                           if(!MenuClass.charaData[MenuClass._nowCharaNum][tabNamePlus]["_visible"][0] && !MenuClass.charaData[MenuClass._nowCharaNum][MenuClass.tabData[headerName][j][2]["_easyLink"]]["_visible"][0])
+                           this.menuNum = 0;
+                        }
+                        if(MenuClass.systemData["EExpert"]["_check"])
+                        {
+                           if(MenuClass.tabData[headerName][j][2]["_easyLink"] != undefined)
                            {
-                              MenuClass.tabMenuAdd[tabName].eyeBox.gotoAndStop(2);
+                              if(!MenuClass.charaData[MenuClass._nowCharaNum][tabNamePlus]["_visible"][0] && !MenuClass.charaData[MenuClass._nowCharaNum][MenuClass.tabData[headerName][j][2]["_easyLink"]]["_visible"][0])
+                              {
+                                 MenuClass.tabMenuAdd[tabName].eyeBox.gotoAndStop(2);
+                              }
+                              else
+                              {
+                                 MenuClass.tabMenuAdd[tabName].eyeBox.gotoAndStop(1);
+                              }
                            }
                            else
                            {
-                              MenuClass.tabMenuAdd[tabName].eyeBox.gotoAndStop(1);
+                              MenuClass.tabMenuAdd[tabName].eyeBox.gotoAndStop(2 - Tab_VDB.dataBox["_visible"][this.menuNum] * 1);
                            }
                         }
                         else
@@ -520,10 +648,7 @@ package menu
                            MenuClass.tabMenuAdd[tabName].eyeBox.gotoAndStop(2 - Tab_VDB.dataBox["_visible"][this.menuNum] * 1);
                         }
                      }
-                     else
-                     {
-                        MenuClass.tabMenuAdd[tabName].eyeBox.gotoAndStop(2 - Tab_VDB.dataBox["_visible"][this.menuNum] * 1);
-                     }
+                     
                   }
                }
                catch(myError:Error)
@@ -615,7 +740,9 @@ package menu
                            MenuClass.tabMenuAdd["RibonAdd"].addBox0.icon.scaleX = MenuClass.tabMenuAdd["RibonAdd"].addBox0.icon.scaleY = 1;
                            MenuClass.tabMenuAdd["RibonAdd"].addBox0.icon.x = 29;
 
-                           var ribbonAdd0Idx = MenuClass.charaData[MenuClass._nowCharaNum]["RibonAdd" + menuNum3]["_add0"];
+                           var ribbon = Ribbon.fromCharacter(MenuClass._nowCharaNum, menuNum3);
+                           var ribbonAdd0Idx = ribbon.attachPoint;
+
                            if (ribbonAdd0Idx == 95) {
                               ribbonAdd0Idx = 11;
                            } else if (ribbonAdd0Idx == 96) {
@@ -632,13 +759,12 @@ package menu
                               ribbonAdd0Idx = 17;
                            } else if (ribbonAdd0Idx == 98) {
                               ribbonAdd0Idx = 18;
+                           } else if (ribbonAdd0Idx == 91) {
+                              ribbonAdd0Idx = 19;
                            }
 
                            MenuClass.tabMenuAdd["RibonAdd"].addBox0.icon.icon.gotoAndStop(Tab_AddCostumOpen3.openAr[ribbonAdd0Idx][0]);
                            new ColorChangeClass(MenuClass.tabMenuAdd["RibonAdd"].addBox0.bg, Tab_AddCostumOpen3.openAr[ribbonAdd0Idx][1]);
-
-                           // MenuClass.tabMenuAdd["RibonAdd"].addBox0.icon.icon.gotoAndStop(Tab_AddCostumOpen3.openAr[MenuClass.charaData[MenuClass._nowCharaNum]["RibonAdd" + menuNum3]["_add0"]][0]);
-                           // new ColorChangeClass(MenuClass.tabMenuAdd["RibonAdd"].addBox0.bg,Tab_AddCostumOpen3.openAr[MenuClass.charaData[MenuClass._nowCharaNum]["RibonAdd" + menuNum3]["_add0"]][1]);
 
                            Tab_AddCostumOpen3.deleteFc("RibonPlus");
                         }
@@ -649,7 +775,9 @@ package menu
                            MenuClass.tabMenuAdd["HairExAdd"].addBox0.icon.scaleX = MenuClass.tabMenuAdd["HairExAdd"].addBox0.icon.scaleY = 1;
                            MenuClass.tabMenuAdd["HairExAdd"].addBox0.icon.x = 29;
 
-                           var hairExAdd0Idx = MenuClass.charaData[MenuClass._nowCharaNum]["HairExAdd" + menuNum3]["_add0"];
+                           var hairpiece = Hairpiece.fromCharacter(MenuClass._nowCharaNum, menuNum3);
+                           var hairExAdd0Idx = hairpiece.attachPoint;
+
                            if (hairExAdd0Idx == 99) {
                               hairExAdd0Idx = 5;
                            } else if (hairExAdd0Idx == 98) {
@@ -666,10 +794,13 @@ package menu
                               hairExAdd0Idx = 10;
                            } else if (hairExAdd0Idx == 94) {
                               hairExAdd0Idx = 11;
+                           } else if (hairExAdd0Idx == 91) {
+                              hairExAdd0Idx = 12;
                            }
 
                            MenuClass.tabMenuAdd["HairExAdd"].addBox0.icon.icon.gotoAndStop(Tab_AddCostumOpen4.openAr[hairExAdd0Idx][0]);
                            new ColorChangeClass(MenuClass.tabMenuAdd["HairExAdd"].addBox0.bg,Tab_AddCostumOpen4.openAr[hairExAdd0Idx][1]);
+
                            Tab_AddCostumOpen4.deleteFc("HairExPlus");
                         }
                         else if(headerName == "Loadmenu")
@@ -949,7 +1080,12 @@ package menu
                   {
                      if(MenuClass.tabData[headerName][j][2]["_menu"] == "chara" || MenuClass.tabData[headerName][j][2]["_menu"] == "charaPlus" || MenuClass.tabData[headerName][j][2]["_meter"] == "chara" || MenuClass.tabData[headerName][j][2]["_meter"] == "charaPlus" || MenuClass.tabData[headerName][j][2]["_reversal"] == "chara")
                      {
-                        MenuClass.tabMenuAdd[tabName].reversal.gotoAndStop(2 - MenuClass.charaData[MenuClass._nowCharaNum][tabNamePlus]["_reversal"] * 1);
+                        if (headerName == "Ribon") {
+                           var ribbon = Ribbon.fromCharacter(MenuClass._nowCharaNum, MenuClass.systemData[plusStr]["_menu"]);
+                           MenuClass.tabMenuAdd[tabName].reversal.gotoAndStop(2 - ribbon.reversal);
+                        } else {
+                           MenuClass.tabMenuAdd[tabName].reversal.gotoAndStop(2 - MenuClass.charaData[MenuClass._nowCharaNum][tabNamePlus]["_reversal"] * 1);
+                        }
                      }
                      else
                      {
@@ -966,7 +1102,15 @@ package menu
                   {
                      if(MenuClass.tabData[headerName][j][2]["_menu"] == "chara" || MenuClass.tabData[headerName][j][2]["_menu"] == "charaPlus" || MenuClass.tabData[headerName][j][2]["_meter"] == "chara" || MenuClass.tabData[headerName][j][2]["_meter"] == "charaPlus")
                      {
-                        MenuClass.tabMenuAdd[tabName].reversal2.gotoAndStop(MenuClass.charaData[MenuClass._nowCharaNum][tabNamePlus]["_reversal2"] + 1);
+                        if (headerName == "Ribon") {
+                           var ribbon = Ribbon.fromCharacter(MenuClass._nowCharaNum, MenuClass.systemData[plusStr]["_menu"]);
+                           MenuClass.tabMenuAdd[tabName].reversal2.gotoAndStop(ribbon.reversal2 + 1);
+                        } else if (headerName == "HairEx") {
+                           var hairpiece = Hairpiece.fromCharacter(MenuClass._nowCharaNum, MenuClass.systemData[plusStr]["_menu"]);
+                           MenuClass.tabMenuAdd[tabName].reversal2.gotoAndStop(hairpiece.reversal2 + 1);
+                        } else {
+                           MenuClass.tabMenuAdd[tabName].reversal2.gotoAndStop(MenuClass.charaData[MenuClass._nowCharaNum][tabNamePlus]["_reversal2"] + 1);
+                        }
                      }
                      else
                      {
@@ -987,24 +1131,38 @@ package menu
                         MenuClass.tabMenuAdd[tabName].depth.y = 2;
                         MenuClass.tabMenuAdd[tabName].depth.transform.colorTransform = new ColorTransform();
 
-                        if (
-                           tabNamePlus.substring(0, 22) == "CharaLoadReversalDepth" &&
-                           MenuClass.charaData[MenuClass._nowCharaNum][tabNamePlus.replace("ReversalDepth", "Add")]["_add0"] == 0 &&
-                           MenuClass.charaData[MenuClass._nowCharaNum][tabNamePlus]["_depth"] == 2
-                        ) {
-                           var prevCxForm = MenuClass.tabMenuAdd[tabName].depth.transform.colorTransform;
-
-                           prevCxForm.redMultiplier = 0.5;
-                           prevCxForm.greenMultiplier = 0.5;
-                           prevCxForm.blueMultiplier = 0.5;
-
-                           prevCxForm.redOffset = 139 * 0.5;
-                           prevCxForm.greenOffset = 75 * 0.5;
-                           prevCxForm.blueOffset = 143 * 0.5;
-
-                           MenuClass.tabMenuAdd[tabName].depth.transform.colorTransform = prevCxForm;
+                        if (tabName == "Ribon") {
+                           var ribbon = Ribbon.fromCharacter(MenuClass._nowCharaNum, MenuClass.systemData["RibonPlus"]["_menu"]);
+                           if (ribbon.attachPoint == 91) {
+                              if (ribbon.depth == 2) {
+                                 Tab_DepthClass.applyTint(MenuClass.tabMenuAdd[tabName].depth, 139, 75, 143, 0.5);
+                                 MenuClass.tabMenuAdd[tabName].depth.gotoAndStop(2);
+                              } else if (ribbon.depth == 3) {
+                                 MenuClass.tabMenuAdd[tabName].depth.gotoAndStop(3);
+                              } else {
+                                 MenuClass.tabMenuAdd[tabName].depth.transform.colorTransform = new ColorTransform();
+                                 MenuClass.tabMenuAdd[tabName].depth.gotoAndStop(ribbon.depth + 1);
+                              }
+                           } else {
+                              MenuClass.tabMenuAdd[tabName].depth.transform.colorTransform = new ColorTransform();
+                              MenuClass.tabMenuAdd[tabName].depth.gotoAndStop(ribbon.depth + 1);
+                           }
+                        } else if (tabName == "HairEx") {
+                           var hairpiece = Hairpiece.fromCharacter(MenuClass._nowCharaNum, MenuClass.systemData["HairExPlus"]["_menu"]);
+                           if (hairpiece.attachPoint == 91 && hairpiece.depth == 2){
+                              Tab_DepthClass.applyTint(MenuClass.tabMenuAdd[tabName].depth, 139, 75, 143, 0.5);
+                              MenuClass.tabMenuAdd[tabName].depth.gotoAndStop(2);
+                           } else {
+                              MenuClass.tabMenuAdd[tabName].depth.transform.colorTransform = new ColorTransform();
+                              MenuClass.tabMenuAdd[tabName].depth.gotoAndStop(hairpiece.depth + 1);
+                           }
+                        }
+                        else if (tabNamePlus.substring(0, 22) == "CharaLoadReversalDepth" 
+                        && MenuClass.charaData[MenuClass._nowCharaNum][tabNamePlus.replace("ReversalDepth", "Add")]["_add0"] == 0 
+                        && MenuClass.charaData[MenuClass._nowCharaNum][tabNamePlus]["_depth"] == 2) 
+                        {
+                           Tab_DepthClass.applyTint(MenuClass.tabMenuAdd[tabName].depth, 139, 75, 143, 0.5);
                            MenuClass.tabMenuAdd[tabName].depth.gotoAndStop(2);
-                           
                         } else if (tabNamePlus === "LeftArm2" || tabNamePlus == "RightArm2") {
                            if (MenuClass.charaData[MenuClass._nowCharaNum][tabNamePlus]["_depth"] == 0) {
                               MenuClass.tabMenuAdd[tabName].depth.gotoAndStop(1);
@@ -1016,6 +1174,8 @@ package menu
                               MenuClass.tabMenuAdd[tabName].depth.gotoAndStop(1);
                               MenuClass.tabMenuAdd[tabName].depth.scaleY = -1;
                               MenuClass.tabMenuAdd[tabName].depth.y = 30;
+                           } else if (MenuClass.charaData[MenuClass._nowCharaNum][tabNamePlus]["_depth"] == 4) {
+                              MenuClass.tabMenuAdd[tabName].depth.gotoAndStop(4);
                            }
                         } else {
                            MenuClass.tabMenuAdd[tabName].depth.transform.colorTransform = new ColorTransform();
@@ -1037,7 +1197,12 @@ package menu
                   {
                      if(MenuClass.tabData[headerName][j][2]["_menu"] == "chara" || MenuClass.tabData[headerName][j][2]["_menu"] == "charaPlus" || MenuClass.tabData[headerName][j][2]["_meter"] == "chara" || MenuClass.tabData[headerName][j][2]["_meter"] == "charaPlus")
                      {
+                        if (headerName == "HairEx") {
+                           var hairpiece = Hairpiece.fromCharacter(MenuClass._nowCharaNum, MenuClass.systemData[plusStr]["_menu"]);
+                           MenuClass.tabMenuAdd[tabName].turn.gotoAndStop(int(hairpiece.turn) + 1);
+                        } else {
                         MenuClass.tabMenuAdd[tabName].turn.gotoAndStop(MenuClass.charaData[MenuClass._nowCharaNum][tabNamePlus]["_turn"] + 1);
+                        }
                      }
                      else
                      {
@@ -1071,7 +1236,15 @@ package menu
                   {
                      if(MenuClass.tabData[headerName][j][2]["_menu"] == "chara" || MenuClass.tabData[headerName][j][2]["_menu"] == "charaPlus" || MenuClass.tabData[headerName][j][2]["_meter"] == "chara" || MenuClass.tabData[headerName][j][2]["_meter"] == "charaPlus")
                      {
-                        MenuClass.tabMenuAdd[tabName].shadow.gotoAndStop(MenuClass.charaData[MenuClass._nowCharaNum][tabNamePlus]["_shadow"] + 1);
+                        if (headerName == "Ribon") {
+                           var ribbon = Ribbon.fromCharacter(MenuClass._nowCharaNum, MenuClass.systemData[plusStr]["_menu"]);
+                           MenuClass.tabMenuAdd[tabName].shadow.gotoAndStop(int(ribbon.shadow) + 1);
+                        } else if (headerName == "HairEx") {
+                           var hairpiece = Hairpiece.fromCharacter(MenuClass._nowCharaNum, MenuClass.systemData[plusStr]["_menu"]);
+                           MenuClass.tabMenuAdd[tabName].shadow.gotoAndStop(int(hairpiece.shadow) + 1);
+                        } else {
+                           MenuClass.tabMenuAdd[tabName].shadow.gotoAndStop(MenuClass.charaData[MenuClass._nowCharaNum][tabNamePlus]["_shadow"] + 1);
+                        }
                      }
                      else
                      {

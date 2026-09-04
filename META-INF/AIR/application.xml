@@ -10,7 +10,7 @@
 	<text xml:lang="es">Esto es un ejemplo.</text> 
   </description> 
   <initialWindow>
-    <title>KKL v106</title>
+    <title>KKL v108.1</title>
     <content>kkl.swf</content>
     <systemChrome>standard</systemChrome>
     <transparent>false</transparent>

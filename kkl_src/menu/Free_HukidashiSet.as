@@ -336,7 +336,7 @@ package menu
                if(_loc20_)
                {
                   _loc3_ = 0;
-                  while(_loc3_ <= 98)
+                  while(_loc3_ <= Main.hukusuuNum)
                   {
                      _loc16_ = MenuClass.systemData["LoadAdd" + _loc3_]["_add0"];
                      _loc18_ = (_loc17_ = Tab_AddCostumOpen.openAr[_loc16_][0]).substring(0,13);
@@ -374,7 +374,7 @@ package menu
                         _loc3_++;
                      }
                      _loc3_ = 0;
-                     while(_loc3_ <= 98)
+                     while(_loc3_ <= Main.hukusuuNum)
                      {
                         _loc16_ = MenuClass.systemData["LoadAdd" + _loc3_]["_add0"];
                         _loc18_ = (_loc17_ = Tab_AddCostumOpen.openAr[_loc16_][0]).substring(0,13);

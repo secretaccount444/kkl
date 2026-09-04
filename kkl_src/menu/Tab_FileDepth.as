@@ -34,7 +34,7 @@ package menu
                   Chara_Class.chara_m["Hukidashi" + _loc10_].swapChildren(Main.mainWindow["loadObj" + param1],Chara_Class.chara_m["Hukidashi" + _loc10_].loadAddGuide);
                }
                _loc6_ = 0;
-               for(; _loc6_ <= 98; _loc6_++)
+               for(; _loc6_ <= Main.hukusuuNum; _loc6_++)
                {
                   try
                   {
@@ -65,7 +65,7 @@ package menu
                   Chara_Class.chara_m["Hukidashi" + _loc10_].swapChildren(Main.mainWindow["loadObj" + param1],Chara_Class.chara_m["Hukidashi" + _loc10_].loadAddGuide2);
                }
                _loc6_ = 0;
-               for(; _loc6_ <= 98; _loc6_++)
+               for(; _loc6_ <= Main.hukusuuNum; _loc6_++)
                {
                   try
                   {
@@ -96,7 +96,7 @@ package menu
                   Chara_Class.chara_m["Hukidashi" + _loc10_].swapChildren(Main.mainWindow["loadObj" + param1],Chara_Class.chara_m["Hukidashi" + _loc10_].loadAddGuide3);
                }
                _loc6_ = 0;
-               for(; _loc6_ <= 98; _loc6_++)
+               for(; _loc6_ <= Main.hukusuuNum; _loc6_++)
                {
                   try
                   {
@@ -130,7 +130,7 @@ package menu
                   Main.mainWindow.swapChildren(Main.mainWindow["loadObj" + param1],Main.mainWindow.bg);
                }
                _loc6_ = 0;
-               for(; _loc6_ <= 98; _loc6_++)
+               for(; _loc6_ <= Main.hukusuuNum; _loc6_++)
                {
                   try
                   {
@@ -161,7 +161,7 @@ package menu
                   Main.mainWindow.swapChildren(Main.mainWindow["loadObj" + param1],Main.mainWindow.chara_obj);
                }
                _loc6_ = 0;
-               for(; _loc6_ <= 98; _loc6_++)
+               for(; _loc6_ <= Main.hukusuuNum; _loc6_++)
                {
                   try
                   {
@@ -192,7 +192,7 @@ package menu
                   Main.mainWindow.swapChildren(Main.mainWindow["loadObj" + param1],Main.mainWindow.mob);
                }
                _loc6_ = 0;
-               for(; _loc6_ <= 98; _loc6_++)
+               for(; _loc6_ <= Main.hukusuuNum; _loc6_++)
                {
                   try
                   {

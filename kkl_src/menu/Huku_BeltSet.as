@@ -270,7 +270,7 @@ package menu
                      }
                      if(MenuClass.systemData["LinkBeltLine"]["_flag"] && (MenuClass._nowTabName == "BeltScale" || param3 == "random"))
                      {
-                        if(this.charaData["BeltScale" + param2]["_meter"] >= 80)
+                        if(this.charaData["BeltScale" + param2]["_meter"] >= 800)
                         {
                            _loc5_ = 0;
                            while(_loc5_ <= 5)
@@ -286,7 +286,7 @@ package menu
                            }
                            this.charaData["BeltLine" + param2]["_menu"] = 1;
                         }
-                        else if(this.charaData["BeltScale" + param2]["_meter"] >= 60)
+                        else if(this.charaData["BeltScale" + param2]["_meter"] >= 600)
                         {
                            _loc5_ = 0;
                            while(_loc5_ <= 5)
@@ -302,7 +302,7 @@ package menu
                            }
                            this.charaData["BeltLine" + param2]["_menu"] = 2;
                         }
-                        else if(this.charaData["BeltScale" + param2]["_meter"] >= 40)
+                        else if(this.charaData["BeltScale" + param2]["_meter"] >= 400)
                         {
                            _loc5_ = 0;
                            while(_loc5_ <= 5)
@@ -318,7 +318,7 @@ package menu
                            }
                            this.charaData["BeltLine" + param2]["_menu"] = 3;
                         }
-                        else if(this.charaData["BeltScale" + param2]["_meter"] >= 20)
+                        else if(this.charaData["BeltScale" + param2]["_meter"] >= 200)
                         {
                            _loc5_ = 0;
                            while(_loc5_ <= 5)
@@ -483,7 +483,7 @@ package menu
                this.charaAdd["belt" + param2 + "_" + 0].beltDou.belt0.transform.matrix = _loc10_;
                new MeterPersentRibon(150,-150,this.charaNum,"BeltX",param2);
                this.charaAdd["belt" + param2 + "_" + 0].beltDou.belt0.x = MeterPersentRibon.MeterPersentNum;
-               new MeterPersentRibon(2.5,-2.5,this.charaNum,"BeltFineX",param2);
+               new MeterPersentRibon(0.5,-0.5,this.charaNum,"BeltFineX",param2);
                this.charaAdd["belt" + param2 + "_" + 0].beltDou.belt0.x += MeterPersentRibon.MeterPersentNum;
             }
             if(this.flag1)
@@ -493,7 +493,7 @@ package menu
                this.charaAdd["belt" + param2 + "_" + 1].beltDou.belt0.transform.matrix = _loc10_;
                new MeterPersentRibon(-150,150,this.charaNum,"BeltX",param2);
                this.charaAdd["belt" + param2 + "_" + 1].beltDou.belt0.x = MeterPersentRibon.MeterPersentNum;
-               new MeterPersentRibon(-2.5,2.5,this.charaNum,"BeltFineX",param2);
+               new MeterPersentRibon(-0.5,0.5,this.charaNum,"BeltFineX",param2);
                this.charaAdd["belt" + param2 + "_" + 1].beltDou.belt0.x += MeterPersentRibon.MeterPersentNum;
             }
             new MeterPersentRibon(360,0,this.charaNum,"BeltRotation",param2);
@@ -528,7 +528,7 @@ package menu
             _loc16_ = MeterPersent.MeterPersentNum;
             _loc4_ = 0;
 
-            new MeterPersentRibon(2.5, -2.5,this.charaNum,"BeltFineY",param2);
+            new MeterPersentRibon(0.5, -0.5,this.charaNum,"BeltFineY",param2);
             var fineTuneY = MeterPersentRibon.MeterPersentNum;
 
             while(_loc4_ <= 1)

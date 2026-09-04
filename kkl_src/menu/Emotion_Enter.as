@@ -1,6 +1,7 @@
 package menu
 {
    import parameter.Emotion_data;
+   import flash.display.MovieClip;
    
    public class Emotion_Enter
    {
@@ -28,6 +29,14 @@ package menu
          this.charaNum = param1;
          this.charaAdd = MenuClass.charaAdd[this.charaNum];
          this.charaData = MenuClass.charaData[this.charaNum];
+
+         /* Create layering helpers for mouth depth 0 */
+         if (!this.charaAdd.head.mouthLayerTarget0) {
+            var pt = new MovieClip();
+            this.charaAdd.head.addChildAt(pt, this.charaAdd.head.getChildIndex(this.charaAdd.head.mouth));
+            this.charaAdd.head.mouthLayerTarget0 = pt;
+         }
+
          if(this.charaData["EmotionManualAuto"]["_flag"] == "play" || this.charaData["EmotionManualAuto"]["_flag"] == "testPlay")
          {
             _loc2_ = this.charaData["EmotionManualAuto"]["_count"];
@@ -220,6 +229,7 @@ package menu
          if(this.charaData["MouthSen"]["_menu"] + 1 != this.charaAdd.head.mouth.sen0.currentFrame)
          {
             this.charaAdd.head.mouth.sen0.gotoAndStop(this.charaData["MouthSen"]["_menu"] + 1);
+            new Chara_ColorClass(this.charaNum, "MouthSen");
          }
          try
          {
@@ -233,6 +243,12 @@ package menu
          {
          }
          new SetClass(this.charaNum,"MouthHeight","tab");
+
+         if (this.charaData["EmotionMouth"]["_depth"] == 0) {
+            this.charaAdd.head.setChildIndex(this.charaAdd.head.mouth, this.charaAdd.head.getChildIndex(this.charaAdd.head.mouthLayerTarget0) + 1);
+         } else if (this.charaData["EmotionMouth"]["_depth"] == 1) {
+            this.charaAdd.head.setChildIndex(this.charaAdd.head.mouth, this.charaAdd.head.numChildren - 1);
+         }
 
          this.charaAdd.head.mouth.visible = this.charaData["EmotionMouth"]["_visible"][0];
       }

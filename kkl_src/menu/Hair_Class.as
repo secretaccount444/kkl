@@ -1,6 +1,7 @@
 package menu
 {
    import parameter.Dress_data;
+   import parts.Hairpiece;
    
    public class Hair_Class
    {
@@ -71,7 +72,7 @@ package menu
             this.charaAdd.head.Bangs.y = -2;
          }
          this.charaAdd.head.faceSen.faceHair.gotoAndStop(Dress_data.HairData[this.charaData["Hair"]["_menu"]]["_hage"] - 1);
-         if(Dress_data.HairData[this.charaData["Hair"]["_menu"]]["_ushiro"] == 0)
+         if(!this.charaData["HeadVisible"]["_visible"][0] || Dress_data.HairData[this.charaData["Hair"]["_menu"]]["_ushiro"] == 0)
          {
             this.charaAdd.HairUshiro.visible = false;
             this.charaAdd.HairUshiro.gotoAndStop(1);
@@ -118,30 +119,28 @@ package menu
             this.DressCharaData["UnderHair"][0]["_color0"][0] = this.charaData["Hair"]["_color0"][0];
             new Chara_ColorClass(param1,"UnderHair");
          }
-         _loc2_ = 0;
-         while(_loc2_ <= Main.hukusuuNum)
+
+         for each (var hairpiece:Hairpiece in Hairpiece.getVisibleHairpieces(param1))
          {
-            if(this.charaData["HairExPlus"]["_visible"][_loc2_])
+
+            if(this.DressCharaData["HairEx" + hairpiece.slot][0]["_color0"][1] == 2)
             {
-               if(this.DressCharaData["HairEx" + _loc2_][0]["_color0"][1] == 2)
+               hairpiece.color0[0] = this.charaData["Hair"]["_color0"][0];
+               this.DressCharaData["HairEx" + hairpiece.slot][0]["_color0"][0] = this.charaData["Hair"]["_color0"][0];
+               if(this.DressCharaData["HairEx" + hairpiece.slot][0]["_color1"][1] == 2)
                {
-                  this.charaData["HairEx" + _loc2_]["_color0"][0] = this.charaData["Hair"]["_color0"][0];
-                  this.DressCharaData["HairEx" + _loc2_][0]["_color0"][0] = this.charaData["Hair"]["_color0"][0];
-                  if(this.DressCharaData["HairEx" + _loc2_][0]["_color1"][1] == 2)
-                  {
-                     this.charaData["HairEx" + _loc2_]["_color1"][0] = this.charaData["Hair"]["_color0"][0];
-                     this.DressCharaData["HairEx" + _loc2_][0]["_color1"][0] = this.charaData["Hair"]["_color0"][0];
-                  }
-                  if(this.DressCharaData["HairEx" + _loc2_][0]["_color2"][1] == 2)
-                  {
-                     this.charaData["HairEx" + _loc2_]["_color2"][0] = this.charaData["Hair"]["_color0"][0];
-                     this.DressCharaData["HairEx" + _loc2_][0]["_color2"][0] = this.charaData["Hair"]["_color0"][0];
-                  }
-                  new Chara_ColorClass(param1,"HairEx" + _loc2_);
+                  hairpiece.color1[0] = this.charaData["Hair"]["_color0"][0];
+                  this.DressCharaData["HairEx" + hairpiece.slot][0]["_color1"][0] = this.charaData["Hair"]["_color0"][0];
+               }
+               if(this.DressCharaData["HairEx" + hairpiece.slot][0]["_color2"][1] == 2)
+               {
+                  hairpiece.color2[0] = this.charaData["Hair"]["_color0"][0];
+                  this.DressCharaData["HairEx" + hairpiece.slot][0]["_color2"][0] = this.charaData["Hair"]["_color0"][0];
                }
             }
-            _loc2_++;
+            new Chara_ColorClass(param1,"HairEx" + hairpiece.slot);
          }
+         
          if(this.DressCharaData["SideBurnLeft"][0]["_color0"][1] == 2)
          {
             this.charaData["SideBurnLeft"]["_color0"][0] = this.charaData["Hair"]["_color0"][0];

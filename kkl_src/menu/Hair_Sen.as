@@ -1,6 +1,7 @@
 package menu
 {
    import parameter.Dress_data;
+   import parts.Hairpiece;
    
    public class Hair_Sen
    {
@@ -203,61 +204,60 @@ package menu
             // trace(myError.getStackTrace());
          }
          _loc4_ = 0;
-         for(; _loc4_ <= Main.hukusuuNum; _loc4_++)
+         for each(var hairpiece:Hairpiece in Hairpiece.getVisibleHairpieces(param1))
          {
-            if(_loc7_["HairExPlus"]["_visible"][_loc4_])
+            _loc4_ = hairpiece.slot;
+            try
             {
-               try
+               var hairExVisible = _loc9_ && (hairpiece.lineType != 0);
+               if(Dress_data.DressData["HairEx"][0]["_color2"] == undefined)
                {
-                  if(Dress_data.DressData["HairEx" + _loc4_][0]["_color2"] == undefined)
+                  _loc2_ = 0;
+                  while(_loc2_ <= 1)
                   {
-                     _loc2_ = 0;
-                     while(_loc2_ <= 1)
+                     _loc5_ = 0;
+                     while(_loc5_ <= 1)
                      {
-                        _loc5_ = 0;
-                        while(_loc5_ <= 1)
+                        try
                         {
-                           try
-                           {
-                              setVisAlpha(_loc9_, _loc10_, _loc8_, "HairEx" + _loc4_ + "_" + _loc2_, "HairEx0", "color1_" + _loc5_);
-                              // _loc8_["HairEx" + _loc4_ + "_" + _loc2_].HairEx0["color1_" + _loc5_].visible = _loc9_;
-                              // _loc8_["HairEx" + _loc4_ + "_" + _loc2_].HairEx0["color1_" + _loc5_].alpha = _loc10_;
-                           }
-                           catch(myError:Error)
-                           {
-                           }
-                           _loc5_++;
+                           setVisAlpha(hairExVisible, _loc10_, _loc8_, "HairEx" + _loc4_ + "_" + _loc2_, "HairEx0", "color1_" + _loc5_);
+                           // _loc8_["HairEx" + _loc4_ + "_" + _loc2_].HairEx0["color1_" + _loc5_].visible = _loc9_;
+                           // _loc8_["HairEx" + _loc4_ + "_" + _loc2_].HairEx0["color1_" + _loc5_].alpha = _loc10_;
                         }
-                        _loc2_++;
-                     }
-                  }
-                  else
-                  {
-                     _loc2_ = 0;
-                     while(_loc2_ <= 1)
-                     {
-                        _loc5_ = 0;
-                        while(_loc5_ <= 1)
+                        catch(myError:Error)
                         {
-                           try
-                           {
-                              setVisAlpha(_loc9_, _loc10_, _loc8_, "HairEx" + _loc4_ + "_" + _loc2_, "HairEx0", "color2_" + _loc5_);
-                              // _loc8_["HairEx" + _loc4_ + "_" + _loc2_].HairEx0["color2_" + _loc5_].visible = _loc9_;
-                              // _loc8_["HairEx" + _loc4_ + "_" + _loc2_].HairEx0["color2_" + _loc5_].alpha = _loc10_;
-                           }
-                           catch(myError:Error)
-                           {
-                           }
-                           _loc5_++;
                         }
-                        _loc2_++;
+                        _loc5_++;
                      }
+                     _loc2_++;
                   }
                }
-               catch(myError:Error)
+               else
                {
-                  continue;
+                  _loc2_ = 0;
+                  while(_loc2_ <= 1)
+                  {
+                     _loc5_ = 0;
+                     while(_loc5_ <= 1)
+                     {
+                        try
+                        {
+                           setVisAlpha(hairExVisible, _loc10_, _loc8_, "HairEx" + _loc4_ + "_" + _loc2_, "HairEx0", "color2_" + _loc5_);
+                           // _loc8_["HairEx" + _loc4_ + "_" + _loc2_].HairEx0["color2_" + _loc5_].visible = _loc9_;
+                           // _loc8_["HairEx" + _loc4_ + "_" + _loc2_].HairEx0["color2_" + _loc5_].alpha = _loc10_;
+                        }
+                        catch(myError:Error)
+                        {
+                        }
+                        _loc5_++;
+                     }
+                     _loc2_++;
+                  }
                }
+            }
+            catch(myError:Error)
+            {
+               continue;
             }
          }
       }

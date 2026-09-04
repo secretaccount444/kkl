@@ -85,16 +85,17 @@ package
             menuRightEdge = 800;
          }
 
-         // trace("Window resize event:");
-         // trace(Main.stageVar.scaleMode);
-         // trace(menuAlign);
-         // trace(Main.stageVar.stageWidth, Main.stageVar.stageHeight);
-         // trace(Main.stageVar.width, Main.stageVar.height);
-         // trace(Main.stageVar.scaleX, Main.stageVar.scaleY);
-         // trace(Main.stageVar.nativeWindow.width, Main.stageVar.nativeWindow.height);
-         // trace(menuLeftEdge, menuRightEdge);
+         //trace("Window resize event:");
+         //trace(Main.stageVar.scaleMode);
+         //trace(menuAlign);
+         //trace(Main.stageVar.stageWidth, Main.stageVar.stageHeight);
+         //trace(Main._stageWidth, Main._stageHeight);
+         //trace(Main.stageVar.width, Main.stageVar.height);
+         //trace(Main.stageVar.scaleX, Main.stageVar.scaleY);
+         //trace(Main.stageVar.nativeWindow.width, Main.stageVar.nativeWindow.height);
+         //trace(menuLeftEdge, menuRightEdge);
 
-         HeaderbtnClass.layoutHeaderButtons();
+         dataFc();
          Tab_ClassSet.rescaleMenu(MenuClass._nowHeaderName);
       }
 
